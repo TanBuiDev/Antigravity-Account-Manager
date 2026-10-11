@@ -3,51 +3,24 @@
 Đây là quét tĩnh; không tự ý thay đổi chuỗi giao thức, kiểm tra lỗi, URL và dữ liệu thử nghiệm.
 
 Tệp mã nguồn: 1302
-Tệp fallback có thể Việt hóa: 144
-Lời dự phòng đã Việt hóa: 6102
-Lời dự phòng cần kiểm tra thủ công: 251
-Vị trí chuỗi chữ Hán còn lại: 11757
+Tệp fallback có thể Việt hóa: 0
+Lời dự phòng đã Việt hóa: 0
+Lời dự phòng cần kiểm tra thủ công: 224
+Vị trí chuỗi chữ Hán còn lại: 11723
 Dòng chú thích Rust có chữ Hán: 4154
 
 ## Phân loại
-literal: 922
+literal: 888
 jsx: 12
 rust-review: 10823
 
 ## Fallback chưa chuyển
-src/App.tsx - appPath.missing.scanEmptyGeneric
-src/components/AccountGroupModal.tsx - accounts.groups.dragToSort
-src/components/AccountGroupModal.tsx - accounts.groups.moveUp
-src/components/AccountGroupModal.tsx - accounts.groups.moveDown
 src/components/CodexAccountPoolHealthModal.tsx - common.unknown
 src/components/CodexAccountPoolHealthModal.tsx - common.unknown
 src/components/CodexAccountPoolHealthModal.tsx - common.unknown
-src/components/GlobalModal.tsx - globalModal.ok
-src/components/GlobalModal.tsx - globalModal.title
-src/components/InstancesManager.tsx - instances.form.modelRouting.catalogUnavailable
-src/components/InstancesManager.tsx - instances.form.modelRouting.desktopOnly
-src/components/InstancesManager.tsx - instances.form.modelRouting.oauthRequired
-src/components/InstancesManager.tsx - instances.form.modelRouting.routeRequired
-src/components/InstancesManager.tsx - instances.form.modelRouting.invalidNamespace
-src/components/InstancesManager.tsx - instances.form.modelRouting.duplicateNamespace
-src/components/InstancesManager.tsx - instances.form.modelRouting.providerRequired
-src/components/InstancesManager.tsx - instances.form.modelRouting.enabledRouteRequired
-src/components/InstancesManager.tsx - instances.form.copyName
-src/components/InstancesManager.tsx - common.noData
-src/components/InstancesManager.tsx - instances.form.modelRouting.oauthRequired
-src/components/InstancesManager.tsx - instances.form.modelRouting.statusBadge
-src/components/InstancesManager.tsx - instances.actions.duplicate
-src/components/InstancesManager.tsx - instances.form.modelRouting.createHint
-src/components/InstancesManager.tsx - instances.form.modelRouting.defaultInstanceName
 src/components/MfaVaultManager.tsx - mfaVault.migrationBatchProgress
 src/components/PlatformLayoutModal.tsx - platformLayout.customIconStorageFailed
-src/components/QuickSettingsPopover.tsx - quickSettings.appPath.scanEmpty
-src/components/QuickSettingsPopover.tsx - quickSettings.codexWindow.orDivider
-src/components/QuickSettingsPopover.tsx - quickSettings.codexWindow.orDivider
-src/components/TagEditModal.tsx - accounts.tagModal.editHint
-src/components/TagEditModal.tsx - accounts.tagModal.addHint
 src/components/TagEditModal.tsx - accounts.tagModal.renamingGlobal
-src/components/TagEditModal.tsx - accounts.tagModal.renamePlaceholder
 src/components/codebuddy/CodebuddySessionManager.tsx - codebuddy.sessionManager.statusAll
 src/components/codebuddy/CodebuddySessionManager.tsx - codebuddy.sessionManager.statusCompleted
 src/components/codebuddy/CodebuddySessionManager.tsx - codebuddy.sessionManager.statusInProgress
@@ -165,6 +138,33 @@ src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.f
 src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.addModels
 src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.noCatalog
 src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToDeselect
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToSelect
+src/components/codex/CodexModelRoutingFields.tsx - common.remove
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.addRoute
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.modalTitle
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.modalDescription
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToDisable
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToEnable
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.channelsSummary
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.manageChannels
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.noChannels
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.addRoute
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToEdit
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.unnamedAccount
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToDisable
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.clickToEnable
+src/components/codex/CodexModelRoutingFields.tsx - codex.launchPreview.modelRoutingEnabled
+src/components/codex/CodexModelRoutingFields.tsx - codex.launchPreview.modelRoutingDisabled
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.routesCount
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.modelsCount
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.manageAction
+src/components/codex/CodexModelRoutingFields.tsx - instances.form.modelRouting.enableAction
+src/components/codex/CodexSshServersPanel.tsx - common.saved
+src/components/codex/CodexSshServersPanel.tsx - common.edit
+src/components/codex/CodexSshServersPanel.tsx - common.edit
+src/components/codex/CodexSshSyncModal.tsx - common.done
+src/components/codex/CodexWakeupContent.tsx - common.edit
+src/hooks/useProviderAccountsPage.ts - workbuddy.webview.opened
 
 ## Ví dụ cần đánh giá thủ công
 src/App.tsx:935 [literal] [ExternalImport][App] 读取当前应用版本失败，已终止外部导入
@@ -235,56 +235,22 @@ src/App.tsx:2737 [literal] 更新检查流程异常中断: error=
 src/App.tsx:3015 [literal] 更新唤醒任务时间失败:
 src/App.tsx:3338 [literal] 选择应用路径失败:
 src/App.tsx:3452 [literal] 设置应用路径失败:
-src/App.tsx:3493 [literal] 未检测到正在运行的 {{app}}，请先启动应用后重试，或手动选择路径。
 src/App.tsx:3499 [literal] 扫描 Claude Desktop 启动目标失败:
 src/App.tsx:3516 [literal] 自动探测应用路径失败:
 src/App.tsx:3585 [literal] [ExternalImport][App] 收到 Tauri 事件 external:provider-import
 src/App.tsx:3604 [literal] [ExternalImport][App] 启动时无待处理导入 payload
 src/App.tsx:3607 [literal] [ExternalImport][App] 启动时读取到待处理导入 payload
 src/App.tsx:3611 [literal] [ExternalImport] 读取待处理导入请求失败:
-src/components/AccountGroupModal.tsx:401 [literal] 按住拖动排序
-src/components/AccountGroupModal.tsx:480 [literal] 上移
-src/components/AccountGroupModal.tsx:489 [literal] 下移
-src/components/AnnouncementCenter.tsx:75 [literal] 刚刚
-src/components/AnnouncementCenter.tsx:78 [literal] {count}分钟前
-src/components/AnnouncementCenter.tsx:82 [literal] {count}小时前
-src/components/AnnouncementCenter.tsx:85 [literal] {count}天前
 src/components/AnnouncementCenter.tsx:307 [literal] [Announcement] 未支持的命令动作:
 src/components/CodexAccountPoolHealthModal.tsx:115 [literal] 未知模型
 src/components/CodexAccountPoolHealthModal.tsx:625 [literal] 未知模型
 src/components/CodexAccountPoolHealthModal.tsx:677 [literal] 未知模型
-src/components/CodexLocalAccessModal.tsx:3714 [literal] 最高
-src/components/CodexLocalAccessModal.tsx:3714 [literal] 最低
-src/components/GlobalModal.tsx:70 [literal] 知道了
-src/components/GlobalModal.tsx:98 [literal] 提示
-src/components/InstancesManager.tsx:1384 [literal] 当前实例的可见模型目录不可由 Cockpit 管理，暂不能启用模型路由。
-src/components/InstancesManager.tsx:1394 [literal] 混合模型路由仅支持桌面版实例。
-src/components/InstancesManager.tsx:1412 [literal] 混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。
-src/components/InstancesManager.tsx:1424 [literal] 请至少添加一个 API 模型路由。
-src/components/InstancesManager.tsx:1442 [literal] 命名空间需为 2-32 位小写字母、数字、下划线或连字符，且不能使用保留名称。
-src/components/InstancesManager.tsx:1452 [literal] 模型路由命名空间不能重复。
-src/components/InstancesManager.tsx:1466 [literal] 每个模型路由都必须选择一个 API 账号。
-src/components/InstancesManager.tsx:1482 [literal] 请至少启用一个 API 模型路由。
-src/components/InstancesManager.tsx:2206 [literal] {{name}} 副本
-src/components/InstancesManager.tsx:2485 [literal] 暂无数据
-src/components/InstancesManager.tsx:2540 [literal] 混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。
-src/components/InstancesManager.tsx:2846 [literal] 混合路由
-src/components/InstancesManager.tsx:2999 [literal] 复制实例
-src/components/InstancesManager.tsx:3558 [literal] 新建时请复制默认实例，这样不用先走一遍 Codex 安装。空白实例才需要先启动一次。
-src/components/InstancesManager.tsx:3578 [literal] 混合路由
 src/components/MfaVaultManager.tsx:671 [literal] Google Authenticator 迁移批次：已识别 {{scanned}}/{{total}} 张二维码。
 src/components/PlatformLayoutModal.tsx:1178 [literal] 自定义图标无法保存，本地存储空间可能已满。删除不再使用的自定义图标后重试。
-src/components/QuickSettingsPopover.tsx:879 [literal] 未检测到正在运行的应用，请先启动后重试，或手动选择路径。
-src/components/QuickSettingsPopover.tsx:1619 [literal] OR（命中任一即触发）
-src/components/QuickSettingsPopover.tsx:2881 [literal] OR（命中任一即触发）
-src/components/SettingsWebdavSyncSection.tsx:50 [literal]  提示：检测到祖先目录不存在。如果您使用坚果云 WebDAV，坚果云限制了不能在根目录下直接创建文件夹，请确认您的“远端目录”是否填写正确。
+src/components/SettingsWebdavSyncSection.tsx:50 [literal]  Lưu ý: Không tìm thấy thư mục cha. Một số dịch vụ WebDAV không cho ph
 src/components/TagEditModal.tsx:172 [literal] 标签长度不能超过 
 src/components/TagEditModal.tsx:172 [literal]  个字符
-src/components/TagEditModal.tsx:184 [literal] 全局重命名失败
-src/components/TagEditModal.tsx:279 [literal] 点击修改
-src/components/TagEditModal.tsx:312 [literal] 点击添加
 src/components/TagEditModal.tsx:372 [literal] 正在全局重命名已存在标签所有账号记录：
-src/components/TagEditModal.tsx:391 [literal] 输入新的标签名称
 src/components/codebuddy/CodebuddySessionManager.tsx:88 [literal] 全部状态
 src/components/codebuddy/CodebuddySessionManager.tsx:92 [literal] 已完成
 src/components/codebuddy/CodebuddySessionManager.tsx:96 [literal] 进行中
@@ -467,5 +433,39 @@ src/components/codex/CodexModelRoutingFields.tsx:1438 [literal] 未启用
 src/components/codex/CodexModelRoutingFields.tsx:1443 [literal] {{count}} 个渠道
 src/components/codex/CodexModelRoutingFields.tsx:1449 [literal] {{count}} 个路由模型
 src/components/codex/CodexModelRoutingFields.tsx:1471 [literal] 管理 API 渠道
+src/components/codex/CodexModelRoutingFields.tsx:1472 [literal] 配置 API 渠道
+src/components/codex/CodexOutputSpeed.test.ts:6 [literal] 速度
+src/components/codex/CodexOutputSpeed.test.ts:21 [literal] 速度 ≈ 43 tok/s
+src/components/codex/CodexOutputSpeed.test.ts:25 [literal] 速度 —
+src/components/codex/CodexSessionManager.tsx:123 [literal] 时间未知
+src/components/codex/CodexSessionManager.tsx:132 [literal]  分钟
+src/components/codex/CodexSessionManager.tsx:136 [literal]  小时
+src/components/codex/CodexSessionManager.tsx:140 [literal]  天
+src/components/codex/CodexSessionManager.tsx:143 [literal]  周
+src/components/codex/CodexSessionUsagePanel.tsx:63 [literal] 刚刚
+src/components/codex/CodexSessionUsagePanel.tsx:67 [literal]  分钟前
+src/components/codex/CodexSessionUsagePanel.tsx:71 [literal]  小时前
+src/components/codex/CodexSessionUsagePanel.tsx:74 [literal]  天前
+src/components/codex/CodexSpeedSelect.tsx:48 [literal] 默认速度，常规用量
+src/components/codex/CodexSpeedSelect.tsx:50 [literal] 加速，用量／费用更高
+src/components/codex/CodexSshServersPanel.tsx:165 [literal] 已保存
+src/components/codex/CodexSshServersPanel.tsx:568 [literal] 编辑
+src/components/codex/CodexSshServersPanel.tsx:569 [literal] 编辑
+src/components/codex/CodexSshSyncModal.tsx:71 [literal] 完成
+src/components/codex/CodexWakeupContent.tsx:2235 [literal] 取消 Codex 唤醒测试失败:
+src/components/codex/CodexWakeupContent.tsx:2639 [literal] 释放 Codex 唤醒测试取消作用域失败:
+src/components/codex/CodexWakeupContent.tsx:2769 [literal] 编辑
+src/components/codex/pelican/pelicanUtils.test.ts:7 [literal] 请求超时
+src/components/codex/pelican/pelicanUtils.test.ts:8 [literal] 响应失败或未完整结束
+src/components/codex/pelican/pelicanUtils.test.ts:9 [literal] 响应过大
+src/components/codex/pelican/pelicanUtils.test.ts:10 [literal] 预览过大
+src/components/codex/pelican/pelicanUtils.test.ts:11 [literal] 账号不可用
+src/components/codex/pelican/pelicanUtils.test.ts:12 [literal] 已取消
+src/components/codex/pelican/pelicanUtils.test.ts:13 [literal] 请求失败
+src/components/codex/pelican/pelicanUtils.test.ts:14 [literal] 没有 HTML
+src/components/codex/pelican/pelicanUtils.test.ts:38 [literal] 响应失败或未完整结束: 
+src/components/codex/pelican/pelicanUtils.test.ts:45 [literal] 响应失败或未完整结束: 
+src/components/codex/pelican/pelicanUtils.test.ts:46 [literal] 请求超时: Read timed out
+src/components/codex/pelican/pelicanUtils.test.ts:62 [literal] 响应失败或未完整结束: reason=content_filter
 
 Không thay key, API, token, câu lệnh, đường dẫn và placeholder {{...}}.
