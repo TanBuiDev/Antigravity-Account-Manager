@@ -1282,14 +1282,14 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       try {
         await openFn(accountId);
         setMessage({
-          text: t('workbuddy.webview.opened', '已打开网页会话：{{email}}', {
+          text: t('workbuddy.webview.opened', 'Đã mở phiên web: {{email}}', {
             email: maskAccountText(displayEmail),
           }),
           tone: 'success',
         });
       } catch (e: unknown) {
         setMessage({
-          text: t('workbuddy.webview.openFailed', '打开网页会话失败：{{error}}', {
+          text: t('workbuddy.webview.openFailed', 'Không thể mở phiên web: {{error}}', {
             error: String(e) || t('common.failed', 'Failed'),
           }),
           tone: 'error',

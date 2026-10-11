@@ -2766,7 +2766,7 @@ export function CodexWakeupContent({
                     <button
                       className="btn btn-secondary icon-only"
                       onClick={() => openEditTaskModal(task)}
-                      title={t('common.edit', '编辑')}
+                      title={t('common.edit', 'Chỉnh sửa')}
                     >
                       <Pencil size={14} />
                     </button>

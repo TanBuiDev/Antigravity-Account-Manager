@@ -287,7 +287,7 @@ export const createCodexModelSourceResolver = (
   const separator = normalized.indexOf("/");
   if (separator < 0) {
     return {
-      label: t("instances.form.modelRouting.subscriptionSource", "订阅"),
+      label: t("instances.form.modelRouting.subscriptionSource", "Gói đăng ký"),
       kind: "subscription",
       managed: false,
     };
@@ -298,14 +298,14 @@ export const createCodexModelSourceResolver = (
   );
   if (!route) {
     return {
-      label: t("instances.form.modelRouting.missingSource", "路由缺失"),
+      label: t("instances.form.modelRouting.missingSource", "Thiếu tuyến định tuyến"),
       kind: "missing",
       managed: false,
     };
   }
   if (!route.enabled) {
     return {
-      label: t("instances.form.modelRouting.disabledSource", "路由已停用"),
+      label: t("instances.form.modelRouting.disabledSource", "Tuyến định tuyến đã tắt"),
       kind: "missing",
       managed: true,
     };
@@ -315,7 +315,7 @@ export const createCodexModelSourceResolver = (
   );
   if (!provider) {
     return {
-      label: t("instances.form.modelRouting.unavailableSource", "账号不可用"),
+      label: t("instances.form.modelRouting.unavailableSource", "Tài khoản không khả dụng"),
       kind: "missing",
       managed: true,
     };
@@ -333,7 +333,7 @@ export const createCodexModelSourceResolver = (
     return {
       label: t(
         "instances.form.modelRouting.modelUnavailable",
-        "模型已不在 API 目录",
+        "Mô hình không còn trong danh mục API",
       ),
       kind: "missing",
       managed: true,
@@ -614,7 +614,7 @@ export function CodexModelRoutingEditor({
       setRouteActionError(
         t(
           "instances.form.modelRouting.fetchCredentialsRequired",
-          "这个 API 账号缺少 Key 或 Base URL，无法获取模型列表。",
+          "Tài khoản API này thiếu Key hoặc Base URL nên không thể tải danh sách mô hình.",
         ),
       );
       return;
@@ -638,7 +638,7 @@ export function CodexModelRoutingEditor({
         setRouteActionError(
           t(
             "instances.form.modelRouting.fetchEmpty",
-            "上游没有返回模型，可以在下面手动填写。",
+            "Máy chủ nguồn không trả về mô hình; bạn có thể nhập thủ công bên dưới.",
           ),
         );
         return;
@@ -663,7 +663,7 @@ export function CodexModelRoutingEditor({
       if (!isCurrentRequest()) return;
       setRouteActionError(
         t("instances.form.modelRouting.fetchFailed", {
-          defaultValue: "获取模型列表失败：{{error}}",
+          defaultValue: "Không thể tải danh sách mô hình: {{error}}",
           error: String(error).replace(/^Error:\s*/, ""),
         }),
       );
@@ -718,7 +718,7 @@ export function CodexModelRoutingEditor({
         <p>
           {t(
             "instances.form.modelRouting.noProviderAccounts",
-            "未检测到可用的 API 账号。请先在「API 账号」页面添加支持的模型服务。",
+            "Không tìm thấy tài khoản API khả dụng. Hãy thêm dịch vụ mô hình được hỗ trợ ở trang Tài khoản API.",
           )}
         </p>
       </div>
@@ -784,11 +784,11 @@ export function CodexModelRoutingEditor({
                     options={providerOptions}
                     placeholder={t(
                       "instances.form.modelRouting.provider",
-                      "选择 API 账号",
+                      "Chọn tài khoản API",
                     )}
                     ariaLabel={t(
                       "instances.form.modelRouting.provider",
-                      "选择 API 账号",
+                      "Chọn tài khoản API",
                     )}
                   />
                 </div>
@@ -809,7 +809,7 @@ export function CodexModelRoutingEditor({
                     }}
                     placeholder={t(
                       "instances.form.modelRouting.namespacePlaceholder",
-                      "前缀 (如 cpa)",
+                      "Tiền tố (ví dụ cpa)",
                     )}
                     maxLength={32}
                   />
@@ -822,7 +822,7 @@ export function CodexModelRoutingEditor({
                   onClick={() =>
                     onRoutesChange(routes.filter((item) => item.id !== route.id))
                   }
-                  title={t("instances.form.modelRouting.deleteRoute", "删除渠道")}
+                  title={t("instances.form.modelRouting.deleteRoute", "Xóa kênh")}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -831,7 +831,7 @@ export function CodexModelRoutingEditor({
               <div className="codex-model-routing-card__models-section">
                 <div className="codex-model-routing-card__models-bar">
                   <span className="codex-model-routing-card__models-label">
-                    {t("instances.form.modelRouting.loadedModels", "已加载模型")}
+                    {t("instances.form.modelRouting.loadedModels", "Mô hình đã tải")}
                     <span className="codex-model-routing-summary__count-badge" title="已启用 / 总数">
                       {route.selectedModels ? `${route.selectedModels.length}/${models.length}` : models.length}
                     </span>
@@ -849,7 +849,7 @@ export function CodexModelRoutingEditor({
                               [route.id]: e.target.value,
                             }))
                           }
-                          placeholder={t("common.filter", "过滤...")}
+                          placeholder={t("common.filter", "Lọc...")}
                         />
                       </div>
                     )}
@@ -893,7 +893,7 @@ export function CodexModelRoutingEditor({
                       />
                       {fetchingAccountId === provider?.id
                         ? t("common.loading", "Đang tải...")
-                        : t("instances.form.modelRouting.fetchModels", "获取列表")}
+                        : t("instances.form.modelRouting.fetchModels", "Tải danh sách")}
                     </button>
                     {!showManual && (
                       <button
@@ -903,7 +903,7 @@ export function CodexModelRoutingEditor({
                         onClick={() => setAddingManualRouteId(route.id)}
                       >
                         <Plus size={12} />
-                        {t("instances.form.modelRouting.addModels", "添加模型")}
+                        {t("instances.form.modelRouting.addModels", "Thêm mô hình")}
                       </button>
                     )}
                   </div>
@@ -962,7 +962,7 @@ export function CodexModelRoutingEditor({
                   <p className="codex-model-routing-card__empty-models">
                     {t(
                       "instances.form.modelRouting.noCatalog",
-                      "尚未获取上游模型，点击「获取列表」或手动添加。",
+                      "Chưa tải mô hình từ máy chủ nguồn; nhấp Tải danh sách hoặc thêm thủ công.",
                     )}
                   </p>
                 ) : (
@@ -981,7 +981,7 @@ export function CodexModelRoutingEditor({
                           aria-disabled={disabled}
                           key={model}
                           onClick={() => toggleModelSelection(route.id, model, models)}
-                          title={isSelected ? t("instances.form.modelRouting.clickToDeselect", "已勾选（点击取消）") : t("instances.form.modelRouting.clickToSelect", "未勾选（点击选择）")}
+                          title={isSelected ? t("instances.form.modelRouting.clickToDeselect", "Đã chọn (nhấp để bỏ chọn)") : t("instances.form.modelRouting.clickToSelect", "Chưa chọn (nhấp để chọn)")}
                         >
                           <span className="codex-model-routing-card__pill-checkbox">
                             {isSelected ? "✓" : ""}
@@ -996,7 +996,7 @@ export function CodexModelRoutingEditor({
                                 e.stopPropagation();
                                 removeManualModel(route.id, model);
                               }}
-                              title={t("common.remove", "删除")}
+                              title={t("common.remove", "Xóa")}
                             >
                               <X size={10} />
                             </button>
@@ -1034,7 +1034,7 @@ export function CodexModelRoutingEditor({
         }}
       >
         <Plus size={14} />
-        {t("instances.form.modelRouting.addRoute", "添加 API 渠道")}
+        {t("instances.form.modelRouting.addRoute", "Thêm kênh API")}
       </button>
 
       {routeActionError && (
@@ -1132,11 +1132,11 @@ export function CodexModelRoutingModal({
       <div className="modal codex-model-routing-modal">
         <div className="modal-header">
           <div>
-            <h2>{t("instances.form.modelRouting.modalTitle", "第三方 API 路由配置")}</h2>
+            <h2>{t("instances.form.modelRouting.modalTitle", "Cấu hình định tuyến API bên thứ ba")}</h2>
             <p>
               {t(
                 "instances.form.modelRouting.modalDescription",
-                "配置第三方 API 账号与模型前缀。未配置前缀的模型继续走当前订阅。",
+                "Cấu hình tài khoản API bên thứ ba và tiền tố mô hình. Mô hình không có tiền tố vẫn dùng gói đăng ký hiện tại.",
               )}
             </p>
           </div>
@@ -1148,7 +1148,7 @@ export function CodexModelRoutingModal({
                 </span>
                 <label
                   className="codex-model-routing__switch"
-                  title={enabled ? t("instances.form.modelRouting.clickToDisable", "点击关闭第三方路由") : t("instances.form.modelRouting.clickToEnable", "点击开启第三方路由")}
+                  title={enabled ? t("instances.form.modelRouting.clickToDisable", "Nhấp để tắt định tuyến bên thứ ba") : t("instances.form.modelRouting.clickToEnable", "Nhấp để bật định tuyến bên thứ ba")}
                   onClick={(e) => {
                     e.preventDefault();
                     void handleModalToggle(!enabled);
@@ -1238,7 +1238,7 @@ export function CodexModelRoutingSummary({
       <div className="codex-model-routing-summary">
         <div className="codex-model-routing-summary__header">
           <span className="codex-model-routing-summary__title">
-            {t("instances.form.modelRouting.channelsSummary", "第三方 API 渠道")}
+            {t("instances.form.modelRouting.channelsSummary", "Kênh API bên thứ ba")}
             <span className="codex-model-routing-summary__count-badge">
               {routes.length}
             </span>
@@ -1250,13 +1250,13 @@ export function CodexModelRoutingSummary({
             onClick={() => setModalOpen(true)}
           >
             <SlidersHorizontal size={13} />
-            {t("instances.form.modelRouting.manageChannels", "配置渠道")}
+            {t("instances.form.modelRouting.manageChannels", "Cấu hình kênh")}
           </button>
         </div>
 
         {routes.length === 0 ? (
           <div className="codex-model-routing-summary__empty">
-            <span>{t("instances.form.modelRouting.noChannels", "暂未添加第三方 API 渠道")}</span>
+            <span>{t("instances.form.modelRouting.noChannels", "Chưa thêm kênh API bên thứ ba")}</span>
             <button
               type="button"
               className="btn btn-outline btn-xs"
@@ -1275,7 +1275,7 @@ export function CodexModelRoutingSummary({
               }}
             >
               <Plus size={11} />
-              {t("instances.form.modelRouting.addRoute", "添加渠道")}
+              {t("instances.form.modelRouting.addRoute", "Thêm kênh")}
             </button>
           </div>
         ) : (
@@ -1297,14 +1297,14 @@ export function CodexModelRoutingSummary({
                   onClick={() => {
                     if (!disabled) setModalOpen(true);
                   }}
-                  title={t("instances.form.modelRouting.clickToEdit", "点击配置此渠道")}
+                  title={t("instances.form.modelRouting.clickToEdit", "Nhấp để cấu hình kênh này")}
                 >
                   <div className="codex-model-routing-summary__row-left">
                     <code className="codex-model-routing-summary__namespace">
                       {route.namespace ? `${route.namespace}/` : "—"}
                     </code>
                     <span className="codex-model-routing-summary__account-name">
-                      {accountName || t("instances.form.modelRouting.unnamedAccount", "未选择账号")}
+                      {accountName || t("instances.form.modelRouting.unnamedAccount", "Chưa chọn tài khoản")}
                     </span>
                   </div>
                   <div className="codex-model-routing-summary__row-right">
@@ -1395,7 +1395,7 @@ export function CodexModelRoutingFields({
   const switchControl = (
     <label
       className="codex-model-routing__switch"
-      title={enabled ? t("instances.form.modelRouting.clickToDisable", "点击关闭第三方路由") : t("instances.form.modelRouting.clickToEnable", "点击开启第三方路由")}
+      title={enabled ? t("instances.form.modelRouting.clickToDisable", "Nhấp để tắt định tuyến bên thứ ba") : t("instances.form.modelRouting.clickToEnable", "Nhấp để bật định tuyến bên thứ ba")}
       onClick={(event) => {
         event.preventDefault();
         void handleToggle(!enabled);
@@ -1434,19 +1434,19 @@ export function CodexModelRoutingFields({
             <div className="codex-launch-preview-tool-meta">
               <span className={enabled ? "is-enabled" : ""}>
                 {enabled
-                  ? t("codex.launchPreview.modelRoutingEnabled", "已启用")
-                  : t("codex.launchPreview.modelRoutingDisabled", "未启用")}
+                  ? t("codex.launchPreview.modelRoutingEnabled", "Đã bật")
+                  : t("codex.launchPreview.modelRoutingDisabled", "Chưa bật")}
               </span>
               {enabled && routes.length > 0 && (
                 <>
                   <span>
-                    {t("instances.form.modelRouting.routesCount", "{{count}} 个渠道", {
+                    {t("instances.form.modelRouting.routesCount", "{{count}} kênh", {
                       count: routes.length,
                     })}
                   </span>
                   {totalModelsCount > 0 && (
                     <span>
-                      {t("instances.form.modelRouting.modelsCount", "{{count}} 个路由模型", {
+                      {t("instances.form.modelRouting.modelsCount", "{{count}} mô hình định tuyến", {
                         count: totalModelsCount,
                       })}
                     </span>
@@ -1468,8 +1468,8 @@ export function CodexModelRoutingFields({
             }}
           >
             {enabled
-              ? t("instances.form.modelRouting.manageAction", "管理 API 渠道")
-              : t("instances.form.modelRouting.enableAction", "配置 API 渠道")}
+              ? t("instances.form.modelRouting.manageAction", "Quản lý kênh API")
+              : t("instances.form.modelRouting.enableAction", "Cấu hình kênh API")}
           </button>
         </section>
 

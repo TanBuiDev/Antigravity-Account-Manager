@@ -789,7 +789,7 @@ export function useCodexModelProviderManagerController({
     () => {
       const counts = new Map<string, { label: string; count: number }>();
       providers.forEach((provider) => {
-        const label = provider.name.trim() || t("common.unknown", "未知");
+        const label = provider.name.trim() || t("common.unknown", "Không xác định");
         const value = label.toLowerCase();
         const previous = counts.get(value);
         counts.set(value, {
@@ -2209,7 +2209,7 @@ export function useCodexModelProviderManagerController({
       setFormError(
         t(
           "codex.api.modelCatalog.contextWindowInvalid",
-          "上下文窗口必须是大于 0 的整数",
+          "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
         ),
       );
       return;
@@ -2463,7 +2463,7 @@ export function useCodexModelProviderManagerController({
     if (!nextApiKey) {
       setNotice({
         tone: "error",
-        text: t("codex.modelProviders.validation.apiKeyRequired", "API Key 不能为空"),
+        text: t("codex.modelProviders.validation.apiKeyRequired", "API Key không được để trống"),
       });
       return;
     }
@@ -2523,22 +2523,22 @@ export function useCodexModelProviderManagerController({
       setEditingApiKey(null);
       setNotice({
         tone: "success",
-        text: t("codex.modelProviders.updateApiKeySuccess", "API Key 已更新"),
+        text: t("codex.modelProviders.updateApiKeySuccess", "Đã cập nhật API Key"),
       });
     } catch (err) {
       const raw = String(err ?? "");
       const message = raw.includes("API_KEY_EXISTS")
         ? t(
             "codex.modelProviders.validation.apiKeyExists",
-            "该 API Key 已存在于当前供应商",
+            "API Key này đã tồn tại ở nhà cung cấp hiện tại",
           )
         : raw.includes("API_KEY_REQUIRED")
           ? t(
               "codex.modelProviders.validation.apiKeyRequired",
-              "API Key 不能为空",
+              "API Key không được để trống",
             )
           : t("codex.modelProviders.updateApiKeyFailed", {
-              defaultValue: "更新 API Key 失败：{{error}}",
+              defaultValue: "Không thể cập nhật API Key: {{error}}",
               error: raw.replace(/^Error:\s*/, ""),
             });
       setNotice({ tone: "error", text: message });
@@ -2608,7 +2608,7 @@ export function useCodexModelProviderManagerController({
     if (ids.length === 0) return;
     const confirmed = await confirmDialog(
       t("codex.modelProviders.batchDeleteConfirm", {
-        defaultValue: "确定要删除选中的 {{count}} 个供应商吗？",
+        defaultValue: "Bạn có chắc muốn xóa {{count}} nhà cung cấp đã chọn không?",
         count: ids.length,
       }),
       {
@@ -2627,7 +2627,7 @@ export function useCodexModelProviderManagerController({
       setNotice({
         tone: "success",
         text: t("codex.modelProviders.batchDeleteSuccess", {
-          defaultValue: "已删除 {{count}} 个供应商",
+          defaultValue: "Đã xóa {{count}} nhà cung cấp",
           count: ids.length,
         }),
       });
@@ -3389,8 +3389,8 @@ export function useCodexModelProviderManagerController({
           "Giới hạn mô hình",
         ),
         totalUsage: t("codex.modelProviders.usage.fields.totalUsage", "Tổng sử dụng"),
-        isAvailable: t("codex.modelProviders.usage.fields.isAvailable", "余额可用"),
-        currency: t("codex.modelProviders.usage.fields.currency", "币种"),
+        isAvailable: t("codex.modelProviders.usage.fields.isAvailable", "Số dư khả dụng"),
+        currency: t("codex.modelProviders.usage.fields.currency", "Loại tiền"),
         totalBalance: t("codex.modelProviders.usage.fields.totalBalance", "Tổng số dư"),
         grantedBalance: t("codex.modelProviders.usage.fields.grantedBalance", "Số dư tặng"),
         toppedUpBalance: t("codex.modelProviders.usage.fields.toppedUpBalance", "Số dư nạp"),

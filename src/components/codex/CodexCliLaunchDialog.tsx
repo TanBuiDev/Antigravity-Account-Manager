@@ -131,11 +131,11 @@ export function CodexCliLaunchDialog({
                   disabled={busy}
                   title={t(
                     "codex.cli.selectWorkingDir",
-                    "选择 Codex CLI 工作目录",
+                    "Chọn thư mục làm việc của Codex CLI",
                   )}
                   aria-label={t(
                     "codex.cli.selectWorkingDir",
-                    "选择 Codex CLI 工作目录",
+                    "Chọn thư mục làm việc của Codex CLI",
                   )}
                 >
                   <FolderOpen size={16} />

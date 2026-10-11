@@ -713,7 +713,7 @@ export function CodexLaunchPreviewModal({
         setError(
           t(
             "instances.form.modelRouting.oauthRequired",
-            "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+            "Định tuyến mô hình kết hợp cần liên kết tài khoản đăng ký OAuth đăng nhập trực tiếp.",
           ),
         );
         return false;
@@ -722,7 +722,7 @@ export function CodexLaunchPreviewModal({
         setError(
           t(
             "instances.form.modelRouting.routeRequired",
-            "请至少添加一个 API 模型路由。",
+            "Hãy thêm ít nhất một tuyến mô hình API.",
           ),
         );
         return false;
@@ -739,7 +739,7 @@ export function CodexLaunchPreviewModal({
           setError(
             t(
               "instances.form.modelRouting.invalidNamespace",
-              "命名空间需为 2-32 位小写字母、数字、下划线或连字符，且不能使用保留名称。",
+              "Namespace phải dài 2–32 ký tự, chỉ gồm chữ thường, chữ số, gạch dưới hoặc gạch ngang và không dùng tên dành riêng.",
             ),
           );
           return false;
@@ -752,7 +752,7 @@ export function CodexLaunchPreviewModal({
           setError(
             t(
               "instances.form.modelRouting.providerRequired",
-              "每个模型路由都必须选择一个 API 账号。",
+              "Mỗi tuyến mô hình phải chọn một tài khoản API.",
             ),
           );
           return false;
@@ -846,7 +846,7 @@ export function CodexLaunchPreviewModal({
       setError(
         getCodexExperimentalModelErrorMessage(t, saveError) ??
           t("instances.form.codexQuickConfig.saveFailed", {
-            defaultValue: "保存 Codex 配置失败：{{error}}",
+            defaultValue: "Không thể lưu cấu hình Codex: {{error}}",
             error: String(saveError).replace(/^Error:\s*/, ""),
           }),
       );

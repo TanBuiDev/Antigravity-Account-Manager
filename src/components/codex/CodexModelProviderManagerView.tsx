@@ -226,7 +226,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             <Search className="search-icon" size={16} />
             <input
               type="text"
-              placeholder={t("common.search", "搜索...")}
+              placeholder={t("common.search", "Tìm kiếm...")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -271,7 +271,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             options={[
               {
                 value: "name",
-                label: t("common.shared.sort.name", "按名称"),
+                label: t("common.shared.sort.name", "Theo tên"),
               },
               {
                 value: "created_at",
@@ -404,7 +404,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         </div>
       ) : filteredProviders.length === 0 ? (
         <div className="empty-state">
-          <h3>{t("codex.modelProviders.noMatchTitle", "没有匹配的供应商")}</h3>
+          <h3>{t("codex.modelProviders.noMatchTitle", "Không tìm thấy nhà cung cấp phù hợp")}</h3>
           <p>{t("common.shared.noMatch.desc", "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
         </div>
       ) : (
@@ -545,7 +545,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               tone: "success",
                               text: t(
                                 "codex.modelProviders.apiKeyCopied",
-                                "API Key 已复制",
+                                "Đã sao chép API Key",
                               ),
                             });
                           }}
@@ -949,7 +949,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <Search className="search-icon" size={16} />
                     <input
                       type="text"
-                      placeholder={t("common.search", "搜索...")}
+                      placeholder={t("common.search", "Tìm kiếm...")}
                       value={batchTestSearchQuery}
                       onChange={(event) => setBatchTestSearchQuery(event.target.value)}
                     />
@@ -2208,7 +2208,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               )
                             }
                             disabled={saving}
-                            title={t("common.rename", "重命名")}
+                            title={t("common.rename", "Đổi tên")}
                           >
                             <Pencil size={12} />
                           </button>
@@ -2415,7 +2415,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <Search className="search-icon" size={16} />
                   <input
                     type="text"
-                    placeholder={t("common.search", "搜索...")}
+                    placeholder={t("common.search", "Tìm kiếm...")}
                     value={pickerSearchQuery}
                     onChange={(event) => setPickerSearchQuery(event.target.value)}
                   />
@@ -2473,7 +2473,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <Search className="search-icon" size={16} />
                   <input
                     type="text"
-                    placeholder={t("common.search", "搜索...")}
+                    placeholder={t("common.search", "Tìm kiếm...")}
                     value={pickerSearchQuery}
                     onChange={(event) => setPickerSearchQuery(event.target.value)}
                   />
@@ -2913,8 +2913,8 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             key: "vision",
             label: t("codex.modelProviders.vision.allModels", "Ảnh"),
             value: provider.supportsVision
-              ? t("common.yes", "是")
-              : t("common.no", "否"),
+              ? t("common.yes", "Có")
+              : t("common.no", "Không"),
             rawKey: "supportsVision",
           },
           {
