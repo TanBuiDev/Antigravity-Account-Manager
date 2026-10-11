@@ -22,3 +22,9 @@
 5. Kiểm tra lại nội dung hiển thị khi chạy ứng dụng. Báo cáo tĩnh không chứng minh toàn bộ giao diện đã được Việt hóa.
 
 **Lưu ý:** Không xóa bừa chuỗi tiếng Trung trong mã phụ thuộc bên thứ ba hoặc dữ liệu kiểm thử. Nếu loại bỏ tính năng không cần dùng, thực hiện thành PR độc lập có kiểm thử hồi quy.
+
+## Kiểm tra bổ sung
+
+- `node scripts/check_antigravity_rust_i18n.cjs` chặn chữ Hán trong mã chạy của 12 mô-đun tài khoản/phiên Antigravity trọng tâm; không xóa chú thích hoặc dữ liệu kiểm thử.
+- Cùng script kiểm tra các tệp được Rust `include_str!` trong mô-đun kiểm tra cập nhật vẫn tồn tại (phát hiện lỗi mất `CHANGELOG.zh-CN.md` trước đó).
+- Bộ giải mã changelog cũ vẫn nhận các tiêu đề tiếng Trung lịch sử như một định dạng đầu vào; không hiển thị chúng thành ngôn ngữ giao diện.

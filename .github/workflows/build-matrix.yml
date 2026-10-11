@@ -42,6 +42,9 @@ jobs:
       - name: 🇻🇳 Verify no translatable Chinese i18next fallback remains
         run: node scripts/vietnamize_source.cjs --check
 
+      - name: 🦀 Check Antigravity Rust localization and bundled resources
+        run: node scripts/check_antigravity_rust_i18n.cjs
+
   preflight-typecheck:
     name: "🔍 Preflight: Typecheck"
     runs-on: ubuntu-latest

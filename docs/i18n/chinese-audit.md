@@ -1,6 +1,6 @@
 # Rà soát chuỗi tiếng Trung trong mã nguồn
 
-Đây là quét tĩnh; không tự ý thay đổi chuỗi giao thức, kiểm tra lỗi, URL và dữ liệu thử nghiệm.
+Đây là quét tĩnh ở thời điểm sau lượt Việt hóa frontend. Một lượt sau đó đã Việt hóa các mô-đun backend Rust cho tài khoản, OAuth, thông tin xác thực và phiên Antigravity. Các tổng số dưới đây là **snapshot trước lượt Rust mới nhất**, không phải số liệu toàn repository hiện tại. Không tự ý thay đổi chuỗi giao thức, kiểm tra lỗi, URL và dữ liệu thử nghiệm.
 
 Tệp mã nguồn: 1302
 Tệp còn fallback đủ điều kiện chuyển tự động: 0
