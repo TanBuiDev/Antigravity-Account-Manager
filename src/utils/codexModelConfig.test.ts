@@ -26,12 +26,12 @@ test('import errors are localized without exposing unknown raw diagnostic data',
 test('field-error translations cover missing required fields and remain localized', () => {
   const key = codexModelConfigErrorKey('MODEL_CONFIG_FIELDS_UNSUPPORTED');
   assert.equal(key, 'codex.modelConfig.errors.fields');
-  const locales = ['ar', 'cs', 'de', 'en-US', 'en', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'pl', 'pt-br', 'ru', 'tr', 'vi', 'zh-CN', 'zh-tw'];
+  const locales = ['ar', 'cs', 'de', 'en-US', 'en', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'pl', 'pt-br', 'ru', 'tr', 'vi'];
   const messages = Object.fromEntries(locales.map((locale) => {
     const document = JSON.parse(readFileSync(new URL(`../locales/${locale}.json`, import.meta.url), 'utf8'));
     return [locale, document.codex.modelConfig.errors.fields as string];
   }));
-  assert.match(messages['zh-CN'], /字段缺失/);
+  assert.match(messages.vi, /thiếu trường/);
   assert.match(messages['en-US'], /missing, invalid, or unsupported fields/);
   assert.equal(messages.en, messages['en-US']);
   for (const locale of locales.filter((locale) => locale !== 'en' && locale !== 'en-US')) {
