@@ -58,4 +58,7 @@ if(process.argv.includes('--verbose')&&out.pending.length){
  console.log('UNRESOLVED_FALLBACKS_END');
 }
 
-if(check&&out.files)process.exitCode=1;
+if(check&&(out.files||out.pending.length)){
+ console.error('Vietnamese fallback check failed: '+out.files+' files can be translated, '+out.pending.length+' fallbacks still require manual review.');
+ process.exitCode=1;
+}
