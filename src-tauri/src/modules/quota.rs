@@ -306,10 +306,10 @@ fn header_value(headers: &reqwest::header::HeaderMap, name: reqwest::header::Hea
 
 fn log_subscription_tier_result(email: &str, subscription_tier: Option<&String>, reason: &str) {
     if let Some(tier) = subscription_tier {
-        crate::modules::logger::log_info(&format!("📊 [{}] 订阅识别成功: {}", email, tier));
+        crate::modules::logger::log_info(&format!("📊 [{}] Nhận diện gói đăng ký thành công: {}", email, tier));
     } else {
         crate::modules::logger::log_warn(&format!(
-            "⚠️ [{}] 订阅识别失败: UNKNOWN ({})",
+            "⚠️ [{}] Không thể nhận diện gói đăng ký: UNKNOWN ({})",
             email, reason
         ));
     }
@@ -678,18 +678,18 @@ async fn try_onboard_user(
         .json(&payload)
         .send()
         .await
-        .map_err(|e| format!("onboardUser 网络错误: {}", e))?;
+        .map_err(|e| format!("Lỗi mạng onboardUser: {}", e))?;
 
     if !response.status().is_success() {
         let status = response.status();
         let text = response.text().await.unwrap_or_default();
-        return Err(format!("onboardUser 失败: {} - {}", status, text));
+        return Err(format!("onboardUser thất bại: {} - {}", status, text));
     }
 
     let mut data = response
         .json::<OnboardUserResponse>()
         .await
-        .map_err(|e| format!("onboardUser 解析失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích phản hồi onboardUser: {}", e))?;
 
     loop {
         if data.done.unwrap_or(false) {
@@ -704,7 +704,7 @@ async fn try_onboard_user(
             .as_deref()
             .map(str::trim)
             .filter(|value| !value.is_empty())
-            .ok_or_else(|| "onboardUser 未完成但缺少 operation name".to_string())?;
+            .ok_or_else(|| "onboardUser chưa hoàn tất nhưng thiếu tên thao tác".to_string())?;
 
         let poll_response = client
             .get(format!("{}/v1internal/{}", base_url, op_name))
@@ -714,18 +714,18 @@ async fn try_onboard_user(
             .header(reqwest::header::ACCEPT_ENCODING, "gzip")
             .send()
             .await
-            .map_err(|e| format!("onboardUser 轮询网络错误: {}", e))?;
+            .map_err(|e| format!("Lỗi mạng khi kiểm tra onboardUser: {}", e))?;
 
         if !poll_response.status().is_success() {
             let status = poll_response.status();
             let text = poll_response.text().await.unwrap_or_default();
-            return Err(format!("onboardUser 轮询失败: {} - {}", status, text));
+            return Err(format!("Kiểm tra tiến trình onboardUser thất bại: {} - {}", status, text));
         }
 
         data = poll_response
             .json::<OnboardUserResponse>()
             .await
-            .map_err(|e| format!("onboardUser 轮询解析失败: {}", e))?;
+            .map_err(|e| format!("Không thể phân tích phản hồi kiểm tra onboardUser: {}", e))?;
 
         tokio::time::sleep(std::time::Duration::from_millis(ONBOARD_POLL_DELAY_MS)).await;
     }
@@ -877,7 +877,7 @@ pub async fn fetch_project_metadata_with_context(
                                         credits = extract_credits_from_tier(paid_tier);
                                         if !credits.is_empty() {
                                             crate::modules::logger::log_info(&format!(
-                                                "💰 [{}] 积分数据: {} 条 ({})",
+                                                "💰 [{}] Dữ liệu điểm: {} bản ghi ({})",
                                                 email,
                                                 credits.len(),
                                                 credits
@@ -896,7 +896,7 @@ pub async fn fetch_project_metadata_with_context(
                                         log_subscription_tier_result(
                                             email,
                                             subscription_tier.as_ref(),
-                                            "loadCodeAssist 正常返回",
+                                            "loadCodeAssist trả về bình thường",
                                         );
                                     } else {
                                         let allowed_tier_preview = data
@@ -911,7 +911,7 @@ pub async fn fetch_project_metadata_with_context(
                                             })
                                             .unwrap_or_else(|| "-".to_string());
                                         let reason = format!(
-                                            "loadCodeAssist 成功但无 tier: paidTier={:?}, currentTier={:?}, allowedTiers=[{}], hasProject={}",
+                                            "loadCodeAssist thành công nhưng thiếu tier: paidTier={:?}, currentTier={:?}, allowedTiers=[{}], hasProject={}",
                                             paid_tier_id,
                                             current_tier_id,
                                             allowed_tier_preview,
@@ -972,7 +972,7 @@ pub async fn fetch_project_metadata_with_context(
                                             }
                                             Err(err) => {
                                                 crate::modules::logger::log_warn(&format!(
-                                                    "⚠️ [{}] onboardUser 失败: {}",
+                                                    "⚠️ [{}] onboardUser thất bại: {}",
                                                     email, err
                                                 ));
                                             }
@@ -987,7 +987,7 @@ pub async fn fetch_project_metadata_with_context(
                                     };
                                 }
                                 Err(err) => {
-                                    last_error = Some(format!("loadCodeAssist 解析失败: {}", err));
+                                    last_error = Some(format!("Không thể phân tích phản hồi loadCodeAssist: {}", err));
                                     let header_info = format!(
                                     "status={}, content-type={}, content-encoding={}, content-length={}",
                                     status,
@@ -996,11 +996,11 @@ pub async fn fetch_project_metadata_with_context(
                                     header_value(&headers, reqwest::header::CONTENT_LENGTH)
                                 );
                                     crate::modules::logger::log_error(&format!(
-                                        "❌ [{}] loadCodeAssist 解析失败: {}, {}",
+                                        "❌ [{}] Không thể phân tích phản hồi loadCodeAssist: {}, {}",
                                         email, err, header_info
                                     ));
                                     crate::modules::logger::log_error(&format!(
-                                        "❌ [{}] loadCodeAssist 原始响应长度: {}",
+                                        "❌ [{}] Độ dài phản hồi gốc loadCodeAssist: {}",
                                         email,
                                         text.len()
                                     ));
@@ -1008,7 +1008,7 @@ pub async fn fetch_project_metadata_with_context(
                             }
                         }
                         Err(err) => {
-                            last_error = Some(format!("loadCodeAssist 读取失败: {}", err));
+                            last_error = Some(format!("Không thể đọc phản hồi loadCodeAssist: {}", err));
                             let header_info = format!(
                                 "status={}, content-type={}, content-encoding={}, content-length={}",
                                 status,
@@ -1017,7 +1017,7 @@ pub async fn fetch_project_metadata_with_context(
                                 header_value(&headers, reqwest::header::CONTENT_LENGTH)
                             );
                             crate::modules::logger::log_error(&format!(
-                                "❌ [{}] loadCodeAssist 请求失败: {}, {}",
+                                "❌ [{}] Yêu cầu loadCodeAssist thất bại: {}, {}",
                                 email, err, header_info
                             ));
                         }
@@ -1025,7 +1025,7 @@ pub async fn fetch_project_metadata_with_context(
                 } else if status == reqwest::StatusCode::UNAUTHORIZED {
                     let text = res.text().await.unwrap_or_default();
                     let reason = format!(
-                        "loadCodeAssist 返回 401 Unauthorized, base={}, attempt={}/{}, body_len={}",
+                        "loadCodeAssist trả về 401 Unauthorized, base={}, attempt={}/{}, body_len={}",
                         base_url,
                         attempt,
                         DEFAULT_ATTEMPTS,
@@ -1041,7 +1041,7 @@ pub async fn fetch_project_metadata_with_context(
                 } else if status == reqwest::StatusCode::FORBIDDEN {
                     let text = res.text().await.unwrap_or_default();
                     let reason = format!(
-                        "loadCodeAssist 返回 403 Forbidden, base={}, attempt={}/{}, body_len={}",
+                        "loadCodeAssist trả về 403 Forbidden, base={}, attempt={}/{}, body_len={}",
                         base_url,
                         attempt,
                         DEFAULT_ATTEMPTS,
@@ -1059,7 +1059,7 @@ pub async fn fetch_project_metadata_with_context(
                     let retryable =
                         status == reqwest::StatusCode::TOO_MANY_REQUESTS || status.as_u16() >= 500;
                     last_error = Some(format!(
-                        "loadCodeAssist 失败: status={}, base={}, attempt={}/{}, body_len={}",
+                        "loadCodeAssist thất bại: status={}, base={}, attempt={}/{}, body_len={}",
                         status,
                         base_url,
                         attempt,
@@ -1077,7 +1077,7 @@ pub async fn fetch_project_metadata_with_context(
             }
             Err(e) => {
                 last_error = Some(format!(
-                    "loadCodeAssist 网络错误: base={}, attempt={}/{}, error={}",
+                    "Lỗi mạng loadCodeAssist: base={}, attempt={}/{}, error={}",
                     base_url, attempt, DEFAULT_ATTEMPTS, e
                 ));
                 if attempt < DEFAULT_ATTEMPTS {
@@ -1092,10 +1092,10 @@ pub async fn fetch_project_metadata_with_context(
     }
 
     if let Some(err) = last_error {
-        crate::modules::logger::log_error(&format!("❌ [{}] loadCodeAssist 失败: {}", email, err));
+        crate::modules::logger::log_error(&format!("❌ [{}] loadCodeAssist thất bại: {}", email, err));
         log_subscription_tier_result(email, subscription_tier.as_ref(), &err);
     } else {
-        log_subscription_tier_result(email, subscription_tier.as_ref(), "未知错误");
+        log_subscription_tier_result(email, subscription_tier.as_ref(), "Lỗi không xác định");
     }
 
     ProjectMetadataResult {
@@ -1329,7 +1329,7 @@ pub async fn fetch_quota_with_context(
 
                     if status == reqwest::StatusCode::FORBIDDEN {
                         crate::modules::logger::log_warn(&format!(
-                            "账号无权限 (403 Forbidden), 标记为 forbidden 状态: {}",
+                            "Tài khoản không có quyền (403 Forbidden), đánh dấu trạng thái forbidden: {}",
                             email
                         ));
                         let text = response.text().await.unwrap_or_default();
@@ -1352,21 +1352,21 @@ pub async fn fetch_quota_with_context(
 
                     let text = response.text().await.unwrap_or_default();
                     return Err(AppError::Unknown(format!(
-                        "API 错误: {} - {}",
+                        "Lỗi API: {} - {}",
                         status, text
                     )));
                 }
 
                 let body = response.text().await.map_err(AppError::Network)?;
                 let mut payload_value: serde_json::Value = serde_json::from_str(&body)
-                    .map_err(|e| AppError::Unknown(format!("API 响应解析失败: {}", e)))?;
+                    .map_err(|e| AppError::Unknown(format!("Không thể phân tích phản hồi API: {}", e)))?;
 
                 // Fetch retrieveUserQuotaSummary to get weekly and 5h buckets
                 let mut quota_summary_val: Option<serde_json::Value> = None;
                 let mut quota_summary_error: Option<QuotaFetchError> = None;
                 let summary_url = format!("{}/v1internal:retrieveUserQuotaSummary", base_url);
                 crate::modules::logger::log_info(&format!(
-                    "[Quota] 发送 retrieveUserQuotaSummary, url: {}",
+                    "[Quota] Gửi yêu cầu retrieveUserQuotaSummary, url: {}",
                     summary_url
                 ));
                 match client
@@ -1381,13 +1381,13 @@ pub async fn fetch_quota_with_context(
                     Ok(res) => {
                         let status = res.status();
                         crate::modules::logger::log_info(&format!(
-                            "[Quota] retrieveUserQuotaSummary 返回状态码: {}",
+                            "[Quota] retrieveUserQuotaSummary trả về mã trạng thái: {}",
                             status
                         ));
                         if status.is_success() {
                             if let Ok(summary_body) = res.text().await {
                                 crate::modules::logger::log_info(&format!(
-                                    "[Quota] retrieveUserQuotaSummary 响应长度: {}",
+                                    "[Quota] Độ dài phản hồi retrieveUserQuotaSummary: {}",
                                     summary_body.len()
                                 ));
                                 if let Ok(val) =
@@ -1398,12 +1398,12 @@ pub async fn fetch_quota_with_context(
                                     if let Some(obj) = payload_value.as_object_mut() {
                                         obj.insert("quota_summary".to_string(), val);
                                         crate::modules::logger::log_info(
-                                            "[Quota] 成功将 quota_summary 合并到 payload_value",
+                                            "[Quota] Đã gộp quota_summary vào payload_value",
                                         );
                                     }
                                 } else {
                                     crate::modules::logger::log_error(
-                                        "[Quota] retrieveUserQuotaSummary JSON 解析失败",
+                                        "[Quota] Không thể phân tích JSON retrieveUserQuotaSummary",
                                     );
                                 }
                             } else {
@@ -1443,7 +1443,7 @@ pub async fn fetch_quota_with_context(
                 );
 
                 let quota_response: QuotaResponse = serde_json::from_value(payload_value)
-                    .map_err(|e| AppError::Unknown(format!("API 响应解析失败: {}", e)))?;
+                    .map_err(|e| AppError::Unknown(format!("Không thể phân tích phản hồi API: {}", e)))?;
                 let quota_data = build_quota_data_from_response(
                     quota_response,
                     subscription_tier.clone(),
