@@ -39,6 +39,9 @@ jobs:
       - name: 🌐 Check locales
         run: node scripts/check_locales.cjs
 
+      - name: 🇻🇳 Verify no translatable Chinese i18next fallback remains
+        run: node scripts/vietnamize_source.cjs --check
+
   preflight-typecheck:
     name: "🔍 Preflight: Typecheck"
     runs-on: ubuntu-latest
