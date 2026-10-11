@@ -140,7 +140,7 @@ test('AntigravityQuotaSection renders cachedNeedsReauth warning when isNeedsReau
 
   // When isNeedsReauth is true, displays cachedNeedsReauth
   const htmlReauth = renderToStaticMarkup(createElement(AntigravityQuotaSection, { items, isNeedsReauth: true, t }));
-  assert.match(htmlReauth, /⚠️ 账号需完成网页验证以继续使用/);
+  assert.match(htmlReauth, /⚠️ Cần xác minh web để tiếp tục/);
   assert.match(htmlReauth, /quota-reauth-warning/);
 
   // When isNeedsReauth is false, displays cachedRefreshFailed
