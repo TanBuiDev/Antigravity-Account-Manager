@@ -90,7 +90,7 @@ pub fn load_history() -> Result<Vec<AntigravitySwitchHistoryItem>, String> {
     }
 
     let content =
-        fs::read_to_string(&path).map_err(|e| format!("读取 Antigravity 切号记录失败: {}", e))?;
+        fs::read_to_string(&path).map_err(|e| format!("Không thể đọc lịch sử chuyển tài khoản Antigravity: {}", e))?;
     if content.trim().is_empty() {
         return Ok(Vec::new());
     }
@@ -100,18 +100,18 @@ pub fn load_history() -> Result<Vec<AntigravitySwitchHistoryItem>, String> {
         Err(error) => {
             match modules::atomic_write::quarantine_file(&path, "invalid-json") {
                 Ok(Some(backup_path)) => modules::logger::log_warn(&format!(
-                    "Antigravity 切号记录解析失败，已隔离并使用空记录: path={}, backup={}, error={}",
+                    "Lịch sử chuyển tài khoản Antigravity không hợp lệ; đã cách ly tệp và dùng lịch sử trống: path={}, backup={}, error={}",
                     path.display(),
                     backup_path.display(),
                     error
                 )),
                 Ok(None) => modules::logger::log_warn(&format!(
-                    "Antigravity 切号记录解析失败，文件已不存在，使用空记录: path={}, error={}",
+                    "Lịch sử chuyển tài khoản Antigravity không hợp lệ; tệp không còn tồn tại, dùng lịch sử trống: path={}, error={}",
                     path.display(),
                     error
                 )),
                 Err(backup_error) => modules::logger::log_warn(&format!(
-                    "Antigravity 切号记录解析失败，隔离失败，使用空记录: path={}, parse_error={}, backup_error={}",
+                    "Lịch sử chuyển tài khoản Antigravity không hợp lệ; không thể cách ly tệp, dùng lịch sử trống: path={}, parse_error={}, backup_error={}",
                     path.display(),
                     error,
                     backup_error
@@ -125,14 +125,14 @@ pub fn load_history() -> Result<Vec<AntigravitySwitchHistoryItem>, String> {
 fn save_history(items: &[AntigravitySwitchHistoryItem]) -> Result<(), String> {
     let path = history_path()?;
     let content = serde_json::to_string_pretty(items)
-        .map_err(|e| format!("序列化 Antigravity 切号记录失败: {}", e))?;
+        .map_err(|e| format!("Không thể tuần tự hóa lịch sử chuyển tài khoản Antigravity: {}", e))?;
 
     modules::atomic_write::write_string_atomic(&path, &content)
-        .map_err(|e| format!("保存 Antigravity 切号记录失败: {}", e))
+        .map_err(|e| format!("Không thể lưu lịch sử chuyển tài khoản Antigravity: {}", e))
 }
 
 pub fn add_history_item(item: AntigravitySwitchHistoryItem) -> Result<(), String> {
-    let _lock = HISTORY_LOCK.lock().map_err(|_| "获取切号记录锁失败")?;
+    let _lock = HISTORY_LOCK.lock().map_err(|_| "Không thể khóa lịch sử chuyển tài khoản")?;
     let mut existing = load_history().unwrap_or_default();
 
     existing.retain(|x| x.id != item.id);
@@ -144,6 +144,6 @@ pub fn add_history_item(item: AntigravitySwitchHistoryItem) -> Result<(), String
 }
 
 pub fn clear_history() -> Result<(), String> {
-    let _lock = HISTORY_LOCK.lock().map_err(|_| "获取切号记录锁失败")?;
+    let _lock = HISTORY_LOCK.lock().map_err(|_| "Không thể khóa lịch sử chuyển tài khoản")?;
     save_history(&[])
 }

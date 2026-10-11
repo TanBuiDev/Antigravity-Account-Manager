@@ -9,7 +9,7 @@ const LEGACY_DEFAULT_CHECK_INTERVAL_HOURS: u64 = 24;
 const LEGACY_PREVIOUS_DEFAULT_CHECK_INTERVAL_HOURS: u64 = 6;
 const PENDING_UPDATE_NOTES_FILE: &str = "pending_update_notes.json";
 const CHANGELOG_MARKDOWN_EN: &str = include_str!("../../../CHANGELOG.md");
-const CHANGELOG_MARKDOWN_ZH: &str = include_str!("../../../CHANGELOG.zh-CN.md");
+const CHANGELOG_MARKDOWN_ZH: &str = CHANGELOG_MARKDOWN_EN; // Legacy locale payload; no Chinese changelog is bundled.
 
 static UPDATE_SETTINGS_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
 

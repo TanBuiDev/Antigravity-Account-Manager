@@ -14,10 +14,10 @@ fn roaming_app_data_dir() -> Result<PathBuf, String> {
     unsafe {
         let raw =
             SHGetKnownFolderPath(&FOLDERID_RoamingAppData, KF_FLAG_DEFAULT, HANDLE::default())
-                .map_err(|e| format!("无法获取 Roaming AppData 目录: {}", e))?;
+                .map_err(|e| format!("Không thể truy cập thư mục Roaming AppData: {}", e))?;
         let path = raw
             .to_string()
-            .map_err(|e| format!("无法解析 Roaming AppData 路径: {}", e));
+            .map_err(|e| format!("Không thể xác định đường dẫn Roaming AppData: {}", e));
         CoTaskMemFree(Some(raw.as_ptr().cast::<c_void>()));
         path.map(PathBuf::from)
     }
@@ -54,7 +54,7 @@ pub fn prefer_user_data_dir_with_state_db(candidates: &[PathBuf], fallback: Path
 pub fn default_user_data_dir() -> Result<PathBuf, String> {
     #[cfg(target_os = "macos")]
     {
-        let home = dirs::home_dir().ok_or("无法获取 Home 目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục Home")?;
         return Ok(home.join("Library/Application Support/Antigravity IDE"));
     }
 
@@ -71,18 +71,18 @@ pub fn default_user_data_dir() -> Result<PathBuf, String> {
 
     #[cfg(target_os = "linux")]
     {
-        let home = dirs::home_dir().ok_or("无法获取 Home 目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục Home")?;
         return Ok(home.join(".config/Antigravity IDE"));
     }
 
     #[allow(unreachable_code)]
-    Err("无法确定 Antigravity IDE 默认目录".to_string())
+    Err("Không thể xác định thư mục mặc định của Antigravity IDE".to_string())
 }
 
 pub fn legacy_default_user_data_dir() -> Result<PathBuf, String> {
     #[cfg(target_os = "macos")]
     {
-        let home = dirs::home_dir().ok_or("无法获取 Home 目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục Home")?;
         return Ok(home.join("Library/Application Support/Antigravity"));
     }
 
@@ -94,12 +94,12 @@ pub fn legacy_default_user_data_dir() -> Result<PathBuf, String> {
 
     #[cfg(target_os = "linux")]
     {
-        let home = dirs::home_dir().ok_or("无法获取 Home 目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục Home")?;
         return Ok(home.join(".config/Antigravity"));
     }
 
     #[allow(unreachable_code)]
-    Err("无法确定 Antigravity 默认目录".to_string())
+    Err("Không thể xác định thư mục mặc định của Antigravity".to_string())
 }
 
 /// 获取所有存在的 Antigravity 用户数据目录（同时包含 `Antigravity` 与 `Antigravity IDE`）。

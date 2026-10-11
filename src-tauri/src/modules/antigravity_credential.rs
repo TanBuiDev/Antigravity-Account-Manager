@@ -52,7 +52,7 @@ fn normalize_non_empty(value: Option<&str>) -> Option<String> {
 fn normalize_antigravity_credential_secret(secret: &str) -> Result<String, String> {
     let trimmed = secret.trim();
     if trimmed.is_empty() {
-        return Err("Antigravity 系统凭据为空".to_string());
+        return Err("Thông tin xác thực hệ thống của Antigravity đang trống".to_string());
     }
     Ok(trimmed.to_string())
 }
@@ -63,9 +63,9 @@ fn parse_antigravity_system_credential(
 ) -> Result<AntigravitySystemCredential, String> {
     let payload_json = normalize_antigravity_credential_secret(secret)?;
     let payload: StoredAntigravityCredentialPayload = serde_json::from_str(&payload_json)
-        .map_err(|e| format!("解析 Antigravity 系统凭据失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích thông tin xác thực hệ thống của Antigravity: {}", e))?;
     let refresh_token = normalize_non_empty(payload.token.refresh_token.as_deref())
-        .ok_or_else(|| "Antigravity 系统凭据缺少 refresh_token".to_string())?;
+        .ok_or_else(|| "Thông tin xác thực hệ thống của Antigravity thiếu refresh_token".to_string())?;
 
     Ok(AntigravitySystemCredential {
         access_token: normalize_non_empty(payload.token.access_token.as_deref()),
@@ -90,14 +90,14 @@ fn build_antigravity_credential_payload(account: &Account) -> Result<String, Str
         },
         auth_method: "consumer".to_string(),
     })
-    .map_err(|e| format!("序列化 Antigravity 系统凭据失败: {}", e))
+    .map_err(|e| format!("Không thể tuần tự hóa thông tin xác thực hệ thống của Antigravity: {}", e))
 }
 
 pub fn write_antigravity_system_credential(account: &Account) -> Result<(), String> {
     let payload_json = build_antigravity_credential_payload(account)?;
 
     crate::modules::logger::log_info(&format!(
-        "[Antigravity 2.0] 写入系统凭据: {}",
+        "[Antigravity 2.0] Đang ghi thông tin xác thực hệ thống: {}",
         account.email
     ));
 
@@ -131,11 +131,11 @@ pub fn write_antigravity_system_credential(account: &Account) -> Result<(), Stri
                 "-A",
             ])
             .output()
-            .map_err(|e| format!("执行 macOS Keychain 写入命令失败: {}", e))?;
+            .map_err(|e| format!("Không thể thực thi lệnh ghi macOS Keychain: {}", e))?;
 
         if !output.status.success() {
             let stderr = String::from_utf8_lossy(&output.stderr);
-            return Err(format!("写入 macOS Keychain 失败: {}", stderr.trim()));
+            return Err(format!("Không thể ghi vào macOS Keychain: {}", stderr.trim()));
         }
     }
 
@@ -208,7 +208,7 @@ pub fn write_antigravity_system_credential(account: &Account) -> Result<(), Stri
             let _ = CredDeleteW(target_wide.as_ptr(), CRED_TYPE_GENERIC, 0);
             if CredWriteW(&credential, 0) == 0 {
                 return Err(format!(
-                    "写入 Windows Credential Manager 失败: {}",
+                    "Không thể ghi vào Windows Credential Manager: {}",
                     std::io::Error::last_os_error()
                 ));
             }
@@ -233,24 +233,24 @@ pub fn write_antigravity_system_credential(account: &Account) -> Result<(), Stri
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()
-            .map_err(|e| format!("启动 Linux secret-tool 失败: {}", e))?;
+            .map_err(|e| format!("Không thể khởi chạy Linux secret-tool: {}", e))?;
 
         if let Some(mut stdin) = child.stdin.take() {
             stdin
                 .write_all(payload_json.as_bytes())
-                .map_err(|e| format!("写入 Linux secret-tool 输入失败: {}", e))?;
+                .map_err(|e| format!("Không thể gửi dữ liệu đầu vào cho Linux secret-tool: {}", e))?;
         }
 
         let output = child
             .wait_with_output()
-            .map_err(|e| format!("等待 Linux secret-tool 失败: {}", e))?;
+            .map_err(|e| format!("Không thể chờ Linux secret-tool hoàn thành: {}", e))?;
         if !output.status.success() {
             let stderr = String::from_utf8_lossy(&output.stderr);
-            return Err(format!("Linux secret-tool 写入失败: {}", stderr.trim()));
+            return Err(format!("Không thể ghi bằng Linux secret-tool: {}", stderr.trim()));
         }
     }
 
-    crate::modules::logger::log_info("[Antigravity 2.0] 系统凭据写入完成");
+    crate::modules::logger::log_info("[Antigravity 2.0] Đã ghi thông tin xác thực hệ thống");
     Ok(())
 }
 
@@ -315,7 +315,7 @@ fn read_antigravity_system_credential_secret() -> Result<Option<String>, String>
                 return Ok(None);
             }
             return Err(format!(
-                "读取 Windows Credential Manager Antigravity 凭据失败: {}",
+                "Không thể đọc thông tin xác thực Antigravity từ Windows Credential Manager: {}",
                 error
             ));
         }

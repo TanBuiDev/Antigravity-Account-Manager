@@ -173,7 +173,7 @@ pub async fn update_instance(
         if let Some(target) = store.instances.iter().find(|item| item.id == instance_id) {
             if !is_profile_initialized(&target.user_data_dir) {
                 return Err(
-                    "INSTANCE_NOT_INITIALIZED:请先启动一次实例创建数据后，再进行账号绑定"
+                    "INSTANCE_NOT_INITIALIZED:Hãy khởi động phiên một lần để tạo dữ liệu trước khi liên kết tài khoản"
                         .to_string(),
                 );
             }
@@ -203,7 +203,7 @@ pub async fn update_instance(
 #[tauri::command]
 pub async fn delete_instance(instance_id: String) -> Result<(), String> {
     if instance_id == DEFAULT_INSTANCE_ID {
-        return Err("默认实例不可删除".to_string());
+        return Err("Không thể xóa phiên mặc định".to_string());
     }
     modules::instance::delete_instance(&instance_id)
 }
@@ -255,7 +255,7 @@ pub async fn start_instance(instance_id: String) -> Result<InstanceProfileView, 
         .instances
         .into_iter()
         .find(|item| item.id == instance_id)
-        .ok_or("实例不存在")?;
+        .ok_or("Không tìm thấy phiên")?;
 
     if let Some(pid) =
         modules::process::resolve_antigravity_pid(instance.last_pid, Some(&instance.user_data_dir))
@@ -321,7 +321,7 @@ pub async fn stop_instance(instance_id: String) -> Result<InstanceProfileView, S
         .instances
         .into_iter()
         .find(|item| item.id == instance_id)
-        .ok_or("实例不存在")?;
+        .ok_or("Không tìm thấy phiên")?;
 
     if let Some(pid) =
         modules::process::resolve_antigravity_pid(instance.last_pid, Some(&instance.user_data_dir))
@@ -361,7 +361,7 @@ pub async fn open_instance_window(instance_id: String) -> Result<(), String> {
     if instance_id == DEFAULT_INSTANCE_ID {
         let default_settings = modules::instance::load_default_settings()?;
         modules::process::focus_antigravity_instance(default_settings.last_pid, None)
-            .map_err(|err| format!("定位 Antigravity IDE 默认实例窗口失败: {}", err))?;
+            .map_err(|err| format!("Không thể tìm cửa sổ phiên mặc định của Antigravity IDE: {}", err))?;
         return Ok(());
     }
 
@@ -370,12 +370,12 @@ pub async fn open_instance_window(instance_id: String) -> Result<(), String> {
         .instances
         .into_iter()
         .find(|item| item.id == instance_id)
-        .ok_or("实例不存在")?;
+        .ok_or("Không tìm thấy phiên")?;
 
     modules::process::focus_antigravity_instance(instance.last_pid, Some(&instance.user_data_dir))
         .map_err(|err| {
             format!(
-                "定位 Antigravity IDE 实例窗口失败: instance_id={}, err={}",
+                "Không thể tìm cửa sổ phiên Antigravity IDE: instance_id={}, err={}",
                 instance.id, err
             )
         })?;
