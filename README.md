@@ -43,4 +43,10 @@ Dự án hiện dựa trên [jlcodes99/cockpit-tools](https://github.com/jlcodes
 
 ## Tiến độ Việt hóa
 
-Đợt đầu xử lý ngôn ngữ mặc định, gói i18n và tài liệu chính. Những thông báo lỗi viết cứng, chú thích mã nguồn, lịch sử thay đổi và mã bên thứ ba vẫn cần được rà soát; chưa thể coi đây là bản Việt hóa hoàn tất.
+- Đặt tiếng Việt làm ngôn ngữ mặc định và loại bỏ các gói dịch Trung.
+- Đã chuyển **6.102 lời dự phòng i18n** có bản dịch tiếng Việt tương ứng trong 144 tệp nguồn, sau đó rà soát thêm một số thông báo giao diện.
+- Quá trình rà soát tiếp theo không còn fallback nào đủ điều kiện chuyển tự động, nhưng còn **224 fallback cần xem thủ công**.
+- Quét tĩnh còn ghi nhận **11.723 vị trí chữ Hán** trong literal/JSX/Rust và khoảng **4.154 dòng chú thích Rust**. Nhiều trường hợp là log nội bộ, bình luận hoặc mã nghiệp vụ kỹ thuật; chưa thể kết luận đều xuất hiện trên giao diện.
+- Chưa xác nhận Việt hóa hoàn toàn và **chưa sẵn sàng merge** nếu kiểm thử còn lỗi.
+
+Xem [báo cáo rà soát](docs/i18n/chinese-audit.md) và [quy tắc bảo toàn chuỗi kỹ thuật](docs/i18n/translation-policy.md).

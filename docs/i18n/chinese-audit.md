@@ -3,11 +3,13 @@
 Đây là quét tĩnh; không tự ý thay đổi chuỗi giao thức, kiểm tra lỗi, URL và dữ liệu thử nghiệm.
 
 Tệp mã nguồn: 1302
-Tệp fallback có thể Việt hóa: 0
-Lời dự phòng đã Việt hóa: 0
+Tệp còn fallback đủ điều kiện chuyển tự động: 0
+Fallback còn có thể chuyển tự động tại lần quét này: 0
 Lời dự phòng cần kiểm tra thủ công: 224
 Vị trí chuỗi chữ Hán còn lại: 11723
 Dòng chú thích Rust có chữ Hán: 4154
+
+Lịch sử: một lượt xử lý trước đó đã Việt hóa 6.102 fallback trong 144 tệp.
 
 ## Phân loại
 literal: 888
