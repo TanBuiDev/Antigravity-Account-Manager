@@ -45,11 +45,17 @@ if(write){const totals={};for(const x of out.remaining)totals[x.type]=(totals[x.
  'Lời dự phòng đã Việt hóa: '+out.replaced,'Lời dự phòng cần kiểm tra thủ công: '+out.pending.length,
  'Vị trí chuỗi chữ Hán còn lại: '+out.remaining.length,'Dòng chú thích Rust có chữ Hán: '+out.comments,'',
  '## Phân loại',...Object.entries(totals).map(x=>x[0]+': '+x[1]),'',
- '## Fallback chưa chuyển',...out.pending.slice(0,150).map(x=>x.file+' - '+x.key),'',
+ '## Fallback chưa chuyển',...out.pending.map(x=>x.file+' - '+x.key),'',
  '## Ví dụ cần đánh giá thủ công',...out.remaining.filter(x=>x.type!=='test').slice(0,300)
  .map(x=>x.file+':'+x.line+' ['+x.type+'] '+x.sample),
  '','Không thay key, API, token, câu lệnh, đường dẫn và placeholder {{...}}.'].join('\n');
  fs.mkdirSync('docs/i18n',{recursive:true});fs.writeFileSync('docs/i18n/chinese-audit.md',report);
 }
 console.log(JSON.stringify({scanned:out.scanned,files:out.files,replaced:out.replaced,pending:out.pending.length,remaining:out.remaining.length,comments:out.comments}));
+if(process.argv.includes('--verbose')&&out.pending.length){
+ console.log('UNRESOLVED_FALLBACKS_BEGIN');
+ for(const p of out.pending)console.log(p.file+' - '+p.key);
+ console.log('UNRESOLVED_FALLBACKS_END');
+}
+
 if(check&&out.files)process.exitCode=1;
