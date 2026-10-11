@@ -11,7 +11,7 @@ import { SettingsGeneralPanel } from "./SettingsGeneralPanel";
 
 export type SettingsPageViewProps = ReturnType<typeof useSettingsPageController>;
 
-/** 渲染 SettingsPage 的界面；业务状态与动作统一由 Controller 提供。 */
+/** Hiển thị giao diện SettingsPage; trạng thái nghiệp vụ và thao tác đều do Controller cung cấp. */
 export function SettingsPageView(props: SettingsPageViewProps) {
   const {
     activeTab,

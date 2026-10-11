@@ -7,7 +7,7 @@ export interface PlatformGroupTabsProps {
   activeGroupId: string | null;
   onSelectGroup: (groupId: string | null) => void;
   onOpenManage: () => void;
-  /** 账号列表，用于计算各分组实际账号匹配数量 */
+  /** Danh sách tài khoản dùng để tính số tài khoản thực tế khớp với mỗi nhóm */
   accounts?: Array<{ id: string }>;
   totalCount?: number;
 }

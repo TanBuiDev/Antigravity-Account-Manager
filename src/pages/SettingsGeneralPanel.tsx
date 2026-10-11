@@ -15,7 +15,7 @@ import { ThemeColorSetting } from './settings/ThemeColorSetting';
 import { SettingsCodexPlatformPanel } from "./SettingsCodexPlatformPanel";
 
 
-/** 渲染 SettingsPageView 的 activeTab === 'general' 业务面板。 */
+/** Hiển thị bảng cài đặt chung khi activeTab của SettingsPageView là 'general'. */
 export function SettingsGeneralPanel(props: SettingsPageViewProps) {
   const {
     antigravityAccountGroups,
@@ -815,7 +815,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         const enabled = e.target.checked;
                         setAutoImportFromLocalEnabled(enabled);
                         if (!enabled) {
-                          // 作废进行中的扫描结果，避免关了之后又刷回完成文案
+                          // Hủy hiệu lực kết quả quét đang chạy để tránh hiển thị lại trạng thái hoàn tất sau khi đóng
                           autoImportScanSeqRef.current += 1;
                           setAutoImportScanBusy(false);
                           setAutoImportScanStatus(
@@ -838,7 +838,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         );
                         void (async () => {
                           try {
-                            // 等 patch 自动保存生效后再扫（debounce 300ms）
+                            // Chờ bản vá tự động được lưu rồi mới quét lại (debounce 300 ms)
                             await new Promise((resolve) => window.setTimeout(resolve, 450));
                             if (autoImportScanSeqRef.current !== scanSeq) {
                               return;
@@ -880,7 +880,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                             if (autoImportScanSeqRef.current !== scanSeq) {
                               return;
                             }
-                            console.error('本机账号自动导入扫描失败:', err);
+                            console.error('Quét nhập tài khoản cục bộ tự động thất bại:', err);
                             setAutoImportScanStatus(
                               t('settings.general.autoImportFromLocalScanFailed', {
                                 error: String(err),
@@ -3126,9 +3126,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_solo',
                 order: platformSettingsOrder.trae_solo,
                 titleKey: 'quickSettings.traeSolo.title',
-                titleDefault: 'TRAE SOLO 设置',
+                titleDefault: 'Cài đặt TRAE SOLO',
                 appPathTitleKey: 'settings.general.traeSoloAppPath',
-                appPathTitleDefault: 'TRAE SOLO 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy TRAE SOLO',
                 autoRefresh: traeSoloAutoRefresh,
                 setAutoRefresh: setTraeSoloAutoRefresh,
                 autoRefreshCustomMode: traeSoloAutoRefreshCustomMode,
@@ -3147,9 +3147,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_cn',
                 order: platformSettingsOrder.trae_cn,
                 titleKey: 'quickSettings.traeCn.title',
-                titleDefault: 'Trae CN 设置',
+                titleDefault: 'Cài đặt Trae CN',
                 appPathTitleKey: 'settings.general.traeCnAppPath',
-                appPathTitleDefault: 'Trae CN 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy Trae CN',
                 autoRefresh: traeCnAutoRefresh,
                 setAutoRefresh: setTraeCnAutoRefresh,
                 autoRefreshCustomMode: traeCnAutoRefreshCustomMode,
@@ -3168,9 +3168,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_solo_cn',
                 order: platformSettingsOrder.trae_solo_cn,
                 titleKey: 'quickSettings.traeSoloCn.title',
-                titleDefault: 'TRAE SOLO CN 设置',
+                titleDefault: 'Cài đặt TRAE SOLO CN',
                 appPathTitleKey: 'settings.general.traeSoloCnAppPath',
-                appPathTitleDefault: 'TRAE SOLO CN 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy TRAE SOLO CN',
                 autoRefresh: traeSoloCnAutoRefresh,
                 setAutoRefresh: setTraeSoloCnAutoRefresh,
                 autoRefreshCustomMode: traeSoloCnAutoRefreshCustomMode,

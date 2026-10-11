@@ -14,11 +14,11 @@ export interface AccountSelectionToolbarProps {
   actions?: ReactNode;
   children?: ReactNode;
 
-  /** 通用平台分组 Hook 返回对象，传入后自动在中间渲染分组 Tabs，并在操作栏追加加入/移出分组按钮及自动挂载弹窗 */
+  /** Đối tượng trả về từ Hook nhóm nền tảng dùng chung; hiển thị tab nhóm và các nút thêm/xóa tài khoản khỏi nhóm khi được truyền vào */
   grouping?: UsePlatformAccountGroupsReturn;
-  /** 用于分组 Tabs 统计各组账号数量及分组内添加账号 */
+  /** Dùng để đếm số tài khoản trong từng tab nhóm và thêm tài khoản vào nhóm */
   accounts?: Array<{ id: string; [key: string]: any }>;
-  /** 当前选中的账号 ID 列表，用于加入/移出分组 */
+  /** Danh sách ID tài khoản đang chọn để thêm vào hoặc xóa khỏi nhóm */
   selectedIds?: string[];
 }
 
