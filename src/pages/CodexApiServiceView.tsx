@@ -1689,8 +1689,8 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                       ? "codex.apiService.accountHealth.authError"
                                       : "codex.apiService.accountHealth.unavailable",
                                     health.schedulerReason === "unauthorized"
-                                      ? "鉴权异常"
-                                      : "暂不可用",
+                                      ? "Xác thực bất thường"
+                                      : "Tạm thời không khả dụng",
                                   )
                                 : t("codex.localAccess.healthAvailable", "Khả dụng")}
                           </span>
@@ -2175,8 +2175,8 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                       ? "codex.apiService.accountHealth.authError"
                                       : "codex.apiService.accountHealth.unavailable",
                                     health.schedulerReason === "unauthorized"
-                                      ? "鉴权异常"
-                                      : "暂不可用",
+                                      ? "Xác thực bất thường"
+                                      : "Tạm thời không khả dụng",
                                   )
                                 : t("codex.localAccess.healthAvailable", "Khả dụng")}
                           </span>
@@ -2526,7 +2526,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h3>
                   {t(
                     "codex.apiService.timeouts.retryTitle",
-                    "发送与账号重试",
+                    "Gửi và thử lại tài khoản",
                   )}
                 </h3>
                 <div className="codex-api-service-policy-grid">
@@ -3089,7 +3089,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <span>
                                 {t(
                                   "codex.api.modelCatalog.contextWindow",
-                                  "上下文窗口",
+                                  "Cửa sổ ngữ cảnh",
                                 )}
                               </span>
                               <input
@@ -3104,7 +3104,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 }
                                 placeholder={t(
                                   "codex.api.modelCatalog.contextWindowPlaceholder",
-                                  "留空=默认",
+                                  "Để trống = mặc định",
                                 )}
                                 inputMode="numeric"
                                 disabled={busy}

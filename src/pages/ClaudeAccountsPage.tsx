@@ -1929,9 +1929,9 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
             : 'claude.apiKey.importSuccess',
           addTab === 'desktopGateway'
             ? editingDesktopGatewayAccountId
-              ? 'Claude Gateway 账号已更新：{{name}}'
-              : 'Claude Gateway 账号已导入：{{name}}'
-            : 'Claude API Key 账号已导入：{{name}}',
+              ? 'Đã cập nhật tài khoản Claude Gateway: {{name}}'
+              : 'Đã nhập tài khoản Claude Gateway: {{name}}'
+            : 'Đã nhập tài khoản Claude API Key: {{name}}',
           {
           name: account.email,
           },
@@ -1961,7 +1961,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
         text: isClaudeDesktopGatewayAccount(account)
           ? t(
             'claude.desktopGateway.switchSuccess',
-            '已应用 Claude Desktop 供应商配置：{{name}}。',
+            'Đã áp dụng cấu hình nhà cung cấp Claude Desktop: {{name}}.',
             { name: displayName },
           )
           : t('messages.switched', {
@@ -2074,7 +2074,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
           ? {
               ...prev,
               executeMessage: null,
-              executeError: t('instances.messages.accountMissing', '账号不存在'),
+              executeError: t('instances.messages.accountMissing', 'Tài khoản không tồn tại'),
             }
           : prev,
       );
@@ -2523,7 +2523,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
           <button
             className={buttonClass}
             onClick={() => openEditDesktopGatewayModal(account)}
-            title={t('common.edit', '编辑')}
+            title={t('common.edit', 'Chỉnh sửa')}
           >
             <Pencil size={14} />
           </button>
@@ -2539,14 +2539,14 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
           title={
             isCliSubPlatform
               ? isDesktopRuntime
-                  ? t('claude.desktopOAuth.cliUnsupported', 'Claude 账号不能启动 Claude Code CLI')
+                  ? t('claude.desktopOAuth.cliUnsupported', 'Tài khoản Claude không thể khởi chạy Claude Code CLI')
                   : t('common.cliQuickLaunch', "Mở CLI")
               : isApiKey
                 ? t('claude.apiKey.switchDisabled', "Tài khoản API Key không chuyển sang Claude")
                 : isDesktopGateway
-                  ? t('claude.desktopGateway.switchHint', '应用供应商配置并启动 Claude Desktop')
+                  ? t('claude.desktopGateway.switchHint', 'Áp dụng cấu hình nhà cung cấp và khởi chạy Claude Desktop')
                   : isClaudeCodeOAuth
-                    ? t('claude.oauth.switchHint', '切换到本机 Claude Code')
+                    ? t('claude.oauth.switchHint', 'Chuyển sang Claude Code trên máy này')
                     : isDesktopRuntime
                       ? t('claude.desktopOAuth.switchHint', "Chuyển sang Claude chính thức")
                       : t('common.shared.switchAccount', "Chuyển tài khoản")
@@ -2860,8 +2860,8 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                   {t(
                     isDesktopSubPlatform ? 'claude.flowNotice.desktopDesc' : 'claude.flowNotice.cliDesc',
                     isDesktopSubPlatform
-                      ? '本工具可管理 Claude 登录态。登录会先保存到本地账号库；切号时才写入官方 Claude。'
-                      : '本工具可管理 Claude Code OAuth 与多供应商 API Key。OAuth 切号会写入本机 Claude Code 配置；API Key 会写入 Claude Code settings.json 的 env。',
+                      ? 'Ứng dụng quản lý các phiên đăng nhập Claude. Phiên được lưu vào kho tài khoản cục bộ trước và chỉ ghi vào Claude chính thức khi chuyển tài khoản.'
+                      : 'Ứng dụng quản lý Claude Code OAuth và API Key của nhiều nhà cung cấp. Chuyển OAuth ghi cấu hình Claude Code; API Key ghi vào env trong settings.json của Claude Code.',
                   )}
                 </div>
                 <ul className="ghcp-flow-notice-list">
@@ -2869,16 +2869,16 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                     {t(
                     isDesktopSubPlatform ? 'claude.flowNotice.desktopPermission' : 'claude.flowNotice.cliPermission',
                     isDesktopSubPlatform
-                      ? '权限范围：读取/写入官方 Claude 应用数据目录；Claude 快照保存于本工具本地账号数据。'
-                        : '权限范围：读取/写入本机 Claude Code 配置目录与 macOS Keychain 中的 Claude Code 凭据；API Key 账号保存于本工具本地账号数据，并在切换或启动 CLI 时明文写入 settings.json 的 env。',
+                      ? 'Phạm vi truy cập: đọc/ghi thư mục dữ liệu Claude chính thức; bản chụp trạng thái Claude được lưu trong dữ liệu tài khoản cục bộ.'
+                        : 'Phạm vi truy cập: đọc/ghi cấu hình Claude Code và thông tin xác thực trong macOS Keychain; tài khoản API Key được lưu cục bộ và ghi dưới dạng văn bản thuần vào env của settings.json khi chuyển hoặc khởi chạy CLI.',
                     )}
                   </li>
                   <li>
                     {t(
                     isDesktopSubPlatform ? 'claude.flowNotice.desktopNetwork' : 'claude.flowNotice.cliNetwork',
                     isDesktopSubPlatform
-                      ? '网络范围：Claude 登录窗口访问 claude.ai；刷新账号会请求 Claude Web 相关接口。'
-                        : '网络范围：OAuth 授权访问 Claude 官方授权页和 token/profile/usage 接口；API Key 导入不联网，启动后由 Claude CLI 访问所选供应商。',
+                      ? 'Phạm vi mạng: cửa sổ đăng nhập truy cập claude.ai; làm mới tài khoản sẽ gọi các API Claude Web.'
+                        : 'Phạm vi mạng: OAuth truy cập trang cấp quyền Claude và API token/profile/usage; nhập API Key không sử dụng mạng, Claude CLI sẽ kết nối nhà cung cấp được chọn sau khi chạy.',
                     )}
                   </li>
                 </ul>
@@ -2903,7 +2903,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                   type="text"
                   placeholder={t(
                     isDesktopSubPlatform ? 'claude.searchDesktop' : 'claude.searchCli',
-                    isDesktopSubPlatform ? '搜索 Claude 账号...' : '搜索 Claude CLI 账号...',
+                    isDesktopSubPlatform ? 'Tìm tài khoản Claude...' : 'Tìm tài khoản Claude CLI...',
                   )}
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
@@ -3010,7 +3010,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
               <p>
                 {t(
                   isDesktopSubPlatform ? 'claude.noDesktopAccounts' : 'claude.noCliAccounts',
-                  isDesktopSubPlatform ? '暂无 Claude 账号' : '暂无 Claude CLI 账号',
+                  isDesktopSubPlatform ? 'Chưa có tài khoản Claude' : 'Chưa có tài khoản Claude CLI',
                 )}
               </p>
               <button className="btn btn-primary" onClick={openAddModal}>
@@ -3148,9 +3148,9 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                           />
                         </th>
                         <th style={{ width: 260 }}>{t('common.shared.columns.account', "Tài khoản")}</th>
-                        <th style={{ width: 140 }}>{t('accounts.columns.plan', '套餐')}</th>
+                        <th style={{ width: 140 }}>{t('accounts.columns.plan', 'Gói dịch vụ')}</th>
                         <th>{t('claude.quota.title', "Hạn mức")}</th>
-                        <th style={{ width: 180 }}>{t('accounts.columns.createdAt', '创建时间')}</th>
+                        <th style={{ width: 180 }}>{t('accounts.columns.createdAt', 'Ngày tạo')}</th>
                         <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', "Hành động")}</th>
                       </tr>
                     </thead>
@@ -3248,10 +3248,10 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                       ? 'claude.addAccount.desktopTitle'
                       : 'claude.addAccount.cliTitle',
                   editingDesktopGatewayAccountId
-                    ? '编辑 Claude Gateway'
+                    ? 'Chỉnh sửa Claude Gateway'
                     : isDesktopSubPlatform
-                      ? '添加 Claude 账号'
-                      : '添加 Claude CLI 账号',
+                      ? 'Thêm tài khoản Claude'
+                      : 'Thêm tài khoản Claude CLI',
                 )}
               </h2>
               <button className="modal-close" onClick={closeAddModal} aria-label={t('common.close', "Đóng")}>
@@ -3502,8 +3502,8 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                     {t(
                       addTab === 'desktopGateway' ? 'claude.desktopGateway.desc' : 'claude.apiKey.desc',
                       addTab === 'desktopGateway'
-                        ? '保存 Gateway API Key 作为 Claude 3P 配置；切换时写入受管 profile 并用官方 Claude 启动。'
-                        : '保存 Claude CLI API Key 作为独立凭证；切换或启动 CLI 时会写入 Claude Code settings.json 的 env，不会写入 Claude 登录态。',
+                        ? 'Lưu Gateway API Key thành cấu hình Claude bên thứ ba; khi chuyển sẽ ghi vào hồ sơ được quản lý và khởi chạy Claude chính thức.'
+                        : 'Lưu Claude CLI API Key làm thông tin xác thực độc lập; khi chuyển hoặc chạy CLI, khóa sẽ được ghi vào env của settings.json, không ghi vào phiên đăng nhập Claude.',
                     )}
                   </p>
                   <div className="form-group">
@@ -3950,8 +3950,8 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                     {t(
                       addTab === 'desktopGateway' ? 'claude.desktopGateway.hint' : 'claude.apiKey.hint',
                       addTab === 'desktopGateway'
-                        ? 'Gateway 账号不会读取 Claude 订阅信息；API Key 会按官方 3P 配置写入受管 profile，用于启动 Claude。'
-                        : 'API Key 账号仅用于 Claude CLI；会以明文 env 写入 Claude Code settings.json，不会写入 Claude 登录态，也不支持订阅额度刷新。',
+                        ? 'Tài khoản Gateway không đọc thông tin đăng ký Claude; API Key được ghi vào hồ sơ được quản lý theo cấu hình bên thứ ba chính thức để khởi chạy Claude.'
+                        : 'Tài khoản API Key chỉ dùng cho Claude CLI; khóa được ghi dưới dạng văn bản thuần vào env của settings.json, không ghi vào phiên đăng nhập Claude và không hỗ trợ làm mới hạn mức đăng ký.',
                     )}
                   </p>
                   <button
@@ -3970,9 +3970,9 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                           : 'claude.apiKey.importAction',
                         addTab === 'desktopGateway'
                           ? editingDesktopGatewayAccountId
-                            ? '保存 Gateway'
-                            : '导入 Gateway'
-                          : '导入 API Key',
+                            ? 'Lưu Gateway'
+                            : 'Nhập Gateway'
+                          : 'Nhập API Key',
                       )}
                   </button>
                 </div>
@@ -4018,8 +4018,8 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                       placeholder={t(
                         isDesktopSubPlatform ? 'claude.import.desktopJsonPlaceholder' : 'claude.import.cliJsonPlaceholder',
                         isDesktopSubPlatform
-                          ? '粘贴导出的 Claude Gateway 账号 JSON'
-                          : '粘贴导出的 Claude CLI 账号 JSON',
+                          ? 'Dán JSON tài khoản Claude Gateway đã xuất'
+                          : 'Dán JSON tài khoản Claude CLI đã xuất',
                       )}
                       onChange={(event) => setJsonInput(event.target.value)}
                     />
@@ -4046,7 +4046,7 @@ export function ClaudeAccountsPage({ subPlatform = 'desktop' }: ClaudeAccountsPa
                   disabled={addModalBusy}
                 >
                   <FileJson size={14} />
-                  {t('common.shared.import.file', '选择文件')}
+                  {t('common.shared.import.file', 'Chọn tệp')}
                 </button>
                 <button
                   className="btn btn-primary"

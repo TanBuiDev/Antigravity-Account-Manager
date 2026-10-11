@@ -994,7 +994,7 @@ export function CodebuddyAccountsPage() {
             </div>
             <div className="modal-body">
               <ModalErrorMessage message={tagDeleteConfirmError} scrollKey={tagDeleteConfirmErrorScrollKey} />
-              <p>{t('common.deleteTagWarning', { tag: tagDeleteConfirm, defaultValue: '确定要从所有账号中移除标签 "{{tag}}" 吗？' })}</p>
+              <p>{t('common.deleteTagWarning', { tag: tagDeleteConfirm, defaultValue: 'Bạn có chắc muốn xóa nhãn "{{tag}}" khỏi tất cả tài khoản không?' })}</p>
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setTagDeleteConfirm(null)} disabled={deletingTag}>{t('common.cancel', "Hủy")}</button>

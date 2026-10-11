@@ -638,7 +638,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                     className="btn btn-primary"
                     onClick={() => void handleCloseBatchImport()}
                   >
-                    {t("common.shared.close", "关闭")}
+                    {t("common.shared.close", "Đóng")}
                   </button>
                 ) : (
                   <>
@@ -658,7 +658,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                           : activeBatchImportCheckQuota
                             ? t("codex.batchImport.cancelScan", "Hủy quét")
                             : t("codex.batchImport.cancelParse", "Hủy phân tích")
-                        : t("common.shared.close", "关闭")}
+                        : t("common.shared.close", "Đóng")}
                     </button>
                     {!batchImportBusy &&
                       batchImportPreview?.status === "cancelled" && (
@@ -904,7 +904,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
 
       {cliLaunchModal && (
         <CodexCliLaunchDialog
-          subjectLabel={t("instances.columns.account", "账号")}
+          subjectLabel={t("instances.columns.account", "Tài khoản")}
           subjectValue={cliLaunchModal.accountLabel}
           workingDir={{
             value: cliLaunchModal.workingDir,
@@ -929,7 +929,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
           commandPlaceholder={
             cliLaunchModal.preparing
               ? t("common.loading", "Đang tải...")
-              : t("codex.cli.selectWorkingDir", "选择 Codex CLI 工作目录")
+              : t("codex.cli.selectWorkingDir", "Chọn thư mục làm việc của Codex CLI")
           }
           preparing={cliLaunchModal.preparing}
           copied={cliLaunchModal.copied}

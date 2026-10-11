@@ -251,7 +251,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <FolderPlus size={14} />
                         <span>
                           {t("codex.addModal.targetGroup", {
-                            defaultValue: "将添加到分组：{{group}}",
+                            defaultValue: "Sẽ thêm vào nhóm: {{group}}",
                             group: codexAddTargetGroup.name,
                           })}
                         </span>

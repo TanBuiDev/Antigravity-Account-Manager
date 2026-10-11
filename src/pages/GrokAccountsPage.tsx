@@ -733,7 +733,7 @@ export function GrokAccountsPage() {
       <p>
         {t(
           "grok.instances.installLaunchHint",
-          "可在终端运行以下官方命令，安装完成后重新点击终端执行。",
+          "Bạn có thể chạy lệnh chính thức dưới đây trong terminal, sau khi cài đặt hãy nhấp chạy trong terminal lần nữa.",
         )}
       </p>
       <div className="grok-cli-install-command">
@@ -824,43 +824,43 @@ export function GrokAccountsPage() {
     pageClassName: "grok-accounts-page",
     quickSettingsType: "grok",
     searchPlaceholderKey: "grok.search",
-    searchPlaceholderDefault: "搜索 Grok CLI 账号...",
+    searchPlaceholderDefault: "Tìm tài khoản Grok CLI...",
     flowNotice: {
       titleKey: "grok.flowNotice.title",
-      titleDefault: "Grok CLI 账号管理说明",
+      titleDefault: "Hướng dẫn quản lý tài khoản Grok CLI",
       descKey: "grok.flowNotice.desc",
       descDefault:
-        "默认使用独立 GROK_HOME；开启“切号同步官方登录”后，默认实例切换 OAuth 账号会写入官方 ~/.grok/auth.json，多开实例仍保持隔离。",
+        "Mặc định dùng GROK_HOME riêng; khi bật Đồng bộ đăng nhập chính thức lúc chuyển tài khoản, phiên mặc định sẽ ghi OAuth vào ~/.grok/auth.json, còn các phiên khác vẫn tách biệt.",
       permissionKey: "grok.flowNotice.permission",
       permissionDefault:
-        "本地范围：可读取默认 ~/.grok/auth.json 用于导入；仅在开关开启且默认实例切换 OAuth 账号时写入该文件，API Key 不会覆盖官方登录。",
+        "Phạm vi cục bộ: có thể đọc ~/.grok/auth.json để nhập; chỉ ghi khi bật đồng bộ và chuyển tài khoản OAuth ở phiên mặc định; API Key không ghi đè đăng nhập chính thức.",
       networkKey: "grok.flowNotice.network",
       networkDefault:
-        "网络范围：OAuth 授权、凭据刷新及账号用量查询；不会上传凭据到 Cockpit 服务。",
+        "Phạm vi mạng: cấp quyền OAuth, làm mới thông tin xác thực và truy vấn mức sử dụng; không tải thông tin xác thực lên dịch vụ Cockpit.",
     },
     noAccountsKey: "grok.empty",
-    noAccountsDefault: "暂无 Grok CLI 账号",
+    noAccountsDefault: "Chưa có tài khoản Grok CLI",
     addAccountTitleKey: "grok.addAccount",
-    addAccountTitleDefault: "添加 Grok CLI 账号",
+    addAccountTitleDefault: "Thêm tài khoản Grok CLI",
     oauthDescKey: "grok.oauth.desc",
-    oauthDescDefault: "打开 xAI 授权页并输入设备验证码，完成后账号会自动保存。",
+    oauthDescDefault: "Mở trang cấp quyền xAI và nhập mã xác minh thiết bị; tài khoản sẽ tự lưu sau khi hoàn tất.",
     oauthFeatureCardClassName: "grok-oauth-feature-card",
     oauthFeatureTitleKey: "grok.oauth.title",
     oauthFeatureTitleDefault: "Grok Device OAuth",
     oauthFeatureItem1Key: "grok.oauth.item1",
     oauthFeatureItem1Default:
-      "使用 Grok CLI 官方 device flow，不占用本地回调端口。",
+      "Sử dụng quy trình xác minh thiết bị chính thức của Grok CLI, không chiếm cổng callback cục bộ.",
     oauthFeatureItem2Key: "grok.oauth.item2",
     oauthFeatureItem2Default:
-      "授权成功后保存独立 GROK_HOME，并维护凭据有效状态。",
+      "Sau khi cấp quyền thành công, lưu GROK_HOME riêng và duy trì trạng thái hợp lệ của thông tin xác thực.",
     oauthFeatureItem3Key: "grok.oauth.item3",
-    oauthFeatureItem3Default: "每个账号独立目录，可同时启动多个账号互不影响。",
+    oauthFeatureItem3Default: "Mỗi tài khoản có thư mục riêng, có thể chạy đồng thời mà không ảnh hưởng lẫn nhau.",
     oauthUrlInputPlaceholderKey: "grok.oauth.urlPlaceholder",
-    oauthUrlInputPlaceholderDefault: "Grok OAuth 授权地址",
+    oauthUrlInputPlaceholderDefault: "URL cấp quyền Grok OAuth",
     oauthWaitingKey: "grok.oauth.waiting",
-    oauthWaitingDefault: "等待 Grok OAuth 授权...",
+    oauthWaitingDefault: "Đang chờ cấp quyền Grok OAuth...",
     oauthOpenButtonKey: "grok.oauth.openWindow",
-    oauthOpenButtonDefault: "打开授权页",
+    oauthOpenButtonDefault: "Mở trang cấp quyền",
     // 与 Codex 对齐：Token / JSON（粘贴）| API Key
     tokenTabLabelKey: "grok.import.apiKeyTab",
     tokenTabLabelDefault: "API Key",
@@ -870,18 +870,18 @@ export function GrokAccountsPage() {
         : "grok.import.apiKeyDesc",
     tokenDescDefault:
       apiProviderMode === "custom"
-        ? "配置 OpenAI 兼容的 Base URL、模型 ID 与 API Key。启动时写入账号专属 config.toml，并仅向该 CLI 进程注入密钥。"
-        : "粘贴 xAI API Key（官方 XAI_API_KEY / xai-…）。启动 CLI 时通过账号专属 GROK_HOME 注入，不会覆盖官方 OAuth 登录。",
+        ? "Cấu hình Base URL, ID mô hình và API Key tương thích OpenAI. Khi chạy, ghi vào config.toml riêng cho tài khoản và chỉ truyền khóa cho tiến trình CLI này."
+        : "Dán xAI API Key (XAI_API_KEY / xai-… chính thức). Khóa được truyền qua GROK_HOME riêng khi chạy CLI, không ghi đè đăng nhập OAuth chính thức.",
     tokenInputPlaceholderKey:
       apiProviderMode === "custom"
         ? "grok.import.customApiKeyPlaceholder"
         : "grok.import.apiKeyPlaceholder",
     tokenInputPlaceholderDefault:
       apiProviderMode === "custom"
-        ? "粘贴第三方 API Key"
-        : "粘贴 xai- 开头的密钥",
+        ? "Dán API Key bên thứ ba"
+        : "Dán khóa bắt đầu bằng xai-",
     tokenSubmitLabelKey: "grok.import.apiKeyAction",
-    tokenSubmitLabelDefault: "添加 API Key",
+    tokenSubmitLabelDefault: "Thêm API Key",
     tokenInputSecret: true,
     tokenSubmitDisabled: customApiFieldsIncomplete,
     tokenControl: (
@@ -1001,16 +1001,16 @@ export function GrokAccountsPage() {
     pasteJsonTabLabelDefault: "Token / JSON",
     pasteJsonDescKey: "grok.import.pasteDesc",
     pasteJsonDescDefault:
-      "粘贴官方 Grok CLI auth.json，或本应用导出的完整账号 JSON（含凭据，可再导入恢复）。凭据仅在本机处理。",
+      "Dán auth.json chính thức của Grok CLI hoặc JSON tài khoản đầy đủ đã xuất (có thông tin xác thực để nhập khôi phục). Thông tin xác thực chỉ được xử lý cục bộ.",
     pasteJsonPlaceholderKey: "grok.import.pastePlaceholder",
-    pasteJsonPlaceholderDefault: "粘贴 Grok 账号 JSON",
+    pasteJsonPlaceholderDefault: "Dán JSON tài khoản Grok",
     pasteJsonSubmitLabelKey: "grok.import.pasteAction",
-    pasteJsonSubmitLabelDefault: "导入 JSON",
+    pasteJsonSubmitLabelDefault: "Nhập JSON",
     importLocalDescKey: "grok.import.localDesc",
     importLocalDescDefault:
-      "从默认 ~/.grok/auth.json 导入；也可选择官方 auth.json 或本应用导出的完整账号 JSON 文件。",
+      "Nhập từ ~/.grok/auth.json mặc định hoặc chọn auth.json chính thức hay tệp JSON tài khoản đầy đủ đã xuất từ ứng dụng.",
     importLocalClientKey: "grok.import.localClient",
-    importLocalClientDefault: "从本机 Grok CLI 导入",
+    importLocalClientDefault: "Nhập từ Grok CLI cục bộ",
     getDisplayEmail: getGrokAccountDisplayEmail,
     getPlanBadge: (account) =>
       getGrokPlanBadge(account) || t("common.none", "None​"),

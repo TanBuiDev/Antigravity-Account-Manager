@@ -416,7 +416,7 @@ export function ApiKeyFunPage() {
       target,
       status: 'success',
       message: t('apiKeyFun.keyManager.prefillOpened', {
-        defaultValue: '已打开 {{target}} 添加弹窗，请确认保存',
+        defaultValue: 'Đã mở hộp thoại thêm {{target}}, hãy xác nhận để lưu',
         target: targetName,
       }),
     });

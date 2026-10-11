@@ -636,7 +636,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <span className="codex-overview-selected-count">
                       {t(
                         "codex.apiService.customRoutingSelected",
-                        "已选 {{count}}",
+                        "Đã chọn {{count}}",
                       ).replace("{{count}}", String(selected.size))}
                     </span>
                     <button

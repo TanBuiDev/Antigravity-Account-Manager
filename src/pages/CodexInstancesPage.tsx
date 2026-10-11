@@ -665,9 +665,9 @@ export function CodexInstancesContent({
           appType="codex"
           isSupported={isSupportedPlatform}
           unsupportedTitleKey="common.shared.instances.unsupported.title"
-          unsupportedTitleDefault="暂不支持当前系统"
+          unsupportedTitleDefault="Hệ điều hành hiện chưa được hỗ trợ"
           unsupportedDescKey="codex.instances.unsupported.desc"
-          unsupportedDescDefault="Codex 应用多开仅支持 macOS 和 Windows。"
+          unsupportedDescDefault="Chạy nhiều phiên Codex chỉ được hỗ trợ trên macOS và Windows."
           onInstanceStarted={handleInstanceStarted}
           onBeforeStart={handleBeforeStart}
           resolveStartSuccessMessage={(instance) =>
@@ -740,7 +740,7 @@ export function CodexInstancesContent({
                       />
                       <span>
                         {syncingAllRecords
-                          ? t("common.syncing", "同步中...")
+                          ? t("common.syncing", "Đang đồng bộ...")
                           : t(
                               "codex.instances.syncAllRecords.action",
                               "Đồng bộ tất cả bản ghi phiên bản",

@@ -1658,7 +1658,7 @@ export function useCodexApiServicePageController() {
       const confirmed = await confirmDialog(
         t(
           "codex.localAccess.riskNotice.desc",
-          "当前 Codex API 服务相关功能，本质上属于代理转发使用方式。继续使用即表示您已知悉相关情况，并愿意自行承担可能产生的风险。",
+          "Các chức năng của dịch vụ Codex API thực chất sử dụng phương thức chuyển tiếp qua proxy. Khi tiếp tục, bạn xác nhận đã hiểu và tự chịu trách nhiệm về các rủi ro liên quan.",
         ),
         {
           title: t("codex.localAccess.riskNotice.title", "Lưu ý rủi ro"),
@@ -1732,7 +1732,7 @@ export function useCodexApiServicePageController() {
       const confirmedRisk = await confirmDialog(
         t(
           "codex.localAccess.riskNotice.desc",
-          "当前 Codex API 服务相关功能，本质上属于代理转发使用方式。继续使用即表示您已知悉相关情况，并愿意自行承担可能产生的风险。",
+          "Các chức năng của dịch vụ Codex API thực chất sử dụng phương thức chuyển tiếp qua proxy. Khi tiếp tục, bạn xác nhận đã hiểu và tự chịu trách nhiệm về các rủi ro liên quan.",
         ),
         {
           title: t("codex.localAccess.riskNotice.title", "Lưu ý rủi ro"),
@@ -2607,7 +2607,7 @@ export function useCodexApiServicePageController() {
         setAccountModelMappingError(
           t(
             "codex.api.modelCatalog.contextWindowInvalid",
-            "上下文窗口必须是大于 0 的整数",
+            "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
           ),
         );
         return;
