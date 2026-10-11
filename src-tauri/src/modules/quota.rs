@@ -731,7 +731,7 @@ async fn try_onboard_user(
     }
 }
 
-/// 从 paidTier.availableCredits 提取有效积分信息
+/// Trích xuất thông tin điểm hợp lệ từ paidTier.availableCredits
 fn extract_credits_from_tier(tier: &Tier) -> Vec<CreditInfo> {
     tier.available_credits
         .as_ref()
@@ -740,7 +740,7 @@ fn extract_credits_from_tier(tier: &Tier) -> Vec<CreditInfo> {
                 .iter()
                 .filter_map(|raw| {
                     let credit_type = raw.credit_type.as_ref()?.clone();
-                    // 仅保留有 creditAmount 的条目
+                    // Chỉ giữ các mục có creditAmount
                     if raw.credit_amount.is_none() {
                         return None;
                     }
@@ -765,7 +765,7 @@ pub struct ProjectMetadataResult {
     pub is_gcp_tos: Option<bool>,
 }
 
-/// 获取项目 ID、订阅类型和积分信息（优先使用 token 中的 project_id / is_gcp_tos 上下文）
+/// Lấy ID dự án, loại đăng ký và thông tin điểm (ưu tiên ngữ cảnh project_id / is_gcp_tos trong token)
 pub async fn fetch_project_id_for_token(
     token: &TokenData,
     email: &str,
@@ -855,7 +855,7 @@ pub async fn fetch_project_metadata_with_context(
                                     subscription_tier =
                                         paid_tier_id.clone().or(current_tier_id.clone());
 
-                                    // 从 currentTier / allowedTiers 中解析 usesGcpTos（严格遵循 Google 返回的真实字段）
+                                    // Đọc usesGcpTos từ currentTier / allowedTiers (tuân theo đúng các trường thực tế mà Google trả về)
                                     let detected_gcp_tos = data
                                         .current_tier
                                         .as_ref()
@@ -872,7 +872,7 @@ pub async fn fetch_project_metadata_with_context(
                                         resolved_is_gcp_tos = detected_gcp_tos;
                                     }
 
-                                    // 提取积分数据
+                                    // Trích xuất dữ liệu điểm
                                     if let Some(ref paid_tier) = data.paid_tier {
                                         credits = extract_credits_from_tier(paid_tier);
                                         if !credits.is_empty() {
@@ -1254,7 +1254,7 @@ pub async fn fetch_quota_with_context(
         .map(|id| id.trim().to_string())
         .filter(|id| !id.is_empty() && id != "aicode-consumers");
 
-    // 保留缓存，但缓存命中前仍先执行与 Antigravity IDE.app 对齐的项目识别流程。
+    // Giữ bộ nhớ đệm nhưng vẫn thực hiện nhận diện dự án nhất quán với Antigravity IDE.app trước khi dùng dữ liệu đã lưu.
     if !skip_cache {
         if let Some(record) = read_api_cache("authorized", email) {
             let is_dirty_cache = record
@@ -1408,13 +1408,13 @@ pub async fn fetch_quota_with_context(
                                 }
                             } else {
                                 crate::modules::logger::log_error(
-                                    "[Quota] retrieveUserQuotaSummary 读取 body 失败",
+                                    "[Quota] Không thể đọc body của retrieveUserQuotaSummary",
                                 );
                             }
                         } else {
                             let err_text = res.text().await.unwrap_or_default();
                             crate::modules::logger::log_warn(&format!(
-                                "[Quota] retrieveUserQuotaSummary 请求未成功: {}, body: {}",
+                                "[Quota] Yêu cầu retrieveUserQuotaSummary không thành công: {}, body: {}",
                                 status, err_text
                             ));
                             let parsed = parse_google_api_error_with_email(status.as_u16(), &err_text, Some(email));
@@ -1428,7 +1428,7 @@ pub async fn fetch_quota_with_context(
                     }
                     Err(e) => {
                         crate::modules::logger::log_warn(&format!(
-                            "[Quota] retrieveUserQuotaSummary 发送失败: {}",
+                            "[Quota] Không thể gửi yêu cầu retrieveUserQuotaSummary: {}",
                             e
                         ));
                     }
@@ -1468,7 +1468,7 @@ pub async fn fetch_quota_with_context(
         }
     }
 
-    Err(AppError::Unknown("配额查询失败".to_string()))
+    Err(AppError::Unknown("Truy vấn hạn mức thất bại".to_string()))
 }
 
 #[cfg(test)]
