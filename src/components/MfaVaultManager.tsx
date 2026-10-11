@@ -668,7 +668,7 @@ export function MfaVaultManager() {
             </div>
             {activeMigrationBatch && (
               <div className="mfa-vault-manual-hint">
-                {t('mfaVault.migrationBatchProgress', 'Google Authenticator 迁移批次：已识别 {{scanned}}/{{total}} 张二维码。')
+                {t('mfaVault.migrationBatchProgress', 'Đợt chuyển dữ liệu Google Authenticator: đã nhận diện {{scanned}}/{{total}} mã QR.')
                   .replace('{{scanned}}', activeMigrationPartCount.toString())
                   .replace('{{total}}', activeMigrationBatch.batchSize.toString())}
                 {!activeMigrationIsComplete && (

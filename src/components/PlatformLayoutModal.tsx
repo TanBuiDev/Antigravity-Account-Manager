@@ -1175,7 +1175,7 @@ export function PlatformLayoutModal({
             <div className="platform-layout-group-error" role="alert">
               {t(
                 'platformLayout.customIconStorageFailed',
-                '自定义图标无法保存，本地存储空间可能已满。删除不再使用的自定义图标后重试。',
+                'Không thể lưu biểu tượng tùy chỉnh; bộ nhớ cục bộ có thể đã đầy. Hãy xóa biểu tượng không còn dùng rồi thử lại.',
               )}
             </div>
           )}

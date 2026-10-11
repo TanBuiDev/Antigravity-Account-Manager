@@ -112,7 +112,7 @@ function formatCooldown(
   cooldown: CodexLocalAccessAccountCooldown,
   t: ReturnType<typeof useTranslation>["t"],
 ): string {
-  const model = cooldown.modelId.trim() || t("common.unknown", "未知模型");
+  const model = cooldown.modelId.trim() || t("common.unknown", "Mô hình không xác định");
   if (!cooldown.nextRetryAt) {
     return t("codex.localAccess.accountPoolHealth.dialog.cooldownModel", {
       model,
@@ -622,7 +622,7 @@ export function CodexAccountPoolHealthModal({
                       : t("codex.localAccess.accountPoolHealth.dialog.unscopedApiKey", "API Key hiện tại")}
                     {" · "}
                     {t("codex.localAccess.accountPoolHealth.dialog.poolUnavailableDetail", {
-                      model: health.model.trim() || t("common.unknown", "未知模型"),
+                      model: health.model.trim() || t("common.unknown", "Mô hình không xác định"),
                       defaultValue: "Không chọn được tài khoản khả dụng cho mô hình {{model}}",
                     })}
                   </p>
@@ -674,7 +674,7 @@ export function CodexAccountPoolHealthModal({
                   {health.diagnosticAvailable && (
                     <p className="codex-account-pool-health-item-detail">
                       {t("codex.localAccess.accountPoolHealth.dialog.poolDiagnosticDetail", {
-                        model: health.model.trim() || t("common.unknown", "未知模型"),
+                        model: health.model.trim() || t("common.unknown", "Mô hình không xác định"),
                         candidate: health.candidateAuths,
                         scoped: health.scopedAuths,
                         available: health.availableAuths,

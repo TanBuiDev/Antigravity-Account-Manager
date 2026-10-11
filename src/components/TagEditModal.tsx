@@ -369,7 +369,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
           {globalRenamingTag ? (
             <div className="tag-input-row">
               <div className="tag-global-rename-hint" style={{ fontSize: 12, color: 'var(--text-secondary, #6b7280)', marginBottom: 4 }}>
-                {t('accounts.tagModal.renamingGlobal', '正在全局重命名已存在标签所有账号记录：')} <b>{globalRenamingTag}</b>
+                {t('accounts.tagModal.renamingGlobal', 'Đang đổi tên nhãn trên tất cả tài khoản có nhãn này:')} <b>{globalRenamingTag}</b>
               </div>
               <div className="tag-input-wrap">
                 <input

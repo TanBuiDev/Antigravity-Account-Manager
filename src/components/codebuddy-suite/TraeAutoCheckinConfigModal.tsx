@@ -63,17 +63,17 @@ export function TraeAutoCheckinConfigModal({
 
   const handleSave = () => {
     if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(startTime)) {
-      setError(t('workbuddy.autoCheckin.error.invalidTime', '开始时间格式错误'));
+      setError(t('workbuddy.autoCheckin.error.invalidTime', 'Định dạng giờ bắt đầu không hợp lệ'));
       return;
     }
     if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(endTime)) {
-      setError(t('workbuddy.autoCheckin.error.invalidTime', '结束时间格式错误'));
+      setError(t('workbuddy.autoCheckin.error.invalidTime', 'Định dạng giờ kết thúc không hợp lệ'));
       return;
     }
     const startMinutes = parseTimeToMinutes(startTime);
     const endMinutes = parseTimeToMinutes(endTime);
     if (endMinutes < startMinutes) {
-      setError(t('workbuddy.autoCheckin.error.endBeforeStart', '结束时间不能早于开始时间'));
+      setError(t('workbuddy.autoCheckin.error.endBeforeStart', 'Giờ kết thúc không được trước giờ bắt đầu'));
       return;
     }
     setError(null);
@@ -112,11 +112,11 @@ export function TraeAutoCheckinConfigModal({
   const statusText = (status: string) => {
     switch (status) {
       case 'success':
-        return t('workbuddy.checkin.success', '成功');
+        return t('workbuddy.checkin.success', 'Thành công');
       case 'already_checked':
-        return t('workbuddy.checkin.alreadyChecked', '已签到');
+        return t('workbuddy.checkin.alreadyChecked', 'Đã điểm danh');
       case 'failed':
-        return t('workbuddy.checkin.failed', '失败');
+        return t('workbuddy.checkin.failed', 'Thất bại');
       case 'inactive':
         return t('workbuddy.checkin.inactive', "Không khả dụng");
       default:
@@ -130,7 +130,7 @@ export function TraeAutoCheckinConfigModal({
         <div className="modal-header">
           <h2>
             <Settings size={18} />
-            {t('trae.autoCheckin.title', 'TRAE SOLO CN 自动签到设置')}
+            {t('trae.autoCheckin.title', 'Cài đặt điểm danh tự động TRAE SOLO CN')}
           </h2>
           <button className="modal-close" onClick={onClose}>
             <X size={18} />
@@ -143,14 +143,14 @@ export function TraeAutoCheckinConfigModal({
             onClick={() => setActiveTab('settings')}
           >
             <Settings size={14} />
-            {t('workbuddy.autoCheckin.settings', '设置')}
+            {t('workbuddy.autoCheckin.settings', 'Cài đặt')}
           </button>
           <button
             className={`modal-tab ${activeTab === 'history' ? 'active' : ''}`}
             onClick={() => setActiveTab('history')}
           >
             <History size={14} />
-            {t('workbuddy.autoCheckin.history', '历史记录')}
+            {t('workbuddy.autoCheckin.history', 'Lịch sử')}
           </button>
         </div>
 
@@ -168,7 +168,7 @@ export function TraeAutoCheckinConfigModal({
           {activeTab === 'settings' && (
             <div className="auto-checkin-settings">
               <label className="setting-row">
-                <span>{t('workbuddy.autoCheckin.enable', '启用自动签到')}</span>
+                <span>{t('workbuddy.autoCheckin.enable', 'Bật điểm danh tự động')}</span>
                 <input
                   type="checkbox"
                   checked={enabled}
@@ -177,7 +177,7 @@ export function TraeAutoCheckinConfigModal({
               </label>
 
               <div className="setting-row">
-                <span>{t('workbuddy.autoCheckin.timeRange', '签到时间段')}</span>
+                <span>{t('workbuddy.autoCheckin.timeRange', 'Khung giờ điểm danh')}</span>
                 <div className="time-range-inputs">
                   <div className="time-input-group">
                     <Clock size={14} />
@@ -211,7 +211,7 @@ export function TraeAutoCheckinConfigModal({
               <div className="setting-divider" />
 
               <div className="setting-row">
-                <span>{t('workbuddy.autoCheckin.manualTest', '手动测试')}</span>
+                <span>{t('workbuddy.autoCheckin.manualTest', 'Kiểm tra thủ công')}</span>
                 <button
                   className="btn btn-secondary btn-sm"
                   onClick={() => void handleManualTest()}
@@ -222,7 +222,7 @@ export function TraeAutoCheckinConfigModal({
                   ) : (
                     <Play size={14} />
                   )}
-                  {t('workbuddy.autoCheckin.testNow', '立即执行')}
+                  {t('workbuddy.autoCheckin.testNow', 'Thực hiện ngay')}
                 </button>
               </div>
             </div>
@@ -232,13 +232,13 @@ export function TraeAutoCheckinConfigModal({
             <div className="auto-checkin-history">
               <div className="history-header">
                 <span className="history-count">
-                  {t('workbuddy.autoCheckin.logCount', '共 {{count}} 条记录', { count: logs.length })}
+                  {t('workbuddy.autoCheckin.logCount', 'Tổng cộng {{count}} bản ghi', { count: logs.length })}
                 </span>
                 {logs.length > 0 && (
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => {
-                      if (confirm(t('workbuddy.autoCheckin.confirmClear', '确定清空所有记录？'))) {
+                      if (confirm(t('workbuddy.autoCheckin.confirmClear', 'Bạn có chắc muốn xóa toàn bộ bản ghi?'))) {
                         clearTraeAutoCheckinLogs();
                       }
                     }}
@@ -251,7 +251,7 @@ export function TraeAutoCheckinConfigModal({
 
               {logs.length === 0 ? (
                 <div className="history-empty">
-                  <p>{t('workbuddy.autoCheckin.noLogs', '暂无签到记录')}</p>
+                  <p>{t('workbuddy.autoCheckin.noLogs', 'Chưa có lịch sử điểm danh')}</p>
                 </div>
               ) : (
                 <div className="history-list">
@@ -293,7 +293,7 @@ export function TraeAutoCheckinConfigModal({
                             </div>
                           ))}
                           <div className="history-detail-footer">
-                            {t('workbuddy.autoCheckin.duration', '耗时: {{ms}}ms', {
+                            {t('workbuddy.autoCheckin.duration', 'Thời gian: {{ms}} ms', {
                               ms: log.durationMs,
                             })}
                           </div>

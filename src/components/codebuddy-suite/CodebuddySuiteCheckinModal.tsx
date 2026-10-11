@@ -547,7 +547,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                       {isCheckingIn ? (
                         <button className="btn btn-primary btn-sm" disabled>
                           <Loader2 size={14} className="animate-spin" />
-                          {t('workbuddy.checkin.button.loading', '签到中...')}
+                          {t('workbuddy.checkin.button.loading', 'Đang điểm danh...')}
                         </button>
                       ) : isClaimed ? (
                         <button className="btn btn-ghost btn-sm" disabled>

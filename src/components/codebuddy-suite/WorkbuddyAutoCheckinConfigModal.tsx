@@ -124,7 +124,7 @@ export function WorkbuddyAutoCheckinConfigModal({
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setError(
-        t('workbuddy.checkin.saveFailed', '自动签到设置保存失败：{{message}}', { message }),
+        t('workbuddy.checkin.saveFailed', 'Không thể lưu cài đặt điểm danh tự động: {{message}}', { message }),
       );
     } finally {
       setSaving(false);
@@ -142,19 +142,19 @@ export function WorkbuddyAutoCheckinConfigModal({
         setError(
           t(
             'workbuddy.checkin.manualTestPartialFailure',
-            '部分账号签到失败，请查看记录；后台稍后会自动重试。',
+            'Một số tài khoản điểm danh thất bại. Vui lòng xem lịch sử; hệ thống sẽ tự thử lại.',
           ),
         );
       } else if (result === 'waiting') {
         setError(
-          t('workbuddy.checkin.manualTestAlreadyRunning', '自动签到任务正在执行，请稍后查看记录。'),
+          t('workbuddy.checkin.manualTestAlreadyRunning', 'Tác vụ điểm danh tự động đang chạy. Vui lòng xem lịch sử sau.'),
         );
       }
     } catch (err) {
       console.warn('[WorkbuddyAutoCheckin] 手动测试自动签到异常:', err);
       const message = err instanceof Error ? err.message : String(err);
       setError(
-        t('workbuddy.checkin.manualTestFailed', '测试执行失败：{{message}}', { message }),
+        t('workbuddy.checkin.manualTestFailed', 'Chạy kiểm tra thất bại: {{message}}', { message }),
       );
     } finally {
       setManualTesting(false);
@@ -169,7 +169,7 @@ export function WorkbuddyAutoCheckinConfigModal({
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setError(
-        t('workbuddy.checkin.clearLogsFailed', '清空签到记录失败：{{message}}', { message }),
+        t('workbuddy.checkin.clearLogsFailed', 'Không thể xóa lịch sử điểm danh: {{message}}', { message }),
       );
     }
   };
@@ -201,14 +201,14 @@ export function WorkbuddyAutoCheckinConfigModal({
               onClick={() => setActiveTab('settings')}
             >
               <Settings size={14} />
-              {t('workbuddy.checkin.tabSettings', '自动签到设置')}
+              {t('workbuddy.checkin.tabSettings', 'Cài đặt điểm danh tự động')}
             </button>
             <button
               className={`auto-checkin-tab-item ${activeTab === 'history' ? 'active' : ''}`}
               onClick={() => setActiveTab('history')}
             >
               <History size={14} />
-              {t('workbuddy.checkin.tabHistory', '自动签到记录')}
+              {t('workbuddy.checkin.tabHistory', 'Lịch sử điểm danh tự động')}
               {logs.length > 0 && <span className="tab-count-badge">{logs.length}</span>}
             </button>
           </div>
@@ -262,7 +262,7 @@ export function WorkbuddyAutoCheckinConfigModal({
                     />
                   </div>
 
-                  <span className="time-separator">{t('common.to', '至')}</span>
+                  <span className="time-separator">{t('common.to', 'đến')}</span>
 
                   <div className="time-input-group">
                     <label>{t('workbuddy.checkin.endTime', "Thời gian kết thúc")}</label>
@@ -292,7 +292,7 @@ export function WorkbuddyAutoCheckinConfigModal({
                 <span className="history-hint">
                   {t(
                     'workbuddy.checkin.historyRangeHint',
-                    '仅保留近 30 天的自动签到记录（共 {{count}} 条）',
+                    'Chỉ lưu lịch sử điểm danh tự động trong 30 ngày gần nhất ({{count}} bản ghi)',
                     { count: logs.length },
                   )}
                 </span>
@@ -301,23 +301,23 @@ export function WorkbuddyAutoCheckinConfigModal({
                     className="btn btn-secondary btn-xs"
                     onClick={() => void handleManualTest()}
                     disabled={manualTesting}
-                    title={t('workbuddy.checkin.manualTest', '测试触发一次自动签到')}
+                    title={t('workbuddy.checkin.manualTest', 'Thử kích hoạt điểm danh tự động một lần')}
                   >
                     {manualTesting ? (
                       <Loader2 size={12} className="animate-spin" />
                     ) : (
                       <Play size={12} />
                     )}
-                    {t('workbuddy.checkin.manualTest', '测试执行')}
+                    {t('workbuddy.checkin.manualTest', 'Chạy kiểm tra')}
                   </button>
                   {logs.length > 0 && (
                     <button
                       className="btn btn-secondary btn-xs"
                       onClick={() => void handleClearLogs()}
-                      title={t('workbuddy.checkin.clearLogs', '清空记录')}
+                      title={t('workbuddy.checkin.clearLogs', 'Xóa lịch sử')}
                     >
                       <Trash2 size={12} />
-                      {t('workbuddy.checkin.clearLogs', '清空')}
+                      {t('workbuddy.checkin.clearLogs', 'Xóa sạch')}
                     </button>
                   )}
                 </div>
@@ -326,13 +326,13 @@ export function WorkbuddyAutoCheckinConfigModal({
               {logsLoading ? (
                 <div className="auto-checkin-empty-history">
                   <Loader2 size={32} className="animate-spin" />
-                  <span>{t('workbuddy.checkin.historyLoading', '正在读取自动签到记录...')}</span>
+                  <span>{t('workbuddy.checkin.historyLoading', 'Đang tải lịch sử điểm danh tự động...')}</span>
                 </div>
               ) : logsError ? (
                 <div className="auto-checkin-empty-history">
                   <XCircle size={32} />
                   <span>
-                    {t('workbuddy.checkin.historyLoadFailed', '读取自动签到记录失败：{{message}}', {
+                    {t('workbuddy.checkin.historyLoadFailed', 'Không thể tải lịch sử điểm danh tự động: {{message}}', {
                       message: logsError,
                     })}
                   </span>
@@ -340,7 +340,7 @@ export function WorkbuddyAutoCheckinConfigModal({
               ) : logs.length === 0 ? (
                 <div className="auto-checkin-empty-history">
                   <Clock size={32} />
-                  <span>{t('workbuddy.checkin.noHistory', '暂无近 30 天的自动签到记录')}</span>
+                  <span>{t('workbuddy.checkin.noHistory', 'Không có lịch sử điểm danh tự động trong 30 ngày qua')}</span>
                 </div>
               ) : (
                 <div className="auto-checkin-history-list">

@@ -188,7 +188,7 @@ export function TraeCheckinModal({
             <ChevronLeft size={14} />
           </button>
           <h2>
-            <CalendarCheck size={20} /> {t('trae.checkin.modalTitle', 'TRAE SOLO CN 每日签到')}
+            <CalendarCheck size={20} /> {t('trae.checkin.modalTitle', 'Điểm danh hằng ngày TRAE SOLO CN')}
           </h2>
           <button className="modal-close" onClick={onClose}>
             <X size={18} />
@@ -205,7 +205,7 @@ export function TraeCheckinModal({
             </span>
             {errorCount > 0 && (
               <span className="checkin-stat error">
-                <Ban size={14} /> {errorCount} {t('workbuddy.checkin.errors', '异常')}
+                <Ban size={14} /> {errorCount} {t('workbuddy.checkin.errors', 'Bất thường')}
               </span>
             )}
           </div>
@@ -257,7 +257,7 @@ export function TraeCheckinModal({
                   {state.status && state.status.total_credits > 0 && (
                     <span className="checkin-account-credits">
                       <Trophy size={12} />
-                      {t('workbuddy.checkin.totalCredits', '{{credits}} 积分', {
+                      {t('workbuddy.checkin.totalCredits', '{{credits}} điểm', {
                         credits: state.status.total_credits,
                       })}
                     </span>
@@ -270,7 +270,7 @@ export function TraeCheckinModal({
                   )}
                   {state.uiState === 'error' && (
                     <span className="checkin-error-text" title={state.error || ''}>
-                      {t('workbuddy.checkin.error', '查询失败')}
+                      {t('workbuddy.checkin.error', 'Truy vấn thất bại')}
                     </span>
                   )}
                   {state.uiState === 'inactive' && (
@@ -296,7 +296,7 @@ export function TraeCheckinModal({
                       ) : (
                         <Gift size={14} />
                       )}
-                      {t('workbuddy.checkin.checkin', '签到')}
+                      {t('workbuddy.checkin.checkin', 'Điểm danh')}
                     </button>
                   )}
                 </div>

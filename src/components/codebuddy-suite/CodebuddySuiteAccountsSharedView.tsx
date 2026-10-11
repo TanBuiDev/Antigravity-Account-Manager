@@ -539,18 +539,18 @@ export function CodebuddySuiteAccountsSharedView<
           accountLabel={maskAccountText(
             platformConfig.getDisplayEmail(account),
           )}
-          normalText={t(`${platformConfig.usagePrefix}.usageNormal`, "正常")}
+          normalText={t(`${platformConfig.usagePrefix}.usageNormal`, "Bình thường")}
           abnormalText={t(
             `${platformConfig.usagePrefix}.usageAbnormal`,
-            "异常",
+            "Bất thường",
           )}
           viewDetailText={t(
             `${platformConfig.usagePrefix}.usageViewDetail`,
-            "查看详情",
+            "Xem chi tiết",
           )}
           detailTitle={t(
             `${platformConfig.usagePrefix}.usageDetailTitle`,
-            "用量状态详情",
+            "Chi tiết trạng thái sử dụng",
           )}
           accountText={t("common.shared.columns.account", "Tài khoản")}
           confirmText={t("common.confirm", "Xác nhận")}
@@ -580,11 +580,11 @@ export function CodebuddySuiteAccountsSharedView<
       const statusText = refreshFailed
         ? t(
             `${platformConfig.quotaPrefix}.quotaQuery.failedRefreshCompact`,
-            "配额查询失败",
+            "Không thể truy vấn hạn mức",
           )
         : t(
             `${platformConfig.quotaPrefix}.quotaQuery.empty`,
-            "暂无可用配额数据",
+            "Chưa có dữ liệu hạn mức",
           );
       const cachedWarningText = t(
         "common.shared.quota.cachedRefreshFailed",
@@ -617,7 +617,7 @@ export function CodebuddySuiteAccountsSharedView<
           <div className="quota-item">
             <div className="quota-header">
               <span className="quota-name">
-                {t(`${platformConfig.usagePrefix}.usage`, "用量状态")}
+                {t(`${platformConfig.usagePrefix}.usage`, "Trạng thái sử dụng")}
               </span>
               {renderUsageInfo(account)}
             </div>
@@ -631,7 +631,7 @@ export function CodebuddySuiteAccountsSharedView<
               <span className="quota-name">
                 {t(
                   `${platformConfig.quotaPrefix}.quotaQuery.sectionTitle`,
-                  "配额查询",
+                  "Truy vấn hạn mức",
                 )}
               </span>
             </div>
@@ -781,7 +781,7 @@ export function CodebuddySuiteAccountsSharedView<
                   className="card-action-btn"
                   onClick={() => handleOpenWebview(account.id)}
                   disabled={webviewing === account.id}
-                  title={t("workbuddy.webview.open", "打开网页会话")}
+                  title={t("workbuddy.webview.open", "Mở phiên trên web")}
                 >
                   {webviewing === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -888,7 +888,7 @@ export function CodebuddySuiteAccountsSharedView<
                   className="action-btn"
                   onClick={() => handleOpenWebview(account.id)}
                   disabled={webviewing === account.id}
-                  title={t("workbuddy.webview.open", "打开网页会话")}
+                  title={t("workbuddy.webview.open", "Mở phiên trên web")}
                 >
                   {webviewing === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -1553,7 +1553,7 @@ export function CodebuddySuiteAccountsSharedView<
                                 ? t(
                                     platformConfig.oauthOpenButtonKey,
                                     platformConfig.oauthOpenButtonDefault ??
-                                      "打开授权窗口",
+                                      "Mở cửa sổ cấp quyền",
                                   )
                                 : t(
                                     "common.shared.oauth.openBrowser",
@@ -1725,7 +1725,7 @@ export function CodebuddySuiteAccountsSharedView<
                             platformConfig.tokenInputPlaceholderKey ||
                               "common.shared.token.placeholder",
                             platformConfig.tokenInputPlaceholderDefault ||
-                              "粘贴 Token 或 JSON...",
+                              "Dán token hoặc JSON...",
                           )}
                         />
                         <button
@@ -1736,11 +1736,11 @@ export function CodebuddySuiteAccountsSharedView<
                           }
                           title={t(
                             tokenInputVisible ? "common.hide" : "common.show",
-                            tokenInputVisible ? "隐藏" : "显示",
+                            tokenInputVisible ? "Ẩn" : "Hiện",
                           )}
                           aria-label={t(
                             tokenInputVisible ? "common.hide" : "common.show",
-                            tokenInputVisible ? "隐藏" : "显示",
+                            tokenInputVisible ? "Ẩn" : "Hiện",
                           )}
                         >
                           {tokenInputVisible ? (
@@ -1759,7 +1759,7 @@ export function CodebuddySuiteAccountsSharedView<
                           platformConfig.tokenInputPlaceholderKey ||
                             "common.shared.token.placeholder",
                           platformConfig.tokenInputPlaceholderDefault ||
-                            "粘贴 Token 或 JSON...",
+                            "Dán token hoặc JSON...",
                         )}
                       />
                     )}
@@ -1792,7 +1792,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonDescKey ||
                           "common.shared.import.pasteDesc",
                         platformConfig.pasteJsonDescDefault ||
-                          "粘贴官方 auth.json，或本应用导出的完整账号 JSON（含凭据，可再导入恢复）。",
+                          "Dán auth.json chính thức hoặc JSON tài khoản đầy đủ do ứng dụng xuất (có thông tin xác thực để có thể nhập khôi phục).",
                       )}
                     </p>
                     <textarea
@@ -1803,7 +1803,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonPlaceholderKey ||
                           "common.shared.import.pastePlaceholder",
                         platformConfig.pasteJsonPlaceholderDefault ||
-                          "粘贴账号 JSON...",
+                          "Dán JSON tài khoản...",
                       )}
                     />
                     <button
@@ -1820,7 +1820,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonSubmitLabelKey ||
                           "common.shared.token.import",
                         platformConfig.pasteJsonSubmitLabelDefault ||
-                          "导入 JSON",
+                          "Nhập JSON",
                       )}
                     </button>
                   </div>
@@ -1962,7 +1962,7 @@ export function CodebuddySuiteAccountsSharedView<
               <p>
                 {t("common.deleteTagWarning", {
                   tag: tagDeleteConfirm,
-                  defaultValue: '确定要从所有账号中移除标签 "{{tag}}" 吗？',
+                  defaultValue: 'Bạn có chắc muốn xóa nhãn "{{tag}}" khỏi tất cả tài khoản không?',
                 })}
               </p>
             </div>
