@@ -876,7 +876,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
           setError(
             t(
               'quickSettings.appPath.scanEmpty',
-              '未检测到正在运行的应用，请先启动后重试，或手动选择路径。',
+              'Không tìm thấy ứng dụng đang chạy. Hãy mở ứng dụng rồi thử lại hoặc chọn đường dẫn thủ công.',
             ),
           );
         }
@@ -1616,7 +1616,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 </div>
 
                 <div className="qs-hint" style={{ marginTop: 0, marginBottom: 4 }}>
-                  {t('quickSettings.codexWindow.orDivider', 'OR（命中任一即触发）')}
+                  {t('quickSettings.codexWindow.orDivider', 'HOẶC (chỉ cần thỏa mãn một điều kiện)')}
                 </div>
 
                 <div className="qs-row">
@@ -2878,7 +2878,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       </div>
 
                       <div className="qs-hint" style={{ marginTop: 0, marginBottom: 4 }}>
-                        {t('quickSettings.codexWindow.orDivider', 'OR（命中任一即触发）')}
+                        {t('quickSettings.codexWindow.orDivider', 'HOẶC (chỉ cần thỏa mãn một điều kiện)')}
                       </div>
 
                       <div className="qs-row">

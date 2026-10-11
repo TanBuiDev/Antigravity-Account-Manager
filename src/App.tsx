@@ -3490,7 +3490,7 @@ function MainApp() {
           setAppPathScanError(
             t(
               'appPath.missing.scanEmptyGeneric',
-              '未检测到正在运行的 {{app}}，请先启动应用后重试，或手动选择路径。',
+              'Không tìm thấy {{app}} đang chạy. Hãy mở ứng dụng và thử lại hoặc chọn đường dẫn thủ công.',
               { app: appPathMissingAppName },
             ),
           );

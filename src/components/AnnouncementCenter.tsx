@@ -72,17 +72,17 @@ function formatTimeAgo(
   const diffDays = Math.floor(diffMs / 86_400_000);
 
   if (diffMins < 1) {
-    return translate('announcement.timeAgo.justNow', '刚刚');
+    return translate('announcement.timeAgo.justNow', 'Vừa xong');
   }
   if (diffMins < 60) {
-    const text = translate('announcement.timeAgo.minutesAgo', '{count}分钟前', { count: diffMins });
+    const text = translate('announcement.timeAgo.minutesAgo', '{count} phút trước', { count: diffMins });
     return text.replace('{count}', String(diffMins)).replace('{{count}}', String(diffMins));
   }
   if (diffHours < 24) {
-    const text = translate('announcement.timeAgo.hoursAgo', '{count}小时前', { count: diffHours });
+    const text = translate('announcement.timeAgo.hoursAgo', '{count} giờ trước', { count: diffHours });
     return text.replace('{count}', String(diffHours)).replace('{{count}}', String(diffHours));
   }
-  const text = translate('announcement.timeAgo.daysAgo', '{count}天前', { count: diffDays });
+  const text = translate('announcement.timeAgo.daysAgo', '{count} ngày trước', { count: diffDays });
   return text.replace('{count}', String(diffDays)).replace('{{count}}', String(diffDays));
 }
 

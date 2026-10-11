@@ -3711,7 +3711,7 @@ export function CodexLocalAccessModal({
                                   draftRule.isPreferred
                                     ? "codex.localAccess.memberPriorityHighest"
                                     : "codex.localAccess.memberPriorityLowest",
-                                  draftRule.isPreferred ? "最高" : "最低",
+                                  draftRule.isPreferred ? "Cao nhất" : "Thấp nhất",
                                 )}
                               </span>
                             )}

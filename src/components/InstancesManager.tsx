@@ -1381,7 +1381,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           formExperimentalModelUnavailableMessage ||
             t(
               "instances.form.modelRouting.catalogUnavailable",
-              "当前实例的可见模型目录不可由 Cockpit 管理，暂不能启用模型路由。",
+              "Không thể quản lý danh sách model của phiên hiện tại; chưa thể bật định tuyến model.",
             ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1391,7 +1391,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.desktopOnly",
-            "混合模型路由仅支持桌面版实例。",
+            "Định tuyến model hỗn hợp chỉ hỗ trợ phiên desktop.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1409,7 +1409,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setMessage({
           text: t(
             "instances.form.modelRouting.oauthRequired",
-            "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+            "Định tuyến model hỗn hợp cần tài khoản thuê bao OAuth được đăng nhập trực tiếp.",
           ),
         });
         setFormModelRoutingEnabled(false);
@@ -1421,7 +1421,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.routeRequired",
-            "请至少添加一个 API 模型路由。",
+            "Hãy thêm ít nhất một tuyến model API.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1439,7 +1439,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.invalidNamespace",
-              "命名空间需为 2-32 位小写字母、数字、下划线或连字符，且不能使用保留名称。",
+              "Không gian tên phải có 2–32 ký tự chữ thường, chữ số, dấu gạch dưới hoặc gạch ngang và không được dùng tên dành riêng.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1449,7 +1449,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.duplicateNamespace",
-              "模型路由命名空间不能重复。",
+              "Không gian tên của các tuyến model không được trùng nhau.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1463,7 +1463,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.providerRequired",
-              "每个模型路由都必须选择一个 API 账号。",
+              "Mỗi tuyến model phải chọn một tài khoản API.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1479,7 +1479,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.enabledRouteRequired",
-            "请至少启用一个 API 模型路由。",
+            "Hãy bật ít nhất một tuyến model API.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -2203,7 +2203,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       const sourceName = source.isDefault
         ? t("instances.defaultName", "Phiên bản mặc định")
         : source.name?.trim() || source.id;
-      const nextName = t("instances.form.copyName", "{{name}} 副本", {
+      const nextName = t("instances.form.copyName", "Bản sao của {{name}}", {
         name: sourceName,
       });
       setFormName((current) => {
@@ -2482,7 +2482,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       !allowUnbound &&
       !allowFollowCurrent ? (
         <div className="account-select-empty">
-          {t("common.noData", "暂无数据")}
+          {t("common.noData", "Chưa có dữ liệu")}
         </div>
       ) : null}
     </>
@@ -2537,7 +2537,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       setMessage({
         text: t(
           "instances.form.modelRouting.oauthRequired",
-          "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+          "Định tuyến model hỗn hợp cần tài khoản thuê bao OAuth được đăng nhập trực tiếp.",
         ),
       });
     }
@@ -2843,7 +2843,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       <span className="instance-model-routing-badge">
                         {t(
                           "instances.form.modelRouting.statusBadge",
-                          "混合路由",
+                          "Định tuyến hỗn hợp",
                         )}
                       </span>
                     )}
@@ -2996,7 +2996,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   )}
                   <button
                     className="icon-button"
-                    title={t("instances.actions.duplicate", "复制实例")}
+                    title={t("instances.actions.duplicate", "Sao chép phiên")}
                     onClick={() => openDuplicateModal(instance)}
                     disabled={
                       isInstanceBusy || restartingAll || bulkActionLoading
@@ -3555,7 +3555,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         ? undefined
                         : t(
                             "instances.form.modelRouting.createHint",
-                            "新建时请复制默认实例，这样不用先走一遍 Codex 安装。空白实例才需要先启动一次。",
+                            "Khi tạo phiên mới, hãy sao chép phiên mặc định để tránh cài lại Codex. Phiên trống cần khởi động một lần.",
                           )
                     }
                     onEnabledChange={(enabled) => {
@@ -3575,7 +3575,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         setFormName(
                           t(
                             "instances.form.modelRouting.defaultInstanceName",
-                            "混合路由",
+                            "Định tuyến hỗn hợp",
                           ),
                         );
                       }

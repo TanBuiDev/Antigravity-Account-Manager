@@ -181,7 +181,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
       setGlobalRenamingTag(null);
       setError('');
     } catch (err: any) {
-      setError(err?.message || '全局重命名失败');
+      setError(err?.message || 'Không thể đổi tên nhãn trên tất cả tài khoản');
     } finally {
       setSaving(false);
     }
@@ -276,7 +276,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                       removeTag(tag);
                     }}
                     style={{ cursor: 'pointer' }}
-                    title={t('accounts.tagModal.editHint', '点击修改')}
+                    title={t('accounts.tagModal.editHint', 'Nhấn để chỉnh sửa')}
                   >
                     {tag}
                   </span>
@@ -309,7 +309,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                         className="tag-suggestion"
                         style={{ border: 'none', background: 'transparent', paddingRight: 4, margin: 0 }}
                         onClick={() => addTag(tag)}
-                        title={t('accounts.tagModal.addHint', '点击添加')}
+                        title={t('accounts.tagModal.addHint', 'Nhấn để thêm')}
                       >
                         <Tag size={12} style={{ marginRight: 4 }} />
                         {tag}
@@ -388,7 +388,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                       setInputValue('');
                     }
                   }}
-                  placeholder={t('accounts.tagModal.renamePlaceholder', '输入新的标签名称')}
+                  placeholder={t('accounts.tagModal.renamePlaceholder', 'Nhập tên nhãn mới')}
                   autoFocus
                 />
                 <button
