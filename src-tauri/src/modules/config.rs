@@ -671,7 +671,7 @@ fn default_diagnostics_error_reporting_debug() -> bool {
     false
 }
 fn default_language() -> String {
-    "zh-cn".to_string()
+    "vi".to_string()
 }
 fn default_default_terminal() -> String {
     "system".to_string()

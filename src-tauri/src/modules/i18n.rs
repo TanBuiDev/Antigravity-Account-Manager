@@ -22,15 +22,13 @@ static LOCALES: std::sync::LazyLock<HashMap<&'static str, Value>> =
             ("ru", include_str!("../../../src/locales/ru.json")),
             ("tr", include_str!("../../../src/locales/tr.json")),
             ("vi", include_str!("../../../src/locales/vi.json")),
-            ("zh-cn", include_str!("../../../src/locales/zh-CN.json")),
-            ("zh-tw", include_str!("../../../src/locales/zh-tw.json")),
         ];
 
         locale_files
             .into_iter()
             .map(|(locale, content)| {
                 let parsed = serde_json::from_str::<Value>(content)
-                    .unwrap_or_else(|err| panic!("解析语言文件失败 {}: {}", locale, err));
+                    .unwrap_or_else(|err| panic!("Cannot parse locale file {}: {}", locale, err));
                 (locale, parsed)
             })
             .collect()
@@ -42,8 +40,14 @@ fn normalize_locale(locale: &str) -> String {
 
 fn locale_candidates(locale: &str) -> Vec<String> {
     let normalized = normalize_locale(locale);
+    // Migrate previously saved Chinese locale preferences to Vietnamese.
+    let normalized = if normalized == "zh" || normalized.starts_with("zh-") {
+        "vi".to_string()
+    } else {
+        normalized
+    };
     if normalized.is_empty() {
-        return vec!["en-us".to_string(), "en".to_string()];
+        return vec!["vi".to_string(), "en-us".to_string(), "en".to_string()];
     }
 
     let mut candidates = vec![normalized.clone()];
@@ -63,21 +67,13 @@ fn locale_candidates(locale: &str) -> Vec<String> {
         }
     }
 
-    if normalized == "zh" || normalized.starts_with("zh-cn-") || normalized.starts_with("zh-sg-") {
-        candidates.push("zh-cn".to_string());
-    }
-
-    if normalized.starts_with("zh-tw-")
-        || normalized.starts_with("zh-hk")
-        || normalized.starts_with("zh-mo")
-    {
-        candidates.push("zh-tw".to_string());
-    }
-
     if normalized == "pt" {
         candidates.push("pt-br".to_string());
     }
 
+    if !candidates.iter().any(|item| item == "vi") {
+        candidates.push("vi".to_string());
+    }
     if !candidates.iter().any(|item| item == "en-us") {
         candidates.push("en-us".to_string());
     }
@@ -120,8 +116,8 @@ mod tests {
     #[test]
     fn uses_selected_locale() {
         assert_eq!(
-            translate("zh-cn", "quotaAlert.modal.title", &[]),
-            "配额预警"
+            translate("vi", "quotaAlert.modal.title", &[]),
+            "Cảnh báo hạn mức"
         );
         assert_eq!(
             translate("en-us", "quotaAlert.modal.title", &[]),

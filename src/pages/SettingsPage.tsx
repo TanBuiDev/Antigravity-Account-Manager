@@ -471,8 +471,7 @@ export function useSettingsPageController() {
   }, [orderedPlatformIds]);
 
   const languageOptions = [
-    { value: 'zh-cn', label: '简体中文' },
-    { value: 'zh-tw', label: '繁體中文' },
+    { value: 'vi', label: 'Tiếng Việt' },
     { value: 'en', label: 'English' },
     { value: 'ja', label: '日本語' },
     { value: 'ko', label: '한국어' },
@@ -485,7 +484,6 @@ export function useSettingsPageController() {
     { value: 'tr', label: 'Türkçe' },
     { value: 'pl', label: 'Polski' },
     { value: 'cs', label: 'Čeština' },
-    { value: 'vi', label: 'Tiếng Việt' },
     { value: 'ar', label: 'العربية' },
     { value: 'id', label: 'Bahasa Indonesia' },
   ];
