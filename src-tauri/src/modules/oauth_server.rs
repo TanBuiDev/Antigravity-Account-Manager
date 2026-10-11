@@ -17,6 +17,9 @@ struct OAuthFlowState {
 }
 
 static OAUTH_FLOW_STATE: OnceLock<Mutex<Option<OAuthFlowState>>> = OnceLock::new();
+// Errors are reused for callback routing; keep detection independent of the UI language.
+const OAUTH_MISSING_CODE: &str = "Không nhận được Authorization Code trong callback";
+const OAUTH_MISSING_STATE: &str = "Không nhận được OAuth state trong callback";
 const OAUTH_CALLBACK_PATH: &str = "/oauth-callback";
 const MAX_HTTP_REQUEST_BYTES: usize = 32 * 1024;
 const REQUEST_READ_TIMEOUT: Duration = Duration::from_secs(5);
@@ -30,8 +33,8 @@ fn oauth_success_html() -> &'static str {
     "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n\
     <html>\
     <body style='font-family: sans-serif; text-align: center; padding: 50px; background: #0d1117; color: #fff;'>\
-        <h1 style='color: #4ade80;'>✅ 授权成功!</h1>\
-        <p>您可以关闭此窗口返回应用。</p>\
+        <h1 style='color: #4ade80;'>✅ Ủy quyền thành công!</h1>\
+        <p>Bạn có thể đóng cửa sổ này để quay lại ứng dụng.</p>\
         <script>setTimeout(function() { window.close(); }, 2000);</script>\
     </body>\
     </html>"
@@ -42,7 +45,7 @@ fn oauth_fail_html(message: &str) -> String {
         "HTTP/1.1 400 Bad Request\r\nContent-Type: text/html; charset=utf-8\r\n\r\n\
     <html>\
     <body style='font-family: sans-serif; text-align: center; padding: 50px; background: #0d1117; color: #fff;'>\
-        <h1 style='color: #f87171;'>❌ 授权失败</h1>\
+        <h1 style='color: #f87171;'>❌ Ủy quyền thất bại</h1>\
         <p>{}</p>\
     </body>\
     </html>",
@@ -83,15 +86,15 @@ fn extract_code_from_callback_url(
     }
 
     let Some(code) = code.filter(|value| !value.trim().is_empty()) else {
-        return Err("未能在回调中获取 Authorization Code".to_string());
+        return Err(OAUTH_MISSING_CODE.to_string());
     };
 
     let Some(state) = state.filter(|value| !value.trim().is_empty()) else {
-        return Err("未能在回调中获取 OAuth state".to_string());
+        return Err(OAUTH_MISSING_STATE.to_string());
     };
 
     if state != expected_state {
-        return Err("OAuth state 校验失败".to_string());
+        return Err("Xác minh OAuth state thất bại".to_string());
     }
 
     Ok(code)
@@ -100,18 +103,18 @@ fn extract_code_from_callback_url(
 fn parse_manual_callback_url(raw_callback_url: &str, redirect_uri: &str) -> Result<Url, String> {
     let trimmed = raw_callback_url.trim();
     if trimmed.is_empty() {
-        return Err("回调链接不能为空".to_string());
+        return Err("Liên kết callback không được để trống".to_string());
     }
 
     if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
-        return Url::parse(trimmed).map_err(|e| format!("OAuth 回调 URL 解析失败: {}", e));
+        return Url::parse(trimmed).map_err(|e| format!("Không thể phân tích URL callback OAuth: {}", e));
     }
 
     let redirect =
-        Url::parse(redirect_uri).map_err(|e| format!("OAuth redirect_uri 无效: {}", e))?;
+        Url::parse(redirect_uri).map_err(|e| format!("OAuth redirect_uri không hợp lệ: {}", e))?;
     let host = redirect
         .host_str()
-        .ok_or_else(|| "OAuth redirect_uri 缺少 host".to_string())?;
+        .ok_or_else(|| "OAuth redirect_uri thiếu host".to_string())?;
     let origin = match redirect.port() {
         Some(port) => format!("{}://{}:{}", redirect.scheme(), host, port),
         None => format!("{}://{}", redirect.scheme(), host),
@@ -119,7 +122,7 @@ fn parse_manual_callback_url(raw_callback_url: &str, redirect_uri: &str) -> Resu
 
     if trimmed.starts_with('/') {
         return Url::parse(format!("{}{}", origin, trimmed).as_str())
-            .map_err(|e| format!("OAuth 回调 URL 解析失败: {}", e));
+            .map_err(|e| format!("Không thể phân tích URL callback OAuth: {}", e));
     }
 
     Url::parse(
@@ -131,7 +134,7 @@ fn parse_manual_callback_url(raw_callback_url: &str, redirect_uri: &str) -> Resu
         )
         .as_str(),
     )
-    .map_err(|e| format!("OAuth 回调 URL 解析失败: {}", e))
+    .map_err(|e| format!("Không thể phân tích URL callback OAuth: {}", e))
 }
 
 async fn read_http_request(stream: &mut tokio::net::TcpStream) -> Result<String, String> {
@@ -141,8 +144,8 @@ async fn read_http_request(stream: &mut tokio::net::TcpStream) -> Result<String,
     loop {
         let bytes_read = timeout(REQUEST_READ_TIMEOUT, stream.read(&mut chunk))
             .await
-            .map_err(|_| "读取 OAuth 回调请求超时".to_string())?
-            .map_err(|e| format!("读取 OAuth 回调请求失败: {}", e))?;
+            .map_err(|_| "Đọc yêu cầu callback OAuth quá thời gian chờ".to_string())?
+            .map_err(|e| format!("Không thể đọc yêu cầu callback OAuth: {}", e))?;
 
         if bytes_read == 0 {
             break;
@@ -157,7 +160,7 @@ async fn read_http_request(stream: &mut tokio::net::TcpStream) -> Result<String,
     }
 
     if buffer.is_empty() {
-        return Err("OAuth 回调请求为空".to_string());
+        return Err("Yêu cầu callback OAuth trống".to_string());
     }
 
     Ok(String::from_utf8_lossy(&buffer).into_owned())
@@ -167,14 +170,14 @@ fn parse_request_target(request: &str) -> Result<(String, String), String> {
     let request_line = request
         .lines()
         .next()
-        .ok_or_else(|| "OAuth 回调请求行为空".to_string())?;
+        .ok_or_else(|| "Dòng yêu cầu callback OAuth trống".to_string())?;
     let mut parts = request_line.split_whitespace();
     let method = parts
         .next()
-        .ok_or_else(|| "OAuth 回调请求缺少 method".to_string())?;
+        .ok_or_else(|| "Yêu cầu callback OAuth thiếu method".to_string())?;
     let target = parts
         .next()
-        .ok_or_else(|| "OAuth 回调请求缺少 target".to_string())?;
+        .ok_or_else(|| "Yêu cầu callback OAuth thiếu target".to_string())?;
 
     Ok((method.to_string(), target.to_string()))
 }
@@ -187,7 +190,7 @@ async fn process_callback_request(
     let request = match read_http_request(stream).await {
         Ok(request) => request,
         Err(err) => {
-            let response = oauth_fail_html("回调请求读取失败，请返回应用重试。");
+            let response = oauth_fail_html("Không thể đọc yêu cầu callback. Hãy quay lại ứng dụng và thử lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
             return Some(Err(err));
@@ -197,7 +200,7 @@ async fn process_callback_request(
     let (method, target) = match parse_request_target(&request) {
         Ok(parsed) => parsed,
         Err(err) => {
-            let response = oauth_fail_html("回调请求格式无效，请返回应用重试。");
+            let response = oauth_fail_html("Định dạng yêu cầu callback không hợp lệ. Hãy quay lại ứng dụng và thử lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
             return Some(Err(err));
@@ -217,10 +220,10 @@ async fn process_callback_request(
     } {
         Ok(url) => url,
         Err(_) => {
-            let response = oauth_fail_html("回调 URL 解析失败，请返回应用重试。");
+            let response = oauth_fail_html("Không thể phân tích URL callback. Hãy quay lại ứng dụng và thử lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
-            return Some(Err("OAuth 回调 URL 解析失败".to_string()));
+            return Some(Err("Không thể phân tích URL callback OAuth".to_string()));
         }
     };
 
@@ -234,20 +237,20 @@ async fn process_callback_request(
 
     let code = match extract_code_from_callback_url(&callback_url, expected_state) {
         Ok(code) => code,
-        Err(err) if err == "未能在回调中获取 Authorization Code" => {
-            let response = oauth_fail_html("未能获取授权 code，请返回应用重试。");
+        Err(err) if err == OAUTH_MISSING_CODE => {
+            let response = oauth_fail_html("Không nhận được mã ủy quyền. Hãy quay lại ứng dụng và thử lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
             return Some(Err(err));
         }
-        Err(err) if err == "未能在回调中获取 OAuth state" => {
-            let response = oauth_fail_html("未能获取授权状态 state，请返回应用重试。");
+        Err(err) if err == OAUTH_MISSING_STATE => {
+            let response = oauth_fail_html("Không nhận được trạng thái ủy quyền. Hãy quay lại ứng dụng và thử lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
             return Some(Err(err));
         }
         Err(err) => {
-            let response = oauth_fail_html("授权状态校验失败，请返回应用重新发起授权。");
+            let response = oauth_fail_html("Xác minh trạng thái ủy quyền thất bại. Hãy quay lại ứng dụng để bắt đầu ủy quyền lại.");
             let _ = stream.write_all(response.as_bytes()).await;
             let _ = stream.flush().await;
             return Some(Err(err));
@@ -271,11 +274,11 @@ async fn ensure_oauth_flow_prepared(app_handle: &tauri::AppHandle) -> Result<Str
 
     let listener = TcpListener::bind("127.0.0.1:0")
         .await
-        .map_err(|e| format!("无法绑定本地端口: {}", e))?;
+        .map_err(|e| format!("Không thể mở cổng cục bộ: {}", e))?;
 
     let port = listener
         .local_addr()
-        .map_err(|e| format!("无法获取本地端口: {}", e))?
+        .map_err(|e| format!("Không thể xác định cổng cục bộ: {}", e))?
         .port();
 
     let redirect_uri = format!("http://localhost:{}/oauth-callback", port);
@@ -333,12 +336,12 @@ async fn ensure_oauth_flow_prepared(app_handle: &tauri::AppHandle) -> Result<Str
     Ok(auth_url)
 }
 
-/// 预生成 OAuth URL
+/// Tạo trước URL OAuth
 pub async fn prepare_oauth_url(app_handle: tauri::AppHandle) -> Result<String, String> {
     ensure_oauth_flow_prepared(&app_handle).await
 }
 
-/// 取消当前的 OAuth 流程
+/// Hủy quy trình OAuth hiện tại
 pub fn cancel_oauth_flow() {
     if let Ok(mut state) = get_oauth_flow_state().lock() {
         if let Some(s) = state.take() {
@@ -356,10 +359,10 @@ pub async fn submit_oauth_callback_url(
     let (redirect_uri, expected_state, code_tx) = {
         let lock = get_oauth_flow_state()
             .lock()
-            .map_err(|_| "OAuth 状态锁被污染".to_string())?;
+            .map_err(|_| "Khóa trạng thái OAuth đã bị lỗi".to_string())?;
         let state = lock
             .as_ref()
-            .ok_or_else(|| "OAuth 状态不存在，请先发起授权".to_string())?;
+            .ok_or_else(|| "Không tìm thấy trạng thái OAuth. Hãy bắt đầu ủy quyền trước.".to_string())?;
         (
             state.redirect_uri.clone(),
             state.expected_state.clone(),
@@ -369,7 +372,7 @@ pub async fn submit_oauth_callback_url(
 
     let parsed = parse_manual_callback_url(callback_url, &redirect_uri)?;
     if parsed.path() != OAUTH_CALLBACK_PATH {
-        return Err(format!("回调链接路径无效，必须为 {}", OAUTH_CALLBACK_PATH));
+        return Err(format!("Đường dẫn callback không hợp lệ, phải là {}", OAUTH_CALLBACK_PATH));
     }
 
     let code = extract_code_from_callback_url(&parsed, expected_state.as_str())?;
@@ -377,15 +380,15 @@ pub async fn submit_oauth_callback_url(
     let mut tx = code_tx.lock().await;
     let sender = tx
         .take()
-        .ok_or_else(|| "OAuth 回调已处理，请勿重复提交".to_string())?;
+        .ok_or_else(|| "Callback OAuth đã được xử lý, không gửi lại".to_string())?;
     sender
         .send(Ok(code))
-        .map_err(|_| "OAuth 回调发送失败，请重新发起授权".to_string())?;
+        .map_err(|_| "Không thể gửi callback OAuth, hãy bắt đầu ủy quyền lại".to_string())?;
     let _ = app_handle.emit("oauth-callback-received", ());
     Ok(())
 }
 
-/// 启动 OAuth 流程并等待回调
+/// Bắt đầu quy trình OAuth và đợi callback
 pub async fn start_oauth_flow(
     app_handle: tauri::AppHandle,
 ) -> Result<oauth::TokenResponse, String> {
@@ -397,20 +400,20 @@ pub async fn start_oauth_flow(
         .open_url(&auth_url, None::<String>)
         .map_err(|e| {
             cancel_oauth_flow();
-            format!("无法打开浏览器: {}", e)
+            format!("Không thể mở trình duyệt: {}", e)
         })?;
 
     let (code_rx, redirect_uri) = {
         let mut lock = get_oauth_flow_state()
             .lock()
-            .map_err(|_| "OAuth 状态锁被污染".to_string())?;
+            .map_err(|_| "Khóa trạng thái OAuth đã bị lỗi".to_string())?;
         let Some(state) = lock.as_mut() else {
-            return Err("OAuth 状态不存在".to_string());
+            return Err("Không tìm thấy trạng thái OAuth".to_string());
         };
         let rx = state
             .code_rx
             .take()
-            .ok_or_else(|| "OAuth 授权已在进行中".to_string())?;
+            .ok_or_else(|| "Quá trình ủy quyền OAuth đang diễn ra".to_string())?;
         (rx, state.redirect_uri.clone())
     };
 
@@ -423,11 +426,11 @@ pub async fn start_oauth_flow(
         }
         Ok(Err(_)) => {
             clear_oauth_flow_state();
-            return Err("等待 OAuth 回调失败".to_string());
+            return Err("Không thể đợi callback OAuth".to_string());
         }
         Err(_) => {
             cancel_oauth_flow();
-            return Err("等待 OAuth 回调超时，请重试".to_string());
+            return Err("Chờ callback OAuth quá thời gian, vui lòng thử lại".to_string());
         }
     };
 
@@ -436,7 +439,7 @@ pub async fn start_oauth_flow(
     oauth::exchange_code(&code, &redirect_uri).await
 }
 
-/// 完成 OAuth 流程（不打开浏览器）
+/// Hoàn tất quy trình OAuth (không mở trình duyệt)
 
 pub async fn complete_oauth_flow(
     app_handle: tauri::AppHandle,
@@ -446,14 +449,14 @@ pub async fn complete_oauth_flow(
     let (code_rx, redirect_uri) = {
         let mut lock = get_oauth_flow_state()
             .lock()
-            .map_err(|_| "OAuth 状态锁被污染".to_string())?;
+            .map_err(|_| "Khóa trạng thái OAuth đã bị lỗi".to_string())?;
         let Some(state) = lock.as_mut() else {
-            return Err("OAuth 状态不存在".to_string());
+            return Err("Không tìm thấy trạng thái OAuth".to_string());
         };
         let rx = state
             .code_rx
             .take()
-            .ok_or_else(|| "OAuth 授权已在进行中".to_string())?;
+            .ok_or_else(|| "Quá trình ủy quyền OAuth đang diễn ra".to_string())?;
         (rx, state.redirect_uri.clone())
     };
 
@@ -466,15 +469,73 @@ pub async fn complete_oauth_flow(
         }
         Ok(Err(_)) => {
             clear_oauth_flow_state();
-            return Err("等待 OAuth 回调失败".to_string());
+            return Err("Không thể đợi callback OAuth".to_string());
         }
         Err(_) => {
             cancel_oauth_flow();
-            return Err("等待 OAuth 回调超时，请重试".to_string());
+            return Err("Chờ callback OAuth quá thời gian, vui lòng thử lại".to_string());
         }
     };
 
     clear_oauth_flow_state();
 
     oauth::exchange_code(&code, &redirect_uri).await
+}
+
+// Regression coverage for user-facing OAuth callback messages and state checks.
+#[cfg(test)]
+mod localization_regression_tests {
+    use super::{
+        extract_code_from_callback_url, oauth_fail_html, oauth_success_html,
+        parse_manual_callback_url, OAUTH_MISSING_CODE, OAUTH_MISSING_STATE,
+    };
+    use tauri::Url;
+
+    #[test]
+    fn callback_accepts_matching_state_and_rejects_invalid_state() {
+        let url = Url::parse("http://127.0.0.1:9999/oauth-callback?code=code123&state=expected")
+            .expect("valid callback URL");
+        assert_eq!(
+            extract_code_from_callback_url(&url, "expected").unwrap(),
+            "code123"
+        );
+        assert_eq!(
+            extract_code_from_callback_url(&url, "different").unwrap_err(),
+            "Xác minh OAuth state thất bại"
+        );
+    }
+
+    #[test]
+    fn callback_requires_both_code_and_state() {
+        let no_code =
+            Url::parse("http://127.0.0.1:9999/oauth-callback?state=expected").unwrap();
+        assert_eq!(
+            extract_code_from_callback_url(&no_code, "expected").unwrap_err(),
+            OAUTH_MISSING_CODE
+        );
+        let no_state =
+            Url::parse("http://127.0.0.1:9999/oauth-callback?code=code123").unwrap();
+        assert_eq!(
+            extract_code_from_callback_url(&no_state, "expected").unwrap_err(),
+            OAUTH_MISSING_STATE
+        );
+    }
+
+    #[test]
+    fn manual_callback_parsing_preserves_original_protocol() {
+        let url = parse_manual_callback_url(
+            "?code=code123&state=expected",
+            "http://127.0.0.1:9999/oauth-callback",
+        )
+        .unwrap();
+        assert_eq!(url.path(), "/oauth-callback");
+        assert_eq!(url.query(), Some("code=code123&state=expected"));
+    }
+
+    #[test]
+    fn oauth_browser_messages_are_in_vietnamese() {
+        assert!(oauth_success_html().contains("Ủy quyền thành công"));
+        assert!(oauth_fail_html("Thử lại").contains("Ủy quyền thất bại"));
+        assert!(oauth_fail_html("Thử lại").contains("Thử lại"));
+    }
 }

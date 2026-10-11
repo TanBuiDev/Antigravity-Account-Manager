@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "31 2 * * 1"
 
+# Do not accumulate expensive CodeQL scans for obsolete PR commits.
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   actions: read
   contents: read

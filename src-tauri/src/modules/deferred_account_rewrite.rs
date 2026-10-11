@@ -43,7 +43,7 @@ fn worker_sender() -> Option<&'static SyncSender<RewriteJob>> {
             match thread::Builder::new()
                 .name("deferred-account-rewrite".into())
                 .spawn(move || {
-                    logger::log_info("[DeferredAccountRewrite] 后台账号详情迁移写回 worker 已启动");
+                    logger::log_info("[DeferredAccountRewrite] Đã khởi chạy tác vụ nền ghi lại dữ liệu tài khoản sau di chuyển");
                     while let Ok(job) = rx.recv() {
                         let key = job.key;
                         let result =
@@ -51,7 +51,7 @@ fn worker_sender() -> Option<&'static SyncSender<RewriteJob>> {
                         remove_pending_key(&key);
                         if let Err(panic) = result {
                             logger::log_warn(&format!(
-                                "[DeferredAccountRewrite] 写回任务 panic: key={}, panic={:?}",
+                                "[DeferredAccountRewrite] Tác vụ ghi lại gặp panic: key={}, panic={:?}",
                                 key, panic
                             ));
                         }
@@ -61,7 +61,7 @@ fn worker_sender() -> Option<&'static SyncSender<RewriteJob>> {
                 Ok(_) => Some(tx),
                 Err(error) => {
                     logger::log_error(&format!(
-                        "[DeferredAccountRewrite] 启动 worker 失败: {}",
+                        "[DeferredAccountRewrite] Không thể khởi chạy tác vụ nền: {}",
                         error
                     ));
                     None
@@ -74,7 +74,7 @@ fn worker_sender() -> Option<&'static SyncSender<RewriteJob>> {
 fn schedule_keyed(key: String, action: RewriteAction) {
     {
         let Ok(mut pending) = pending_keys().lock() else {
-            logger::log_warn("[DeferredAccountRewrite] 获取任务去重锁失败，跳过写回");
+            logger::log_warn("[DeferredAccountRewrite] Không thể lấy khóa loại bỏ tác vụ trùng lặp, bỏ qua ghi lại");
             return;
         };
         if !pending.insert(key.clone()) {
@@ -95,14 +95,14 @@ fn schedule_keyed(key: String, action: RewriteAction) {
         Err(TrySendError::Full(_)) => {
             remove_pending_key(&key);
             logger::log_warn(&format!(
-                "[DeferredAccountRewrite] 写回队列已满，稍后读取时重试: key={}",
+                "[DeferredAccountRewrite] Hàng đợi ghi lại đã đầy, thử lại khi đọc lần sau: key={}",
                 key
             ));
         }
         Err(TrySendError::Disconnected(_)) => {
             remove_pending_key(&key);
             logger::log_error(&format!(
-                "[DeferredAccountRewrite] 写回 worker 已退出: key={}",
+                "[DeferredAccountRewrite] Tác vụ nền ghi lại đã kết thúc: key={}",
                 key
             ));
         }
@@ -130,7 +130,7 @@ pub fn schedule_account_rewrite_if_unchanged<F>(
         key,
         Box::new(move || {
             logger::log_info(&format!(
-                "[DeferredAccountRewrite] 开始写回: platform={}, account_id={}",
+                "[DeferredAccountRewrite] Bắt đầu ghi lại: platform={}, account_id={}",
                 platform, account_id
             ));
             match crate::modules::atomic_write::write_string_atomic_if_hash_matches(
@@ -140,13 +140,13 @@ pub fn schedule_account_rewrite_if_unchanged<F>(
             ) {
                 Ok(true) => {}
                 Ok(false) => logger::log_info(&format!(
-                    "[DeferredAccountRewrite] 源文件已变化或删除，跳过旧快照写回: platform={}, account_id={}, path={}",
+                    "[DeferredAccountRewrite] Tệp nguồn đã thay đổi hoặc bị xóa, bỏ qua ghi lại từ bản cũ: platform={}, account_id={}, path={}",
                     platform,
                     account_id,
                     source_path.display()
                 )),
                 Err(error) => logger::log_warn(&format!(
-                    "[DeferredAccountRewrite] 写回失败: platform={}, account_id={}, path={}, error={}",
+                    "[DeferredAccountRewrite] Ghi lại thất bại: platform={}, account_id={}, path={}, error={}",
                     platform,
                     account_id,
                     source_path.display(),
@@ -168,7 +168,7 @@ where
         key,
         Box::new(move || {
             logger::log_info(&format!(
-                "[DeferredAccountRewrite] 开始写回: platform={}, account_id={}",
+                "[DeferredAccountRewrite] Bắt đầu ghi lại: platform={}, account_id={}",
                 platform, account_id
             ));
             action();

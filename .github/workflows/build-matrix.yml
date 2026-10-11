@@ -127,6 +127,10 @@ jobs:
         run: npm test
 
   build:
+    # Full six-platform Tauri builds are explicit pre-merge/release checks.
+    # PRs run only preflight jobs; launch "Run workflow" on the PR branch
+    # before marking a release-critical PR ready to merge.
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     name: "🏗️ Build: ${{ matrix.label }}"
     needs: [preflight-locales, preflight-typecheck, preflight-tests, preflight-ts-windows]
     runs-on: ${{ matrix.platform }}

@@ -24,6 +24,9 @@ const guardedFiles = [
   'src-tauri/src/modules/account_index_repair.rs',
   'src-tauri/src/modules/secure_account_storage.rs',
   'src-tauri/src/modules/quota.rs',
+  'src-tauri/src/modules/oauth_server.rs',
+  'src-tauri/src/modules/oauth_pending_state.rs',
+  'src-tauri/src/modules/deferred_account_rewrite.rs',
 ];
 
 const han = /[\u3400-\u9fff]/;
