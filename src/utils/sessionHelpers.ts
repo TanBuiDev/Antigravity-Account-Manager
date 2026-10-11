@@ -41,7 +41,7 @@ export function buildSessionGroups<T extends SessionLike>(sessions: T[]): Sessio
 }
 
 export function formatRelativeTime(value: number | null | undefined, t: TFunction): string {
-  if (!value) return t('sessionManager.time.unknown', '时间未知');
+  if (!value) return t('sessionManager.time.unknown', 'Không rõ thời gian');
   const diffMs = Date.now() - value;
   const diffSeconds = Math.max(0, Math.floor(diffMs / 1000));
   const minute = 60;
@@ -50,18 +50,18 @@ export function formatRelativeTime(value: number | null | undefined, t: TFunctio
   const week = 7 * day;
   if (diffSeconds < hour) {
     const m = Math.max(1, Math.floor(diffSeconds / minute));
-    return t('sessionManager.time.minutesAgo', '{{count}} 分钟前', { count: m });
+    return t('sessionManager.time.minutesAgo', '{{count}} phút trước', { count: m });
   }
   if (diffSeconds < day) {
     const h = Math.floor(diffSeconds / hour);
-    return t('sessionManager.time.hoursAgo', '{{count}} 小时前', { count: h });
+    return t('sessionManager.time.hoursAgo', '{{count}} giờ trước', { count: h });
   }
   if (diffSeconds < week) {
     const d = Math.floor(diffSeconds / day);
-    return t('sessionManager.time.daysAgo', '{{count}} 天前', { count: d });
+    return t('sessionManager.time.daysAgo', '{{count}} ngày trước', { count: d });
   }
   const w = Math.floor(diffSeconds / week);
-  return t('sessionManager.time.weeksAgo', '{{count}} 周前', { count: w });
+  return t('sessionManager.time.weeksAgo', '{{count}} tuần trước', { count: w });
 }
 
 export function resolveGroupLabel(cwd: string): string {

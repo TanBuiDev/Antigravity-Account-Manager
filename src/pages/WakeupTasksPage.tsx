@@ -291,7 +291,7 @@ const loadHistory = async (): Promise<WakeupHistoryRecord[]> => {
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, MAX_HISTORY_ITEMS);
   } catch (error) {
-    console.error('加载唤醒历史失败:', error);
+    console.error('Không thể tải lịch sử đánh thức:', error);
     return [];
   }
 };
@@ -962,7 +962,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
     setNotice({ text: t('wakeup.notice.testCancelled'), tone: 'warning' });
     if (scopeId) {
       invoke('wakeup_cancel_scope', { cancelScopeId: scopeId }).catch((error) => {
-        console.error('取消唤醒测试失败:', error);
+        console.error('Không thể hủy bài kiểm tra đánh thức:', error);
       });
     }
   }, [clearTestModalError, t]);
@@ -1058,7 +1058,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
         if (!active) return;
         setAccountGroups(groups || []);
       } catch (error) {
-        console.error('加载账号分组失败:', error);
+        console.error('Không thể tải nhóm tài khoản:', error);
         if (!active) return;
         setAccountGroups([]);
       }
@@ -1086,13 +1086,13 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
 
   useEffect(() => {
     invoke('set_wakeup_override', { enabled: wakeupEnabled }).catch((error) => {
-      console.error('唤醒互斥通知失败:', error);
+      console.error('Không thể gửi thông báo khóa loại trừ đánh thức:', error);
     });
   }, [wakeupEnabled]);
 
   useEffect(() => {
     invoke('wakeup_set_official_ls_version_mode', { mode: officialLsVersionMode }).catch((error) => {
-      console.error('同步官方 LS 版本模式失败:', error);
+      console.error('Không thể đồng bộ chế độ phiên bản LS chính thức:', error);
     });
   }, [officialLsVersionMode]);
 
@@ -1134,7 +1134,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
       tasks,
       officialLsVersionMode,
     }).catch((error) => {
-      console.error('[WakeupTasks] 同步唤醒任务状态失败:', error);
+      console.error('[WakeupTasks] Không thể đồng bộ trạng thái tác vụ đánh thức:', error);
     });
   }, [officialLsVersionMode, tasks, wakeupEnabled]);
 
@@ -1173,7 +1173,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
           setAvailableModels([]);
         }
       } catch (error) {
-        console.error('获取模型列表失败:', error);
+        console.error('Không thể lấy danh sách model:', error);
         setNotice({ text: t('wakeup.notice.modelsFetchFailed'), tone: 'warning' });
         setAvailableModels([]);
       } finally {
@@ -1278,7 +1278,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
       await invoke('wakeup_clear_history');
       setHistoryRecords([]);
     } catch (error) {
-      console.error('清空唤醒历史失败:', error);
+      console.error('Không thể xóa lịch sử đánh thức:', error);
     }
   };
 
@@ -1295,7 +1295,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
       await navigator.clipboard.writeText(text);
       setNotice({ text: t('wakeup.errorUi.copySuccess'), tone: 'success' });
     } catch (error) {
-      console.error('复制唤醒错误信息失败:', error);
+      console.error('Không thể sao chép thông báo lỗi đánh thức:', error);
       setNotice({ text: t('wakeup.errorUi.copyFailed'), tone: 'error' });
     }
   };
@@ -1304,7 +1304,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
     try {
       await openUrl(url);
     } catch (error) {
-      console.error('打开验证链接失败:', error);
+      console.error('Không thể mở liên kết xác minh:', error);
       setNotice({ text: t('wakeup.errorUi.openFailed'), tone: 'error' });
       window.open(url, '_blank', 'noopener,noreferrer');
     }
@@ -1534,7 +1534,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
           }
           setHistoryRecords(latest);
         } catch (error) {
-          console.error('写入唤醒历史失败:', error);
+          console.error('Không thể ghi lịch sử đánh thức:', error);
           if (activeTestRunTokenRef.current !== runToken) {
             return;
           }
@@ -1558,7 +1558,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
         setTesting(false);
       }
       invoke('wakeup_release_scope', { cancelScopeId }).catch((error) => {
-        console.error('释放唤醒测试取消作用域失败:', error);
+        console.error('Không thể giải phóng phạm vi hủy bài kiểm tra đánh thức:', error);
       });
     }
   };
@@ -1978,7 +1978,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
         });
       }
     } catch (error) {
-      console.error('[WakeupTasks] 调整刷新间隔失败:', error);
+      console.error('[WakeupTasks] Không thể điều chỉnh khoảng làm mới:', error);
     }
   };
 
@@ -1994,7 +1994,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
       setFormCrontabError(showSuccess ? t('wakeup.notice.crontabValid') : '');
       return true;
     } catch (error) {
-      console.error('[WakeupTasks] 校验 crontab 失败:', error);
+      console.error('[WakeupTasks] Không thể kiểm tra crontab:', error);
       setFormCrontabError(t('wakeup.notice.crontabInvalid'));
       return false;
     }
@@ -2373,12 +2373,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{t('wakeup.dialogs.testTitle')}</h2>
               <button
                 className="modal-close"
                 onClick={closeTestModal}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -2571,12 +2571,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{t('wakeup.dialogs.historyTitle')}</h2>
               <button
                 className="modal-close"
                 onClick={() => setShowHistoryModal(false)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -2645,12 +2645,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
         <div className="modal-overlay">
           <div className="modal modal-lg wakeup-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={() => setShowModal(false)} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={() => setShowModal(false)} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{editingTaskId ? t('wakeup.dialogs.taskTitleEdit') : t('wakeup.dialogs.taskTitleNew')}</h2>
               <button
                 className="modal-close"
                 onClick={() => setShowModal(false)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -3254,7 +3254,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
               )}
 
               <div className="wakeup-form-group">
-                <label>{t('wakeup.form.executionMode', '执行模式')}</label>
+                <label>{t('wakeup.form.executionMode', "Chế độ thực thi")}</label>
                 <select
                   className="wakeup-select"
                   value={formExecutionMode}
@@ -3262,14 +3262,14 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
                     setFormExecutionMode(event.target.value as 'auto' | 'confirm')
                   }
                 >
-                  <option value="auto">{t('wakeup.form.executionModeAuto', '直接执行')}</option>
-                  <option value="confirm">{t('wakeup.form.executionModeConfirm', '需要确认')}</option>
+                  <option value="auto">{t('wakeup.form.executionModeAuto', "Chạy trực tiếp")}</option>
+                  <option value="confirm">{t('wakeup.form.executionModeConfirm', "Cần xác nhận")}</option>
                 </select>
               </div>
 
               {formExecutionMode === 'confirm' && (
                 <div className="wakeup-form-group">
-                  <label>{t('wakeup.form.confirmTimeout', '确认超时（分钟）')}</label>
+                  <label>{t('wakeup.form.confirmTimeout', "Hết hạn xác nhận")}</label>
                   <div className="wakeup-input-with-unit">
                     <input
                       className="wakeup-input"

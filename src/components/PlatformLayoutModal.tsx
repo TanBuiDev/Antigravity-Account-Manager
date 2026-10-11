@@ -215,7 +215,7 @@ function IconSelector({
 
   const currentLabel =
     iconKind === 'custom'
-      ? selectedCustom?.name ?? t('platformLayout.groupIconCustom', '自定义图片')
+      ? selectedCustom?.name ?? t('platformLayout.groupIconCustom', "Ảnh tùy chỉnh")
       : getPlatformLabel(iconPlatformId, t);
 
   return (
@@ -277,9 +277,9 @@ function IconSelector({
               <Upload size={14} />
             </span>
             <span>
-              {t('platformLayout.groupIconCustom', '自定义图片')}
+              {t('platformLayout.groupIconCustom', "Ảnh tùy chỉnh")}
               {' · '}
-              {t('common.add', '添加')}
+              {t('common.add', "Add​")}
             </span>
           </button>
 
@@ -339,7 +339,7 @@ function IconSelector({
                         event.stopPropagation();
                         onDeleteCustom(icon.id);
                       }}
-                      aria-label={t('common.delete', '删除')}
+                      aria-label={t('common.delete', "Xóa")}
                     >
                       <X size={12} />
                     </button>
@@ -507,7 +507,7 @@ export function PlatformLayoutModal({
       result.splice(insertIndex, 0, {
         id: API_RELAY_LAYOUT_ENTRY_ID,
         type: 'api-relay',
-        label: t('nav.apiRelay', '中转站'),
+        label: t('nav.apiRelay', "Trạm chuyển"),
         hidden: !apiRelayDashboardVisible,
         group: null,
         defaultPlatformId: null,
@@ -706,7 +706,7 @@ export function PlatformLayoutModal({
     }
 
     const confirmed = window.confirm(
-      t('platformLayout.customIconDeleteConfirm', '确认删除这个自定义图标吗？'),
+      t('platformLayout.customIconDeleteConfirm', "Xóa biểu tượng tùy chỉnh này?"),
     );
     if (!confirmed) {
       return;
@@ -949,15 +949,15 @@ export function PlatformLayoutModal({
   const handleSaveGroup = () => {
     const name = groupDraftName.trim();
     if (!name) {
-      setGroupDraftError(t('platformLayout.groupNameRequired', '请输入分组名称'));
+      setGroupDraftError(t('platformLayout.groupNameRequired', "Vui lòng nhập tên nhóm"));
       return;
     }
     if (groupDraftPlatformIds.length === 0 || !groupDraftDefaultPlatformId) {
-      setGroupDraftError(t('platformLayout.groupChildrenRequired', '至少选择一个子平台'));
+      setGroupDraftError(t('platformLayout.groupChildrenRequired', "Chọn ít nhất một nền tảng con"));
       return;
     }
     if (groupDraftIconKind === 'custom' && !groupDraftIconCustomDataUrl.trim()) {
-      setGroupDraftError(t('platformLayout.groupCustomIconRequired', '请上传自定义图标'));
+      setGroupDraftError(t('platformLayout.groupCustomIconRequired', "Vui lòng tải lên biểu tượng tùy chỉnh"));
       return;
     }
 
@@ -1006,11 +1006,11 @@ export function PlatformLayoutModal({
 
     const name = childDraftName.trim();
     if (!name) {
-      setChildDraftError(t('platformLayout.groupNameRequired', '请输入分组名称'));
+      setChildDraftError(t('platformLayout.groupNameRequired', "Vui lòng nhập tên nhóm"));
       return;
     }
     if (childDraftIconKind === 'custom' && !childDraftIconCustomDataUrl.trim()) {
-      setChildDraftError(t('platformLayout.groupCustomIconRequired', '请上传自定义图标'));
+      setChildDraftError(t('platformLayout.groupCustomIconRequired', "Vui lòng tải lên biểu tượng tùy chỉnh"));
       return;
     }
 
@@ -1129,8 +1129,8 @@ export function PlatformLayoutModal({
     <div className="modal-overlay">
       <div className="modal modal-lg" onClick={(event) => event.stopPropagation()}>
         <div className="modal-header">
-          <h2>{t('platformLayout.title', '平台布局')}</h2>
-          <button className="modal-close" onClick={onClose} aria-label={t('common.close', '关闭')}>
+          <h2>{t('platformLayout.title', "Bố cục nền tảng")}</h2>
+          <button className="modal-close" onClick={onClose} aria-label={t('common.close', "Đóng")}>
             <X />
           </button>
         </div>
@@ -1149,16 +1149,16 @@ export function PlatformLayoutModal({
               {t('platformLayout.sidebarSelected', {
                 count: sidebarSelectedCount,
                 max: sidebarSelectionLimit,
-                defaultValue: '侧边栏已选择 {{count}}/{{max}}',
+                defaultValue: "Đã chọn trên thanh bên {{count}}/{{max}}",
               })}
             </span>
             <div className="platform-layout-summary-actions">
               <button className="btn btn-secondary" onClick={openCreateGroupEditor}>
                 <Plus size={14} />
-                <span>{t('platformLayout.addGroup', '新建分组')}</span>
+                <span>{t('platformLayout.addGroup', "Thêm nhóm")}</span>
               </button>
               <button className="btn btn-secondary" onClick={resetPlatformLayout}>
-                {t('platformLayout.reset', '恢复默认')}
+                {t('platformLayout.reset', "Đặt lại mặc định")}
               </button>
             </div>
           </div>
@@ -1166,7 +1166,7 @@ export function PlatformLayoutModal({
           <div className="platform-layout-tip">
             {t(
               'platformLayout.tipWithGroups',
-              '拖拽可排序；最多选择 {{max}} 个入口显示在侧边栏。分组子级不参与侧边栏/仪表盘开关，仅用于菜单栏与默认平台切换。',
+              "Kéo để sắp xếp. Thanh bên có thể hiển thị tối đa {{max}} mục. Các mục con của nhóm không có công tắc thanh bên/bảng điều khiển và chỉ dùng cho thanh menu cùng nền tảng mặc định.",
               { max: sidebarSelectionLimit },
             )}
           </div>
@@ -1175,7 +1175,7 @@ export function PlatformLayoutModal({
             <div className="platform-layout-group-error" role="alert">
               {t(
                 'platformLayout.customIconStorageFailed',
-                '自定义图标无法保存，本地存储空间可能已满。删除不再使用的自定义图标后重试。',
+                'Không thể lưu biểu tượng tùy chỉnh; bộ nhớ cục bộ có thể đã đầy. Hãy xóa biểu tượng không còn dùng rồi thử lại.',
               )}
             </div>
           )}
@@ -1199,7 +1199,7 @@ export function PlatformLayoutModal({
                     checked={sidebarBulkEnabled}
                     onChange={() => handleBulkSidebar(!sidebarBulkEnabled)}
                   />
-                  <span>{t('platformLayout.sidebarToggle', '侧边栏显示')}</span>
+                  <span>{t('platformLayout.sidebarToggle', "Hiển thị ở thanh bên")}</span>
                 </label>
               </div>
               <div className="platform-layout-bulk-cell">
@@ -1209,7 +1209,7 @@ export function PlatformLayoutModal({
                     checked={dashboardBulkEnabled}
                     onChange={() => handleBulkDashboard(!dashboardBulkEnabled)}
                   />
-                  <span>{t('platformLayout.dashboardToggle', '仪表盘显示')}</span>
+                  <span>{t('platformLayout.dashboardToggle', "Hiển thị trên bảng điều khiển")}</span>
                 </label>
               </div>
               <div className="platform-layout-bulk-cell">
@@ -1219,7 +1219,7 @@ export function PlatformLayoutModal({
                     checked={trayBulkEnabled}
                     onChange={() => handleBulkTray(!trayBulkEnabled)}
                   />
-                  <span>{t('platformLayout.trayToggle', '菜单栏显示')}</span>
+                  <span>{t('platformLayout.trayToggle', "Hiển thị trên khay hệ thống")}</span>
                 </label>
               </div>
               <div className="platform-layout-bulk-cell is-edit-column" />
@@ -1283,7 +1283,7 @@ export function PlatformLayoutModal({
                         type="button"
                         className="platform-layout-drag-trigger"
                         onMouseDown={(event) => handleDragStart(event, entry.id)}
-                        aria-label={t('platformLayout.dragHandleLabel', '拖拽排序')}
+                        aria-label={t('platformLayout.dragHandleLabel', "Kéo để sắp xếp lại")}
                       >
                         <GripVertical size={16} className="drag-handle" />
                       </button>
@@ -1298,8 +1298,8 @@ export function PlatformLayoutModal({
                           }}
                           aria-label={
                             groupExpanded
-                              ? t('platformLayout.collapseChildren', '收起子级')
-                              : t('platformLayout.expandChildren', '展开子级')
+                              ? t('platformLayout.collapseChildren', "Thu gọn nền tảng con")
+                              : t('platformLayout.expandChildren', "Mở rộng nền tảng con")
                           }
                         >
                           {groupExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
@@ -1311,7 +1311,7 @@ export function PlatformLayoutModal({
                           type="button"
                           className="platform-layout-expand-trigger"
                           disabled
-                          aria-label={t('platformLayout.expandChildren', '展开子级')}
+                          aria-label={t('platformLayout.expandChildren', "Mở rộng nền tảng con")}
                         >
                           <ChevronRight size={14} />
                         </button>
@@ -1358,7 +1358,7 @@ export function PlatformLayoutModal({
                             setSidebarEntry(entry.id as PlatformLayoutEntryId, event.target.checked);
                           }}
                         />
-                        <span>{t('platformLayout.sidebarToggle', '侧边栏显示')}</span>
+                        <span>{t('platformLayout.sidebarToggle', "Hiển thị ở thanh bên")}</span>
                       </label>
 
                       <label className="platform-layout-toggle">
@@ -1373,14 +1373,14 @@ export function PlatformLayoutModal({
                             setHiddenEntry(entry.id as PlatformLayoutEntryId, !event.target.checked);
                           }}
                         />
-                        <span>{t('platformLayout.dashboardToggle', '仪表盘显示')}</span>
+                        <span>{t('platformLayout.dashboardToggle', "Hiển thị trên bảng điều khiển")}</span>
                       </label>
 
                       <label
                         className={`platform-layout-toggle ${isApiRelayEntry ? 'is-disabled' : ''}`}
                         title={
                           isApiRelayEntry
-                            ? t('platformLayout.apiRelayTrayDisabled', '中转站暂不支持菜单栏显示')
+                            ? t('platformLayout.apiRelayTrayDisabled', "Trạm relay chưa thể hiển thị trên khay hệ thống")
                             : undefined
                         }
                       >
@@ -1397,7 +1397,7 @@ export function PlatformLayoutModal({
                             entry.platformIds.forEach((platformId) => setTrayPlatform(platformId, target));
                           }}
                         />
-                        <span>{t('platformLayout.trayToggle', '菜单栏显示')}</span>
+                        <span>{t('platformLayout.trayToggle', "Hiển thị trên khay hệ thống")}</span>
                       </label>
 
                       {entry.group ? (
@@ -1405,8 +1405,8 @@ export function PlatformLayoutModal({
                           type="button"
                           className="action-btn"
                           onClick={() => openEditGroupEditor(entry.group!)}
-                          title={t('platformLayout.editGroup', '编辑')}
-                          aria-label={t('platformLayout.editGroup', '编辑')}
+                          title={t('platformLayout.editGroup', "Sửa nhóm")}
+                          aria-label={t('platformLayout.editGroup', "Sửa nhóm")}
                         >
                           <Pencil size={13} />
                         </button>
@@ -1415,8 +1415,8 @@ export function PlatformLayoutModal({
                           type="button"
                           className="action-btn"
                           disabled
-                          title={t('platformLayout.editGroup', '编辑')}
-                          aria-label={t('platformLayout.editGroup', '编辑')}
+                          title={t('platformLayout.editGroup', "Sửa nhóm")}
+                          aria-label={t('platformLayout.editGroup', "Sửa nhóm")}
                         >
                           <Pencil size={13} />
                         </button>
@@ -1467,20 +1467,20 @@ export function PlatformLayoutModal({
                               ))}
                               {(availableAddChildByGroup.get(entry.group.id) ?? []).length === 0 && (
                                 <span className="platform-layout-no-options">
-                                  {t('platformLayout.noAvailableChildren', '暂无可添加的平台')}
+                                  {t('platformLayout.noAvailableChildren', "Không có nền tảng nào để thêm")}
                                 </span>
                               )}
                             </div>
                             <div className="platform-layout-add-child-actions">
                               <button type="button" className="btn btn-secondary" onClick={closeAddChildPanel}>
-                                {t('common.cancel', '取消')}
+                                {t('common.cancel', "Hủy")}
                               </button>
                               <button
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={() => applyAddChildren(entry.group!)}
                               >
-                                {t('common.confirm', '确认')}
+                                {t('common.confirm', "Xác nhận")}
                               </button>
                             </div>
                           </div>
@@ -1522,7 +1522,7 @@ export function PlatformLayoutModal({
                                 type="button"
                                 className="platform-layout-child-drag-trigger"
                                 onMouseDown={(event) => handleChildDragStart(event, entry.group!.id, platformId)}
-                                aria-label={t('platformLayout.dragHandleLabel', '拖拽排序')}
+                                aria-label={t('platformLayout.dragHandleLabel', "Kéo để sắp xếp lại")}
                               >
                                 <GripVertical size={14} className="drag-handle" />
                               </button>
@@ -1553,7 +1553,7 @@ export function PlatformLayoutModal({
                                   checked={isDefault}
                                   onChange={() => handleSetGroupDefault(entry.group!, platformId)}
                                 />
-                                <span>{t('platformLayout.groupDefault', '默认平台')}</span>
+                                <span>{t('platformLayout.groupDefault', "Nền tảng mặc định")}</span>
                               </label>
                               <label className="platform-layout-toggle">
                                 <input
@@ -1561,14 +1561,14 @@ export function PlatformLayoutModal({
                                   checked={traySet.has(platformId)}
                                   onChange={(event) => setTrayPlatform(platformId, event.target.checked)}
                                 />
-                                <span>{t('platformLayout.trayToggle', '菜单栏显示')}</span>
+                                <span>{t('platformLayout.trayToggle', "Hiển thị trên khay hệ thống")}</span>
                               </label>
                               <button
                                 type="button"
                                 className="action-btn"
                                 onClick={() => openEditChildEditor(entry.group!, platformId)}
-                                title={t('platformLayout.editGroup', '编辑')}
-                                aria-label={t('platformLayout.editGroup', '编辑')}
+                                title={t('platformLayout.editGroup', "Sửa nhóm")}
+                                aria-label={t('platformLayout.editGroup', "Sửa nhóm")}
                               >
                                 <Pencil size={13} />
                               </button>
@@ -1579,13 +1579,13 @@ export function PlatformLayoutModal({
                                 disabled={entry.group!.platformIds.length <= 1}
                                 title={
                                   entry.group!.platformIds.length <= 1
-                                    ? t('platformLayout.groupChildrenRequired', '至少选择一个子平台')
-                                    : t('common.delete', '删除')
+                                    ? t('platformLayout.groupChildrenRequired', "Chọn ít nhất một nền tảng con")
+                                    : t('common.delete', "Xóa")
                                 }
                                 aria-label={
                                   entry.group!.platformIds.length <= 1
-                                    ? t('platformLayout.groupChildrenRequired', '至少选择一个子平台')
-                                    : t('common.delete', '删除')
+                                    ? t('platformLayout.groupChildrenRequired', "Chọn ít nhất một nền tảng con")
+                                    : t('common.delete', "Xóa")
                                 }
                               >
                                 <Trash2 size={13} />
@@ -1608,14 +1608,14 @@ export function PlatformLayoutModal({
               <div className="platform-layout-group-editor-header">
                 <span>
                   {editingGroupId
-                    ? t('platformLayout.editGroup', '编辑分组')
-                    : t('platformLayout.addGroup', '新建分组')}
+                    ? t('platformLayout.editGroup', "Sửa nhóm")
+                    : t('platformLayout.addGroup', "Thêm nhóm")}
                 </span>
                 <button
                   type="button"
                   className="platform-layout-group-editor-close"
                   onClick={closeGroupEditor}
-                  aria-label={t('common.close', '关闭')}
+                  aria-label={t('common.close', "Đóng")}
                 >
                   <X size={16} />
                 </button>
@@ -1623,17 +1623,17 @@ export function PlatformLayoutModal({
 
               <div className="platform-layout-group-editor-grid">
                 <label className="platform-layout-group-field">
-                  <span>{t('platformLayout.groupName', '分组名称')}</span>
+                  <span>{t('platformLayout.groupName', "Tên nhóm")}</span>
                   <input
                     type="text"
                     value={groupDraftName}
                     onChange={(event) => setGroupDraftName(event.target.value)}
-                    placeholder={t('platformLayout.groupNamePlaceholder', '例如：CodeBuddy 套件')}
+                    placeholder={t('platformLayout.groupNamePlaceholder', "Ví dụ: Bộ CodeBuddy")}
                   />
                 </label>
 
                 <div className="platform-layout-group-field">
-                  <span>{t('platformLayout.groupIcon', '分组图标')}</span>
+                  <span>{t('platformLayout.groupIcon', "Biểu tượng nhóm")}</span>
                   <IconSelector
                     customIcons={customIcons}
                     iconKind={groupDraftIconKind}
@@ -1656,7 +1656,7 @@ export function PlatformLayoutModal({
                 </div>
 
                 <div className="platform-layout-group-field full-width">
-                  <span>{t('platformLayout.groupChildren', '子级平台')}</span>
+                  <span>{t('platformLayout.groupChildren', "Nền tảng con")}</span>
                   <div className="platform-layout-group-children-picker">
                     {MENU_VISIBLE_PLATFORM_IDS.map((platformId) => {
                       const checked = groupDraftPlatformIds.includes(platformId);
@@ -1683,7 +1683,7 @@ export function PlatformLayoutModal({
                 </div>
 
                 <label className="platform-layout-group-field">
-                  <span>{t('platformLayout.groupDefault', '默认平台')}</span>
+                  <span>{t('platformLayout.groupDefault', "Nền tảng mặc định")}</span>
                   <select
                     value={groupDraftDefaultPlatformId}
                     onChange={(event) => setGroupDraftDefaultPlatformId(event.target.value as PlatformId)}
@@ -1704,15 +1704,15 @@ export function PlatformLayoutModal({
                 {editingGroupId && (
                   <button type="button" className="btn btn-danger" onClick={handleDeleteGroup}>
                     <Trash2 size={14} />
-                    <span>{t('platformLayout.deleteGroup', '删除分组')}</span>
+                    <span>{t('platformLayout.deleteGroup', "Xóa nhóm")}</span>
                   </button>
                 )}
                 <div className="platform-layout-group-editor-actions-right">
                   <button type="button" className="btn btn-secondary" onClick={closeGroupEditor}>
-                    {t('common.cancel', '取消')}
+                    {t('common.cancel', "Hủy")}
                   </button>
                   <button type="button" className="btn btn-primary" onClick={handleSaveGroup}>
-                    {t('common.save', '保存')}
+                    {t('common.save', "Lưu")}
                   </button>
                 </div>
               </div>
@@ -1724,12 +1724,12 @@ export function PlatformLayoutModal({
           <div className="platform-layout-group-editor-overlay">
             <div className="platform-layout-group-editor-modal" onClick={(event) => event.stopPropagation()}>
               <div className="platform-layout-group-editor-header">
-                <span>{t('platformLayout.editChildPlatform', '编辑子级平台')}</span>
+                <span>{t('platformLayout.editChildPlatform', "Chỉnh sửa nền tảng con")}</span>
                 <button
                   type="button"
                   className="platform-layout-group-editor-close"
                   onClick={closeChildEditor}
-                  aria-label={t('common.close', '关闭')}
+                  aria-label={t('common.close', "Đóng")}
                 >
                   <X size={16} />
                 </button>
@@ -1737,7 +1737,7 @@ export function PlatformLayoutModal({
 
               <div className="platform-layout-group-editor-grid">
                 <label className="platform-layout-group-field">
-                  <span>{t('platformLayout.groupName', '分组名称')}</span>
+                  <span>{t('platformLayout.groupName', "Tên nhóm")}</span>
                   <input
                     type="text"
                     value={childDraftName}
@@ -1746,7 +1746,7 @@ export function PlatformLayoutModal({
                 </label>
 
                 <div className="platform-layout-group-field">
-                  <span>{t('platformLayout.groupIcon', '分组图标')}</span>
+                  <span>{t('platformLayout.groupIcon', "Biểu tượng nhóm")}</span>
                   <IconSelector
                     customIcons={customIcons}
                     iconKind={childDraftIconKind}
@@ -1769,14 +1769,14 @@ export function PlatformLayoutModal({
                 </div>
 
                 <label className="platform-layout-group-field full-width">
-                  <span>{t('platformLayout.groupDefault', '默认平台')}</span>
+                  <span>{t('platformLayout.groupDefault', "Nền tảng mặc định")}</span>
                   <label className="platform-layout-toggle">
                     <input
                       type="checkbox"
                       checked={childDraftSetDefault}
                       onChange={(event) => setChildDraftSetDefault(event.target.checked)}
                     />
-                    <span>{t('platformLayout.setAsDefaultInGroup', '设为分组内默认平台')}</span>
+                    <span>{t('platformLayout.setAsDefaultInGroup', "Đặt làm nền tảng mặc định trong nhóm này")}</span>
                   </label>
                 </label>
               </div>
@@ -1791,19 +1791,19 @@ export function PlatformLayoutModal({
                   disabled={(platformGroups.find((item) => item.id === childEditorGroupId)?.platformIds.length ?? 0) <= 1}
                   title={
                     (platformGroups.find((item) => item.id === childEditorGroupId)?.platformIds.length ?? 0) <= 1
-                      ? t('platformLayout.groupChildrenRequired', '至少选择一个子平台')
-                      : t('platformLayout.removeFromGroup', '移出分组')
+                      ? t('platformLayout.groupChildrenRequired', "Chọn ít nhất một nền tảng con")
+                      : t('platformLayout.removeFromGroup', "Xóa khỏi nhóm")
                   }
                 >
                   <Trash2 size={14} />
-                  <span>{t('platformLayout.removeFromGroup', '移出分组')}</span>
+                  <span>{t('platformLayout.removeFromGroup', "Xóa khỏi nhóm")}</span>
                 </button>
                 <div className="platform-layout-group-editor-actions-right">
                   <button type="button" className="btn btn-secondary" onClick={closeChildEditor}>
-                    {t('common.cancel', '取消')}
+                    {t('common.cancel', "Hủy")}
                   </button>
                   <button type="button" className="btn btn-primary" onClick={handleSaveChild}>
-                    {t('common.save', '保存')}
+                    {t('common.save', "Lưu")}
                   </button>
                 </div>
               </div>

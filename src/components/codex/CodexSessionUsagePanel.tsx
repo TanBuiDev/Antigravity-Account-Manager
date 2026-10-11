@@ -94,11 +94,11 @@ function UsageBreakdownTable({
         <thead>
           <tr>
             <th>{keyLabel}</th>
-            <th>{t('codex.sessionUsage.tables.input', '输入 Tokens')}</th>
-            <th>{t('codex.sessionUsage.tables.cached', '缓存 Tokens')}</th>
-            <th>{t('codex.sessionUsage.tables.output', '输出 Tokens')}</th>
-            <th>{t('codex.sessionUsage.tables.total', '合计 Tokens')}</th>
-            <th>{t('codex.sessionUsage.tables.requests', '请求')}</th>
+            <th>{t('codex.sessionUsage.tables.input', "Token vào")}</th>
+            <th>{t('codex.sessionUsage.tables.cached', "Token cache")}</th>
+            <th>{t('codex.sessionUsage.tables.output', "Token ra")}</th>
+            <th>{t('codex.sessionUsage.tables.total', "Tổng token")}</th>
+            <th>{t('codex.sessionUsage.tables.requests', "YC")}</th>
             {showEstimatedCost ? <th>{t('codex.sessionUsage.cards.cost')}</th> : null}
           </tr>
         </thead>
@@ -188,37 +188,37 @@ export function CodexSessionUsageSummary({
   const totals = report?.totals;
   const metrics = [
     [
-      t('codex.sessionUsage.summary.input', '输入'),
+      t('codex.sessionUsage.summary.input', "Vào"),
       trusted
         ? formatSessionUsageTokensShort(totals?.inputTokens ?? 0, lang)
         : SESSION_USAGE_SUMMARY_PENDING,
     ],
     [
-      t('codex.sessionUsage.summary.cached', '缓存'),
+      t('codex.sessionUsage.summary.cached', "Cache"),
       trusted
         ? formatSessionUsageTokensShort(totals?.cachedInputTokens ?? 0, lang)
         : SESSION_USAGE_SUMMARY_PENDING,
     ],
     [
-      t('codex.sessionUsage.summary.output', '输出'),
+      t('codex.sessionUsage.summary.output', "Ra"),
       trusted
         ? formatSessionUsageTokensShort(totals?.outputTokens ?? 0, lang)
         : SESSION_USAGE_SUMMARY_PENDING,
     ],
     [
-      t('codex.sessionUsage.summary.total', '合计'),
+      t('codex.sessionUsage.summary.total', "Tổng"),
       trusted
         ? formatSessionUsageTokensShort(totals?.totalTokens ?? 0, lang, 2)
         : SESSION_USAGE_SUMMARY_PENDING,
     ],
     [
-      t('codex.sessionUsage.summary.requests', '请求'),
+      t('codex.sessionUsage.summary.requests', "YC"),
       trusted
         ? formatSessionUsageCount(totals?.requestCount ?? 0)
         : SESSION_USAGE_SUMMARY_PENDING,
     ],
     [
-      t('codex.sessionUsage.summary.cost', '费用'),
+      t('codex.sessionUsage.summary.cost', "Phí"),
       trusted
         ? formatSessionUsageCostUsd(totals?.estimatedCostUsd)
         : SESSION_USAGE_SUMMARY_PENDING,
@@ -235,8 +235,8 @@ export function CodexSessionUsageSummary({
             role="status"
           >
             {status === 'scanning'
-              ? t('codex.sessionUsage.summary.scanning', '扫描中')
-              : t('codex.sessionUsage.summary.updating', '更新中')}
+              ? t('codex.sessionUsage.summary.scanning', "Đang quét")
+              : t('codex.sessionUsage.summary.updating', "Đang cập nhật")}
           </span>
         ) : null}
       </div>
@@ -253,7 +253,7 @@ export function CodexSessionUsageSummary({
         className="btn btn-sm btn-secondary codex-session-usage-summary__detail"
         onClick={onOpenDetail}
       >
-        {t('codex.sessionUsage.summary.detail', '详情')}
+        {t('codex.sessionUsage.summary.detail', "Chi tiết")}
       </button>
     </div>
   );
@@ -292,7 +292,7 @@ export function CodexSessionUsagePanel({
         setError(
           t('codex.sessionUsage.errors.loadFailed', {
             error: loadError instanceof Error ? loadError.message : String(loadError),
-            defaultValue: '读取会话用量失败：{{error}}',
+            defaultValue: "Không đọc được mức dùng phiên: {{error}}",
           }),
         );
       }
@@ -332,7 +332,7 @@ export function CodexSessionUsagePanel({
         setError(
           t('codex.sessionUsage.errors.syncFailed', {
             error: syncError instanceof Error ? syncError.message : String(syncError),
-            defaultValue: '扫描会话用量失败：{{error}}',
+            defaultValue: "Không quét được mức dùng phiên: {{error}}",
           }),
         );
       }
@@ -359,10 +359,10 @@ export function CodexSessionUsagePanel({
     const confirmed = await confirmDialog(
       t(
         'codex.sessionUsage.rebuildConfirm.message',
-        '会清空已汇总的会话用量缓存，再重新读取全部会话日志。官方配额和 API 服务日志不受影响。确认继续？',
+        "Sẽ xóa bộ nhớ đệm mức dùng phiên rồi đọc lại mọi nhật ký. Hạn mức chính thức và nhật ký dịch vụ API không đổi. Tiếp tục?",
       ),
       {
-        title: t('codex.sessionUsage.rebuildConfirm.title', '重新扫描'),
+        title: t('codex.sessionUsage.rebuildConfirm.title', "Quét lại"),
         kind: 'warning',
       },
     );
@@ -375,16 +375,16 @@ export function CodexSessionUsagePanel({
   const rangeOptions = useMemo<SingleSelectOption[]>(
     () => [
       { value: 'today', label: t('codex.sessionUsage.range.today') },
-      { value: '7d', label: t('codex.sessionUsage.range.7d', '近 7 天') },
-      { value: '30d', label: t('codex.sessionUsage.range.30d', '近 30 天') },
-      { value: 'month', label: t('codex.sessionUsage.range.month', '本月') },
-      { value: 'all', label: t('codex.sessionUsage.range.all', '全部') },
+      { value: '7d', label: t('codex.sessionUsage.range.7d', "7 ngày") },
+      { value: '30d', label: t('codex.sessionUsage.range.30d', "30 ngày") },
+      { value: 'month', label: t('codex.sessionUsage.range.month', "Tháng này") },
+      { value: 'all', label: t('codex.sessionUsage.range.all', "Tất cả") },
     ],
     [t],
   );
   const instanceOptions = useMemo<SingleSelectOption[]>(
     () => [
-      { value: '', label: t('codex.sessionUsage.instance.all', '全部实例') },
+      { value: '', label: t('codex.sessionUsage.instance.all', "Mọi phiên bản") },
       ...(report?.instances ?? []).map((instance) => ({
         value: instance.id,
         label: instance.name || instance.id,
@@ -416,8 +416,8 @@ export function CodexSessionUsagePanel({
     <div className="codex-session-usage">
       <div className="codex-session-usage__intro">
         <div>
-          <h3>{t('codex.sessionUsage.title', '会话用量')}</h3>
-          <p>{t('codex.sessionUsage.desc', '从本机 Codex 会话日志汇总真实 Token 用量，不依赖官方配额或 API 服务请求日志。')}</p>
+          <h3>{t('codex.sessionUsage.title', "Mức dùng phiên")}</h3>
+          <p>{t('codex.sessionUsage.desc', "Cộng dồn token thực từ nhật ký phiên Codex trên máy, không dùng hạn mức chính thức hay nhật ký dịch vụ API.")}</p>
         </div>
         {onBack ? (
           <button
@@ -425,14 +425,14 @@ export function CodexSessionUsagePanel({
             className="btn btn-secondary"
             onClick={onBack}
           >
-            {t('codex.sessionUsage.summary.back', '返回')}
+            {t('codex.sessionUsage.summary.back', "Quay lại")}
           </button>
         ) : null}
       </div>
 
       <div className="codex-session-usage__toolbar">
         <label className="codex-session-usage__field">
-          <span>{t('codex.sessionUsage.range.label', '时间范围')}</span>
+          <span>{t('codex.sessionUsage.range.label', "Khoảng")}</span>
           <SingleSelectDropdown
             value={range}
             options={rangeOptions}
@@ -441,18 +441,18 @@ export function CodexSessionUsagePanel({
               setRange(nextRange);
               persistCodexSessionUsageRange(nextRange);
             }}
-            ariaLabel={t('codex.sessionUsage.range.label', '时间范围')}
+            ariaLabel={t('codex.sessionUsage.range.label', "Khoảng")}
             menuWidth={140}
             menuMaxHeight={220}
           />
         </label>
         <label className="codex-session-usage__field">
-          <span>{t('codex.sessionUsage.instance.label', '实例')}</span>
+          <span>{t('codex.sessionUsage.instance.label', "Phiên bản")}</span>
           <SingleSelectDropdown
             value={instanceId}
             options={instanceOptions}
             onChange={setInstanceId}
-            ariaLabel={t('codex.sessionUsage.instance.label', '实例')}
+            ariaLabel={t('codex.sessionUsage.instance.label', "Phiên bản")}
             menuWidth={200}
             menuMaxHeight={260}
           />
@@ -465,7 +465,7 @@ export function CodexSessionUsagePanel({
             disabled={syncing}
           >
             <RefreshCw size={14} className={syncing && !rebuilding ? 'spin' : undefined} />
-            {t('codex.sessionUsage.actions.refresh', '刷新')}
+            {t('codex.sessionUsage.actions.refresh', "Làm mới")}
           </button>
           <button
             type="button"
@@ -474,26 +474,26 @@ export function CodexSessionUsagePanel({
             disabled={syncing}
           >
             <RotateCcw size={14} className={rebuilding ? 'spin' : undefined} />
-            {t('codex.sessionUsage.actions.rebuild', '重新扫描')}
+            {t('codex.sessionUsage.actions.rebuild', "Quét lại")}
           </button>
         </div>
       </div>
 
       <div className="codex-session-usage__status" role="status">
         {syncing
-          ? t('codex.sessionUsage.status.scanning', '正在扫描会话日志…')
+          ? t('codex.sessionUsage.status.scanning', "Đang quét nhật ký…")
           : hasData
             ? t('codex.sessionUsage.status.ready', {
                 files: report?.filesTracked ?? 0,
                 requests: report?.eventCount ?? 0,
-                defaultValue: '已扫描 {{files}} 个文件，累计 {{requests}} 次请求',
+                defaultValue: "{{files}} tệp, {{requests}} yêu cầu",
               })
-            : t('codex.sessionUsage.status.idle', '尚未扫描')}
+            : t('codex.sessionUsage.status.idle', "Chưa quét")}
         {lastSyncedLabel ? (
           <span>
             {t('codex.sessionUsage.status.lastSynced', {
               time: lastSyncedLabel,
-              defaultValue: '上次同步 {{time}}',
+              defaultValue: "Đồng bộ lần cuối {{time}}",
             })}
           </span>
         ) : null}
@@ -501,7 +501,7 @@ export function CodexSessionUsagePanel({
           <span>
             {t('codex.sessionUsage.status.deferred', {
               count: report?.deferredFiles ?? 0,
-              defaultValue: '{{count}} 个分叉会话待父会话就绪',
+              defaultValue: "{{count}} nhánh đang chờ phiên cha",
             })}
           </span>
         ) : null}
@@ -509,7 +509,7 @@ export function CodexSessionUsagePanel({
           <span>
             {t('codex.sessionUsage.status.errors', {
               count: report?.lastErrorCount ?? 0,
-              defaultValue: '{{count}} 个文件解析失败',
+              defaultValue: "{{count}} tệp không đọc được",
             })}
           </span>
         ) : null}
@@ -520,21 +520,21 @@ export function CodexSessionUsagePanel({
       <p className="codex-session-usage__hint">
         {t(
           'codex.sessionUsage.hint',
-          '官方配额是套餐额度；API 服务日志只覆盖走本地网关的请求。这里按会话 JSONL 的每次请求用量增量汇总。',
+          "Hạn mức chính thức là gói. Nhật ký dịch vụ API chỉ gồm cổng cục bộ. Ở đây cộng phần tăng JSONL từng yêu cầu.",
         )}
       </p>
 
       {loading && !report ? (
         <div className="codex-session-usage__empty">
-          {t('common.loading', '加载中...')}
+          {t('common.loading', "Đang tải...")}
         </div>
       ) : !hasData ? (
         <div className="codex-session-usage__empty">
-          <h4>{t('codex.sessionUsage.empty.title', '还没有会话用量')}</h4>
+          <h4>{t('codex.sessionUsage.empty.title', "Chưa có mức dùng phiên")}</h4>
           <p>
             {t(
               'codex.sessionUsage.empty.desc',
-              '打开此页后会在后台扫描本机 Codex 会话日志及多开会话目录。若刚用过 Codex，点刷新即可。',
+              "Mở trang này sẽ quét nền nhật ký Codex cục bộ và các phiên bản thêm. Vừa dùng xong thì nhấn Làm mới.",
             )}
           </p>
         </div>
@@ -547,7 +547,7 @@ export function CodexSessionUsagePanel({
                   <Zap size={22} />
                 </div>
                 <div>
-                  <span>{t('codex.sessionUsage.cards.total', '合计 Tokens')}</span>
+                  <span>{t('codex.sessionUsage.cards.total', "Tổng token")}</span>
                   <TokenAmount
                     value={totals?.totalTokens ?? 0}
                     lang={lang}
@@ -558,12 +558,12 @@ export function CodexSessionUsagePanel({
               <div className="codex-session-usage__hero-side">
                 <span>
                   <Send size={13} />
-                  {t('codex.sessionUsage.cards.requests', '请求数')}
+                  {t('codex.sessionUsage.cards.requests', "Yêu cầu")}
                 </span>
                 <strong>{formatSessionUsageCount(totals?.requestCount ?? 0)}</strong>
                 <span>
                   <DollarSign size={13} />
-                  {t('codex.sessionUsage.cards.cost', '估算费用')}
+                  {t('codex.sessionUsage.cards.cost', "Chi phí ước")}
                 </span>
                 <strong>{formatSessionUsageCostUsd(totals?.estimatedCostUsd)}</strong>
               </div>
@@ -573,7 +573,7 @@ export function CodexSessionUsagePanel({
             <article className="is-input">
               <div className="codex-session-usage__card-head">
                 <ArrowDownToLine size={15} aria-hidden="true" />
-                <span>{t('codex.sessionUsage.cards.input', '输入 Tokens')}</span>
+                <span>{t('codex.sessionUsage.cards.input', "Token vào")}</span>
               </div>
               <TokenAmount
                 value={totals?.inputTokens ?? 0}
@@ -583,7 +583,7 @@ export function CodexSessionUsagePanel({
             <article className="is-cache">
               <div className="codex-session-usage__card-head">
                 <Database size={15} aria-hidden="true" />
-                <span>{t('codex.sessionUsage.cards.cached', '缓存输入 Tokens')}</span>
+                <span>{t('codex.sessionUsage.cards.cached', "Token cache")}</span>
               </div>
               <TokenAmount
                 value={totals?.cachedInputTokens ?? 0}
@@ -593,7 +593,7 @@ export function CodexSessionUsagePanel({
             <article className="is-output">
               <div className="codex-session-usage__card-head">
                 <ArrowUpFromLine size={15} aria-hidden="true" />
-                <span>{t('codex.sessionUsage.cards.output', '输出 Tokens')}</span>
+                <span>{t('codex.sessionUsage.cards.output', "Token ra")}</span>
               </div>
               <TokenAmount
                 value={totals?.outputTokens ?? 0}
@@ -607,42 +607,42 @@ export function CodexSessionUsagePanel({
             points={sessionTrend}
             metrics={["totalTokens", "requestCount"]}
             hourly={false}
-            title={t('codex.sessionUsage.title', '会话用量')}
-            emptyLabel={t('codex.sessionUsage.empty.title', '还没有会话用量')}
+            title={t('codex.sessionUsage.title', "Mức dùng phiên")}
+            emptyLabel={t('codex.sessionUsage.empty.title', "Chưa có mức dùng phiên")}
             labels={{
-              totalTokens: t('codex.sessionUsage.cards.total', '合计 Tokens'),
-              requestCount: t('codex.sessionUsage.cards.requests', '请求数'),
+              totalTokens: t('codex.sessionUsage.cards.total', "Tổng token"),
+              requestCount: t('codex.sessionUsage.cards.requests', "Yêu cầu"),
             }}
           />
 
           <div className="codex-session-usage__grids">
             <section>
-              <h4>{t('codex.sessionUsage.tables.model', '按模型')}</h4>
+              <h4>{t('codex.sessionUsage.tables.model', "Theo mô hình")}</h4>
               <UsageBreakdownTable
                 rows={report?.byModel ?? []}
-                keyLabel={t('codex.sessionUsage.tables.modelName', '模型')}
-                emptyLabel={t('codex.sessionUsage.empty.title', '还没有会话用量')}
+                keyLabel={t('codex.sessionUsage.tables.modelName', "Mô hình")}
+                emptyLabel={t('codex.sessionUsage.empty.title', "Chưa có mức dùng phiên")}
                 lang={lang}
               />
             </section>
             <section>
-              <h4>{t('codex.sessionUsage.tables.instance', '按实例')}</h4>
+              <h4>{t('codex.sessionUsage.tables.instance', "Theo phiên bản")}</h4>
               <UsageBreakdownTable
                 rows={report?.byInstance ?? []}
-                keyLabel={t('codex.sessionUsage.tables.instanceName', '实例')}
-                emptyLabel={t('codex.sessionUsage.empty.title', '还没有会话用量')}
+                keyLabel={t('codex.sessionUsage.tables.instanceName', "Phiên bản")}
+                emptyLabel={t('codex.sessionUsage.empty.title', "Chưa có mức dùng phiên")}
                 lang={lang}
               />
             </section>
           </div>
 
           <section>
-            <h4>{t('codex.sessionUsage.tables.day', '按日期')}</h4>
+            <h4>{t('codex.sessionUsage.tables.day', "Theo ngày")}</h4>
             <UsageBreakdownTable
               rows={report?.byDay ?? []}
               showEstimatedCost
-              keyLabel={t('codex.sessionUsage.tables.dayName', '日期')}
-              emptyLabel={t('codex.sessionUsage.empty.title', '还没有会话用量')}
+              keyLabel={t('codex.sessionUsage.tables.dayName', "Ngày")}
+              emptyLabel={t('codex.sessionUsage.empty.title', "Chưa có mức dùng phiên")}
               lang={lang}
             />
             {(report?.byDay ?? []).some((row) => row.estimatedCostUsd == null) ? (

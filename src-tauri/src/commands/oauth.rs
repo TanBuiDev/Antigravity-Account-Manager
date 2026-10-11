@@ -10,7 +10,7 @@ async fn refresh_account_quota_after_login(account: models::Account) -> models::
         Ok(quota) => {
             if let Err(e) = modules::update_account_quota(&account_id, quota) {
                 modules::logger::log_warn(&format!(
-                    "OAuth 登录后自动刷新配额写回失败: account_id={}, error={}",
+                    "Không thể lưu hạn mức sau khi tự làm mới lúc đăng nhập OAuth: account_id={}, error={}",
                     account_id, e
                 ));
                 return refreshing_account;
@@ -20,7 +20,7 @@ async fn refresh_account_quota_after_login(account: models::Account) -> models::
                 Ok(updated) => updated,
                 Err(e) => {
                     modules::logger::log_warn(&format!(
-                        "OAuth 登录后自动刷新配额后读取账号失败: account_id={}, error={}",
+                        "Không thể đọc tài khoản sau khi tự làm mới hạn mức lúc đăng nhập OAuth: account_id={}, error={}",
                         account_id, e
                     ));
                     refreshing_account
@@ -29,7 +29,7 @@ async fn refresh_account_quota_after_login(account: models::Account) -> models::
         }
         Err(e) => {
             modules::logger::log_warn(&format!(
-                "OAuth 登录后自动刷新配额失败: account_id={}, error={}",
+                "Không thể tự làm mới hạn mức sau khi đăng nhập OAuth: account_id={}, error={}",
                 account_id, e
             ));
             refreshing_account
@@ -47,41 +47,41 @@ pub async fn start_oauth_login(
     mail_url: Option<String>,
     aux_email: Option<String>,
 ) -> Result<models::Account, String> {
-    modules::logger::log_info("开始 OAuth 授权流程...");
+    modules::logger::log_info("Bắt đầu xác thực OAuth...");
 
     let token_res = modules::oauth_server::start_oauth_flow(app_handle.clone())
         .await
         .map_err(|e| {
-            modules::logger::log_error(&format!("OAuth 流程失败: {}", e));
+            modules::logger::log_error(&format!("Quá trình OAuth thất bại: {}", e));
             e
         })?;
 
-    modules::logger::log_info("OAuth 授权成功，检查 refresh_token...");
+    modules::logger::log_info("Xác thực OAuth thành công, đang kiểm tra refresh_token...");
 
     let refresh_token = token_res.refresh_token.ok_or_else(|| {
-        let msg = "未获取到 Refresh Token。\n\n\
-         可能原因：您之前已授权过此应用\n\n\
-         解决方案：\n\
-         1. 访问 https://myaccount.google.com/permissions\n\
-         2. 撤销 'Antigravity Tools' 的访问权限\n\
-         3. 重新进行 OAuth 授权"
+        let msg = "Không nhận được Refresh Token.\n\n\
+         Nguyên nhân có thể: bạn đã cấp quyền cho ứng dụng này trước đây\n\n\
+         Cách khắc phục:\n\
+         1. Truy cập https://myaccount.google.com/permissions\n\
+         2. Thu hồi quyền truy cập của 'Antigravity Tools'\n\
+         3. Thực hiện xác thực OAuth lại"
             .to_string();
         modules::logger::log_error(&msg);
         msg
     })?;
 
-    modules::logger::log_info("获取用户信息...");
+    modules::logger::log_info("Đang lấy thông tin người dùng...");
     let user_info = modules::oauth::get_user_info(&token_res.access_token)
         .await
         .map_err(|e| {
-            modules::logger::log_error(&format!("获取用户信息失败: {}", e));
+            modules::logger::log_error(&format!("Không thể lấy thông tin người dùng: {}", e));
             e
         })?;
 
     modules::logger::log_info(&format!(
-        "用户: {} ({})",
+        "Người dùng: {} ({})",
         user_info.email,
-        user_info.name.as_deref().unwrap_or("无名称")
+        user_info.name.as_deref().unwrap_or("Chưa có tên")
     ));
 
     let token_data = models::TokenData::new(
@@ -100,7 +100,7 @@ pub async fn start_oauth_login(
         token_data,
     )
     .map_err(|e| {
-        modules::logger::log_error(&format!("保存账号失败: {}", e));
+        modules::logger::log_error(&format!("Không thể lưu tài khoản: {}", e));
         e
     })?;
 
@@ -117,7 +117,7 @@ pub async fn start_oauth_login(
     )?;
     let account = refresh_account_quota_after_login(account).await;
 
-    modules::logger::log_info(&format!("账号添加成功: {}", account.email));
+    modules::logger::log_info(&format!("Đã thêm tài khoản: {}", account.email));
 
     // 广播数据变更通知
     modules::websocket::broadcast_data_changed("oauth_login");
@@ -135,41 +135,41 @@ pub async fn complete_oauth_login(
     mail_url: Option<String>,
     aux_email: Option<String>,
 ) -> Result<models::Account, String> {
-    modules::logger::log_info("完成 OAuth 授权流程...");
+    modules::logger::log_info("Đã hoàn tất xác thực OAuth...");
 
     let token_res = modules::oauth_server::complete_oauth_flow(app_handle.clone())
         .await
         .map_err(|e| {
-            modules::logger::log_error(&format!("OAuth 流程失败: {}", e));
+            modules::logger::log_error(&format!("Quá trình OAuth thất bại: {}", e));
             e
         })?;
 
-    modules::logger::log_info("OAuth 授权成功，检查 refresh_token...");
+    modules::logger::log_info("Xác thực OAuth thành công, đang kiểm tra refresh_token...");
 
     let refresh_token = token_res.refresh_token.ok_or_else(|| {
-        let msg = "未获取到 Refresh Token。\n\n\
-         可能原因：您之前已授权过此应用\n\n\
-         解决方案：\n\
-         1. 访问 https://myaccount.google.com/permissions\n\
-         2. 撤销 'Antigravity Tools' 的访问权限\n\
-         3. 重新进行 OAuth 授权"
+        let msg = "Không nhận được Refresh Token.\n\n\
+         Nguyên nhân có thể: bạn đã cấp quyền cho ứng dụng này trước đây\n\n\
+         Cách khắc phục:\n\
+         1. Truy cập https://myaccount.google.com/permissions\n\
+         2. Thu hồi quyền truy cập của 'Antigravity Tools'\n\
+         3. Thực hiện xác thực OAuth lại"
             .to_string();
         modules::logger::log_error(&msg);
         msg
     })?;
 
-    modules::logger::log_info("获取用户信息...");
+    modules::logger::log_info("Đang lấy thông tin người dùng...");
     let user_info = modules::oauth::get_user_info(&token_res.access_token)
         .await
         .map_err(|e| {
-            modules::logger::log_error(&format!("获取用户信息失败: {}", e));
+            modules::logger::log_error(&format!("Không thể lấy thông tin người dùng: {}", e));
             e
         })?;
 
     modules::logger::log_info(&format!(
-        "用户: {} ({})",
+        "Người dùng: {} ({})",
         user_info.email,
-        user_info.name.as_deref().unwrap_or("无名称")
+        user_info.name.as_deref().unwrap_or("Chưa có tên")
     ));
 
     let token_data = models::TokenData::new(
@@ -188,7 +188,7 @@ pub async fn complete_oauth_login(
         token_data,
     )
     .map_err(|e| {
-        modules::logger::log_error(&format!("保存账号失败: {}", e));
+        modules::logger::log_error(&format!("Không thể lưu tài khoản: {}", e));
         e
     })?;
 
@@ -205,7 +205,7 @@ pub async fn complete_oauth_login(
     )?;
     let account = refresh_account_quota_after_login(account).await;
 
-    modules::logger::log_info(&format!("账号添加成功: {}", account.email));
+    modules::logger::log_info(&format!("Đã thêm tài khoản: {}", account.email));
     modules::websocket::broadcast_data_changed("oauth_login");
 
     Ok(account)

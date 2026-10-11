@@ -861,7 +861,7 @@ function resolveAccountContextText(
   const isPersonalStructure = structure.includes('personal');
 
   if (isPersonalStructure || (!structure && !isTeamLikePlan)) {
-    return t('codex.account.personal', '个人账户');
+    return t('codex.account.personal', "Tài khoản cá nhân");
   }
 
   return accountName || workspaceTitle || '';
@@ -1034,7 +1034,7 @@ export function CodexWakeupContent({
     () =>
       buildCodexPlanFilterOptions(wakeupTierCounts, {
         includeError: false,
-        pendingLabel: t('codex.pendingAuth.badge', '待授权'),
+        pendingLabel: t('codex.pendingAuth.badge', "Chờ xác thực"),
       }),
     [t, wakeupTierCounts],
   );
@@ -1852,10 +1852,10 @@ export function CodexWakeupContent({
               options={wakeupTierFilterOptions}
               selectedValues={filters.planTypes}
               allLabel={t('common.shared.filter.all', { count: wakeupTierCounts.all })}
-              filterLabel={t('common.shared.filterLabel', '筛选')}
-              clearLabel={t('accounts.clearFilter', '清空筛选')}
-              emptyLabel={t('common.none', '暂无')}
-              ariaLabel={t('common.shared.filterLabel', '筛选')}
+              filterLabel={t('common.shared.filterLabel', "Bộ lọc")}
+              clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+              emptyLabel={t('common.none', "None​")}
+              ariaLabel={t('common.shared.filterLabel', "Bộ lọc")}
               onToggleValue={(value) =>
                 setFilters((current) => ({
                   ...current,
@@ -1892,26 +1892,26 @@ export function CodexWakeupContent({
                   options={[
                     {
                       value: 'default',
-                      label: t('codex.wakeup.accountSort.default', '默认顺序'),
+                      label: t('codex.wakeup.accountSort.default', "Thứ tự mặc định"),
                     },
                     {
                       value: 'hourly',
-                      label: t('codex.wakeup.accountSort.hourly', '按5h额度'),
+                      label: t('codex.wakeup.accountSort.hourly', "Theo hạn mức 5h"),
                     },
                     {
                       value: 'weekly',
-                      label: t('codex.wakeup.accountSort.weekly', '按周额度'),
+                      label: t('codex.wakeup.accountSort.weekly', "Theo hạn mức tuần"),
                     },
                     {
                       value: 'created_at',
-                      label: t('common.shared.sort.createdAt', '按创建时间'),
+                      label: t('common.shared.sort.createdAt', "Thời gian tạo"),
                     },
                     {
                       value: 'email',
-                      label: t('codex.wakeup.accountSort.email', '按邮箱'),
+                      label: t('codex.wakeup.accountSort.email', "Theo email"),
                     },
                   ]}
-                  ariaLabel={t('common.shared.sortLabel', '排序')}
+                  ariaLabel={t('common.shared.sortLabel', "Sắp xếp")}
                   icon={<ArrowDownWideNarrow size={14} />}
                   onChange={(value) => sortConfig.onSortByChange(value as WakeupAccountSortBy)}
                 />
@@ -1922,10 +1922,10 @@ export function CodexWakeupContent({
                     onClick={sortConfig.onToggleSortDirection}
                     title={
                       sortConfig.sortDirection === 'desc'
-                        ? t('common.shared.sort.descTooltip', '当前：降序，点击切换为升序')
-                        : t('common.shared.sort.ascTooltip', '当前：升序，点击切换为降序')
+                        ? t('common.shared.sort.descTooltip', "Giảm dần (nhấn để chuyển Tăng dần)")
+                        : t('common.shared.sort.ascTooltip', "Tăng dần (nhấn để chuyển Giảm dần)")
                     }
-                    aria-label={t('common.shared.sort.toggleDirection', '切换排序方向')}
+                    aria-label={t('common.shared.sort.toggleDirection', "Đổi hướng sắp xếp")}
                   >
                     {sortConfig.sortDirection === 'desc' ? (
                       <ArrowDown size={15} />
@@ -2115,7 +2115,7 @@ export function CodexWakeupContent({
   const handleDeletePreset = useCallback(
     async (preset: CodexWakeupModelPreset) => {
       const confirmed = await confirmDialog(t('codex.wakeup.presetDeleteConfirm', { name: preset.name }), {
-        title: t('common.confirm', '确认'),
+        title: t('common.confirm', "Xác nhận"),
         kind: 'warning',
       });
       if (!confirmed) return;
@@ -2296,7 +2296,7 @@ export function CodexWakeupContent({
       const confirmed = await confirmDialog(
         t('codex.wakeup.deleteConfirm', { name: task.name }),
         {
-          title: t('common.confirm', '确认'),
+          title: t('common.confirm', "Xác nhận"),
           kind: 'warning',
         },
       );
@@ -2427,10 +2427,10 @@ export function CodexWakeupContent({
           count: accountIds.length,
         }),
         {
-          title: t('common.confirm', '确认'),
+          title: t('common.confirm', "Xác nhận"),
           kind: 'warning',
-          okLabel: t('common.confirm', '确认'),
-          cancelLabel: t('common.cancel', '取消'),
+          okLabel: t('common.confirm', "Xác nhận"),
+          cancelLabel: t('common.cancel', "Hủy"),
         },
       );
       if (!confirmed) {
@@ -2654,7 +2654,7 @@ export function CodexWakeupContent({
 
   const handleClearHistory = useCallback(async () => {
     const confirmed = await confirmDialog(t('codex.wakeup.clearHistoryConfirm'), {
-      title: t('common.confirm', '确认'),
+      title: t('common.confirm', "Xác nhận"),
       kind: 'warning',
     });
     if (!confirmed) return;
@@ -2715,7 +2715,7 @@ export function CodexWakeupContent({
       {loading ? (
         <div className="loading-container">
           <RefreshCw size={24} className="loading-spinner" />
-          <p>{t('common.loading', '加载中...')}</p>
+          <p>{t('common.loading', "Đang tải...")}</p>
         </div>
       ) : sortedTasks.length === 0 ? (
         <div className="empty-state">
@@ -2766,7 +2766,7 @@ export function CodexWakeupContent({
                     <button
                       className="btn btn-secondary icon-only"
                       onClick={() => openEditTaskModal(task)}
-                      title={t('common.edit', '编辑')}
+                      title={t('common.edit', 'Chỉnh sửa')}
                     >
                       <Pencil size={14} />
                     </button>
@@ -2842,8 +2842,8 @@ export function CodexWakeupContent({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={closeRuntimeGuideModal}
-                title={t('common.back', '返回')}
-                aria-label={t('common.back', '返回')}
+                title={t('common.back', "Quay lại")}
+                aria-label={t('common.back', "Quay lại")}
                 disabled={runtimeGuideRefreshing}
               >
                 <ChevronLeft size={14} />
@@ -2946,8 +2946,8 @@ export function CodexWakeupContent({
                 <button
                   className="btn btn-secondary icon-only"
                   onClick={closePresetModal}
-                  title={t('common.back', '返回')}
-                  aria-label={t('common.back', '返回')}
+                  title={t('common.back', "Quay lại")}
+                  aria-label={t('common.back', "Quay lại")}
                   disabled={saving}
                 >
                   <ChevronLeft size={14} />
@@ -3099,7 +3099,7 @@ export function CodexWakeupContent({
         <div className="modal-overlay">
           <div ref={taskValidation.dialog} role="dialog" aria-modal="true" aria-labelledby="codex-wakeup-task-title" tabIndex={-1} className="modal modal-lg wakeup-modal codex-wakeup-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeTaskModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeTaskModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2 id="codex-wakeup-task-title">{taskDraft.id ? t('codex.wakeup.editTaskTitle') : t('codex.wakeup.createTaskTitle')}</h2>
               <button className="modal-close" aria-label={t('common.close')} onClick={closeTaskModal}>
                 <X />
@@ -3490,7 +3490,7 @@ export function CodexWakeupContent({
               </div>
 
               <div className="wakeup-form-group">
-                <label>{t('wakeup.form.nextRuns', '接下来执行')}</label>
+                <label>{t('wakeup.form.nextRuns', "Lịch chạy tiếp theo")}</label>
                 <ul className="wakeup-preview-list">
                   {previewRuns.length === 0 && (
                     <li>
@@ -3503,7 +3503,7 @@ export function CodexWakeupContent({
                                 Math.max(1, Number(taskDraft.startupDelayMinutes) || 1),
                               )}${t('settings.general.minutes')}`
                             : t('settings.general.startupWakeupImmediate')
-                          : t('wakeup.form.nextRunsEmpty', '暂无预览')}
+                          : t('wakeup.form.nextRunsEmpty', "Vui lòng chọn thời điểm kích hoạt")}
                     </li>
                   )}
                   {previewRuns.map((date, index) => (
@@ -3519,7 +3519,7 @@ export function CodexWakeupContent({
                 {t('common.cancel')}
               </button>
               <button className="btn btn-primary" onClick={() => void handleSaveTask()} disabled={saving}>
-                {saving ? t('common.saving', '保存中...') : t('common.save')}
+                {saving ? t('common.saving', "Đang lưu...") : t('common.save')}
               </button>
             </div>
           </div>
@@ -3530,7 +3530,7 @@ export function CodexWakeupContent({
         <div className="modal-overlay">
           <div ref={modalFocus.test} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="codex-wakeup-test-title" className="modal modal-lg wakeup-modal wakeup-test-modal codex-wakeup-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2 id="codex-wakeup-test-title">{t('codex.wakeup.testTitle')}</h2>
               <button className="modal-close" aria-label={t('common.close')} onClick={closeTestModal}>
                 <X />
@@ -3541,7 +3541,7 @@ export function CodexWakeupContent({
               <div className="wakeup-form-group">
                 <label>
                   {testModalVariant === 'fullQuota'
-                    ? t('codex.wakeup.fullQuotaAccountsLabel', '选择要唤醒的账号')
+                    ? t('codex.wakeup.fullQuotaAccountsLabel', "Tài khoản cần đánh thức")
                     : t('codex.wakeup.testAccountsLabel')}
                 </label>
                 {renderAccountPickerFilters(
@@ -3673,7 +3673,7 @@ export function CodexWakeupContent({
         <div className="modal-overlay">
           <div ref={modalFocus.history} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="codex-wakeup-history-title" className="modal wakeup-modal wakeup-history-modal codex-wakeup-history-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2 id="codex-wakeup-history-title">{t('codex.wakeup.historyTitle')}</h2>
               <button className="modal-close" aria-label={t('common.close')} onClick={() => setShowHistoryModal(false)}>
                 <X />
@@ -3771,7 +3771,7 @@ export function CodexWakeupContent({
                   setExecutionSession(null);
                   setExecutionSessionFromHistory(false);
                   setShowHistoryModal(true);
-                }} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                }} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               )}
               <h2 id="codex-wakeup-results-title">{t('codex.wakeup.resultsTitle')}</h2>
               <button
@@ -3951,7 +3951,7 @@ export function CodexWakeupContent({
                   );
                 })}
                 {filteredExecutionRecords.length === 0 && (
-                  <p className="wakeup-hint">{t('common.none', '暂无')}</p>
+                  <p className="wakeup-hint">{t('common.none', "None​")}</p>
                 )}
               </div>
             </div>
@@ -3969,7 +3969,7 @@ export function CodexWakeupContent({
                 onClick={() => { setExecutionSession(null); setExecutionSessionFromHistory(false); }}
                 disabled={executionSession.running}
               >
-                {t('common.close', '关闭')}
+                {t('common.close', "Đóng")}
               </button>
             </div>
           </div>

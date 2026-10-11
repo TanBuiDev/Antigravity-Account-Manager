@@ -509,7 +509,7 @@ export function CodebuddySuiteAccountsSharedView<
 
   const resolveGroupLabel = (groupKey: string) =>
     groupKey === "__untagged__"
-      ? t("accounts.defaultGroup", "默认分组")
+      ? t("accounts.defaultGroup", "Nhóm mặc định")
       : groupKey;
 
   const renderResourceQuotaItems = useCallback(
@@ -539,22 +539,22 @@ export function CodebuddySuiteAccountsSharedView<
           accountLabel={maskAccountText(
             platformConfig.getDisplayEmail(account),
           )}
-          normalText={t(`${platformConfig.usagePrefix}.usageNormal`, "正常")}
+          normalText={t(`${platformConfig.usagePrefix}.usageNormal`, "Bình thường")}
           abnormalText={t(
             `${platformConfig.usagePrefix}.usageAbnormal`,
-            "异常",
+            "Bất thường",
           )}
           viewDetailText={t(
             `${platformConfig.usagePrefix}.usageViewDetail`,
-            "查看详情",
+            "Xem chi tiết",
           )}
           detailTitle={t(
             `${platformConfig.usagePrefix}.usageDetailTitle`,
-            "用量状态详情",
+            "Chi tiết trạng thái sử dụng",
           )}
-          accountText={t("common.shared.columns.account", "账号")}
-          confirmText={t("common.confirm", "确认")}
-          closeText={t("common.close", "关闭")}
+          accountText={t("common.shared.columns.account", "Tài khoản")}
+          confirmText={t("common.confirm", "Xác nhận")}
+          closeText={t("common.close", "Đóng")}
           classPrefix={platformConfig.usagePrefix}
         />
       );
@@ -580,15 +580,15 @@ export function CodebuddySuiteAccountsSharedView<
       const statusText = refreshFailed
         ? t(
             `${platformConfig.quotaPrefix}.quotaQuery.failedRefreshCompact`,
-            "配额查询失败",
+            "Không thể truy vấn hạn mức",
           )
         : t(
             `${platformConfig.quotaPrefix}.quotaQuery.empty`,
-            "暂无可用配额数据",
+            "Chưa có dữ liệu hạn mức",
           );
       const cachedWarningText = t(
         "common.shared.quota.cachedRefreshFailed",
-        "刷新失败，以下为上次成功数据",
+        "Làm mới thất bại; đang hiển thị dữ liệu thành công gần nhất",
       );
       const updatedAtMs = getAccountQuotaUpdatedAtMs(account);
       const updatedAtText = updatedAtMs != null
@@ -609,7 +609,7 @@ export function CodebuddySuiteAccountsSharedView<
                   onClick={() => platformConfig.onReauthorize?.(account)}
                 >
                   <KeyRound size={12} />
-                  {t("common.reauthorize", "重新授权")}
+                  {t("common.reauthorize", "Ủy quyền lại")}
                 </button>
               )}
             </div>
@@ -617,7 +617,7 @@ export function CodebuddySuiteAccountsSharedView<
           <div className="quota-item">
             <div className="quota-header">
               <span className="quota-name">
-                {t(`${platformConfig.usagePrefix}.usage`, "用量状态")}
+                {t(`${platformConfig.usagePrefix}.usage`, "Trạng thái sử dụng")}
               </span>
               {renderUsageInfo(account)}
             </div>
@@ -631,7 +631,7 @@ export function CodebuddySuiteAccountsSharedView<
               <span className="quota-name">
                 {t(
                   `${platformConfig.quotaPrefix}.quotaQuery.sectionTitle`,
-                  "配额查询",
+                  "Truy vấn hạn mức",
                 )}
               </span>
             </div>
@@ -642,7 +642,7 @@ export function CodebuddySuiteAccountsSharedView<
                   <span className="quota-cache-warning-title">{cachedWarningText}</span>
                   {updatedAtText && (
                     <span className="quota-cache-warning-time">
-                      {t("common.shared.quota.lastSuccessfulQuery", "上次成功：{{time}}", {
+                      {t("common.shared.quota.lastSuccessfulQuery", "Lần thành công gần nhất: {{time}}", {
                         time: updatedAtText,
                       })}
                     </span>
@@ -711,7 +711,7 @@ export function CodebuddySuiteAccountsSharedView<
             </span>
             {isCurrent && (
               <span className="current-tag">
-                {t("accounts.status.current", "当前")}
+                {t("accounts.status.current", "Hiện tại")}
               </span>
             )}
             <span
@@ -743,7 +743,7 @@ export function CodebuddySuiteAccountsSharedView<
                 className="card-action-btn success"
                 onClick={() => handleInjectToVSCode?.(account.id)}
                 disabled={!!injecting}
-                title={t("common.shared.switchAccount", "切换账号")}
+                title={t("common.shared.switchAccount", "Chuyển tài khoản")}
               >
                 {injecting === account.id ? (
                   <RefreshCw size={14} className="loading-spinner" />
@@ -754,7 +754,7 @@ export function CodebuddySuiteAccountsSharedView<
               <button
                 className="card-action-btn"
                 onClick={() => openTagModal(account.id)}
-                title={t("accounts.editTags", "编辑标签")}
+                title={t("accounts.editTags", "Chỉnh sửa thẻ")}
               >
                 <Tag size={14} />
               </button>
@@ -762,7 +762,7 @@ export function CodebuddySuiteAccountsSharedView<
                 className="card-action-btn"
                 onClick={() => handleRefresh(account.id)}
                 disabled={refreshing === account.id}
-                title={t("common.shared.refreshQuota", "刷新")}
+                title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
               >
                 <RotateCw
                   size={14}
@@ -772,7 +772,7 @@ export function CodebuddySuiteAccountsSharedView<
               <button
                 className="card-action-btn export-btn"
                 onClick={() => handleExportByIds([account.id])}
-                title={t("common.shared.export.title", "导出")}
+                title={t("common.shared.export.title", "Xuất")}
               >
                 <Upload size={14} />
               </button>
@@ -781,7 +781,7 @@ export function CodebuddySuiteAccountsSharedView<
                   className="card-action-btn"
                   onClick={() => handleOpenWebview(account.id)}
                   disabled={webviewing === account.id}
-                  title={t("workbuddy.webview.open", "打开网页会话")}
+                  title={t("workbuddy.webview.open", "Mở phiên trên web")}
                 >
                   {webviewing === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -793,7 +793,7 @@ export function CodebuddySuiteAccountsSharedView<
               <button
                 className="card-action-btn danger"
                 onClick={() => handleDelete(account.id)}
-                title={t("common.delete", "删除")}
+                title={t("common.delete", "Xóa")}
               >
                 <Trash2 size={14} />
               </button>
@@ -835,7 +835,7 @@ export function CodebuddySuiteAccountsSharedView<
             </span>
             {isCurrent && (
               <span className="current-tag">
-                {t("accounts.status.current", "当前")}
+                {t("accounts.status.current", "Hiện tại")}
               </span>
             )}
           </td>
@@ -888,7 +888,7 @@ export function CodebuddySuiteAccountsSharedView<
                   className="action-btn"
                   onClick={() => handleOpenWebview(account.id)}
                   disabled={webviewing === account.id}
-                  title={t("workbuddy.webview.open", "打开网页会话")}
+                  title={t("workbuddy.webview.open", "Mở phiên trên web")}
                 >
                   {webviewing === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -1000,14 +1000,14 @@ export function CodebuddySuiteAccountsSharedView<
             <button
               className={`view-btn ${viewMode === "list" ? "active" : ""}`}
               onClick={() => setViewMode("list")}
-              title={t("common.shared.view.list", "列表视图")}
+              title={t("common.shared.view.list", "Dạng danh sách")}
             >
               <List size={16} />
             </button>
             <button
               className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
               onClick={() => setViewMode("grid")}
-              title={t("common.shared.view.grid", "卡片视图")}
+              title={t("common.shared.view.grid", "Dạng thẻ")}
             >
               <LayoutGrid size={16} />
             </button>
@@ -1015,11 +1015,11 @@ export function CodebuddySuiteAccountsSharedView<
           <MultiSelectFilterDropdown
             options={tierFilterOptions}
             selectedValues={filterTypes}
-            allLabel={t('common.shared.filter.all', '全部 ({{count}})', { count: tierSummary.all })}
-            filterLabel={t("common.shared.filterLabel", "筛选")}
-            clearLabel={t("accounts.clearFilter", "清空筛选")}
-            emptyLabel={t("common.none", "暂无")}
-            ariaLabel={t("common.shared.filterLabel", "筛选")}
+            allLabel={t('common.shared.filter.all', "Tất cả ({{count}})", { count: tierSummary.all })}
+            filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+            clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+            emptyLabel={t("common.none", "None​")}
+            ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
             onToggleValue={toggleFilterTypeValue}
             onClear={clearFilterTypes}
           />
@@ -1031,8 +1031,8 @@ export function CodebuddySuiteAccountsSharedView<
             >
               <Tag size={14} />
               {tagFilter.length > 0
-                ? `${t("accounts.filterTagsCount", "标签")}(${tagFilter.length})`
-                : t("accounts.filterTags", "标签筛选")}
+                ? `${t("accounts.filterTagsCount", "Thẻ")}(${tagFilter.length})`
+                : t("accounts.filterTags", "Lọc thẻ")}
             </button>
             {showTagFilter && (
               <div
@@ -1041,7 +1041,7 @@ export function CodebuddySuiteAccountsSharedView<
               >
                 {availableTags.length === 0 ? (
                   <div className="tag-filter-empty">
-                    {t("accounts.noAvailableTags", "暂无可用标签")}
+                    {t("accounts.noAvailableTags", "Không có thẻ nào")}
                   </div>
                 ) : (
                   <>
@@ -1052,14 +1052,14 @@ export function CodebuddySuiteAccountsSharedView<
                           checked={groupByTag}
                           onChange={() => setGroupByTag(!groupByTag)}
                         />{" "}
-                        {t("accounts.groupByTag", "按标签分组")}
+                        {t("accounts.groupByTag", "Nhóm theo thẻ")}
                       </label>
                       {tagFilter.length > 0 && (
                         <button
                           className="tag-filter-clear"
                           onClick={clearTagFilter}
                         >
-                          {t("common.shared.clear", "清除")}
+                          {t("common.shared.clear", "Xóa")}
                         </button>
                       )}
                     </div>
@@ -1088,7 +1088,7 @@ export function CodebuddySuiteAccountsSharedView<
           <button
             className="btn btn-primary icon-only"
             onClick={() => openAddModal("oauth")}
-            title={t("common.shared.addAccount", "添加账号")}
+            title={t("common.shared.addAccount", "Thêm tài khoản")}
           >
             <Plus size={14} />
           </button>
@@ -1111,7 +1111,7 @@ export function CodebuddySuiteAccountsSharedView<
               className="btn btn-secondary icon-only"
               onClick={() => setShowCheckinModal(true)}
               disabled={accounts.length === 0}
-              title={t("workbuddy.checkin.modalTitle", "每日签到")}
+              title={t("workbuddy.checkin.modalTitle", "Điểm danh hằng ngày")}
             >
               <CalendarCheck size={14} />
             </button>
@@ -1120,7 +1120,7 @@ export function CodebuddySuiteAccountsSharedView<
             className="btn btn-secondary icon-only"
             onClick={handleRefreshAll}
             disabled={refreshingAll || accounts.length === 0}
-            title={t("common.shared.refreshAll", "刷新全部")}
+            title={t("common.shared.refreshAll", "Làm mới tất cả")}
           >
             <RefreshCw
               size={14}
@@ -1132,8 +1132,8 @@ export function CodebuddySuiteAccountsSharedView<
             onClick={togglePrivacyMode}
             title={
               privacyModeEnabled
-                ? t("privacy.showSensitive", "显示邮箱")
-                : t("privacy.hideSensitive", "隐藏邮箱")
+                ? t("privacy.showSensitive", "Hiện email")
+                : t("privacy.hideSensitive", "Ẩn email")
             }
           >
             {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -1142,7 +1142,7 @@ export function CodebuddySuiteAccountsSharedView<
             className="btn btn-secondary icon-only"
             onClick={() => openAddModal("token")}
             disabled={importing}
-            title={t("common.shared.import.label", "导入")}
+            title={t("common.shared.import.label", "Nhập")}
           >
             <Download size={14} />
           </button>
@@ -1152,8 +1152,8 @@ export function CodebuddySuiteAccountsSharedView<
             disabled={exporting || filteredIds.length === 0}
             title={
               exportSelectionCount > 0
-                ? `${t("common.shared.export.title", "导出")} (${exportSelectionCount})`
-                : t("common.shared.export.title", "导出")
+                ? `${t("common.shared.export.title", "Xuất")} (${exportSelectionCount})`
+                : t("common.shared.export.title", "Xuất")
             }
           >
             <Upload size={14} />
@@ -1178,8 +1178,8 @@ export function CodebuddySuiteAccountsSharedView<
             <button
               className="btn btn-danger icon-only"
               onClick={handleBatchDelete}
-              title={`${t("common.delete", "删除")} (${selected.size})`}
-              aria-label={`${t("common.delete", "删除")} (${selected.size})`}
+              title={`${t("common.delete", "Xóa")} (${selected.size})`}
+              aria-label={`${t("common.delete", "Xóa")} (${selected.size})`}
             >
               <Trash2 size={14} />
             </button>
@@ -1190,12 +1190,12 @@ export function CodebuddySuiteAccountsSharedView<
       {loading && accounts.length === 0 ? (
         <div className="loading-container">
           <RefreshCw size={24} className="loading-spinner" />
-          <p>{t("common.loading", "加载中...")}</p>
+          <p>{t("common.loading", "Đang tải...")}</p>
         </div>
       ) : accounts.length === 0 ? (
         <div className="empty-state">
           <Globe size={48} />
-          <h3>{t("common.shared.empty.title", "暂无账号")}</h3>
+          <h3>{t("common.shared.empty.title", "Chưa có tài khoản")}</h3>
           <p>
             {t(platformConfig.noAccountsKey, platformConfig.noAccountsDefault)}
           </p>
@@ -1211,14 +1211,14 @@ export function CodebuddySuiteAccountsSharedView<
               className="btn btn-primary"
               onClick={() => openAddModal("oauth")}
             >
-              <Plus size={16} /> {t("common.shared.addAccount", "添加账号")}
+              <Plus size={16} /> {t("common.shared.addAccount", "Thêm tài khoản")}
             </button>
           </div>
         </div>
       ) : filteredAccounts.length === 0 ? (
         <div className="empty-state">
-          <h3>{t("common.shared.noMatch.title", "没有匹配的账号")}</h3>
-          <p>{t("common.shared.noMatch.desc", "请尝试调整搜索或筛选条件")}</p>
+          <h3>{t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}</h3>
+          <p>{t("common.shared.noMatch.desc", "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
         </div>
       ) : viewMode === "grid" ? (
         <div className="grid-view-container">
@@ -1259,14 +1259,14 @@ export function CodebuddySuiteAccountsSharedView<
                   />
                 </th>
                 <th style={{ width: 240 }}>
-                  {t("common.shared.columns.email", "邮箱")}
+                  {t("common.shared.columns.email", "E-mail")}
                 </th>
                 <th style={{ width: 120 }}>
-                  {t("common.shared.columns.plan", "套餐")}
+                  {t("common.shared.columns.plan", "Gói")}
                 </th>
-                <th>{t("instances.labels.quota", "配额")}</th>
+                <th>{t("instances.labels.quota", "Hạn ngạch")}</th>
                 <th className="sticky-action-header table-action-header">
-                  {t("common.shared.columns.actions", "操作")}
+                  {t("common.shared.columns.actions", "Hành động")}
                 </th>
               </tr>
             </thead>
@@ -1304,14 +1304,14 @@ export function CodebuddySuiteAccountsSharedView<
                   />
                 </th>
                 <th style={{ width: 240 }}>
-                  {t("common.shared.columns.email", "邮箱")}
+                  {t("common.shared.columns.email", "E-mail")}
                 </th>
                 <th style={{ width: 120 }}>
-                  {t("common.shared.columns.plan", "套餐")}
+                  {t("common.shared.columns.plan", "Gói")}
                 </th>
-                <th>{t("instances.labels.quota", "配额")}</th>
+                <th>{t("instances.labels.quota", "Hạn ngạch")}</th>
                 <th className="sticky-action-header table-action-header">
-                  {t("common.shared.columns.actions", "操作")}
+                  {t("common.shared.columns.actions", "Hành động")}
                 </th>
               </tr>
             </thead>
@@ -1350,14 +1350,14 @@ export function CodebuddySuiteAccountsSharedView<
                 <button
                   className="btn btn-secondary icon-only"
                   onClick={closeAddModal}
-                  title={t("common.back", "返回")}
-                  aria-label={t("common.back", "返回")}
+                  title={t("common.back", "Quay lại")}
+                  aria-label={t("common.back", "Quay lại")}
                 >
                   <ChevronLeft size={14} />
                 </button>
                 <h2>
                   {platformConfig.reauthorizingAccount
-                    ? t("common.reauthorize", "重新授权")
+                    ? t("common.reauthorize", "Ủy quyền lại")
                     : t(
                         platformConfig.addAccountTitleKey,
                         platformConfig.addAccountTitleDefault,
@@ -1366,7 +1366,7 @@ export function CodebuddySuiteAccountsSharedView<
                 <button
                   className="modal-close"
                   onClick={closeAddModal}
-                  aria-label={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
                 >
                   <X size={18} />
                 </button>
@@ -1385,7 +1385,7 @@ export function CodebuddySuiteAccountsSharedView<
                   >
                     <Globe size={14} />
                     <span className="modal-tab-label">
-                      {t("common.shared.addModal.oauth", "授权登录")}
+                      {t("common.shared.addModal.oauth", "Ủy quyền OAuth")}
                     </span>
                   </button>
                   {/* 与 Codex 一致：OAuth | Token / JSON | API Key | 本地导入 */}
@@ -1440,7 +1440,7 @@ export function CodebuddySuiteAccountsSharedView<
                   >
                     <Database size={14} />
                     <span className="modal-tab-label">
-                      {t("common.shared.addModal.import", "本地导入")}
+                      {t("common.shared.addModal.import", "Nhập từ máy")}
                     </span>
                   </button>
                 </div>
@@ -1459,7 +1459,7 @@ export function CodebuddySuiteAccountsSharedView<
                     {platformConfig.reauthorizingAccount && (
                       <div className="oauth-reauthorization-target">
                         <KeyRound size={14} />
-                        <span>{t("common.reauthorize", "重新授权")}</span>
+                        <span>{t("common.reauthorize", "Ủy quyền lại")}</span>
                         <strong>
                           {maskAccountText(
                             platformConfig.getDisplayEmail(
@@ -1483,7 +1483,7 @@ export function CodebuddySuiteAccountsSharedView<
                           className="btn btn-sm btn-outline"
                           onClick={handleRetryOauth}
                         >
-                          {t("common.shared.oauth.retry", "重新生成授权信息")}
+                          {t("common.shared.oauth.retry", "Tạo lại thông tin ủy quyền")}
                         </button>
                       </div>
                     ) : oauthUrl ? (
@@ -1522,7 +1522,7 @@ export function CodebuddySuiteAccountsSharedView<
                           <p className="oauth-hint">
                             {t(
                               "common.shared.oauth.meta",
-                              "授权有效期：{{expires}}s；轮询间隔：{{interval}}s",
+                              "Hết hạn sau: {{expires}}s; chu kỳ thăm dò: {{interval}}s",
                               {
                                 expires: oauthMeta.expiresIn,
                                 interval: oauthMeta.intervalSeconds,
@@ -1547,17 +1547,17 @@ export function CodebuddySuiteAccountsSharedView<
                             {platformConfig.showOauthIncognitoOpenButton
                               ? t(
                                   "common.shared.oauth.normalWindow",
-                                  "打开授权窗口",
+                                  "Cửa sổ thường",
                                 )
                               : platformConfig.oauthOpenButtonKey
                                 ? t(
                                     platformConfig.oauthOpenButtonKey,
                                     platformConfig.oauthOpenButtonDefault ??
-                                      "打开授权窗口",
+                                      "Mở cửa sổ cấp quyền",
                                   )
                                 : t(
                                     "common.shared.oauth.openBrowser",
-                                    "在浏览器中打开",
+                                    "Mở trong trình duyệt",
                                   )}
                           </button>
                           {platformConfig.showOauthIncognitoOpenButton && (
@@ -1570,7 +1570,7 @@ export function CodebuddySuiteAccountsSharedView<
                               <ShieldCheck size={16} />
                               {t(
                                 "common.shared.oauth.incognitoWindow",
-                                "打开无痕授权窗口",
+                                "Cửa sổ riêng tư",
                               )}
                             </button>
                           )}
@@ -1597,7 +1597,7 @@ export function CodebuddySuiteAccountsSharedView<
                               >
                                 {t(
                                   "common.shared.oauth.timeoutRetry",
-                                  "刷新授权链接",
+                                  "Làm mới liên kết ủy quyền",
                                 )}
                               </button>
                             )}
@@ -1608,7 +1608,7 @@ export function CodebuddySuiteAccountsSharedView<
                             <label>
                               {t(
                                 "common.shared.oauth.manualCallbackLabel",
-                                "手动提交回调链接",
+                                "Nhập URL callback thủ công",
                               )}
                             </label>
                             <div className="oauth-url-box">
@@ -1622,7 +1622,7 @@ export function CodebuddySuiteAccountsSharedView<
                                 }
                                 placeholder={t(
                                   "common.shared.oauth.manualCallbackPlaceholder",
-                                  "粘贴完整回调链接",
+                                  "Dán đầy đủ URL callback, ví dụ: http://localhost:1455/auth/callback?code=...&state=...",
                                 )}
                               />
                               <button
@@ -1633,7 +1633,7 @@ export function CodebuddySuiteAccountsSharedView<
                                   oauthManualCallbackSubmitting ||
                                   !oauthManualCallbackInput.trim()
                                 }
-                                title={t("common.confirm", "确认")}
+                                title={t("common.confirm", "Xác nhận")}
                               >
                                 {oauthManualCallbackSubmitting ? (
                                   <RefreshCw
@@ -1666,7 +1666,7 @@ export function CodebuddySuiteAccountsSharedView<
                         <span>
                           {t(
                             "common.shared.oauth.preparing",
-                            "正在准备授权信息...",
+                            "Đang chuẩn bị liên kết ủy quyền...",
                           )}
                         </span>
                       </div>
@@ -1725,7 +1725,7 @@ export function CodebuddySuiteAccountsSharedView<
                             platformConfig.tokenInputPlaceholderKey ||
                               "common.shared.token.placeholder",
                             platformConfig.tokenInputPlaceholderDefault ||
-                              "粘贴 Token 或 JSON...",
+                              "Dán token hoặc JSON...",
                           )}
                         />
                         <button
@@ -1736,11 +1736,11 @@ export function CodebuddySuiteAccountsSharedView<
                           }
                           title={t(
                             tokenInputVisible ? "common.hide" : "common.show",
-                            tokenInputVisible ? "隐藏" : "显示",
+                            tokenInputVisible ? "Ẩn" : "Hiện",
                           )}
                           aria-label={t(
                             tokenInputVisible ? "common.hide" : "common.show",
-                            tokenInputVisible ? "隐藏" : "显示",
+                            tokenInputVisible ? "Ẩn" : "Hiện",
                           )}
                         >
                           {tokenInputVisible ? (
@@ -1759,7 +1759,7 @@ export function CodebuddySuiteAccountsSharedView<
                           platformConfig.tokenInputPlaceholderKey ||
                             "common.shared.token.placeholder",
                           platformConfig.tokenInputPlaceholderDefault ||
-                            "粘贴 Token 或 JSON...",
+                            "Dán token hoặc JSON...",
                         )}
                       />
                     )}
@@ -1792,7 +1792,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonDescKey ||
                           "common.shared.import.pasteDesc",
                         platformConfig.pasteJsonDescDefault ||
-                          "粘贴官方 auth.json，或本应用导出的完整账号 JSON（含凭据，可再导入恢复）。",
+                          "Dán auth.json chính thức hoặc JSON tài khoản đầy đủ do ứng dụng xuất (có thông tin xác thực để có thể nhập khôi phục).",
                       )}
                     </p>
                     <textarea
@@ -1803,7 +1803,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonPlaceholderKey ||
                           "common.shared.import.pastePlaceholder",
                         platformConfig.pasteJsonPlaceholderDefault ||
-                          "粘贴账号 JSON...",
+                          "Dán JSON tài khoản...",
                       )}
                     />
                     <button
@@ -1820,7 +1820,7 @@ export function CodebuddySuiteAccountsSharedView<
                         platformConfig.pasteJsonSubmitLabelKey ||
                           "common.shared.token.import",
                         platformConfig.pasteJsonSubmitLabelDefault ||
-                          "导入 JSON",
+                          "Nhập JSON",
                       )}
                     </button>
                   </div>
@@ -1849,7 +1849,7 @@ export function CodebuddySuiteAccountsSharedView<
                       )}
                     </button>
                     <div className="oauth-hint" style={{ margin: "8px 0 4px" }}>
-                      {t("common.shared.import.orJson", "或从 JSON 文件导入")}
+                      {t("common.shared.import.orJson", "Hoặc nhập từ tệp JSON")}
                     </div>
                     <input
                       ref={importFileInputRef}
@@ -1873,7 +1873,7 @@ export function CodebuddySuiteAccountsSharedView<
                       ) : (
                         <Database size={16} />
                       )}
-                      {t("common.shared.import.pickFile", "选择 JSON 文件导入")}
+                      {t("common.shared.import.pickFile", "Chọn tệp JSON để nhập")}
                     </button>
                   </div>
                 )}
@@ -1883,7 +1883,7 @@ export function CodebuddySuiteAccountsSharedView<
                     <Check size={16} />
                     <span>
                       {addMessage ||
-                        t("common.shared.loginSuccess", "登录成功")}
+                        t("common.shared.loginSuccess", "Đăng nhập thành công")}
                     </span>
                   </div>
                 )}
@@ -1900,11 +1900,11 @@ export function CodebuddySuiteAccountsSharedView<
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t("common.confirmDelete", "确认删除")}</h2>
+              <h2>{t("common.confirmDelete", "Xác nhận xóa")}</h2>
               <button
                 className="modal-close"
                 onClick={() => !deleting && setDeleteConfirm(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -1922,7 +1922,7 @@ export function CodebuddySuiteAccountsSharedView<
                 onClick={() => setDeleteConfirm(null)}
                 disabled={deleting}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-danger"
@@ -1930,8 +1930,8 @@ export function CodebuddySuiteAccountsSharedView<
                 disabled={deleting}
               >
                 {deleting
-                  ? t("common.processing", "处理中...")
-                  : t("common.confirm", "确认")}
+                  ? t("common.processing", "Đang xử lý...")
+                  : t("common.confirm", "Xác nhận")}
               </button>
             </div>
           </div>
@@ -1945,11 +1945,11 @@ export function CodebuddySuiteAccountsSharedView<
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t("common.confirmDeleteTag", "确认删除标签")}</h2>
+              <h2>{t("common.confirmDeleteTag", "Xác nhận xóa thẻ")}</h2>
               <button
                 className="modal-close"
                 onClick={() => !deletingTag && setTagDeleteConfirm(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -1962,7 +1962,7 @@ export function CodebuddySuiteAccountsSharedView<
               <p>
                 {t("common.deleteTagWarning", {
                   tag: tagDeleteConfirm,
-                  defaultValue: '确定要从所有账号中移除标签 "{{tag}}" 吗？',
+                  defaultValue: 'Bạn có chắc muốn xóa nhãn "{{tag}}" khỏi tất cả tài khoản không?',
                 })}
               </p>
             </div>
@@ -1972,7 +1972,7 @@ export function CodebuddySuiteAccountsSharedView<
                 onClick={() => setTagDeleteConfirm(null)}
                 disabled={deletingTag}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-danger"
@@ -1980,8 +1980,8 @@ export function CodebuddySuiteAccountsSharedView<
                 disabled={deletingTag}
               >
                 {deletingTag
-                  ? t("common.processing", "处理中...")
-                  : t("common.confirm", "确认")}
+                  ? t("common.processing", "Đang xử lý...")
+                  : t("common.confirm", "Xác nhận")}
               </button>
             </div>
           </div>
@@ -1990,7 +1990,7 @@ export function CodebuddySuiteAccountsSharedView<
 
       <ExportJsonModal
         isOpen={showExportModal}
-        title={`${t("common.shared.export.title", "导出")} JSON`}
+        title={`${t("common.shared.export.title", "Xuất")} JSON`}
         jsonContent={exportJsonContent}
         hidden={exportJsonHidden}
         copied={exportJsonCopied}

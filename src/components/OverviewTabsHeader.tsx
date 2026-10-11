@@ -74,7 +74,7 @@ export function OverviewTabsHeader({
       ? [
           {
             key: 'instances' as const,
-            label: t('instances.title', '应用多开'),
+            label: t('instances.title', "Nhiều phiên bản"),
             icon: <Layers className="tab-icon" />,
           },
           {

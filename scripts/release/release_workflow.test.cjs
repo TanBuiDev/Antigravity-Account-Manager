@@ -20,7 +20,7 @@ test("release remains draft until all assets, manifests, and checksums are ready
   const prepare = jobBody("prepare-release", "build-windows");
   const finalize = jobBody("finalize-legacy-latest", "upload-checksums");
   const checksums = jobBody("upload-checksums", "publish-release");
-  const publish = jobBody("publish-release", "update-homebrew-cask");
+  const publish = jobBody("publish-release");
 
   assert.match(prepare, /gh release create "\$\{TAG\}" --draft/);
   assert.doesNotMatch(prepare, /--draft=false/);
@@ -30,24 +30,21 @@ test("release remains draft until all assets, manifests, and checksums are ready
   assert.match(publish, /gh release edit "\$\{TAG\}" --draft=false --prerelease=false --latest/);
 });
 
-test("public updater verification and Homebrew run only after publication", () => {
-  const publish = jobBody("publish-release", "update-homebrew-cask");
-  const homebrew = jobBody("update-homebrew-cask");
-
-  assert.match(publish, /Verify complete published updater state/);
+test("published updater verification is Windows-only and runs after publication", () => {
+  const publish = jobBody("publish-release");
+  assert.match(publish, /Verify published Windows updater state/);
   assert.match(publish, /verify_published_updater_manifests\.cjs/);
-  assert.match(homebrew, /needs:[\s\S]*publish-release/);
+  assert.match(publish, /--targets "windows-x86_64-msi,windows-x86_64-nsis"/);
+  assert.doesNotMatch(workflow, /  update-homebrew-cask:/);
+  assert.doesNotMatch(workflow, /  build-macos-|  build-linux:/);
+  assert.match(publish, /gh release edit "\$\{TAG\}" --draft=false --prerelease=false --latest/);
 });
 
 test("every release upload uses the draft-safe retry helper", () => {
   assert.doesNotMatch(workflow, /gh release upload/);
-  assert.equal((workflow.match(/node scripts\/release\/upload_release_assets\.cjs /g) || []).length, 11);
+  assert.equal((workflow.match(/node scripts\/release\/upload_release_assets\.cjs /g) || []).length, 4);
   for (const [job, next] of [
-    ["build-windows", "build-macos-aarch64"],
-    ["build-macos-aarch64", "build-macos-x86_64"],
-    ["build-macos-x86_64", "build-macos-universal"],
-    ["build-macos-universal", "build-linux"],
-    ["build-linux", "finalize-legacy-latest"],
+    ["build-windows", "finalize-legacy-latest"],
     ["finalize-legacy-latest", "upload-checksums"],
     ["upload-checksums", "publish-release"],
   ]) {
@@ -61,7 +58,7 @@ test("every release upload uses the draft-safe retry helper", () => {
 // Execute the actual workflow shell steps with fake external commands. This
 // catches early exits that textual ordering checks cannot detect.
 function runPublishJob(overrides = {}) {
-  const publish = jobBody("publish-release", "update-homebrew-cask");
+  const publish = jobBody("publish-release");
   const scripts = [...publish.matchAll(/        run: \|\r?\n((?:          .*\r?\n|\r?\n)+)/g)]
     .map((match) => match[1].replace(/^          /gm, "").replace(/\r/g, ""));
   assert.equal(scripts.length, 2, "expected publication and verification shell steps");

@@ -1,6 +1,6 @@
 /**
- * 分组管理弹窗组件
- * 固定分组 + 其他分组（显示黑名单外全部模型）
+ * Thành phần hộp thoại quản lý nhóm
+ * Nhóm cố định và các nhóm khác (hiển thị mọi mô hình không nằm trong danh sách chặn)
  */
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -125,7 +125,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
     if (otherModels.length > 0) {
       groupsWithOther.push({
         id: 'other',
-        name: t('group_settings.other_group', '其他模型'),
+        name: t('group_settings.other_group', "Mô hình khác"),
         models: otherModels,
       });
     }
@@ -136,7 +136,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
     }));
   }, [t, visibleModels]);
 
-  // 加载分组配置（合并已保存的名称）
+  // Tải cấu hình nhóm (kết hợp các tên đã lưu)
   const loadSettings = useCallback(async () => {
     try {
       const data = await getGroupSettings();
@@ -144,7 +144,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
       setError(null);
     } catch (err) {
       console.error('Failed to load group settings:', err);
-      // 加载失败时使用默认配置
+      // Dùng cấu hình mặc định nếu tải thất bại
       setGroups(buildGroups());
       setError(null);
     }
@@ -156,14 +156,14 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
     }
   }, [isOpen, loadSettings]);
 
-  // 修改分组名称
+  // Đổi tên nhóm
   const handleGroupNameChange = (groupId: string, newName: string) => {
     setGroups(groups.map(g => 
       g.id === groupId ? { ...g, name: newName } : g
     ));
   };
 
-  // 保存配置
+  // Lưu cấu hình
   const handleSave = async () => {
     setSaving(true);
     setError(null);
@@ -199,7 +199,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
         <div className="modal-header">
           <h2>
             <Package size={20} />
-            {t('group_settings.title', '分组管理')}
+            {t('group_settings.title', "Quản lý nhóm")}
           </h2>
           <button className="modal-close" onClick={onClose}>
             <X size={20} />
@@ -207,18 +207,18 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
         </div>
         
         <div className="modal-body">
-          {/* 错误提示 */}
+          {/* Thông báo lỗi */}
           {error && (
             <div className="group-settings-error">
               {error}
             </div>
           )}
           
-          {/* 分组列表 */}
+          {/* Danh sách nhóm */}
           <div className="group-list-section">
             <h3>
               <Package size={16} />
-              {t('group_settings.group_list', '分组列表')}
+              {t('group_settings.group_list', "Danh sách nhóm")}
             </h3>
             
             <div className="group-list">
@@ -236,7 +236,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
                         }
                       }}
                       className="group-name-input"
-                      placeholder={t('group_settings.group_name_placeholder', '分组名称')}
+                      placeholder={t('group_settings.group_name_placeholder', "Tên nhóm")}
                     />
                   </div>
                   
@@ -255,10 +255,10 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
         
         <div className="modal-footer">
           <button className="btn btn-secondary" onClick={onClose} disabled={saving}>
-            {t('common.cancel', '取消')}
+            {t('common.cancel', "Hủy")}
           </button>
           <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
-            {saving ? t('common.saving', '保存中...') : t('group_settings.save', '保存分组')}
+            {saving ? t('common.saving', "Đang lưu...") : t('group_settings.save', "Lưu nhóm")}
           </button>
         </div>
       </div>

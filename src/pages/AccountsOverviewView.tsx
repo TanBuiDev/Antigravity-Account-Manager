@@ -226,7 +226,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           subtitle={t('overview.subtitle')}
         />
 
-        {/* 工具栏 */}
+        {/* Thanh công cụ */}
         <div className="toolbar">
           <div className="toolbar-left">
             <div className="search-box">
@@ -267,10 +267,10 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               options={tierFilterOptions}
               selectedValues={filterTypes}
               allLabel={t('accounts.filter.all', { count: tierCounts.all })}
-              filterLabel={t('accounts.filterLabel', '筛选')}
-              clearLabel={t('accounts.clearFilter', '清空筛选')}
-              emptyLabel={t('common.none', '暂无')}
-              ariaLabel={t('accounts.filterLabel', '筛选')}
+              filterLabel={t('accounts.filterLabel', "Lọc tài khoản")}
+              clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+              emptyLabel={t('common.none', "None​")}
+              ariaLabel={t('accounts.filterLabel', "Lọc tài khoản")}
               onToggleValue={(value) => toggleFilterTypeValue(value as AccountsFilterType)}
               onClear={clearFilterTypes}
             />
@@ -284,43 +284,43 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               groupByTag={groupByTag}
               onToggleGroupByTag={setGroupByTag}
             />
-            {/* 排序下拉菜单 */}
+            {/* Menu sắp xếp */}
             <SingleSelectFilterDropdown
               value={sortBy}
               options={[
                 {
                   value: 'overall',
-                  label: t('accounts.sort.overall', '按综合配额'),
+                  label: t('accounts.sort.overall', "Theo tổng hạn mức"),
                 },
                 {
                   value: 'created_at',
-                  label: t('accounts.sort.createdAt', '按创建时间'),
+                  label: t('accounts.sort.createdAt', "Theo thời gian tạo"),
                 },
                 ...displayGroups.map((group) => ({
                   value: group.id,
                   label: t('accounts.sort.byGroup', {
                     group: group.name,
-                    defaultValue: `按 ${group.name} 配额`,
+                    defaultValue: `Theo hạn mức ${group.name}`,
                   }),
                 })),
                 ...displayGroups.map((group) => ({
                   value: `${ANTIGRAVITY_RESET_SORT_PREFIX}${group.id}`,
                   label: t('accounts.sort.byGroupReset', {
                     group: group.name,
-                    defaultValue: `按 ${group.name} 重置时间`,
+                    defaultValue: `Theo thời gian đặt lại ${group.name}`,
                   }),
                 })),
                 {
                   value: 'custom',
-                  label: t('accounts.sort.custom', '自定义顺序'),
+                  label: t('accounts.sort.custom', 'Thứ tự tùy chỉnh'),
                 },
               ]}
-              ariaLabel={t('accounts.sortLabel', '排序')}
+              ariaLabel={t('accounts.sortLabel', "Sắp xếp")}
               icon={<ArrowDownWideNarrow size={14} />}
               onChange={handleSortByChange}
             />
 
-            {/* 排序方向切换按钮 / 自定义排序配置按钮 */}
+            {/* Nút đổi chiều sắp xếp / cấu hình thứ tự tùy chỉnh */}
             {!isCustomSortActive ? (
               <button
                 className="sort-direction-btn"
@@ -329,10 +329,10 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 }
                 title={
                   sortDirection === 'desc'
-                    ? t('accounts.sort.descTooltip', '当前：降序，点击切换为升序')
-                    : t('accounts.sort.ascTooltip', '当前：升序，点击切换为降序')
+                    ? t('accounts.sort.descTooltip', "Giảm dần, nhấn để chuyển Tăng dần")
+                    : t('accounts.sort.ascTooltip', "Tăng dần, nhấn để chuyển Giảm dần")
                 }
-                aria-label={t('accounts.sort.toggleDirection', '切换排序方向')}
+                aria-label={t('accounts.sort.toggleDirection', "Đổi hướng sắp xếp")}
               >
                 {sortDirection === 'desc' ? '⬇' : '⬆'}
               </button>
@@ -340,8 +340,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               <button
                 className="sort-direction-btn"
                 onClick={() => setShowCustomSortModal(true)}
-                title={t('accounts.sort.customSettingsTooltip', '配置自定义顺序')}
-                aria-label={t('accounts.sort.customSettingsTooltip', '配置自定义顺序')}
+                title={t('accounts.sort.customSettingsTooltip', 'Cấu hình thứ tự tùy chỉnh')}
+                aria-label={t('accounts.sort.customSettingsTooltip', 'Cấu hình thứ tự tùy chỉnh')}
               >
                 <Wrench size={14} />
               </button>
@@ -373,8 +373,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               <button
                 className="btn btn-secondary icon-only"
                 onClick={openSwitchHistoryModal}
-                title={t('accounts.switchHistory.title', '切换记录')}
-                aria-label={t('accounts.switchHistory.title', '切换记录')}
+                title={t('accounts.switchHistory.title', "Lịch sử chuyển đổi")}
+                aria-label={t('accounts.switchHistory.title', "Lịch sử chuyển đổi")}
               >
                 <History size={14} />
               </button>
@@ -384,13 +384,13 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               onClick={togglePrivacyMode}
               title={
                 privacyModeEnabled
-                  ? t('privacy.showSensitive', '显示邮箱')
-                  : t('privacy.hideSensitive', '隐藏邮箱')
+                  ? t('privacy.showSensitive', "Hiện email")
+                  : t('privacy.hideSensitive', "Ẩn email")
               }
               aria-label={
                 privacyModeEnabled
-                  ? t('privacy.showSensitive', '显示邮箱')
-                  : t('privacy.hideSensitive', '隐藏邮箱')
+                  ? t('privacy.showSensitive', "Hiện email")
+                  : t('privacy.hideSensitive', "Ẩn email")
               }
             >
               {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -479,7 +479,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           </div>
         )}
 
-        {/* 内容区域 */}
+        {/* Khu vực nội dung */}
         {loading ? (
           <div className="empty-state">
             <div
@@ -507,7 +507,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={() => onNavigate?.('manual')}
               >
                 <BookOpen size={18} />
-                {t('manual.navTitle', '查阅接入手册')}
+                {t('manual.navTitle', "Sổ tay sử dụng")}
               </button>
             </div>
           </div>
@@ -560,7 +560,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   <FolderPlus size={14} />
                   <span>
                     {t('accounts.addModal.targetGroup', {
-                      defaultValue: '将添加到分组：{{group}}',
+                      defaultValue: 'Sẽ thêm vào nhóm: {{group}}',
                       group: addTargetGroup.name,
                     })}
                   </span>
@@ -600,7 +600,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 <div className="add-panel">
                   <div className="codex-pending-oauth-draft antigravity-pending-oauth-draft">
                     <div className="oauth-link">
-                      <label>{t('codex.pendingAuth.emailLabel', '待授权账号')}</label>
+                      <label>{t('codex.pendingAuth.emailLabel', "Tài khoản chờ xác thực")}</label>
                       <div className="oauth-link-row oauth-manual-input">
                         <input
                           type="email"
@@ -609,12 +609,12 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             setPendingOAuthEmailInput(event.target.value)
                             setPendingOAuthEmailError(null)
                           }}
-                          placeholder={t('codex.pendingAuth.emailPlaceholder', '输入账号邮箱')}
+                          placeholder={t('codex.pendingAuth.emailPlaceholder', "Nhập email tài khoản OpenAI")}
                           readOnly={Boolean(pendingOAuthAccount)}
                           disabled={savingPendingOAuthAccount}
                         />
                         {pendingOAuthAccount ? (
-                          <button type="button" className="btn btn-secondary icon-only" onClick={() => void copyAccountNoteValue('pendingEmail', pendingOAuthEmailInput)} aria-label={t('common.copy', '复制')}>
+                          <button type="button" className="btn btn-secondary icon-only" onClick={() => void copyAccountNoteValue('pendingEmail', pendingOAuthEmailInput)} aria-label={t('common.copy', "Copy​")}>
                             {accountNoteCopiedKey === 'pendingEmail' ? <Check size={14} /> : <Copy size={14} />}
                           </button>
                         ) : null}
@@ -628,12 +628,12 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                       disabled={savingPendingOAuthAccount || addStatus === 'loading'}
                     >
                       <FileText size={12} />
-                      <span>{hasAntigravityAccountNoteFormDetails(oauthAccountNoteForm) ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.addShort', '加备注')}</span>
+                      <span>{hasAntigravityAccountNoteFormDetails(oauthAccountNoteForm) ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.addShort', "Thêm")}</span>
                     </button>
                     {!pendingOAuthAccount ? (
                       <button type="button" className="btn btn-secondary btn-full" onClick={() => void handleSavePendingOAuthAccount()} disabled={savingPendingOAuthAccount || !pendingOAuthEmailInput.trim()}>
                         {savingPendingOAuthAccount ? <RefreshCw size={16} className="loading-spinner" /> : <FileText size={16} />}
-                        {t('codex.pendingAuth.saveDraft', '保存待授权卡片')}
+                        {t('codex.pendingAuth.saveDraft', "Lưu thẻ chờ xác thực")}
                       </button>
                     ) : null}
                   </div>
@@ -680,13 +680,13 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     </div>
                   </div>
                   <div className="oauth-link">
-                    <label>{t('common.shared.oauth.manualCallbackLabel', '手动输入回调地址')}</label>
+                    <label>{t('common.shared.oauth.manualCallbackLabel', "Nhập URL callback thủ công")}</label>
                     <div className="oauth-link-row oauth-manual-input">
                       <input
                         type="text"
                         value={oauthCallbackInput}
                         onChange={(e) => setOauthCallbackInput(e.target.value)}
-                        placeholder={t('common.shared.oauth.manualCallbackPlaceholder', '粘贴完整回调地址，例如：http://localhost:1455/auth/callback?code=...&state=...')}
+                        placeholder={t('common.shared.oauth.manualCallbackPlaceholder', "Dán đầy đủ URL callback, ví dụ: http://localhost:1455/auth/callback?code=...&state=...")}
                       />
                       <button
                         className="btn btn-secondary"
@@ -847,7 +847,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
         pathCopied={exportModal.pathCopied}
         toolbarContent={
           <>
-            <label className="export-json-sensitive-toggle" title={t('accounts.accountNote.exportSensitiveToggleHint', '控制导出 JSON 是否包含 2FA 秘钥、密码、手机号和邮件地址。')}>
+            <label className="export-json-sensitive-toggle" title={t('accounts.accountNote.exportSensitiveToggleHint', "Kiểm soát JSON xuất ra có gồm mã 2FA, mật khẩu, số điện thoại và URL email hay không.")}>
               <input type="checkbox" checked={includeExportSensitiveNotes} onChange={(event) => {
                 includeExportSensitiveNotesRef.current = event.target.checked
                 setIncludeExportSensitiveNotes(event.target.checked)
@@ -880,13 +880,13 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 })
               }} />
               <span className="export-json-sensitive-switch" />
-              <span>{includeExportSensitiveNotes ? t('accounts.accountNote.exportSensitiveIncluded', '包含敏感备注') : t('accounts.accountNote.exportSensitiveExcluded', '已排除敏感备注')}</span>
+              <span>{includeExportSensitiveNotes ? t('accounts.accountNote.exportSensitiveIncluded', "Gồm ghi chú nhạy cảm") : t('accounts.accountNote.exportSensitiveExcluded', "Loại ghi chú nhạy cảm")}</span>
               <Info size={14} />
             </label>
             {includeExportSensitiveNotes ? (
               <div className="export-json-sensitive-notice">
                 <Info size={14} />
-                <span>{t('accounts.accountNote.exportSensitiveNotice', '导出内容包含 2FA 秘钥、密码、手机号或邮件地址，请只保存到可信位置。')}</span>
+                <span>{t('accounts.accountNote.exportSensitiveNotice', "Bản xuất chứa mã 2FA, mật khẩu, số điện thoại hoặc URL email. Chỉ lưu vào vị trí tin cậy.")}</span>
               </div>
             ) : null}
           </>
@@ -908,19 +908,19 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
             <div className="modal-header">
               <div>
                 <h2>
-                  {t('accounts.sort.customModalTitle', '自定义账号排序')}
+                  {t('accounts.sort.customModalTitle', 'Tùy chỉnh thứ tự tài khoản')}
                 </h2>
                 <p className="codex-custom-sort-modal-desc">
                   {t(
                     'accounts.sort.customModalDesc',
-                    '拖动账号或使用上下按钮调整展示顺序。'
+                    'Kéo tài khoản hoặc dùng nút lên/xuống để sắp xếp thứ tự hiển thị.'
                   )}
                 </p>
               </div>
               <button
                 className="modal-close"
                 onClick={() => setShowCustomSortModal(false)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -972,11 +972,11 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           }
                           title={t(
                             'accounts.sort.customDragHandle',
-                            '拖拽排序'
+                            'Kéo để sắp xếp'
                           )}
                           aria-label={t(
                             'accounts.sort.customDragHandle',
-                            '拖拽排序'
+                            'Kéo để sắp xếp'
                           )}
                         >
                           <GripVertical size={16} />
@@ -993,7 +993,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             </span>
                             {isCurrent && (
                               <span className="mini-tag current">
-                                {t('accounts.status.current', '当前')}
+                                {t('accounts.status.current', "Hiện tại")}
                               </span>
                             )}
                             <span
@@ -1018,7 +1018,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                               ))
                             ) : (
                               <span className="codex-custom-sort-quota-empty">
-                                {t('common.shared.quota.noData', '暂无配额数据')}
+                                {t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}
                               </span>
                             )}
                           </div>
@@ -1032,8 +1032,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             moveCustomSortAccount(account.id, 'up')
                           }
                           disabled={index === 0}
-                          title={t('accounts.sort.customMoveUp', '上移')}
-                          aria-label={t('accounts.sort.customMoveUp', '上移')}
+                          title={t('accounts.sort.customMoveUp', 'Lên trên')}
+                          aria-label={t('accounts.sort.customMoveUp', 'Lên trên')}
                         >
                           <ArrowUp size={14} />
                         </button>
@@ -1044,10 +1044,10 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             moveCustomSortAccount(account.id, 'down')
                           }
                           disabled={index === customSortAccounts.length - 1}
-                          title={t('accounts.sort.customMoveDown', '下移')}
+                          title={t('accounts.sort.customMoveDown', 'Xuống dưới')}
                           aria-label={t(
                             'accounts.sort.customMoveDown',
-                            '下移'
+                            'Xuống dưới'
                           )}
                         >
                           <ArrowDown size={14} />
@@ -1064,13 +1064,13 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={resetCustomSortOrder}
               >
                 <RotateCw size={14} />
-                {t('accounts.sort.customReset', '重置自定义顺序')}
+                {t('accounts.sort.customReset', 'Đặt lại thứ tự tùy chỉnh')}
               </button>
               <button
                 className="btn btn-primary"
                 onClick={() => setShowCustomSortModal(false)}
               >
-                {t('common.confirm', '确认')}
+                {t('common.confirm', "Xác nhận")}
               </button>
             </div>
           </div>
@@ -1083,7 +1083,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
         >
           <div className="modal modal-lg" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('accounts.switchHistory.title', '切换记录')}</h2>
+              <h2>{t('accounts.switchHistory.title', "Lịch sử chuyển đổi")}</h2>
               <button
                 className="modal-close"
                 onClick={() => {
@@ -1091,7 +1091,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   setShowSwitchHistoryModal(false)
                   setSwitchHistoryClearConfirmOpen(false)
                 }}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -1103,7 +1103,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 </div>
               ) : switchHistory.length === 0 ? (
                 <div className="empty-state" style={{ minHeight: 180 }}>
-                  <p>{t('accounts.switchHistory.empty', '暂无切换记录')}</p>
+                  <p>{t('accounts.switchHistory.empty', "Chưa có lịch sử chuyển đổi")}</p>
                 </div>
               ) : (
                 <div style={{ maxHeight: 420, overflowY: 'auto', display: 'grid', gap: 10 }}>
@@ -1136,45 +1136,45 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           }}
                         >
                           {item.success
-                            ? t('accounts.switchHistory.success', '成功')
-                            : t('accounts.switchHistory.failed', '失败')}
+                            ? t('accounts.switchHistory.success', "Thành công")
+                            : t('accounts.switchHistory.failed', "Thất bại")}
                         </div>
                       </div>
                       <div style={{ fontWeight: 600, fontSize: 14 }}>
                         {t('accounts.switchHistory.target', {
                           email: maskAccountText(item.targetEmail) || item.targetEmail || '-',
-                          defaultValue: '目标账号：{{email}}',
+                          defaultValue: "Tài khoản đích: {{email}}",
                         })}
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                         {t('accounts.switchHistory.trigger', {
                           trigger: formatSwitchHistoryTrigger(item.triggerType),
-                          defaultValue: '触发方式：{{trigger}}',
+                          defaultValue: "Trình kích hoạt: {{trigger}}",
                         })}
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                         {t('accounts.switchHistory.origin', {
                           origin: formatSwitchHistoryOrigin(item.triggerSource),
-                          defaultValue: '触发端：{{origin}}',
+                          defaultValue: "Nguồn kích hoạt: {{origin}}",
                         })}
                       </div>
                       {item.triggerType === 'auto' && (
                         <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                           {t('accounts.switchHistory.autoReasonLabel', {
                             reason: formatSwitchHistoryAutoReason(item.autoSwitchReason),
-                            defaultValue: '自动原因：{{reason}}',
+                            defaultValue: "Lý do tự động: {{reason}}",
                           })}
                         </div>
                       )}
                       <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                         {t('accounts.switchHistory.stageResult', {
                           local: item.localOk
-                            ? t('accounts.switchHistory.success', '成功')
-                            : t('accounts.switchHistory.failed', '失败'),
+                            ? t('accounts.switchHistory.success', "Thành công")
+                            : t('accounts.switchHistory.failed', "Thất bại"),
                           seamless: item.seamlessOk
-                            ? t('accounts.switchHistory.success', '成功')
-                            : t('accounts.switchHistory.failed', '失败'),
-                          defaultValue: '本地：{{local}} / 无感：{{seamless}}',
+                            ? t('accounts.switchHistory.success', "Thành công")
+                            : t('accounts.switchHistory.failed', "Thất bại"),
+                          defaultValue: "Cục bộ: {{local}} / Liền mạch: {{seamless}}",
                         })}
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
@@ -1182,7 +1182,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           total: item.totalDurationMs,
                           local: item.localDurationMs,
                           seamless: item.seamlessDurationMs ?? 0,
-                          defaultValue: '耗时：总 {{total}}ms，本地 {{local}}ms，无感 {{seamless}}ms',
+                          defaultValue: "Thời gian: tổng {{total}}ms, cục bộ {{local}}ms, liền mạch {{seamless}}ms",
                         })}
                       </div>
                       {!item.success && (
@@ -1191,7 +1191,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             stage: formatSwitchHistoryStage(item.errorStage),
                             code: item.errorCode || '-',
                             message: item.errorMessage || '-',
-                            defaultValue: '失败阶段：{{stage}}（{{code}}）{{message}}',
+                            defaultValue: "Lỗi ở giai đoạn {{stage}} ({{code}}): {{message}}",
                           })}
                         </div>
                       )}
@@ -1209,7 +1209,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 }}
                 disabled={switchHistoryClearing}
               >
-                {t('common.close', '关闭')}
+                {t('common.close', "Đóng")}
               </button>
               <button
                 className="btn btn-danger"
@@ -1217,8 +1217,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 disabled={switchHistoryClearing || switchHistoryLoading || switchHistory.length === 0}
               >
                 {switchHistoryClearing
-                  ? t('common.loading', '加载中...')
-                  : t('accounts.switchHistory.clear', '清空记录')}
+                  ? t('common.loading', "Đang tải...")
+                  : t('accounts.switchHistory.clear', "Xóa lịch sử")}
               </button>
             </div>
           </div>
@@ -1238,13 +1238,13 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   if (switchHistoryClearing) return
                   setSwitchHistoryClearConfirmOpen(false)
                 }}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
             </div>
             <div className="modal-body">
-              <p>{t('accounts.switchHistory.clearConfirm', '确定清空全部切换记录吗？')}</p>
+              <p>{t('accounts.switchHistory.clearConfirm', "Xóa toàn bộ lịch sử chuyển đổi?")}</p>
             </div>
             <div className="modal-footer">
               <button
@@ -1260,8 +1260,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 disabled={switchHistoryClearing}
               >
                 {switchHistoryClearing
-                  ? t('common.loading', '加载中...')
-                  : t('accounts.switchHistory.clear', '清空记录')}
+                  ? t('common.loading', "Đang tải...")
+                  : t('accounts.switchHistory.clear', "Xóa lịch sử")}
               </button>
             </div>
           </div>
@@ -1282,7 +1282,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   setDeleteConfirm(null)
                   setDeleteConfirmError(null)
                 }}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -1328,7 +1328,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   setTagDeleteConfirm(null)
                   setTagDeleteConfirmError(null)
                 }}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -1339,7 +1339,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 {t('accounts.confirmDeleteTag', {
                   tag: tagDeleteConfirm.tag,
                   count: tagDeleteConfirm.count,
-                  defaultValue: '确认删除标签 "{{tag}}" 吗？该标签将从 {{count}} 个账号中移除。',
+                  defaultValue: "Xóa thẻ \"{{tag}}\"? Thẻ này sẽ bị xóa khỏi {{count}} tài khoản.",
                 })}
               </p>
             </div>
@@ -1359,7 +1359,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={confirmDeleteTag}
                 disabled={deletingTag}
               >
-                {deletingTag ? '处理中...' : t('common.confirm')}
+                {deletingTag ? 'Đang xử lý...' : t('common.confirm')}
               </button>
             </div>
           </div>
@@ -1543,8 +1543,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           const vDetail = verificationDetailMap[account.id]
           const isTos = vReason === 'tos_violation'
           const title = isTos
-            ? t('wakeup.errorUi.tosViolationTitle', 'TOS 违规')
-            : t('wakeup.errorUi.verificationRequiredTitle', '需要验证')
+            ? t('wakeup.errorUi.tosViolationTitle', "Vi phạm TOS")
+            : t('wakeup.errorUi.verificationRequiredTitle', "Yêu cầu xác minh")
 
           const validationUrl = resolveValidationUrl(account)
           const lastMessage = vDetail?.lastMessage || account.quota_error?.message
@@ -1591,7 +1591,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   </div>
                   {!lastMessage && !validationUrl && (
                     <div className="empty-state-small" style={{ marginTop: 12 }}>
-                      {t('modals.errors.empty', '暂无验证详情')}
+                      {t('modals.errors.empty', "Không có chi tiết lỗi")}
                     </div>
                   )}
 
@@ -1604,7 +1604,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           onClick={() => openLink(validationUrl)}
                         >
                           <ExternalLink size={14} />
-                          {t('wakeup.errorUi.completeVerification', '立即验证')}
+                          {t('wakeup.errorUi.completeVerification', "Hoàn tất xác minh")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -1612,8 +1612,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                         >
                           {copiedValidationUrlAccountId === account.id ? <Check size={14} /> : <Copy size={14} />}
                           {copiedValidationUrlAccountId === account.id
-                            ? t('common.copied', '已复制')
-                            : t('wakeup.errorUi.copyValidationUrl', '复制验证地址')}
+                            ? t('common.copied', "Đã sao chép")
+                            : t('wakeup.errorUi.copyValidationUrl', "Sao chép URL xác minh")}
                         </button>
                       </>
                     )}
@@ -1624,7 +1624,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           onClick={() => openLink(vDetail.appealUrl!)}
                         >
                           <ExternalLink size={14} />
-                          {t('wakeup.errorUi.submitAppeal', '立即提交保证书')}
+                          {t('wakeup.errorUi.submitAppeal', "Gửi kháng cáo")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -1632,8 +1632,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                         >
                           {copiedValidationUrlAccountId === account.id ? <Check size={14} /> : <Copy size={14} />}
                           {copiedValidationUrlAccountId === account.id
-                            ? t('common.copied', '已复制')
-                            : t('wakeup.errorUi.copyAppealUrl', '复制链接')}
+                            ? t('common.copied', "Đã sao chép")
+                            : t('wakeup.errorUi.copyAppealUrl', "Sao chép liên kết")}
                         </button>
                       </>
                     )}
@@ -1650,7 +1650,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           )
         })()}
 
-      {/* 标签编辑弹窗 */}
+      {/* Hộp thoại sửa nhãn */}
       <TagEditModal
         isOpen={!!showTagModal}
         initialTags={accounts.find((acc) => acc.id === showTagModal)?.tags || []}
@@ -1671,14 +1671,14 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           >
             <div className="modal-header">
               <h2 id="antigravity-account-note-title">
-                {t('accounts.accountNote.title', '账号备注')}
+                {t('accounts.accountNote.title', "Ghi chú tài khoản")}
               </h2>
               <button
                 type="button"
                 className="modal-close"
                 onClick={closeAccountNoteModal}
                 disabled={savingAccountNote}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -1691,11 +1691,11 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               <p className="antigravity-account-note-desc">
                 {t('accounts.accountNote.desc', {
                   account: maskAccountText(activeAccountNoteEmail),
-                  defaultValue: '给 {{account}} 填写密码、2FA、邮件地址、手机号和其他备注。',
+                  defaultValue: "Thêm mật khẩu, 2FA, URL email, điện thoại và ghi chú khác cho {{account}}.",
                 })}
               </p>
               <div className="codex-account-note-field">
-                <span>{t('common.shared.columns.email', '邮箱')}</span>
+                <span>{t('common.shared.columns.email', "E-mail")}</span>
                 <div className="codex-account-note-readonly-row">
                   {oauthAccountNoteMode && !pendingOAuthAccount ? (
                     <input
@@ -1706,7 +1706,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                         setPendingOAuthEmailInput(event.target.value)
                         setPendingOAuthEmailError(null)
                       }}
-                      placeholder={t('codex.pendingAuth.emailPlaceholder', '输入账号邮箱')}
+                      placeholder={t('codex.pendingAuth.emailPlaceholder', "Nhập email tài khoản OpenAI")}
                       disabled={savingAccountNote}
                     />
                   ) : (
@@ -1714,21 +1714,21 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                       {activeAccountNoteEmail || '-'}
                     </span>
                   )}
-                  <button type="button" className="codex-account-note-icon-btn" onClick={() => void copyAccountNoteValue('email', activeAccountNoteEmail)} disabled={savingAccountNote || !activeAccountNoteEmail} aria-label={t('common.copy', '复制')}>
+                  <button type="button" className="codex-account-note-icon-btn" onClick={() => void copyAccountNoteValue('email', activeAccountNoteEmail)} disabled={savingAccountNote || !activeAccountNoteEmail} aria-label={t('common.copy', "Copy​")}>
                     {accountNoteCopiedKey === 'email' ? <Check size={14} /> : <Copy size={14} />}
                   </button>
                 </div>
                 {pendingOAuthEmailError ? <span className="codex-account-note-field-error">{pendingOAuthEmailError}</span> : null}
               </div>
               <label className="codex-account-note-field">
-                <span>{t('accounts.accountNote.passwordLabel', '账号密码')}</span>
+                <span>{t('accounts.accountNote.passwordLabel', "Mật khẩu")}</span>
                 <div className="codex-account-note-input-row">
                   <input
                     className="codex-account-note-input"
                     type={accountNotePasswordVisible ? 'text' : 'password'}
                     value={activeAccountNoteForm.accountPassword}
                     onChange={(event) => updateEditingAccountNoteForm({ accountPassword: event.target.value })}
-                    placeholder={t('accounts.accountNote.passwordPlaceholder', '登录密码或临时密码')}
+                    placeholder={t('accounts.accountNote.passwordPlaceholder', "Mật khẩu đăng nhập hoặc tạm thời")}
                     disabled={savingAccountNote}
                     autoFocus
                   />
@@ -1737,7 +1737,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => setAccountNotePasswordVisible((value) => !value)}
                     disabled={savingAccountNote}
-                    aria-label={accountNotePasswordVisible ? t('accounts.accountNote.hide', '隐藏') : t('accounts.accountNote.show', '显示')}
+                    aria-label={accountNotePasswordVisible ? t('accounts.accountNote.hide', "Ẩn") : t('accounts.accountNote.show', "Hiện")}
                   >
                     {accountNotePasswordVisible ? <EyeOff size={14} /> : <Eye size={14} />}
                   </button>
@@ -1746,21 +1746,21 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void copyAccountNoteValue('password', activeAccountNoteForm.accountPassword)}
                     disabled={savingAccountNote || !activeAccountNoteForm.accountPassword.trim()}
-                    aria-label={t('common.copy', '复制')}
+                    aria-label={t('common.copy', "Copy​")}
                   >
                     {accountNoteCopiedKey === 'password' ? <Check size={14} /> : <Copy size={14} />}
                   </button>
                 </div>
               </label>
               <label className="codex-account-note-field">
-                <span>{t('accounts.accountNote.twoFactorSecretLabel', '2FA 秘钥')}</span>
+                <span>{t('accounts.accountNote.twoFactorSecretLabel', "Mã bí mật 2FA")}</span>
                 <div className="codex-account-note-input-row">
                   <input
                     className={`codex-account-note-input ${accountNoteFieldError ? 'has-error' : ''}`}
                     type={accountNoteSecretVisible ? 'text' : 'password'}
                     value={activeAccountNoteForm.twoFactorSecret}
                     onChange={(event) => updateEditingAccountNoteForm({ twoFactorSecret: event.target.value })}
-                    placeholder={t('accounts.accountNote.twoFactorSecretPlaceholder', 'Base32 secret 或 otpauth:// 链接')}
+                    placeholder={t('accounts.accountNote.twoFactorSecretPlaceholder', "Mã Base32 hoặc URI otpauth://")}
                     disabled={savingAccountNote}
                   />
                   <button
@@ -1771,7 +1771,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                       setAccountNoteMfaPickerOpen((value) => !value)
                     }}
                     disabled={savingAccountNote || savedMfaRecords.length === 0}
-                    aria-label={t('mfaQuick.selectLabel', '选择 2FA 秘钥')}
+                    aria-label={t('mfaQuick.selectLabel', "Chọn khóa 2FA")}
                   >
                     <ChevronDown size={14} />
                   </button>
@@ -1780,7 +1780,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => setAccountNoteSecretVisible((value) => !value)}
                     disabled={savingAccountNote}
-                    aria-label={accountNoteSecretVisible ? t('accounts.accountNote.hide', '隐藏') : t('accounts.accountNote.show', '显示')}
+                    aria-label={accountNoteSecretVisible ? t('accounts.accountNote.hide', "Ẩn") : t('accounts.accountNote.show', "Hiện")}
                   >
                     {accountNoteSecretVisible ? <EyeOff size={14} /> : <Eye size={14} />}
                   </button>
@@ -1789,7 +1789,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void copyAccountNoteValue('twoFactorSecret', activeAccountNoteForm.twoFactorSecret)}
                     disabled={savingAccountNote || !activeAccountNoteForm.twoFactorSecret.trim()}
-                    aria-label={t('common.copy', '复制')}
+                    aria-label={t('common.copy', "Copy​")}
                   >
                     {accountNoteCopiedKey === 'twoFactorSecret' ? <Check size={14} /> : <Copy size={14} />}
                   </button>
@@ -1807,7 +1807,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                         }}
                       >
                         <span className="codex-account-note-mfa-option__main">
-                          <strong>{formatMfaRecordOption(record, t('mfaQuick.unnamedSecret', '未命名秘钥'))}</strong>
+                          <strong>{formatMfaRecordOption(record, t('mfaQuick.unnamedSecret', "Khóa chưa đặt tên"))}</strong>
                           {record.remark?.trim() ? <em>{record.remark}</em> : null}
                         </span>
                         <span className="codex-account-note-mfa-option__side">
@@ -1821,29 +1821,29 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   <span className="codex-account-note-field-error">{accountNoteFieldError}</span>
                 ) : activeAccountNoteForm.twoFactorSecret.trim() && accountNoteOtpToken ? (
                   <div className="codex-account-note-otp-preview">
-                    <span>{t('accounts.accountNote.currentOtp', '当前验证码')}</span>
+                    <span>{t('accounts.accountNote.currentOtp', "Mã hiện tại")}</span>
                     <strong>{accountNoteOtpToken}</strong>
                     <button
                       type="button"
                       className="codex-account-note-icon-btn"
                       onClick={() => void copyAccountNoteValue('otp', accountNoteOtpToken)}
-                      aria-label={t('common.copy', '复制')}
+                      aria-label={t('common.copy', "Copy​")}
                     >
                       {accountNoteCopiedKey === 'otp' ? <Check size={14} /> : <Copy size={14} />}
                     </button>
-                    <em>{t('accounts.accountNote.otpRemaining', { seconds: mfaTimeRemaining, defaultValue: '{{seconds}}秒' })}</em>
+                    <em>{t('accounts.accountNote.otpRemaining', { seconds: mfaTimeRemaining, defaultValue: "{{seconds}} giây" })}</em>
                   </div>
                 ) : null}
               </label>
               <label className="codex-account-note-field">
-                <span>{t('accounts.accountNote.mailUrlLabel', '邮件地址')}</span>
+                <span>{t('accounts.accountNote.mailUrlLabel', "URL email")}</span>
                 <div className="codex-account-note-input-row">
                   <input
                     className="codex-account-note-input"
                     type="url"
                     value={activeAccountNoteForm.mailUrl}
                     onChange={(event) => updateEditingAccountNoteForm({ mailUrl: event.target.value })}
-                    placeholder={t('accounts.accountNote.mailUrlPlaceholder', '填写可打开的邮件查询网页地址')}
+                    placeholder={t('accounts.accountNote.mailUrlPlaceholder', "Nhập URL trang tra cứu email mở được")}
                     disabled={savingAccountNote}
                   />
                   <button
@@ -1851,7 +1851,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void fetchAccountNoteMailPreviewForUrl(activeAccountNoteForm.mailUrl)}
                     disabled={savingAccountNote || !activeAccountNoteForm.mailUrl.trim()}
-                    aria-label={t('accounts.accountNote.mailPreviewRefresh', '刷新邮件')}
+                    aria-label={t('accounts.accountNote.mailPreviewRefresh', "Làm mới email")}
                   >
                     <RefreshCw size={14} className={accountNoteMailPreviewLoading ? 'loading-spinner' : ''} />
                   </button>
@@ -1860,7 +1860,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void openUrl(activeAccountNoteForm.mailUrl.trim())}
                     disabled={savingAccountNote || !activeAccountNoteForm.mailUrl.trim()}
-                    aria-label={t('accounts.accountNote.mailPreviewOpen', '浏览器查看')}
+                    aria-label={t('accounts.accountNote.mailPreviewOpen', "Mở trong trình duyệt")}
                   >
                     <ExternalLink size={14} />
                   </button>
@@ -1869,45 +1869,45 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void copyAccountNoteValue('mailUrl', activeAccountNoteForm.mailUrl)}
                     disabled={savingAccountNote || !activeAccountNoteForm.mailUrl.trim()}
-                    aria-label={t('common.copy', '复制')}
+                    aria-label={t('common.copy', "Copy​")}
                   >
                     {accountNoteCopiedKey === 'mailUrl' ? <Check size={14} /> : <Copy size={14} />}
                   </button>
                 </div>
                 {accountNoteMailPreviewLoading ? (
-                  <div className="codex-account-note-mail-preview is-loading">{t('accounts.accountNote.mailPreviewLoading', '读取邮件中...')}</div>
+                  <div className="codex-account-note-mail-preview is-loading">{t('accounts.accountNote.mailPreviewLoading', "Đang đọc email...")}</div>
                 ) : accountNoteMailPreviewError ? (
                   <span className="codex-account-note-field-error">{accountNoteMailPreviewError}</span>
                 ) : accountNoteMailPreview ? (
                   <div className={`codex-account-note-mail-preview ${accountNoteMailPreview.status === 'changed' ? 'is-changed' : ''}`}>
                     <div className="codex-account-note-mail-preview__code">
-                      <span>{t('accounts.accountNote.mailPreviewCode', '最近一条邮箱验证码')}</span>
+                      <span>{t('accounts.accountNote.mailPreviewCode', "Mã email mới nhất")}</span>
                       <strong>{accountNoteMailPreview.code}</strong>
-                      <button type="button" className="codex-account-note-icon-btn" onClick={() => void copyAccountNoteValue('mailCode', accountNoteMailPreview.code)} disabled={savingAccountNote} aria-label={t('common.copy', '复制')}>
+                      <button type="button" className="codex-account-note-icon-btn" onClick={() => void copyAccountNoteValue('mailCode', accountNoteMailPreview.code)} disabled={savingAccountNote} aria-label={t('common.copy', "Copy​")}>
                         {accountNoteCopiedKey === 'mailCode' ? <Check size={14} /> : <Copy size={14} />}
                       </button>
                     </div>
                     <p title={accountNoteMailPreview.snippet}>{accountNoteMailPreview.snippet}</p>
                     <em className={`codex-account-note-mail-preview__status status-${accountNoteMailPreview.status}`}>
                       {accountNoteMailPreview.status === 'changed'
-                        ? t('accounts.accountNote.mailPreviewStatusChanged', { defaultValue: '新验证码 · {{time}}', time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })
+                        ? t('accounts.accountNote.mailPreviewStatusChanged', { defaultValue: "Mã mới · {{time}}", time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })
                         : accountNoteMailPreview.status === 'unchanged'
-                          ? t('accounts.accountNote.mailPreviewStatusUnchanged', { defaultValue: '未变化 · {{time}}', time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })
-                          : t('accounts.accountNote.mailPreviewStatusInitial', { defaultValue: '获取于 {{time}}', time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })}
+                          ? t('accounts.accountNote.mailPreviewStatusUnchanged', { defaultValue: "Không đổi · {{time}}", time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })
+                          : t('accounts.accountNote.mailPreviewStatusInitial', { defaultValue: "Đã lấy lúc {{time}}", time: formatAntigravityMailPreviewTime(accountNoteMailPreview.fetchedAt) })}
                     </em>
-                    {accountNoteMailPreview.truncated ? <em>{t('accounts.accountNote.mailPreviewTruncated', '内容已截断')}</em> : null}
+                    {accountNoteMailPreview.truncated ? <em>{t('accounts.accountNote.mailPreviewTruncated', "Nội dung đã bị cắt")}</em> : null}
                   </div>
                 ) : null}
               </label>
               <label className="codex-account-note-field">
-                <span>{t('accounts.accountNote.phoneNumberLabel', '手机号')}</span>
+                <span>{t('accounts.accountNote.phoneNumberLabel', "Điện thoại")}</span>
                 <div className="codex-account-note-input-row">
                   <input
                     className="codex-account-note-input"
                     type="tel"
                     value={activeAccountNoteForm.phoneNumber}
                     onChange={(event) => updateEditingAccountNoteForm({ phoneNumber: event.target.value })}
-                    placeholder={t('accounts.accountNote.phoneNumberPlaceholder', '绑定手机号')}
+                    placeholder={t('accounts.accountNote.phoneNumberPlaceholder', "Số điện thoại đã liên kết")}
                     disabled={savingAccountNote}
                   />
                   <button
@@ -1915,18 +1915,18 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                     className="codex-account-note-icon-btn"
                     onClick={() => void copyAccountNoteValue('phoneNumber', activeAccountNoteForm.phoneNumber)}
                     disabled={savingAccountNote || !activeAccountNoteForm.phoneNumber.trim()}
-                    aria-label={t('common.copy', '复制')}
+                    aria-label={t('common.copy', "Copy​")}
                   >
                     {accountNoteCopiedKey === 'phoneNumber' ? <Check size={14} /> : <Copy size={14} />}
                   </button>
                 </div>
               </label>
               <label className="antigravity-account-note-field">
-                <span>{t('accounts.accountNote.otherNoteLabel', '其他备注')}</span>
+                <span>{t('accounts.accountNote.otherNoteLabel', "Ghi chú khác")}</span>
                 <textarea
                   value={activeAccountNoteForm.note}
                   onChange={(event) => updateEditingAccountNoteForm({ note: event.target.value })}
-                  placeholder={t('accounts.accountNote.placeholder', '其他交付备注、辅助邮箱或账号说明')}
+                  placeholder={t('accounts.accountNote.placeholder', "Ghi chú bàn giao, email khôi phục hoặc chi tiết tài khoản")}
                   maxLength={ANTIGRAVITY_ACCOUNT_NOTE_MAX_LENGTH}
                   rows={4}
                   disabled={savingAccountNote}
@@ -1944,7 +1944,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={closeAccountNoteModal}
                 disabled={savingAccountNote}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 type="button"
@@ -1953,8 +1953,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 disabled={savingAccountNote}
               >
                 {savingAccountNote
-                  ? t('common.saving', '保存中...')
-                  : t('common.save', '保存')}
+                  ? t('common.saving', "Đang lưu...")
+                  : t('common.save', "Lưu")}
               </button>
             </div>
           </div>
@@ -1962,7 +1962,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
         document.body
       )}
 
-      {/* 文件损坏弹窗 */}
+      {/* Hộp thoại tệp bị hỏng */}
       {fileCorruptedError && (
         <FileCorruptedModal
           error={fileCorruptedError}

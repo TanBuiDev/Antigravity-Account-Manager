@@ -260,10 +260,10 @@ export function GroupAccountPickerModal({
                 options={tierFilterOptions}
                 selectedValues={filterTypes}
                 allLabel={t('accounts.filter.all', { count: tierCounts.all })}
-                filterLabel={t('accounts.filterLabel', '筛选')}
-                clearLabel={t('accounts.clearFilter', '清空筛选')}
-                emptyLabel={t('common.none', '暂无')}
-                ariaLabel={t('accounts.filterLabel', '筛选')}
+                filterLabel={t('accounts.filterLabel', "Lọc tài khoản")}
+                clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+                emptyLabel={t('common.none', "None​")}
+                ariaLabel={t('accounts.filterLabel', "Lọc tài khoản")}
                 onToggleValue={(value) =>
                   setFilterTypes((prev) =>
                     prev.includes(value as AccountFilterType)

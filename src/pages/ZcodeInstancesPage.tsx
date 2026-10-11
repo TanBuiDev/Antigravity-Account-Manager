@@ -33,9 +33,9 @@ export function ZcodeInstancesContent({
         <DosageNotifyQuotaPreview
           usage={getZcodeUsage(account)}
           locale={i18n.language || 'zh-CN'}
-          emptyText={t('instances.quota.empty', '暂无配额缓存')}
-          normalText={t('zcode.usageNormal', '正常')}
-          abnormalText={t('zcode.usageAbnormal', '异常')}
+          emptyText={t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm")}
+          normalText={t('zcode.usageNormal', "Bình thường")}
+          abnormalText={t('zcode.usageAbnormal', "Lỗi")}
           abnormalDisplay="short"
         />
       )}

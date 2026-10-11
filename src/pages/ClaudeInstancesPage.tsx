@@ -123,16 +123,16 @@ export function ClaudeInstancesContent({
       ? accountMap.get(instance.bindAccountId)
       : undefined;
     const instanceName = instance.isDefault
-      ? t('instances.defaultName', '默认实例')
-      : instance.name || t('instances.defaultName', '默认实例');
+      ? t('instances.defaultName', "Phiên bản mặc định")
+      : instance.name || t('instances.defaultName', "Phiên bản mặc định");
     setLaunchModal({
       instanceId: instance.id,
       instanceName,
       switchMessage: boundAccount
-        ? t('accounts.switched', '已切换至 {{email}}', {
+        ? t('accounts.switched', "Đã chuyển sang {{email}}", {
             email: getClaudeAccountDisplayEmail(boundAccount),
           })
-        : t('claude.cli.prepared', 'Claude CLI 已准备'),
+        : t('claude.cli.prepared', "Claude CLI đã sẵn sàng"),
       launchCommand: launchInfo.launchCommand,
       copied: false,
       executing: false,
@@ -154,7 +154,7 @@ export function ClaudeInstancesContent({
         prev
           ? {
               ...prev,
-              executeError: t('common.shared.export.copyFailed', '复制失败，请手动复制'),
+              executeError: t('common.shared.export.copyFailed', "Sao chép thất bại, vui lòng sao chép thủ công"),
             }
           : prev,
       );
@@ -179,7 +179,7 @@ export function ClaudeInstancesContent({
           ? {
               ...prev,
               executing: false,
-              executeMessage: result || t('claude.cli.launchSuccess', '已启动 Claude CLI'),
+              executeMessage: result || t('claude.cli.launchSuccess', "Đã mở Claude CLI"),
             }
           : prev,
       );
@@ -205,15 +205,15 @@ export function ClaudeInstancesContent({
         renderAccountQuotaPreview={(account) =>
           renderClaudeQuotaPreview(
             account,
-            t('instances.quota.empty', '暂无配额缓存'),
-            t('claude.apiKey.quotaUnsupported', 'API Key 账号不支持 Claude 订阅配额刷新'),
+            t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm"),
+            t('claude.apiKey.quotaUnsupported', "Tài khoản API Key không hỗ trợ làm mới"),
             t('claude.quota.fiveHour', 'Current session'),
             t('claude.quota.sevenDay', 'Current week (all models)'),
           )
         }
         renderAccountBadge={(account) => (
           <span className={`instance-plan-badge ${getClaudePlanBadgeClass(account)}`}>
-            {getClaudePlanBadge(account) || t('claude.desktopOAuth.planUnknown', '订阅未知')}
+            {getClaudePlanBadge(account) || t('claude.desktopOAuth.planUnknown', "Gói chưa rõ")}
           </span>
         )}
         getAccountSearchText={(account) =>
@@ -228,8 +228,8 @@ export function ClaudeInstancesContent({
         onInstanceStarted={handleInstanceStarted}
         resolveStartSuccessMessage={(instance) =>
           (instance.launchMode ?? 'app') === 'cli'
-            ? t('claude.cli.prepared', 'Claude CLI 已准备')
-            : t('claude.instances.startSuccess', 'Claude 已启动')
+            ? t('claude.cli.prepared', "Claude CLI đã sẵn sàng")
+            : t('claude.instances.startSuccess', "Đã khởi động Claude")
         }
         isAccountAllowedForLaunchMode={isAccountAllowedForLaunchMode}
       />
@@ -241,16 +241,16 @@ export function ClaudeInstancesContent({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={() => setLaunchModal(null)}
-                title={t('common.back', '返回')}
-                aria-label={t('common.back', '返回')}
+                title={t('common.back', "Quay lại")}
+                aria-label={t('common.back', "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t('instances.launchDialog.title', '启动实例')}</h2>
+              <h2>{t('instances.launchDialog.title', "Khởi chạy phiên bản")}</h2>
               <button
                 className="modal-close"
                 onClick={() => setLaunchModal(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -261,11 +261,11 @@ export function ClaudeInstancesContent({
                 <span>{launchModal.switchMessage}</span>
               </div>
               <div className="form-group">
-                <label>{t('instances.columns.instance', '实例')}</label>
+                <label>{t('instances.columns.instance', "Phiên bản")}</label>
                 <input className="form-input" value={launchModal.instanceName} readOnly />
               </div>
               <div className="form-group">
-                <label>{t('instances.launchDialog.command', '启动命令')}</label>
+                <label>{t('instances.launchDialog.command', "Lệnh khởi chạy")}</label>
                 <textarea
                   className="form-input instance-args-input"
                   value={launchModal.launchCommand}
@@ -274,18 +274,18 @@ export function ClaudeInstancesContent({
                 <p className="form-hint">
                   {t(
                     'instances.launchDialog.hint',
-                    '可复制命令手动执行，或点击下方按钮直接在终端执行。',
+                    "Sao chép lệnh để chạy thủ công hoặc chạy trực tiếp trong terminal.",
                   )}
                 </p>
               </div>
               <div className="form-group">
-                <label>{t('instances.launchDialog.terminal', '终端')}</label>
+                <label>{t('instances.launchDialog.terminal', "Cửa sổ lệnh")}</label>
                 <SingleSelectDropdown
                   value={selectedTerminal}
                   onChange={setSelectedTerminal}
                   options={terminalOptions}
                   disabled={launchModal.executing}
-                  ariaLabel={t('instances.launchDialog.terminal', '终端')}
+                  ariaLabel={t('instances.launchDialog.terminal', "Cửa sổ lệnh")}
                 />
               </div>
               {launchModal.executeMessage && (
@@ -301,7 +301,7 @@ export function ClaudeInstancesContent({
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => void handleCopyLaunchCommand()}>
                 <Copy size={16} />
-                {launchModal.copied ? t('common.success', '成功') : t('common.copy', '复制')}
+                {launchModal.copied ? t('common.success', "Thành công") : t('common.copy', "Copy​")}
               </button>
               <button
                 className="btn btn-primary"
@@ -310,8 +310,8 @@ export function ClaudeInstancesContent({
               >
                 <Play size={16} />
                 {launchModal.executing
-                  ? t('common.loading', '加载中...')
-                  : t('instances.launchDialog.runInTerminal', '终端执行')}
+                  ? t('common.loading', "Đang tải...")
+                  : t('instances.launchDialog.runInTerminal', "Chạy trong terminal")}
               </button>
             </div>
           </div>

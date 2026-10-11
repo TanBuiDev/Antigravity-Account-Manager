@@ -1082,7 +1082,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     const corrupted = parseFileCorruptedError(storeError);
     if (corrupted) {
       setMessage({
-        text: t('error.fileCorrupted.description', '文件 {{fileName}} 已损坏，无法解析。', {
+        text: t('error.fileCorrupted.description', "Tệp {{fileName}} bị hỏng và không thể phân tích.", {
           fileName: corrupted.file_name,
         }),
         tone: 'error',
@@ -1137,7 +1137,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     (accountId: string) => {
       setDeleteConfirm({
         ids: [accountId],
-        message: t('messages.deleteConfirm', '确定要删除此账号吗？'),
+        message: t('messages.deleteConfirm', "Bạn có chắc chắn muốn xóa tài khoản này không?"),
       });
     },
     [t],
@@ -1282,14 +1282,14 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       try {
         await openFn(accountId);
         setMessage({
-          text: t('workbuddy.webview.opened', '已打开网页会话：{{email}}', {
+          text: t('workbuddy.webview.opened', 'Đã mở phiên web: {{email}}', {
             email: maskAccountText(displayEmail),
           }),
           tone: 'success',
         });
       } catch (e: unknown) {
         setMessage({
-          text: t('workbuddy.webview.openFailed', '打开网页会话失败：{{error}}', {
+          text: t('workbuddy.webview.openFailed', 'Không thể mở phiên web: {{error}}', {
             error: String(e) || t('common.failed', 'Failed'),
           }),
           tone: 'error',
@@ -1504,7 +1504,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
         current: 0,
         message: t(
           'common.shared.externalImport.statusReceiving',
-          '正在接收导入请求...',
+          "Đang nhận yêu cầu nhập...",
         ),
         failures: [],
       });
@@ -1518,7 +1518,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
               progress: 20,
               message: t(
                 'common.shared.externalImport.statusFetching',
-                '正在获取导入包...',
+                "Đang lấy gói nhập...",
               ),
             });
             content = await invoke<string>('external_import_fetch_import_url', {
@@ -1526,7 +1526,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
             });
           }
           if (!content.trim()) {
-            throw new Error(t('common.shared.externalImport.bundleEmpty', '导入包内容为空'));
+            throw new Error(t('common.shared.externalImport.bundleEmpty', "Gói nhập trống"));
           }
 
           updateProgress({
@@ -1534,32 +1534,32 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
             progress: 35,
             message: t(
               'common.shared.externalImport.statusParsing',
-              '正在解析 Codex JSON...',
+              "Đang phân tích nội dung nhập Codex...",
             ),
           });
           const resolvedItems = resolveExternalImportBundleItems(content, platformId, {
             invalidJson: t(
               'common.shared.externalImport.bundleInvalidJson',
-              '导入包不是有效 JSON',
+              "Gói nhập không phải JSON hợp lệ",
             ),
-            empty: t('common.shared.externalImport.bundleEmpty', '导入包内容为空'),
+            empty: t('common.shared.externalImport.bundleEmpty', "Gói nhập trống"),
             providerMismatch: t(
               'common.shared.externalImport.bundleProviderMismatch',
-              '导入包平台不匹配',
+              "Nhà cung cấp của gói nhập không khớp",
             ),
             noItems: t(
               'common.shared.externalImport.bundleNoItems',
-              '导入包没有可导入内容',
+              "Gói nhập không có mục nào để nhập",
             ),
             rawLineNoRefreshToken: (line) =>
               t('common.shared.externalImport.rawLineNoRefreshToken', {
                 line,
-                defaultValue: '第 {{line}} 行没有匹配到 refresh_token',
+                defaultValue: "Dòng {{line}} không có refresh_token",
               }),
             rawLineMultipleRefreshTokens: (line) =>
               t('common.shared.externalImport.rawLineMultipleRefreshTokens', {
                 line,
-                defaultValue: '第 {{line}} 行匹配到多个 refresh_token，请只保留一个',
+                defaultValue: "Dòng {{line}} có nhiều refresh_token. Chỉ giữ lại một.",
               }),
           });
           const items =
@@ -1584,7 +1584,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
               {
                 current: 1,
                 total,
-                defaultValue: '正在导入第 {{current}} / {{total}} 个账号',
+                defaultValue: "Đang nhập tài khoản {{current}} / {{total}}",
               },
             ),
           });
@@ -1595,7 +1595,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
               items[index],
               t('common.shared.externalImport.unknownItem', {
                 index: current,
-                defaultValue: '第 {{index}} 个 JSON',
+                defaultValue: "Mục #{{index}}",
               }),
             );
             updateProgress({
@@ -1609,7 +1609,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
                 {
                   current,
                   total,
-                  defaultValue: '正在导入第 {{current}} / {{total}} 个账号',
+                  defaultValue: "Đang nhập tài khoản {{current}} / {{total}}",
                 },
               ),
             });
@@ -1642,7 +1642,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
               failures: [...failures],
               message: t(
                 'common.shared.externalImport.statusActivating',
-                '正在切换到导入账号...',
+                "Đang chuyển sang tài khoản đã nhập...",
               ),
             });
             await activateImportedAccount(activatedAccountId);
@@ -1664,7 +1664,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
             failures: [...failures],
             message: t(
               'common.shared.externalImport.statusRefreshing',
-              '正在刷新账号列表...',
+              "Đang làm mới danh sách tài khoản...",
             ),
           });
           await fetchAccounts();
@@ -1689,10 +1689,10 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
             failures: [...failures],
             message:
               status === 'success'
-                ? t('common.shared.externalImport.statusSuccess', '导入完成')
+                ? t('common.shared.externalImport.statusSuccess', "Nhập hoàn tất")
                 : status === 'partial'
-                  ? t('common.shared.externalImport.statusPartial', '部分导入完成')
-                  : t('common.shared.externalImport.statusFailed', '导入失败'),
+                  ? t('common.shared.externalImport.statusPartial', "Nhập một phần hoàn tất")
+                  : t('common.shared.externalImport.statusFailed', "Nhập thất bại"),
           });
         } catch (error) {
           updateProgress({
@@ -1753,7 +1753,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     async (file: File) => {
       setImporting(true);
       setAddStatus('loading');
-      setAddMessage(t('common.shared.import.importing', '正在导入...'));
+      setAddMessage(t('common.shared.import.importing', "Đang nhập tài khoản cục bộ..."));
 
       try {
         const content = await file.text();
@@ -1770,7 +1770,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
         setAddMessage(
           t('common.shared.token.importSuccessMsg', {
             count: imported.length,
-            defaultValue: '成功导入 {{count}} 个账号',
+            defaultValue: "Đã nhập {{count}} tài khoản",
           }),
         );
         setTimeout(() => {
@@ -1783,7 +1783,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
         setAddMessage(
           t('common.shared.import.failedMsg', {
             error: errorMsg,
-            defaultValue: '导入失败: {{error}}',
+            defaultValue: "Nhập thất bại: {{error}}",
           }),
         );
       }
@@ -1799,7 +1799,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     return async () => {
       setImporting(true);
       setAddStatus('loading');
-      setAddMessage(t('common.shared.import.importing', '正在导入...'));
+      setAddMessage(t('common.shared.import.importing', "Đang nhập tài khoản cục bộ..."));
       try {
         const imported = await importFn();
         await fetchAccounts();
@@ -1816,7 +1816,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
         setAddMessage(
           t('common.shared.token.importSuccessMsg', {
             count: imported.length,
-            defaultValue: '成功导入 {{count}} 个账号',
+            defaultValue: "Đã nhập {{count}} tài khoản",
           }),
         );
         setTimeout(() => {
@@ -1829,7 +1829,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
         setAddMessage(
           t('common.shared.import.failedMsg', {
             error: errorMsg,
-            defaultValue: '导入失败: {{error}}',
+            defaultValue: "Nhập thất bại: {{error}}",
           }),
         );
       }
@@ -1841,13 +1841,13 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     const trimmed = tokenInput.trim();
     if (!trimmed) {
       setAddStatus('error');
-      setAddMessage(t('common.shared.token.empty', '请输入 Token 或 JSON'));
+      setAddMessage(t('common.shared.token.empty', "Vui lòng nhập Token hoặc JSON"));
       return;
     }
 
     setImporting(true);
     setAddStatus('loading');
-    setAddMessage(t('common.shared.token.importing', '正在导入...'));
+    setAddMessage(t('common.shared.token.importing', "Đang nhập..."));
 
     try {
       let importedCount = 0;
@@ -1874,7 +1874,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       setAddMessage(
         t('common.shared.token.importSuccessMsg', {
           count: importedCount,
-          defaultValue: '成功导入 {{count}} 个账号',
+          defaultValue: "Đã nhập {{count}} tài khoản",
         }),
       );
       setTimeout(() => {
@@ -1887,7 +1887,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       setAddMessage(
         t('common.shared.token.importFailedMsg', {
           error: errorMsg,
-          defaultValue: '导入失败: {{error}}',
+          defaultValue: "Nhập thất bại: {{error}}",
         }),
       );
     }
@@ -1962,7 +1962,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       setOauthCallbackUrl(null);
       setOauthManualCallbackSubmitting(false);
       setOauthManualCallbackError(null);
-      setOauthPrepareError(t('common.shared.oauth.failed', '授权失败') + ': ' + msg);
+      setOauthPrepareError(t('common.shared.oauth.failed', "Ủy quyền thất bại") + ': ' + msg);
     },
     [oauthLogPrefix, t],
   );
@@ -1980,7 +1980,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     }
     setAddStatus('success');
     setAddMessage(
-      config.resolveOauthSuccessMessage?.() ?? t('common.shared.oauth.success', '授权成功'),
+      config.resolveOauthSuccessMessage?.() ?? t('common.shared.oauth.success', "Ủy quyền thành công"),
     );
     // 授权完成后不再触发 cancelLogin，避免误关仍需用户手动确认的授权页
     oauthLoginIdRef.current = null;
@@ -2223,7 +2223,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       console.error('复制失败:', e);
       setAddStatus('error');
       setAddMessage(
-        t('common.shared.export.copyFailed', '复制失败，请手动复制'),
+        t('common.shared.export.copyFailed', "Sao chép thất bại, vui lòng sao chép thủ công"),
       );
     }
   }, [oauthUrl, oauthLog, setAddStatus, t]);
@@ -2241,7 +2241,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
       console.error('复制失败:', e);
       setAddStatus('error');
       setAddMessage(
-        t('common.shared.export.copyFailed', '复制失败，请手动复制'),
+        t('common.shared.export.copyFailed', "Sao chép thất bại, vui lòng sao chép thủ công"),
       );
     }
   }, [oauthUserCode, oauthLog, setAddStatus, t]);
@@ -2346,7 +2346,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     } catch (e) {
       console.error('打开授权链接失败:', e);
       const msg = String(e).replace(/^Error:\s*/, '');
-      setOauthCompleteError(`${t('common.shared.oauth.failed', '授权失败')}: ${msg}`);
+      setOauthCompleteError(`${t('common.shared.oauth.failed', "Ủy quyền thất bại")}: ${msg}`);
       await navigator.clipboard.writeText(oauthUrl).catch(() => {});
       setOauthUrlCopied(true);
       setTimeout(() => setOauthUrlCopied(false), 1200);
@@ -2369,7 +2369,7 @@ export function useProviderAccountsPage<TAccount extends ProviderAccountBase>(
     const callbackUrl = oauthManualCallbackInput.trim();
     if (!callbackUrl) return;
     if (!loginId) {
-      setOauthManualCallbackError(t('common.shared.oauth.failed', '授权失败'));
+      setOauthManualCallbackError(t('common.shared.oauth.failed', "Ủy quyền thất bại"));
       return;
     }
 

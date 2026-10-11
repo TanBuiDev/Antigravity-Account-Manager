@@ -221,7 +221,7 @@ export function CodexInstancesContent({
       const preset = findCodexApiProviderPresetById(OPENAI_OFFICIAL_PRESET_ID);
       return preset
         ? t(`codex.api.providers.${preset.id}.name`, preset.name)
-        : t("codex.api.provider.custom", "自定义");
+        : t("codex.api.provider.custom", "Tùy chỉnh");
     }
 
     const providerName = account.api_provider_name?.trim();
@@ -233,7 +233,7 @@ export function CodexInstancesContent({
     if (preset) {
       return t(`codex.api.providers.${preset.id}.name`, preset.name);
     }
-    return t("codex.api.provider.custom", "自定义");
+    return t("codex.api.provider.custom", "Tùy chỉnh");
   };
 
   const accountMap = useMemo(() => {
@@ -256,13 +256,13 @@ export function CodexInstancesContent({
         : null;
       const accountLabel =
         instance.bindAccountId === CODEX_API_SERVICE_BIND_ID
-          ? t("codex.localAccess.title", "API 服务")
+          ? t("codex.localAccess.title", "Dịch vụ API")
           : instance.followLocalAccount
-            ? t("instances.form.followCurrent", "跟随当前账号")
+            ? t("instances.form.followCurrent", "Theo tài khoản hiện tại")
             : account
               ? buildCodexAccountPresentation(account, t).displayName ||
                 account.email
-              : t("instances.labels.unbound", "未绑定账号");
+              : t("instances.labels.unbound", "Chưa liên kết");
       return new Promise<boolean>((resolve) => {
         pendingLaunchResolve.current = resolve;
         setLaunchPreview({
@@ -335,7 +335,7 @@ export function CodexInstancesContent({
       const providerName = resolveApiProviderDisplayName(account);
       const text = t("codex.api.provider.inlineLabel", {
         provider: providerName,
-        defaultValue: "供应商：{{provider}}",
+        defaultValue: "Nhà cung cấp: {{provider}}",
       });
       return (
         <div className="account-quota-preview">
@@ -354,7 +354,7 @@ export function CodexInstancesContent({
     if (lines.length === 0) {
       return (
         <span className="account-quota-empty">
-          {t("instances.quota.empty", "暂无配额缓存")}
+          {t("instances.quota.empty", "Không có hạn ngạch trong bộ nhớ đệm")}
         </span>
       );
     }
@@ -398,21 +398,21 @@ export function CodexInstancesContent({
       : undefined;
     const accountLabel =
       instance.bindAccountId === CODEX_API_SERVICE_BIND_ID
-        ? t("codex.localAccess.title", "API 服务")
+        ? t("codex.localAccess.title", "Dịch vụ API")
         : boundAccount
           ? buildCodexAccountPresentation(boundAccount, t).displayName ||
             boundAccount.email
           : null;
     const instanceName = instance.isDefault
-      ? t("instances.defaultName", "默认实例")
-      : instance.name || t("instances.defaultName", "默认实例");
+      ? t("instances.defaultName", "Phiên bản mặc định")
+      : instance.name || t("instances.defaultName", "Phiên bản mặc định");
 
     setLaunchModal({
       instanceId: instance.id,
       instanceName,
       switchMessage: accountLabel
-        ? t("codex.switched", "已切换至 {{email}}", { email: accountLabel })
-        : t("instances.messages.launchPrepared", "启动命令已准备"),
+        ? t("codex.switched", "Đã chuyển sang {{email}}", { email: accountLabel })
+        : t("instances.messages.launchPrepared", "Lệnh khởi chạy đã sẵn sàng"),
       baseLaunchCommand: launchInfo.launchCommand,
       launchCommand: launchInfo.terminalCommand,
       preparing: false,
@@ -440,7 +440,7 @@ export function CodexInstancesContent({
               ...prev,
               executeError: t(
                 "common.shared.export.copyFailed",
-                "复制失败，请手动复制",
+                "Sao chép thất bại, vui lòng sao chép thủ công",
               ),
             }
           : prev,
@@ -539,7 +539,7 @@ export function CodexInstancesContent({
         setSyncRecordsMessage({
           text: t(
             "codex.instances.syncAllRecords.needTwo",
-            "至少需要两个实例才能同步记录",
+            "Cần ít nhất hai phiên bản để đồng bộ bản ghi",
           ),
           tone: "error",
         });
@@ -553,7 +553,7 @@ export function CodexInstancesContent({
         setSyncRecordsMessage({
           text: t(
             "codex.instances.syncAllRecords.closeFirst",
-            "请先关闭所有 Codex 实例后再同步记录，避免运行中的实例把旧记录写回。",
+            "Hãy đóng tất cả phiên bản Codex trước khi đồng bộ bản ghi để tránh phiên bản đang chạy ghi lại bản ghi cũ.",
           ),
           tone: "error",
         });
@@ -563,9 +563,9 @@ export function CodexInstancesContent({
       const confirmed = await confirmDialog(
         t("codex.instances.syncAllRecords.confirmMessage"),
         {
-          title: t("codex.instances.syncAllRecords.title", "同步所有实例记录"),
-          okLabel: t("common.confirm", "确认"),
-          cancelLabel: t("common.cancel", "取消"),
+          title: t("codex.instances.syncAllRecords.title", "Đồng bộ tất cả bản ghi phiên bản"),
+          okLabel: t("common.confirm", "Xác nhận"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmed) return;
@@ -596,11 +596,11 @@ export function CodexInstancesContent({
         text: nextAutoSyncThreads
           ? t(
               "codex.instances.syncAllRecords.autoEnabled",
-              "已开启自动同步所有实例记录",
+              "Đã bật tự động đồng bộ tất cả bản ghi phiên bản",
             )
           : t(
               "codex.instances.syncAllRecords.autoDisabled",
-              "已关闭自动同步所有实例记录",
+              "Đã tắt tự động đồng bộ tất cả bản ghi phiên bản",
             ),
       });
     } catch (error) {
@@ -618,11 +618,11 @@ export function CodexInstancesContent({
         onClick={() => setShowSyncSettingsModal(true)}
         title={t(
           "codex.instances.syncAllRecords.settingsTitle",
-          "实例记录设置",
+          "Cài đặt bản ghi phiên bản",
         )}
         aria-label={t(
           "codex.instances.syncAllRecords.settingsTitle",
-          "实例记录设置",
+          "Cài đặt bản ghi phiên bản",
         )}
       >
         <Settings size={16} />
@@ -643,7 +643,7 @@ export function CodexInstancesContent({
             <button
               className="action-message-close"
               onClick={() => setSyncRecordsMessage(null)}
-              aria-label={t("common.close", "关闭")}
+              aria-label={t("common.close", "Đóng")}
             >
               <X size={14} />
             </button>
@@ -665,15 +665,15 @@ export function CodexInstancesContent({
           appType="codex"
           isSupported={isSupportedPlatform}
           unsupportedTitleKey="common.shared.instances.unsupported.title"
-          unsupportedTitleDefault="暂不支持当前系统"
+          unsupportedTitleDefault="Hệ điều hành hiện chưa được hỗ trợ"
           unsupportedDescKey="codex.instances.unsupported.desc"
-          unsupportedDescDefault="Codex 应用多开仅支持 macOS 和 Windows。"
+          unsupportedDescDefault="Chạy nhiều phiên Codex chỉ được hỗ trợ trên macOS và Windows."
           onInstanceStarted={handleInstanceStarted}
           onBeforeStart={handleBeforeStart}
           resolveStartSuccessMessage={(instance) =>
             (instance.launchMode ?? "app") === "cli"
-              ? t("instances.messages.launchPrepared", "启动命令已准备")
-              : t("instances.messages.started", "实例已启动")
+              ? t("instances.messages.launchPrepared", "Lệnh khởi chạy đã sẵn sàng")
+              : t("instances.messages.started", "Đã bắt đầu phiên bản")
           }
           toolbarExtraActions={syncAllRecordsSettingsButton}
         />
@@ -690,20 +690,20 @@ export function CodexInstancesContent({
                 <div className="codex-sync-settings-title">
                   {t(
                     "codex.instances.syncAllRecords.settingsTitle",
-                    "实例记录设置",
+                    "Cài đặt bản ghi phiên bản",
                   )}
                 </div>
                 <div className="codex-sync-settings-subtitle">
                   {t(
                     "codex.instances.syncAllRecords.settingsSubtitle",
-                    "管理 Codex 多实例记录同步方式",
+                    "Quản lý cách đồng bộ bản ghi nhiều phiên bản Codex",
                   )}
                 </div>
               </div>
               <button
                 className="codex-sync-settings-close"
                 onClick={() => setShowSyncSettingsModal(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={16} />
               </button>
@@ -715,7 +715,7 @@ export function CodexInstancesContent({
                   <span>
                     {t(
                       "codex.instances.syncAllRecords.settingsSection",
-                      "同步设置",
+                      "Cài đặt đồng bộ",
                     )}
                   </span>
                 </div>
@@ -724,7 +724,7 @@ export function CodexInstancesContent({
                     <span>
                       {t(
                         "codex.instances.syncAllRecords.action",
-                        "同步所有实例记录",
+                        "Đồng bộ tất cả bản ghi phiên bản",
                       )}
                     </span>
                   </div>
@@ -740,10 +740,10 @@ export function CodexInstancesContent({
                       />
                       <span>
                         {syncingAllRecords
-                          ? t("common.syncing", "同步中...")
+                          ? t("common.syncing", "Đang đồng bộ...")
                           : t(
                               "codex.instances.syncAllRecords.action",
-                              "同步所有实例记录",
+                              "Đồng bộ tất cả bản ghi phiên bản",
                             )}
                       </span>
                     </button>
@@ -754,7 +754,7 @@ export function CodexInstancesContent({
                     <span>
                       {t(
                         "codex.instances.syncAllRecords.autoAction",
-                        "自动同步所有实例记录",
+                        "Tự động đồng bộ tất cả bản ghi phiên bản",
                       )}
                     </span>
                   </div>
@@ -781,7 +781,7 @@ export function CodexInstancesContent({
 
       {launchModal && (
         <CodexCliLaunchDialog
-          subjectLabel={t("instances.columns.instance", "实例")}
+          subjectLabel={t("instances.columns.instance", "Phiên bản")}
           subjectValue={launchModal.instanceName}
           statusMessage={launchModal.switchMessage}
           terminal={selectedTerminal}
@@ -805,7 +805,7 @@ export function CodexInstancesContent({
           accountLabel={launchPreview.accountLabel}
           accountMetaLabel={
             launchPreview.instance.bindAccountId === CODEX_API_SERVICE_BIND_ID
-              ? t("codex.apiSwitchNotice.type.apiKey", "API 密钥")
+              ? t("codex.apiSwitchNotice.type.apiKey", "Khóa API")
               : undefined
           }
           summary={
@@ -827,7 +827,7 @@ export function CodexInstancesContent({
           instanceId={launchPreview.instance.id}
           instanceLabel={
             launchPreview.instance.isDefault
-              ? t("instances.defaultName", "默认实例")
+              ? t("instances.defaultName", "Phiên bản mặc định")
               : launchPreview.instance.name || launchPreview.instance.id
           }
           mode="instance"

@@ -88,17 +88,17 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
     (state) => state.state.codexOAuthAppVersion,
   );
   return <div style={{ order: platformSettingsOrder.codex }}>
-                <div className="group-title">{t('settings.general.codexSettingsTitle', 'Codex 设置')}</div>
+                <div className="group-title">{t('settings.general.codexSettingsTitle', "Cài đặt Codex")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.codexLocalAccessEntryVisible', '显示 API 服务入口')}
+                    {t('settings.general.codexLocalAccessEntryVisible', "Hiển thị mục Dịch vụ API")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.codexLocalAccessEntryVisibleDesc',
-                      '仅控制 Codex 总览中的 API 服务入口显示，不会停止本地 API 服务；关闭后可在这里重新打开。',
+                      "Chỉ kiểm soát việc mục Dịch vụ API có hiển thị trong tổng quan Codex hay không. Thao tác này không dừng dịch vụ API cục bộ; bạn có thể bật lại tại đây hoặc trong Cài đặt nhanh.",
                     )}
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={codexAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setCodexAutoRefresh(sanitizeNumberInput(e.target.value))}
                         onBlur={() => {
                           const normalized = normalizeNumberInput(codexAutoRefresh, 1, 999);
@@ -195,11 +195,11 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.codexOAuthAppVersion', 'OAuth 客户端版本')}
+                    {t('settings.general.codexOAuthAppVersion', "Phiên bản máy khách OAuth")}
                   </div>
                   <div className="row-desc">
                     {t('settings.general.codexOAuthAppVersionDesc', {
-                      defaultValue: '留空跟随远端默认值 {{version}}；填写后仅覆盖 OAuth 授权链接中的版本字段。',
+                      defaultValue: "Để trống để dùng giá trị mặc định từ xa {{version}}; giá trị nhập vào chỉ ghi đè trường phiên bản trong URL ủy quyền OAuth.",
                       version: remoteCodexOAuthAppVersion || '26.820.60940',
                     })}
                   </div>
@@ -210,7 +210,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                     className="settings-input"
                     value={codexOAuthAppVersion}
                     placeholder={t('settings.general.codexOAuthAppVersionPlaceholder', {
-                      defaultValue: '留空使用 {{version}}',
+                      defaultValue: "Để trống để dùng {{version}}",
                       version: remoteCodexOAuthAppVersion || '26.820.60940',
                     })}
                     onChange={(event) => setCodexOAuthAppVersion(event.target.value)}
@@ -280,8 +280,8 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.codexAppPath', 'Codex 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.codexAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('settings.general.codexAppPath', "Đường dẫn ứng dụng Codex")}</div>
+                  <div className="row-desc">{t('settings.general.codexAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow settings-claude-launch-control">
                   <div className="settings-claude-launch-row">
@@ -289,7 +289,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={codexAppPath}
-                      placeholder={t('settings.general.codexAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => {
                         setCodexLaunchCandidates([]);
                         setCodexAppScanError('');
@@ -301,7 +301,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('codex')}
                       disabled={isAppPathResetDetecting('codex')}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -310,7 +310,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('codex') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('codex')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('codex')}
                     </button>
                   </div>
@@ -346,8 +346,8 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.codexLaunchOnSwitch', '切换 Codex 时自动启动 Codex App')}</div>
-                  <div className="row-desc">{t('settings.general.codexLaunchOnSwitchDesc', '切换账号后自动启动或重启 Codex App')}</div>
+                  <div className="row-title">{t('settings.general.codexLaunchOnSwitch', "Tự động khởi chạy Codex App khi chuyển Codex")}</div>
+                  <div className="row-desc">{t('settings.general.codexLaunchOnSwitchDesc', "Tự động khởi động hoặc khởi động lại Codex App sau khi chuyển tài khoản")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -401,13 +401,13 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                   <div className="row-title">
                     {t(
                       'settings.general.codexRestartSpecifiedAppOnSwitch',
-                      '切换 Codex 时重启指定应用',
+                      "Khởi động lại ứng dụng chỉ định khi chuyển Codex",
                     )}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.codexRestartSpecifiedAppOnSwitchDesc',
-                      '开启后按下方路径重启指定应用（适用于依赖插件宿主的场景）',
+                      "Khi bật, sẽ khởi động lại ứng dụng ở đường dẫn bên dưới (cho luồng dùng host plugin).",
                     )}
                   </div>
                 </div>
@@ -428,12 +428,12 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.codexSpecifiedAppPath', '指定应用启动路径')}
+                    {t('settings.general.codexSpecifiedAppPath', "Đường dẫn ứng dụng chỉ định")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.codexSpecifiedAppPathDesc',
-                      '填写需联动重启的应用路径',
+                      "Đường dẫn ứng dụng được khởi động lại cùng lúc chuyển Codex.",
                     )}
                   </div>
                 </div>
@@ -445,18 +445,18 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                       value={codexSpecifiedAppPath}
                       placeholder={t(
                         'settings.general.codexSpecifiedAppPathPlaceholder',
-                        '例如 /Applications/Host.app',
+                        "Ví dụ /Applications/Host.app",
                       )}
                       onChange={(e) => setCodexSpecifiedAppPath(e.target.value)}
                     />
                     <button className="btn btn-secondary" onClick={handlePickCodexSpecifiedAppPath}>
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
                       onClick={() => setCodexSpecifiedAppPath('')}
                     >
-                      {t('settings.general.codexSpecifiedAppPathClear', '清空')}
+                      {t('settings.general.codexSpecifiedAppPathClear', "Xóa")}
                     </button>
                   </div>
                 </div>
@@ -527,12 +527,12 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.hermesAuthOverwrite', '切换 Codex 时同步 Hermes')}
+                    {t('settings.general.hermesAuthOverwrite', "Đồng bộ Hermes khi đổi Codex")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.hermesAuthOverwriteDesc',
-                      '仅 OAuth 账号：切号后写入 ~/.hermes/auth.json 的 openai-codex 凭据（默认关闭）'
+                      "Chỉ OAuth: ghi openai-codex vào ~/.hermes/auth.json (mặc định tắt)"
                     )}
                   </div>
                 </div>
@@ -591,7 +591,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('opencode')}
                       disabled={isAppPathResetDetecting('opencode')}
                     >
-                      {t('settings.general.opencodePathSelect', '选择')}
+                      {t('settings.general.opencodePathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -600,7 +600,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('opencode') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('opencode')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('opencode')}
                     </button>
                   </div>
@@ -609,8 +609,8 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -626,8 +626,8 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
               {codexQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {codexQuotaAlertThresholdCustomMode ? (
@@ -638,7 +638,7 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={codexQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setCodexQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(codexQuotaAlertThreshold, 0, 100);
@@ -688,12 +688,12 @@ export function SettingsCodexPlatformPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.codexHideRelayQuota', '隐藏中转站额度')}
+                    {t('settings.general.codexHideRelayQuota', "Ẩn hạn mức relay")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.codexHideRelayQuotaDesc',
-                      '开启后，Codex 账号总览隐藏中转 / New API 类额度面板，减轻列表重叠与视觉干扰。',
+                      "Ẩn bảng hạn mức relay / New API trên tổng quan tài khoản Codex.",
                     )}
                   </div>
                 </div>

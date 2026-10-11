@@ -39,6 +39,15 @@ jobs:
       - name: 🌐 Check locales
         run: node scripts/check_locales.cjs
 
+      - name: 🇻🇳 Verify no translatable Chinese i18next fallback remains
+        run: node scripts/vietnamize_source.cjs --check --verbose
+
+      - name: 🦀 Check Antigravity Rust localization and bundled resources
+        run: node scripts/check_antigravity_rust_i18n.cjs
+
+      - name: 🖥️ Check active Antigravity screen localization
+        run: node scripts/check_antigravity_frontend_i18n.cjs
+
   preflight-typecheck:
     name: "🔍 Preflight: Typecheck"
     runs-on: ubuntu-latest
@@ -118,36 +127,17 @@ jobs:
         run: npm test
 
   build:
-    name: "🏗️ Build: ${{ matrix.label }}"
+    # Windows 10/11 x64 is the only supported desktop distribution target.
+    name: "🏗️ Build: Windows x64"
     needs: [preflight-locales, preflight-typecheck, preflight-tests, preflight-ts-windows]
-    runs-on: ${{ matrix.platform }}
+    runs-on: windows-latest
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
         include:
-          - label: "macos-aarch64"
-            platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
-            release_dir: "target/aarch64-apple-darwin/release"
-          - label: "macos-x86_64"
-            platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
-            release_dir: "target/x86_64-apple-darwin/release"
-          - label: "macos-universal"
-            platform: "macos-latest"
-            args: "--target universal-apple-darwin"
-            release_dir: "target/universal-apple-darwin/release"
-          - label: "ubuntu-22.04"
-            platform: "ubuntu-22.04"
-            args: ""
-            release_dir: "target/release"
-          - label: "ubuntu-24.04-arm"
-            platform: "ubuntu-24.04-arm"
-            args: ""
-            release_dir: "target/release"
-          - label: "windows-latest"
+          - label: "windows-x64"
             platform: "windows-latest"
             args: ""
             release_dir: "target/release"
@@ -156,25 +146,15 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🐧 Install system dependencies (Linux)
-        if: startsWith(matrix.platform, 'ubuntu')
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev patchelf pkg-config libsoup-3.0-dev javascriptcoregtk-4.1 libjavascriptcoregtk-4.1-dev
-          sudo apt-get install -y libnm-dev xdg-utils
-
       - name: 🦀 Rust setup
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: 🦀 Rust cache
         uses: swatinem/rust-cache@v2
         with:
           key: ${{ matrix.platform }}-${{ matrix.label }}
 
-      - name: 🧪 Test Codex context preservation
-        if: matrix.label == 'ubuntu-22.04'
+      - name: 🧪 Test Codex context preservation (Windows)
         working-directory: src-tauri
         run: |
           cargo test instance_configuration_save --lib
@@ -198,17 +178,13 @@ jobs:
       - name: 🔄 Sync versions
         run: npm run sync-version
 
-      - name: 🧪 Test core Rust library
-        if: matrix.label == 'ubuntu-22.04'
+      - name: 🧪 Test core Rust library (Windows)
         run: npm run test:rust:core
 
       - name: 💾 Cache Tauri tooling
         uses: actions/cache@v4
         with:
-          path: |
-            ${{ matrix.platform == 'windows-latest' && 'C:\Users\runneradmin\AppData\Local\tauri' || '' }}
-            ${{ startsWith(matrix.platform, 'ubuntu') && '~/.cache/tauri' || '' }}
-            ${{ matrix.platform == 'macos-latest' && '~/Library/Caches/tauri' || '' }}
+          path: C:\Users\runneradmin\AppData\Local\tauri
           key: tauri-deps-${{ matrix.platform }}-${{ hashFiles('package-lock.json', '**/Cargo.toml') }}
           restore-keys: |
             tauri-deps-${{ matrix.platform }}-

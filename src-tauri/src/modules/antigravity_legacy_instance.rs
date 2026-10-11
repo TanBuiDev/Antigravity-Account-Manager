@@ -56,7 +56,7 @@ pub fn update_default_settings(
     extra_args: Option<String>,
     follow_local_account: Option<bool>,
 ) -> Result<DefaultInstanceSettings, String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     let settings = &mut store.default_settings;
 
@@ -104,7 +104,7 @@ fn ensure_profile_global_storage(profile_dir: &Path) -> Result<PathBuf, String> 
     let global_storage = profile_dir.join("User").join("globalStorage");
     if !global_storage.exists() {
         fs::create_dir_all(&global_storage)
-            .map_err(|e| format!("创建 globalStorage 失败: {}", e))?;
+            .map_err(|e| format!("Không thể tạo globalStorage: {}", e))?;
     }
     Ok(global_storage)
 }
@@ -121,18 +121,18 @@ fn ensure_state_db_for_injection(profile_dir: &Path) -> Result<PathBuf, String> 
     let default_db = modules::antigravity_paths::legacy_state_db_path()?;
     if default_db.exists() {
         let _ = ensure_profile_global_storage(profile_dir)?;
-        fs::copy(&default_db, &db_path).map_err(|e| format!("复制 state.vscdb 失败: {}", e))?;
+        fs::copy(&default_db, &db_path).map_err(|e| format!("Không thể sao chép state.vscdb: {}", e))?;
     }
 
     if !db_path.exists() {
         let _ = ensure_profile_global_storage(profile_dir)?;
         let conn =
-            Connection::open(&db_path).map_err(|e| format!("创建 state.vscdb 失败: {}", e))?;
+            Connection::open(&db_path).map_err(|e| format!("Không thể tạo state.vscdb: {}", e))?;
         conn.execute(
             "CREATE TABLE IF NOT EXISTS ItemTable (key TEXT UNIQUE ON CONFLICT REPLACE, value TEXT)",
             [],
         )
-        .map_err(|e| format!("初始化 state.vscdb 失败: {}", e))?;
+        .map_err(|e| format!("Không thể khởi tạo state.vscdb: {}", e))?;
     }
 
     Ok(db_path)
@@ -177,7 +177,7 @@ pub fn resolve_auth_mode() -> AntigravityDesktopAuthMode {
     });
     let Some(info) = info else {
         modules::logger::log_warn(
-            "[Antigravity Legacy Instance] 无法确认 Antigravity 安装版本，默认采用系统凭据认证模式",
+            "[Antigravity Legacy Instance] Không thể xác định phiên bản cài đặt Antigravity; sử dụng xác thực hệ thống mặc định",
         );
         return AntigravityDesktopAuthMode::SystemCredential;
     };
@@ -227,13 +227,13 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
     let directory_preexisted = std::path::Path::new(params.user_data_dir.trim()).exists();
     let creation_mode = params.init_mode.clone().unwrap_or_else(|| "copy".to_string());
     let _creation_guard = crate::modules::instance_storage_cleanup::protect_instance_creation()?;
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
 
     let name = instance_store::normalize_name(&params.name)?;
     let user_data_dir = params.user_data_dir.trim().to_string();
     if user_data_dir.is_empty() {
-        return Err("实例目录不能为空".to_string());
+        return Err("Thư mục phiên không được để trống".to_string());
     }
 
     instance_store::ensure_unique(&store, &name, &user_data_dir, None)?;
@@ -250,10 +250,10 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
     if use_existing_dir {
         if !user_dir_path.exists() {
             let resolved = instance_store::display_path(&user_dir_path);
-            return Err(format!("所选目录不存在: {}", resolved));
+            return Err(format!("Thư mục đã chọn không tồn tại: {}", resolved));
         }
         if !user_dir_path.is_dir() {
-            return Err("所选路径不是目录".to_string());
+            return Err("Đường dẫn đã chọn không phải thư mục".to_string());
         }
     } else if create_empty {
         if user_dir_path.exists() {
@@ -265,10 +265,10 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
             }
             if has_entries {
                 let resolved_path = instance_store::display_path(&user_dir_path);
-                return Err(format!("空白实例需要目标目录为空: {}", resolved_path));
+                return Err(format!("Phiên trống yêu cầu thư mục đích không chứa dữ liệu: {}", resolved_path));
             }
         }
-        fs::create_dir_all(&user_dir_path).map_err(|e| format!("创建实例目录失败: {}", e))?;
+        fs::create_dir_all(&user_dir_path).map_err(|e| format!("Không thể tạo thư mục phiên: {}", e))?;
     } else {
         let source_dir = match params.copy_source_instance_id.as_deref() {
             Some("__default__") | None => get_default_user_data_dir()?,
@@ -277,7 +277,7 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
                     .instances
                     .iter()
                     .find(|item| item.id == source_id)
-                    .ok_or("复制来源实例不存在")?;
+                    .ok_or("Không tìm thấy phiên nguồn để sao chép")?;
                 PathBuf::from(&source_instance.user_data_dir)
             }
         };
@@ -291,7 +291,7 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
             }
             if has_entries {
                 let resolved_path = instance_store::display_path(&user_dir_path);
-                return Err(format!("复制来源实例需要目标目录为空: {}", resolved_path));
+                return Err(format!("Khi sao chép phiên, thư mục đích phải trống: {}", resolved_path));
             }
         }
 
@@ -326,13 +326,13 @@ pub fn create_instance(params: CreateInstanceParams) -> Result<InstanceProfile, 
 }
 
 pub fn update_instance(params: UpdateInstanceParams) -> Result<InstanceProfile, String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     let index = store
         .instances
         .iter()
         .position(|instance| instance.id == params.instance_id)
-        .ok_or("实例不存在")?;
+        .ok_or("Không tìm thấy phiên")?;
 
     let current_id = store.instances[index].id.clone();
     let current_dir = store.instances[index].user_data_dir.clone();
@@ -371,13 +371,13 @@ pub fn update_instance(params: UpdateInstanceParams) -> Result<InstanceProfile, 
 
 pub fn delete_instance(instance_id: &str) -> Result<(), String> {
     let _creation_guard = crate::modules::instance_storage_cleanup::protect_instance_creation()?;
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     let index = store
         .instances
         .iter()
         .position(|instance| instance.id == instance_id)
-        .ok_or("实例不存在")?;
+        .ok_or("Không tìm thấy phiên")?;
     let user_data_dir = store.instances[index].user_data_dir.clone();
 
     if !user_data_dir.trim().is_empty() {
@@ -391,7 +391,7 @@ pub fn delete_instance(instance_id: &str) -> Result<(), String> {
 }
 
 pub fn update_instance_after_start(instance_id: &str, pid: u32) -> Result<InstanceProfile, String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     let mut updated = None;
     for instance in &mut store.instances {
@@ -402,13 +402,13 @@ pub fn update_instance_after_start(instance_id: &str, pid: u32) -> Result<Instan
             break;
         }
     }
-    let updated = updated.ok_or("实例不存在")?;
+    let updated = updated.ok_or("Không tìm thấy phiên")?;
     save_instance_store(&store)?;
     Ok(updated)
 }
 
 pub fn update_instance_pid(instance_id: &str, pid: Option<u32>) -> Result<InstanceProfile, String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     let mut updated = None;
     for instance in &mut store.instances {
@@ -418,13 +418,13 @@ pub fn update_instance_pid(instance_id: &str, pid: Option<u32>) -> Result<Instan
             break;
         }
     }
-    let updated = updated.ok_or("实例不存在")?;
+    let updated = updated.ok_or("Không tìm thấy phiên")?;
     save_instance_store(&store)?;
     Ok(updated)
 }
 
 pub fn update_default_pid(pid: Option<u32>) -> Result<DefaultInstanceSettings, String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     store.default_settings.last_pid = pid;
     let updated = store.default_settings.clone();
@@ -433,7 +433,7 @@ pub fn update_default_pid(pid: Option<u32>) -> Result<DefaultInstanceSettings, S
 }
 
 pub fn clear_all_pids() -> Result<(), String> {
-    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "无法获取实例锁")?;
+    let _lock = INSTANCE_STORE_LOCK.lock().map_err(|_| "Không thể khóa dữ liệu phiên")?;
     let mut store = load_instance_store()?;
     store.default_settings.last_pid = None;
     for instance in &mut store.instances {

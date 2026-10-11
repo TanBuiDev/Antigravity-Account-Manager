@@ -31,7 +31,7 @@ export interface VerificationHistoryBatch {
   records?: VerificationHistoryRecord[];
 }
 
-/** 将验证历史归并为账号级最新状态，供总览快速渲染和错误详情展示。 */
+/** Tổng hợp lịch sử xác minh thành trạng thái mới nhất theo từng tài khoản để hiển thị tổng quan và chi tiết lỗi. */
 export function buildVerificationHistoryMaps(batches: VerificationHistoryBatch[] = []) {
   const sorted = [...batches].sort((a, b) => b.verifiedAt - a.verifiedAt);
   const statusMap: Record<string, string> = {};
@@ -103,7 +103,7 @@ export const EMPTY_ANTIGRAVITY_ACCOUNT_NOTE_FORM: AntigravityAccountNoteFormStat
   mailUrl: '',
 };
 
-/** 建立账号备注编辑草稿，避免 UI 直接修改账号缓存对象。 */
+/** Tạo bản nháp chỉnh sửa ghi chú để giao diện không sửa trực tiếp đối tượng tài khoản trong bộ nhớ đệm. */
 export function buildAntigravityAccountNoteForm(
   account?: Account | null,
 ): AntigravityAccountNoteFormState {
@@ -138,7 +138,7 @@ export function hasAntigravityAccountNoteFormDetails(
   );
 }
 
-/** 把页面草稿转换为后端更新命令使用的字段结构。 */
+/** Chuyển bản nháp trên trang thành cấu trúc trường dùng cho lệnh cập nhật backend. */
 export function buildAntigravityAccountNoteUpdate(form: AntigravityAccountNoteFormState) {
   return {
     note: form.note,
@@ -196,6 +196,6 @@ export function writeAntigravityCustomSortActive(active: boolean): void {
   try {
     localStorage.setItem(ANTIGRAVITY_CUSTOM_SORT_ACTIVE_KEY, active ? '1' : '0');
   } catch {
-    // 自定义排序只影响显示顺序，存储不可用时允许静默降级。
+    // Sắp xếp tùy chỉnh chỉ ảnh hưởng thứ tự hiển thị; khi bộ nhớ lưu trữ không khả dụng có thể giảm cấp mà không báo lỗi.
   }
 }

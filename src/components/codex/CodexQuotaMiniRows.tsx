@@ -48,7 +48,7 @@ function CodexQuotaMiniRow({
             className="codex-quota-mini-right"
             title={t(
               "codex.quota.windowStatsHint",
-              "从本窗口满额到现在，该账号走 API 服务的请求数、token 和账号计费",
+              "Số yêu cầu, token và phí tài khoản qua dịch vụ API từ lúc cửa sổ đầy",
             )}
           >
             <span className="codex-quota-mini-chip">
@@ -61,7 +61,7 @@ function CodexQuotaMiniRow({
               className="codex-quota-mini-chip"
               title={t(
                 "codex.quota.windowAccountCostHint",
-                "账号计费（按模型价格估算）",
+                "Phí tài khoản (ước theo giá mô hình)",
               )}
             >
               A ${formatCodexWindowCostAmount(stats.estimatedCostUsd)}
@@ -71,7 +71,7 @@ function CodexQuotaMiniRow({
                 className="codex-quota-mini-chip"
                 title={t(
                   "codex.quota.windowEstimatedFullCostHint",
-                  "按已用额度折算：本窗口满额约合多少账号计费",
+                  "Quy đổi từ mức dùng hiện tại: chi phí tính cho tài khoản khi cửa sổ này đầy",
                 )}
               >
                 ≈${formatCodexWindowCostAmount(estimatedFullCostUsd)}
@@ -80,7 +80,7 @@ function CodexQuotaMiniRow({
             {stats.userCostUsd != null ? (
               <span
                 className="codex-quota-mini-chip"
-                title={t("codex.quota.windowUserCostHint", "用户计费")}
+                title={t("codex.quota.windowUserCostHint", "Phí người dùng")}
               >
                 U ${formatCodexWindowCostAmount(stats.userCostUsd)}
               </span>

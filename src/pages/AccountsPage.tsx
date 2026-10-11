@@ -230,7 +230,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       return { label: t('wakeup.errorUi.tosViolationTitle', 'TOS'), className: 'is-tos-violation' }
     }
     if (reason === 'verification_required' || isAccountNeedsReauth(account, verificationStatusMap)) {
-      return { label: t('accounts.status.needsReauth', '需网页验证'), className: 'is-warning' }
+      return { label: t('accounts.status.needsReauth', "Cần xác minh web"), className: 'is-warning' }
     }
     return null
   }, [verificationStatusMap, t])
@@ -564,7 +564,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       if (accountNoteMailPreviewSeqRef.current !== requestSeq) return
       const preview = findFirstMailVerificationCode(response.body)
       if (!preview) {
-        setAccountNoteMailPreviewError(t('accounts.accountNote.mailPreviewNoCode', '未匹配到连续 6 位验证码'))
+        setAccountNoteMailPreviewError(t('accounts.accountNote.mailPreviewNoCode', "Không tìm thấy mã 6 chữ số liên tiếp"))
         return
       }
       const previous = accountNoteMailPreviewSnapshotRef.current
@@ -578,15 +578,15 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       const rawError = String(error).replace(/^Error:\s*/, '')
       const httpError = rawError.match(/^MAIL_PREVIEW_HTTP_FAILED:(\d+)$/)
       const detail = rawError === 'MAIL_URL_EMPTY'
-        ? t('accounts.accountNote.mailPreviewUrlRequired', '请输入邮件地址')
+        ? t('accounts.accountNote.mailPreviewUrlRequired', "Nhập URL email")
         : rawError === 'MAIL_URL_INVALID'
-          ? t('accounts.accountNote.mailPreviewUrlInvalid', '邮件地址格式无效，请输入完整的 http:// 或 https:// 地址')
+          ? t('accounts.accountNote.mailPreviewUrlInvalid', "URL email không hợp lệ. Nhập địa chỉ http:// hoặc https:// đầy đủ.")
           : rawError === 'MAIL_URL_UNSUPPORTED_SCHEME'
-            ? t('accounts.accountNote.mailPreviewUnsupportedProtocol', '邮件地址仅支持 http 或 https 协议')
+            ? t('accounts.accountNote.mailPreviewUnsupportedProtocol', "URL email chỉ hỗ trợ http hoặc https.")
             : httpError
-              ? t('accounts.accountNote.mailPreviewHttpFailed', { defaultValue: '邮件地址请求失败：HTTP {{status}}', status: httpError[1] })
+              ? t('accounts.accountNote.mailPreviewHttpFailed', { defaultValue: "Yêu cầu URL email thất bại: HTTP {{status}}", status: httpError[1] })
               : rawError.replace(/^MAIL_PREVIEW_[A-Z_]+:\s*/, '')
-      setAccountNoteMailPreviewError(t('accounts.accountNote.mailPreviewFetchFailed', { defaultValue: '读取邮件失败：{{error}}', error: detail }))
+      setAccountNoteMailPreviewError(t('accounts.accountNote.mailPreviewFetchFailed', { defaultValue: "Không đọc được email: {{error}}", error: detail }))
     } finally {
       if (accountNoteMailPreviewSeqRef.current === requestSeq) setAccountNoteMailPreviewLoading(false)
     }
@@ -1584,7 +1584,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         }
       })
       .catch((e) => {
-        console.error('准备 OAuth 链接失败:', e)
+        console.error('Không thể chuẩn bị liên kết OAuth:', e)
       })
   }, [showAddModal, addTab, oauthUrl])
 
@@ -1765,10 +1765,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
   const consumeExternalProviderImport = useCallback(() => {
     const request = consumeQueuedExternalProviderImportForPlatform('antigravity')
     if (!request) {
-      console.info('[ExternalImport][AccountsPage] 当前无 antigravity 待处理导入请求')
+      console.info('[ExternalImport][AccountsPage] Không có yêu cầu nhập antigravity đang chờ')
       return
     }
-    console.info('[ExternalImport][AccountsPage] 消费到导入请求，准备打开导入弹框', {
+    console.info('[ExternalImport][AccountsPage] Đã nhận yêu cầu nhập; chuẩn bị mở hộp thoại', {
       page: request.page,
       autoImport: request.autoImport,
       tokenLength: request.token.length,
@@ -1779,7 +1779,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
     setTokenInput(normalizedTokenInput)
     setAddStatus('idle')
     setAddMessage('')
-    console.info('[ExternalImport][AccountsPage] 已打开导入弹框并写入 tokenInput', {
+    console.info('[ExternalImport][AccountsPage] Đã mở hộp thoại nhập và điền tokenInput', {
       normalizedLength: normalizedTokenInput.length,
       normalizedLooksLikeJson: normalizedTokenInput.trim().startsWith('{'),
     })
@@ -1787,10 +1787,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
 
   useEffect(() => {
     const handleExternalImportEvent = () => {
-      console.info('[ExternalImport][AccountsPage] 收到前端外部导入事件')
+      console.info('[ExternalImport][AccountsPage] Đã nhận sự kiện nhập từ frontend')
       consumeExternalProviderImport()
     }
-    console.info('[ExternalImport][AccountsPage] 初始化时尝试消费外部导入队列')
+    console.info('[ExternalImport][AccountsPage] Kiểm tra hàng đợi nhập khi khởi tạo')
     consumeExternalProviderImport()
     window.addEventListener(EXTERNAL_PROVIDER_IMPORT_EVENT, handleExternalImportEvent)
     return () => {
@@ -1879,19 +1879,19 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
     const email = pendingOAuthEmailInput.trim()
     setPendingOAuthEmailError(null)
     if (!email || !email.includes('@')) {
-      setPendingOAuthEmailError(t('codex.pendingAuth.emailRequired', '请输入账号邮箱'))
+      setPendingOAuthEmailError(t('codex.pendingAuth.emailRequired', "Nhập email tài khoản"))
       return
     }
     const rawSecret = oauthAccountNoteForm.twoFactorSecret.trim()
     const parsedSecret = rawSecret ? parseMfaCredentialInput(rawSecret) : null
     if (rawSecret && !parsedSecret) {
-      setAccountNoteFieldError(t('accounts.accountNote.twoFactorSecretInvalid', '2FA 秘钥格式无效，请输入 Base32 secret 或 otpauth:// 链接'))
+      setAccountNoteFieldError(t('accounts.accountNote.twoFactorSecretInvalid', "Mã bí mật 2FA không hợp lệ. Nhập mã Base32 hoặc URI otpauth://."))
       openOAuthAccountNoteModal()
       return
     }
     setSavingPendingOAuthAccount(true)
     setAddStatus('loading')
-    setAddMessage(t('codex.pendingAuth.saving', '正在保存待授权账号...'))
+    setAddMessage(t('codex.pendingAuth.saving', "Đang lưu tài khoản chờ xác thực..."))
     try {
       const account = await accountService.createPendingOAuthAccount(email, {
         ...buildAntigravityAccountNoteUpdate(oauthAccountNoteForm),
@@ -1905,7 +1905,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       await assignAccountsToAddTargetGroup([account])
       setPendingOAuthAccount(account)
       setAddStatus('success')
-      setAddMessage(t('codex.pendingAuth.saved', '待授权账号已保存'))
+      setAddMessage(t('codex.pendingAuth.saved', "Đã lưu tài khoản chờ xác thực"))
       window.setTimeout(() => {
         setShowAddModal(false)
         resetAddModalState()
@@ -1916,7 +1916,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       }, 900)
     } catch (error) {
       setAddStatus('error')
-      setAddMessage(t('codex.pendingAuth.saveFailed', { defaultValue: '保存待授权账号失败：{{error}}', error: String(error).replace(/^Error:\s*/, '') }))
+      setAddMessage(t('codex.pendingAuth.saveFailed', { defaultValue: "Không thể lưu tài khoản chờ xác thực: {{error}}", error: String(error).replace(/^Error:\s*/, '') }))
     } finally {
       setSavingPendingOAuthAccount(false)
     }
@@ -2016,69 +2016,69 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
 
   const formatSwitchHistoryStage = (stage?: string | null) => {
     if (stage === 'local') {
-      return t('accounts.switchHistory.stageLocal', '本地落盘')
+      return t('accounts.switchHistory.stageLocal', "Ghi cục bộ")
     }
     if (stage === 'client_start') {
-      return t('accounts.switchHistory.stageClientStart', '启动客户端')
+      return t('accounts.switchHistory.stageClientStart', "Khởi động ứng dụng")
     }
     if (stage === 'seamless') {
-      return t('accounts.switchHistory.stageSeamless', '扩展无感')
+      return t('accounts.switchHistory.stageSeamless', "Tiện ích mở rộng liền mạch")
     }
-    return t('accounts.switchHistory.stageUnknown', '未知阶段')
+    return t('accounts.switchHistory.stageUnknown', "Giai đoạn không xác định")
   }
 
   const formatSwitchHistoryTrigger = (triggerType?: string | null) => {
     if (triggerType === 'auto') {
-      return t('accounts.switchHistory.triggerAuto', '自动切换')
+      return t('accounts.switchHistory.triggerAuto', "Chuyển tự động")
     }
     if (triggerType === 'manual') {
-      return t('accounts.switchHistory.triggerManual', '手动切换')
+      return t('accounts.switchHistory.triggerManual', "Chuyển thủ công")
     }
-    return t('accounts.switchHistory.triggerUnknown', '未知')
+    return t('accounts.switchHistory.triggerUnknown', "Không xác định")
   }
 
   const formatSwitchHistoryOrigin = (triggerSource?: string | null) => {
     const normalizedSource = (triggerSource || '').trim().toLowerCase()
     if (normalizedSource.startsWith('tools.ws.')) {
-      return t('accounts.switchHistory.originPlugin', '插件端')
+      return t('accounts.switchHistory.originPlugin', "Tiện ích mở rộng")
     }
     if (normalizedSource.startsWith('tools.account.')) {
-      return t('accounts.switchHistory.originDesktop', '桌面端')
+      return t('accounts.switchHistory.originDesktop', "Máy tính để bàn")
     }
-    return t('accounts.switchHistory.originUnknown', '未知')
+    return t('accounts.switchHistory.originUnknown', "Không xác định")
   }
 
   const formatSwitchHistoryAutoRule = (rule?: string | null) => {
     if (rule === 'current_disabled') {
-      return t('accounts.switchHistory.autoReasonRuleCurrentDisabled', '当前账号已禁用')
+      return t('accounts.switchHistory.autoReasonRuleCurrentDisabled', "Tài khoản hiện tại đã bị vô hiệu hóa")
     }
     if (rule === 'current_quota_forbidden') {
-      return t('accounts.switchHistory.autoReasonRuleQuotaForbidden', '当前账号配额受限')
+      return t('accounts.switchHistory.autoReasonRuleQuotaForbidden', "Hạn mức của tài khoản hiện tại bị hạn chế")
     }
     if (rule === 'group_and_credits_below_threshold') {
-      return t('accounts.switchHistory.autoReasonRuleGroupAndCreditsBelowThreshold', '模型分组和 Credits 同时低于阈值')
+      return t('accounts.switchHistory.autoReasonRuleGroupAndCreditsBelowThreshold', "Nhóm mô hình và credits đều thấp hơn ngưỡng")
     }
     if (rule === 'group_below_threshold') {
-      return t('accounts.switchHistory.autoReasonRuleGroupBelowThreshold', '模型分组低于阈值')
+      return t('accounts.switchHistory.autoReasonRuleGroupBelowThreshold', "Nhóm mô hình thấp hơn ngưỡng")
     }
     if (rule === 'credits_below_threshold') {
-      return t('accounts.switchHistory.autoReasonRuleCreditsBelowThreshold', '剩余 Credits 低于阈值')
+      return t('accounts.switchHistory.autoReasonRuleCreditsBelowThreshold', "Credits còn lại thấp hơn ngưỡng")
     }
-    return t('accounts.switchHistory.triggerUnknown', '未知')
+    return t('accounts.switchHistory.triggerUnknown', "Không xác định")
   }
 
   const formatSwitchHistoryAutoScope = (scopeMode?: string | null) => {
     if (scopeMode === 'selected_groups') {
-      return t('accounts.switchHistory.autoReasonScopeSelectedGroups', '指定模型分组')
+      return t('accounts.switchHistory.autoReasonScopeSelectedGroups', "Nhóm mô hình đã chọn")
     }
-    return t('accounts.switchHistory.autoReasonScopeAnyGroup', '任一模型分组')
+    return t('accounts.switchHistory.autoReasonScopeAnyGroup', "Bất kỳ nhóm mô hình nào")
   }
 
   const formatSwitchHistoryAutoReason = (
     reason?: accountService.AntigravityAutoSwitchReason | null
   ) => {
     if (!reason) {
-      return t('accounts.switchHistory.autoReasonUnknown', '自动切号触发，未记录详细原因')
+      return t('accounts.switchHistory.autoReasonUnknown', "Đã kích hoạt chuyển tự động nhưng không ghi lại lý do chi tiết")
     }
     const formatCreditsValue = (value?: number | null) => {
       if (typeof value !== 'number' || !Number.isFinite(value)) {
@@ -2107,7 +2107,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       currentCredits: currentCreditsText,
       candidates: reason.candidateCount ?? 0,
       defaultValue:
-        '规则：{{rule}}；额度阈值：{{quotaThreshold}}%；Credits 阈值：{{creditsThreshold}}；范围：{{scope}}；监控分组：{{selectedGroups}}；命中分组：{{hitGroups}}；当前 Credits：{{currentCredits}}；候选账号：{{candidates}}',
+        "Quy tắc: {{rule}}; ngưỡng quota: {{quotaThreshold}}%; ngưỡng credits: {{creditsThreshold}}; phạm vi: {{scope}}; nhóm theo dõi: {{selectedGroups}}; nhóm trúng ngưỡng: {{hitGroups}}; credits hiện tại: {{currentCredits}}; tài khoản ứng viên: {{candidates}}",
     })
   }
 
@@ -2399,7 +2399,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         importedAccounts.push(account)
         success += 1
       } catch (e) {
-        console.error('Token 导入失败:', e)
+        console.error('Không thể nhập token:', e)
         fail += 1
       }
       await new Promise((resolve) => setTimeout(resolve, 120))
@@ -2438,7 +2438,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       setOauthUrlCopied(true)
       window.setTimeout(() => setOauthUrlCopied(false), 1200)
     } catch (e) {
-      console.error('复制失败:', e)
+      console.error('Sao chép thất bại:', e)
     }
   }
 
@@ -2663,7 +2663,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         : null
       if (rawTwoFactorSecret && !parsedTwoFactorSecret) {
         setAccountNoteFieldError(
-          t('accounts.accountNote.twoFactorSecretInvalid', '2FA 秘钥格式无效，请输入 Base32 secret 或 otpauth:// 链接'),
+          t('accounts.accountNote.twoFactorSecretInvalid', "Mã bí mật 2FA không hợp lệ. Nhập mã Base32 hoặc URI otpauth://."),
         )
         return
       }
@@ -2688,7 +2688,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
           remark: activeAccountNoteForm.note,
         }))
       }
-      setMessage({ text: t('accounts.accountNote.saved', '账号备注已保存') })
+      setMessage({ text: t('accounts.accountNote.saved', "Đã lưu ghi chú tài khoản") })
       setEditingAccountNoteId(null)
       setOauthAccountNoteMode(false)
       setEditingAccountNoteForm(EMPTY_ANTIGRAVITY_ACCOUNT_NOTE_FORM)
@@ -2696,7 +2696,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       setAccountNoteError(
         t('accounts.accountNote.saveFailed', {
           error: String(error).replace(/^Error:\s*/, ''),
-          defaultValue: '保存账号备注失败：{{error}}',
+          defaultValue: "Không thể lưu ghi chú tài khoản: {{error}}",
         })
       )
     } finally {
@@ -2727,11 +2727,11 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         className={`codex-account-note-chip ${hasNote ? 'has-note' : 'empty-note'}`}
         onClick={() => openAccountNoteModal(account)}
         title={hasNote
-          ? getAntigravityAccountNoteTitle(account, t('accounts.accountNote.short', '账号备注'))
-          : t('accounts.accountNote.emptyTitle', '填写账号备注')}
+          ? getAntigravityAccountNoteTitle(account, t('accounts.accountNote.short', "Ghi chú"))
+          : t('accounts.accountNote.emptyTitle', "Thêm ghi chú tài khoản")}
       >
         <FileText size={12} />
-        <span>{hasNote ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.addShort', '加备注')}</span>
+        <span>{hasNote ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.addShort', "Thêm")}</span>
       </button>
     )
   }, [openAccountNoteModal, t])
@@ -2854,7 +2854,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
   }, [accounts, refreshWarnings])
 
   const resolveGroupLabel = (groupKey: string) =>
-    groupKey === untaggedKey ? t('accounts.untagged', '未分组') : groupKey
+    groupKey === untaggedKey ? t('accounts.untagged', "Chưa gắn thẻ") : groupKey
 
   const renderCustomQuotaSection = (account: Account, isList: boolean = false) => (
     <AntigravityQuotaSection
@@ -2902,7 +2902,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
 
       const hasModels = account.quota?.models && account.quota.models.length > 0
       if (!hasModels) {
-        console.log('[AccountsPage] 账号无配额数据:', {
+        console.log('[AccountsPage] Tài khoản chưa có dữ liệu hạn mức:', {
           email: account.email,
           isCurrent,
           hasQuota: !!account.quota,
@@ -2954,7 +2954,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
             </span>
             <AntigravityGcpTosBadge account={account} />
             {isPendingAntigravityAccount(account) && (
-              <span className="status-pill warning">{t('codex.pendingAuth.badge', '待授权')}</span>
+              <span className="status-pill warning">{t('codex.pendingAuth.badge', "Chờ xác thực")}</span>
             )}
             {(() => {
               const vBadge = getVerificationBadge(account)
@@ -2970,7 +2970,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
             {renderAccountNoteChip(account)}
             {isPendingAntigravityAccount(account) && (
               <button type="button" className="btn btn-sm btn-outline" onClick={() => openPendingOAuthAccount(account)}>
-                {t('codex.pendingAuth.authorizeAction', '授权添加')}
+                {t('codex.pendingAuth.authorizeAction', "Xác thực")}
               </button>
             )}
             {!isPendingAntigravityAccount(account) && isAccountNeedsReauth(account, verificationStatusMap) && (() => {
@@ -2999,10 +2999,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                         setShowVerificationErrorModal(account.id)
                       }
                     }}
-                    title={validationUrl || t('modals.errors.viewVerificationDetail', '查看验证详情')}
+                    title={validationUrl || t('modals.errors.viewVerificationDetail', 'Xem chi tiết xác minh')}
                   >
                     <ExternalLink size={12} />
-                    <span>{t('accounts.actions.openValidationUrl', '网页验证')}</span>
+                    <span>{t('accounts.actions.openValidationUrl', "Xác minh web")}</span>
                   </button>
                   {validationUrl && (
                     <button
@@ -3016,13 +3016,13 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                         gap: 4,
                       }}
                       onClick={() => handleCopyValidationUrl(account.id, validationUrl)}
-                      title={t('accounts.actions.copyValidationUrlTooltip', '复制网页验证地址')}
+                      title={t('accounts.actions.copyValidationUrlTooltip', "Sao chép địa chỉ xác minh web")}
                     >
                       {isCopied ? <Check size={12} /> : <Copy size={12} />}
                       <span>
                         {isCopied
-                          ? t('common.copied', '已复制')
-                          : t('accounts.actions.copyValidationUrl', '复制验证链接')}
+                          ? t('common.copied', "Đã sao chép")
+                          : t('accounts.actions.copyValidationUrl', "Sao chép liên kết xác minh")}
                       </span>
                     </button>
                   )}
@@ -3047,7 +3047,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
               <>
                 {hasQuotaError && !isAccountNeedsReauth(account, verificationStatusMap) && (
                   <div className="quota-empty" title={quotaError?.message}>
-                    {t('common.shared.quota.queryFailed', '配额查询失败')}
+                    {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
                   </div>
                 )}
                 {renderCustomQuotaSection(account, false)}
@@ -3078,7 +3078,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                   type="button"
                   className="card-action-btn pending-auth-action"
                   onClick={() => openPendingOAuthAccount(account)}
-                  title={t('common.shared.addModal.oauth', 'OAuth 授权')}
+                  title={t('common.shared.addModal.oauth', "Ủy quyền OAuth")}
                 >
                   <Globe size={14} />
                 </button>
@@ -3106,7 +3106,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
               <button
                 className="card-action-btn"
                 onClick={() => openTagModal(account.id)}
-                title={t('accounts.editTags', '编辑标签')}
+                title={t('accounts.editTags', "Chỉnh sửa thẻ")}
               >
                 <Tag size={14} />
               </button>
@@ -3114,8 +3114,8 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                 type="button"
                 className={`card-action-btn ${hasAntigravityAccountNoteDetails(account) ? 'active' : ''}`}
                 onClick={() => isPendingAntigravityAccount(account) ? openPendingOAuthAccount(account) : openAccountNoteModal(account)}
-                title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.emptyTitle', '填写账号备注')}
-                aria-label={t('accounts.accountNote.title', '账号备注')}
+                title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.emptyTitle', "Thêm ghi chú tài khoản")}
+                aria-label={t('accounts.accountNote.title', "Ghi chú tài khoản")}
               >
                 <FileText size={14} />
               </button>
@@ -3350,11 +3350,11 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                 event.stopPropagation()
                 openAccountNoteModal(account)
               }}
-              title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.emptyTitle', '填写账号备注')}
-              aria-label={t('accounts.accountNote.title', '账号备注')}
+              title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.emptyTitle', "Thêm ghi chú tài khoản")}
+              aria-label={t('accounts.accountNote.title', "Ghi chú tài khoản")}
             >
               <FileText size={12} />
-              <span>{hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.addShort', '加备注')}</span>
+              <span>{hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.addShort', "Thêm")}</span>
             </button>
             <button
               type="button"
@@ -3434,8 +3434,8 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                       }}
                       title={
                         isHidden
-                          ? t('accounts.compact.show', '显示')
-                          : t('accounts.compact.hide', '隐藏')
+                          ? t('accounts.compact.show', "Hiển thị")
+                          : t('accounts.compact.hide', "Ẩn")
                       }
                     >
                       {isHidden ? <EyeOff size={12} /> : <Eye size={12} />}
@@ -3568,14 +3568,14 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                   </span>
                 )}
                 {isPendingAntigravityAccount(account) && (
-                  <span className="status-pill warning">{t('codex.pendingAuth.badge', '待授权')}</span>
+                  <span className="status-pill warning">{t('codex.pendingAuth.badge', "Chờ xác thực")}</span>
                 )}
               </div>
               <div className="account-sub-line antigravity-account-meta-inline">
                 {renderAccountNoteChip(account)}
                 {isPendingAntigravityAccount(account) && (
                   <button type="button" className="btn btn-sm btn-outline" onClick={() => openPendingOAuthAccount(account)}>
-                    {t('codex.pendingAuth.authorizeAction', '授权添加')}
+                    {t('codex.pendingAuth.authorizeAction', "Xác thực")}
                   </button>
                 )}
                 {!isPendingAntigravityAccount(account) && isAccountNeedsReauth(account, verificationStatusMap) && (() => {
@@ -3604,10 +3604,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                             setShowVerificationErrorModal(account.id)
                           }
                         }}
-                        title={validationUrl || t('modals.errors.viewVerificationDetail', '查看验证详情')}
+                        title={validationUrl || t('modals.errors.viewVerificationDetail', 'Xem chi tiết xác minh')}
                       >
                         <ExternalLink size={12} />
-                        <span>{t('accounts.actions.openValidationUrl', '网页验证')}</span>
+                        <span>{t('accounts.actions.openValidationUrl', "Xác minh web")}</span>
                       </button>
                       {validationUrl && (
                         <button
@@ -3621,13 +3621,13 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                             gap: 4,
                           }}
                           onClick={() => handleCopyValidationUrl(account.id, validationUrl)}
-                          title={t('accounts.actions.copyValidationUrlTooltip', '复制网页验证地址')}
+                          title={t('accounts.actions.copyValidationUrlTooltip', "Sao chép địa chỉ xác minh web")}
                         >
                           {isCopied ? <Check size={12} /> : <Copy size={12} />}
                           <span>
                             {isCopied
-                              ? t('common.copied', '已复制')
-                              : t('accounts.actions.copyValidationUrl', '复制验证链接')}
+                              ? t('common.copied', "Đã sao chép")
+                              : t('accounts.actions.copyValidationUrl', "Sao chép liên kết xác minh")}
                           </span>
                         </button>
                       )}
@@ -3680,7 +3680,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                 <>
                   {hasQuotaError && !isAccountNeedsReauth(account, verificationStatusMap) && (
                     <div className="quota-empty" title={quotaError?.message}>
-                      {t('common.shared.quota.queryFailed', '配额查询失败')}
+                      {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
                     </div>
                   )}
                   {renderCustomQuotaSection(account, true)}
@@ -3696,7 +3696,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
           <td className="sticky-action-cell table-action-cell">
             <div className="action-buttons">
               {isPendingAntigravityAccount(account) && (
-                <button type="button" className="action-btn" onClick={() => openPendingOAuthAccount(account)} title={t('common.shared.addModal.oauth', 'OAuth 授权')}>
+                <button type="button" className="action-btn" onClick={() => openPendingOAuthAccount(account)} title={t('common.shared.addModal.oauth', "Ủy quyền OAuth")}>
                   <Globe size={16} />
                 </button>
               )}
@@ -3723,7 +3723,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
               <button
                 className="action-btn"
                 onClick={() => openTagModal(account.id)}
-                title={t('accounts.editTags', '编辑标签')}
+                title={t('accounts.editTags', "Chỉnh sửa thẻ")}
               >
                 <Tag size={16} />
               </button>
@@ -3731,8 +3731,8 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                 type="button"
                 className={`action-btn ${hasAntigravityAccountNoteDetails(account) ? 'active' : ''}`}
                 onClick={() => isPendingAntigravityAccount(account) ? openPendingOAuthAccount(account) : openAccountNoteModal(account)}
-                title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', '账号备注') : t('accounts.accountNote.emptyTitle', '填写账号备注')}
-                aria-label={t('accounts.accountNote.title', '账号备注')}
+                title={hasAntigravityAccountNoteDetails(account) ? t('accounts.accountNote.short', "Ghi chú") : t('accounts.accountNote.emptyTitle', "Thêm ghi chú tài khoản")}
+                aria-label={t('accounts.accountNote.title', "Ghi chú tài khoản")}
               >
                 <FileText size={16} />
               </button>

@@ -79,7 +79,7 @@ test("binding dialog shows saved percentages directly and opens the shared edito
   let tree = nodes(h.flush());
   const summary = tree.find((node) => node.props?.className?.includes("codex-oauth-binding-quota-summary"));
   assert.ok(summary);
-  assert.match(text(summary), /5小时 15%.*周 25%/);
+  assert.match(text(summary), /5 giờ 15%.*Tuần 25%/);
   assert.equal(tree.find((node) => node.props?.type === "checkbox").props.checked, true);
   summary.props.onClick();
   assert.equal(editCount, 1);

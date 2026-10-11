@@ -67,7 +67,7 @@ export function ZcodeAccountsPage() {
       injectToVSCode: zcodeService.injectZcodeAccount,
     },
     getDisplayEmail: getZcodeAccountDisplayEmail,
-    resolveOauthSuccessMessage: () => t('zcode.oauth.success', 'ZCode OAuth 登录成功'),
+    resolveOauthSuccessMessage: () => t('zcode.oauth.success', "Đăng nhập OAuth ZCode thành công"),
   });
 
   const previousOauthProviderRef = useRef(oauthProvider);
@@ -160,7 +160,7 @@ export function ZcodeAccountsPage() {
     tableUsageClassName: 'zcode-table-usage',
     showMfaQuickCode: false,
     tokenControl: (
-      <div className="zcode-oauth-provider-control" role="group" aria-label={t('zcode.apiKey.provider', 'API Key 服务')}>
+      <div className="zcode-oauth-provider-control" role="group" aria-label={t('zcode.apiKey.provider', "Dịch vụ Khóa API")}>
         <button
           type="button"
           className={`btn btn-secondary ${apiKeyProvider === 'zai' ? 'active' : ''}`}
@@ -180,7 +180,7 @@ export function ZcodeAccountsPage() {
       </div>
     ),
     oauthProviderControl: (
-      <div className="zcode-oauth-provider-control" role="group" aria-label={t('zcode.oauth.provider', '登录服务')}>
+      <div className="zcode-oauth-provider-control" role="group" aria-label={t('zcode.oauth.provider', "Dịch vụ đăng nhập")}>
         <button
           type="button"
           className={`btn btn-secondary ${oauthProvider === 'zai' ? 'active' : ''}`}

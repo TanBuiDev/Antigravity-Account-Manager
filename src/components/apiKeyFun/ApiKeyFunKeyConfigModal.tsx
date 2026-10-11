@@ -107,13 +107,13 @@ export function ApiKeyFunKeyConfigModal({
         className="modal-content apikey-fun-config-modal"
         role="dialog"
         aria-modal="true"
-        aria-label={keyName || t('apiKeyFun.config.title', '使用 API 密钥')}
+        aria-label={keyName || t('apiKeyFun.config.title', "Dùng khóa API")}
       >
         <header className="apikey-fun-config-head">
           <div>
-            <h2>{t('apiKeyFun.config.title', '使用 API 密钥')}</h2>
+            <h2>{t('apiKeyFun.config.title', "Dùng khóa API")}</h2>
           </div>
-          <button type="button" className="icon-button" onClick={onClose} aria-label={t('common.close', '关闭')}>
+          <button type="button" className="icon-button" onClick={onClose} aria-label={t('common.close', "Đóng")}>
             <X size={16} />
           </button>
         </header>
@@ -122,8 +122,8 @@ export function ApiKeyFunKeyConfigModal({
           {modelsLoading && !family ? (
             <div className="apikey-fun-config-loading">
               <RefreshCw size={18} className="loading-spinner" />
-              <strong>{t('apiKeyFun.models.loading', '读取中')}</strong>
-              <span>{t('apiKeyFun.models.loadingDesc', '正在从当前 API Key 读取模型列表...')}</span>
+              <strong>{t('apiKeyFun.models.loading', "Đang tải")}</strong>
+              <span>{t('apiKeyFun.models.loadingDesc', "Đang đọc danh sách mô hình từ API Key hiện tại...")}</span>
             </div>
           ) : (
           <>
@@ -138,7 +138,7 @@ export function ApiKeyFunKeyConfigModal({
                   className="apikey-fun-config-select"
                   value={familyId}
                   options={APIKEY_FUN_FAMILIES.map((item) => ({ value: item.id, label: item.label }))}
-                  placeholder={t('apiKeyFun.config.family', '分组')}
+                  placeholder={t('apiKeyFun.config.family', "Nhóm")}
                   onChange={(value) => setFamilyId(value as ApiKeyFunFamily)}
                 />
               )}
@@ -146,20 +146,20 @@ export function ApiKeyFunKeyConfigModal({
             <span className="apikey-fun-config-divider" aria-hidden="true" />
             <span className="apikey-fun-config-inline-field">
               <span className="apikey-fun-config-inline-label">
-                {t('apiKeyFun.models.title', '可用模型')}
+                {t('apiKeyFun.models.title', "Mô hình khả dụng")}
               </span>
               {modelOptions.length > 0 ? (
                 <SingleSelectDropdown
                   className="apikey-fun-config-select"
                   value={model}
                   options={modelOptions}
-                  placeholder={t('apiKeyFun.models.title', '可用模型')}
+                  placeholder={t('apiKeyFun.models.title', "Mô hình khả dụng")}
                   onChange={setModel}
                 />
               ) : (
                 <span className="apikey-fun-config-detected">
                   {modelsLoading
-                    ? t('apiKeyFun.models.loading', '读取中')
+                    ? t('apiKeyFun.models.loading', "Đang tải")
                     : family?.fallbackModel ?? '-'}
                 </span>
               )}
@@ -168,11 +168,11 @@ export function ApiKeyFunKeyConfigModal({
 
           {family && availableClients.length === 0 ? (
             <div className="apikey-fun-config-empty">
-              {t('apiKeyFun.config.unsupportedGroup', '该分组暂时没有可一键写入的客户端。')}
+              {t('apiKeyFun.config.unsupportedGroup', "Nhóm này chưa có ứng dụng khách ghi bằng một cú nhấp.")}
             </div>
           ) : (
             <>
-              <nav className="apikey-fun-config-clients" aria-label={t('apiKeyFun.toolsTitle', '一键写入客户端')}>
+              <nav className="apikey-fun-config-clients" aria-label={t('apiKeyFun.toolsTitle', "Ghi cấu hình client")}>
                 {availableClients.map((item) => (
                   <button
                     key={item}
@@ -196,8 +196,8 @@ export function ApiKeyFunKeyConfigModal({
                       >
                         {copiedLabel === block.label ? <Check size={13} /> : <Copy size={13} />}
                         {copiedLabel === block.label
-                          ? t('common.copied', '已复制')
-                          : t('common.copy', '复制')}
+                          ? t('common.copied', "Đã sao chép")
+                          : t('common.copy', "Copy​")}
                       </button>
                     </header>
                     <pre className={`apikey-fun-config-code language-${block.language}`}>{block.text}</pre>
@@ -212,7 +212,7 @@ export function ApiKeyFunKeyConfigModal({
 
         <footer className="apikey-fun-config-foot">
           <button type="button" className="btn btn-secondary" onClick={onClose}>
-            {t('common.close', '关闭')}
+            {t('common.close', "Đóng")}
           </button>
 </footer>
       </div>

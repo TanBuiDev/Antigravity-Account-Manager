@@ -1147,7 +1147,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
   
       if (!email) {
         setPendingOAuthFieldErrors({
-          email: t("codex.pendingAuth.emailRequired", "请输入账号邮箱"),
+          email: t("codex.pendingAuth.emailRequired", "Nhập email tài khoản"),
         });
         return;
       }
@@ -1157,7 +1157,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
   
       setSavingPendingOAuthAccount(true);
       setAddStatus("loading");
-      setAddMessage(t("codex.pendingAuth.saving", "正在保存待授权账号..."));
+      setAddMessage(t("codex.pendingAuth.saving", "Đang lưu tài khoản chờ xác thực..."));
       try {
         const account = await codexService.createPendingCodexOAuthAccount(
           email,
@@ -1180,7 +1180,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           reason: "pending_oauth",
         });
         setAddStatus("success");
-        setAddMessage(t("codex.pendingAuth.saved", "待授权账号已保存"));
+        setAddMessage(t("codex.pendingAuth.saved", "Đã lưu tài khoản chờ xác thực"));
         setReauthTargetAccount(account);
         window.setTimeout(() => {
           setShowAddModal(false);
@@ -1190,7 +1190,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
         setAddStatus("error");
         setAddMessage(
           t("codex.pendingAuth.saveFailed", {
-            defaultValue: "保存待授权账号失败：{{error}}",
+            defaultValue: "Không thể lưu tài khoản chờ xác thực: {{error}}",
             error: String(error).replace(/^Error:\s*/, ""),
           }),
         );
@@ -1245,7 +1245,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           return;
         }
         setOauthPrepareError(
-          t("common.shared.oauth.failed", "授权失败") + ": " + describeOauthProxyError(e),
+          t("common.shared.oauth.failed", "Ủy quyền thất bại") + ": " + describeOauthProxyError(e),
         );
       },
       [t, oauthProxyEnabled, describeOauthProxyError],
@@ -1332,10 +1332,10 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             } else {
               throw new Error(
                 t("codex.api.oauthBinding.saveFailed", {
-                  defaultValue: "OAuth 绑定失败：绑定目标账号缺失",
+                  defaultValue: "Liên kết OAuth thất bại: không tìm thấy tài khoản đích",
                   error: t(
                     "codex.api.oauthBinding.validationRequired",
-                    "请选择 OAuth 账号",
+                    "Vui lòng chọn tài khoản OAuth",
                   ),
                 }),
               );
@@ -1344,7 +1344,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             setAddStatus("error");
             setAddMessage(
               t("codex.api.oauthBinding.saveFailed", {
-                defaultValue: "OAuth 绑定失败：{{error}}",
+                defaultValue: "Liên kết OAuth thất bại: {{error}}",
                 error: String(error).replace(/^Error:\s*/, ""),
               }),
             );
@@ -1366,7 +1366,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             setAddMessage(
               t(
                 "codex.importApiService.syncFailed",
-                "账号已导入，但加入 API 服务失败：{{error}}",
+                "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
               ).replace("{{error}}", String(error).replace(/^Error:\s*/, "")),
             );
             oauthActiveRef.current = false;
@@ -1382,7 +1382,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           setAddMessage(
             t(
               "codex.switchAuth.switchingAfterReauth",
-              "授权成功，正在继续切换账号...",
+              "Đã cập nhật ủy quyền. Đang tiếp tục chuyển tài khoản...",
             ),
           );
           try {
@@ -1406,7 +1406,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             setAddStatus("error");
             setAddMessage(
               t("codex.switchAuth.switchAfterReauthFailed", {
-                defaultValue: "授权已更新，但继续切换失败：{{error}}",
+                defaultValue: "Đã cập nhật ủy quyền nhưng chuyển tài khoản thất bại: {{error}}",
                 error: String(error).replace(/^Error:\s*/, ""),
               }),
             );
@@ -1418,7 +1418,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           setAddMessage(
             t(
               "codex.switchAuth.startingInstanceAfterReauth",
-              "授权成功，正在重新启动实例...",
+              "Đã cập nhật ủy quyền. Đang khởi động lại phiên...",
             ),
           );
           try {
@@ -1427,7 +1427,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             setAddStatus("error");
             setAddMessage(
               t("codex.switchAuth.startInstanceAfterReauthFailed", {
-                defaultValue: "授权已更新，但实例启动失败：{{error}}",
+                defaultValue: "Đã cập nhật ủy quyền nhưng không thể khởi động phiên: {{error}}",
                 error: String(error).replace(/^Error:\s*/, ""),
               }),
             );
@@ -1437,13 +1437,13 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
         setAddStatus("success");
         setAddMessage(
           reauthRetrySwitchAccountId
-            ? t("codex.switchAuth.reauthorizedAndSwitched", "重新授权并切换成功")
+            ? t("codex.switchAuth.reauthorizedAndSwitched", "Đã ủy quyền lại và chuyển")
             : reauthRetryInstanceId
               ? t(
                   "codex.switchAuth.reauthorizedAndStartedInstance",
-                  "重新授权并启动实例成功",
+                  "Đã ủy quyền lại và khởi động phiên",
                 )
-              : t("common.shared.oauth.success", "授权成功"),
+              : t("common.shared.oauth.success", "Ủy quyền thành công"),
         );
         oauthActiveRef.current = false;
         oauthCompletingRef.current = false;
@@ -1494,7 +1494,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
       (e: unknown, allowTokenExchangeRetry = false) => {
         setAddStatus("error");
         setAddMessage(
-          t("common.shared.oauth.failed", "授权失败") + ": " + describeOauthProxyError(e),
+          t("common.shared.oauth.failed", "Ủy quyền thất bại") + ": " + describeOauthProxyError(e),
         );
         setOauthTokenExchangeRetryVisible(allowTokenExchangeRetry);
       },
@@ -1531,7 +1531,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           if (oauthLoginIdRef.current !== loginId) return;
           ++oauthAttemptSeqRef.current;
           setAddStatus("loading");
-          setAddMessage(t("codex.oauth.exchanging", "正在交换令牌..."));
+          setAddMessage(t("codex.oauth.exchanging", "Đang đổi token..."));
           oauthCompletingRef.current = true;
           try {
             const account = await resolveCompletedOauthAccount(loginId);
@@ -1586,7 +1586,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             return;
           oauthActiveRef.current = false;
           setDeviceAuthError(
-            event.payload?.error || t("common.shared.oauth.failed", "授权失败"),
+            event.payload?.error || t("common.shared.oauth.failed", "Ủy quyền thất bại"),
           );
           setDeviceAuthInfo(null);
         },
@@ -2053,7 +2053,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
       } catch (error) {
         setAddStatus("error");
         setAddMessage(
-          t("common.shared.oauth.failed", "授权失败") +
+          t("common.shared.oauth.failed", "Ủy quyền thất bại") +
             ": " +
             describeOauthProxyError(error),
         );
@@ -2154,7 +2154,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
       if (!callbackUrl) return;
       const loginId = oauthLoginIdRef.current;
       if (!loginId) {
-        setOauthCallbackError(t("common.shared.oauth.failed", "授权失败"));
+        setOauthCallbackError(t("common.shared.oauth.failed", "Ủy quyền thất bại"));
         return;
       }
   
@@ -2168,7 +2168,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
           await codexService.submitCodexOAuthCallbackUrl(loginId, callbackUrl);
         }
         setAddStatus("loading");
-        setAddMessage(t("codex.oauth.exchanging", "正在交换令牌..."));
+        setAddMessage(t("codex.oauth.exchanging", "Đang đổi token..."));
         tokenExchangeStarted = true;
         const account = await resolveCompletedOauthAccount(loginId);
         await completeOauthSuccess(account);

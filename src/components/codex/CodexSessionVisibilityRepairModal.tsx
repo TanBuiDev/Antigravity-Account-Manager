@@ -98,75 +98,75 @@ export function CodexSessionVisibilityRepairProgressView({
         case "collect_instances":
           return t(
             "codex.sessionManager.repairModal.progress.collectInstances",
-            "正在收集 Codex 实例...",
+            "Đang thu thập phiên bản Codex...",
           );
         case "scan_instances":
           return t(
             "codex.sessionManager.repairModal.progress.scanInstances",
-            "正在准备扫描实例...",
+            "Đang chuẩn bị quét phiên bản...",
           );
         case "scan_instance":
           return t(
             "codex.sessionManager.repairModal.progress.scanInstance",
-            "正在扫描 {{instance}}（{{current}}/{{total}}）...",
+            "Đang quét {{instance}} ({{current}}/{{total}})...",
             values,
           );
         case "backup_instance":
           return t(
             "codex.sessionManager.repairModal.progress.backupInstance",
-            "正在备份 {{instance}}（{{current}}/{{total}}）...",
+            "Đang sao lưu {{instance}} ({{current}}/{{total}})...",
             values,
           );
         case "write_instance":
           return t(
             "codex.sessionManager.repairModal.progress.writeInstance",
-            "正在写入 {{instance}}（{{current}}/{{total}}）...",
+            "Đang ghi {{instance}} ({{current}}/{{total}})...",
             values,
           );
         case "write_sqlite_provider":
           return t(
             "codex.sessionManager.repairModal.progress.writeSqliteProvider",
-            "正在写入 {{instance}} 的 SQLite 可见性...",
+            "Đang ghi hiển thị SQLite cho {{instance}}...",
             values,
           );
         case "write_rollout_files":
           return t(
             "codex.sessionManager.repairModal.progress.writeRolloutFiles",
-            "正在校正 {{instance}} 的会话文件时间...",
+            "Đang sửa thời gian tệp phiên cho {{instance}}...",
             values,
           );
         case "write_sqlite_timestamps":
           return t(
             "codex.sessionManager.repairModal.progress.writeSqliteTimestamps",
-            "正在校正 {{instance}} 的 SQLite 时间...",
+            "Đang sửa thời gian SQLite cho {{instance}}...",
             values,
           );
         case "write_session_index":
           return t(
             "codex.sessionManager.repairModal.progress.writeSessionIndex",
-            "正在跳过旧索引写入...",
+            "Đang ghi session_index...",
             values,
           );
         case "rebuild_metadata":
           return t(
             "codex.sessionManager.repairModal.progress.rebuildMetadata",
-            "正在刷新 {{instance}} 的官方会话状态...",
+            "Đang làm mới trạng thái phiên chính thức cho {{instance}}...",
             values,
           );
         case "prune_backups":
           return t(
             "codex.sessionManager.repairModal.progress.pruneBackups",
-            "正在清理旧备份...",
+            "Đang dọn bản sao lưu cũ...",
           );
         case "done":
           return t(
             "codex.sessionManager.repairModal.progress.done",
-            "修复已完成",
+            "Đã sửa xong",
           );
         default:
           return t(
             "codex.sessionManager.repairModal.progress.queued",
-            "正在启动修复任务...",
+            "Đang khởi động tác vụ sửa...",
           );
       }
     },
@@ -179,7 +179,7 @@ export function CodexSessionVisibilityRepairProgressView({
     <div className="codex-visibility-repair-progress" role="status">
       <div className="codex-visibility-repair-progress__head">
         <strong>
-          {t("codex.sessionManager.repairModal.progressTitle", "修复进度")}
+          {t("codex.sessionManager.repairModal.progressTitle", "Tiến trình sửa")}
         </strong>
         <span>{percent}%</span>
       </div>
@@ -193,7 +193,7 @@ export function CodexSessionVisibilityRepairProgressView({
             ? resolveProgressMessage(progress)
             : t(
                 "codex.sessionManager.repairModal.progress.queued",
-                "正在启动修复任务...",
+                "Đang khởi động tác vụ sửa...",
               )}
         </span>
       </div>
@@ -262,10 +262,10 @@ export function CodexSessionVisibilityRepairModal({
     () =>
       repairInstances.map((instance) => {
         const name = instance.isDefault
-          ? t("codex.sessionManager.repairModal.defaultInstance", "默认实例")
+          ? t("codex.sessionManager.repairModal.defaultInstance", "Phiên bản mặc định")
           : instance.name || instance.id;
         const runningLabel = instance.running
-          ? ` · ${t("codex.sessionManager.repairModal.runningInstance", "运行中")}`
+          ? ` · ${t("codex.sessionManager.repairModal.runningInstance", "Đang chạy")}`
           : "";
         return {
           value: instance.id,
@@ -287,7 +287,7 @@ export function CodexSessionVisibilityRepairModal({
           )
           .join(" / ");
         const defaultLabel = provider.isDefault
-          ? ` · ${t("codex.sessionManager.repairModal.defaultProvider", "默认")}`
+          ? ` · ${t("codex.sessionManager.repairModal.defaultProvider", "Mặc định")}`
           : "";
         return {
           value: provider.id,
@@ -375,7 +375,7 @@ export function CodexSessionVisibilityRepairModal({
         if (cancelled) return;
         setError(
           t("codex.sessionManager.repairModal.instanceLoadFailed", {
-            defaultValue: "读取实例失败：{{error}}",
+            defaultValue: "Không thể tải phiên bản: {{error}}",
             error: String(err).replace(/^Error:\s*/, ""),
           }),
         );
@@ -418,7 +418,7 @@ export function CodexSessionVisibilityRepairModal({
         if (cancelled) return;
         setError(
           t("codex.sessionManager.repairModal.providerLoadFailed", {
-            defaultValue: "读取 Provider 候选失败：{{error}}",
+            defaultValue: "Không tải được provider: {{error}}",
             error: String(err).replace(/^Error:\s*/, ""),
           }),
         );
@@ -537,7 +537,7 @@ export function CodexSessionVisibilityRepairModal({
       setPreviewSummary(null);
       setError(
         t("codex.sessionManager.repairModal.previewFailedWithError", {
-          defaultValue: "预览会话修复失败：{{error}}",
+          defaultValue: "Xem trước sửa phiên thất bại: {{error}}",
           error: String(err).replace(/^Error:\s*/, ""),
         }),
       );
@@ -589,7 +589,7 @@ export function CodexSessionVisibilityRepairModal({
       setStatus("idle");
       setError(
         t("codex.apiSwitchNotice.repairFailedWithError", {
-          defaultValue: "修复可见性失败：{{error}}",
+          defaultValue: "Sửa hiển thị thất bại: {{error}}",
           error: String(err).replace(/^Error:\s*/, ""),
         }),
       );
@@ -617,12 +617,12 @@ export function CodexSessionVisibilityRepairModal({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="modal-header">
-          <h2>{t("codex.sessionManager.repairModal.title", "修复历史会话")}</h2>
+          <h2>{t("codex.sessionManager.repairModal.title", "Sửa lịch sử")}</h2>
           <button
             className="modal-close"
             onClick={closeModal}
             disabled={running}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X />
           </button>
@@ -633,13 +633,13 @@ export function CodexSessionVisibilityRepairModal({
             {description ??
               t(
                 "codex.sessionManager.repairModal.description",
-                "将历史会话的 Provider 归一到目标实例当前状态（仅修正 SQLite 索引、会话目录和工作区状态；会话日志文件保持原样，只校正文件时间）。执行前会创建本地备份。",
+                "Chuẩn hóa nhà cung cấp trong chỉ mục SQLite, danh mục phiên và không gian làm việc. Giữ nguyên từng byte của tệp rollout; chỉ sửa thời gian tệp. Tạo bản sao lưu cục bộ trước khi sửa.",
               )}
           </p>
           <div className="codex-visibility-repair-options">
             <div className="codex-visibility-repair-scope">
               <span className="codex-visibility-repair-scope__title">
-                {t("codex.sessionManager.repairModal.modeTitle", "修复方式")}
+                {t("codex.sessionManager.repairModal.modeTitle", "Chế độ sửa")}
               </span>
               <div className="codex-visibility-repair-scope__grid">
                 <button
@@ -657,13 +657,13 @@ export function CodexSessionVisibilityRepairModal({
                   <strong>
                     {t(
                       "codex.sessionManager.repairModal.modeQuick",
-                      "快速修复",
+                      "Sửa nhanh",
                     )}
                   </strong>
                   <small>
                     {t(
                       "codex.sessionManager.repairModal.modeQuickDesc",
-                      "只校正官方 state DB 和会话索引的 Provider，会话日志文件保持原样，适合日常切号后恢复。",
+                      "Chuẩn hóa nhà cung cấp trong cơ sở dữ liệu chính thức và chỉ mục phiên. Giữ nguyên tệp rollout. Phù hợp khi đổi tài khoản thông thường.",
                     )}
                   </small>
                 </button>
@@ -680,12 +680,12 @@ export function CodexSessionVisibilityRepairModal({
                   aria-pressed={selectedMode === "deep"}
                 >
                   <strong>
-                    {t("codex.sessionManager.repairModal.modeDeep", "完整修复")}
+                    {t("codex.sessionManager.repairModal.modeDeep", "Sửa đầy đủ")}
                   </strong>
                   <small>
                     {t(
                       "codex.sessionManager.repairModal.modeDeepDesc",
-                      "全量归一历史 Provider，并修复目录、工作区和子 Agent 索引；会话日志文件保持原样，执行前需退出目标实例。",
+                      "Sửa nhà cung cấp cũ, danh mục, không gian làm việc và chỉ mục tác nhân con. Giữ nguyên tệp rollout. Hãy đóng phiên bản đích trước.",
                     )}
                   </small>
                 </button>
@@ -695,7 +695,7 @@ export function CodexSessionVisibilityRepairModal({
               <span>
                 {t(
                   "codex.sessionManager.repairModal.targetProvider",
-                  "目标 Provider",
+                  "Provider đích",
                 )}
               </span>
               <SingleSelectDropdown
@@ -713,16 +713,16 @@ export function CodexSessionVisibilityRepairModal({
                   loadingProviders
                     ? t(
                         "codex.sessionManager.repairModal.loadingProviders",
-                        "正在读取 Provider...",
+                        "Đang tải provider...",
                       )
                     : t(
                         "codex.sessionManager.repairModal.noProvider",
-                        "未发现 Provider",
+                        "Không tìm thấy provider",
                       )
                 }
                 ariaLabel={t(
                   "codex.sessionManager.repairModal.targetProvider",
-                  "目标 Provider",
+                  "Provider đích",
                 )}
                 className="codex-visibility-repair-instance-select"
                 menuClassName="codex-visibility-repair-instance-menu"
@@ -732,7 +732,7 @@ export function CodexSessionVisibilityRepairModal({
               <span>
                 {t(
                   "codex.sessionManager.repairModal.targetInstance",
-                  "目标实例",
+                  "Phiên bản đích",
                 )}
               </span>
               <SingleSelectDropdown
@@ -750,16 +750,16 @@ export function CodexSessionVisibilityRepairModal({
                   loadingInstances
                     ? t(
                         "codex.sessionManager.repairModal.loadingInstances",
-                        "正在读取实例...",
+                        "Đang tải phiên bản...",
                       )
                     : t(
                         "codex.sessionManager.repairModal.noInstance",
-                        "未发现实例",
+                        "Không tìm thấy phiên bản",
                       )
                 }
                 ariaLabel={t(
                   "codex.sessionManager.repairModal.targetInstance",
-                  "目标实例",
+                  "Phiên bản đích",
                 )}
                 className="codex-visibility-repair-instance-select"
                 menuClassName="codex-visibility-repair-instance-menu"
@@ -769,7 +769,7 @@ export function CodexSessionVisibilityRepairModal({
               <span className="codex-visibility-repair-scope__title">
                 {t(
                   "codex.sessionManager.repairModal.instanceScopeTitle",
-                  "实例范围",
+                  "Phạm vi phiên bản",
                 )}
               </span>
               <div className="codex-visibility-repair-scope__grid">
@@ -788,13 +788,13 @@ export function CodexSessionVisibilityRepairModal({
                   <strong>
                     {t(
                       "codex.sessionManager.repairModal.instanceScopeTarget",
-                      "仅目标实例",
+                      "Chỉ bản đích",
                     )}
                   </strong>
                   <small>
                     {t(
                       "codex.sessionManager.repairModal.instanceScopeTargetDesc",
-                      "只修复上方选中的实例，通常更快。",
+                      "Chỉ sửa phiên bản đã chọn, thường nhanh hơn.",
                     )}
                   </small>
                 </button>
@@ -813,13 +813,13 @@ export function CodexSessionVisibilityRepairModal({
                   <strong>
                     {t(
                       "codex.sessionManager.repairModal.instanceScopeAll",
-                      "全部实例",
+                      "Tất cả phiên bản",
                     )}
                   </strong>
                   <small>
                     {t(
                       "codex.sessionManager.repairModal.instanceScopeAllDesc",
-                      "修复所有 Codex 实例，适合应用多开一起恢复。",
+                      "Sửa mọi phiên bản Codex khi khôi phục nhiều phiên bản.",
                     )}
                   </small>
                 </button>
@@ -827,7 +827,7 @@ export function CodexSessionVisibilityRepairModal({
             </div>
             <div className="codex-visibility-repair-scope">
               <span className="codex-visibility-repair-scope__title">
-                {t("codex.sessionManager.repairModal.scopeTitle", "会话范围")}
+                {t("codex.sessionManager.repairModal.scopeTitle", "Phạm vi phiên")}
               </span>
               <div className="codex-visibility-repair-scope__grid">
                 <button
@@ -843,11 +843,11 @@ export function CodexSessionVisibilityRepairModal({
                   aria-pressed={effectiveScope === "all"}
                 >
                   <strong>
-                    {t("codex.sessionManager.repairModal.scopeAll", "全部会话")}
+                    {t("codex.sessionManager.repairModal.scopeAll", "Tất cả phiên")}
                   </strong>
                   <small>
                     {t("codex.sessionManager.repairModal.scopeAllDesc", {
-                      defaultValue: "修复当前管理列表中的 {{count}} 条会话。",
+                      defaultValue: "Sửa {{count}} phiên trong danh sách hiện tại.",
                       count: totalSessionCount,
                     })}
                   </small>
@@ -867,7 +867,7 @@ export function CodexSessionVisibilityRepairModal({
                   <strong>
                     {t(
                       "codex.sessionManager.repairModal.scopeSelected",
-                      "所选会话",
+                      "Phiên đã chọn",
                     )}
                   </strong>
                   <small>
@@ -875,13 +875,13 @@ export function CodexSessionVisibilityRepairModal({
                       ? t(
                           "codex.sessionManager.repairModal.scopeSelectedDesc",
                           {
-                            defaultValue: "只修复已勾选的 {{count}} 条会话。",
+                            defaultValue: "Chỉ sửa {{count}} phiên đã chọn.",
                             count: uniqueSelectedSessionIds.length,
                           },
                         )
                       : t(
                           "codex.sessionManager.repairModal.scopeSelectedEmpty",
-                          "先在列表中勾选会话。",
+                          "Hãy chọn phiên trong danh sách trước.",
                         )}
                   </small>
                 </button>
@@ -896,7 +896,7 @@ export function CodexSessionVisibilityRepairModal({
               <span>
                 {t(
                   "codex.sessionManager.repairModal.stopInstanceHint",
-                  "完整修复前请先完全退出所选 Codex App/ChatGPT 实例；仍可先预览变更。",
+                  "Hãy thoát hoàn toàn phiên bản Codex App/ChatGPT đã chọn trước khi sửa đầy đủ. Bạn vẫn có thể xem trước thay đổi.",
                 )}
               </span>
             </div>
@@ -918,7 +918,7 @@ export function CodexSessionVisibilityRepairModal({
               <span>
                 {t(
                   "codex.sessionManager.repairModal.encryptedContentWarning",
-                  "检测到由其他 Provider/账号加密的历史内容。元数据可以完成迁移，但继续或压缩这些会话仍可能失败；需要可靠续聊时请切回原 Provider/账号或开启新会话。",
+                  "Đã phát hiện lịch sử được mã hóa bởi nhà cung cấp hoặc tài khoản khác. Có thể di chuyển siêu dữ liệu, nhưng việc tiếp tục hoặc nén các phiên đó vẫn có thể thất bại; hãy quay lại nhà cung cấp/tài khoản gốc hoặc mở phiên mới.",
                 )}
               </span>
             </div>
@@ -930,7 +930,7 @@ export function CodexSessionVisibilityRepairModal({
             onClick={closeModal}
             disabled={running}
           >
-            {t("common.close", "关闭")}
+            {t("common.close", "Đóng")}
           </button>
           <button
             className="btn btn-secondary"
@@ -942,10 +942,10 @@ export function CodexSessionVisibilityRepairModal({
               className={previewing ? "icon-spin" : undefined}
             />
             {previewing
-              ? t("codex.sessionManager.repairModal.previewing", "正在预览...")
+              ? t("codex.sessionManager.repairModal.previewing", "Đang xem trước...")
               : hasPreview
-                ? t("codex.sessionManager.repairModal.previewAgain", "重新预览")
-                : t("codex.sessionManager.repairModal.preview", "预览变更")}
+                ? t("codex.sessionManager.repairModal.previewAgain", "Xem trước lại")
+                : t("codex.sessionManager.repairModal.preview", "Xem trước thay đổi")}
           </button>
           <button
             className="btn btn-primary"
@@ -957,13 +957,13 @@ export function CodexSessionVisibilityRepairModal({
               className={repairing ? "icon-spin" : undefined}
             />
             {repairing
-              ? t("codex.sessionManager.repairModal.running", "正在修复...")
+              ? t("codex.sessionManager.repairModal.running", "Đang sửa...")
               : hasPreview
                 ? t(
                     "codex.sessionManager.repairModal.confirmRepair",
-                    "确认修复",
+                    "Xác nhận sửa",
                   )
-                : t("codex.sessionManager.repairModal.start", "开始修复")}
+                : t("codex.sessionManager.repairModal.start", "Sửa")}
           </button>
         </div>
       </div>

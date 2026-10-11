@@ -77,13 +77,13 @@ export function CodexContextOverrideEditor({
     () => [
       {
         value: "official",
-        label: t("codex.contextOverride.followOfficial", "跟随官方"),
+        label: t("codex.contextOverride.followOfficial", "Theo chính thức"),
       },
       { value: "preset_516k", label: "516K / 464K" },
       { value: "preset_1m", label: "1M / 900K" },
       {
         value: "custom",
-        label: t("codex.contextOverride.custom", "自定义上下文"),
+        label: t("codex.contextOverride.custom", "Ngữ cảnh tùy chỉnh"),
       },
     ],
     [t],
@@ -111,7 +111,7 @@ export function CodexContextOverrideEditor({
         className="codex-context-override-preset"
         menuClassName="codex-context-override-preset-menu"
         disabled={disabled}
-        ariaLabel={t("codex.contextOverride.title", "上下文管理")}
+        ariaLabel={t("codex.contextOverride.title", "Quản lý ngữ cảnh")}
       />
       {preset === "custom" && (
         <div className="codex-context-override-fields">
@@ -155,7 +155,7 @@ export function CodexContextOverrideEditor({
               min={1}
               step={1}
               value={compactLimit}
-              placeholder={t("codex.contextOverride.automatic", "自动")}
+              placeholder={t("codex.contextOverride.automatic", "Tự động")}
               onChange={(event) => {
                 setCustomEditing(true);
                 // 留空时回落到 90% 派生值，避免向下游透传空压缩阈值。

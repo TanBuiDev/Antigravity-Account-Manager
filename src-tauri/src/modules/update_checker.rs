@@ -9,7 +9,7 @@ const LEGACY_DEFAULT_CHECK_INTERVAL_HOURS: u64 = 24;
 const LEGACY_PREVIOUS_DEFAULT_CHECK_INTERVAL_HOURS: u64 = 6;
 const PENDING_UPDATE_NOTES_FILE: &str = "pending_update_notes.json";
 const CHANGELOG_MARKDOWN_EN: &str = include_str!("../../../CHANGELOG.md");
-const CHANGELOG_MARKDOWN_ZH: &str = include_str!("../../../CHANGELOG.zh-CN.md");
+const CHANGELOG_MARKDOWN_ZH: &str = CHANGELOG_MARKDOWN_EN; // Legacy locale payload; no Chinese changelog is bundled.
 
 static UPDATE_SETTINGS_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
 
@@ -282,18 +282,18 @@ fn load_pending_update_notes() -> Result<Option<PendingUpdateNotes>, String> {
         Err(error) => {
             match crate::modules::atomic_write::quarantine_file(&path, "invalid-json") {
                 Ok(Some(backup_path)) => logger::log_warn(&format!(
-                    "[UpdateChecker] 待安装更新说明解析失败，已隔离并忽略: path={}, backup={}, error={}",
+                    "[UpdateChecker] Không thể đọc ghi chú cập nhật chờ cài đặt; đã cách ly và bỏ qua: path={}, backup={}, error={}",
                     path.display(),
                     backup_path.display(),
                     error
                 )),
                 Ok(None) => logger::log_warn(&format!(
-                    "[UpdateChecker] 待安装更新说明解析失败，文件已不存在，忽略: path={}, error={}",
+                    "[UpdateChecker] Không thể đọc ghi chú cập nhật chờ cài đặt; tệp không còn tồn tại, bỏ qua: path={}, error={}",
                     path.display(),
                     error
                 )),
                 Err(backup_error) => logger::log_warn(&format!(
-                    "[UpdateChecker] 待安装更新说明解析失败，隔离失败，忽略: path={}, parse_error={}, backup_error={}",
+                    "[UpdateChecker] Không thể đọc hoặc cách ly ghi chú cập nhật chờ cài đặt, bỏ qua: path={}, parse_error={}, backup_error={}",
                     path.display(),
                     error,
                     backup_error
@@ -310,7 +310,7 @@ fn remove_pending_update_notes_file() {
             if path.exists() {
                 if let Err(err) = std::fs::remove_file(&path) {
                     logger::log_error(&format!(
-                        "删除待安装更新说明文件失败: path={}, error={}",
+                        "Không thể xóa tệp ghi chú cập nhật chờ cài đặt: path={}, error={}",
                         path.display(),
                         err
                     ));
@@ -318,7 +318,7 @@ fn remove_pending_update_notes_file() {
             }
         }
         Err(err) => {
-            logger::log_error(&format!("解析待安装更新说明路径失败: {}", err));
+            logger::log_error(&format!("Không thể phân tích đường dẫn ghi chú cập nhật chờ cài đặt: {}", err));
         }
     }
 }
@@ -346,7 +346,7 @@ pub fn save_pending_update_notes(
         .map_err(|e| format!("Failed to write pending update notes: {}", e))?;
 
     logger::log_info(&format!(
-        "已保存待安装更新说明: version={}, path={}",
+        "Đã lưu ghi chú cập nhật chờ cài đặt: version={}, path={}",
         version,
         path.display()
     ));
@@ -369,18 +369,18 @@ fn load_update_settings_unlocked() -> Result<UpdateSettings, String> {
         Err(error) => {
             match crate::modules::atomic_write::quarantine_file(&settings_path, "invalid-json") {
                 Ok(Some(backup_path)) => logger::log_warn(&format!(
-                    "[UpdateChecker] 更新设置解析失败，已隔离并使用默认设置: path={}, backup={}, error={}",
+                    "[UpdateChecker] Không thể phân tích cài đặt cập nhật; đã cách ly và dùng mặc định: path={}, backup={}, error={}",
                     settings_path.display(),
                     backup_path.display(),
                     error
                 )),
                 Ok(None) => logger::log_warn(&format!(
-                    "[UpdateChecker] 更新设置解析失败，文件已不存在，使用默认设置: path={}, error={}",
+                    "[UpdateChecker] Không thể phân tích cài đặt cập nhật; tệp không còn tồn tại, dùng mặc định: path={}, error={}",
                     settings_path.display(),
                     error
                 )),
                 Err(backup_error) => logger::log_warn(&format!(
-                    "[UpdateChecker] 更新设置解析失败，隔离失败，使用默认设置: path={}, parse_error={}, backup_error={}",
+                    "[UpdateChecker] Không thể phân tích hoặc cách ly cài đặt cập nhật; dùng mặc định: path={}, parse_error={}, backup_error={}",
                     settings_path.display(),
                     error,
                     backup_error
@@ -491,7 +491,7 @@ pub fn check_version_jump() -> Result<Option<VersionJumpInfo>, String> {
         }
         Ok(None) => {}
         Err(err) => {
-            logger::log_error(&format!("读取待安装更新说明失败: {}", err));
+            logger::log_error(&format!("Không thể đọc ghi chú cập nhật chờ cài đặt: {}", err));
         }
     }
 
@@ -499,7 +499,7 @@ pub fn check_version_jump() -> Result<Option<VersionJumpInfo>, String> {
     settings.last_run_version = current.clone();
     save_update_settings_unlocked(&settings)?;
 
-    logger::log_info(&format!("检测到版本跳跃: {} -> {}", previous, current));
+    logger::log_info(&format!("Phát hiện thay đổi phiên bản: {} -> {}", previous, current));
 
     Ok(Some(VersionJumpInfo {
         previous_version: previous,

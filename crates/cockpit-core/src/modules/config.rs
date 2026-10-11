@@ -468,7 +468,7 @@ fn default_global_proxy_no_proxy() -> String {
     "127.0.0.1,localhost,::1".to_string()
 }
 fn default_language() -> String {
-    "zh-cn".to_string()
+    "vi".to_string()
 }
 fn default_default_terminal() -> String {
     "system".to_string()

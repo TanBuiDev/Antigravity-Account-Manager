@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 fn collect_account_file_ids(accounts_dir: &Path) -> Result<Vec<String>, String> {
     let entries = fs::read_dir(accounts_dir).map_err(|e| {
         format!(
-            "读取账号详情目录失败: path={}, error={}",
+            "Không thể đọc thư mục chi tiết tài khoản: path={}, error={}",
             accounts_dir.display(),
             e
         )
@@ -13,7 +13,7 @@ fn collect_account_file_ids(accounts_dir: &Path) -> Result<Vec<String>, String> 
 
     let mut account_ids = Vec::new();
     for entry in entries {
-        let entry = entry.map_err(|e| format!("遍历账号详情目录失败: {}", e))?;
+        let entry = entry.map_err(|e| format!("Không thể duyệt thư mục chi tiết tài khoản: {}", e))?;
         let path = entry.path();
         if !path.is_file() {
             continue;
@@ -85,7 +85,7 @@ pub fn backup_existing_index(path: &Path) -> Result<Option<PathBuf>, String> {
     }
 
     let Some(file_name) = path.file_name().and_then(|name| name.to_str()) else {
-        return Err(format!("索引文件名非法: {}", path.display()));
+        return Err(format!("Tên tệp chỉ mục không hợp lệ: {}", path.display()));
     };
 
     let backup_name = format!("{}.bak.{}", file_name, Utc::now().timestamp_millis());
@@ -106,7 +106,7 @@ pub fn backup_existing_index(path: &Path) -> Result<Option<PathBuf>, String> {
     }
     fs::rename(path, &backup_path).map_err(|e| {
         format!(
-            "备份账号索引失败: from={}, to={}, error={}",
+            "Không thể sao lưu chỉ mục tài khoản: from={}, to={}, error={}",
             path.display(),
             backup_path.display(),
             e

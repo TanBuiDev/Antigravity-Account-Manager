@@ -276,16 +276,16 @@ export function getOfficialQuotaModel(account: CodebuddySuiteAccountBase): Offic
  */
 function resolvePackageName(resource: OfficialQuotaResource): string {
   if (resource.packageName) return resource.packageName;
-  if (resource.packageCode === PACKAGE_CODE.enterprise) return '企业版';
-  if (resource.packageCode === PACKAGE_CODE.extra) return '加量包';
-  if (resource.packageCode === PACKAGE_CODE.activity) return '活动赠送包';
+  if (resource.packageCode === PACKAGE_CODE.enterprise) return 'Gói doanh nghiệp';
+  if (resource.packageCode === PACKAGE_CODE.extra) return 'Gói bổ sung';
+  if (resource.packageCode === PACKAGE_CODE.activity) return 'Gói tặng từ sự kiện';
   if (resource.packageCode === PACKAGE_CODE.free || resource.packageCode === PACKAGE_CODE.gift || resource.packageCode === PACKAGE_CODE.freeMon || resource.packageCode === PACKAGE_CODE.freeMonIntl) {
-    return '基础体验包';
+    return 'Gói trải nghiệm cơ bản';
   }
   if (resource.packageCode === PACKAGE_CODE.proMon || resource.packageCode === PACKAGE_CODE.proMonPlus || resource.packageCode === PACKAGE_CODE.proYear) {
-    return '专业版订阅';
+    return 'Gói Pro';
   }
-  return '基础包';
+  return 'Gói cơ bản';
 }
 
 /**
@@ -321,7 +321,7 @@ export function getQuotaDisplayItems(account: CodebuddySuiteAccountBase): QuotaD
 
     items.push({
       key: 'extra',
-      label: '加量包',
+      label: 'Gói bổ sung',
       used: model.extra.used,
       total: model.extra.total,
       remain: model.extra.remain,
@@ -391,9 +391,9 @@ export function getQuotaCategoryGroups(account: CodebuddySuiteAccountBase, t: (k
   const otherAgg = aggregate(otherItems);
 
   return [
-    { key: 'base', label: t('codebuddy.quotaCategory.base', '基础体验包'), ...baseAgg, items: baseItems, visible: baseAgg.unlimited || baseAgg.total > 0 },
-    { key: 'activity', label: t('codebuddy.quotaCategory.activity', '活动赠送包'), ...activityAgg, items: activityItems, visible: activityAgg.unlimited || activityAgg.total > 0 },
-    { key: 'extra', label: t('codebuddy.quotaCategory.extra', '加量包'), ...extraAgg, items: extraItems, visible: extraAgg.unlimited || extraAgg.total > 0 },
-    { key: 'other', label: t('codebuddy.quotaCategory.other', '其他'), ...otherAgg, items: otherItems, visible: otherAgg.unlimited || otherAgg.total > 0 },
+    { key: 'base', label: t('codebuddy.quotaCategory.base', 'Gói trải nghiệm cơ bản'), ...baseAgg, items: baseItems, visible: baseAgg.unlimited || baseAgg.total > 0 },
+    { key: 'activity', label: t('codebuddy.quotaCategory.activity', 'Gói tặng từ sự kiện'), ...activityAgg, items: activityItems, visible: activityAgg.unlimited || activityAgg.total > 0 },
+    { key: 'extra', label: t('codebuddy.quotaCategory.extra', 'Gói bổ sung'), ...extraAgg, items: extraItems, visible: extraAgg.unlimited || extraAgg.total > 0 },
+    { key: 'other', label: t('codebuddy.quotaCategory.other', 'Khác'), ...otherAgg, items: otherItems, visible: otherAgg.unlimited || otherAgg.total > 0 },
   ];
 }

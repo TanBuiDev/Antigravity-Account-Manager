@@ -10,7 +10,7 @@ export function buildValidAccountsFilterOption(
     value: VALID_ACCOUNTS_FILTER_VALUE,
     label: t('common.shared.filter.validAccounts', {
       count,
-      defaultValue: '有效账号 ({{count}})',
+      defaultValue: "Tài khoản hợp lệ ({{count}})",
     }),
   };
 }

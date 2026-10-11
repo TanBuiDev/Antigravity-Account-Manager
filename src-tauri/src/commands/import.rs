@@ -83,7 +83,7 @@ pub async fn export_accounts(account_ids: Vec<String>) -> Result<String, String>
         .collect();
 
     let json =
-        serde_json::to_string_pretty(&simplified).map_err(|e| format!("序列化失败: {}", e))?;
+        serde_json::to_string_pretty(&simplified).map_err(|e| format!("Không thể tuần tự hóa: {}", e))?;
 
     Ok(json)
 }

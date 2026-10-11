@@ -76,18 +76,18 @@ export function CodexCliLaunchDialog({
               type="button"
               className="btn btn-secondary icon-only"
               onClick={onBack}
-              title={t("common.back", "返回")}
-              aria-label={t("common.back", "返回")}
+              title={t("common.back", "Quay lại")}
+              aria-label={t("common.back", "Quay lại")}
             >
               <ChevronLeft size={14} />
             </button>
           )}
-          <h2>{t("instances.launchDialog.title", "启动实例")}</h2>
+          <h2>{t("instances.launchDialog.title", "Khởi chạy phiên bản")}</h2>
           <button
             type="button"
             className="modal-close"
             onClick={onClose}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X />
           </button>
@@ -110,14 +110,14 @@ export function CodexCliLaunchDialog({
 
           {workingDir && (
             <div className="form-group">
-              <label>{t("instances.form.workingDir", "工作目录")}</label>
+              <label>{t("instances.form.workingDir", "Thư mục làm việc")}</label>
               <div style={{ display: "flex", gap: 8 }}>
                 <input
                   className={`form-input${workingDir.error ? " input-error" : ""}`}
                   value={workingDir.value}
                   placeholder={
                     workingDir.placeholder ??
-                    t("instances.form.workingDirPlaceholder", "默认当前路径")
+                    t("instances.form.workingDirPlaceholder", "Mặc định dùng đường dẫn hiện tại")
                   }
                   onChange={(event) => workingDir.onChange(event.target.value)}
                   onBlur={workingDir.onBlur}
@@ -131,11 +131,11 @@ export function CodexCliLaunchDialog({
                   disabled={busy}
                   title={t(
                     "codex.cli.selectWorkingDir",
-                    "选择 Codex CLI 工作目录",
+                    "Chọn thư mục làm việc của Codex CLI",
                   )}
                   aria-label={t(
                     "codex.cli.selectWorkingDir",
-                    "选择 Codex CLI 工作目录",
+                    "Chọn thư mục làm việc của Codex CLI",
                   )}
                 >
                   <FolderOpen size={16} />
@@ -145,24 +145,24 @@ export function CodexCliLaunchDialog({
                 <div className="form-error">{workingDir.error}</div>
               )}
               <p className="form-hint">
-                {t("instances.form.workingDirDesc", "启动时将首先切换到此目录")}
+                {t("instances.form.workingDirDesc", "Khi khởi động sẽ chuyển vào thư mục này trước")}
               </p>
             </div>
           )}
 
           <div className="form-group">
-            <label>{t("instances.launchDialog.terminal", "终端")}</label>
+            <label>{t("instances.launchDialog.terminal", "Cửa sổ lệnh")}</label>
             <SingleSelectDropdown
               value={terminal}
               onChange={onTerminalChange}
               options={terminalOptions}
               disabled={busy}
-              ariaLabel={t("instances.launchDialog.terminal", "终端")}
+              ariaLabel={t("instances.launchDialog.terminal", "Cửa sổ lệnh")}
             />
           </div>
 
           <div className="form-group">
-            <label>{t("instances.launchDialog.command", "启动命令")}</label>
+            <label>{t("instances.launchDialog.command", "Lệnh khởi chạy")}</label>
             <textarea
               className="form-input instance-args-input"
               value={command}
@@ -172,7 +172,7 @@ export function CodexCliLaunchDialog({
             <p className="form-hint">
               {t(
                 "instances.launchDialog.hint",
-                "可复制命令手动执行，或点击下方按钮直接在终端执行。",
+                "Sao chép lệnh để chạy thủ công hoặc chạy trực tiếp trong terminal.",
               )}
             </p>
           </div>
@@ -193,7 +193,7 @@ export function CodexCliLaunchDialog({
               onClick={onClose}
               disabled={executing}
             >
-              {t("common.cancel", "取消")}
+              {t("common.cancel", "Hủy")}
             </button>
           )}
           <button
@@ -204,10 +204,10 @@ export function CodexCliLaunchDialog({
           >
             <Copy size={16} />
             {preparing
-              ? t("common.loading", "加载中...")
+              ? t("common.loading", "Đang tải...")
               : copied
-                ? t("common.success", "成功")
-                : t("common.copy", "复制")}
+                ? t("common.success", "Thành công")
+                : t("common.copy", "Copy​")}
           </button>
           <button
             type="button"
@@ -221,8 +221,8 @@ export function CodexCliLaunchDialog({
               <Play size={16} />
             )}
             {busy
-              ? t("common.loading", "加载中...")
-              : t("instances.launchDialog.runInTerminal", "终端执行")}
+              ? t("common.loading", "Đang tải...")
+              : t("instances.launchDialog.runInTerminal", "Chạy trong terminal")}
           </button>
         </div>
       </div>

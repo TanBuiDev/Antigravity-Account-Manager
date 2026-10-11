@@ -58,7 +58,7 @@ fn resolve_oauth_client_key(preferred: Option<&str>) -> Result<String, String> {
         Some(key) if key == DEFAULT_OAUTH_CLIENT_KEY => Ok(key),
         Some(key) if key.is_empty() => Ok(DEFAULT_OAUTH_CLIENT_KEY.to_string()),
         Some(key) => Err(format!(
-            "未知 OAuth client: {}，当前版本仅支持 {}",
+            "OAuth client không xác định: {}，phiên bản hiện tại chỉ hỗ trợ {}",
             key, DEFAULT_OAUTH_CLIENT_KEY
         )),
         None => Ok(DEFAULT_OAUTH_CLIENT_KEY.to_string()),
@@ -74,7 +74,7 @@ fn oauth_client_config(
 
 /// 生成 OAuth 授权 URL
 pub fn get_auth_url(redirect_uri: &str, state: Option<&str>) -> String {
-    let (client_id, _, _) = oauth_client_config(None).expect("默认 OAuth client 配置无效");
+    let (client_id, _, _) = oauth_client_config(None).expect("Cấu hình OAuth client mặc định không hợp lệ");
     let scopes = vec![
         "openid",
         "https://www.googleapis.com/auth/cloud-platform",
@@ -99,13 +99,13 @@ pub fn get_auth_url(redirect_uri: &str, state: Option<&str>) -> String {
         params.push(("state", state));
     }
 
-    let url = url::Url::parse_with_params(AUTH_URL, &params).expect("无效的 Auth URL");
+    let url = url::Url::parse_with_params(AUTH_URL, &params).expect("URL xác thực không hợp lệ");
     url.to_string()
 }
 
 /// 使用 Authorization Code 交换 Token
 pub async fn exchange_code(code: &str, redirect_uri: &str) -> Result<TokenResponse, String> {
-    crate::modules::logger::log_info(&format!("开始 Token 交换, redirect_uri: {}", redirect_uri));
+    crate::modules::logger::log_info(&format!("Bắt đầu trao đổi token, redirect_uri: {}", redirect_uri));
     let client = crate::utils::http::create_client(15);
     let (client_id, client_secret, client_key) = oauth_client_config(None)?;
 
@@ -123,34 +123,34 @@ pub async fn exchange_code(code: &str, redirect_uri: &str) -> Result<TokenRespon
         .send()
         .await
         .map_err(|e| {
-            let msg = format!("Token 交换请求失败: {}", e);
+            let msg = format!("Yêu cầu trao đổi token thất bại: {}", e);
             crate::modules::logger::log_error(&msg);
             msg
         })?;
 
     let status = response.status();
-    crate::modules::logger::log_info(&format!("Token 交换响应状态: {}", status));
+    crate::modules::logger::log_info(&format!("Trạng thái phản hồi trao đổi token: {}", status));
 
     if status.is_success() {
         let mut token_res = response.json::<TokenResponse>().await.map_err(|e| {
-            let msg = format!("Token 解析失败: {}", e);
+            let msg = format!("Không thể phân tích token: {}", e);
             crate::modules::logger::log_error(&msg);
             msg
         })?;
         token_res.oauth_client_key = Some(client_key);
 
         if token_res.refresh_token.is_some() {
-            crate::modules::logger::log_info("Token 交换成功, 获取到 refresh_token");
+            crate::modules::logger::log_info("Trao đổi token thành công, đã nhận refresh_token");
         } else {
             crate::modules::logger::log_warn(
-                "警告: Google 未返回 refresh_token, 可能之前已授权过此应用",
+                "Cảnh báo: Google không trả về refresh_token; có thể bạn đã cấp quyền cho ứng dụng này trước đó",
             );
         }
 
         Ok(token_res)
     } else {
         let error_text = response.text().await.unwrap_or_default();
-        let msg = format!("Token 交换失败 ({})，body_len={}", status, error_text.len());
+        let msg = format!("Trao đổi token thất bại ({})，body_len={}", status, error_text.len());
         crate::modules::logger::log_error(&msg);
         Err(msg)
     }
@@ -181,19 +181,19 @@ pub async fn refresh_access_token_with_client(
         .form(&params)
         .send()
         .await
-        .map_err(|e| format!("刷新请求失败: {}", e))?;
+        .map_err(|e| format!("Yêu cầu làm mới thất bại: {}", e))?;
 
     if response.status().is_success() {
         let mut token_data = response
             .json::<TokenResponse>()
             .await
-            .map_err(|e| format!("刷新数据解析失败: {}", e))?;
+            .map_err(|e| format!("Không thể phân tích dữ liệu làm mới: {}", e))?;
         token_data.oauth_client_key = Some(client_key);
 
         Ok(token_data)
     } else {
         let error_text = response.text().await.unwrap_or_default();
-        Err(format!("刷新失败: {}", error_text))
+        Err(format!("Làm mới thất bại: {}", error_text))
     }
 }
 
@@ -206,16 +206,16 @@ pub async fn get_user_info(access_token: &str) -> Result<UserInfo, String> {
         .bearer_auth(access_token)
         .send()
         .await
-        .map_err(|e| format!("用户信息请求失败: {}", e))?;
+        .map_err(|e| format!("Yêu cầu thông tin người dùng thất bại: {}", e))?;
 
     if response.status().is_success() {
         response
             .json::<UserInfo>()
             .await
-            .map_err(|e| format!("用户信息解析失败: {}", e))
+            .map_err(|e| format!("Không thể phân tích thông tin người dùng: {}", e))
     } else {
         let error_text = response.text().await.unwrap_or_default();
-        Err(format!("获取用户信息失败: {}", error_text))
+        Err(format!("Không thể lấy thông tin người dùng: {}", error_text))
     }
 }
 
@@ -229,7 +229,7 @@ pub async fn ensure_fresh_token(
         return Ok(current_token.clone());
     }
 
-    crate::modules::logger::log_info("Token 即将过期，正在刷新...");
+    crate::modules::logger::log_info("Token sắp hết hạn, đang làm mới...");
     let response = refresh_access_token_with_client(
         &current_token.refresh_token,
         current_token.oauth_client_key.as_deref(),

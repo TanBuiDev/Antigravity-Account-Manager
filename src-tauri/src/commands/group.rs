@@ -5,7 +5,7 @@ use std::collections::HashMap;
 
 fn refresh_tray_menu(app: &tauri::AppHandle) {
     if let Err(err) = crate::modules::tray::update_tray_menu(app) {
-        crate::modules::logger::log_warn(&format!("[GroupSettings] 更新托盘菜单失败: {}", err));
+        crate::modules::logger::log_warn(&format!("[GroupSettings] Không thể cập nhật menu khay hệ thống: {}", err));
     }
 }
 

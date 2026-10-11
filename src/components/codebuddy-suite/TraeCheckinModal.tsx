@@ -182,13 +182,13 @@ export function TraeCheckinModal({
           <button
             className="btn btn-secondary icon-only"
             onClick={onClose}
-            title={t('common.back', '返回')}
-            aria-label={t('common.back', '返回')}
+            title={t('common.back', "Quay lại")}
+            aria-label={t('common.back', "Quay lại")}
           >
             <ChevronLeft size={14} />
           </button>
           <h2>
-            <CalendarCheck size={20} /> {t('trae.checkin.modalTitle', 'TRAE SOLO CN 每日签到')}
+            <CalendarCheck size={20} /> {t('trae.checkin.modalTitle', 'Điểm danh hằng ngày TRAE SOLO CN')}
           </h2>
           <button className="modal-close" onClick={onClose}>
             <X size={18} />
@@ -198,14 +198,14 @@ export function TraeCheckinModal({
         <div className="checkin-modal-toolbar">
           <div className="checkin-summary">
             <span className="checkin-stat checked">
-              <CheckCircle size={14} /> {claimedCount} {t('workbuddy.checkin.checkedIn', '已签到')}
+              <CheckCircle size={14} /> {claimedCount} {t('workbuddy.checkin.checkedIn', "Đã điểm danh")}
             </span>
             <span className="checkin-stat unchecked">
-              <XCircle size={14} /> {availableCount} {t('workbuddy.checkin.notCheckedIn', '未签到')}
+              <XCircle size={14} /> {availableCount} {t('workbuddy.checkin.notCheckedIn', "Chưa điểm danh")}
             </span>
             {errorCount > 0 && (
               <span className="checkin-stat error">
-                <Ban size={14} /> {errorCount} {t('workbuddy.checkin.errors', '异常')}
+                <Ban size={14} /> {errorCount} {t('workbuddy.checkin.errors', 'Bất thường')}
               </span>
             )}
           </div>
@@ -220,7 +220,7 @@ export function TraeCheckinModal({
               ) : (
                 <RefreshCw size={14} />
               )}
-              {t('workbuddy.checkin.refreshStatus', '刷新状态')}
+              {t('workbuddy.checkin.refreshStatus', "Làm mới")}
             </button>
             <button
               className="btn btn-primary btn-sm"
@@ -232,7 +232,7 @@ export function TraeCheckinModal({
               ) : (
                 <Gift size={14} />
               )}
-              {t('workbuddy.checkin.checkAll', '一键签到')}
+              {t('workbuddy.checkin.checkAll', "Điểm danh tất cả")}
             </button>
           </div>
         </div>
@@ -249,7 +249,7 @@ export function TraeCheckinModal({
                   {state.status && (
                     <span className="checkin-account-streak">
                       <Flame size={12} />
-                      {t('workbuddy.checkin.streakDays', '连续 {{days}} 天', {
+                      {t('workbuddy.checkin.streakDays', "{{days}} ngày", {
                         days: state.status.consecutive_days,
                       })}
                     </span>
@@ -257,7 +257,7 @@ export function TraeCheckinModal({
                   {state.status && state.status.total_credits > 0 && (
                     <span className="checkin-account-credits">
                       <Trophy size={12} />
-                      {t('workbuddy.checkin.totalCredits', '{{credits}} 积分', {
+                      {t('workbuddy.checkin.totalCredits', '{{credits}} điểm', {
                         credits: state.status.total_credits,
                       })}
                     </span>
@@ -270,19 +270,19 @@ export function TraeCheckinModal({
                   )}
                   {state.uiState === 'error' && (
                     <span className="checkin-error-text" title={state.error || ''}>
-                      {t('workbuddy.checkin.error', '查询失败')}
+                      {t('workbuddy.checkin.error', 'Truy vấn thất bại')}
                     </span>
                   )}
                   {state.uiState === 'inactive' && (
                     <span className="checkin-inactive">
                       <Ban size={14} />
-                      {t('workbuddy.checkin.inactive', '不可用')}
+                      {t('workbuddy.checkin.inactive', "Không khả dụng")}
                     </span>
                   )}
                   {state.uiState === 'claimed' && (
                     <span className="checkin-claimed">
                       <CheckCircle size={14} />
-                      {t('workbuddy.checkin.claimed', '已领取')}
+                      {t('workbuddy.checkin.claimed', "Đã nhận")}
                     </span>
                   )}
                   {state.uiState === 'available' && (
@@ -296,7 +296,7 @@ export function TraeCheckinModal({
                       ) : (
                         <Gift size={14} />
                       )}
-                      {t('workbuddy.checkin.checkin', '签到')}
+                      {t('workbuddy.checkin.checkin', 'Điểm danh')}
                     </button>
                   )}
                 </div>
@@ -307,7 +307,7 @@ export function TraeCheckinModal({
 
         {accounts.length === 0 && (
           <div className="checkin-empty">
-            <p>{t('workbuddy.checkin.noAccounts', '暂无账号')}</p>
+            <p>{t('workbuddy.checkin.noAccounts', "Không có tài khoản")}</p>
           </div>
         )}
       </div>

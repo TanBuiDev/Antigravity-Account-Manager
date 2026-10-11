@@ -142,7 +142,7 @@ export function CodexSwitchProgressModal() {
         if (detail.type === "error") {
           const prerequisite = proxyEnginePrerequisiteKey(detail.error) || codexLaunchErrorKey(detail.error);
           const errorText =
-            prerequisite ? t(prerequisite) : detail.error || base.error || t("common.failed", "失败");
+            prerequisite ? t(prerequisite) : detail.error || base.error || t("common.failed", "Thất bại");
           const authFailure =
             detail.authFailure === undefined
               ? base.authFailure
@@ -341,7 +341,7 @@ export function CodexSwitchProgressModal() {
           t("codex.switchProgress.detail.credentialsFound", {
             tokens: available.length
               ? available.join(" · ")
-              : t("common.none", "暂无"),
+              : t("common.none", "None​"),
           }),
         ];
       }
@@ -444,7 +444,7 @@ export function CodexSwitchProgressModal() {
         ? t("codex.switchProgress.needsAttention")
         : activeStep
           ? stepLabel(activeStep.id)
-          : t("common.loading", "加载中...");
+          : t("common.loading", "Đang tải...");
 
   const handleReauthorize = () => {
     const accountId = state.accountId;
@@ -565,7 +565,7 @@ export function CodexSwitchProgressModal() {
                 ? authFailure.apiOnlyAvailable
                   ? t("codex.switchAuth.apiOnlyTitle")
                   : t("codex.switchAuth.reauthorizeTitle")
-                : t("codex.switch", "切换账号")}
+                : t("codex.switch", "Chuyển")}
             </h2>
             <p>{accountLabel}</p>
           </div>
@@ -685,7 +685,7 @@ export function CodexSwitchProgressModal() {
               onClick={() => setState(null)}
               disabled={actionBusy !== null}
             >
-              {t("common.cancel", "取消")}
+              {t("common.cancel", "Hủy")}
             </button>
             {authFailure.apiOnlyAvailable && (
               <button
@@ -695,8 +695,8 @@ export function CodexSwitchProgressModal() {
                 disabled={actionBusy !== null}
               >
                 {actionBusy === "api"
-                  ? t("common.loading", "加载中...")
-                  : t("codex.localAccess.entryAction", "添加至 API 服务")}
+                  ? t("common.loading", "Đang tải...")
+                  : t("codex.localAccess.entryAction", "Thêm vào dịch vụ API")}
               </button>
             )}
             {authFailure.reasonCode === "client_login_required" && (
@@ -707,8 +707,8 @@ export function CodexSwitchProgressModal() {
                 disabled={actionBusy !== null || retryBusy !== null}
               >
                 {actionBusy === "clear"
-                  ? t("common.loading", "加载中...")
-                  : t("codex.switchAuth.clearClientAuth", "清除异常标识")}
+                  ? t("common.loading", "Đang tải...")
+                  : t("codex.switchAuth.clearClientAuth", "Xóa cảnh báo")}
               </button>
             )}
                 <button
@@ -717,7 +717,7 @@ export function CodexSwitchProgressModal() {
                   onClick={handleReauthorize}
                   disabled={actionBusy !== null || retryBusy !== null}
                 >
-                  {t("common.reauthorize", "重新授权")}
+                  {t("common.reauthorize", "Ủy quyền lại")}
                 </button>
           </div>
         )}
@@ -730,7 +730,7 @@ export function CodexSwitchProgressModal() {
                   onClick={() => setState(null)}
                   disabled={retryBusy !== null}
                 >
-                  {t("common.close", "关闭")}
+                  {t("common.close", "Đóng")}
                 </button>
                 {state.canRetry !== false && (
                   <button
@@ -742,7 +742,7 @@ export function CodexSwitchProgressModal() {
                     {retryBusy === "retry" && (
                       <RefreshCw size={14} className="loading-spinner" />
                     )}
-                    {t("common.retry", "重试")}
+                    {t("common.retry", "Thử lại")}
                   </button>
                 )}
           </div>

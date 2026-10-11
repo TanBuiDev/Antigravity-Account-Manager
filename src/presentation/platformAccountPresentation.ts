@@ -334,7 +334,7 @@ function buildUsageStatusSubline(
   abnormalKey: string,
 ): Pick<UnifiedAccountPresentation, "sublineText" | "sublineClass"> {
   return {
-    sublineText: isNormal ? t(normalKey, "正常") : t(abnormalKey, "异常"),
+    sublineText: isNormal ? t(normalKey, "Bình thường") : t(abnormalKey, "Bất thường"),
     sublineClass: isNormal ? "high" : "critical",
   };
 }
@@ -344,27 +344,27 @@ function resolveCodebuddyResourceLabel(
   t: Translate,
 ): string {
   if (resource.packageCode === CB_PACKAGE_CODE.extra) {
-    return t("codebuddy.extraCredit.title", "加量包");
+    return t("codebuddy.extraCredit.title", "Gói cộng thêm");
   }
   if (resource.packageCode === CB_PACKAGE_CODE.activity) {
-    return t("codebuddy.quotaQuery.packageTitle.activity", "活动赠送包");
+    return t("codebuddy.quotaQuery.packageTitle.activity", "Gói quà tặng sự kiện");
   }
   if (
     resource.packageCode === CB_PACKAGE_CODE.free ||
     resource.packageCode === CB_PACKAGE_CODE.gift ||
     resource.packageCode === CB_PACKAGE_CODE.freeMon
   ) {
-    return t("codebuddy.quotaQuery.packageTitle.base", "基础体验包");
+    return t("codebuddy.quotaQuery.packageTitle.base", "Gói trải nghiệm cơ bản");
   }
   if (
     resource.packageCode === CB_PACKAGE_CODE.proMon ||
     resource.packageCode === CB_PACKAGE_CODE.proYear
   ) {
-    return t("codebuddy.quotaQuery.packageTitle.pro", "专业版订阅");
+    return t("codebuddy.quotaQuery.packageTitle.pro", "Đăng ký Pro");
   }
   return (
     resource.packageName ||
-    t("codebuddy.quotaQuery.packageUnknown", "套餐信息未知")
+    t("codebuddy.quotaQuery.packageUnknown", "Không rõ gói")
   );
 }
 
@@ -373,17 +373,17 @@ function resolveWorkbuddyResourceLabel(
   t: Translate,
 ): string {
   if (resource.packageCode === WORKBUDDY_PACKAGE_CODE.extra) {
-    return t("workbuddy.extraCredit.title", "加量包");
+    return t("workbuddy.extraCredit.title", "Gói cộng thêm");
   }
   if (resource.packageCode === WORKBUDDY_PACKAGE_CODE.activity) {
-    return t("workbuddy.quotaQuery.packageTitle.activity", "活动赠送包");
+    return t("workbuddy.quotaQuery.packageTitle.activity", "Gói quà tặng sự kiện");
   }
   if (
     resource.packageCode === WORKBUDDY_PACKAGE_CODE.free ||
     resource.packageCode === WORKBUDDY_PACKAGE_CODE.gift ||
     resource.packageCode === WORKBUDDY_PACKAGE_CODE.freeMon
   ) {
-    return t("workbuddy.quotaQuery.packageTitle.base", "基础体验包");
+    return t("workbuddy.quotaQuery.packageTitle.base", "Gói trải nghiệm cơ bản");
   }
   if (
     resource.packageCode === WORKBUDDY_PACKAGE_CODE.proMon ||
@@ -393,7 +393,7 @@ function resolveWorkbuddyResourceLabel(
   }
   return (
     resource.packageName ||
-    t("workbuddy.quotaQuery.packageUnknown", "套餐信息未知")
+    t("workbuddy.quotaQuery.packageUnknown", "Không rõ gói")
   );
 }
 
@@ -417,11 +417,11 @@ function resolveResourceTimeText(
     return resource.isBasePackage
       ? t(updatedAtKey, {
           time: primaryText,
-          defaultValue: "下次刷新时间：{{time}}",
+          defaultValue: "Lần làm mới tiếp theo: {{time}}",
         })
       : t(expireAtKey, {
           time: primaryText,
-          defaultValue: "到期时间：{{time}}",
+          defaultValue: "Thời điểm hết hạn: {{time}}",
         });
   }
   const fallbackText = formatMetricResetText(fallbackTime, t);
@@ -429,11 +429,11 @@ function resolveResourceTimeText(
     return resource.isBasePackage
       ? t(expireAtKey, {
           time: fallbackText,
-          defaultValue: "到期时间：{{time}}",
+          defaultValue: "Thời điểm hết hạn: {{time}}",
         })
       : t(updatedAtKey, {
           time: fallbackText,
-          defaultValue: "下次刷新时间：{{time}}",
+          defaultValue: "Lần làm mới tiếp theo: {{time}}",
         });
   }
   return "";
@@ -713,14 +713,14 @@ function buildCodexNewApiQuotaItems(
       : clampPercent((available / total) * 100);
   const expiresAt = readNumber(usage, "expires_at");
   const valueText = unlimited
-    ? t("codex.newApi.quota.unlimited", "不限量")
+    ? t("codex.newApi.quota.unlimited", "Không giới hạn")
     : readString(usage, "summary_display") ||
       `${formatQuotaNumber(available)} / ${formatQuotaNumber(total)}`;
 
   return [
     {
       key: "new_api_quota",
-      label: t("codex.newApi.quota.available", "额度"),
+      label: t("codex.newApi.quota.available", "Hạn mức"),
       percentage,
       quotaClass: getCodexQuotaClass(percentage),
       valueText,
@@ -731,7 +731,7 @@ function buildCodexNewApiQuotaItems(
       left: available,
       hintText: t("codex.newApi.quota.usedHint", {
         used: formatQuotaNumber(used),
-        defaultValue: "已用 {{used}}",
+        defaultValue: "Đã dùng {{used}}",
       }),
     },
   ];
@@ -744,37 +744,37 @@ function getCodexQuotaWindowTitle(
 ): string {
   const label = getCodexQuotaWindowLabel(windowMinutes, fallback);
   if (label === "5h") {
-    return t("codex.quota.hourly", "5小时配额");
+    return t("codex.quota.hourly", "Hạn mức 5 giờ");
   }
   if (label === "7d" || label === "Weekly") {
-    return t("codex.quota.weekly", "周配额");
+    return t("codex.quota.weekly", "Hạn mức tuần");
   }
   const weeks = /^(\d+)\s*w(?:eek)?s?$/i.exec(label);
   if (weeks) {
     return t("codex.quota.windowWeeks", {
       count: Number(weeks[1]),
-      defaultValue: "{{count}} 周配额",
+      defaultValue: "Hạn mức {{count}} tuần",
     });
   }
   const days = /^(\d+)d$/.exec(label);
   if (days) {
     return t("codex.quota.windowDays", {
       count: Number(days[1]),
-      defaultValue: "{{count}} 天配额",
+      defaultValue: "Hạn mức {{count}} ngày",
     });
   }
   const hours = /^(\d+)h$/.exec(label);
   if (hours) {
     return t("codex.quota.windowHours", {
       count: Number(hours[1]),
-      defaultValue: "{{count}} 小时配额",
+      defaultValue: "Hạn mức {{count}} giờ",
     });
   }
   const minutes = /^(\d+)m$/.exec(label);
   if (minutes) {
     return t("codex.quota.windowMinutes", {
       count: Number(minutes[1]),
-      defaultValue: "{{count}} 分钟配额",
+      defaultValue: "Hạn mức {{count}} phút",
     });
   }
   return label;
@@ -793,7 +793,7 @@ export function buildCodexAccountPresentation(
       : account.email;
   const effectiveQuota = getCodexEffectiveQuotaPercentages(account.quota);
   const weeklyBlocksHourlyHint = effectiveQuota.weeklyBlocksHourly
-    ? t("codex.quota.weeklyBlocksHourly", "周额度为 0，5小时额度已不可用")
+    ? t("codex.quota.weeklyBlocksHourly", "Hạn mức tuần là 0 nên hạn mức 5 giờ không khả dụng")
     : "";
   const newApiQuotaItems = isCodexNewApiAccount(account)
     ? buildCodexNewApiQuotaItems(account, t)
@@ -858,7 +858,7 @@ export function buildCodexAccountPresentation(
               balance: monthlyCreditUsage.balance,
               defaultValue: "{{balance}}",
             })
-          : t("common.shared.quota.noData", "暂无配额数据");
+          : t("common.shared.quota.noData", "Không có dữ liệu hạn mức");
     quotaItems.push({
       key: "monthly_credits",
       label: t("codex.quota.monthlyCredits", "Credits"),
@@ -875,7 +875,7 @@ export function buildCodexAccountPresentation(
       used: monthlyCreditUsage.used,
       total,
       left: remaining,
-      hintText: t("codex.quota.monthlyCreditsHint", "本月 credits 剩余"),
+      hintText: t("codex.quota.monthlyCreditsHint", "Tín dụng tháng còn lại"),
       showProgress: false,
     });
   }
@@ -888,7 +888,7 @@ export function buildCodexAccountPresentation(
             t,
           );
           const limitLabel =
-            window.limitLabel || t("codex.quota.additional", "额外额度");
+            window.limitLabel || t("codex.quota.additional", "Hạn mức bổ sung");
           const hintText = [
             `${limitLabel} · ${windowTitle}`,
             [window.limitName, window.meteredFeature]
@@ -929,7 +929,7 @@ export function buildCodexAccountPresentation(
   }
   const planBadge = isCodexPendingOAuthAccount(account)
     ? {
-        label: t("codex.pendingAuth.badge", "待授权"),
+        label: t("codex.pendingAuth.badge", "Chờ xác thực"),
         className: "pending-auth",
       }
     : getCodexPlanBadgePresentation(account);
@@ -982,7 +982,7 @@ export function buildClaudeAccountPresentation(
   return {
     id: account.id,
     displayName: getClaudeAccountDisplayEmail(account),
-    planLabel: getClaudePlanBadge(account) || t("claude.desktopOAuth.planUnknown", "订阅未知"),
+    planLabel: getClaudePlanBadge(account) || t("claude.desktopOAuth.planUnknown", "Gói chưa rõ"),
     planClass: getClaudePlanBadgeClass(account),
     quotaItems,
     sublineText: account.quota_error?.message,
@@ -1116,7 +1116,7 @@ export function buildWindsurfAccountPresentation(
   const quotaItems: UnifiedQuotaMetric[] = [];
   const cycleText = credits.planEndsAt
     ? formatWindsurfResetTime(credits.planEndsAt, t)
-    : t("common.shared.credits.planEndsUnknown", "配额周期时间未知");
+    : t("common.shared.credits.planEndsUnknown", "Không có thông tin chu kỳ");
 
   if (usageMode === "quota") {
     const dailyUsedPercent =
@@ -1461,7 +1461,7 @@ export function buildQoderAccountPresentation(
   ) {
     quotaItems.push({
       key: "included",
-      label: t("qoder.usageOverview.includedCredits", "套餐内 Credits"),
+      label: t("qoder.usageOverview.includedCredits", "Credits trong gói"),
       percentage: userRemainingPercent ?? 0,
       progressPercent: userRemainingPercent ?? 0,
       quotaClass: getCursorUsageQuotaClass(userUsedPercent ?? 0),
@@ -1470,7 +1470,7 @@ export function buildQoderAccountPresentation(
           ? "--"
           : t("common.shared.remaining", {
               value: `${userRemainingPercent}%`,
-              defaultValue: "剩余 {{value}}",
+              defaultValue: "Còn lại {{value}}",
             }),
       resetText:
         subscription.userQuota.used != null ||
@@ -1580,7 +1580,7 @@ export function buildTraeAccountPresentation(
           ? "--"
           : t("common.shared.remaining", {
               value: `${remainingPercent}%`,
-              defaultValue: "剩余 {{value}}",
+              defaultValue: "Còn lại {{value}}",
             }),
       resetText:
         usage.spentUsd != null && usage.totalUsd != null
@@ -1679,7 +1679,7 @@ export function buildKiroAccountPresentation(
       : t("kiro.credits.expiryUnknown", "—");
   const cycleText = credits.planEndsAt
     ? formatKiroResetTime(credits.planEndsAt, t)
-    : t("common.shared.credits.planEndsUnknown", "配额周期时间未知");
+    : t("common.shared.credits.planEndsUnknown", "Không có thông tin chu kỳ");
 
   const quotaItems: UnifiedQuotaMetric[] = [
     {
@@ -1886,7 +1886,7 @@ export function buildGrokAccountPresentation(
   return {
     id: account.id,
     displayName: getGrokAccountDisplayEmail(account),
-    planLabel: planBadge || t("common.none", "暂无"),
+    planLabel: planBadge || t("common.none", "None​"),
     // Missing tier (暂无) uses Free styling, not red unknown.
     planClass: planBadge ? "plan-badge-default" : "free",
     quotaItems,
@@ -1931,13 +1931,13 @@ export function buildZedAccountPresentation(
   if (account.has_overdue_invoices != null) {
     quotaItems.push({
       key: "overdue_invoices",
-      label: t("zed.page.overdueField", "是否欠费"),
+      label: t("zed.page.overdueField", "Hóa đơn quá hạn"),
       percentage: 0,
       progressPercent: 0,
       quotaClass: account.has_overdue_invoices ? "low" : "high",
       valueText: account.has_overdue_invoices
-        ? t("zed.page.overdueYes", "是")
-        : t("zed.page.overdueNo", "否"),
+        ? t("zed.page.overdueYes", "Có")
+        : t("zed.page.overdueNo", "Không"),
       showProgress: false,
     });
   }

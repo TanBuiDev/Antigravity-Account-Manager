@@ -113,16 +113,16 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
             role="dialog"
             aria-modal={!reserveOpen}
             aria-hidden={reserveOpen || undefined}
-            aria-label={t("codex.api.oauthBinding.title", "绑定 OAuth 账号")}
+            aria-label={t("codex.api.oauthBinding.title", "Liên kết tài khoản OAuth")}
             tabIndex={-1}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t("codex.api.oauthBinding.title", "绑定 OAuth 账号")}</h2>
+              <h2>{t("codex.api.oauthBinding.title", "Liên kết tài khoản OAuth")}</h2>
               <button
                 className="modal-close"
                 onClick={closeOAuthBindingModal}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
                 disabled={oauthBindingSaving}
               >
                 <X />
@@ -141,7 +141,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     onClick={handleReauthorizeOAuthBinding}
                     disabled={oauthBindingSaving}
                   >
-                    {t("common.reauthorize", "重新授权")}
+                    {t("common.reauthorize", "Ủy quyền lại")}
                   </button>
                 </div>
               )}
@@ -151,22 +151,22 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     {oauthBindingTargetKind === "local_access"
                       ? t(
                           "codex.localAccess.oauthBinding.desc",
-                          "可选绑定。只要 OAuth 账号带 refresh_token 即可选择；未绑定时 API 服务按原 API Key 逻辑运行；绑定后登录态使用 OAuth 账号，Provider 使用当前 API 服务配置。",
+                          "Tùy chọn. Chỉ có thể chọn tài khoản OAuth có refresh_token. Khi chưa liên kết, dịch vụ API chạy theo luồng API Key cũ; sau khi liên kết, trạng thái đăng nhập dùng tài khoản OAuth và Provider dùng cấu hình dịch vụ API hiện tại.",
                         )
                       : t(
                           "codex.api.oauthBinding.desc",
-                          "可选绑定。只要 OAuth 账号带 refresh_token 即可选择；未绑定时该账号按原 API Key 逻辑切换；绑定后登录态使用 OAuth 账号，Provider 使用当前 API Key 账号配置。",
+                          "Tùy chọn. Chỉ có thể chọn tài khoản OAuth có refresh_token. Khi chưa liên kết, tài khoản này chuyển theo luồng API Key cũ; sau khi liên kết, trạng thái đăng nhập dùng tài khoản OAuth và Provider dùng cấu hình tài khoản API Key này.",
                         )}
                   </p>
                   <div className="section-desc codex-oauth-binding-current-target">
                     {oauthBindingTargetKind === "local_access"
                       ? t("codex.localAccess.oauthBinding.currentService", {
-                          defaultValue: "API 服务：{{name}}",
-                          name: t("codex.localAccess.title", "API 服务"),
+                          defaultValue: "Dịch vụ API: {{name}}",
+                          name: t("codex.localAccess.title", "Dịch vụ API"),
                         })
                       : oauthBindingAccount
                         ? t("codex.api.oauthBinding.currentAccount", {
-                            defaultValue: "API Key 账号：{{name}}",
+                            defaultValue: "Tài khoản API Key: {{name}}",
                             name: maskAccountText(
                               resolvePresentation(oauthBindingAccount)
                                 .displayName,
@@ -180,7 +180,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     <label>
                       {t(
                         "codex.api.oauthBinding.selectLabel",
-                        "选择 OAuth 账号",
+                        "Chọn tài khoản OAuth",
                       )}
                     </label>
                     <div className="codex-oauth-binding-picker-controls">
@@ -190,7 +190,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                             className="codex-oauth-binding-gateway-toggle codex-oauth-binding-quota-toggle"
                             title={t(
                               "codex.localAccess.oauthBinding.quotaReserveDesc",
-                              "API 服务仅在 5 小时和周剩余额度均高于保留值时使用该 OAuth 账号。",
+                              "Dịch vụ API chỉ dùng tài khoản OAuth này khi hạn mức còn lại của 5 giờ và tuần đều cao hơn mức giữ lại.",
                             )}
                           >
                             <input
@@ -210,7 +210,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                             <span>
                               {t(
                                 "codex.localAccess.oauthBinding.quotaReserveToggle",
-                                "保留 OAuth 额度",
+                                "Giữ lại hạn mức OAuth",
                               )}
                             </span>
                           </label>
@@ -222,22 +222,22 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                               disabled={oauthBindingSaving}
                               title={`${t(
                                 "codex.localAccess.oauthBinding.quotaReserveHourlyLabel",
-                                "5 小时保留",
+                                "Giữ lại 5 giờ",
                               )} ${oauthBindingQuotaReserve.hourlyPercent}% · ${t(
                                 "codex.localAccess.oauthBinding.quotaReserveWeeklyLabel",
-                                "周保留",
+                                "Giữ lại theo tuần",
                               )} ${oauthBindingQuotaReserve.weeklyPercent}%`}
-                              aria-label={`${t("instances.actions.edit", "编辑")} ${t(
+                              aria-label={`${t("instances.actions.edit", "Chỉnh sửa")} ${t(
                                 "codex.localAccess.oauthBinding.quotaReserveToggle",
-                                "保留 OAuth 额度",
+                                "Giữ lại hạn mức OAuth",
                               )}`}
                             >
                               <span>
-                                {t("codex.instances.quota.hourly", "5小时")}{" "}
+                                {t("codex.instances.quota.hourly", "5 giờ")}{" "}
                                 <strong>{oauthBindingQuotaReserve.hourlyPercent}%</strong>
                               </span>
                               <span>
-                                {t("codex.instances.quota.weekly", "周")}{" "}
+                                {t("codex.instances.quota.weekly", "Tuần")}{" "}
                                 <strong>{oauthBindingQuotaReserve.weeklyPercent}%</strong>
                               </span>
                               <Pencil size={12} />
@@ -253,7 +253,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.api.oauthBinding.empty",
-                          "暂无 OAuth 账号，请先添加 OAuth 授权账号。",
+                          "Chưa có tài khoản OAuth. Hãy thêm tài khoản ủy quyền OAuth trước.",
                         )}
                       </span>
                     </div>
@@ -265,7 +265,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.api.oauthBinding.emptyEligible",
-                              "没有带 refresh_token 的 OAuth 账号，请重新 OAuth 授权或添加符合条件的 OAuth 账号。",
+                              "Không có tài khoản OAuth có refresh_token. Hãy ủy quyền OAuth lại hoặc thêm tài khoản OAuth đủ điều kiện.",
                             )}
                           </span>
                         </div>
@@ -277,7 +277,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                             type="text"
                             placeholder={t(
                               "common.shared.search",
-                              "搜索账号...",
+                              "Tìm kiếm tài khoản...",
                             )}
                             value={searchQuery}
                             onChange={(event) =>
@@ -292,10 +292,10 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                           allLabel={t("common.shared.filter.all", {
                             count: oauthBindingTierCounts.all,
                           })}
-                          filterLabel={t("common.shared.filterLabel", "筛选")}
-                          clearLabel={t("accounts.clearFilter", "清空筛选")}
-                          emptyLabel={t("common.none", "暂无")}
-                          ariaLabel={t("common.shared.filterLabel", "筛选")}
+                          filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                          clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                          emptyLabel={t("common.none", "None​")}
+                          ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                           onToggleValue={toggleFilterTypeValue}
                           onClear={clearFilterTypes}
                         />
@@ -308,7 +308,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                         <SingleSelectFilterDropdown
                           value={sortBy}
                           options={codexAccountSortOptions}
-                          ariaLabel={t("common.shared.sortLabel", "排序")}
+                          ariaLabel={t("common.shared.sortLabel", "Sắp xếp")}
                           icon={<ArrowDownWideNarrow size={14} />}
                           disabled={oauthBindingSaving}
                           onChange={setSortBy}
@@ -327,16 +327,16 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                               sortDirection === "desc"
                                 ? t(
                                     "common.shared.sort.descTooltip",
-                                    "当前：降序，点击切换为升序",
+                                    "Giảm dần (nhấn để chuyển Tăng dần)",
                                   )
                                 : t(
                                     "common.shared.sort.ascTooltip",
-                                    "当前：升序，点击切换为降序",
+                                    "Tăng dần (nhấn để chuyển Giảm dần)",
                                   )
                             }
                             aria-label={t(
                               "common.shared.sort.toggleDirection",
-                              "切换排序方向",
+                              "Đổi hướng sắp xếp",
                             )}
                           >
                             {sortDirection === "desc" ? (
@@ -350,7 +350,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                       {oauthBindingFilteredAccounts.length === 0 ? (
                         <div className="group-account-empty">
                           <span>
-                            {t("common.shared.noMatch.title", "没有匹配的账号")}
+                            {t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}
                           </span>
                         </div>
                       ) : (
@@ -382,16 +382,16 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                                     : isCodexAgentIdentityAccount(account)
                                       ? t(
                                           "codex.agentIdentityRegistration.oauthBindingUnsupported",
-                                          "Agent Identity 账号仅用于 API 服务，不能作为 OAuth 绑定账号。",
+                                          "Tài khoản Agent Identity chỉ dành cho Dịch vụ API và không thể dùng làm tài khoản liên kết OAuth.",
                                         )
                                       : isCodexWebSessionAccount(account)
                                         ? t(
                                             "codex.webSessionImport.oauthBindingUnsupported",
-                                            "Web Session 账号仅支持查看额度，不能作为 OAuth 绑定账号。",
+                                            "Web Session không dùng OAuth.",
                                           )
                                         : t(
                                             "codex.api.oauthBinding.validationSubscriptionRequired",
-                                            "只能绑定带 refresh_token 的 OAuth 账号",
+                                            "Chỉ có thể liên kết tài khoản OAuth có refresh_token",
                                           )
                                 }
                                 onClick={(event) => {
@@ -434,7 +434,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                                   >
                                     <Clock size={12} />
                                     <span>
-                                      {t("codex.subscription.label", "有效期")}
+                                      {t("codex.subscription.label", "Hết hạn gói")}
                                     </span>
                                     <strong>
                                       {subscriptionInfo.valueText}
@@ -474,7 +474,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                       }}
                       disabled={oauthBindingSaving}
                     >
-                      {t("codex.addModal.oauth", "OAuth 授权")}
+                      {t("codex.addModal.oauth", "Ủy quyền OAuth")}
                     </button>
                   )}
                   {oauthBindingHasExistingBinding && (
@@ -483,7 +483,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                       onClick={() => void handleClearOAuthBinding()}
                       disabled={oauthBindingSaving}
                     >
-                      {t("codex.api.oauthBinding.clearAction", "解除绑定")}
+                      {t("codex.api.oauthBinding.clearAction", "Bỏ liên kết")}
                     </button>
                   )}
                   <button
@@ -503,7 +503,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     }
                   >
                     {oauthBindingSaving
-                      ? t("common.saving", "保存中...")
+                      ? t("common.saving", "Đang lưu...")
                       : t("common.save")}
                   </button>
                 </div>
@@ -519,7 +519,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
             ref={reserveDialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={t("codex.localAccess.oauthBinding.quotaReserveToggle", "保留 OAuth 额度")}
+            aria-label={t("codex.localAccess.oauthBinding.quotaReserveToggle", "Giữ lại hạn mức OAuth")}
             tabIndex={-1}
             onClick={(event) => event.stopPropagation()}
           >
@@ -527,14 +527,14 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
               <h2>
                 {t(
                   "codex.localAccess.oauthBinding.quotaReserveToggle",
-                  "保留 OAuth 额度",
+                  "Giữ lại hạn mức OAuth",
                 )}
               </h2>
               <button
                 type="button"
                 className="modal-close"
                 onClick={closeOAuthBindingQuotaReserveEditor}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -544,7 +544,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                 <p className="section-desc codex-oauth-binding-quota-desc">
                   {t(
                     "codex.localAccess.oauthBinding.quotaReserveDesc",
-                    "API 服务仅在 5 小时和周剩余额度均高于保留值时使用该 OAuth 账号。",
+                    "Dịch vụ API chỉ dùng tài khoản OAuth này khi hạn mức còn lại của 5 giờ và tuần đều cao hơn mức giữ lại.",
                   )}
                 </p>
                 <div className="codex-oauth-binding-quota-fields">
@@ -552,7 +552,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     <span>
                       {t(
                         "codex.localAccess.oauthBinding.quotaReserveHourlyLabel",
-                        "5 小时保留",
+                        "Giữ lại 5 giờ",
                       )}
                     </span>
                     <div className="codex-oauth-binding-quota-input-wrap">
@@ -595,7 +595,7 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     <span>
                       {t(
                         "codex.localAccess.oauthBinding.quotaReserveWeeklyLabel",
-                        "周保留",
+                        "Giữ lại theo tuần",
                       )}
                     </span>
                     <div className="codex-oauth-binding-quota-input-wrap">
@@ -641,14 +641,14 @@ export function CodexOAuthBindingModal(props: CodexAccountsViewProps) {
                     className="btn btn-secondary"
                     onClick={closeOAuthBindingQuotaReserveEditor}
                   >
-                    {t("common.cancel", "取消")}
+                    {t("common.cancel", "Hủy")}
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary"
                     onClick={confirmOAuthBindingQuotaReserveEditor}
                   >
-                    {t("common.confirm", "确认")}
+                    {t("common.confirm", "Xác nhận")}
                   </button>
                 </div>
               </div>

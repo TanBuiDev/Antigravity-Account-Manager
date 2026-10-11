@@ -225,7 +225,7 @@ export function CodexInstanceLaunchProgressModal() {
                     : ("error" as const),
                   details: {
                     ...step.details,
-                    error: payload.error || t("common.failed", "失败"),
+                    error: payload.error || t("common.failed", "Thất bại"),
                   },
                 }
               : step,
@@ -234,7 +234,7 @@ export function CodexInstanceLaunchProgressModal() {
             ...base,
             status: isAuthRequired ? "auth-required" : "error",
             steps: markedSteps,
-            error: payload.error || t("common.failed", "失败"),
+            error: payload.error || t("common.failed", "Thất bại"),
             authFailure,
             canRetry: payload.canRetry ?? base.canRetry,
             transferConflictingAccount:
@@ -315,7 +315,7 @@ export function CodexInstanceLaunchProgressModal() {
   if (!state) return null;
 
   const instanceLabel = state.isDefault
-    ? t("instances.defaultName", "默认实例")
+    ? t("instances.defaultName", "Phiên bản mặc định")
     : state.instanceName || state.instanceId;
   const formatExpiry = (expiresAt: number | null) => {
     if (expiresAt === null) {
@@ -343,7 +343,7 @@ export function CodexInstanceLaunchProgressModal() {
   };
   const ownerLabel = (owner: CodexInstanceRuntimeOwner) =>
     owner.isDefault
-      ? t("instances.defaultName", "默认实例")
+      ? t("instances.defaultName", "Phiên bản mặc định")
       : owner.instanceName || owner.instanceId;
   const authFailure =
     state.status === "auth-required" ? state.authFailure : null;
@@ -369,7 +369,7 @@ export function CodexInstanceLaunchProgressModal() {
     ? authFailure.reasonCode === "client_login_required"
       ? t(
           "codex.switchAuth.apiOnlyDescription",
-          "官方客户端上次运行时检测到需要登录，请重新授权后再启动。",
+          "Ứng dụng hiện tại đã chuyển đến trang đăng nhập. Hãy cấp quyền lại để khôi phục ứng dụng; bạn vẫn có thể tiếp tục dùng Dịch vụ API trong lúc này.",
         )
       : authFailure.reasonCode === "refresh_token_expired"
         ? t("codex.authError.refreshTokenExpired")
@@ -788,8 +788,8 @@ export function CodexInstanceLaunchProgressModal() {
             className="codex-switch-progress-close"
             onClick={() => void closeLaunch()}
             disabled={retryBusy !== null || actionBusy !== null || apiActionBusy}
-            aria-label={t("common.close", "关闭")}
-            title={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
+            title={t("common.close", "Đóng")}
           >
             <X size={18} />
           </button>
@@ -917,10 +917,10 @@ export function CodexInstanceLaunchProgressModal() {
           <div className="codex-switch-progress-footer codex-instance-launch-footer">
             <button type="button" className="btn btn-secondary" onClick={() => void cancelLaunch()} disabled={actionBusy !== null}>
               {actionBusy === "cancel" && <RefreshCw size={14} className="loading-spinner" />}
-              {t("common.cancel", "取消")}
+              {t("common.cancel", "Hủy")}
             </button>
             <button type="button" className="btn btn-secondary" onClick={() => void closeLaunch()} disabled={actionBusy !== null}>
-              {t("common.close", "关闭")}
+              {t("common.close", "Đóng")}
             </button>
           </div>
         )}
@@ -928,7 +928,7 @@ export function CodexInstanceLaunchProgressModal() {
         {state.status === "cancelled" && (
           <div className="codex-switch-progress-footer codex-instance-launch-footer">
             <button type="button" className="btn btn-primary" onClick={() => setState(null)}>
-              {t("common.close", "关闭")}
+              {t("common.close", "Đóng")}
             </button>
           </div>
         )}
@@ -941,7 +941,7 @@ export function CodexInstanceLaunchProgressModal() {
                   onClick={() => void closeLaunch()}
                   disabled={retryBusy !== null}
                 >
-                  {t("common.close", "关闭")}
+                  {t("common.close", "Đóng")}
                 </button>
                 {state.canRetry !== false && (
                   <button
@@ -953,7 +953,7 @@ export function CodexInstanceLaunchProgressModal() {
                     {retryBusy === "retry" && (
                       <RefreshCw size={14} className="loading-spinner" />
                     )}
-                    {t("common.retry", "重试")}
+                    {t("common.retry", "Thử lại")}
                   </button>
                 )}
                 {failedStepId && (
@@ -975,7 +975,7 @@ export function CodexInstanceLaunchProgressModal() {
                   onClick={() => void closeLaunch()}
                   disabled={apiActionBusy}
                 >
-                  {t("common.cancel", "取消")}
+                  {t("common.cancel", "Hủy")}
                 </button>
                 {authFailure.apiOnlyAvailable && (
                   <button
@@ -985,8 +985,8 @@ export function CodexInstanceLaunchProgressModal() {
                     disabled={apiActionBusy}
                   >
                     {apiActionBusy
-                      ? t("common.loading", "加载中...")
-                      : t("codex.localAccess.entryAction", "添加至 API 服务")}
+                      ? t("common.loading", "Đang tải...")
+                      : t("codex.localAccess.entryAction", "Thêm vào dịch vụ API")}
                   </button>
                 )}
                 {authFailure.reasonCode === "client_login_required" && (
@@ -997,8 +997,8 @@ export function CodexInstanceLaunchProgressModal() {
                     disabled={apiActionBusy || retryBusy !== null}
                   >
                     {apiActionBusy
-                      ? t("common.loading", "加载中...")
-                      : t("codex.switchAuth.clearClientAuth", "清除异常标识")}
+                      ? t("common.loading", "Đang tải...")
+                      : t("codex.switchAuth.clearClientAuth", "Xóa cảnh báo")}
                   </button>
                 )}
                 <button
@@ -1007,7 +1007,7 @@ export function CodexInstanceLaunchProgressModal() {
                   onClick={reauthorizeAccount}
                   disabled={apiActionBusy || retryBusy !== null || !accountId}
                 >
-                  {t("common.reauthorize", "重新授权")}
+                  {t("common.reauthorize", "Ủy quyền lại")}
                 </button>
                 {failedStepId && (
                   <button type="button" className="btn btn-secondary" onClick={() => void skipAndLaunch()} disabled={apiActionBusy || retryBusy !== null}>
@@ -1023,7 +1023,7 @@ export function CodexInstanceLaunchProgressModal() {
                   onClick={() => void closeLaunch()}
                   disabled={actionBusy !== null}
                 >
-                  {t("common.close", "关闭")}
+                  {t("common.close", "Đóng")}
                 </button>
                 <button
                   type="button"
@@ -1062,7 +1062,7 @@ export function CodexInstanceLaunchProgressModal() {
                 className="btn btn-secondary"
                 onClick={() => void closeLaunch()}
               >
-                {t("common.close", "关闭")}
+                {t("common.close", "Đóng")}
               </button>
             )}
           </div>

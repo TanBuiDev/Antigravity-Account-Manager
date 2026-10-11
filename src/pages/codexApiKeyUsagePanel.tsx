@@ -88,7 +88,7 @@ export function renderCodexApiKeyUsagePanel({
             <span>
               {t(
                 "codex.modelProviders.usage.fields.totalBalance",
-                "总余额",
+                "Tổng số dư",
               )}
             </span>
             <strong>
@@ -99,7 +99,7 @@ export function renderCodexApiKeyUsagePanel({
             <span>
               {t(
                 "codex.modelProviders.usage.fields.grantedBalance",
-                "赠金余额",
+                "Số dư tặng",
               )}
             </span>
             <strong>
@@ -110,7 +110,7 @@ export function renderCodexApiKeyUsagePanel({
             <span>
               {t(
                 "codex.modelProviders.usage.fields.toppedUpBalance",
-                "充值余额",
+                "Số dư nạp",
               )}
             </span>
             <strong>
@@ -120,7 +120,7 @@ export function renderCodexApiKeyUsagePanel({
         </div>
         {!summary && usageState?.error ? (
           <div className="codex-api-key-usage-empty">
-            {t("common.shared.quota.queryFailed", "配额查询失败")}
+            {t("common.shared.quota.queryFailed", "Truy vấn hạn mức thất bại")}
           </div>
         ) : null}
       </div>
@@ -140,7 +140,7 @@ export function renderCodexApiKeyUsagePanel({
             value: String(quota.expiresAt),
           })
         : "-";
-    const unlimitedText = t("codex.newApi.quota.unlimited", "不限量");
+    const unlimitedText = t("codex.newApi.quota.unlimited", "Không giới hạn");
     const quotaValueText =
       summary.quotaUnlimited === true
         ? unlimitedText
@@ -150,12 +150,12 @@ export function renderCodexApiKeyUsagePanel({
     return (
       <div
         className="quota-item codex-api-key-quota-item new-api"
-        title={`${t("codex.cockpitApi.balance", "额度")}：${quotaValueText}`}
+        title={`${t("codex.cockpitApi.balance", "Số dư")}：${quotaValueText}`}
       >
         <div className="quota-header">
           <Database size={14} />
           <span className="quota-label">
-            {t("codex.cockpitApi.balance", "额度")}
+            {t("codex.cockpitApi.balance", "Số dư")}
           </span>
           <span className="quota-pct high">{quotaValueText}</span>
         </div>
@@ -167,7 +167,7 @@ export function renderCodexApiKeyUsagePanel({
         </div>
         {expiresText !== "-" && (
           <span className="quota-reset">
-            {t("codex.modelProviders.usage.fields.expiresAt", "过期时间")}：
+            {t("codex.modelProviders.usage.fields.expiresAt", "Hết hạn")}：
             {expiresText}
           </span>
         )}
@@ -225,7 +225,7 @@ export function renderCodexApiKeyUsagePanel({
         <div className="codex-api-key-usage-grid">
           <div>
             <span>
-              {t("codex.modelProviders.usage.accountBalance", "账户余额")}
+              {t("codex.modelProviders.usage.accountBalance", "Số dư tài khoản")}
             </span>
             <strong>
               {formatApiKeyUsageQuotaValue(
@@ -240,7 +240,7 @@ export function renderCodexApiKeyUsagePanel({
             <span>
               {t(
                 "codex.modelProviders.usage.fields.todayRequests",
-                "今日请求",
+                "Yêu cầu hôm nay",
               )}
             </span>
             <strong>
@@ -251,7 +251,7 @@ export function renderCodexApiKeyUsagePanel({
             <span>
               {t(
                 "codex.modelProviders.usage.fields.todayTokens",
-                "今日 Token",
+                "Token hôm nay",
               )}
             </span>
             <strong>
@@ -295,7 +295,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.fields.totalGranted",
-                      "授予额度",
+                      "Đã cấp",
                     )}
                   </span>
                   <strong>
@@ -317,7 +317,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.fields.totalAvailable",
-                      "可用额度",
+                      "Khả dụng",
                     )}
                   </span>
                   <strong>
@@ -339,7 +339,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.fields.expiresAt",
-                      "过期时间",
+                      "Hết hạn",
                     )}
                   </span>
                   <strong>
@@ -397,7 +397,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.accountBalance",
-                      "账户余额",
+                      "Số dư tài khoản",
                     )}
                   </span>
                   <strong>
@@ -413,7 +413,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.fields.todayRequests",
-                      "今日请求",
+                      "Yêu cầu hôm nay",
                     )}
                   </span>
                   <strong>
@@ -424,7 +424,7 @@ export function renderCodexApiKeyUsagePanel({
                   <span>
                     {t(
                       "codex.modelProviders.usage.fields.todayTokens",
-                      "今日 Token",
+                      "Token hôm nay",
                     )}
                   </span>
                   <strong>
@@ -451,12 +451,12 @@ export function renderCodexApiKeyUsagePanel({
       ) : (
         <div className="codex-api-key-usage-empty">
           {loading
-            ? t("codex.modelProviders.usage.loading", "正在查询额度...")
+            ? t("codex.modelProviders.usage.loading", "Đang truy vấn hạn mức...")
             : usageState?.error
               ? null
               : canRefresh
-                ? t("codex.modelProviders.usage.pending", "等待查询额度")
-                : t("codex.modelProviders.usage.noKey", "暂无可查询额度")}
+                ? t("codex.modelProviders.usage.pending", "Đang chờ truy vấn hạn mức")
+                : t("codex.modelProviders.usage.noKey", "Chưa có hạn mức để truy vấn")}
         </div>
       )}
     </div>

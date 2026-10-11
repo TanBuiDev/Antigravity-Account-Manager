@@ -632,15 +632,15 @@ function requestKindLabel(
   t: ReturnType<typeof useTranslation>["t"],
 ): string {
   if (kind === "image_generation") {
-    return t("codex.localAccess.requestKind.imageGeneration", "生图");
+    return t("codex.localAccess.requestKind.imageGeneration", "Ảnh");
   }
   if (kind === "image_edit") {
-    return t("codex.localAccess.requestKind.imageEdit", "改图");
+    return t("codex.localAccess.requestKind.imageEdit", "Sửa ảnh");
   }
   if (kind === "text") {
-    return t("codex.localAccess.requestKind.text", "文本");
+    return t("codex.localAccess.requestKind.text", "Văn bản");
   }
-  return t("codex.localAccess.requestKind.other", "其他");
+  return t("codex.localAccess.requestKind.other", "Khác");
 }
 
 /** 与后端写入 x-cockpit-instance-id 一致：profile 目录 basename */
@@ -824,13 +824,13 @@ export function useCodexApiServicePageController() {
     () => [
       {
         id: "long_wait" as const,
-        name: t("codex.apiService.timeouts.longWaitPreset", "长等待方案"),
+        name: t("codex.apiService.timeouts.longWaitPreset", "Mẫu chờ lâu"),
         timeouts: defaultCodexLocalAccessTimeouts(),
         builtin: true,
       },
       {
         id: "short_wait" as const,
-        name: t("codex.apiService.timeouts.shortWaitPreset", "短等待方案"),
+        name: t("codex.apiService.timeouts.shortWaitPreset", "Mẫu chờ ngắn"),
         timeouts: shortWaitCodexLocalAccessTimeouts(),
         builtin: true,
       },
@@ -1081,7 +1081,7 @@ export function useCodexApiServicePageController() {
     if (pricingRepriceProgress.phase === "completed") {
       return t("codex.apiService.models.pricingRepriceDone", {
         updated: formatCompactNumber(pricingRepriceProgress.updated),
-        defaultValue: "历史估算价值已更新，变更 {{updated}} 条",
+        defaultValue: "Đã cập nhật ước tính lịch sử; đổi {{updated}} dòng",
       });
     }
     if (pricingRepriceProgress.phase === "failed") {
@@ -1090,15 +1090,15 @@ export function useCodexApiServicePageController() {
           pricingRepriceProgress.message ||
           t(
             "codex.apiService.models.pricingRepriceFailed",
-            "历史估算价值更新失败",
+            "Cập nhật ước tính thất bại",
           ),
-        defaultValue: "历史估算价值更新失败：{{message}}",
+        defaultValue: "Cập nhật ước tính thất bại: {{message}}",
       });
     }
     if (pricingRepriceProgress.phase === "superseded") {
       return t(
         "codex.apiService.models.pricingRepriceSuperseded",
-        "已收到新的价格配置，正在切换到最新重算任务",
+        "Đã nhận giá mới; chuyển sang tác vụ tính lại mới nhất",
       );
     }
     return t("codex.apiService.models.pricingRepriceRunning", {
@@ -1106,7 +1106,7 @@ export function useCodexApiServicePageController() {
       total: formatCompactNumber(pricingRepriceProgress.total),
       updated: formatCompactNumber(pricingRepriceProgress.updated),
       defaultValue:
-        "正在更新历史估算价值 {{processed}} / {{total}}，已更新 {{updated}} 条",
+        "Đang cập nhật ước tính {{processed}} / {{total}}; đã cập nhật {{updated}}",
     });
   }, [pricingRepriceProgress, t]);
   const pricingRepriceActive =
@@ -1141,7 +1141,7 @@ export function useCodexApiServicePageController() {
       ),
       incomplete: formatCompactNumber(usage?.streamIncompleteCount ?? 0),
       defaultValue:
-        "成功 {{success}} / 失败 {{failed}} / 取消 {{canceled}} / 上游失败 {{upstreamFailed}} / 流未完成 {{incomplete}}",
+        "OK {{success}} / Lỗi {{failed}} / Hủy {{canceled}} / Nguồn {{upstreamFailed}} / Chưa xong {{incomplete}}",
     });
   const formatAccountTokenUsage = (
     usage?: CodexLocalAccessUsageStats | null,
@@ -1309,7 +1309,7 @@ export function useCodexApiServicePageController() {
           setNotice(
             t(
               "codex.apiService.models.pricingRepriceCompleted",
-              "历史估算价值已更新",
+              "Đã cập nhật ước tính lịch sử",
             ),
           );
           return;
@@ -1319,7 +1319,7 @@ export function useCodexApiServicePageController() {
             progress.message ||
             t(
               "codex.apiService.models.pricingRepriceFailed",
-              "历史估算价值更新失败",
+              "Cập nhật ước tính thất bại",
             );
           setPricingError(message);
           setError(message);
@@ -1635,7 +1635,7 @@ export function useCodexApiServicePageController() {
         1200,
       );
     } catch (err) {
-      setError(t("common.shared.export.copyFailed", "复制失败，请手动复制"));
+      setError(t("common.shared.export.copyFailed", "Sao chép thất bại, vui lòng sao chép thủ công"));
       console.error("Failed to copy Codex API service value:", err);
     }
   };
@@ -1658,13 +1658,13 @@ export function useCodexApiServicePageController() {
       const confirmed = await confirmDialog(
         t(
           "codex.localAccess.riskNotice.desc",
-          "当前 Codex API 服务相关功能，本质上属于代理转发使用方式。继续使用即表示您已知悉相关情况，并愿意自行承担可能产生的风险。",
+          "Các chức năng của dịch vụ Codex API thực chất sử dụng phương thức chuyển tiếp qua proxy. Khi tiếp tục, bạn xác nhận đã hiểu và tự chịu trách nhiệm về các rủi ro liên quan.",
         ),
         {
-          title: t("codex.localAccess.riskNotice.title", "使用风险提示"),
+          title: t("codex.localAccess.riskNotice.title", "Lưu ý rủi ro"),
           kind: "warning",
-          okLabel: t("codex.localAccess.riskNotice.continueStart", "继续启动"),
-          cancelLabel: t("common.cancel", "取消"),
+          okLabel: t("codex.localAccess.riskNotice.continueStart", "Tiếp tục"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmed) return false;
@@ -1677,8 +1677,8 @@ export function useCodexApiServicePageController() {
         setState(next);
       },
       collection.enabled
-        ? t("codex.localAccess.disabledSuccess", "API 服务已停用")
-        : t("codex.localAccess.enabledSuccess", "API 服务已启用"),
+        ? t("codex.localAccess.disabledSuccess", "Đã tắt dịch vụ API")
+        : t("codex.localAccess.enabledSuccess", "Đã bật dịch vụ API"),
       fromDialog,
     );
   };
@@ -1711,19 +1711,19 @@ export function useCodexApiServicePageController() {
       const confirmedEnableAndSwitch = await confirmDialog(
         t(
           "codex.localAccess.enableBeforeActivateMessage",
-          "API 服务当前未启用，需要先启用服务。是否启用并切号？",
+          "Dịch vụ API hiện đang tắt và cần bật trước. Bật và chuyển ngay?",
         ),
         {
           title: t(
             "codex.localAccess.enableBeforeActivateTitle",
-            "服务未启用",
+            "Dịch vụ chưa bật",
           ),
           kind: "warning",
           okLabel: t(
             "codex.localAccess.enableAndActivateAction",
-            "启用并切号",
+            "Bật và chuyển",
           ),
-          cancelLabel: t("common.cancel", "取消"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmedEnableAndSwitch) return;
@@ -1732,16 +1732,16 @@ export function useCodexApiServicePageController() {
       const confirmedRisk = await confirmDialog(
         t(
           "codex.localAccess.riskNotice.desc",
-          "当前 Codex API 服务相关功能，本质上属于代理转发使用方式。继续使用即表示您已知悉相关情况，并愿意自行承担可能产生的风险。",
+          "Các chức năng của dịch vụ Codex API thực chất sử dụng phương thức chuyển tiếp qua proxy. Khi tiếp tục, bạn xác nhận đã hiểu và tự chịu trách nhiệm về các rủi ro liên quan.",
         ),
         {
-          title: t("codex.localAccess.riskNotice.title", "使用风险提示"),
+          title: t("codex.localAccess.riskNotice.title", "Lưu ý rủi ro"),
           kind: "warning",
           okLabel: t(
             "codex.localAccess.riskNotice.continueSwitch",
-            "继续切号",
+            "Tiếp tục",
           ),
-          cancelLabel: t("common.cancel", "取消"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmedRisk) return;
@@ -1757,7 +1757,7 @@ export function useCodexApiServicePageController() {
       await fetchCurrentAccount();
       await refreshApiServiceCurrent();
       setNotice(
-        next.recovering ? "" : t("codex.localAccess.activateSuccess", "已切换到 API 服务"),
+        next.recovering ? "" : t("codex.localAccess.activateSuccess", "Đã chuyển sang dịch vụ API"),
       );
     } catch (err) {
       if (!mountedRef.current) return;
@@ -1765,7 +1765,7 @@ export function useCodexApiServicePageController() {
         presentWindowsOperationError({
           error: err,
           operation: "start_sidecar",
-          summary: t("codex.localAccess.activateAction", "启动 API 服务"),
+          summary: t("codex.localAccess.activateAction", "Khởi động dịch vụ API"),
           retry: async () => {
             const next = await codexLocalAccessService.activateCodexLocalAccess();
             if (!mountedRef.current) return;
@@ -1806,13 +1806,13 @@ export function useCodexApiServicePageController() {
     const content = testChatInput.trim();
     if (!content) {
       setTestDialogError(
-        t("codex.localAccess.testChatInputRequired", "请输入测试消息"),
+        t("codex.localAccess.testChatInputRequired", "Nhập tin nhắn thử"),
       );
       return;
     }
     if (!selectedModelId) {
       setTestDialogError(
-        t("codex.localAccess.testChatModelRequired", "请选择模型 ID"),
+        t("codex.localAccess.testChatModelRequired", "Chọn ID mô hình"),
       );
       return;
     }
@@ -1877,7 +1877,7 @@ export function useCodexApiServicePageController() {
                         message.content ||
                         t(
                           "codex.localAccess.testChatEmptyResponse",
-                          "响应为空",
+                          "Phản hồi trống",
                         ),
                       latencyMs: payload.latencyMs,
                     }
@@ -1907,7 +1907,7 @@ export function useCodexApiServicePageController() {
     const nextPort = Number(portInput.trim());
     if (!Number.isInteger(nextPort) || nextPort <= 0 || nextPort > 65535) {
       setError(
-        t("codex.localAccess.portInvalid", "请输入 1 到 65535 之间的端口"),
+        t("codex.localAccess.portInvalid", "Nhập cổng từ 1 đến 65535"),
       );
       return;
     }
@@ -1917,7 +1917,7 @@ export function useCodexApiServicePageController() {
           await codexLocalAccessService.updateCodexLocalAccessPort(nextPort);
         setState(next);
       },
-      t("codex.localAccess.portSaveSuccess", "API 服务端口已更新"),
+      t("codex.localAccess.portSaveSuccess", "Đã cập nhật cổng dịch vụ API"),
     );
   };
 
@@ -1930,7 +1930,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.localAccess.upstreamProxySaveSuccess", "API 代理地址已更新"),
+      t("codex.localAccess.upstreamProxySaveSuccess", "Đã cập nhật URL proxy API"),
     );
   };
 
@@ -1942,7 +1942,7 @@ export function useCodexApiServicePageController() {
       const result = await codexLocalAccessService.killCodexLocalAccessPort();
       setState(result.state);
       setNotice(
-        t("codex.localAccess.killPortSuccessUnknown", "API 服务端口已清理"),
+        t("codex.localAccess.killPortSuccessUnknown", "Đã dọn cổng dịch vụ API"),
       );
     } catch (err) {
       const retryKillPort = async () => {
@@ -1953,7 +1953,7 @@ export function useCodexApiServicePageController() {
         presentWindowsOperationError({
           error: err,
           operation: "stop_process",
-          summary: t("codex.localAccess.killPortTitle", "清理 API 服务端口"),
+          summary: t("codex.localAccess.killPortTitle", "Dọn cổng dịch vụ API"),
           retry: retryKillPort,
           manualContinue: retryKillPort,
         })
@@ -1970,13 +1970,13 @@ export function useCodexApiServicePageController() {
     const confirmed = await confirmDialog(
       t(
         "codex.localAccess.restartConfirmMessage",
-        "将仅重启 API 服务 Sidecar，不修改账号、Token、API Key 或账号池配置。正在进行中的请求可能中断，确认继续吗？",
+        "Chỉ Sidecar của dịch vụ API sẽ được khởi động lại. Tài khoản, token, API key và cài đặt nhóm tài khoản sẽ không thay đổi. Các yêu cầu đang chạy có thể bị gián đoạn. Tiếp tục?",
       ),
       {
-        title: t("codex.localAccess.restartTitle", "重启 API 服务"),
+        title: t("codex.localAccess.restartTitle", "Khởi động lại dịch vụ API"),
         kind: "warning",
-        okLabel: t("codex.localAccess.restartAction", "重启 Sidecar"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("codex.localAccess.restartAction", "Khởi động lại Sidecar"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -1988,14 +1988,14 @@ export function useCodexApiServicePageController() {
         await codexLocalAccessService.restartCodexLocalAccessSidecar();
       setState(next);
       setNotice(
-        next.recovering ? "" : t("codex.localAccess.restartSuccess", "API 服务 Sidecar 已重启"),
+        next.recovering ? "" : t("codex.localAccess.restartSuccess", "Đã khởi động lại Sidecar dịch vụ API"),
       );
     } catch (err) {
       if (
         presentWindowsOperationError({
           error: err,
           operation: "start_sidecar",
-          summary: t("codex.localAccess.restartTitle", "重启 API 服务"),
+          summary: t("codex.localAccess.restartTitle", "Khởi động lại dịch vụ API"),
           retry: async () => {
             const next = await codexLocalAccessService.restartCodexLocalAccessSidecar();
             setState(next);
@@ -2020,7 +2020,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.localAccess.accessScopeSaveSuccess", "API 服务访问范围已更新"),
+      t("codex.localAccess.accessScopeSaveSuccess", "Đã cập nhật phạm vi truy cập dịch vụ API"),
     );
   };
 
@@ -2036,7 +2036,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.localAccess.clientBaseUrlHostSaveSuccess", "客户端地址已更新"),
+      t("codex.localAccess.clientBaseUrlHostSaveSuccess", "Đã cập nhật địa chỉ client"),
     );
   };
 
@@ -2049,7 +2049,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.localAccess.routingSaveSuccess", "API 服务调度策略已更新"),
+      t("codex.localAccess.routingSaveSuccess", "Đã cập nhật định tuyến dịch vụ API"),
     );
   };
 
@@ -2073,7 +2073,7 @@ export function useCodexApiServicePageController() {
       throw new Error(
         t(
           "codex.localAccess.noEligibleAccountsSelected",
-          "所选账号不在当前环境中，或不符合 API 服务条件。请先在当前环境导入可用 Codex 账号后再添加。",
+          "Các tài khoản đã chọn không có trong môi trường này hoặc không thể dùng với dịch vụ API. Trước tiên hãy nhập một tài khoản Codex dùng được trong môi trường này.",
         ),
       );
     }
@@ -2118,7 +2118,7 @@ export function useCodexApiServicePageController() {
           backupAccountIds,
           preferredAccountIds,
         ),
-      t("codex.localAccess.saveSuccess", "API 服务集合已更新"),
+      t("codex.localAccess.saveSuccess", "Đã cập nhật bộ dịch vụ API"),
     );
   };
 
@@ -2155,7 +2155,7 @@ export function useCodexApiServicePageController() {
         preferredAccountIds,
         imageGenerationAccountPolicies,
       );
-      setNotice(t("codex.localAccess.saveSuccess", "API 服务集合已更新"));
+      setNotice(t("codex.localAccess.saveSuccess", "Đã cập nhật bộ dịch vụ API"));
     } catch (err) {
       const message = String(err).replace(/^Error:\s*/, "");
       setError(message);
@@ -2179,7 +2179,7 @@ export function useCodexApiServicePageController() {
       setNotice(
         t("codex.localAccess.accountPoolHealth.recoverSuccess", {
           count: accountIds.length,
-          defaultValue: "已提交 {{count}} 个账号的恢复操作",
+          defaultValue: "Đã yêu cầu khôi phục {{count}} tài khoản",
         }),
       );
     } catch (err) {
@@ -2223,7 +2223,7 @@ export function useCodexApiServicePageController() {
         );
         setState(next);
       },
-      t("codex.localAccess.apiKeyCreateSuccess", "API Key 已创建"),
+      t("codex.localAccess.apiKeyCreateSuccess", "Đã tạo API Key"),
     );
   };
 
@@ -2243,7 +2243,7 @@ export function useCodexApiServicePageController() {
         );
         setState(next);
       },
-      t("codex.localAccess.apiKeyUpdateSuccess", "API Key 已更新"),
+      t("codex.localAccess.apiKeyUpdateSuccess", "Đã cập nhật API Key"),
     );
   };
 
@@ -2275,7 +2275,7 @@ export function useCodexApiServicePageController() {
       setError(
         t(
           "codex.apiService.keys.accountScopeFixed",
-          "此 Key 已固定绑定账号，不能继承服务池或清空账号范围",
+          "Khóa này cố định với tài khoản liên kết và không thể kế thừa nhóm dịch vụ",
         ),
       );
       return;
@@ -2284,7 +2284,7 @@ export function useCodexApiServicePageController() {
       setError(
         t(
           "codex.apiService.keys.accountScopeRequired",
-          "自定义账号池至少需要选择 1 个账号",
+          "Chọn ít nhất một tài khoản",
         ),
       );
       return;
@@ -2313,7 +2313,7 @@ export function useCodexApiServicePageController() {
           }));
         }
       },
-      t("codex.apiService.keys.policySaved", "Key 策略已保存"),
+      t("codex.apiService.keys.policySaved", "Đã lưu chính sách mô hình của Key"),
     );
   };
 
@@ -2342,8 +2342,8 @@ export function useCodexApiServicePageController() {
         setState(next);
       },
       pinned
-        ? t("codex.apiService.keys.accountPrioritySaved", "已置顶账号")
-        : t("codex.apiService.keys.accountPriorityCleared", "已取消置顶账号"),
+        ? t("codex.apiService.keys.accountPrioritySaved", "Đã ghim tài khoản ưu tiên")
+        : t("codex.apiService.keys.accountPriorityCleared", "Đã bỏ ghim tài khoản ưu tiên"),
     );
   };
 
@@ -2366,7 +2366,7 @@ export function useCodexApiServicePageController() {
         );
         setState(next);
       },
-      t("codex.localAccess.apiKeyUpdateSuccess", "API Key 已更新"),
+      t("codex.localAccess.apiKeyUpdateSuccess", "Đã cập nhật API Key"),
     );
   };
 
@@ -2374,13 +2374,13 @@ export function useCodexApiServicePageController() {
     const confirmed = await confirmDialog(
       t(
         "codex.localAccess.apiKeyRotateConfirm",
-        "重置后该 API Key 会立即失效，确认继续吗？",
+        "API Key này sẽ ngừng hoạt động ngay sau khi đặt lại. Tiếp tục?",
       ),
       {
-        title: t("codex.localAccess.rotateKey", "重置密钥"),
+        title: t("codex.localAccess.rotateKey", "Đổi khóa"),
         kind: "warning",
-        okLabel: t("common.confirm", "确认"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("common.confirm", "Xác nhận"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -2392,18 +2392,18 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.localAccess.apiKeyRotateSuccess", "API Key 已重置"),
+      t("codex.localAccess.apiKeyRotateSuccess", "Đã đặt lại API Key"),
     );
   };
 
   const handleDeleteApiKey = async (apiKeyId: string) => {
     const confirmed = await confirmDialog(
-      t("codex.localAccess.apiKeyDeleteConfirm", "确定删除这个 API Key 吗？"),
+      t("codex.localAccess.apiKeyDeleteConfirm", "Xóa API Key này?"),
       {
-        title: t("codex.localAccess.apiKeyDelete", "删除 Key"),
+        title: t("codex.localAccess.apiKeyDelete", "Xóa khóa"),
         kind: "error",
-        okLabel: t("common.delete", "删除"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("common.delete", "Xóa"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -2413,18 +2413,18 @@ export function useCodexApiServicePageController() {
           await codexLocalAccessService.deleteCodexLocalAccessApiKey(apiKeyId);
         setState(next);
       },
-      t("codex.localAccess.apiKeyDeleteSuccess", "API Key 已删除"),
+      t("codex.localAccess.apiKeyDeleteSuccess", "Đã xóa API Key"),
     );
   };
 
   const handleClearStats = async () => {
     const confirmed = await confirmDialog(
-      t("codex.localAccess.clearStatsConfirm", "确定要清空 API 服务统计吗？"),
+      t("codex.localAccess.clearStatsConfirm", "Xóa toàn bộ thống kê dịch vụ API?"),
       {
-        title: t("codex.localAccess.clearStats", "清除统计"),
+        title: t("codex.localAccess.clearStats", "Xóa thống kê"),
         kind: "warning",
-        okLabel: t("common.confirm", "确认"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("common.confirm", "Xác nhận"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -2433,7 +2433,7 @@ export function useCodexApiServicePageController() {
         const next = await codexLocalAccessService.clearCodexLocalAccessStats();
         setState(next);
       },
-      t("codex.localAccess.clearStatsSuccess", "API 服务统计已清空"),
+      t("codex.localAccess.clearStatsSuccess", "Đã xóa thống kê dịch vụ API"),
     );
   };
 
@@ -2447,7 +2447,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.apiService.models.rulesSaved", "模型规则已保存"),
+      t("codex.apiService.models.rulesSaved", "Đã lưu quy tắc mô hình"),
     );
   };
 
@@ -2580,7 +2580,7 @@ export function useCodexApiServicePageController() {
           setAccountModelMappingError(
             t(
               "codex.apiService.accountModelMappings.incomplete",
-              "请补全请求模型和发送模型",
+              "Hãy điền mô hình yêu cầu và mô hình được gửi",
             ),
           );
           return;
@@ -2590,7 +2590,7 @@ export function useCodexApiServicePageController() {
           setAccountModelMappingError(
             t(
               "codex.apiService.accountModelMappings.duplicate",
-              "请求模型不能重复",
+              "Mô hình yêu cầu phải là duy nhất",
             ),
           );
           return;
@@ -2607,7 +2607,7 @@ export function useCodexApiServicePageController() {
         setAccountModelMappingError(
           t(
             "codex.api.modelCatalog.contextWindowInvalid",
-            "上下文窗口必须是大于 0 的整数",
+            "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
           ),
         );
         return;
@@ -2632,7 +2632,7 @@ export function useCodexApiServicePageController() {
       },
       t(
         "codex.apiService.accountModelMappings.saveSuccess",
-        "账号模型映射已保存",
+        "Đã lưu ánh xạ mô hình tài khoản",
       ),
     );
   };
@@ -2658,7 +2658,7 @@ export function useCodexApiServicePageController() {
       },
       t(
         "codex.apiService.accountModelRules.saveSuccess",
-        "账号模型禁用规则已保存",
+        "Đã lưu chặn mô hình tài khoản",
       ),
     );
   };
@@ -2733,7 +2733,7 @@ export function useCodexApiServicePageController() {
       setPricingError(
         t(
           "codex.apiService.models.pricingRepriceSaveBlocked",
-          "历史估算价值更新中，完成后再保存",
+          "Đang tính lại ước tính; hãy lưu sau khi xong",
         ),
       );
       return;
@@ -2870,7 +2870,7 @@ export function useCodexApiServicePageController() {
         setPricingError(
           t(
             "codex.apiService.models.pricingInvalid",
-            "价格必须是大于或等于 0 的数字，Token 阈值必须是正整数",
+            "Giá phải ≥ 0 và ngưỡng token là số nguyên dương",
           ),
         );
         return;
@@ -2919,7 +2919,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.apiService.models.pricingSaved", "价格设置已保存"),
+      t("codex.apiService.models.pricingSaved", "Đã lưu giá"),
     );
   };
 
@@ -2934,7 +2934,7 @@ export function useCodexApiServicePageController() {
       setNotice(
         t(
           "codex.apiService.models.pricingRepriced",
-          "历史估值已按当前价格重算",
+          "Ước tính lịch sử đã được tính lại theo giá hiện tại",
         ),
       );
     } catch (err) {
@@ -2955,7 +2955,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 60,
           max: 86400,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return;
@@ -2970,7 +2970,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 0,
           max: 8,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return;
@@ -2985,7 +2985,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 0,
           max: 30,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return;
@@ -3055,7 +3055,7 @@ export function useCodexApiServicePageController() {
             });
           setState(next);
         },
-        t("codex.apiService.routing.optionsSaved", "调度选项已保存"),
+        t("codex.apiService.routing.optionsSaved", "Đã lưu tùy chọn định tuyến"),
       );
     } finally {
       setRoutingSaving(false);
@@ -3096,7 +3096,7 @@ export function useCodexApiServicePageController() {
           t("codex.apiService.validation.numberRange", {
             min: 1,
             max,
-            defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+            defaultValue: "Nhập số từ {{min}} đến {{max}}",
           }),
         );
         return null;
@@ -3113,7 +3113,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 1,
           max: 3,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return null;
@@ -3128,7 +3128,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 0,
           max: 300,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return null;
@@ -3143,7 +3143,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 0,
           max: 5,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return null;
@@ -3166,7 +3166,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 0,
           max: 5,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return null;
@@ -3201,7 +3201,7 @@ export function useCodexApiServicePageController() {
         t("codex.apiService.validation.numberRange", {
           min: 50,
           max: 10000,
-          defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+          defaultValue: "Nhập số từ {{min}} đến {{max}}",
         }),
       );
       return null;
@@ -3210,7 +3210,7 @@ export function useCodexApiServicePageController() {
       setTimeoutsError(
         t(
           "codex.apiService.timeouts.maxDelayGteBase",
-          "最大延迟不能小于基础延迟",
+          "Độ trễ tối đa không được nhỏ hơn độ trễ cơ bản",
         ),
       );
       return null;
@@ -3221,7 +3221,7 @@ export function useCodexApiServicePageController() {
       setTimeoutsError(
         t(
           "codex.apiService.timeouts.maxDelayGteBase",
-          "最大延迟不能小于基础延迟",
+          "Độ trễ tối đa không được nhỏ hơn độ trễ cơ bản",
         ),
       );
       return null;
@@ -3269,7 +3269,7 @@ export function useCodexApiServicePageController() {
         setState(next);
         setTimeoutsModalOpen(false);
       },
-      t("codex.apiService.timeouts.saved", "超时与重试已保存"),
+      t("codex.apiService.timeouts.saved", "Đã lưu hết hạn và thử lại"),
     );
   };
 
@@ -3297,7 +3297,7 @@ export function useCodexApiServicePageController() {
     const name = timeoutPresetNameDraft.trim();
     if (!name) {
       setTimeoutsError(
-        t("codex.apiService.timeouts.presetNameRequired", "请输入方案名称"),
+        t("codex.apiService.timeouts.presetNameRequired", "Nhập tên mẫu"),
       );
       return;
     }
@@ -3324,7 +3324,7 @@ export function useCodexApiServicePageController() {
         setSelectedTimeoutPresetId(preset.id);
         setTimeoutPresetNameDraft("");
       },
-      t("codex.apiService.timeouts.presetSaved", "方案已保存"),
+      t("codex.apiService.timeouts.presetSaved", "Đã lưu mẫu"),
     );
   };
 
@@ -3334,7 +3334,7 @@ export function useCodexApiServicePageController() {
     const name = timeoutPresetNameDraft.trim();
     if (!name) {
       setTimeoutsError(
-        t("codex.apiService.timeouts.presetNameRequired", "请输入方案名称"),
+        t("codex.apiService.timeouts.presetNameRequired", "Nhập tên mẫu"),
       );
       return;
     }
@@ -3356,7 +3356,7 @@ export function useCodexApiServicePageController() {
           );
         setState(next);
       },
-      t("codex.apiService.timeouts.presetUpdated", "方案已更新"),
+      t("codex.apiService.timeouts.presetUpdated", "Đã cập nhật mẫu"),
     );
   };
 
@@ -3365,9 +3365,9 @@ export function useCodexApiServicePageController() {
     const confirmed = await confirmDialog(
       t(
         "codex.apiService.timeouts.deletePresetConfirm",
-        "确定删除这个自定义方案吗？",
+        "Xóa mẫu tùy chỉnh này?",
       ),
-      { title: t("codex.apiService.timeouts.deletePresetTitle", "删除方案") },
+      { title: t("codex.apiService.timeouts.deletePresetTitle", "Xóa mẫu") },
     );
     if (!confirmed) return;
     const nextPresets = collection.timeoutPresets.filter(
@@ -3391,16 +3391,16 @@ export function useCodexApiServicePageController() {
           timeoutDraftsFromValue(defaultCodexLocalAccessTimeouts()),
         );
       },
-      t("codex.apiService.timeouts.presetDeleted", "方案已删除"),
+      t("codex.apiService.timeouts.presetDeleted", "Đã xóa mẫu"),
     );
   };
 
   const accessScopeOptions = [
     {
       value: "localhost",
-      label: t("codex.localAccess.accessScopeLocalhost", "仅本机"),
+      label: t("codex.localAccess.accessScopeLocalhost", "Chỉ cục bộ"),
     },
-    { value: "lan", label: t("codex.localAccess.accessScopeLan", "局域网") },
+    { value: "lan", label: t("codex.localAccess.accessScopeLan", "Mạng nội bộ") },
   ];
   const clientBaseUrlHostOptions = [
     { value: "localhost", label: "localhost" },
@@ -3409,52 +3409,52 @@ export function useCodexApiServicePageController() {
   const routingOptions = [
     {
       value: "auto",
-      label: t("codex.localAccess.routingStrategy.auto", "自动（推荐）"),
+      label: t("codex.localAccess.routingStrategy.auto", "Tự động (khuyến nghị)"),
     },
     {
       value: "random",
-      label: t("codex.localAccess.routingStrategy.random", "随机分散"),
+      label: t("codex.localAccess.routingStrategy.random", "Phân tán ngẫu nhiên"),
     },
     {
       value: "single_account",
-      label: t("codex.localAccess.routingStrategy.singleAccount", "固定首个账号"),
+      label: t("codex.localAccess.routingStrategy.singleAccount", "Một tài khoản"),
     },
     {
       value: "quota_high_first",
       label: t(
         "codex.localAccess.routingStrategy.quotaHighFirst",
-        "优先高配额",
+        "Ưu tiên hạn mức cao",
       ),
     },
     {
       value: "quota_low_first",
-      label: t("codex.localAccess.routingStrategy.quotaLowFirst", "优先低配额"),
+      label: t("codex.localAccess.routingStrategy.quotaLowFirst", "Ưu tiên hạn mức thấp"),
     },
     {
       value: "plan_high_first",
-      label: t("codex.localAccess.routingStrategy.planHighFirst", "优先高订阅"),
+      label: t("codex.localAccess.routingStrategy.planHighFirst", "Ưu tiên gói cao"),
     },
     {
       value: "plan_low_first",
-      label: t("codex.localAccess.routingStrategy.planLowFirst", "优先低订阅"),
+      label: t("codex.localAccess.routingStrategy.planLowFirst", "Ưu tiên gói thấp"),
     },
     {
       value: "expiry_soon_first",
       label: t(
         "codex.localAccess.routingStrategy.expirySoonFirst",
-        "优先近到期",
+        "Sắp hết hạn trước",
       ),
     },
     {
       value: "custom",
-      label: t("codex.localAccess.routingStrategy.custom", "自定义"),
+      label: t("codex.localAccess.routingStrategy.custom", "Tùy chỉnh"),
     },
   ];
   const selectedStatsRangeTitle =
     statsRange === "daily"
       ? t("codex.apiService.statsRange.today", "Today")
       : statsRange === "rolling7d"
-        ? t("codex.sessionUsage.range.7d", "近 7 天")
+        ? t("codex.sessionUsage.range.7d", "7 ngày")
       : statsRange === "weekly"
         ? t("codex.apiService.statsRange.thisWeek", "This week")
         : statsRange === "monthly"
@@ -3515,56 +3515,56 @@ export function useCodexApiServicePageController() {
   }> = [
     {
       key: "overview",
-      label: t("codex.apiService.tabs.overview", "服务总览"),
+      label: t("codex.apiService.tabs.overview", "Tổng quan dịch vụ"),
       icon: <CodexIcon className="tab-icon" />,
     },
     {
       key: "keys",
-      label: t("codex.apiService.tabs.keys", "客户端 Key"),
+      label: t("codex.apiService.tabs.keys", "Khóa máy khách"),
       icon: <KeyRound className="tab-icon" />,
     },
     {
       key: "accounts",
-      label: t("codex.apiService.tabs.accounts", "账号池"),
+      label: t("codex.apiService.tabs.accounts", "Nhóm tài khoản"),
       icon: <Users className="tab-icon" />,
     },
     {
       key: "models",
-      label: t("codex.apiService.tabs.models", "模型与能力"),
+      label: t("codex.apiService.tabs.models", "Mô hình và năng lực"),
       icon: <Image className="tab-icon" />,
     },
     {
       key: "logs",
-      label: t("codex.apiService.tabs.logs", "统计与日志"),
+      label: t("codex.apiService.tabs.logs", "Thống kê và nhật ký"),
       icon: <Activity className="tab-icon" />,
     },
   ];
   const statsLogTabs: Array<{ key: StatsLogTab; label: string }> = [
-    { key: "logs", label: t("codex.localAccess.requestLogTitle", "请求日志") },
+    { key: "logs", label: t("codex.localAccess.requestLogTitle", "Nhật ký yêu cầu") },
     {
       key: "accounts",
-      label: t("codex.localAccess.accountStatsTitle", "按账号统计"),
+      label: t("codex.localAccess.accountStatsTitle", "Theo tài khoản"),
     },
     {
       key: "models",
-      label: t("codex.localAccess.modelStatsTitle", "按模型统计"),
+      label: t("codex.localAccess.modelStatsTitle", "Theo mô hình"),
     },
     {
       key: "keys",
-      label: t("codex.localAccess.apiKeyStatsTitle", "按 Key 统计"),
+      label: t("codex.localAccess.apiKeyStatsTitle", "Theo khóa"),
     },
   ];
 
   const summaryCards = [
     {
       key: "requests",
-      label: t("codex.localAccess.stats.requests", "总请求数"),
+      label: t("codex.localAccess.stats.requests", "Yêu cầu"),
       value: formatCompactNumber(totals?.requestCount ?? 0),
       detail: formatRequestResultDetail(totals),
     },
     {
       key: "images",
-      label: t("codex.localAccess.stats.images", "图片请求"),
+      label: t("codex.localAccess.stats.images", "Yêu cầu ảnh"),
       value: formatCompactNumber(totals?.imageRequestCount ?? 0),
       detail: t("codex.localAccess.stats.imagesDetail", {
         generate: formatCompactNumber(totals?.imageGenerationRequestCount ?? 0),
@@ -3572,35 +3572,35 @@ export function useCodexApiServicePageController() {
         blocked: formatCompactNumber(
           totals?.imageGenerationCapabilityFailureCount ?? 0,
         ),
-        defaultValue: "生成 {{generate}} / 编辑 {{edit}} / 权限 {{blocked}}",
+        defaultValue: "Tạo {{generate}} / Sửa {{edit}} / Quyền {{blocked}}",
       }),
     },
     {
       key: "tokens",
-      label: t("codex.localAccess.stats.tokens", "总 Token 数"),
+      label: t("codex.localAccess.stats.tokens", "Token"),
       value: formatCompactNumber(totals?.totalTokens ?? 0),
       detail: `${t("codex.localAccess.stats.tokensDetail", {
         input: formatCompactNumber(totals?.inputTokens ?? 0),
         output: formatCompactNumber(totals?.outputTokens ?? 0),
-        defaultValue: "输入 {{input}} / 输出 {{output}}",
-      })} / ${t("codex.localAccess.stats.cached", "缓存")} ${formatCompactNumber(totals?.cachedTokens ?? 0)}`,
+        defaultValue: "Đầu vào {{input}} / Đầu ra {{output}}",
+      })} / ${t("codex.localAccess.stats.cached", "Bộ đệm")} ${formatCompactNumber(totals?.cachedTokens ?? 0)}`,
     },
     {
       key: "cost",
-      label: t("codex.localAccess.stats.estimatedCost", "估算价值"),
+      label: t("codex.localAccess.stats.estimatedCost", "Giá trị ước tính"),
       value: formatUsdCost(totals?.estimatedCostUsd ?? 0),
       detail: t(
         "codex.localAccess.stats.estimatedCostDetail",
-        "按当前请求价格快照累计",
+        "Cộng dồn từ ảnh chụp giá của từng yêu cầu",
       ),
     },
     {
       key: "latency",
-      label: t("codex.localAccess.stats.avgLatency", "平均延迟"),
+      label: t("codex.localAccess.stats.avgLatency", "Độ trễ TB"),
       value: formatLatencyMs(avgLatency),
       detail: t("codex.localAccess.stats.successRate", {
         rate: successRate,
-        defaultValue: "成功率 {{rate}}%",
+        defaultValue: "Tỷ lệ thành công {{rate}}%",
       }),
     },
   ];

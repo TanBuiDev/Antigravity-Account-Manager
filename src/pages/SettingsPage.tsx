@@ -416,7 +416,7 @@ export function useSettingsPageController() {
   useEffect(() => {
     invoke<string[]>('get_available_terminals')
       .then(setAvailableTerminals)
-      .catch(err => console.error('获取可用终端失败:', err));
+      .catch(err => console.error('Không thể tải danh sách terminal khả dụng:', err));
   }, []);
 
   const terminalOptions = useMemo(() => {
@@ -425,9 +425,9 @@ export function useSettingsPageController() {
       label: isWindows
         ? t(
             'settings.general.terminalSystemWindowsCompatibility',
-            '系统兼容（PowerShell）',
+            "Tương thích hệ thống (PowerShell)",
           )
-        : t('settings.general.terminalSystem', '系统默认'),
+        : t('settings.general.terminalSystem', "Mặc định hệ thống"),
     }];
     const allOptions = isMacOS ? [
       { value: 'Terminal', label: 'Terminal.app' },
@@ -471,8 +471,7 @@ export function useSettingsPageController() {
   }, [orderedPlatformIds]);
 
   const languageOptions = [
-    { value: 'zh-cn', label: '简体中文' },
-    { value: 'zh-tw', label: '繁體中文' },
+    { value: 'vi', label: 'Tiếng Việt' },
     { value: 'en', label: 'English' },
     { value: 'ja', label: '日本語' },
     { value: 'ko', label: '한국어' },
@@ -485,7 +484,6 @@ export function useSettingsPageController() {
     { value: 'tr', label: 'Türkçe' },
     { value: 'pl', label: 'Polski' },
     { value: 'cs', label: 'Čeština' },
-    { value: 'vi', label: 'Tiếng Việt' },
     { value: 'ar', label: 'العربية' },
     { value: 'id', label: 'Bahasa Indonesia' },
   ];
@@ -815,7 +813,7 @@ export function useSettingsPageController() {
         setCodexAccounts(nextCodexAccounts || []);
         setCodexGroups(nextCodexGroups || []);
       } catch (error) {
-        console.error('加载自动切号账号范围数据失败:', error);
+        console.error('Không thể tải danh sách tài khoản chuyển tự động:', error);
         if (!mounted) return;
         setAntigravityAccounts([]);
         setAntigravityAccountGroups([]);
@@ -854,7 +852,7 @@ export function useSettingsPageController() {
       setAutoInstallLoaded(true);
       setUpdateRemindersLoaded(true);
     } catch (err) {
-      console.error('加载自动更新设置失败:', err);
+      console.error('Không thể tải cài đặt tự động cập nhật:', err);
       setUpdateSettingsLoadFailed(true);
     }
   };
@@ -953,7 +951,7 @@ export function useSettingsPageController() {
   const [globalProxyNoProxy, setGlobalProxyNoProxy] = useState('');
   const reportPreviewPort = reportActualPort ?? (parseInt(reportPort, 10) || reportDefaultPort);
   const reportPreviewToken = encodeURIComponent((reportToken || 'your-token').trim() || 'your-token');
-  const reportRawPreviewUrl = `http://<当前IP>:${reportPreviewPort}/report?token=${reportPreviewToken}`;
+  const reportRawPreviewUrl = `http://<IP-hien-tai>:${reportPreviewPort}/report?token=${reportPreviewToken}`;
   const reportRenderedPreviewUrl = `${reportRawPreviewUrl}&render=true`;
   const [needsRestart, setNeedsRestart] = useState(false);
   const [networkSaving, setNetworkSaving] = useState(false);
@@ -1281,7 +1279,7 @@ export function useSettingsPageController() {
           };
           dispatchSettingsConfigUpdated(configUpdateSource);
         } catch (err) {
-          console.error('保存通用配置失败:', err);
+          console.error('Không thể lưu cấu hình chung:', err);
           const message = String(err) === 'common.configSaveTimeout' ? t('common.configSaveTimeout') : String(err);
           alert(`${t('settings.network.saveFailed').replace('{error}', message)}`);
           if (generalSaveQueueRef.current === operation) {
@@ -1571,7 +1569,7 @@ export function useSettingsPageController() {
         );
         setHasActiveResetTasks(hasReset);
       } catch (error) {
-        console.error('检测配额重置任务失败:', error);
+        console.error('Không thể kiểm tra tác vụ đặt lại hạn mức:', error);
         setHasActiveResetTasks(false);
       }
     };
@@ -1613,7 +1611,7 @@ export function useSettingsPageController() {
     try {
       await getCurrentWebview().setZoom(normalized);
     } catch (error) {
-      console.error('应用界面缩放失败:', error);
+      console.error('Không thể áp dụng tỷ lệ giao diện:', error);
     }
   };
 
@@ -1862,7 +1860,7 @@ export function useSettingsPageController() {
       if (loadVersion !== generalConfigLoadVersionRef.current) {
         return;
       }
-      console.error('加载通用配置失败:', err);
+      console.error('Không thể tải cấu hình chung:', err);
       setGeneralLoadFailed(true);
       if (hasHydratedGeneralConfigRef.current) {
         setGeneralLoaded(true);
@@ -1900,7 +1898,7 @@ export function useSettingsPageController() {
       setGlobalProxyNoProxy(config.global_proxy_no_proxy || '');
       setNeedsRestart(false);
     } catch (err) {
-      console.error('加载网络配置失败:', err);
+      console.error('Không thể tải cấu hình mạng:', err);
     }
   };
 
@@ -1936,7 +1934,7 @@ export function useSettingsPageController() {
       const config = await invoke<DiagnosticsConfig>('get_diagnostics_config');
       setErrorReportingEnabled(config.errorReportingEnabled);
     } catch (err) {
-      console.warn('加载诊断配置失败:', err);
+      console.warn('Không thể tải cấu hình chẩn đoán:', err);
     }
   };
 
@@ -1951,7 +1949,7 @@ export function useSettingsPageController() {
       });
     } catch (err) {
       setErrorReportingEnabled(previous);
-      console.error('保存诊断配置失败:', err);
+      console.error('Không thể lưu cấu hình chẩn đoán:', err);
     } finally {
       setErrorReportingSaving(false);
     }
@@ -2134,48 +2132,48 @@ export function useSettingsPageController() {
 
   const getResetLabelByTarget = (target: AppPathTarget) => {
     if (isWindows) {
-      return t('appPath.missing.scanApps', '检测运行中应用');
+      return t('appPath.missing.scanApps', "Quét ứng dụng");
     }
     if (target === 'vscode') {
-      return t('settings.general.vscodePathReset', '重置默认');
+      return t('settings.general.vscodePathReset', "Đặt lại mặc định");
     }
     if (target === 'windsurf') {
-      return t('settings.general.windsurfPathReset', '重置默认');
+      return t('settings.general.windsurfPathReset', "Đặt lại mặc định");
     }
     if (target === 'kiro') {
-      return t('settings.general.kiroPathReset', '重置默认');
+      return t('settings.general.kiroPathReset', "Đặt lại về mặc định");
     }
     if (target === 'cursor') {
-      return t('settings.general.cursorPathReset', '重置默认');
+      return t('settings.general.cursorPathReset', "Đặt lại mặc định");
     }
     if (target === 'codebuddy') {
-      return t('settings.general.codebuddyPathReset', '重置默认');
+      return t('settings.general.codebuddyPathReset', "Đặt lại mặc định");
     }
     if (target === 'codebuddy_cn') {
-      return t('settings.general.codebuddyCnPathReset', '重置默认');
+      return t('settings.general.codebuddyCnPathReset', "Đặt lại mặc định");
     }
     if (target === 'qoder') {
-      return t('settings.general.qoderPathReset', '重置默认');
+      return t('settings.general.qoderPathReset', "Đặt lại mặc định");
     }
     if (target === 'zcode') {
-      return t('settings.general.codexPathReset', '重置默认');
+      return t('settings.general.codexPathReset', "Đặt lại mặc định");
     }
     if (isTraeAppPathTarget(target)) {
-      return t('settings.general.traePathReset', '重置默认');
+      return t('settings.general.traePathReset', "Đặt lại mặc định");
     }
     if (target === 'workbuddy') {
-      return t('settings.general.workbuddyPathReset', '重置默认');
+      return t('settings.general.workbuddyPathReset', "Đặt lại mặc định");
     }
     if (target === 'zed') {
-      return t('settings.general.zedPathReset', '重置默认');
+      return t('settings.general.zedPathReset', "Đặt lại mặc định");
     }
     if (target === 'opencode') {
-      return t('settings.general.opencodePathReset', '重置默认');
+      return t('settings.general.opencodePathReset', "Đặt lại mặc định");
     }
     if (target === 'claude') {
-      return t('settings.general.codexPathReset', '重置默认');
+      return t('settings.general.codexPathReset', "Đặt lại mặc định");
     }
-    return t('settings.general.codexPathReset', '重置默认');
+    return t('settings.general.codexPathReset', "Đặt lại mặc định");
   };
 
   const handlePickAppPath = async (target: AppPathTarget) => {
@@ -2190,7 +2188,7 @@ export function useSettingsPageController() {
 
       setAppPathForTarget(target, path);
     } catch (err) {
-      console.error('选择启动路径失败:', err);
+      console.error('Không thể chọn đường dẫn khởi chạy:', err);
     }
   };
 
@@ -2204,7 +2202,7 @@ export function useSettingsPageController() {
       if (!path) return;
       setCodexSpecifiedAppPath(path);
     } catch (err) {
-      console.error('选择指定应用路径失败:', err);
+      console.error('Không thể chọn đường dẫn ứng dụng:', err);
     }
   };
 
@@ -2237,7 +2235,7 @@ export function useSettingsPageController() {
         } else {
           const message = t(
             'appPath.missing.scanEmptyGeneric',
-            '未检测到正在运行的 {{app}}，请先启动应用后重试，或手动选择路径。',
+            'Không tìm thấy {{app}} đang chạy; hãy mở ứng dụng và thử lại hoặc chọn đường dẫn thủ công.',
             { app: getAppPathDisplayName(target) },
           );
           if (target === 'codex') {
@@ -2251,7 +2249,7 @@ export function useSettingsPageController() {
       const detected = await invoke<string | null>('detect_app_path', { app: target, force: true });
       setAppPathForTarget(target, detected || '');
     } catch (err) {
-      console.error('重置启动路径失败:', err);
+      console.error('Không thể đặt lại đường dẫn khởi chạy:', err);
       if (target === 'codex' && isWindows) {
         setCodexAppScanError(String(err));
       } else {
@@ -2304,7 +2302,7 @@ export function useSettingsPageController() {
       <div className="settings-row" key={target}>
         <div className="row-label">
           <div className="row-title">{t(titleKey, titleDefault)}</div>
-          <div className="row-desc">{t('settings.general.traeAppPathDesc', '留空则使用默认路径')}</div>
+          <div className="row-desc">{t('settings.general.traeAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
         </div>
         <div className="row-control row-control--grow settings-claude-launch-control">
           <div className="settings-claude-launch-row">
@@ -2312,7 +2310,7 @@ export function useSettingsPageController() {
               type="text"
               className="settings-input settings-input--path"
               value={appPath}
-              placeholder={t('settings.general.traeAppPathPlaceholder', '默认路径')}
+              placeholder={t('settings.general.traeAppPathPlaceholder', "Đường dẫn mặc định")}
               onChange={(e) => setTraeAppPathValue(target, e.target.value)}
             />
             <button
@@ -2320,7 +2318,7 @@ export function useSettingsPageController() {
               onClick={() => handlePickAppPath(target)}
               disabled={isAppPathResetDetecting(target)}
             >
-              {t('settings.general.traePathSelect', '选择')}
+              {t('settings.general.traePathSelect', "Chọn")}
             </button>
             <button
               className="btn btn-secondary"
@@ -2329,7 +2327,7 @@ export function useSettingsPageController() {
             >
               <RefreshCw size={16} className={isAppPathResetDetecting(target) ? 'spin' : undefined} />
               {isAppPathResetDetecting(target)
-                ? t('common.loading', '加载中...')
+                ? t('common.loading', "Đang tải...")
                 : getResetLabelByTarget(target)}
             </button>
           </div>
@@ -2440,7 +2438,7 @@ export function useSettingsPageController() {
               ? t('settings.general.currentAccountRefreshItemDesc')
               : t(
                 'settings.general.currentAccountRefreshRequiresAutoRefresh',
-                '需先开启“配额自动刷新”后，才能设置当前账号刷新。',
+                "Hãy bật \"Tự động làm mới hạn ngạch\" trước để cấu hình làm mới tài khoản hiện tại.",
               )}
           </div>
         </div>
@@ -2454,7 +2452,7 @@ export function useSettingsPageController() {
                   max={999}
                   className="settings-select settings-select--input-mode settings-select--with-unit"
                   value={value}
-                  placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                  placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                   onChange={(event) =>
                     setCurrentAccountRefreshValue(platform, sanitizeNumberInput(event.target.value))
                   }
@@ -2630,12 +2628,12 @@ export function useSettingsPageController() {
       <div className="settings-row">
         <div className="row-label">
           <div className="row-title">
-            {t('settings.general.accountLevelRefreshTitle', '账号级刷新配置')}
+            {t('settings.general.accountLevelRefreshTitle', 'Cấu hình làm mới theo tài khoản')}
           </div>
           <div className="row-desc">
             {t(
               'settings.general.accountLevelRefreshDesc',
-              '为不同账号设置不同的自动刷新间隔，覆盖平台级默认值。',
+              'Đặt khoảng làm mới riêng cho từng tài khoản, ghi đè thiết lập mặc định của nền tảng.',
             )}
           </div>
         </div>
@@ -2643,10 +2641,10 @@ export function useSettingsPageController() {
           <details>
             <summary style={{ cursor: 'pointer', fontSize: '13px', color: 'var(--text-secondary)' }}>
               {hasAnyOverride
-                ? t('settings.general.accountLevelRefreshSummaryActive', '已配置 {{count}} 个账号', {
+                ? t('settings.general.accountLevelRefreshSummaryActive', 'Đã cấu hình {{count}} tài khoản', {
                     count: Object.keys(platformOverrides).length,
                   })
-                : t('settings.general.accountLevelRefreshSummary', '展开配置')}
+                : t('settings.general.accountLevelRefreshSummary', 'Mở rộng cấu hình')}
             </summary>
             <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {accounts.map((account) => {
@@ -2681,7 +2679,7 @@ export function useSettingsPageController() {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={overrideValue !== undefined ? String(overrideValue) : '1'}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => {
                             const sanitized = sanitizeNumberInput(e.target.value);
                             if (sanitized) {
@@ -2729,10 +2727,10 @@ export function useSettingsPageController() {
                         }
                       >
                         <option value="inherit">
-                          {t('settings.general.accountLevelRefreshInherit', '继承平台设置')}
+                          {t('settings.general.accountLevelRefreshInherit', 'Kế thừa thiết lập nền tảng')}
                         </option>
                         <option value="-1">
-                          {t('settings.general.accountLevelRefreshDisabled', '禁用')}
+                          {t('settings.general.accountLevelRefreshDisabled', 'Tắt')}
                         </option>
                         <option value="1">1 {t('settings.general.minutes')}</option>
                         <option value="2">2 {t('settings.general.minutes')}</option>
@@ -2744,7 +2742,7 @@ export function useSettingsPageController() {
                             {overrideValue} {t('settings.general.minutes')}
                           </option>
                         )}
-                        <option value="custom">{t('settings.general.autoRefreshCustom', '自定义')}</option>
+                        <option value="custom">{t('settings.general.autoRefreshCustom', "Tùy chỉnh...")}</option>
                       </select>
                     )}
                   </div>
@@ -2789,7 +2787,7 @@ export function useSettingsPageController() {
                 max={999}
                 className="settings-select settings-select--input-mode settings-select--with-unit"
                 value={value}
-                placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                 onChange={(event) => setValue(sanitizeNumberInput(event.target.value))}
                 onBlur={() => {
                   setValue(normalizeNumberInput(value, 1, 999));
@@ -2859,11 +2857,11 @@ export function useSettingsPageController() {
     <>
       <div className="settings-row">
         <div className="row-label">
-          <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
+          <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
           <div className="row-desc">
             {t(
               'quickSettings.quotaAlert.hint',
-              '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。',
+              "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.",
             )}
           </div>
         </div>
@@ -2881,9 +2879,9 @@ export function useSettingsPageController() {
       {enabled && (
         <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
           <div className="row-label">
-            <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
+            <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
             <div className="row-desc">
-              {t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}
+              {t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}
             </div>
           </div>
           <div className="row-control">
@@ -2895,7 +2893,7 @@ export function useSettingsPageController() {
                   max={100}
                   className="settings-select settings-select--input-mode settings-select--with-unit"
                   value={threshold}
-                  placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                  placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                   onChange={(event) => setThreshold(sanitizeNumberInput(event.target.value))}
                   onBlur={() => {
                     setThreshold(normalizeNumberInput(threshold, 0, 100));
@@ -3099,11 +3097,11 @@ export function useSettingsPageController() {
     Array<{ key: ReleaseHistorySectionKey; label: string }>
   >(
     () => [
-      { key: 'highlights', label: t('settings.about.releaseHistorySectionHighlights', '重要更新') },
-      { key: 'added', label: t('settings.about.releaseHistorySectionAdded', '新增') },
-      { key: 'changed', label: t('settings.about.releaseHistorySectionChanged', '变更') },
-      { key: 'fixed', label: t('settings.about.releaseHistorySectionFixed', '修复') },
-      { key: 'removed', label: t('settings.about.releaseHistorySectionRemoved', '移除') },
+      { key: 'highlights', label: t('settings.about.releaseHistorySectionHighlights', "Cập nhật nổi bật") },
+      { key: 'added', label: t('settings.about.releaseHistorySectionAdded', "Đã thêm") },
+      { key: 'changed', label: t('settings.about.releaseHistorySectionChanged', "Đã thay đổi") },
+      { key: 'fixed', label: t('settings.about.releaseHistorySectionFixed', "Đã sửa") },
+      { key: 'removed', label: t('settings.about.releaseHistorySectionRemoved', "LOẠI BỎ") },
     ],
     [t],
   );
@@ -3125,7 +3123,7 @@ export function useSettingsPageController() {
           : [],
       );
     } catch (error) {
-      console.error('加载更新记录失败:', error);
+      console.error('Không thể tải lịch sử cập nhật:', error);
       setReleaseHistoryItems([]);
       setReleaseHistoryError(
         error instanceof Error ? error.message : String(error || ''),

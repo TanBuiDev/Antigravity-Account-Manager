@@ -351,7 +351,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           const windowStatsText = formatCodexWindowStatsText(stats);
           const hint = t(
             "codex.quota.windowStatsHint",
-            "从本窗口满额到现在，该账号走 API 服务的请求数、token 和账号计费",
+            "Số yêu cầu, token và phí tài khoản qua dịch vụ API từ lúc cửa sổ đầy",
           );
           return {
             ...item,
@@ -412,11 +412,11 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
                 .filter(Boolean)
                 .join(" · "),
           statusLabel: account.requires_reauth
-            ? t("codex.authError.badge", "授权异常")
+            ? t("codex.authError.badge", "Lỗi ủy quyền")
             : account.client_auth_status === "login_required"
-              ? t("codex.switchAuth.apiOnlyBadge", "客户端需授权")
+              ? t("codex.switchAuth.apiOnlyBadge", "Cần đăng nhập")
               : overviewCurrentAccountId === account.id
-                ? t("codex.current", "当前")
+                ? t("codex.current", "Hiện tại")
                 : undefined,
           statusTone: account.requires_reauth || account.client_auth_status === "login_required"
             ? "warning"
@@ -426,14 +426,14 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           facts: isApiKey
             ? [
                 {
-                  label: t("codex.api.provider.label", "供应商"),
+                  label: t("codex.api.provider.label", "Nhà cung cấp"),
                   value: providerName,
                 },
                 {
-                  label: t("codex.api.modelCatalog.label", "模型列表"),
+                  label: t("codex.api.modelCatalog.label", "Danh sách mô hình"),
                   value: t("codex.api.modelCatalog.count", {
                     count: account.api_model_catalog?.length ?? 0,
-                    defaultValue: "{{count}} 个模型",
+                    defaultValue: "{{count}} mô hình",
                   }),
                 },
                 {
@@ -445,24 +445,24 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
               ]
             : [
                 {
-                  label: t("kiro.account.userId", "用户 ID"),
+                  label: t("kiro.account.userId", "ID người dùng"),
                   value: meta.userId,
                   monospace: true,
                 },
                 {
-                  label: t("codex.apiSwitchNotice.type.account", "账号"),
+                  label: t("codex.apiSwitchNotice.type.account", "Tài khoản"),
                   value: meta.chatgptAccountId,
                   monospace: true,
                 },
                 {
-                  label: t("codex.subscription.label", "有效期"),
+                  label: t("codex.subscription.label", "Hết hạn gói"),
                   value: subscription
                     ? `${subscription.valueText}${
                         subscription.detailText
                           ? ` · ${subscription.detailText}`
                           : ""
                       }`
-                    : t("common.none", "暂无"),
+                    : t("common.none", "None​"),
                 },
               ],
           quotaItems,
@@ -470,8 +470,8 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
             isApiKey && usage
               ? {
                   label: useTodayUsage
-                    ? t("codex.modelProviders.usage.today", "今日用量")
-                    : t("codex.modelProviders.usage.total", "累计用量"),
+                    ? t("codex.modelProviders.usage.today", "Hôm nay")
+                    : t("codex.modelProviders.usage.total", "Tổng cộng"),
                   requests:
                     requestCount != null
                       ? formatCockpitApiInteger(requestCount)
@@ -485,7 +485,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
                       ? formatApiKeyUsageMoney(cost, usage.unit)
                       : null,
                   extraLabel: usage.planName
-                    ? t("codex.modelProviders.usage.fields.planName", "订阅")
+                    ? t("codex.modelProviders.usage.fields.planName", "Gói")
                     : null,
                   extraValue: usage.planName || null,
                 }
@@ -539,9 +539,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       if (accountIssue.rawMessage) {
         actions.push({
           id: "issue-detail",
-          label: t("codex.quotaError.viewDetails", "查看详情"),
+          label: t("codex.quotaError.viewDetails", "Chi tiết"),
           description: accountIssue.displayText,
-          actionLabel: t("common.detail", "详情"),
+          actionLabel: t("common.detail", "Chi tiết"),
           onAction: () => {
             openQuotaErrorDetail(accountName, accountIssue.rawMessage);
           },
@@ -555,11 +555,11 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       ) {
         actions.push({
           id: "subscription",
-          label: t("codex.subscription.label", "有效期"),
+          label: t("codex.subscription.label", "Hết hạn gói"),
           description: `${subscription.valueText}${
             subscription.detailText ? ` · ${subscription.detailText}` : ""
           }`,
-          actionLabel: t("common.refresh", "刷新"),
+          actionLabel: t("common.refresh", "Làm mới"),
           disabled:
             refreshingSubscriptionAccountId === account.id ||
             refreshing === account.id,
@@ -572,9 +572,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       if (localAccessAccountIdSet.has(account.id)) {
         actions.push({
           id: "api-service-membership",
-          label: t("codex.localAccess.removeAction", "移除 API 服务"),
-          description: `${t("codex.localAccess.title", "API 服务")} · ${accountName}`,
-          actionLabel: t("codex.localAccess.removeAction", "移除 API 服务"),
+          label: t("codex.localAccess.removeAction", "Xóa khỏi API"),
+          description: `${t("codex.localAccess.title", "Dịch vụ API")} · ${accountName}`,
+          actionLabel: t("codex.localAccess.removeAction", "Xóa khỏi API"),
           disabled: addingLocalAccessAccountId !== null,
           onAction: async () => {
             await handleRemoveLocalAccessAccount(account.id);
@@ -583,9 +583,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       } else if (canDirectlyAddLocalAccessAccount(account)) {
         actions.push({
           id: "api-service-membership",
-          label: t("codex.localAccess.entryAction", "添加至 API 服务"),
-          description: `${t("codex.localAccess.title", "API 服务")} · ${accountName}`,
-          actionLabel: t("codex.localAccess.entryAction", "添加至 API 服务"),
+          label: t("codex.localAccess.entryAction", "Thêm vào dịch vụ API"),
+          description: `${t("codex.localAccess.title", "Dịch vụ API")} · ${accountName}`,
+          actionLabel: t("codex.localAccess.entryAction", "Thêm vào dịch vụ API"),
           disabled: addingLocalAccessAccountId !== null,
           onAction: async () => {
             await handleAddLocalAccessAccount(account.id);
@@ -598,25 +598,25 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         actions.push({
           id: "api-key-visibility",
           label: apiKeyVisible
-            ? t("codex.api.hideApiKey", "隐藏 API Key")
-            : t("codex.api.showApiKey", "显示 API Key"),
+            ? t("codex.api.hideApiKey", "Ẩn API Key")
+            : t("codex.api.showApiKey", "Hiện API Key"),
           description: resolveApiKeyDisplayText(account, apiKeyVisible),
           actionLabel: apiKeyVisible
-            ? t("codex.api.hideApiKey", "隐藏 API Key")
-            : t("codex.api.showApiKey", "显示 API Key"),
+            ? t("codex.api.hideApiKey", "Ẩn API Key")
+            : t("codex.api.showApiKey", "Hiện API Key"),
           onAction: () => toggleAccountApiKeyVisible(account.id),
         });
   
         const boundOAuth = resolveBoundOAuthAccount(account);
         actions.push({
           id: "oauth-binding",
-          label: t("codex.api.oauthBinding.action", "绑定 OAuth"),
+          label: t("codex.api.oauthBinding.action", "Liên kết OAuth"),
           description: boundOAuth
             ? maskAccountText(
                 boundOAuth.account_name || boundOAuth.email || boundOAuth.id,
               )
-            : t("codex.api.oauthBinding.unbound", "未绑定"),
-          actionLabel: t("codex.api.oauthBinding.actionShort", "绑定"),
+            : t("codex.api.oauthBinding.unbound", "Chưa liên kết"),
+          actionLabel: t("codex.api.oauthBinding.actionShort", "Liên kết"),
           onAction: () => {
             openOAuthBindingModal(account);
           },
@@ -625,9 +625,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         if (!isNewApi) {
           actions.push({
             id: "provider",
-            label: t("codex.quickSwitch.action", "快速切换供应商"),
+            label: t("codex.quickSwitch.action", "Chuyển nhanh nhà cung cấp"),
             description: `${providerName} · ${account.api_base_url?.trim() || "-"}`,
-            actionLabel: t("codex.quickSwitch.inlineAction", "切换"),
+            actionLabel: t("codex.quickSwitch.inlineAction", "Chuyển"),
             onAction: () => {
               openQuickSwitchProviderModal(account);
             },
@@ -637,12 +637,12 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         if (!isNewApi) {
           actions.push({
             id: "edit-credentials",
-            label: t("instances.actions.edit", "编辑"),
+            label: t("instances.actions.edit", "Chỉnh sửa"),
             description: `${providerName} · ${account.api_model_catalog?.length ?? 0} ${t(
               "codex.api.modelCatalog.label",
-              "模型列表",
+              "Danh sách mô hình",
             )}`,
-            actionLabel: t("instances.actions.edit", "编辑"),
+            actionLabel: t("instances.actions.edit", "Chỉnh sửa"),
             onAction: () => {
               openApiKeyCredentialsModal(account);
             },
@@ -652,9 +652,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         if (isNewApi) {
           actions.push({
             id: "service-panel",
-            label: t("codex.cockpitApi.servicePanel", "服务面板"),
+            label: t("codex.cockpitApi.servicePanel", "Bảng dịch vụ"),
             description: providerName,
-            actionLabel: t("common.open", "打开"),
+            actionLabel: t("common.open", "Open​"),
             onAction: () => {
               setCockpitApiPanelAccountId(account.id);
             },
@@ -662,10 +662,10 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         } else if (resolveApiKeyUsageMode(apiKeyUsageMap[account.id]?.summary)) {
           actions.push({
             id: "usage-detail",
-            label: t("codex.modelProviders.usage.detailTitle", "服务面板"),
+            label: t("codex.modelProviders.usage.detailTitle", "Bảng dịch vụ"),
             description:
               apiKeyUsageMap[account.id]?.summary?.planName || providerName,
-            actionLabel: t("common.detail", "详情"),
+            actionLabel: t("common.detail", "Chi tiết"),
             onAction: () => {
               setApiKeyUsageDetailAccountId(account.id);
             },
@@ -674,11 +674,11 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       } else {
         actions.push({
           id: "account-note",
-          label: t("codex.accountNote.short", "账号备注"),
+          label: t("codex.accountNote.short", "Ghi chú"),
           description:
             getCodexAccountNoteTitle(account, "") ||
-            t("codex.accountNote.emptyTitle", "填写账号备注"),
-          actionLabel: t("instances.actions.edit", "编辑"),
+            t("codex.accountNote.emptyTitle", "Thêm ghi chú tài khoản"),
+          actionLabel: t("instances.actions.edit", "Chỉnh sửa"),
           onAction: () => {
             openAccountNoteModal(account);
           },
@@ -704,21 +704,21 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       actions.push(
         {
           id: "tags",
-          label: t("accounts.editTags", "编辑标签"),
+          label: t("accounts.editTags", "Chỉnh sửa thẻ"),
           description:
             account.tags && account.tags.length > 0
               ? account.tags.join(" · ")
-              : t("common.none", "暂无"),
-          actionLabel: t("instances.actions.edit", "编辑"),
+              : t("common.none", "None​"),
+          actionLabel: t("instances.actions.edit", "Chỉnh sửa"),
           onAction: () => {
             openTagModal(account.id);
           },
         },
         {
           id: "cli",
-          label: t("common.cliQuickLaunch", "CLI 快速启动"),
-          description: `${accountName} · ${t("instances.defaultName", "默认实例")}`,
-          actionLabel: t("common.open", "打开"),
+          label: t("common.cliQuickLaunch", "Mở CLI"),
+          description: `${accountName} · ${t("instances.defaultName", "Phiên bản mặc định")}`,
+          actionLabel: t("common.open", "Open​"),
           disabled: cliLaunchingAccountId === account.id,
           onAction: async () => {
             await handleLaunchCodexCli(account);
@@ -734,12 +734,12 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           isApiKey && canRefreshApiKeyUsage(account, provider);
         actions.push({
           id: "refresh-quota",
-          label: t("common.shared.refreshQuota", "刷新配额"),
+          label: t("common.shared.refreshQuota", "Làm mới hạn mức"),
           description: presentation.quotaItems
             .slice(0, 2)
             .map((item) => `${item.label} ${item.valueText}`)
             .join(" · "),
-          actionLabel: t("common.refresh", "刷新"),
+          actionLabel: t("common.refresh", "Làm mới"),
           disabled: canRefreshUsage
             ? apiKeyUsageMap[account.id]?.loading === true
             : refreshing === account.id,
@@ -755,9 +755,9 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
   
       actions.push({
         id: "export",
-        label: t("common.shared.export.title", "导出"),
+        label: t("common.shared.export.title", "Xuất"),
         description: accountName,
-        actionLabel: t("common.shared.export.title", "导出"),
+        actionLabel: t("common.shared.export.title", "Xuất"),
         onAction: async () => {
           await handleExportByIds(
             [account.id],
@@ -832,8 +832,8 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         const statusLabel = t(CODEX_LOCAL_ACCESS_STATUS_KEYS[status]);
         const scopeLabel =
           collection?.accessScope === "lan"
-            ? t("codex.localAccess.accessScopeLanShort", "本机+局域网")
-            : t("codex.localAccess.accessScopeLocalhostShort", "仅本机");
+            ? t("codex.localAccess.accessScopeLanShort", "Cục bộ+mạng")
+            : t("codex.localAccess.accessScopeLocalhostShort", "Chỉ cục bộ");
         const routingStrategy = collection?.routingStrategy ?? "auto";
         const routingTranslationKey =
           {
@@ -854,12 +854,12 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
             : "-";
   
         return {
-          badgeLabel: t("codex.apiSwitchNotice.type.apiKey", "API 密钥"),
-          contextText: `${t("codex.apiSwitchNotice.type.apiKey", "API 密钥")} · ${t(
+          badgeLabel: t("codex.apiSwitchNotice.type.apiKey", "Khóa API"),
+          contextText: `${t("codex.apiSwitchNotice.type.apiKey", "Khóa API")} · ${t(
             "codex.localAccess.accountCount",
             {
               count: localAccessState?.memberCount ?? 0,
-              defaultValue: "{{count}} 个账号",
+              defaultValue: "{{count}} tài khoản",
             },
           )}`,
           statusLabel,
@@ -870,53 +870,53 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
               : "warning",
           facts: [
             {
-              label: t("codex.localAccess.memberTitle", "集合成员"),
+              label: t("codex.localAccess.memberTitle", "Thành viên bộ sưu tập"),
               value: t("codex.localAccess.accountCount", {
                 count: localAccessState?.memberCount ?? 0,
-                defaultValue: "{{count}} 个账号",
+                defaultValue: "{{count}} tài khoản",
               }),
             },
             {
-              label: t("codex.localAccess.routingLabel", "调度策略"),
+              label: t("codex.localAccess.routingLabel", "Định tuyến"),
               value: t(
                 `codex.localAccess.routingStrategy.${routingTranslationKey}`,
                 routingStrategy,
               ),
             },
             {
-              label: t("codex.api.modelCatalog.label", "模型列表"),
+              label: t("codex.api.modelCatalog.label", "Danh sách mô hình"),
               value: t("codex.api.modelCatalog.count", {
                 count: localAccessState?.modelIds.length ?? 0,
-                defaultValue: "{{count}} 个模型",
+                defaultValue: "{{count}} mô hình",
               }),
             },
             {
-              label: t("codex.localAccess.baseUrl", "地址"),
+              label: t("codex.localAccess.baseUrl", "Địa chỉ"),
               value: resolveLocalAccessBaseUrl() || "-",
               monospace: true,
               wide: true,
             },
             {
-              label: t("codex.localAccess.accessScopeLabel", "访问范围"),
+              label: t("codex.localAccess.accessScopeLabel", "Phạm vi truy cập"),
               value: scopeLabel,
             },
           ],
           usage: totals
             ? {
-                label: t("codex.localAccess.statsRange.weekly", "本周"),
+                label: t("codex.localAccess.statsRange.weekly", "Tuần"),
                 requests: formatCockpitApiInteger(totals.requestCount),
                 tokens: formatCockpitApiTokenCount(totals.totalTokens),
                 cost: `$${totals.estimatedCostUsd.toFixed(2)}`,
                 extraLabel: t(
                   "codex.localAccess.stats.successRateLabel",
-                  "成功率",
+                  "Tỷ lệ thành công",
                 ),
                 extraValue: successRate,
               }
             : null,
           footerText: t("codex.localAccess.footerHint", {
             scope: scopeLabel,
-            defaultValue: "监听范围：{{scope}}",
+            defaultValue: "Phạm vi truy cập: {{scope}}",
           }),
         };
       }, [localAccessCollection, localAccessState, resolveLocalAccessBaseUrl, t]);
@@ -928,10 +928,10 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         const actions: CodexLaunchPreviewAction[] = [
           {
             id: "image-forward",
-            label: t("codex.localAccess.imageForwardLabel", "启用 GPT 生图"),
+            label: t("codex.localAccess.imageForwardLabel", "Bật tạo ảnh GPT"),
             description: t(
               "codex.localAccess.imageForwardHint",
-              "勾选后选择 GPT 账号：生图与图片编辑请求交给所选账号执行并消耗其额度，对话请求仍按账号池调度。",
+              "Sau khi bật, hãy chọn tài khoản GPT: yêu cầu tạo và chỉnh sửa ảnh sẽ do các tài khoản đã chọn thực hiện và tiêu tốn hạn mức của chúng; yêu cầu trò chuyện vẫn dùng nhóm tài khoản.",
             ),
             meta: (
               <>
@@ -967,21 +967,21 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           },
           {
             id: "members",
-            label: t("common.shared.addAccount", "添加账号"),
+            label: t("common.shared.addAccount", "Thêm tài khoản"),
             description: t("codex.localAccess.accountCount", {
               count: localAccessState?.memberCount ?? 0,
-              defaultValue: "{{count}} 个账号",
+              defaultValue: "{{count}} tài khoản",
             }),
-            actionLabel: t("common.shared.addAccount", "添加账号"),
+            actionLabel: t("common.shared.addAccount", "Thêm tài khoản"),
             onAction: () => {
               openLocalAccessMemberPicker();
             },
           },
           {
             id: "cli",
-            label: t("common.cliQuickLaunch", "CLI 快速启动"),
-            description: `${t("codex.localAccess.title", "API 服务")} · ${baseUrl}`,
-            actionLabel: t("common.open", "打开"),
+            label: t("common.cliQuickLaunch", "Mở CLI"),
+            description: `${t("codex.localAccess.title", "Dịch vụ API")} · ${baseUrl}`,
+            actionLabel: t("common.open", "Open​"),
             disabled: cliLaunchingAccountId === CODEX_API_SERVICE_BIND_ID,
             onAction: async () => {
               await handleLaunchLocalAccessCli();
@@ -989,30 +989,30 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           },
           {
             id: "dashboard",
-            label: t("codex.localAccess.dashboardAction", "服务面板"),
+            label: t("codex.localAccess.dashboardAction", "Bảng dịch vụ"),
             description: baseUrl,
-            actionLabel: t("common.open", "打开"),
+            actionLabel: t("common.open", "Open​"),
             onAction: () => {
               openLocalAccessPanel();
             },
           },
           {
             id: "full-page",
-            label: t("codex.apiService.openPage", "进入 API 服务"),
-            description: t("codex.apiService.openFullPage", "查看全部功能"),
-            actionLabel: t("common.open", "打开"),
+            label: t("codex.apiService.openPage", "Mở dịch vụ API"),
+            description: t("codex.apiService.openFullPage", "Xem tất cả tính năng"),
+            actionLabel: t("common.open", "Open​"),
             onAction: () => {
               openCodexApiServicePage();
             },
           },
           {
             id: "refresh-quota",
-            label: t("common.shared.refreshQuota", "刷新配额"),
+            label: t("common.shared.refreshQuota", "Làm mới hạn mức"),
             description: t("codex.localAccess.accountCount", {
               count: localAccessState?.memberCount ?? 0,
-              defaultValue: "{{count}} 个账号",
+              defaultValue: "{{count}} tài khoản",
             }),
-            actionLabel: t("common.refresh", "刷新"),
+            actionLabel: t("common.refresh", "Làm mới"),
             disabled: localAccessRefreshing,
             onAction: async () => {
               await handleQuickRefreshLocalAccessQuota();
@@ -1021,23 +1021,23 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           {
             id: "toggle-service",
             label: localAccessCollection.enabled
-              ? t("codex.localAccess.disableService", "停用服务")
-              : t("codex.localAccess.enableService", "启用服务"),
+              ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+              : t("codex.localAccess.enableService", "Bật dịch vụ"),
             description: t(CODEX_LOCAL_ACCESS_STATUS_KEYS[
               resolveCodexLocalAccessRuntimeStatus(localAccessCollection, localAccessState)
             ]),
             actionLabel: localAccessCollection.enabled
-              ? t("codex.localAccess.disableService", "停用服务")
-              : t("codex.localAccess.enableService", "启用服务"),
+              ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+              : t("codex.localAccess.enableService", "Bật dịch vụ"),
             onAction: async () => {
               await handleQuickToggleLocalAccessEnabled();
             },
           },
           {
             id: "hide-entry",
-            label: t("codex.localAccess.hideEntryAction", "关闭 API 服务入口"),
-            description: t("codex.localAccess.title", "API 服务"),
-            actionLabel: t("common.close", "关闭"),
+            label: t("codex.localAccess.hideEntryAction", "Ẩn mục Dịch vụ API"),
+            description: t("codex.localAccess.title", "Dịch vụ API"),
+            actionLabel: t("common.close", "Đóng"),
             onAction: async () => {
               await handleHideLocalAccessEntry();
             },
@@ -1047,11 +1047,11 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         if (localAccessState?.lastError) {
           actions.push({
             id: "clear-port",
-            label: t("codex.localAccess.killPortAction", "清理端口"),
+            label: t("codex.localAccess.killPortAction", "Dọn cổng"),
             description: summarizeCodexQuotaErrorMessage(
               localAccessState.lastError,
             ),
-            actionLabel: t("codex.localAccess.killPortAction", "清理端口"),
+            actionLabel: t("codex.localAccess.killPortAction", "Dọn cổng"),
             onAction: async () => {
               await handleKillLocalAccessPort();
             },
@@ -1148,19 +1148,19 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
     const overviewFilterChips = useMemo(() => {
       const chips: string[] = [];
       if (activeGroupId) {
-        chips.push(t("codex.filters.chipFolder", "分组目录"));
+        chips.push(t("codex.filters.chipFolder", "Thư mục"));
       }
       if (groupFilter.length > 0) {
-        chips.push(t("codex.filters.chipGroup", "分组"));
+        chips.push(t("codex.filters.chipGroup", "Nhóm"));
       }
       if (tagFilter.length > 0) {
-        chips.push(t("codex.filters.chipTags", "标签"));
+        chips.push(t("codex.filters.chipTags", "Thẻ"));
       }
       if (searchQuery.trim()) {
-        chips.push(t("codex.filters.chipSearch", "搜索"));
+        chips.push(t("codex.filters.chipSearch", "Tìm"));
       }
       if (filterTypes.length > 0) {
-        chips.push(t("codex.filters.chipPlan", "套餐"));
+        chips.push(t("codex.filters.chipPlan", "Gói"));
       }
       return chips;
     }, [
@@ -1191,7 +1191,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         ids: errorAccountIds,
         message: t("messages.cleanErrorAccountsConfirm", {
           count: errorAccountIds.length,
-          defaultValue: "确定要删除当前范围内的 {{count}} 条 ERROR 账号吗？",
+          defaultValue: "Xóa {{count}} tài khoản ERROR trong phạm vi hiện tại?",
         }),
       });
     }, [errorAccountIds, setDeleteConfirm, t]);
@@ -1200,7 +1200,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
         setMessage({
           text: t(
             "codex.wakeup.fullQuotaNoAccounts",
-            "当前列表没有可唤醒的 OAuth 账号。",
+            "Danh sách hiện tại không có tài khoản OAuth có thể đánh thức.",
           ),
           tone: "error",
         });
@@ -1369,7 +1369,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
           ? t("messages.deleteFilteredAccountsConfirm", {
               count: ids.length,
               defaultValue:
-                "将删除当前筛选条件下的 {{count}} 个 Codex 账号。此操作不会只删除当前页，确认继续？",
+                "Sẽ xóa {{count}} tài khoản Codex khớp bộ lọc hiện tại, không chỉ trang này. Tiếp tục?",
             })
           : t("messages.batchDeleteConfirm", { count: ids.length }),
       });
@@ -1604,7 +1604,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
   
         if (targetIds.length === 0) {
           setMessage({
-            text: t("accounts.groups.refreshEmpty", "当前分组没有可刷新的账号"),
+            text: t("accounts.groups.refreshEmpty", "Nhóm này không có tài khoản nào có thể làm mới"),
             tone: "error",
           });
           return;
@@ -1643,7 +1643,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
   
           setMessage({
             text: t("codex.refreshFailed", {
-              error: t("common.shared.quota.queryFailed", "配额查询失败"),
+              error: t("common.shared.quota.queryFailed", "Truy vấn hạn mức thất bại"),
             }),
             tone: "error",
           });
@@ -1652,7 +1652,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
             text: t("codex.refreshFailed", {
               error:
                 String(error ?? "").replace(/^Error:\s*/, "") ||
-                t("common.shared.quota.queryFailed", "配额查询失败"),
+                t("common.shared.quota.queryFailed", "Truy vấn hạn mức thất bại"),
             }),
             tone: "error",
           });
@@ -1678,7 +1678,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
   
     const resolveGroupLabel = (groupKey: string) =>
       groupKey === untaggedKey
-        ? t("accounts.defaultGroup", "默认分组")
+        ? t("accounts.defaultGroup", "Nhóm mặc định")
         : groupKey;
   
     const resolveVisibleQuotaItems = useCallback(
@@ -1714,7 +1714,7 @@ export function useCodexAccountsOverviewController(context: Pick<ReturnType<type
       const titleText =
         displayCount > 0
           ? buildResetCreditsTitle(account, displayCount)
-          : t("codex.quota.resetCreditDetailsTitle", "重置次数明细");
+          : t("codex.quota.resetCreditDetailsTitle", "Chi tiết lượt đặt lại");
   
       return (
         <div className="codex-reset-credit-row inline">

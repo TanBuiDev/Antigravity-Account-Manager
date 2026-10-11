@@ -779,7 +779,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
       console.error('Failed to load config:', err);
       setError(t('quickSettings.error.loadFailed', {
         error: String(err),
-        defaultValue: '加载配置失败：{{error}}',
+        defaultValue: "Tải cấu hình thất bại: {{error}}",
       }));
     }
   };
@@ -832,7 +832,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
         console.error('Failed to save config:', err);
         setError(t('quickSettings.error.saveFailed', {
           error: String(err),
-          defaultValue: '保存配置失败：{{error}}',
+          defaultValue: "Lưu cấu hình thất bại: {{error}}",
         }));
         if (saveVersion === configSaveVersionRef.current) {
           void loadConfig();
@@ -857,7 +857,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
       console.error('Failed to pick path:', err);
       setError(t('quickSettings.error.pickPathFailed', {
         error: String(err),
-        defaultValue: '选择路径失败：{{error}}',
+        defaultValue: "Chọn đường dẫn thất bại: {{error}}",
       }));
     }
   };
@@ -876,7 +876,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
           setError(
             t(
               'quickSettings.appPath.scanEmpty',
-              '未检测到正在运行的应用，请先启动后重试，或手动选择路径。',
+              'Không tìm thấy ứng dụng đang chạy. Hãy mở ứng dụng rồi thử lại hoặc chọn đường dẫn thủ công.',
             ),
           );
         }
@@ -884,7 +884,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
         console.error('Failed to scan app launch targets:', err);
         setError(t('quickSettings.error.resetPathFailed', {
           error: String(err),
-          defaultValue: '重置路径失败：{{error}}',
+          defaultValue: "Đặt lại đường dẫn thất bại: {{error}}",
         }));
       } finally {
         setPathDetecting(false);
@@ -901,7 +901,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
       console.error('Failed to reset path:', err);
       setError(t('quickSettings.error.resetPathFailed', {
         error: String(err),
-        defaultValue: '重置路径失败：{{error}}',
+        defaultValue: "Đặt lại đường dẫn thất bại: {{error}}",
       }));
     } finally {
       setPathDetecting(false);
@@ -923,7 +923,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
       console.error('Failed to pick codex specified app path:', err);
       setError(t('quickSettings.error.pickPathFailed', {
         error: String(err),
-        defaultValue: '选择路径失败：{{error}}',
+        defaultValue: "Chọn đường dẫn thất bại: {{error}}",
       }));
     }
   };
@@ -936,7 +936,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
     } catch (err) {
       setError(t('quickSettings.error.openCodexConfigFailed', {
         error: String(err),
-        defaultValue: '打开 Codex config.toml 失败：{{error}}',
+        defaultValue: "Không thể mở Codex config.toml: {{error}}",
       }));
     } finally {
       setOpeningCodexConfig(false);
@@ -984,7 +984,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
           return 'Zed';
       }
     })();
-    return `${platformLabel} ${t('nav.settings', '设置')}`;
+    return `${platformLabel} ${t('nav.settings', "Cài đặt")}`;
   };
 
   const getSessionSharingPlatformLabel = () => {
@@ -1104,38 +1104,38 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
   const getRefreshLabel = () => {
     switch (type) {
       case 'antigravity':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'codex':
-        return t('quickSettings.codexRefreshInterval', '配额自动刷新');
+        return t('quickSettings.codexRefreshInterval', "Tự động làm mới hạn ngạch");
       case 'claude':
-        return t('quickSettings.claudeRefreshInterval', '配额自动刷新');
+        return t('quickSettings.claudeRefreshInterval', "Tự làm mới hạn mức");
       case 'github_copilot':
-        return t('quickSettings.ghcpRefreshInterval', '配额自动刷新');
+        return t('quickSettings.ghcpRefreshInterval', "Tự động làm mới hạn ngạch");
       case 'windsurf':
-        return t('quickSettings.windsurfRefreshInterval', '配额自动刷新');
+        return t('quickSettings.windsurfRefreshInterval', "Tự động làm mới hạn ngạch");
       case 'kiro':
-        return t('quickSettings.kiroRefreshInterval', '配额自动刷新');
+        return t('quickSettings.kiroRefreshInterval', "Hạn ngạch làm mới tự động");
       case 'cursor':
-        return t('quickSettings.cursorRefreshInterval', '配额自动刷新');
+        return t('quickSettings.cursorRefreshInterval', "Tự động làm mới hạn mức");
       case 'grok':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'codebuddy':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'codebuddy_cn':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'qoder':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'zcode':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'trae':
       case 'trae_solo':
       case 'trae_cn':
       case 'trae_solo_cn':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'workbuddy':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
       case 'zed':
-        return t('quickSettings.refreshInterval', '配额自动刷新');
+        return t('quickSettings.refreshInterval', "Tự động làm mới hạn ngạch");
     }
   };
 
@@ -1189,41 +1189,41 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
   const getAppPathLabel = () => {
     switch (type) {
       case 'antigravity':
-        return t('quickSettings.antigravity.appPath', '启动路径');
+        return t('quickSettings.antigravity.appPath', "Đường dẫn ứng dụng");
       case 'codex':
-        return t('quickSettings.codex.appPath', '启动路径');
+        return t('quickSettings.codex.appPath', "Đường dẫn ứng dụng");
       case 'claude':
-        return t('quickSettings.claude.appPath', 'Claude 启动路径');
+        return t('quickSettings.claude.appPath', "Đường dẫn Claude");
       case 'github_copilot':
-        return t('quickSettings.githubCopilot.appPath', 'VS Code 路径');
+        return t('quickSettings.githubCopilot.appPath', "Đường dẫn VS Code");
       case 'windsurf':
-        return t('quickSettings.windsurf.appPath', 'Devin 路径');
+        return t('quickSettings.windsurf.appPath', "Đường dẫn Devin");
       case 'kiro':
-        return t('quickSettings.kiro.appPath', 'Kiro 路径');
+        return t('quickSettings.kiro.appPath', "Con đường Kiro");
       case 'cursor':
-        return t('quickSettings.cursor.appPath', 'Cursor 路径');
+        return t('quickSettings.cursor.appPath', "Đường dẫn Cursor");
       case 'grok':
-        return t('quickSettings.grok.appPath', 'Grok CLI 路径');
+        return t('quickSettings.grok.appPath', "Đường dẫn Grok CLI");
       case 'codebuddy':
-        return t('quickSettings.codebuddy.appPath', 'CodeBuddy 路径');
+        return t('quickSettings.codebuddy.appPath', "Đường dẫn CodeBuddy");
       case 'codebuddy_cn':
-        return t('quickSettings.codebuddyCn.appPath', 'CodeBuddy CN 路径');
+        return t('quickSettings.codebuddyCn.appPath', "Đường dẫn CodeBuddy CN");
       case 'qoder':
-        return t('quickSettings.qoder.appPath', 'Qoder 路径');
+        return t('quickSettings.qoder.appPath', "Đường dẫn Qoder");
       case 'zcode':
-        return t('quickSettings.zcode.appPath', 'ZCode 启动路径');
+        return t('quickSettings.zcode.appPath', "Đường dẫn ZCode");
       case 'trae':
-        return t('quickSettings.trae.appPath', 'Trae 路径');
+        return t('quickSettings.trae.appPath', "Đường dẫn Trae");
       case 'trae_solo':
-        return t('quickSettings.traeSolo.appPath', 'TRAE SOLO 路径');
+        return t('quickSettings.traeSolo.appPath', "Đường dẫn TRAE SOLO");
       case 'trae_cn':
-        return t('quickSettings.traeCn.appPath', 'Trae CN 路径');
+        return t('quickSettings.traeCn.appPath', "Đường dẫn Trae CN");
       case 'trae_solo_cn':
-        return t('quickSettings.traeSoloCn.appPath', 'TRAE SOLO CN 路径');
+        return t('quickSettings.traeSoloCn.appPath', "Đường dẫn TRAE SOLO CN");
       case 'workbuddy':
-        return t('quickSettings.workbuddy.appPath', 'WorkBuddy 路径');
+        return t('quickSettings.workbuddy.appPath', "Đường dẫn WorkBuddy");
       case 'zed':
-        return t('quickSettings.zed.appPath', 'Zed 路径');
+        return t('quickSettings.zed.appPath', "Đường dẫn Zed");
     }
   };
 
@@ -1549,7 +1549,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
       <>
         <div className="qs-row" style={{ marginTop: type === 'antigravity' ? 10 : 0 }}>
           <div className="qs-row-label">
-            <span>{t('quickSettings.quotaAlert.enable', '超额预警')}</span>
+            <span>{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</span>
           </div>
           <div className="qs-row-control">
             <label className="qs-switch">
@@ -1572,7 +1572,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <span>
-                      {t('codex.thresholds.shortCycle')} {t('quickSettings.quotaAlert.threshold', '预警阈值')}
+                      {t('codex.thresholds.shortCycle')} {t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}
                     </span>
                   </div>
                   <div className="qs-row-control">
@@ -1583,7 +1583,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         max={100}
                         className="qs-select qs-select--input-mode qs-select--with-unit"
                         value={codexQuotaAlertPrimaryCustomThreshold}
-                        placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                        placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                         onChange={(e) =>
                           handleCodexWindowThresholdInputChange(
                             e.target.value,
@@ -1616,13 +1616,13 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 </div>
 
                 <div className="qs-hint" style={{ marginTop: 0, marginBottom: 4 }}>
-                  {t('quickSettings.codexWindow.orDivider', 'OR（命中任一即触发）')}
+                  {t('quickSettings.codexWindow.orDivider', 'HOẶC (chỉ cần thỏa mãn một điều kiện)')}
                 </div>
 
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <span>
-                      {t('codex.thresholds.weekly')} {t('quickSettings.quotaAlert.threshold', '预警阈值')}
+                      {t('codex.thresholds.weekly')} {t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}
                     </span>
                   </div>
                   <div className="qs-row-control">
@@ -1633,7 +1633,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         max={100}
                         className="qs-select qs-select--input-mode qs-select--with-unit"
                         value={codexQuotaAlertSecondaryCustomThreshold}
-                        placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                        placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                         onChange={(e) =>
                           handleCodexWindowThresholdInputChange(
                             e.target.value,
@@ -1668,7 +1668,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
             ) : (
               <div className="qs-row">
                 <div className="qs-row-label">
-                  <span>{t('quickSettings.quotaAlert.threshold', '预警阈值')}</span>
+                  <span>{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</span>
                 </div>
                 <div className="qs-row-control">
                   {showQuotaAlertThresholdInput ? (
@@ -1679,7 +1679,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         max={100}
                         className="qs-select qs-select--input-mode qs-select--with-unit"
                         value={quotaAlertCustomThreshold}
-                        placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                        placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                         onChange={(e) => setQuotaAlertCustomThreshold(e.target.value.replace(/[^\d]/g, ''))}
                         onBlur={handleQuotaAlertCustomThresholdApply}
                         onKeyDown={(e) => {
@@ -1706,7 +1706,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       <option value="20">20%</option>
                       <option value="40">40%</option>
                       <option value="60">60%</option>
-                      <option value="custom">{t('quickSettings.customInput', '自定义')}</option>
+                      <option value="custom">{t('quickSettings.customInput', "Tùy chỉnh")}</option>
                     </select>
                   )}
                 </div>
@@ -1716,11 +1716,11 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
               {isGrokAlert
                 ? t(
                     'grok.quotaAlert.hint',
-                    '当当前账号任意配额项低于阈值时，发送原生通知并在页面提示快捷切号。',
+                    "Khi bất kỳ mục hạn mức nào của tài khoản hiện tại xuống dưới ngưỡng, hãy gửi thông báo hệ thống và hiển thị thao tác chuyển nhanh trong ứng dụng.",
                   )
                 : t(
                     'quickSettings.quotaAlert.hint',
-                    '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。',
+                    "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.",
                   )}
               {isCodexAlert && (
                 <>
@@ -1780,7 +1780,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
         {!config && !error && (
           <div className="qs-loading" role="status" aria-live="polite">
             <span className="loading-spinner" aria-hidden="true" />
-            <span>{t('common.loading', '加载中...')}</span>
+            <span>{t('common.loading', "Đang tải...")}</span>
           </div>
         )}
 
@@ -1793,7 +1793,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'quickSettings.grok.syncOfficialAuthOnSwitch',
-                        '切号同步官方登录',
+                        "Đồng bộ đăng nhập chính thức",
                       )}
                     </span>
                   </div>
@@ -1815,7 +1815,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'quickSettings.grok.syncOfficialAuthOnSwitchDesc',
-                    '开启后，默认实例切换 OAuth 账号会写入官方 ~/.grok/auth.json；关闭时使用独立 GROK_HOME。API Key 和多开实例不改写官方登录。',
+                    "Khi bật, việc chuyển tài khoản OAuth cho phiên bản mặc định sẽ ghi vào ~/.grok/auth.json chính thức. Khi tắt, một GROK_HOME riêng sẽ được dùng. API Key và các phiên bản bổ sung không ghi đè đăng nhập chính thức.",
                   )}
                 </div>
                 <div className="qs-row" style={{ marginTop: 8 }}>
@@ -1823,7 +1823,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.grokOpencodeAuthOverwrite',
-                        '切换 Grok 时覆盖 OpenCode 登录信息',
+                        "Ghi đè đăng nhập OpenCode khi chuyển đổi Grok",
                       )}
                     </span>
                   </div>
@@ -1852,7 +1852,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.grokOpencodeRestart',
-                        '切换 Grok 时自动重启 OpenCode',
+                        "Khởi động lại OpenCode khi chuyển Grok",
                       )}
                     </span>
                   </div>
@@ -1889,7 +1889,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.codexLocalAccessEntryVisible',
-                        '显示 API 服务入口',
+                        "Hiển thị mục Dịch vụ API",
                       )}
                     </span>
                   </div>
@@ -1909,7 +1909,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'settings.general.codexLocalAccessEntryVisibleDesc',
-                    '仅控制 Codex 总览中的 API 服务入口显示，不会停止本地 API 服务；关闭后可在这里重新打开。',
+                    "Chỉ kiểm soát việc mục Dịch vụ API có hiển thị trong tổng quan Codex hay không. Thao tác này không dừng dịch vụ API cục bộ; bạn có thể bật lại tại đây hoặc trong Cài đặt nhanh.",
                   )}
                 </div>
                 <div className="qs-row" style={{ marginTop: 8 }}>
@@ -1918,7 +1918,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.codexAppUiInjection',
-                        '显示 API 服务额度',
+                        "Hạn mức dịch vụ API",
                       )}
                     </span>
                   </div>
@@ -1940,12 +1940,12 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'settings.general.codexAppUiInjectionDesc',
-                    '重启 Codex 实例后，在输入框下方显示 Cockpit Tools API 服务的账号数、周额度和 5h 额度。需保持 Cockpit Tools 在后台运行；完全退出或网络不可用时，额度不会继续刷新。',
+                    "Sau khi khởi động lại phiên Codex, huy hiệu hạn mức bên dưới trình soạn thảo sẽ thay đổi theo mô hình đang chọn: DeepSeek hiển thị số dư tài khoản, Grok hiển thị hạn mức Grok, các mô hình GPT hiển thị hạn mức tuần và 5 giờ. Cần giữ Cockpit Tools chạy trong nền; dữ liệu sẽ ngừng cập nhật khi thoát hoàn toàn hoặc khi mạng không khả dụng.",
                   )}
                 </div>
                 <div className="qs-row" style={{ marginTop: 8 }}>
                   <div className="qs-row-label">
-                    <span>{t('settings.general.codexOAuthAppVersion', 'OAuth 客户端版本')}</span>
+                    <span>{t('settings.general.codexOAuthAppVersion', "Phiên bản máy khách OAuth")}</span>
                   </div>
                   <div className="qs-row-control">
                     <input
@@ -1953,7 +1953,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       className="qs-path-input"
                       value={config.codex_oauth_app_version || ''}
                       placeholder={t('settings.general.codexOAuthAppVersionPlaceholder', {
-                        defaultValue: '留空使用 {{version}}',
+                        defaultValue: "Để trống để dùng {{version}}",
                         version: remoteCodexOAuthAppVersion || '26.820.60940',
                       })}
                       onChange={(event) =>
@@ -1964,7 +1964,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 </div>
                 <div className="qs-hint">
                   {t('settings.general.codexOAuthAppVersionDesc', {
-                    defaultValue: '留空跟随远端默认值 {{version}}；填写后仅覆盖 OAuth 授权链接中的版本字段。',
+                    defaultValue: "Để trống để dùng giá trị mặc định từ xa {{version}}; giá trị nhập vào chỉ ghi đè trường phiên bản trong URL ủy quyền OAuth.",
                     version: remoteCodexOAuthAppVersion || '26.820.60940',
                   })}
                 </div>
@@ -2063,7 +2063,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <div className="qs-row" style={{ marginTop: 8 }}>
                       <div className="qs-row-label">
                         <Terminal size={15} />
-                        <span>{t('settings.general.codexSyncWsl', '同步 Codex 到 WSL')}</span>
+                        <span>{t('settings.general.codexSyncWsl', "Đồng bộ Codex sang WSL")}</span>
                       </div>
                       <div className="qs-row-control">
                         <label className="qs-switch">
@@ -2081,7 +2081,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <div className="qs-hint">
                       {t(
                         'settings.general.codexSyncWslDesc',
-                        '切换默认 Codex 账号后，同时写入 WSL 的 Codex 配置目录。',
+                        "Sau khi chuyển tài khoản Codex mặc định, auth.json và config.toml cũng được ghi vào thư mục Codex trong WSL.",
                       )}
                     </div>
                     {config.codex_sync_wsl && (
@@ -2110,7 +2110,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.codexHideRelayQuota',
-                        '隐藏中转站额度',
+                        "Ẩn hạn mức relay",
                       )}
                     </span>
                   </div>
@@ -2132,7 +2132,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'settings.general.codexHideRelayQuotaDesc',
-                    '开启后，Codex 账号总览隐藏中转 / New API 类额度面板，减轻列表重叠与视觉干扰。',
+                    "Ẩn bảng hạn mức relay / New API trên tổng quan tài khoản Codex.",
                   )}
                 </div>
               </div>
@@ -2153,7 +2153,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       max={999}
                       className="qs-select qs-select--input-mode qs-select--with-unit"
                       value={customRefresh}
-                      placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                      placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                       onChange={(e) => setCustomRefresh(e.target.value.replace(/[^\d]/g, ''))}
                       onBlur={handleCustomRefreshApply}
                       onKeyDown={(e) => {
@@ -2181,7 +2181,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <option value="5">5 {t('settings.general.minutes')}</option>
                     <option value="10">10 {t('settings.general.minutes')}</option>
                     <option value="15">15 {t('settings.general.minutes')}</option>
-                    <option value="custom">{t('quickSettings.customInput', '自定义')}</option>
+                    <option value="custom">{t('quickSettings.customInput', "Tùy chỉnh")}</option>
                   </select>
                 )}
               </div>
@@ -2201,7 +2201,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       max={999}
                       className="qs-select qs-select--input-mode qs-select--with-unit"
                       value={currentAccountCustomRefresh}
-                      placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                      placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                       onChange={(e) =>
                         setCurrentAccountCustomRefresh(e.target.value.replace(/[^\d]/g, ''))
                       }
@@ -2235,7 +2235,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <option value="5">5 {t('settings.general.minutes')}</option>
                     <option value="10">10 {t('settings.general.minutes')}</option>
                     <option value="15">15 {t('settings.general.minutes')}</option>
-                    <option value="custom">{t('quickSettings.customInput', '自定义')}</option>
+                    <option value="custom">{t('quickSettings.customInput', "Tùy chỉnh")}</option>
                   </select>
                 )}
                 <div className="qs-hint" style={{ marginTop: 6 }}>
@@ -2243,7 +2243,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     ? t('settings.general.currentAccountRefreshItemDesc')
                     : t(
                       'settings.general.currentAccountRefreshRequiresAutoRefresh',
-                      '需先开启“配额自动刷新”后，才能设置当前账号刷新。',
+                      "Hãy bật \"Tự động làm mới hạn ngạch\" trước để cấu hình làm mới tài khoản hiện tại.",
                     )}
                 </div>
               </div>
@@ -2252,14 +2252,14 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
             <div className="qs-section">
               <div className="qs-section-header">
                 <Settings size={15} />
-                <span>{t('quickSettings.filterPersistence.title', '筛选记忆')}</span>
+                <span>{t('quickSettings.filterPersistence.title', "Ghi nhớ bộ lọc")}</span>
               </div>
               <div className="qs-row">
                 <div className="qs-row-label">
                   <span>
                     {t(
                       'quickSettings.filterPersistence.enable',
-                      '记住账号总览筛选（不含搜索）',
+                      "Ghi nhớ bộ lọc tổng quan tài khoản (không gồm tìm kiếm)",
                     )}
                   </span>
                 </div>
@@ -2279,7 +2279,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
               <div className="qs-hint">
                 {t(
                   'quickSettings.filterPersistence.hint',
-                  '默认关闭。开启后会按平台记住筛选、标签和排序。',
+                  "Mặc định tắt. Khi bật, mỗi nền tảng sẽ giữ bộ lọc, thẻ và thứ tự sắp xếp.",
                 )}
               </div>
             </div>
@@ -2298,7 +2298,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         <span>
                           {t(
                             'settings.general.codexLaunchOnSwitch',
-                            '切换 Codex 时自动启动 Codex App',
+                            "Tự động khởi chạy Codex App khi chuyển Codex",
                           )}
                         </span>
                       </div>
@@ -2320,7 +2320,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <div className="qs-hint">
                       {t(
                         'settings.general.codexLaunchOnSwitchDesc',
-                        '切换账号后自动启动或重启 Codex App',
+                        "Tự động khởi động hoặc khởi động lại Codex App sau khi chuyển tài khoản",
                       )}
                     </div>
                     <div className="qs-row">
@@ -2354,7 +2354,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         <span>
                           {t(
                             'settings.general.antigravityLaunchOnSwitch',
-                            '切换时启动 Antigravity',
+                            "Khởi chạy Antigravity IDE khi chuyển",
                           )}
                         </span>
                       </div>
@@ -2376,7 +2376,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <div className="qs-hint">
                       {t(
                         'settings.general.antigravityLaunchOnSwitchDesc',
-                        '关闭后切号只写入 Antigravity 默认账号数据，不会关闭、启动或重启应用。',
+                        "Khi tắt, việc chuyển chỉ ghi dữ liệu tài khoản mặc định của Antigravity IDE và không đóng, khởi chạy hoặc khởi động lại ứng dụng.",
                       )}
                     </div>
                   </>
@@ -2391,9 +2391,9 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       type === 'claude'
                         ? t(
                             'quickSettings.claude.appTargetPlaceholder',
-                            'Claude.exe 路径或 shell:AppsFolder\\...',
+                            "Đường dẫn Claude.exe hoặc shell:AppsFolder\\...",
                           )
-                        : t('settings.general.codexAppPathPlaceholder', '默认路径')
+                        : t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")
                     }
                     onChange={(e) => {
                       setAppLaunchCandidates([]);
@@ -2409,18 +2409,18 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                           saveConfig({ zcode_app_path: '' });
                         }}
                         disabled={pathDetecting || !getAppPath().trim()}
-                        title={t('common.clear', '清除')}
+                        title={t('common.clear', "Xóa")}
                       >
-                        {t('common.clear', '清除')}
+                        {t('common.clear', "Xóa")}
                       </button>
                     )}
                     <button
                       className="qs-btn"
                       onClick={() => handlePickAppPath(getAppTarget())}
                       disabled={pathDetecting}
-                      title={t('settings.general.codexPathSelect', '选择')}
+                      title={t('settings.general.codexPathSelect', "Chọn")}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="qs-btn"
@@ -2428,16 +2428,16 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       disabled={pathDetecting}
                       title={
                         pathDetecting
-                          ? t('common.loading', '加载中...')
+                          ? t('common.loading', "Đang tải...")
                           : isWindows
-                            ? t('appPath.missing.scanApps', '检测运行中应用')
-                            : t('settings.general.codexPathReset', '恢复默认')
+                            ? t('appPath.missing.scanApps', "Quét ứng dụng")
+                            : t('settings.general.codexPathReset', "Đặt lại mặc định")
                       }
                     >
                       {isWindows ? (
                         pathDetecting
-                          ? t('common.loading', '加载中...')
-                          : t('appPath.missing.scanApps', '检测运行中应用')
+                          ? t('common.loading', "Đang tải...")
+                          : t('appPath.missing.scanApps', "Quét ứng dụng")
                       ) : (
                         <RefreshCw size={12} className={pathDetecting ? 'spin' : undefined} />
                       )}
@@ -2472,7 +2472,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                               <div className="qs-claude-candidate-note">
                                 {t(
                                   'appPath.missing.defaultOnly',
-                                  '仅适用于默认桌面端；应用多开请选择真实 Claude.exe',
+                                  "Chỉ dành cho desktop mặc định; hãy chọn Claude.exe thật cho hồ sơ đa phiên bản.",
                                 )}
                               </div>
                             ) : null}
@@ -2491,7 +2491,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         <span>
                           {t(
                             'settings.general.codexRestartSpecifiedAppOnSwitch',
-                            '切换 Codex 时重启指定应用',
+                            "Khởi động lại ứng dụng chỉ định khi chuyển Codex",
                           )}
                         </span>
                       </div>
@@ -2517,7 +2517,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                           value={config.codex_specified_app_path}
                           placeholder={t(
                             'settings.general.codexSpecifiedAppPathPlaceholder',
-                            '例如 /Applications/Host.app',
+                            "Ví dụ /Applications/Host.app",
                           )}
                           onChange={(e) =>
                             saveConfig({ codex_specified_app_path: e.target.value })
@@ -2527,14 +2527,14 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                           <button
                             className="qs-btn"
                             onClick={() => void handlePickCodexSpecifiedAppPath()}
-                            title={t('settings.general.codexPathSelect', '选择')}
+                            title={t('settings.general.codexPathSelect', "Chọn")}
                           >
-                            {t('settings.general.codexPathSelect', '选择')}
+                            {t('settings.general.codexPathSelect', "Chọn")}
                           </button>
                           <button
                             className="qs-btn"
                             onClick={() => saveConfig({ codex_specified_app_path: '' })}
-                            title={t('settings.general.codexPathReset', '恢复默认')}
+                            title={t('settings.general.codexPathReset', "Đặt lại mặc định")}
                           >
                             <RefreshCw size={12} />
                           </button>
@@ -2647,13 +2647,13 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       disabled={openingCodexConfig}
                     >
                       {openingCodexConfig
-                        ? t('common.loading', '加载中...')
-                        : t('quickSettings.codex.openConfigToml', '打开文件')}
+                        ? t('common.loading', "Đang tải...")
+                        : t('quickSettings.codex.openConfigToml', "Mở tệp")}
                     </button>
                   </div>
                 </div>
                 <div className="qs-hint" style={{ marginTop: -2, marginBottom: 2 }}>
-                  {t('quickSettings.codex.openConfigHint', '快速打开当前使用的 Codex config.toml 文件。')}
+                  {t('quickSettings.codex.openConfigHint', "Mở nhanh tệp Codex config.toml đang hoạt động.")}
                 </div>
 
                 <div className="qs-row">
@@ -2662,7 +2662,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.openclawAuthOverwrite',
-                        '切换 Codex 时覆盖 OpenClaw 登录信息'
+                        "Ghi đè đăng nhập OpenClaw khi chuyển đổi Codex"
                       )}
                     </span>
                   </div>
@@ -2686,7 +2686,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.hermesAuthOverwrite',
-                        '切换 Codex 时同步 Hermes'
+                        "Đồng bộ Hermes khi đổi Codex"
                       )}
                     </span>
                   </div>
@@ -2710,7 +2710,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.opencodeAuthOverwrite',
-                        '切换 Codex 时覆盖 OpenCode 登录信息'
+                        "Ghi đè đăng nhập OpenCode khi chuyển đổi Codex"
                       )}
                     </span>
                   </div>
@@ -2738,7 +2738,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <Zap size={15} />
-                    <span>{t('settings.general.opencodeRestart', '切换时自动重启 OpenCode')}</span>
+                    <span>{t('settings.general.opencodeRestart', "Khởi động lại OpenCode khi chuyển Codex")}</span>
                   </div>
                   <div className="qs-row-control">
                     <label className="qs-switch">
@@ -2756,7 +2756,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <Zap size={15} />
-                    <span>{t('codex.list.showCodeReviewQuota', '显示 Code Review 配额')}</span>
+                    <span>{t('codex.list.showCodeReviewQuota', "Hiển thị hạn mức Code Review")}</span>
                   </div>
                   <div className="qs-row-control">
                     <label className="qs-switch">
@@ -2773,7 +2773,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <Zap size={15} />
-                    <span>{t('codex.list.showAdditionalQuota', '显示模型专属配额')}</span>
+                    <span>{t('codex.list.showAdditionalQuota', "Hạn mức theo model")}</span>
                   </div>
                   <div className="qs-row-control">
                     <label className="qs-switch">
@@ -2790,7 +2790,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-row">
                   <div className="qs-row-label">
                     <Zap size={15} />
-                    <span>{t('codex.list.planBadgeStyle', '套餐徽章样式')}</span>
+                    <span>{t('codex.list.planBadgeStyle', "Kiểu huy hiệu gói")}</span>
                   </div>
                   <div className="qs-row-control">
                     <select
@@ -2800,10 +2800,10 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         handleCodexPlanBadgeStyleChange(e.target.value as CodexPlanBadgeStyle)
                       }
                     >
-                      <option value="default">{t('codex.list.planBadgeStyleDefault', '默认')}</option>
-                      <option value="outline">{t('codex.list.planBadgeStyleOutline', '描边')}</option>
-                      <option value="soft">{t('codex.list.planBadgeStyleSoft', '柔和')}</option>
-                      <option value="mono">{t('codex.list.planBadgeStyleMono', '单色')}</option>
+                      <option value="default">{t('codex.list.planBadgeStyleDefault', "Mặc định")}</option>
+                      <option value="outline">{t('codex.list.planBadgeStyleOutline', "Viền")}</option>
+                      <option value="soft">{t('codex.list.planBadgeStyleSoft', "Mềm")}</option>
+                      <option value="mono">{t('codex.list.planBadgeStyleMono', "Đơn sắc")}</option>
                     </select>
                   </div>
                 </div>
@@ -2815,7 +2815,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                   <div className="qs-row">
                     <div className="qs-row-label">
                       <Zap size={15} />
-                      <span>{t('quickSettings.autoSwitch.enable', '启用自动切号')}</span>
+                      <span>{t('quickSettings.autoSwitch.enable', "Tự động chuyển đổi")}</span>
                     </div>
                     <div className="qs-row-control">
                       <label className="qs-switch">
@@ -2834,7 +2834,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       <div className="qs-row">
                         <div className="qs-row-label">
                           <span>
-                            {t('codex.thresholds.shortCycle')} {t('quickSettings.autoSwitch.threshold', '切号阈值')}
+                            {t('codex.thresholds.shortCycle')} {t('quickSettings.autoSwitch.threshold', "Ngưỡng chuyển đổi")}
                           </span>
                         </div>
                         <div className="qs-row-control">
@@ -2845,7 +2845,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                               max={100}
                               className="qs-select qs-select--input-mode qs-select--with-unit"
                               value={codexAutoSwitchPrimaryCustomThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) =>
                                 handleCodexWindowThresholdInputChange(
                                   e.target.value,
@@ -2878,13 +2878,13 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       </div>
 
                       <div className="qs-hint" style={{ marginTop: 0, marginBottom: 4 }}>
-                        {t('quickSettings.codexWindow.orDivider', 'OR（命中任一即触发）')}
+                        {t('quickSettings.codexWindow.orDivider', 'HOẶC (chỉ cần thỏa mãn một điều kiện)')}
                       </div>
 
                       <div className="qs-row">
                         <div className="qs-row-label">
                           <span>
-                            {t('codex.thresholds.weekly')} {t('quickSettings.autoSwitch.threshold', '切号阈值')}
+                            {t('codex.thresholds.weekly')} {t('quickSettings.autoSwitch.threshold', "Ngưỡng chuyển đổi")}
                           </span>
                         </div>
                         <div className="qs-row-control">
@@ -2895,7 +2895,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                               max={100}
                               className="qs-select qs-select--input-mode qs-select--with-unit"
                               value={codexAutoSwitchSecondaryCustomThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) =>
                                 handleCodexWindowThresholdInputChange(
                                   e.target.value,
@@ -2929,7 +2929,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
 
                       <div className="qs-row qs-row--top">
                         <div className="qs-row-label">
-                          <span>{t('settings.general.codexAutoSwitchAccountScope', 'Codex 自动切号账号范围')}</span>
+                          <span>{t('settings.general.codexAutoSwitchAccountScope', "Phạm vi chuyển tự động tài khoản Codex")}</span>
                         </div>
                         <div className="qs-row-control qs-row-control--fill">
                           <AutoSwitchAccountScopeSelector
@@ -2960,7 +2960,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                       <div className="qs-hint">
                         {t(
                           'quickSettings.autoSwitch.hint',
-                          '当任意模型配额低于阈值时，自动切换到配额最高的账号。'
+                          "Tự động chuyển khi các nhóm mô hình đang theo dõi chạm ngưỡng; nếu bật theo dõi credits, nó cũng sẽ kích hoạt khi credits còn lại thấp hơn ngưỡng."
                         )}
                         <div>
                           {t('codex.thresholds.windowHint')}
@@ -2987,7 +2987,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.ghcpLaunchOnSwitch',
-                        '切换 GitHub Copilot 时自动启动 GitHub Copilot'
+                        "Tự động khởi chạy GitHub Copilot App khi chuyển GitHub Copilot"
                       )}
                     </span>
                   </div>
@@ -3009,7 +3009,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.ghcpOpencodeAuthOverwrite',
-                        '切换 GitHub Copilot 时覆盖 OpenCode 登录信息'
+                        "Ghi đè đăng nhập OpenCode khi chuyển đổi GitHub Copilot"
                       )}
                     </span>
                   </div>
@@ -3040,7 +3040,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.ghcpOpencodeRestart',
-                        '切换 GitHub Copilot 时自动重启 OpenCode'
+                        "Khởi động lại OpenCode khi chuyển GitHub Copilot"
                       )}
                     </span>
                   </div>
@@ -3066,7 +3066,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
               <div className="qs-section qs-section--highlight">
                 <div className="qs-section-header">
                   <Zap size={15} />
-                  <span>{t('quickSettings.autoSwitch.title', '自动切号')}</span>
+                  <span>{t('quickSettings.autoSwitch.title', "Tự động chuyển đổi")}</span>
                 </div>
 
                 {antigravitySeamlessSwitchUnlocked && (
@@ -3076,7 +3076,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                         <span>
                           {t(
                             'settings.general.antigravityDualSwitchNoRestart',
-                            '无感双通道切号（不重启）'
+                            "Chuyển đôi không cần khởi động lại"
                           )}
                         </span>
                       </div>
@@ -3099,7 +3099,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <div className="qs-hint">
                       {t(
                         'settings.general.antigravityDualSwitchNoRestartDesc',
-                        '切号时同时执行本地落盘与扩展无感切号，不再自动重启 Antigravity IDE。'
+                        "Khi chuyển tài khoản, việc ghi dữ liệu cục bộ và chuyển đổi liền mạch qua tiện ích mở rộng được thực hiện trong một luồng, không cần khởi động lại Antigravity IDE."
                       )}
                     </div>
                   </>
@@ -3107,7 +3107,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
 
                 <div className="qs-row">
                   <div className="qs-row-label">
-                    <span>{t('quickSettings.autoSwitch.enable', '启用自动切号')}</span>
+                    <span>{t('quickSettings.autoSwitch.enable', "Tự động chuyển đổi")}</span>
                   </div>
                   <div className="qs-row-control">
                     <label className="qs-switch">
@@ -3125,7 +3125,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                   <div className="qs-field-group" style={{ animation: 'qsFadeUp 0.2s ease both' }}>
                     <div className="qs-row">
                       <div className="qs-row-label">
-                        <span>{t('quickSettings.autoSwitch.threshold', '切号阈值')}</span>
+                        <span>{t('quickSettings.autoSwitch.threshold', "Ngưỡng chuyển đổi")}</span>
                       </div>
                       <div className="qs-row-control">
                         {showThresholdInput ? (
@@ -3136,7 +3136,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                               max={100}
                               className="qs-select qs-select--input-mode qs-select--with-unit"
                               value={customThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setCustomThreshold(e.target.value.replace(/[^\d]/g, ''))}
                               onBlur={handleCustomThresholdApply}
                               onKeyDown={(e) => {
@@ -3163,7 +3163,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                             <option value="20">20%</option>
                             <option value="40">40%</option>
                             <option value="60">60%</option>
-                            <option value="custom">{t('quickSettings.customInput', '自定义')}</option>
+                            <option value="custom">{t('quickSettings.customInput', "Tùy chỉnh")}</option>
                           </select>
                         )}
                       </div>
@@ -3171,7 +3171,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
 
                     <div className="qs-row">
                       <div className="qs-row-label">
-                        <span>{t('quickSettings.autoSwitch.creditsEnable', '监控 Credits')}</span>
+                        <span>{t('quickSettings.autoSwitch.creditsEnable', "Theo dõi credits")}</span>
                       </div>
                       <div className="qs-row-control">
                         <label className="qs-switch">
@@ -3190,7 +3190,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     {creditsAutoSwitchEnabled && (
                       <div className="qs-row">
                         <div className="qs-row-label">
-                          <span>{t('quickSettings.autoSwitch.creditsThreshold', 'Credits 阈值')}</span>
+                          <span>{t('quickSettings.autoSwitch.creditsThreshold', "Ngưỡng credits")}</span>
                         </div>
                         <div className="qs-row-control">
                           {showCreditsThresholdInput ? (
@@ -3200,7 +3200,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                                 min={0}
                                 className="qs-select qs-select--input-mode"
                                 value={customCreditsThreshold}
-                                placeholder={t('quickSettings.inputCredits', '输入 Credits')}
+                                placeholder={t('quickSettings.inputCredits', "Nhập credits")}
                                 onChange={(e) =>
                                   setCustomCreditsThreshold(e.target.value.replace(/[^\d]/g, ''))
                                 }
@@ -3228,7 +3228,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                               <option value="5">5</option>
                               <option value="10">10</option>
                               <option value="20">20</option>
-                              <option value="custom">{t('quickSettings.customInput', '自定义')}</option>
+                              <option value="custom">{t('quickSettings.customInput', "Tùy chỉnh")}</option>
                             </select>
                           )}
                         </div>
@@ -3237,7 +3237,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
 
                     <div className="qs-row">
                       <div className="qs-row-label">
-                        <span>{t('quickSettings.autoSwitch.triggerModel', '触发模型')}</span>
+                        <span>{t('quickSettings.autoSwitch.triggerModel', "Mô hình kích hoạt")}</span>
                       </div>
                       <div className="qs-row-control">
                         <select
@@ -3246,10 +3246,10 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                           onChange={(e) => handleAutoSwitchScopeModeChange(e.target.value)}
                         >
                           <option value="any_group">
-                            {t('quickSettings.autoSwitch.scopeAnyGroup', '任一模型分组')}
+                            {t('quickSettings.autoSwitch.scopeAnyGroup', "Bất kỳ nhóm mô hình nào")}
                           </option>
                           <option value="selected_groups">
-                            {t('quickSettings.autoSwitch.scopeSelectedGroups', '指定模型分组')}
+                            {t('quickSettings.autoSwitch.scopeSelectedGroups', "Nhóm mô hình đã chọn")}
                           </option>
                         </select>
                       </div>
@@ -3258,12 +3258,12 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     {autoSwitchScopeMode === 'selected_groups' && (
                       <div className="qs-row qs-row--top">
                         <div className="qs-row-label">
-                          <span>{t('quickSettings.autoSwitch.selectedGroups', '指定分组')}</span>
+                          <span>{t('quickSettings.autoSwitch.selectedGroups', "Nhóm đã chọn")}</span>
                         </div>
                         <div className="qs-row-control qs-row-control--fill">
                           {autoSwitchDisplayGroups.length === 0 ? (
                             <div className="qs-hint qs-hint--compact">
-                              {t('quickSettings.autoSwitch.selectedGroupsEmpty', '暂无可选分组')}
+                              {t('quickSettings.autoSwitch.selectedGroupsEmpty', "Không có nhóm mô hình nào khả dụng")}
                             </div>
                           ) : (
                             <div className="qs-check-group-inline">
@@ -3291,7 +3291,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
 
                     <div className="qs-row qs-row--top">
                       <div className="qs-row-label">
-                        <span>{t('settings.general.autoSwitchAccountScope', '自动切号账号范围')}</span>
+                        <span>{t('settings.general.autoSwitchAccountScope', "Phạm vi chuyển tài khoản tự động")}</span>
                       </div>
                       <div className="qs-row-control qs-row-control--fill">
                         <AutoSwitchAccountScopeSelector
@@ -3323,7 +3323,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'quickSettings.autoSwitch.hint',
-                    '命中监控的模型分组阈值时会自动切号；启用 Credits 监控后，剩余 Credits 低于阈值时也会触发。'
+                    "Tự động chuyển khi các nhóm mô hình đang theo dõi chạm ngưỡng; nếu bật theo dõi credits, nó cũng sẽ kích hoạt khi credits còn lại thấp hơn ngưỡng."
                   )}
                 </div>
 
@@ -3335,7 +3335,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
               <div className="qs-section qs-section--highlight">
                 <div className="qs-section-header">
                   <Zap size={15} />
-                  <span>{t('quickSettings.quotaAlert.enable', '超额预警')}</span>
+                  <span>{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</span>
                 </div>
                 {renderQuotaAlertControls()}
               </div>
@@ -3348,7 +3348,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                   <span>
                     {t(
                       'settings.general.claudeQuotaDisplayRemaining',
-                      'Claude 额度显示剩余%',
+                      "Claude hiển thị % còn lại",
                     )}
                   </span>
                 </div>
@@ -3357,7 +3357,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                     <span>
                       {t(
                         'settings.general.claudeQuotaDisplayRemaining',
-                        'Claude 额度显示剩余%',
+                        "Claude hiển thị % còn lại",
                       )}
                     </span>
                   </div>
@@ -3381,7 +3381,7 @@ export function QuickSettingsPopover({ type }: QuickSettingsPopoverProps) {
                 <div className="qs-hint">
                   {t(
                     'settings.general.claudeQuotaDisplayRemainingDesc',
-                    '默认显示已用百分比；开启后改为显示剩余百分比。自动切号与预警仍按已用比例计算。',
+                    "Mặc định % đã dùng. Bật = % còn lại. Tự chuyển và cảnh báo vẫn theo đã dùng.",
                   )}
                 </div>
               </div>

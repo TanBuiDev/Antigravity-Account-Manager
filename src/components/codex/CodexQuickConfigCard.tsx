@@ -67,7 +67,7 @@ export function CodexQuickConfigCard({ onClose }: { onClose?: () => void }) {
     } catch (err) {
       setError(
         t('codex.modelProviders.quickConfig.loadFailed', {
-          defaultValue: '加载当前 Codex 配置失败：{{error}}',
+          defaultValue: "Không tải được cấu hình Codex hiện tại: {{error}}",
           error: String(err),
         }),
       );

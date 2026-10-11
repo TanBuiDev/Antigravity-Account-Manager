@@ -113,7 +113,7 @@ export function getZcodeQuotaGroups(
   return [
     {
       key: 'base',
-      label: t('zcode.quota.models', '模型额度'),
+      label: t('zcode.quota.models', "Hạn mức mô hình"),
       used,
       total,
       remain,

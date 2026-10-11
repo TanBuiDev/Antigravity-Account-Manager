@@ -15,7 +15,7 @@ import { ThemeColorSetting } from './settings/ThemeColorSetting';
 import { SettingsCodexPlatformPanel } from "./SettingsCodexPlatformPanel";
 
 
-/** 渲染 SettingsPageView 的 activeTab === 'general' 业务面板。 */
+/** Hiển thị bảng cài đặt chung khi activeTab của SettingsPageView là 'general'. */
 export function SettingsGeneralPanel(props: SettingsPageViewProps) {
   const {
     antigravityAccountGroups,
@@ -402,7 +402,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
             disabled={!generalLoaded}
             aria-busy={!generalLoaded}
           >
-            <div className="group-title">{t('settings.general.commonTitle', '通用')}</div>
+            <div className="group-title">{t('settings.general.commonTitle', "Chung")}</div>
             <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
@@ -443,12 +443,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.reducedMotion', '减少动画')}
+                    {t('settings.general.reducedMotion', "Giảm chuyển động")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.reducedMotionDesc',
-                      '降低页面淡入、弹层过渡、阴影、模糊和平滑滚动，仅保留必要加载反馈'
+                      "Giảm fade, chuyển modal, bóng, blur và cuộn mượt; chỉ giữ phản hồi tải cần thiết"
                     )}
                   </div>
                 </div>
@@ -466,8 +466,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.defaultTerminal', '默认终端')}</div>
-                  <div className="row-desc">{t('settings.general.defaultTerminalDesc', 'CLI 打开时使用的终端')}</div>
+                  <div className="row-title">{t('settings.general.defaultTerminal', "Terminal mặc định")}</div>
+                  <div className="row-desc">{t('settings.general.defaultTerminalDesc', "Terminal được sử dụng khi mở CLI")}</div>
                 </div>
                 <div className="row-control">
                   <select 
@@ -484,8 +484,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.sideNavLayout', '侧边栏布局')}</div>
-                  <div className="row-desc">{t('settings.general.sideNavLayoutDesc', '切换原始布局或经典布局')}</div>
+                  <div className="row-title">{t('settings.general.sideNavLayout', "Bố cục thanh bên")}</div>
+                  <div className="row-desc">{t('settings.general.sideNavLayoutDesc', "Chuyển giữa bố cục thanh bên gốc và cổ điển")}</div>
                 </div>
                 <div className="row-control">
                   <select
@@ -493,8 +493,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     value={sideNavLayoutMode}
                     onChange={(e) => setSideNavLayoutMode(e.target.value as SideNavLayoutMode)}
                   >
-                    <option value="original">{t('settings.general.sideNavLayoutOriginal', '原始布局')}</option>
-                    <option value="classic">{t('settings.general.sideNavLayoutClassic', '经典布局')}</option>
+                    <option value="original">{t('settings.general.sideNavLayoutOriginal', "Bố cục gốc")}</option>
+                    <option value="classic">{t('settings.general.sideNavLayoutClassic', "Bố cục cổ điển")}</option>
                   </select>
                 </div>
               </div>
@@ -538,12 +538,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.startupMinimized', '启动后自动最小化')}
+                    {t('settings.general.startupMinimized', "Khởi động thu nhỏ")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.startupMinimizedDesc',
-                      '应用启动完成后自动最小化主窗口，可从 Dock、任务栏或托盘恢复'
+                      "Tự động thu nhỏ cửa sổ chính sau khi ứng dụng khởi động; khôi phục từ Dock, thanh tác vụ hoặc khay"
                     )}
                   </div>
                 </div>
@@ -553,8 +553,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     value={startupMinimized ? 'true' : 'false'}
                     onChange={(e) => setStartupMinimized(e.target.value === 'true')}
                   >
-                    <option value="false">{t('common.disable', '停用')}</option>
-                    <option value="true">{t('common.enable', '启用')}</option>
+                    <option value="false">{t('common.disable', "Disable​")}</option>
+                    <option value="true">{t('common.enable', "Enable​")}</option>
                   </select>
                 </div>
               </div>
@@ -562,12 +562,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.rememberMainWindowState', '记住主窗口位置和大小')}
+                    {t('settings.general.rememberMainWindowState', "Ghi nhớ vị trí và kích thước cửa sổ")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.rememberMainWindowStateDesc',
-                      '重启或从托盘重新打开时恢复主窗口位置和大小；默认关闭'
+                      "Khôi phục vị trí và kích thước sau khi khởi động lại hoặc mở từ khay; mặc định tắt"
                     )}
                   </div>
                 </div>
@@ -630,12 +630,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('settings.general.hideDockIcon', '是否隐藏Dock图标（仅 macOS）')}
+                        {t('settings.general.hideDockIcon', "Ẩn biểu tượng Dock (chỉ macOS)?")}
                       </div>
                       <div className="row-desc">
                         {t(
                           'settings.general.hideDockIconDesc',
-                          '独立控制程序坞图标显示状态，不受窗口最小化行为影响'
+                          "Điều khiển hiển thị biểu tượng Dock độc lập, không phụ thuộc vào hành vi thu nhỏ cửa sổ"
                         )}
                       </div>
                     </div>
@@ -646,10 +646,10 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         onChange={(e) => setHideDockIcon(e.target.value === 'true')}
                       >
                         <option value="false">
-                          {t('settings.general.hideDockIconOff', '否（显示Dock图标）')}
+                          {t('settings.general.hideDockIconOff', "Không (Hiện biểu tượng Dock)")}
                         </option>
                         <option value="true">
-                          {t('settings.general.hideDockIconOn', '是（隐藏Dock图标）')}
+                          {t('settings.general.hideDockIconOn', "Có (Ẩn biểu tượng Dock)")}
                         </option>
                       </select>
                     </div>
@@ -658,12 +658,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('settings.general.trayIconStyle', '菜单栏图标样式（仅 macOS）')}
+                        {t('settings.general.trayIconStyle', "Kiểu biểu tượng thanh menu (chỉ macOS)")}
                       </div>
                       <div className="row-desc">
                         {t(
                           'settings.general.trayIconStyleDesc',
-                          '选择系统单色图标或原彩色 App 图标'
+                          "Chọn biểu tượng đơn sắc của hệ thống hoặc biểu tượng app gốc có màu"
                         )}
                       </div>
                     </div>
@@ -676,10 +676,10 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         }
                       >
                         <option value="template">
-                          {t('settings.general.trayIconStyleTemplate', '单色图标')}
+                          {t('settings.general.trayIconStyleTemplate', "Biểu tượng đơn sắc")}
                         </option>
                         <option value="color">
-                          {t('settings.general.trayIconStyleColor', '彩色图标')}
+                          {t('settings.general.trayIconStyleColor', "Biểu tượng màu")}
                         </option>
                       </select>
                     </div>
@@ -688,13 +688,13 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('settings.general.menuBarQuota', '菜单栏显示实时额度')}
+                        {t('settings.general.menuBarQuota', "Hạn mức trực tiếp trên thanh menu")}
                       </div>
                       <div className="row-desc">
                         {menuBarQuotaEnabled
                           ? t(
                               'settings.general.menuBarQuotaEnabledDesc',
-                              '已启用 · {{platform}} · 显示该平台当前账号剩余额度（多条取最低）',
+                              "Đang bật · {{platform}} · còn lại của tài khoản hiện tại nền tảng đó (thấp nhất trong các hạn mức)",
                               {
                                 platform:
                                   menuBarQuotaPlatformOptions.find(
@@ -704,7 +704,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                             )
                           : t(
                               'settings.general.menuBarQuotaDesc',
-                              '启用后在菜单栏图标旁显示所选平台当前账号的剩余额度；平台等专属选项在弹框中配置'
+                              "Khi bật, hiển thị hạn mức còn lại của tài khoản hiện tại nền tảng đã chọn cạnh biểu tượng. Tùy chọn nền tảng trong hộp thoại."
                             )}
                       </div>
                     </div>
@@ -720,8 +720,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           setMenuBarQuotaEnabled(false);
                         }}
                       >
-                        <option value="false">{t('common.disable', '停用')}</option>
-                        <option value="true">{t('common.enable', '启用')}</option>
+                        <option value="false">{t('common.disable', "Disable​")}</option>
+                        <option value="true">{t('common.enable', "Enable​")}</option>
                       </select>
                       {menuBarQuotaEnabled ? (
                         <button
@@ -729,7 +729,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           className="btn btn-secondary"
                           onClick={() => openMenuBarQuotaModal('edit')}
                         >
-                          {t('settings.general.menuBarQuotaConfigure', '配置')}
+                          {t('settings.general.menuBarQuotaConfigure', "Cấu hình")}
                         </button>
                       ) : null}
                     </div>
@@ -753,8 +753,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     value={appAutoLaunchEnabled ? 'true' : 'false'}
                     onChange={(e) => setAppAutoLaunchEnabled(e.target.value === 'true')}
                   >
-                    <option value="false">{t('common.disable', '停用')}</option>
-                    <option value="true">{t('common.enable', '启用')}</option>
+                    <option value="false">{t('common.disable', "Disable​")}</option>
+                    <option value="true">{t('common.enable', "Enable​")}</option>
                   </select>
                 </div>
               </div>
@@ -762,12 +762,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.tokenKeeper', '后台授权保活')}
+                    {t('settings.general.tokenKeeper', "Giữ auth")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.tokenKeeperDesc',
-                      '仅在授权快过期时分批刷新账号 Token，降低大量账号场景下的后台请求压力。',
+                      "Chỉ làm mới Token tài khoản theo từng nhóm nhỏ khi ủy quyền sắp hết hạn, giảm áp lực yêu cầu nền khi có nhiều tài khoản.",
                     )}
                   </div>
                 </div>
@@ -786,12 +786,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.autoImportFromLocal', '本机账号自动导入')}
+                    {t('settings.general.autoImportFromLocal', "Tự nhập tài khoản cục bộ")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.autoImportFromLocalDesc',
-                      '开启后会立即扫描本机客户端登录状态并导入当前账号；之后当官方客户端更换登录时自动导入。首次可能弹出系统钥匙串授权，请选择「始终允许」。',
+                      "Bật sẽ quét và nhập đăng nhập cục bộ ngay; sau đó tự nhập khi client chính thức đổi tài khoản. Có thể hỏi quyền keychain.",
                     )}
                     {autoImportScanStatus ? (
                       <div
@@ -815,14 +815,14 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         const enabled = e.target.checked;
                         setAutoImportFromLocalEnabled(enabled);
                         if (!enabled) {
-                          // 作废进行中的扫描结果，避免关了之后又刷回完成文案
+                          // Hủy hiệu lực kết quả quét đang chạy để tránh hiển thị lại trạng thái hoàn tất sau khi đóng
                           autoImportScanSeqRef.current += 1;
                           setAutoImportScanBusy(false);
                           setAutoImportScanStatus(
                             autoImportScanBusy
                               ? t(
                                   'settings.general.autoImportFromLocalScanCancelled',
-                                  '已关闭，后台扫描将忽略结果',
+                                  "Đã tắt; kết quả quét đang chạy sẽ bị bỏ qua",
                                 )
                               : '',
                           );
@@ -833,12 +833,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         setAutoImportScanStatus(
                           t(
                             'settings.general.autoImportFromLocalScanning',
-                            '正在扫描本机账号，可随时关闭…',
+                            "Đang quét tài khoản cục bộ… có thể tắt bất cứ lúc nào",
                           ),
                         );
                         void (async () => {
                           try {
-                            // 等 patch 自动保存生效后再扫（debounce 300ms）
+                            // Chờ bản vá tự động được lưu rồi mới quét lại (debounce 300 ms)
                             await new Promise((resolve) => window.setTimeout(resolve, 450));
                             if (autoImportScanSeqRef.current !== scanSeq) {
                               return;
@@ -858,21 +858,21 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                                   imported: result.imported,
                                   scanned: result.scanned,
                                   defaultValue:
-                                    '扫描完成：发现 {{scanned}} 个本机登录，已导入 {{imported}} 个',
+                                    "Xong: tìm {{scanned}}, đã nhập {{imported}}",
                                 }),
                               );
                             } else if (result.failed > 0) {
                               setAutoImportScanStatus(
                                 t(
                                   'settings.general.autoImportFromLocalScanPartial',
-                                  '扫描完成：未成功导入，部分平台失败，可到账号页手动导入',
+                                  "Xong: một số nền tảng lỗi",
                                 ),
                               );
                             } else {
                               setAutoImportScanStatus(
                                 t(
                                   'settings.general.autoImportFromLocalScanEmpty',
-                                  '扫描完成：未发现可导入的本机登录',
+                                  "Xong: không có đăng nhập để nhập",
                                 ),
                               );
                             }
@@ -880,11 +880,11 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                             if (autoImportScanSeqRef.current !== scanSeq) {
                               return;
                             }
-                            console.error('本机账号自动导入扫描失败:', err);
+                            console.error('Quét nhập tài khoản cục bộ tự động thất bại:', err);
                             setAutoImportScanStatus(
                               t('settings.general.autoImportFromLocalScanFailed', {
                                 error: String(err),
-                                defaultValue: '扫描失败：{{error}}',
+                                defaultValue: "Quét thất bại: {{error}}",
                               }),
                             );
                           } finally {
@@ -939,12 +939,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.topRightAdVisible', '显示顶部推广')}
+                    {t('settings.general.topRightAdVisible', "Hiện quảng bá trên cùng")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.topRightAdVisibleDesc',
-                      '关闭后隐藏应用顶部推广位。'
+                      "Ẩn vị trí quảng bá trên cùng trong ứng dụng. Trang Nhà tài trợ không bị ảnh hưởng."
                     )}
                   </div>
                 </div>
@@ -965,12 +965,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.themeColor', '主题色套件')}
+                    {t('settings.general.themeColor', "Gói màu")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.themeColorDesc',
-                      '在浅色/深色之上叠加配色包（Nord、Tokyo Night 等）'
+                      "Chồng gói màu lên sáng/tối"
                     )}
                   </div>
                 </div>
@@ -982,12 +982,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.externalNetwork', '允许外连')}
+                    {t('settings.general.externalNetwork', "Cho phép mạng ngoài")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.externalNetworkDesc',
-                      '关闭后阻断 WebDAV 同步与 OpenRouter 用量刷新（不影响应用更新等其他网络）'
+                      "Tắt: chặn WebDAV, usage OpenRouter, thông báo và kiểm tra cập nhật (tính năng local vẫn chạy)."
                     )}
                   </div>
                 </div>
@@ -1006,12 +1006,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               <div className="settings-row">
                 <div className="row-label">
                   <div className="row-title">
-                    {t('settings.general.webdavAllowedDomains', 'WebDAV 域名白名单')}
+                    {t('settings.general.webdavAllowedDomains', "Danh sách domain WebDAV")}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.webdavAllowedDomainsDesc',
-                      '逗号分隔；留空不限制。非空时同步 URL 主机必须匹配'
+                      "Cách nhau bằng dấu phẩy; trống = không giới hạn"
                     )}
                   </div>
                 </div>
@@ -1027,7 +1027,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ order: platformSettingsOrder.antigravity }}>
-                <div className="group-title">{t('settings.general.antigravitySettingsTitle', 'Antigravity IDE 设置')}</div>
+                <div className="group-title">{t('settings.general.antigravitySettingsTitle', "Cài đặt Antigravity IDE")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
@@ -1044,7 +1044,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={autoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setAutoRefresh(sanitizeNumberInput(e.target.value))}
                         onBlur={() => {
                           const normalized = normalizeNumberInput(autoRefresh, 1, 999);
@@ -1121,13 +1121,13 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="row-title">
                     {t(
                       'settings.general.antigravityLaunchOnSwitch',
-                      '切换时启动 Antigravity',
+                      "Khởi chạy Antigravity IDE khi chuyển",
                     )}
                   </div>
                   <div className="row-desc">
                     {t(
                       'settings.general.antigravityLaunchOnSwitchDesc',
-                      '关闭后切号只写入 Antigravity 默认账号数据，不会关闭、启动或重启应用。',
+                      "Khi tắt, việc chuyển chỉ ghi dữ liệu tài khoản mặc định của Antigravity IDE và không đóng, khởi chạy hoặc khởi động lại ứng dụng.",
                     )}
                   </div>
                 </div>
@@ -1145,8 +1145,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
 	              <div className="settings-row">
 	                <div className="row-label">
-	                  <div className="row-title">{t('settings.general.antigravityAppPath', 'Antigravity IDE 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.codexAppPathDesc', '留空则使用默认路径')}</div>
+	                  <div className="row-title">{t('settings.general.antigravityAppPath', "Đường dẫn ứng dụng Antigravity IDE")}</div>
+                  <div className="row-desc">{t('settings.general.codexAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -1154,7 +1154,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={antigravityAppPath}
-                      placeholder={t('settings.general.codexAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setAntigravityAppPath(e.target.value)}
                     />
                     <button
@@ -1162,7 +1162,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('antigravity')}
                       disabled={isAppPathResetDetecting('antigravity')}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -1171,7 +1171,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('antigravity') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('antigravity')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('antigravity')}
                     </button>
                   </div>
@@ -1184,13 +1184,13 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     <div className="row-title">
                       {t(
                         'settings.general.antigravityDualSwitchNoRestart',
-                        '无感双通道切号（不重启）'
+                        "Chuyển đôi không cần khởi động lại"
                       )}
                     </div>
                     <div className="row-desc">
                       {t(
                         'settings.general.antigravityDualSwitchNoRestartDesc',
-                        '切号时同时执行本地落盘与扩展无感切号，不再自动重启 Antigravity IDE。'
+                        "Khi chuyển tài khoản, việc ghi dữ liệu cục bộ và chuyển đổi liền mạch qua tiện ích mở rộng được thực hiện trong một luồng, không cần khởi động lại Antigravity IDE."
                       )}
                     </div>
                   </div>
@@ -1211,8 +1211,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.autoSwitch.enable', '自动切号')}</div>
-                  <div className="row-desc">{t('quickSettings.autoSwitch.hint', '命中监控的模型分组阈值时会自动切号；启用 Credits 监控后，剩余 Credits 低于阈值时也会触发。')}</div>
+                  <div className="row-title">{t('quickSettings.autoSwitch.enable', "Tự động chuyển đổi")}</div>
+                  <div className="row-desc">{t('quickSettings.autoSwitch.hint', "Tự động chuyển khi các nhóm mô hình đang theo dõi chạm ngưỡng; nếu bật theo dõi credits, nó cũng sẽ kích hoạt khi credits còn lại thấp hơn ngưỡng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -1228,8 +1228,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {autoSwitchEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.autoSwitch.threshold', '切号阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.autoSwitch.thresholdDesc', '任意模型配额低于此百分比时触发自动切号')}</div>
+                    <div className="row-title">{t('quickSettings.autoSwitch.threshold', "Ngưỡng chuyển đổi")}</div>
+                    <div className="row-desc">{t('quickSettings.autoSwitch.thresholdDesc', "Tự động chuyển sẽ kích hoạt khi các nhóm mô hình đang theo dõi chạm ngưỡng phần trăm này")}</div>
                   </div>
                   <div className="row-control">
                     {autoSwitchThresholdCustomMode ? (
@@ -1240,7 +1240,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={autoSwitchThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setAutoSwitchThreshold(sanitizeNumberInput(e.target.value))}
                         onBlur={() => {
                           const normalized = normalizeNumberInput(autoSwitchThreshold, 0, 100);
@@ -1290,10 +1290,10 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 <div className="settings-row">
                   <div className="row-label">
                     <div className="row-title">
-                      {t('quickSettings.autoSwitch.creditsEnable', '监控 Credits')}
+                      {t('quickSettings.autoSwitch.creditsEnable', "Theo dõi credits")}
                     </div>
                     <div className="row-desc">
-                      {t('quickSettings.autoSwitch.creditsThresholdDesc', '剩余 Credits 小于等于此值时也会触发自动切号')}
+                      {t('quickSettings.autoSwitch.creditsThresholdDesc', "Cũng tự động chuyển khi credits còn lại nhỏ hơn hoặc bằng giá trị này")}
                     </div>
                   </div>
                   <div className="row-control">
@@ -1312,10 +1312,10 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
                     <div className="row-title">
-                      {t('quickSettings.autoSwitch.creditsThreshold', 'Credits 阈值')}
+                      {t('quickSettings.autoSwitch.creditsThreshold', "Ngưỡng credits")}
                     </div>
                     <div className="row-desc">
-                      {t('quickSettings.autoSwitch.creditsThresholdDesc', '剩余 Credits 小于等于此值时也会触发自动切号')}
+                      {t('quickSettings.autoSwitch.creditsThresholdDesc', "Cũng tự động chuyển khi credits còn lại nhỏ hơn hoặc bằng giá trị này")}
                     </div>
                   </div>
                   <div className="row-control">
@@ -1326,7 +1326,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           min={0}
                           className="settings-select settings-select--input-mode"
                           value={autoSwitchCreditsThreshold}
-                          placeholder={t('quickSettings.inputCredits', '输入 Credits')}
+                          placeholder={t('quickSettings.inputCredits', "Nhập credits")}
                           onChange={(e) =>
                             setAutoSwitchCreditsThreshold(sanitizeNumberInput(e.target.value))
                           }
@@ -1402,8 +1402,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -1419,8 +1419,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {quotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {quotaAlertThresholdCustomMode ? (
@@ -1431,7 +1431,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={quotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(quotaAlertThreshold, 0, 100);
@@ -1485,17 +1485,17 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div style={{ order: platformSettingsOrder.claude_manager }}>
                 <div className="group-title">
-                  {t('settings.general.claudeSettingsTitle', 'Claude 设置')}
+                  {t('settings.general.claudeSettingsTitle', "Cài đặt Claude")}
                 </div>
                 <div className="settings-group">
                   {renderPlatformAutoRefreshRow({
                     title: t(
                       'settings.general.claudeAutoRefresh',
-                      'Claude 自动刷新配额',
+                      "Tự động làm mới hạn mức Claude",
                     ),
                     description: t(
                       'settings.general.claudeAutoRefreshDesc',
-                      '后台自动更新 Claude 账号配额缓存',
+                      "Tự động làm mới bộ nhớ đệm hạn mức cho tài khoản Claude trong nền.",
                     ),
                     value: claudeAutoRefresh,
                     setValue: setClaudeAutoRefresh,
@@ -1510,13 +1510,13 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       <div className="row-title">
                         {t(
                           'settings.general.claudeQuotaDisplayRemaining',
-                          'Claude 额度显示剩余%',
+                          "Claude hiển thị % còn lại",
                         )}
                       </div>
                       <div className="row-desc">
                         {t(
                           'settings.general.claudeQuotaDisplayRemainingDesc',
-                          '默认显示已用百分比；开启后改为显示剩余百分比。自动切号与预警仍按已用比例计算。',
+                          "Mặc định % đã dùng. Bật = % còn lại. Tự chuyển và cảnh báo vẫn theo đã dùng.",
                         )}
                       </div>
                     </div>
@@ -1538,12 +1538,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row settings-row--align-start">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('settings.general.claudeAppPath', 'Claude Desktop 启动目标')}
+                        {t('settings.general.claudeAppPath', "Mục tiêu khởi chạy Claude Desktop")}
                       </div>
                       <div className="row-desc">
                         {t(
                           'settings.general.claudeAppPathDesc',
-                          '默认实例可使用 Microsoft Store 应用目标；应用多开请选择真实 Claude.exe。',
+                          "Hồ sơ mặc định có thể dùng mục tiêu Microsoft Store; hồ sơ đa phiên bản cần Claude.exe thật.",
                         )}
                       </div>
                     </div>
@@ -1555,7 +1555,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           value={claudeAppPath}
                           placeholder={t(
                             'quickSettings.claude.appTargetPlaceholder',
-                            'Claude.exe 路径或 shell:AppsFolder\\...',
+                            "Đường dẫn Claude.exe hoặc shell:AppsFolder\\...",
                           )}
                           onChange={(e) => setClaudeAppPath(e.target.value)}
                         />
@@ -1564,7 +1564,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('claude')}
                           disabled={isAppPathResetDetecting('claude')}
                         >
-                          {t('settings.general.codexPathSelect', '选择')}
+                          {t('settings.general.codexPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -1576,7 +1576,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                             className={isAppPathResetDetecting('claude') ? 'spin' : undefined}
                           />
                           {isAppPathResetDetecting('claude')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('claude')}
                         </button>
                       </div>
@@ -1606,7 +1606,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                                 <div className="settings-claude-candidate-note">
                                   {t(
                                     'appPath.missing.defaultOnly',
-                                    '仅适用于默认桌面端；应用多开请选择真实 Claude.exe',
+                                    "Chỉ dành cho desktop mặc định; hãy chọn Claude.exe thật cho hồ sơ đa phiên bản.",
                                   )}
                                 </div>
                               ) : null}
@@ -1629,12 +1629,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder['github-copilot'] }}>
-                <div className="group-title">{t('settings.general.githubCopilotSettingsTitle', 'GitHub Copilot 设置')}</div>
+                <div className="group-title">{t('settings.general.githubCopilotSettingsTitle', "Cài đặt GitHub Copilot")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.ghcpAutoRefresh', 'GitHub Copilot 自动刷新配额')}</div>
-                  <div className="row-desc">{t('settings.general.ghcpAutoRefreshDesc', '后台自动更新频率')}</div>
+                  <div className="row-title">{t('settings.general.ghcpAutoRefresh', "Tự động làm mới quota GitHub Copilot")}</div>
+                  <div className="row-desc">{t('settings.general.ghcpAutoRefreshDesc', "Tần suất cập nhật nền")}</div>
                 </div>
                 <div className="row-control">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -1646,7 +1646,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={ghcpAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setGhcpAutoRefresh(sanitizeNumberInput(e.target.value))}
                         onBlur={() => {
                           const normalized = normalizeNumberInput(ghcpAutoRefresh, 1, 999);
@@ -1702,8 +1702,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.vscodeAppPath', 'VS Code 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.vscodeAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('settings.general.vscodeAppPath', "Đường dẫn ứng dụng VS Code")}</div>
+                  <div className="row-desc">{t('settings.general.vscodeAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -1711,7 +1711,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={vscodeAppPath}
-                      placeholder={t('settings.general.vscodeAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.vscodeAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setVscodeAppPath(e.target.value)}
                     />
                     <button
@@ -1719,7 +1719,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('vscode')}
                       disabled={isAppPathResetDetecting('vscode')}
                     >
-                      {t('settings.general.vscodePathSelect', '选择')}
+                      {t('settings.general.vscodePathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -1728,7 +1728,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('vscode') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('vscode')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('vscode')}
                     </button>
                   </div>
@@ -1737,8 +1737,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -1754,8 +1754,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {ghcpQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {ghcpQuotaAlertThresholdCustomMode ? (
@@ -1766,7 +1766,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={ghcpQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setGhcpQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(ghcpQuotaAlertThreshold, 0, 100);
@@ -1817,12 +1817,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.windsurf }}>
-                <div className="group-title">{t('settings.general.windsurfSettingsTitle', 'Windsurf 设置')}</div>
+                <div className="group-title">{t('settings.general.windsurfSettingsTitle', "Cài đặt Devin")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.windsurfAutoRefresh', 'Windsurf 自动刷新配额')}</div>
-                  <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', '后台自动更新频率')}</div>
+                  <div className="row-title">{t('settings.general.windsurfAutoRefresh', "Tự động làm mới hạn mức Devin")}</div>
+                  <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', "Tần suất cập nhật tự động dưới nền")}</div>
                 </div>
                 <div className="row-control">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -1834,7 +1834,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={windsurfAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setWindsurfAutoRefresh(sanitizeNumberInput(e.target.value))}
                         onBlur={() => {
                           const normalized = normalizeNumberInput(windsurfAutoRefresh, 1, 999);
@@ -1890,8 +1890,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.windsurfAppPath', 'Windsurf 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.windsurfAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('settings.general.windsurfAppPath', "Đường dẫn ứng dụng Devin")}</div>
+                  <div className="row-desc">{t('settings.general.windsurfAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -1899,7 +1899,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={windsurfAppPath}
-                      placeholder={t('settings.general.windsurfAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.windsurfAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setWindsurfAppPath(e.target.value)}
                     />
                     <button
@@ -1907,7 +1907,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('windsurf')}
                       disabled={isAppPathResetDetecting('windsurf')}
                     >
-                      {t('settings.general.windsurfPathSelect', '选择')}
+                      {t('settings.general.windsurfPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -1916,7 +1916,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('windsurf') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('windsurf')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('windsurf')}
                     </button>
                   </div>
@@ -1925,8 +1925,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -1942,8 +1942,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {windsurfQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {windsurfQuotaAlertThresholdCustomMode ? (
@@ -1954,7 +1954,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={windsurfQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setWindsurfQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(windsurfQuotaAlertThreshold, 0, 100);
@@ -2005,12 +2005,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.kiro }}>
-                <div className="group-title">{t('settings.general.kiroSettingsTitle', 'Kiro 设置')}</div>
+                <div className="group-title">{t('settings.general.kiroSettingsTitle', "Cài đặt Kiro")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.kiroAutoRefresh', 'Kiro 自动刷新配额')}</div>
-                  <div className="row-desc">{t('settings.general.kiroAutoRefreshDesc', '后台自动更新频率')}</div>
+                  <div className="row-title">{t('settings.general.kiroAutoRefresh', "Hạn ngạch làm mới tự động của Kiro")}</div>
+                  <div className="row-desc">{t('settings.general.kiroAutoRefreshDesc', "Tần suất cập nhật nền")}</div>
                 </div>
                 <div className="row-control">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2022,7 +2022,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={kiroAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setKiroAutoRefresh(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(kiroAutoRefresh, 1, 999);
@@ -2078,8 +2078,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.kiroAppPath', 'Kiro 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.kiroAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('settings.general.kiroAppPath', "Đường dẫn ứng dụng Kiro")}</div>
+                  <div className="row-desc">{t('settings.general.kiroAppPathDesc', "Để trống để sử dụng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -2087,7 +2087,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={kiroAppPath}
-                      placeholder={t('settings.general.kiroAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.kiroAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setKiroAppPath(e.target.value)}
                     />
                     <button
@@ -2095,7 +2095,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('kiro')}
                       disabled={isAppPathResetDetecting('kiro')}
                     >
-                      {t('settings.general.kiroPathSelect', '选择')}
+                      {t('settings.general.kiroPathSelect', "Lựa chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -2104,7 +2104,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('kiro') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('kiro')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('kiro')}
                     </button>
                   </div>
@@ -2113,8 +2113,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -2130,8 +2130,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {kiroQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {kiroQuotaAlertThresholdCustomMode ? (
@@ -2142,7 +2142,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={kiroQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setKiroQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(kiroQuotaAlertThreshold, 0, 100);
@@ -2192,12 +2192,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.codebuddy }}>
-                <div className="group-title">{t('settings.general.codebuddySettingsTitle', 'CodeBuddy 设置')}</div>
+                <div className="group-title">{t('settings.general.codebuddySettingsTitle', "Cài đặt CodeBuddy")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.codebuddyAutoRefresh', 'CodeBuddy 自动刷新配额')}</div>
-                  <div className="row-desc">{t('settings.general.codebuddyAutoRefreshDesc', '后台自动更新频率')}</div>
+                  <div className="row-title">{t('settings.general.codebuddyAutoRefresh', "Tự động làm mới hạn ngạch CodeBuddy")}</div>
+                  <div className="row-desc">{t('settings.general.codebuddyAutoRefreshDesc', "Tần suất tự động cập nhật nền")}</div>
                 </div>
                 <div className="row-control">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2209,7 +2209,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={codebuddyAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setCodebuddyAutoRefresh(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(codebuddyAutoRefresh, 1, 999);
@@ -2288,8 +2288,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('settings.general.codebuddyAppPath', 'CodeBuddy 启动路径')}</div>
-                  <div className="row-desc">{t('settings.general.codebuddyAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('settings.general.codebuddyAppPath', "Đường dẫn khởi động CodeBuddy")}</div>
+                  <div className="row-desc">{t('settings.general.codebuddyAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -2297,7 +2297,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={codebuddyAppPath}
-                      placeholder={t('settings.general.codebuddyAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.codebuddyAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setCodebuddyAppPath(e.target.value)}
                     />
                     <button
@@ -2305,7 +2305,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('codebuddy')}
                       disabled={isAppPathResetDetecting('codebuddy')}
                     >
-                      {t('settings.general.codebuddyPathSelect', '选择')}
+                      {t('settings.general.codebuddyPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -2314,7 +2314,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('codebuddy') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('codebuddy')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('codebuddy')}
                     </button>
                   </div>
@@ -2323,8 +2323,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -2340,8 +2340,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {codebuddyQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {codebuddyQuotaAlertThresholdCustomMode ? (
@@ -2352,7 +2352,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={codebuddyQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setCodebuddyQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(codebuddyQuotaAlertThreshold, 0, 100);
@@ -2404,12 +2404,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.codebuddy_cn }}>
-                <div className="group-title">{t('settings.general.codebuddyCnSettingsTitle', 'CodeBuddy CN 设置')}</div>
+                <div className="group-title">{t('settings.general.codebuddyCnSettingsTitle', "Cài đặt CodeBuddy CN")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.codebuddyCnAutoRefresh', 'CodeBuddy CN 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.codebuddyCnAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.codebuddyCnAutoRefresh', "Tự động làm mới hạn ngạch CodeBuddy CN")}</div>
+                      <div className="row-desc">{t('settings.general.codebuddyCnAutoRefreshDesc', "Tần suất tự động làm mới nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2421,7 +2421,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={codebuddyCnAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(e) => setCodebuddyCnAutoRefresh(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(codebuddyCnAutoRefresh, 1, 999);
@@ -2485,8 +2485,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.codebuddyCnAppPath', 'CodeBuddy CN 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.codebuddyCnAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.codebuddyCnAppPath', "Đường dẫn ứng dụng CodeBuddy CN")}</div>
+                      <div className="row-desc">{t('settings.general.codebuddyCnAppPathDesc', "Để trống để sử dụng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -2494,7 +2494,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={codebuddyCnAppPath}
-                          placeholder={t('settings.general.codebuddyCnAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.codebuddyCnAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(e) => setCodebuddyCnAppPath(e.target.value)}
                         />
                         <button
@@ -2502,7 +2502,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('codebuddy_cn')}
                           disabled={isAppPathResetDetecting('codebuddy_cn')}
                         >
-                          {t('settings.general.codebuddyCnPathSelect', '选择')}
+                          {t('settings.general.codebuddyCnPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2511,7 +2511,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('codebuddy_cn') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('codebuddy_cn')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('codebuddy_cn')}
                         </button>
                       </div>
@@ -2520,8 +2520,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -2537,8 +2537,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {codebuddyCnQuotaAlertEnabled && (
                     <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         {codebuddyCnQuotaAlertThresholdCustomMode ? (
@@ -2549,7 +2549,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={100}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={codebuddyCnQuotaAlertThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setCodebuddyCnQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(codebuddyCnQuotaAlertThreshold, 0, 100);
@@ -2601,12 +2601,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.qoder }}>
-                <div className="group-title">{t('quickSettings.qoder.title', 'Qoder 设置')}</div>
+                <div className="group-title">{t('quickSettings.qoder.title', "Cài đặt Qoder")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.qoderAutoRefresh', 'Qoder 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.qoderAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.qoderAutoRefresh', "Tự động làm mới hạn ngạch Qoder")}</div>
+                      <div className="row-desc">{t('settings.general.qoderAutoRefreshDesc', "Tần suất tự động làm mới nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2618,7 +2618,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={qoderAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(e) => setQoderAutoRefresh(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(qoderAutoRefresh, 1, 999);
@@ -2676,8 +2676,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.qoderAppPath', 'Qoder 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.qoderAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.qoderAppPath', "Đường dẫn ứng dụng Qoder")}</div>
+                      <div className="row-desc">{t('settings.general.qoderAppPathDesc', "Để trống để sử dụng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -2685,7 +2685,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={qoderAppPath}
-                          placeholder={t('settings.general.qoderAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.qoderAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(e) => setQoderAppPath(e.target.value)}
                         />
                         <button
@@ -2693,7 +2693,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('qoder')}
                           disabled={isAppPathResetDetecting('qoder')}
                         >
-                          {t('settings.general.qoderPathSelect', '选择')}
+                          {t('settings.general.qoderPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2702,7 +2702,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('qoder') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('qoder')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('qoder')}
                         </button>
                       </div>
@@ -2711,8 +2711,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -2728,8 +2728,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {qoderQuotaAlertEnabled && (
                     <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         {qoderQuotaAlertThresholdCustomMode ? (
@@ -2740,7 +2740,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={100}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={qoderQuotaAlertThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setQoderQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(qoderQuotaAlertThreshold, 0, 100);
@@ -2792,12 +2792,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.zcode }}>
-                <div className="group-title">{t('quickSettings.zcode.title', 'ZCode 设置')}</div>
+                <div className="group-title">{t('quickSettings.zcode.title', "Cài đặt ZCode")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.zcodeAutoRefresh', 'ZCode 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.zcodeAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.zcodeAutoRefresh', "Tự động làm mới ZCode")}</div>
+                      <div className="row-desc">{t('settings.general.zcodeAutoRefreshDesc', "Khoảng làm mới hạn mức trong nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2809,7 +2809,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={zcodeAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(event) => setZcodeAutoRefresh(sanitizeNumberInput(event.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(zcodeAutoRefresh, 1, 999);
@@ -2867,8 +2867,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.zcodeAppPath', 'ZCode 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.zcodeAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.zcodeAppPath', "Đường dẫn khởi chạy ZCode")}</div>
+                      <div className="row-desc">{t('settings.general.zcodeAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -2876,7 +2876,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={zcodeAppPath}
-                          placeholder={t('settings.general.codexAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(event) => setZcodeAppPath(event.target.value)}
                         />
                         <button
@@ -2884,14 +2884,14 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => setZcodeAppPath('')}
                           disabled={isAppPathResetDetecting('zcode') || !zcodeAppPath.trim()}
                         >
-                          {t('common.clear', '清除')}
+                          {t('common.clear', "Xóa")}
                         </button>
                         <button
                           className="btn btn-secondary"
                           onClick={() => handlePickAppPath('zcode')}
                           disabled={isAppPathResetDetecting('zcode')}
                         >
-                          {t('settings.general.codexPathSelect', '选择')}
+                          {t('settings.general.codexPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2900,7 +2900,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('zcode') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('zcode')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('zcode')}
                         </button>
                       </div>
@@ -2910,12 +2910,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.trae }}>
-                <div className="group-title">{t('quickSettings.trae.title', 'Trae 设置')}</div>
+                <div className="group-title">{t('quickSettings.trae.title', "Cài đặt Trae")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.traeAutoRefresh', 'Trae 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.traeAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.traeAutoRefresh', "Tự động làm mới hạn ngạch Trae")}</div>
+                      <div className="row-desc">{t('settings.general.traeAutoRefreshDesc', "Tần suất tự động cập nhật nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -2927,7 +2927,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={traeAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(e) => setTraeAutoRefresh(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(traeAutoRefresh, 1, 999);
@@ -2985,8 +2985,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.traeAppPath', 'Trae 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.traeAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.traeAppPath', "Đường dẫn khởi động Trae")}</div>
+                      <div className="row-desc">{t('settings.general.traeAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow settings-claude-launch-control">
                       <div className="settings-claude-launch-row">
@@ -2994,7 +2994,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={traeAppPath}
-                          placeholder={t('settings.general.traeAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.traeAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(e) => setTraeAppPath(e.target.value)}
                         />
                         <button
@@ -3002,7 +3002,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('trae')}
                           disabled={isAppPathResetDetecting('trae')}
                         >
-                          {t('settings.general.traePathSelect', '选择')}
+                          {t('settings.general.traePathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -3011,7 +3011,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('trae') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('trae')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('trae')}
                         </button>
                       </div>
@@ -3042,8 +3042,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -3059,8 +3059,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {traeQuotaAlertEnabled && (
                     <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         {traeQuotaAlertThresholdCustomMode ? (
@@ -3071,7 +3071,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={100}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={traeQuotaAlertThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setTraeQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(traeQuotaAlertThreshold, 0, 100);
@@ -3126,9 +3126,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_solo',
                 order: platformSettingsOrder.trae_solo,
                 titleKey: 'quickSettings.traeSolo.title',
-                titleDefault: 'TRAE SOLO 设置',
+                titleDefault: 'Cài đặt TRAE SOLO',
                 appPathTitleKey: 'settings.general.traeSoloAppPath',
-                appPathTitleDefault: 'TRAE SOLO 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy TRAE SOLO',
                 autoRefresh: traeSoloAutoRefresh,
                 setAutoRefresh: setTraeSoloAutoRefresh,
                 autoRefreshCustomMode: traeSoloAutoRefreshCustomMode,
@@ -3147,9 +3147,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_cn',
                 order: platformSettingsOrder.trae_cn,
                 titleKey: 'quickSettings.traeCn.title',
-                titleDefault: 'Trae CN 设置',
+                titleDefault: 'Cài đặt Trae CN',
                 appPathTitleKey: 'settings.general.traeCnAppPath',
-                appPathTitleDefault: 'Trae CN 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy Trae CN',
                 autoRefresh: traeCnAutoRefresh,
                 setAutoRefresh: setTraeCnAutoRefresh,
                 autoRefreshCustomMode: traeCnAutoRefreshCustomMode,
@@ -3168,9 +3168,9 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                 target: 'trae_solo_cn',
                 order: platformSettingsOrder.trae_solo_cn,
                 titleKey: 'quickSettings.traeSoloCn.title',
-                titleDefault: 'TRAE SOLO CN 设置',
+                titleDefault: 'Cài đặt TRAE SOLO CN',
                 appPathTitleKey: 'settings.general.traeSoloCnAppPath',
-                appPathTitleDefault: 'TRAE SOLO CN 启动路径',
+                appPathTitleDefault: 'Đường dẫn khởi chạy TRAE SOLO CN',
                 autoRefresh: traeSoloCnAutoRefresh,
                 setAutoRefresh: setTraeSoloCnAutoRefresh,
                 autoRefreshCustomMode: traeSoloCnAutoRefreshCustomMode,
@@ -3186,12 +3186,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               })}
 
               <div style={{ order: platformSettingsOrder.workbuddy }}>
-                <div className="group-title">{t('quickSettings.workbuddy.title', 'WorkBuddy 设置')}</div>
+                <div className="group-title">{t('quickSettings.workbuddy.title', "Cài đặt WorkBuddy")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.workbuddyAutoRefresh', 'WorkBuddy 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.workbuddyAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.workbuddyAutoRefresh', "Tự động làm mới hạn ngạch WorkBuddy")}</div>
+                      <div className="row-desc">{t('settings.general.workbuddyAutoRefreshDesc', "Tần suất tự động làm mới nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -3203,7 +3203,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={workbuddyAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(e) => setWorkbuddyAutoRefresh(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(workbuddyAutoRefresh, 1, 999);
@@ -3284,8 +3284,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.workbuddyAppPath', 'WorkBuddy 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.workbuddyAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.workbuddyAppPath', "Đường dẫn khởi động WorkBuddy")}</div>
+                      <div className="row-desc">{t('settings.general.workbuddyAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -3293,7 +3293,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={workbuddyAppPath}
-                          placeholder={t('settings.general.workbuddyAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.workbuddyAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(e) => setWorkbuddyAppPath(e.target.value)}
                         />
                         <button
@@ -3301,7 +3301,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('workbuddy')}
                           disabled={isAppPathResetDetecting('workbuddy')}
                         >
-                          {t('settings.general.workbuddyPathSelect', '选择')}
+                          {t('settings.general.workbuddyPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -3310,7 +3310,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('workbuddy') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('workbuddy')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('workbuddy')}
                         </button>
                       </div>
@@ -3319,8 +3319,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -3336,8 +3336,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {workbuddyQuotaAlertEnabled && (
                     <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         {workbuddyQuotaAlertThresholdCustomMode ? (
@@ -3348,7 +3348,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={100}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={workbuddyQuotaAlertThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setWorkbuddyQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(workbuddyQuotaAlertThreshold, 0, 100);
@@ -3400,12 +3400,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.zed }}>
-                <div className="group-title">{t('quickSettings.zed.title', 'Zed 设置')}</div>
+                <div className="group-title">{t('quickSettings.zed.title', "Cài đặt Zed")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.zedAutoRefresh', 'Zed 自动刷新配额')}</div>
-                      <div className="row-desc">{t('settings.general.zedAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('settings.general.zedAutoRefresh', "Tự động làm mới hạn mức Zed")}</div>
+                      <div className="row-desc">{t('settings.general.zedAutoRefreshDesc', "Tần suất cập nhật nền")}</div>
                     </div>
                     <div className="row-control">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -3417,7 +3417,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={999}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={zedAutoRefresh}
-                              placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                              placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                               onChange={(e) => setZedAutoRefresh(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(zedAutoRefresh, 1, 999);
@@ -3473,8 +3473,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('settings.general.zedAppPath', 'Zed 启动路径')}</div>
-                      <div className="row-desc">{t('settings.general.zedAppPathDesc', '留空则使用默认路径')}</div>
+                      <div className="row-title">{t('settings.general.zedAppPath', "Đường dẫn khởi chạy Zed")}</div>
+                      <div className="row-desc">{t('settings.general.zedAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                     </div>
                     <div className="row-control row-control--grow">
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -3482,7 +3482,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           type="text"
                           className="settings-input settings-input--path"
                           value={zedAppPath}
-                          placeholder={t('settings.general.zedAppPathPlaceholder', '默认路径')}
+                          placeholder={t('settings.general.zedAppPathPlaceholder', "Đường dẫn mặc định")}
                           onChange={(e) => setZedAppPath(e.target.value)}
                         />
                         <button
@@ -3490,7 +3490,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           onClick={() => handlePickAppPath('zed')}
                           disabled={isAppPathResetDetecting('zed')}
                         >
-                          {t('settings.general.zedPathSelect', '选择')}
+                          {t('settings.general.zedPathSelect', "Chọn")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -3499,7 +3499,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         >
                           <RefreshCw size={16} className={isAppPathResetDetecting('zed') ? 'spin' : undefined} />
                           {isAppPathResetDetecting('zed')
-                            ? t('common.loading', '加载中...')
+                            ? t('common.loading', "Đang tải...")
                             : getResetLabelByTarget('zed')}
                         </button>
                       </div>
@@ -3508,8 +3508,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -3525,8 +3525,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {zedQuotaAlertEnabled && (
                     <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         {zedQuotaAlertThresholdCustomMode ? (
@@ -3537,7 +3537,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                               max={100}
                               className="settings-select settings-select--input-mode settings-select--with-unit"
                               value={zedQuotaAlertThreshold}
-                              placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                              placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                               onChange={(e) => setZedQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                               onBlur={() => {
                                 const normalized = normalizeNumberInput(zedQuotaAlertThreshold, 0, 100);
@@ -3587,12 +3587,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               </div>
 
               <div style={{ order: platformSettingsOrder.cursor }}>
-                <div className="group-title">{t('quickSettings.cursor.title', 'Cursor 设置')}</div>
+                <div className="group-title">{t('quickSettings.cursor.title', "Cài đặt Cursor")}</div>
                 <div className="settings-group">
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.cursorRefreshInterval', '配额自动刷新')}</div>
-                  <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', '后台自动更新频率')}</div>
+                  <div className="row-title">{t('quickSettings.cursorRefreshInterval', "Tự động làm mới hạn mức")}</div>
+                  <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', "Tần suất cập nhật tự động dưới nền")}</div>
                 </div>
                 <div className="row-control">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -3604,7 +3604,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={cursorAutoRefresh}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => setCursorAutoRefresh(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(cursorAutoRefresh, 1, 999);
@@ -3660,8 +3660,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.cursor.appPath', 'Cursor 路径')}</div>
-                  <div className="row-desc">{t('settings.general.codexAppPathDesc', '留空则使用默认路径')}</div>
+                  <div className="row-title">{t('quickSettings.cursor.appPath', "Đường dẫn Cursor")}</div>
+                  <div className="row-desc">{t('settings.general.codexAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
                 </div>
                 <div className="row-control row-control--grow">
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flex: 1 }}>
@@ -3669,7 +3669,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       type="text"
                       className="settings-input settings-input--path"
                       value={cursorAppPath}
-                      placeholder={t('settings.general.codexAppPathPlaceholder', '默认路径')}
+                      placeholder={t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")}
                       onChange={(e) => setCursorAppPath(e.target.value)}
                     />
                     <button
@@ -3677,7 +3677,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       onClick={() => handlePickAppPath('cursor')}
                       disabled={isAppPathResetDetecting('cursor')}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -3686,7 +3686,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                     >
                       <RefreshCw size={16} className={isAppPathResetDetecting('cursor') ? 'spin' : undefined} />
                       {isAppPathResetDetecting('cursor')
-                        ? t('common.loading', '加载中...')
+                        ? t('common.loading', "Đang tải...")
                         : getResetLabelByTarget('cursor')}
                     </button>
                   </div>
@@ -3695,8 +3695,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
               <div className="settings-row">
                 <div className="row-label">
-                  <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                  <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                  <div className="row-desc">{t('quickSettings.quotaAlert.hint', "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.")}</div>
                 </div>
                 <div className="row-control">
                   <label className="switch">
@@ -3712,8 +3712,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
               {cursorQuotaAlertEnabled && (
                 <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
                   <div className="row-label">
-                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}</div>
+                    <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                    <div className="row-desc">{t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}</div>
                   </div>
                   <div className="row-control">
                     {cursorQuotaAlertThresholdCustomMode ? (
@@ -3724,7 +3724,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                           max={100}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={cursorQuotaAlertThreshold}
-                          placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                          placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                           onChange={(e) => setCursorQuotaAlertThreshold(sanitizeNumberInput(e.target.value))}
                           onBlur={() => {
                             const normalized = normalizeNumberInput(cursorQuotaAlertThreshold, 0, 100);
@@ -3773,18 +3773,18 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
             </div>
               </div>
 <div style={{ order: platformSettingsOrder.grok }}>
-                <div className="group-title">{t('quickSettings.grok.title', 'Grok CLI 设置')}</div>
+                <div className="group-title">{t('quickSettings.grok.title', "Cài đặt Grok CLI")}</div>
                 <div className="settings-group">
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.grok.cliPath', 'CLI 路径')}</div>
+                      <div className="row-title">{t('quickSettings.grok.cliPath', "Đường dẫn CLI")}</div>
                       <div className="row-desc">
                         {grokCliStatus?.available
-                          ? t('quickSettings.grok.cliDetected', '已检测 {{version}} · {{path}}', {
+                          ? t('quickSettings.grok.cliDetected', "Đã phát hiện: {{version}} · {{path}}", {
                               version: grokCliStatus.version || '--',
                               path: grokCliStatus.binaryPath || '--',
                             })
-                          : t('quickSettings.grok.cliMissing', '未检测到 Grok CLI，可填写自定义路径')}
+                          : t('quickSettings.grok.cliMissing', "Không tìm thấy Grok CLI. Hãy nhập đường dẫn riêng.")}
                       </div>
                     </div>
                     <div className="row-control">
@@ -3804,7 +3804,7 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                         disabled={grokCliSaving}
                       >
                         <Save size={14} />
-                        {grokCliSaving ? t('common.loading', '加载中...') : t('common.save', '保存')}
+                        {grokCliSaving ? t('common.loading', "Đang tải...") : t('common.save', "Lưu")}
                       </button>
                     </div>
                   </div>
@@ -3813,12 +3813,12 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('quickSettings.grok.syncOfficialAuthOnSwitch', '切号同步官方登录')}
+                        {t('quickSettings.grok.syncOfficialAuthOnSwitch', "Đồng bộ đăng nhập chính thức")}
                       </div>
                       <div className="row-desc">
                         {t(
                           'quickSettings.grok.syncOfficialAuthOnSwitchDesc',
-                          '开启后，默认实例切换 OAuth 账号会写入官方 ~/.grok/auth.json；关闭时使用独立 GROK_HOME。API Key 和多开实例不改写官方登录。',
+                          "Khi bật, việc chuyển tài khoản OAuth cho phiên bản mặc định sẽ ghi vào ~/.grok/auth.json chính thức. Khi tắt, một GROK_HOME riêng sẽ được dùng. API Key và các phiên bản bổ sung không ghi đè đăng nhập chính thức.",
                         )}
                       </div>
                     </div>
@@ -3841,13 +3841,13 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                       <div className="row-title">
                         {t(
                           'settings.general.grokOpencodeAuthOverwrite',
-                          '切换 Grok 时覆盖 OpenCode 登录信息',
+                          "Ghi đè đăng nhập OpenCode khi chuyển đổi Grok",
                         )}
                       </div>
                       <div className="row-desc">
                         {t(
                           'settings.general.grokOpencodeAuthOverwriteDesc',
-                          '关闭后只切 Grok，不改 OpenCode 当前登录态',
+                          "Khi tắt, chỉ chuyển Grok và OpenCode giữ nguyên trạng thái đăng nhập hiện tại",
                         )}
                       </div>
                     </div>
@@ -3872,17 +3872,17 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   <div className="settings-row">
                     <div className="row-label">
                       <div className="row-title">
-                        {t('settings.general.grokOpencodeRestart', '切换 Grok 时自动重启 OpenCode')}
+                        {t('settings.general.grokOpencodeRestart', "Khởi động lại OpenCode khi chuyển Grok")}
                       </div>
                       <div className="row-desc">
                         {grokOpencodeAuthOverwriteOnSwitch
                           ? t(
                               'settings.general.grokOpencodeRestartDesc',
-                              '覆盖 OpenCode 登录信息后重启，使授权立即生效',
+                              "Sau khi ghi đè thông tin đăng nhập OpenCode, khởi động lại để áp dụng ngay",
                             )
                           : t(
                               'settings.general.grokOpencodeRestartRequiresOverwrite',
-                              '请先开启“切换 Grok 时覆盖 OpenCode 登录信息”',
+                              "Hãy bật \"Ghi đè đăng nhập OpenCode khi chuyển đổi Grok\" trước",
                             )}
                       </div>
                     </div>
@@ -3901,8 +3901,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.grokRefreshInterval', '配额自动刷新')}</div>
-                      <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', '后台自动更新频率')}</div>
+                      <div className="row-title">{t('quickSettings.grokRefreshInterval', "Tự động làm mới hạn ngạch")}</div>
+                      <div className="row-desc">{t('settings.general.windsurfAutoRefreshDesc', "Tần suất cập nhật tự động dưới nền")}</div>
                     </div>
                     <div className="row-control">
                       <div className="settings-inline-input">
@@ -3929,8 +3929,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
 
                   <div className="settings-row">
                     <div className="row-label">
-                      <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
-                      <div className="row-desc">{t('grok.quotaAlert.hint', '当当前账号任意配额项低于阈值时，发送原生通知并在页面提示快捷切号。')}</div>
+                      <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
+                      <div className="row-desc">{t('grok.quotaAlert.hint', "Khi bất kỳ mục hạn mức nào của tài khoản hiện tại xuống dưới ngưỡng, hãy gửi thông báo hệ thống và hiển thị thao tác chuyển nhanh trong ứng dụng.")}</div>
                     </div>
                     <div className="row-control">
                       <label className="switch">
@@ -3946,8 +3946,8 @@ export function SettingsGeneralPanel(props: SettingsPageViewProps) {
                   {grokQuotaAlertEnabled && (
                     <div className="settings-row">
                       <div className="row-label">
-                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
-                        <div className="row-desc">{t('grok.quotaAlert.thresholdDesc', '任意配额项低于此百分比时触发预警')}</div>
+                        <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
+                        <div className="row-desc">{t('grok.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi bất kỳ mục hạn mức nào xuống dưới tỷ lệ này")}</div>
                       </div>
                       <div className="row-control">
                         <div className="settings-inline-input">

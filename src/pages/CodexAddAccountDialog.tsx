@@ -173,7 +173,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="modal-header">
-                    <h2>{t("codex.addModal.title", "添加 Codex 账号")}</h2>
+                    <h2>{t("codex.addModal.title", "Thêm tài khoản Codex")}</h2>
                     <button
                       className="modal-close"
                       onClick={
@@ -185,7 +185,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           : closeCodexAddModal
                       }
                       disabled={importing || tempLoginCancelling}
-                      aria-label={t("common.close", "关闭")}
+                      aria-label={t("common.close", "Đóng")}
                     >
                       <X />
                     </button>
@@ -198,7 +198,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                     >
                       <Monitor size={14} />
                       <span className="modal-tab-label">
-                        {t("codex.tempLogin.tab", "官方登录")}
+                        {t("codex.tempLogin.tab", "Đăng nhập chính thức")}
                       </span>
                     </button>
                     <button
@@ -241,7 +241,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                     >
                       <Database size={14} />
                       <span className="modal-tab-label">
-                        {t("accounts.tabs.import", "本地导入")}
+                        {t("accounts.tabs.import", "Nhập")}
                       </span>
                     </button>
                   </div>
@@ -251,7 +251,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <FolderPlus size={14} />
                         <span>
                           {t("codex.addModal.targetGroup", {
-                            defaultValue: "将添加到分组：{{group}}",
+                            defaultValue: "Sẽ thêm vào nhóm: {{group}}",
                             group: codexAddTargetGroup.name,
                           })}
                         </span>
@@ -264,7 +264,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <label>
                               {t(
                                 "codex.oauth.reauthEmailLabel",
-                                "本次重新授权账号",
+                                "Tài khoản ủy quyền lại",
                               )}
                             </label>
                             <div className="oauth-url-box">
@@ -274,7 +274,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 readOnly
                                 aria-label={t(
                                   "codex.oauth.reauthEmailLabel",
-                                  "本次重新授权账号",
+                                  "Tài khoản ủy quyền lại",
                                 )}
                               />
                               <button
@@ -282,13 +282,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 onClick={() => void handleCopyReauthEmail()}
                                 title={
                                   reauthEmailCopied
-                                    ? t("common.copied", "已复制")
-                                    : t("common.copy", "复制")
+                                    ? t("common.copied", "Đã sao chép")
+                                    : t("common.copy", "Copy​")
                                 }
                                 aria-label={
                                   reauthEmailCopied
-                                    ? t("common.copied", "已复制")
-                                    : t("common.copy", "复制")
+                                    ? t("common.copied", "Đã sao chép")
+                                    : t("common.copy", "Copy​")
                                 }
                               >
                                 {reauthEmailCopied ? (
@@ -311,7 +311,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <p className="section-desc">
                           {t(
                             "codex.tempLogin.desc",
-                            "由官方客户端打开浏览器完成登录并处理授权回调。Cockpit 在临时客户端关闭后读取最终凭据并导入。",
+                            "Ứng dụng chính thức mở trình duyệt để đăng nhập và xử lý phản hồi ủy quyền. Cockpit đọc và nhập thông tin xác thực cuối cùng sau khi ứng dụng tạm đóng.",
                           )}
                         </p>
                         <ol className="codex-temp-login-steps">
@@ -346,7 +346,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           <p className="section-desc codex-temp-login-hint">
                             {t(
                               "codex.tempLogin.waitingHint",
-                              "请在官方客户端打开的浏览器中完成登录；检测到完整凭据后会自动关闭临时客户端并导入（最长等待 10 分钟）。",
+                              "Đăng nhập trong trình duyệt do ứng dụng chính thức mở. Khi phát hiện đầy đủ thông tin xác thực, ứng dụng tạm sẽ đóng và tài khoản được nhập (tối đa 10 phút).",
                             )}
                           </p>
                         )}
@@ -365,12 +365,12 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           ) : (
                             <Monitor size={16} />
                           )}
-                          {tempLoginRecoverable ? t("codex.tempLogin.retryImport") : t("codex.tempLogin.start", "打开官方客户端并登录")}
+                          {tempLoginRecoverable ? t("codex.tempLogin.retryImport") : t("codex.tempLogin.start", "Mở ứng dụng chính thức và đăng nhập")}
                         </button>
                         {tempLoginRecoverable && !tempLoginRunning && (
                           <button className="btn btn-secondary btn-full" onClick={() => void handleStartCodexTempLogin(true)} disabled={importing}>
                             <Monitor size={16} />
-                            {t("codex.tempLogin.start", "打开官方客户端并登录")}
+                            {t("codex.tempLogin.start", "Mở ứng dụng chính thức và đăng nhập")}
                           </button>
                         )}
                         {tempLoginRunning && (
@@ -384,13 +384,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             ) : (
                               <X size={16} />
                             )}
-                            {t("codex.tempLogin.cancel", "取消登录")}
+                            {t("codex.tempLogin.cancel", "Hủy đăng nhập")}
                           </button>
                         )}
                         <p className="section-desc codex-temp-login-note">
                           {t(
                             "codex.tempLogin.note",
-                            "导入成功后清理临时配置与认证条目；导入失败保留凭据供重试。默认实例和多开实例不受影响。",
+                            "Sau khi nhập thành công, cấu hình tạm, dữ liệu chạy và các mục xác thực liên quan sẽ được xóa. Nếu lần nhập cuối thất bại, thông tin đăng nhập được giữ để thử lại. Các phiên bản khác không bị ảnh hưởng.",
                           )}
                         </p>
                       </div>
@@ -403,7 +403,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <label>
                                 {t(
                                   "codex.pendingAuth.emailLabel",
-                                  "待授权账号",
+                                  "Tài khoản chờ xác thực",
                                 )}
                               </label>
                               <div className="oauth-url-box oauth-manual-input">
@@ -417,7 +417,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   }}
                                   placeholder={t(
                                     "codex.pendingAuth.emailPlaceholder",
-                                    "输入 OpenAI 账号邮箱",
+                                    "Nhập email tài khoản OpenAI",
                                   )}
                                   disabled={savingPendingOAuthAccount}
                                 />
@@ -442,8 +442,8 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <FileText size={12} />
                               <span>
                                 {pendingOAuthHasNoteDetails
-                                  ? t("codex.accountNote.short", "账号备注")
-                                  : t("codex.accountNote.addShort", "加备注")}
+                                  ? t("codex.accountNote.short", "Ghi chú")
+                                  : t("codex.accountNote.addShort", "Thêm")}
                               </span>
                             </button>
                             <button
@@ -467,7 +467,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               )}
                               {t(
                                 "codex.pendingAuth.saveDraft",
-                                "保存待授权卡片",
+                                "Lưu thẻ chờ xác thực",
                               )}
                             </button>
                           </div>
@@ -475,7 +475,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <p className="section-desc">
                           {t(
                             "codex.oauth.desc",
-                            "通过 OpenAI 官方 OAuth 授权您的 Codex 账号。",
+                            "Nhấn nút bên dưới và hoàn tất ủy quyền OpenAI trong trình duyệt",
                           )}
                         </p>
                         {/* 重新授权已有账号时，只有后端确认了实际出口或出现错误才显示代理区，
@@ -563,7 +563,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <span>
                               {t(
                                 "common.shared.oauth.browserAuth",
-                                "浏览器授权",
+                                "Xác thực trên trình duyệt",
                               )}
                             </span>
                           </button>
@@ -586,7 +586,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <Terminal size={15} />
                             )}
                             <span>
-                              {t("common.shared.oauth.deviceAuth", "设备授权")}
+                              {t("common.shared.oauth.deviceAuth", "Xác thực thiết bị")}
                             </span>
                           </button>
                         </div>
@@ -596,7 +596,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <span>
                               {t(
                                 "common.shared.oauth.deviceAuthPrerequisite",
-                                "如果提示未启用设备代码授权，请先在 ChatGPT 安全设置中为 Codex 开启设备代码授权。",
+                                "Nếu xác thực bằng mã thiết bị chưa được bật, hãy bật tính năng này cho Codex trong cài đặt Bảo mật ChatGPT trước.",
                               )}
                             </span>
                             <button
@@ -607,7 +607,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             >
                               {t(
                                 "common.shared.oauth.openSecuritySettings",
-                                "打开设置",
+                                "Mở cài đặt",
                               )}
                             </button>
                           </div>
@@ -625,24 +625,24 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 <strong>
                                   {t(
                                     "common.shared.oauth.deviceAuth",
-                                    "设备授权",
+                                    "Xác thực thiết bị",
                                   )}
                                 </strong>
                                 <span>
                                   {t(
                                     "common.shared.oauth.deviceAuthWaiting",
-                                    "请完成以下步骤，完成后会自动继续",
+                                    "Hoàn tất các bước bên dưới, ứng dụng sẽ tự động tiếp tục",
                                   )}
                                 </span>
                               </div>
                               <span className="codex-device-auth-status">
-                                {t("common.shared.oauth.waiting", "等待授权")}
+                                {t("common.shared.oauth.waiting", "Đang chờ ủy quyền...")}
                               </span>
                             </div>
                             <label>
                               {t(
                                 "common.shared.oauth.deviceCode",
-                                "设备验证码",
+                                "Mã thiết bị",
                               )}
                             </label>
                             <div className="oauth-url-box">
@@ -656,13 +656,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 onClick={() => void handleCopyDeviceCode()}
                                 title={
                                   deviceCodeCopied
-                                    ? t("common.copied", "已复制")
-                                    : t("common.copy", "复制")
+                                    ? t("common.copied", "Đã sao chép")
+                                    : t("common.copy", "Copy​")
                                 }
                                 aria-label={
                                   deviceCodeCopied
-                                    ? t("common.copied", "已复制")
-                                    : t("common.copy", "复制")
+                                    ? t("common.copied", "Đã sao chép")
+                                    : t("common.copy", "Copy​")
                                 }
                               >
                                 {deviceCodeCopied ? (
@@ -680,13 +680,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <ExternalLink size={16} />
                               {t(
                                 "common.shared.oauth.openBrowser",
-                                "打开授权页面",
+                                "Mở trong trình duyệt",
                               )}
                             </button>
                             <p className="codex-device-auth-footnote">
                               {t(
                                 "common.shared.oauth.deviceAuthFootnote",
-                                "设备授权不占用本地 1455 回调端口。",
+                                "Xác thực thiết bị không dùng cổng callback cục bộ 1455.",
                               )}
                             </p>
                           </div>
@@ -716,7 +716,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 >
                                   {t(
                                     "codex.oauth.timeoutRetry",
-                                    "刷新授权链接",
+                                    "Làm mới link xác thực",
                                   )}
                                 </button>
                               )}
@@ -725,7 +725,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <div className="oauth-url-section">
                               {!oauthProxyEnabled && <div className="oauth-link">
                                 <label>
-                                  {t("accounts.oauth.linkLabel", "授权链接")}
+                                  {t("accounts.oauth.linkLabel", "Liên kết xác thực")}
                                 </label>
                                 <div className="oauth-url-box">
                                   <input
@@ -758,7 +758,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 {isOauthTimeoutState
                                   ? t(
                                       "codex.oauth.timeoutRetry",
-                                      "刷新授权链接",
+                                      "Làm mới link xác thực",
                                     )
                                   : oauthProxyEnabled
                                     ? t("codex.oauthProxy.openWindow")
@@ -778,7 +778,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   <ShieldCheck size={16} />
                                   {t(
                                     "common.shared.oauth.incognitoWindow",
-                                    "无痕窗口",
+                                    "Cửa sổ riêng tư",
                                   )}
                                 </button>
                               )}
@@ -786,7 +786,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 <label>
                                   {t(
                                     "common.shared.oauth.manualCallbackLabel",
-                                    "手动输入回调地址",
+                                    "Nhập URL callback thủ công",
                                   )}
                                 </label>
                                 <div className="oauth-url-box oauth-manual-input">
@@ -798,7 +798,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                     }
                                     placeholder={t(
                                       "common.shared.oauth.manualCallbackPlaceholder",
-                                      "粘贴完整回调地址，例如：http://localhost:1455/auth/callback?code=...&state=...",
+                                      "Dán đầy đủ URL callback, ví dụ: http://localhost:1455/auth/callback?code=...&state=...",
                                     )}
                                   />
                                   <button
@@ -822,7 +822,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                     <span className="oauth-copy-button-label">
                                       {t(
                                         "accounts.oauth.continue",
-                                        "我已授权，继续",
+                                        "Tôi đã xác thực, tiếp tục",
                                       )}
                                     </span>
                                   </button>
@@ -840,7 +840,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   <span>
                                     {t(
                                       "codex.oauth.timeout",
-                                      '授权超时，请点击"刷新授权链接"后重试。',
+                                      "Xác thực đã hết thời gian. Vui lòng nhấn",
                                     )}
                                   </span>
                                 </div>
@@ -849,7 +849,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 <Info size={14} />
                                 {t(
                                   "common.shared.oauth.hint",
-                                  "授权完成后，此窗口会自动更新",
+                                  "Sau khi ủy quyền, cửa sổ này sẽ tự cập nhật",
                                 )}
                               </div>
                             </div>
@@ -862,7 +862,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <span>
                                 {t(
                                   "codex.oauth.preparing",
-                                  "正在准备授权链接...",
+                                  "Đang chuẩn bị liên kết ủy quyền...",
                                 )}
                               </span>
                             </div>
@@ -875,18 +875,18 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           <label>
                             {t(
                               "codex.modelProviders.selectSavedProvider",
-                              "已保存供应商",
+                              "Nhà cung cấp đã lưu",
                             )}
                           </label>
                           {managedProvidersLoading ? (
                             <div className="section-desc">
-                              {t("common.loading", "加载中...")}
+                              {t("common.loading", "Đang tải...")}
                             </div>
                           ) : managedProviders.length === 0 ? (
                             <div className="section-desc">
                               {t(
                                 "codex.modelProviders.noSavedProviders",
-                                "暂无已保存供应商，可直接填写后自动保存。",
+                                "Chưa có nhà cung cấp nào được lưu. Bạn có thể điền trực tiếp các trường và hệ thống sẽ tự động lưu.",
                               )}
                             </div>
                           ) : (
@@ -912,7 +912,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <label>
                                 {t(
                                   "codex.modelProviders.selectSavedApiKey",
-                                  "已保存 API Key",
+                                  "API Key đã lưu",
                                 )}
                               </label>
                               <SingleSelectDropdown
@@ -923,7 +923,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                     value: "",
                                     label: t(
                                       "codex.modelProviders.manualApiKeyOption",
-                                      "手动输入新 Key",
+                                      "Nhập khóa mới theo cách thủ công",
                                     ),
                                   },
                                   ...selectedManagedProvider.apiKeys.map(
@@ -934,7 +934,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                           item,
                                           t(
                                             "codex.modelProviders.unnamedKey",
-                                            "未命名 Key",
+                                            "Key chưa có tên",
                                           ),
                                         ),
                                     }),
@@ -943,18 +943,18 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 onChange={handleSelectManagedProviderApiKey}
                                 placeholder={t(
                                   "codex.modelProviders.selectSavedApiKeyPlaceholder",
-                                  "选择 API Key",
+                                  "Chọn khóa API",
                                 )}
                                 ariaLabel={t(
                                   "codex.modelProviders.selectSavedApiKey",
-                                  "已保存 API Key",
+                                  "API Key đã lưu",
                                 )}
                               />
                               {selectedManagedProvider.apiKeys.length > 1 && (
                                 <p className="api-provider-hint">
                                   {t(
                                     "codex.modelProviders.selectSavedApiKeyHint",
-                                    "该供应商有多个 API Key，可在此切换选择。",
+                                    "Nhà cung cấp này có nhiều khóa API. Chọn một khóa tại đây.",
                                   )}
                                 </p>
                               )}
@@ -962,7 +962,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           )}
                         <div className="oauth-link">
                           <label>
-                            {t("codex.api.provider.label", "供应商")}
+                            {t("codex.api.provider.label", "Nhà cung cấp")}
                           </label>
                           <div className="api-provider-chip-list">
                             <button
@@ -975,7 +975,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               type="button"
                             >
                               <span>
-                                {t("codex.api.provider.custom", "自定义")}
+                                {t("codex.api.provider.custom", "Tùy chỉnh")}
                               </span>
                             </button>
                             {sponsorApiProviderTemplates.map((template) => (
@@ -1024,7 +1024,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <p className="api-provider-hint">
                               {t(
                                 "codex.modelProviders.sponsorHint",
-                                "已按专属中转站配置自动填写兼容服务地址。输入 API Key 后，卡片会自动查询余额和用量。",
+                                "URL dịch vụ trạm chuyển riêng đã được điền. Sau khi nhập API Key, thẻ sẽ tự động truy vấn số dư và mức dùng.",
                               )}
                             </p>
                             <div className="api-provider-links">
@@ -1038,7 +1038,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   }
                                 >
                                   <ExternalLink size={14} />
-                                  {t("codex.api.provider.website", "官网")}
+                                  {t("codex.api.provider.website", "Trang web")}
                                 </button>
                               )}
                               {selectedSponsorApiProviderTemplate.apiKeyUrl && (
@@ -1053,7 +1053,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   <KeyRound size={14} />
                                   {t(
                                     "codex.api.provider.apiKeyPage",
-                                    "API Key 页面",
+                                    "Trang API Key",
                                   )}
                                 </button>
                               )}
@@ -1064,7 +1064,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           selectedApiProviderPreset.baseUrls.length > 1 && (
                             <div className="oauth-link">
                               <label>
-                                {t("codex.api.provider.endpoint", "供应商端点")}
+                                {t("codex.api.provider.endpoint", "Điểm cuối nhà cung cấp")}
                               </label>
                               <div className="api-provider-endpoint-list">
                                 {selectedApiProviderPreset.baseUrls.map(
@@ -1089,7 +1089,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <p className="api-provider-hint">
                               {t(
                                 "codex.api.provider.hint",
-                                "已自动填写兼容 Base URL，可继续手动调整。",
+                                "Base URL tương thích đã được điền tự động. Bạn vẫn có thể chỉnh sửa thủ công.",
                               )}
                             </p>
                             <div className="api-provider-links">
@@ -1103,7 +1103,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   }
                                 >
                                   <ExternalLink size={14} />
-                                  {t("codex.api.provider.website", "官网")}
+                                  {t("codex.api.provider.website", "Trang web")}
                                 </button>
                               )}
                               {selectedApiProviderPreset.apiKeyUrl && (
@@ -1120,11 +1120,11 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   COCKPIT_API_PROVIDER_ID
                                     ? t(
                                         "codex.api.provider.getApiKey",
-                                        "获取秘钥",
+                                        "Lấy khóa",
                                       )
                                     : t(
                                         "codex.api.provider.apiKeyPage",
-                                        "API Key 页面",
+                                        "Trang API Key",
                                       )}
                                 </button>
                               )}
@@ -1151,13 +1151,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               }
                               title={
                                 apiKeyInputVisible
-                                  ? t("codex.api.hideApiKey", "隐藏 API Key")
-                                  : t("codex.api.showApiKey", "显示 API Key")
+                                  ? t("codex.api.hideApiKey", "Ẩn API Key")
+                                  : t("codex.api.showApiKey", "Hiện API Key")
                               }
                               aria-label={
                                 apiKeyInputVisible
-                                  ? t("codex.api.hideApiKey", "隐藏 API Key")
-                                  : t("codex.api.showApiKey", "显示 API Key")
+                                  ? t("codex.api.hideApiKey", "Ẩn API Key")
+                                  : t("codex.api.showApiKey", "Hiện API Key")
                               }
                             >
                               {apiKeyInputVisible ? (
@@ -1179,7 +1179,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               }
                               placeholder={t(
                                 "codex.api.baseUrlPlaceholder",
-                                "不填写则是官方默认",
+                                "Để trống để dùng giá trị mặc định chính thức",
                               )}
                             />
                           </div>
@@ -1189,7 +1189,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <label>
                               {t(
                                 "codex.modelProviders.newProviderName",
-                                "供应商名称（自动保存时使用，可选）",
+                                "Tên nhà cung cấp (tùy chọn, dùng cho tự động lưu)",
                               )}
                             </label>
                             <div className="oauth-url-box oauth-manual-input">
@@ -1201,7 +1201,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 }
                                 placeholder={t(
                                   "codex.modelProviders.newProviderNamePlaceholder",
-                                  "不填则按域名自动生成",
+                                  "Nếu để trống, tên máy chủ sẽ được dùng tự động",
                                 )}
                               />
                             </div>
@@ -1214,12 +1214,12 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 <label htmlFor="codex-api-model-catalog-add">
                                   {t(
                                     "codex.api.modelCatalog.label",
-                                    "模型列表",
+                                    "Danh sách mô hình",
                                   )}
                                 </label>
                                 <span className="api-model-catalog-count">
                                   {t("codex.api.modelCatalog.count", {
-                                    defaultValue: "{{count}} 个模型",
+                                    defaultValue: "{{count}} mô hình",
                                     count: apiModelCatalogDraft.length,
                                   })}
                                 </span>
@@ -1235,7 +1235,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 }}
                                 placeholder={t(
                                   "codex.api.modelCatalog.placeholder",
-                                  "每行填写一个模型 ID，也可以使用逗号分隔。",
+                                  "Nhập một ID mô hình trên mỗi dòng hoặc phân tách các ID bằng dấu phẩy.",
                                 )}
                                 disabled={addStatus === "loading"}
                                 aria-describedby="codex-api-model-catalog-add-hint"
@@ -1247,7 +1247,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                 >
                                   {t(
                                     "codex.api.modelCatalog.editHint",
-                                    "上游结果仅填入当前草稿，可在保存前删除、补充或调整模型。",
+                                    "Các mô hình đã lấy chỉ được thêm vào bản nháp này. Hãy xem lại và chỉnh sửa trước khi lưu.",
                                   )}
                                 </p>
                                 <button
@@ -1273,11 +1273,11 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   {apiModelCatalogFetching
                                     ? t(
                                         "codex.api.modelCatalog.fetching",
-                                        "获取中...",
+                                        "Đang lấy...",
                                       )
                                     : t(
                                         "codex.api.modelCatalog.fetch",
-                                        "从上游获取",
+                                        "Lấy từ nhà cung cấp",
                                       )}
                                 </button>
                               </div>
@@ -1294,13 +1294,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                                   <strong>
                                     {t(
                                       "codex.api.modelCatalog.syncToggle",
-                                      "同步供应商模型到 Codex",
+                                      "Đồng bộ mô hình nhà cung cấp với Codex",
                                     )}
                                   </strong>
                                   <small>
                                     {t(
                                       "codex.api.modelCatalog.syncDescription",
-                                      "保存后使用当前模型列表生成 Cockpit 受管的 Codex 模型目录，不覆盖用户自定义目录。",
+                                      "Sau khi lưu, danh sách này được dùng để tạo danh mục mô hình Codex do Cockpit quản lý. Danh mục tùy chỉnh không bị ghi đè.",
                                     )}
                                   </small>
                                 </span>
@@ -1327,28 +1327,28 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <p className="section-desc">
                           {t(
                             "codex.token.desc",
-                            "粘贴 auth.json、账号 JSON、Sub2API JSON、accessToken、个人访问令牌 at-… 或 refresh_token。",
+                            "Dán auth.json, JSON tài khoản hoặc refresh_token.",
                           )}
                         </p>
                         <details className="token-format-collapse">
                           <summary className="token-format-collapse-summary">
                             {t(
                               "codex.token.formatSummary",
-                              "必填字段与示例（点击展开）",
+                              "Trường bắt buộc và ví dụ",
                             )}
                           </summary>
                           <div className="token-format">
                             <p className="token-format-required">
                               {t(
                                 "codex.token.formatRequired",
-                                "支持 session JSON、完整 tokens（id_token + access_token）、Sub2API 导出 JSON、仅 accessToken、个人访问令牌 at-… / personal_access_token，或仅 refresh_token。仅 refresh_token 会先联网换取完整凭据；无 refresh 的 at-… 按 personal_access_token 形态落盘。",
+                                "Hỗ trợ tokens đầy đủ (id_token + access_token), một refresh_token hoặc mỗi dòng một refresh_token. Khi chỉ có refresh_token, hệ thống sẽ đổi trực tuyến sang thông tin xác thực đầy đủ trước.",
                               )}
                             </p>
                             <div className="token-format-group">
                               <div className="token-format-label">
                                 {t(
                                   "codex.token.formatSingleLabel",
-                                  "完整 tokens 示例",
+                                  "Tokens đầy đủ",
                                 )}
                               </div>
                               <pre className="token-format-code">
@@ -1359,7 +1359,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <div className="token-format-label">
                                 {t(
                                   "codex.token.formatRefreshOnlyLabel",
-                                  "session / accessToken / at- / refresh_token 示例",
+                                  "Chỉ refresh_token",
                                 )}
                               </div>
                               <pre className="token-format-code">
@@ -1368,7 +1368,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             </div>
                             <div className="token-format-group">
                               <div className="token-format-label">
-                                {t("codex.token.formatBatchLabel", "批量示例")}
+                                {t("codex.token.formatBatchLabel", "Ví dụ hàng loạt")}
                               </div>
                               <pre className="token-format-code">
                                 {CODEX_TOKEN_BATCH_EXAMPLE}
@@ -1383,7 +1383,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           disabled={importing}
                           placeholder={t(
                             "codex.token.placeholder",
-                            '示例：session JSON、accessToken、at-… 个人访问令牌、Sub2API JSON，或 {"personal_access_token":"at-..."}',
+                            "Ví dụ: mỗi dòng một refresh_token hoặc {\"refresh_token\":\"rt_...\"}",
                           )}
                         />
                         <label className="codex-import-api-service-toggle">
@@ -1391,13 +1391,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <strong>
                               {t(
                                 "codex.importApiService.toggle",
-                                "同步加入 API 服务",
+                                "Thêm vào dịch vụ API",
                               )}
                             </strong>
                             <small>
                               {t(
                                 "codex.importApiService.description",
-                                "导入成功后，将符合条件的账号加入 API 服务账号池。",
+                                "Thêm các tài khoản đã nhập đủ điều kiện vào nhóm tài khoản dịch vụ API.",
                               )}
                             </small>
                           </span>
@@ -1434,7 +1434,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         <p className="section-desc">
                           {t(
                             "codex.import.localDesc",
-                            "从本地已登录的会话中导入 Codex 账号。",
+                            "Nhập tài khoản Codex từ các phiên đăng nhập cục bộ.",
                           )}
                         </p>
                         <button
@@ -1458,13 +1458,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                             <strong>
                               {t(
                                 "codex.importApiService.toggle",
-                                "同步加入 API 服务",
+                                "Thêm vào dịch vụ API",
                               )}
                             </strong>
                             <small>
                               {t(
                                 "codex.importApiService.description",
-                                "导入成功后，将符合条件的账号加入 API 服务账号池。",
+                                "Thêm các tài khoản đã nhập đủ điều kiện vào nhóm tài khoản dịch vụ API.",
                               )}
                             </small>
                           </span>
@@ -1537,7 +1537,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                       disabled={importing || addStatus === "loading" || apiModelCatalogFetching || !apiKeyInput.trim()}
                     >
                       {addStatus === "loading" ? <RefreshCw size={16} className="loading-spinner" /> : <KeyRound size={16} />}
-                      {t("common.shared.addAccount", "添加账号")}
+                      {t("common.shared.addAccount", "Thêm tài khoản")}
                     </button>
                   </div>
                 )}
@@ -1552,13 +1552,13 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                   >
                     <div className="modal-header">
                       <h2>
-                        {t("codex.import.localInstanceTitle", "选择实例")}
+                        {t("codex.import.localInstanceTitle", "Chọn phiên bản")}
                       </h2>
                       <button
                         className="modal-close"
                         onClick={handleCloseLocalImportInstancePicker}
                         disabled={localImportBusy}
-                        aria-label={t("common.close", "关闭")}
+                        aria-label={t("common.close", "Đóng")}
                       >
                         <X />
                       </button>
@@ -1568,7 +1568,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                       <p className="codex-local-import-instance-modal__hint">
                         {t(
                           "codex.import.localInstanceDesc",
-                          "检测到多个 Codex 实例，请选择要从哪个实例获取本地账号：",
+                          "Phát hiện nhiều phiên bản Codex. Hãy chọn phiên bản để lấy tài khoản cục bộ:",
                         )}
                       </p>
                       {localImportBusy ? (
@@ -1577,7 +1577,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.import.importing",
-                              "正在导入本地账号...",
+                              "Đang nhập tài khoản cục bộ...",
                             )}
                           </span>
                         </div>
@@ -1595,9 +1595,9 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                           >
                             <span className="codex-local-import-instance-modal__option-name">
                               {instance.isDefault
-                                ? t("instances.defaultName", "默认实例")
+                                ? t("instances.defaultName", "Phiên bản mặc định")
                                 : instance.name ||
-                                  t("instances.defaultName", "默认实例")}
+                                  t("instances.defaultName", "Phiên bản mặc định")}
                             </span>
                             <span className="codex-local-import-instance-modal__option-dir">
                               {instance.userDataDir}
@@ -1606,7 +1606,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                               <span className="codex-local-import-instance-modal__option-badge">
                                 {t(
                                   "codex.sessionManager.locationPicker.running",
-                                  "运行中",
+                                  "Đang chạy",
                                 )}
                               </span>
                             ) : null}
@@ -1621,7 +1621,7 @@ export function CodexAddAccountDialog(props: CodexAccountsViewProps) {
                         onClick={handleCloseLocalImportInstancePicker}
                         disabled={localImportBusy}
                       >
-                        {t("common.cancel", "取消")}
+                        {t("common.cancel", "Hủy")}
                       </button>
                     </div>
                   </div>

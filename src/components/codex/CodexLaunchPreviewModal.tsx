@@ -713,7 +713,7 @@ export function CodexLaunchPreviewModal({
         setError(
           t(
             "instances.form.modelRouting.oauthRequired",
-            "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+            "Định tuyến mô hình kết hợp cần liên kết tài khoản đăng ký OAuth đăng nhập trực tiếp.",
           ),
         );
         return false;
@@ -722,7 +722,7 @@ export function CodexLaunchPreviewModal({
         setError(
           t(
             "instances.form.modelRouting.routeRequired",
-            "请至少添加一个 API 模型路由。",
+            "Hãy thêm ít nhất một tuyến mô hình API.",
           ),
         );
         return false;
@@ -739,7 +739,7 @@ export function CodexLaunchPreviewModal({
           setError(
             t(
               "instances.form.modelRouting.invalidNamespace",
-              "命名空间需为 2-32 位小写字母、数字、下划线或连字符，且不能使用保留名称。",
+              "Namespace phải dài 2–32 ký tự, chỉ gồm chữ thường, chữ số, gạch dưới hoặc gạch ngang và không dùng tên dành riêng.",
             ),
           );
           return false;
@@ -752,7 +752,7 @@ export function CodexLaunchPreviewModal({
           setError(
             t(
               "instances.form.modelRouting.providerRequired",
-              "每个模型路由都必须选择一个 API 账号。",
+              "Mỗi tuyến mô hình phải chọn một tài khoản API.",
             ),
           );
           return false;
@@ -829,11 +829,11 @@ export function CodexLaunchPreviewModal({
       applyLoadedConfig(saved);
       setRoutingRoutes(normalizedRoutingRoutes);
       setNotice(routingDirty
-        ? t("instances.form.modelRouting.savedForNextLaunch", "已保存，下次通过 Cockpit 启动 Codex 时生效；当前会话保持不变。")
+        ? t("instances.form.modelRouting.savedForNextLaunch", "Đã lưu. Thay đổi sẽ có hiệu lực vào lần tới khi bạn khởi động Codex qua Cockpit; phiên hiện tại vẫn giữ nguyên.")
         :
         t(
           "codex.modelProviders.quickConfig.saveSuccess",
-          "当前 Codex 配置已保存",
+          "Đã lưu cấu hình Codex hiện tại.",
         ),
       );
       return true;
@@ -846,7 +846,7 @@ export function CodexLaunchPreviewModal({
       setError(
         getCodexExperimentalModelErrorMessage(t, saveError) ??
           t("instances.form.codexQuickConfig.saveFailed", {
-            defaultValue: "保存 Codex 配置失败：{{error}}",
+            defaultValue: "Không thể lưu cấu hình Codex: {{error}}",
             error: String(saveError).replace(/^Error:\s*/, ""),
           }),
       );
@@ -941,7 +941,7 @@ export function CodexLaunchPreviewModal({
   const defaultModelLabel =
     defaultModel?.display_name ||
     defaultModel?.model_id ||
-    t("codex.experimentalModelCatalog.models.followOfficial", "跟随官方");
+    t("codex.experimentalModelCatalog.models.followOfficial", "Theo chính thức");
 
   const isApiKeySubject = Boolean(account && isCodexApiKeyAccount(account));
   // DeepSeek 走自己的模型目录与 API Key 鉴权：不显示 Token 刷新与官方模型管理。
@@ -1003,11 +1003,11 @@ export function CodexLaunchPreviewModal({
       const modelCount = account.api_model_catalog?.length ?? 0;
       return [
         {
-          label: t("codex.api.provider.label", "供应商"),
+          label: t("codex.api.provider.label", "Nhà cung cấp"),
           value:
             account.api_provider_name?.trim() ||
             account.api_provider_id?.trim() ||
-            t("codex.api.provider.custom", "自定义"),
+            t("codex.api.provider.custom", "Tùy chỉnh"),
         },
         {
           label: t("codex.api.baseUrl", "Base URL"),
@@ -1016,43 +1016,43 @@ export function CodexLaunchPreviewModal({
           wide: true,
         },
         {
-          label: t("codex.api.modelCatalog.label", "模型列表"),
+          label: t("codex.api.modelCatalog.label", "Danh sách mô hình"),
           value:
             modelCount > 0
               ? t("codex.api.modelCatalog.count", {
                   count: modelCount,
-                  defaultValue: "{{count}} 个模型",
+                  defaultValue: "{{count}} mô hình",
                 })
-              : t("common.none", "暂无"),
+              : t("common.none", "None​"),
         },
       ];
     }
     return [
       {
-        label: t("kiro.account.userId", "用户 ID"),
+        label: t("kiro.account.userId", "ID người dùng"),
         value:
           accountAuthMetadata?.userId?.trim() ||
           account.user_id?.trim() ||
-          t("common.none", "暂无"),
+          t("common.none", "None​"),
         monospace: true,
       },
       {
-        label: t("codex.apiSwitchNotice.type.account", "账号"),
+        label: t("codex.apiSwitchNotice.type.account", "Tài khoản"),
         value:
           accountAuthMetadata?.chatgptAccountId?.trim() ||
           account.account_id?.trim() ||
-          t("common.none", "暂无"),
+          t("common.none", "None​"),
         monospace: true,
       },
       {
-        label: t("codex.subscription.label", "有效期"),
+        label: t("codex.subscription.label", "Hết hạn gói"),
         value: accountSubscription
           ? `${accountSubscription.valueText}${
               accountSubscription.detailText
                 ? ` · ${accountSubscription.detailText}`
                 : ""
             }`
-          : t("common.none", "暂无"),
+          : t("common.none", "None​"),
       },
     ];
   }, [account, accountAuthMetadata, accountSubscription, isApiKeySubject, t]);
@@ -1157,9 +1157,9 @@ export function CodexLaunchPreviewModal({
       const confirmed = await confirmDialog(
         t("codex.modelManagement.enableConfirmDescription"),
         {
-          title: t("codex.modelManagement.enableConfirmTitle", "开启模型管理？"),
-          okLabel: t("codex.modelManagement.enableConfirmAction", "开启并配置"),
-          cancelLabel: t("common.cancel", "取消"),
+          title: t("codex.modelManagement.enableConfirmTitle", "Bật quản lý mô hình?"),
+          okLabel: t("codex.modelManagement.enableConfirmAction", "Bật và cấu hình"),
+          cancelLabel: t("common.cancel", "Hủy"),
           kind: "warning",
         },
       );
@@ -1340,7 +1340,7 @@ export function CodexLaunchPreviewModal({
       setContextConfigSnapshot(null);
       setContextConfigOpen(false);
       setNotice(
-        t("codex.modelProviders.quickConfig.saveSuccess", "当前 Codex 配置已保存"),
+        t("codex.modelProviders.quickConfig.saveSuccess", "Đã lưu cấu hình Codex hiện tại."),
       );
     } catch (saveError) {
       if (session !== configSession.current) return;
@@ -1463,7 +1463,7 @@ export function CodexLaunchPreviewModal({
           disabled={busy || action.disabled || !action.onAction}
         >
           {runningActionId === action.id
-            ? t("common.loading", "加载中...")
+            ? t("common.loading", "Đang tải...")
             : action.label}
         </button>
       )}
@@ -1472,10 +1472,10 @@ export function CodexLaunchPreviewModal({
 
   const deepSeekAccessModeLabel =
     deepSeekAccessMode === DEEPSEEK_ACCESS_MODE_DIRECT
-      ? t("codex.deepSeek.start.directMode", "直连官方")
+      ? t("codex.deepSeek.start.directMode", "API chính thức")
       : deepSeekAccessMode === DEEPSEEK_ACCESS_MODE_CDP
-        ? t("codex.deepSeek.start.cdpMode", "CDP 注入")
-        : t("codex.deepSeek.start.gatewayMode", "网关列出");
+        ? t("codex.deepSeek.start.cdpMode", "Tiêm CDP")
+        : t("codex.deepSeek.start.gatewayMode", "Danh sách cổng");
 
   const deepSeekAccessModeOptions: {
     id: DeepSeekAccessMode;
@@ -1485,38 +1485,38 @@ export function CodexLaunchPreviewModal({
   }[] = ([
     {
       id: DEEPSEEK_ACCESS_MODE_GATEWAY,
-      label: t("codex.deepSeek.start.gatewayMode", "网关列出"),
+      label: t("codex.deepSeek.start.gatewayMode", "Danh sách cổng"),
       pros: t(
         "codex.launchPreview.accessModeGatewayPros",
-        "优点：支持在 Codex 内切换模型，可绑定 OAuth 的 GPT 账号并转发生图。",
+        "1: Đổi model ngay trong Codex\n2: Liên kết tài khoản OAuth và dùng các tính năng OAuth như nén từ xa, điều khiển trình duyệt\n3: Cấu hình tài khoản GPT để chuyển tiếp tạo ảnh",
       ),
       cons: t(
         "codex.launchPreview.accessModeGatewayCons",
-        "缺点：需要实例本地网关，速度略低于直连。",
+        "1: Cần cổng nội bộ của instance, chậm hơn một chút so với kết nối trực tiếp",
       ),
     },
     {
       id: DEEPSEEK_ACCESS_MODE_CDP,
-      label: t("codex.deepSeek.start.cdpMode", "CDP 注入"),
+      label: t("codex.deepSeek.start.cdpMode", "Tiêm CDP"),
       pros: t(
         "codex.launchPreview.accessModeCdpPros",
-        "优点：速度与直连一致，可在官方模型列表切换 Flash / Pro。",
+        "1: Tốc độ như kết nối trực tiếp\n2: Đổi Flash / Pro trong danh sách model chính thức của Codex",
       ),
       cons: t(
         "codex.launchPreview.accessModeCdpCons",
-        "缺点：需要注入官方客户端，不支持绑定 OAuth 与生图转发。",
+        "1: Cần inject ứng dụng chính thức, không liên kết OAuth và không chuyển tiếp ảnh",
       ),
     },
     {
       id: DEEPSEEK_ACCESS_MODE_DIRECT,
-      label: t("codex.deepSeek.start.directMode", "直连官方"),
+      label: t("codex.deepSeek.start.directMode", "API chính thức"),
       pros: t(
         "codex.launchPreview.accessModeDirectPros",
-        "优点：不经网关，速度最快。",
+        "1: Không qua cổng, nhanh nhất",
       ),
       cons: t(
         "codex.launchPreview.accessModeDirectCons",
-        "缺点：不能在 Codex 内切换模型，也没有 OAuth 与生图转发。",
+        "1: Không đổi được model trong Codex, không liên kết OAuth và không chuyển tiếp ảnh",
       ),
     },
   ] as {
@@ -1551,7 +1551,7 @@ export function CodexLaunchPreviewModal({
               className="modal-close"
               onClick={requestClose}
               disabled={busy}
-              aria-label={t("common.close", "关闭")}
+              aria-label={t("common.close", "Đóng")}
             >
               <X />
             </button>
@@ -1628,7 +1628,7 @@ export function CodexLaunchPreviewModal({
                     <span>
                       {t(
                         "codex.sessionManager.repairModal.targetInstance",
-                        "目标实例",
+                        "Phiên bản đích",
                       )}
                     </span>
                     {instanceOptions?.length && onInstanceChange ? (
@@ -1643,7 +1643,7 @@ export function CodexLaunchPreviewModal({
                         disabled={busy || checkingConfig || (!configReady && loadedTarget === previewTargetKey && dirty)}
                         ariaLabel={t(
                           "codex.sessionManager.repairModal.targetInstance",
-                          "目标实例",
+                          "Phiên bản đích",
                         )}
                         menuWidth={260}
                       />
@@ -1651,7 +1651,7 @@ export function CodexLaunchPreviewModal({
                       <>
                         <strong>
                           {instanceLabel ||
-                            t("instances.defaultName", "默认实例")}
+                            t("instances.defaultName", "Phiên bản mặc định")}
                         </strong>
                         <ArrowRight size={16} />
                       </>
@@ -1707,7 +1707,7 @@ export function CodexLaunchPreviewModal({
                       {summary.usage.requests && (
                         <div>
                           <span>
-                            {t("codex.localAccess.stats.requests", "总请求数")}
+                            {t("codex.localAccess.stats.requests", "Yêu cầu")}
                           </span>
                           <strong>{summary.usage.requests}</strong>
                         </div>
@@ -1715,7 +1715,7 @@ export function CodexLaunchPreviewModal({
                       {summary.usage.tokens && (
                         <div>
                           <span>
-                            {t("codex.localAccess.stats.tokens", "总 Token 数")}
+                            {t("codex.localAccess.stats.tokens", "Token")}
                           </span>
                           <strong>{summary.usage.tokens}</strong>
                         </div>
@@ -1727,7 +1727,7 @@ export function CodexLaunchPreviewModal({
                               <span>
                                 {t(
                                   "codex.localAccess.stats.estimatedCost",
-                                  "估算价值",
+                                  "Giá trị ước tính",
                                 )}
                               </span>
                               <strong>{summary.usage.cost}</strong>
@@ -1770,11 +1770,11 @@ export function CodexLaunchPreviewModal({
                     <Route size={16} />
                   </div>
                   <div className="codex-launch-preview-tool-copy">
-                    <h3>{t("codex.launchPreview.accessModeTitle", "启动方式")}</h3>
+                    <h3>{t("codex.launchPreview.accessModeTitle", "Chế độ khởi động")}</h3>
                     <p>
                       {t(
                         "codex.launchPreview.accessModeDescription",
-                        "选择该供应商的启动方式；不同方式在模型切换、OAuth 与生图转发上不同。",
+                        "Chọn cách khởi động nhà cung cấp này; các chế độ khác nhau ở chuyển mô hình, OAuth và chuyển tiếp tạo ảnh.",
                       )}
                     </p>
                     {providerAccessModeReadOnly ? (
@@ -1782,7 +1782,7 @@ export function CodexLaunchPreviewModal({
                         <span>
                           {t(
                             "codex.launchPreview.accessModeApiServiceFixed",
-                            "API 服务固定使用网关模式，不可切换。",
+                            "Dịch vụ API luôn dùng chế độ cổng; không thể thay đổi.",
                           )}
                         </span>
                       </div>
@@ -1791,7 +1791,7 @@ export function CodexLaunchPreviewModal({
                         <span>
                           {t(
                             "codex.deepSeek.start.chatOnlyHint",
-                            "Chat Completions 只能走本地网关，并在此选择启动模型。",
+                            "Chat Completions chỉ đi cổng cục bộ. Chọn mô hình khởi động tại đây.",
                           )}
                         </span>
                       </div>
@@ -1805,7 +1805,7 @@ export function CodexLaunchPreviewModal({
                   >
                     <span>
                       {providerAccessModeReadOnly
-                        ? t("codex.deepSeek.start.gatewayMode", "网关列出")
+                        ? t("codex.deepSeek.start.gatewayMode", "Danh sách cổng")
                         : deepSeekAccessModeLabel}
                     </span>
                     {!providerAccessModeReadOnly && <ChevronDown size={14} />}
@@ -1821,12 +1821,12 @@ export function CodexLaunchPreviewModal({
                   </div>
                   <div className="codex-launch-preview-tool-copy">
                     <h3>
-                      {t("codex.launchPreview.imageGenTitle", "启用 GPT 生图")}
+                      {t("codex.launchPreview.imageGenTitle", "Bật tạo ảnh GPT")}
                     </h3>
                     <p>
                       {t(
                         "codex.deepSeek.start.imageGenHint",
-                        "对话仍由该供应商的模型处理；生图走 gpt-image 原链路，由所选 GPT 账号执行并消耗其额度。",
+                        "Chỉ hỗ trợ ở chế độ cổng. Hội thoại vẫn do model của nhà cung cấp này xử lý; tạo ảnh đi theo luồng gpt-image gốc, do các tài khoản GPT đã chọn thực hiện và tiêu tốn hạn mức của chúng.",
                       )}
                     </p>
                     {providerAccessModeReadOnly && (
@@ -1834,7 +1834,7 @@ export function CodexLaunchPreviewModal({
                         <span>
                           {t(
                             "codex.launchPreview.imageGenApiServiceFixed",
-                            "API 服务的生图转发在「API 服务 → 设置」里统一管理，这里只展示当前状态。",
+                            "Việc chuyển tiếp tạo ảnh của dịch vụ API được quản lý trong “Dịch vụ API → Cài đặt”; ở đây chỉ hiển thị trạng thái hiện tại.",
                           )}
                         </span>
                       </div>
@@ -1845,11 +1845,11 @@ export function CodexLaunchPreviewModal({
                           {selectedImageGenAccounts.length > 0
                             ? t("codex.deepSeek.start.imageGenSelected", {
                                 count: selectedImageGenAccounts.length,
-                                defaultValue: "已选 {{count}} 个账号",
+                                defaultValue: "Đã chọn {{count}} tài khoản",
                               })
                             : t(
                                 "codex.deepSeek.start.imageGenEmpty",
-                                "尚未选择账号",
+                                "Chưa chọn tài khoản",
                               )}
                         </span>
                       )}
@@ -1882,7 +1882,7 @@ export function CodexLaunchPreviewModal({
                           setImageGenPickerOpen(true);
                         }}
                       />
-                      <span>{t("common.enable", "启用")}</span>
+                      <span>{t("common.enable", "Enable​")}</span>
                     </label>
                     <button
                       type="button"
@@ -1890,7 +1890,7 @@ export function CodexLaunchPreviewModal({
                       disabled={busy || providerAccessModeReadOnly || !imageGenEnabled}
                       onClick={(event) => { rememberChildTrigger(event); setImageGenPickerOpen(true); }}
                     >
-                      {t("codex.deepSeek.start.imageGenPick", "选择 GPT 账号")}
+                      {t("codex.deepSeek.start.imageGenPick", "Chọn tài khoản GPT")}
                     </button>
                   </div>
                 </section>
@@ -1952,12 +1952,12 @@ export function CodexLaunchPreviewModal({
                   </div>
                   <div className="codex-launch-preview-tool-copy">
                     <h3>
-                      {t("codex.launchPreview.imageGenTitle", "启用 GPT 生图")}
+                      {t("codex.launchPreview.imageGenTitle", "Bật tạo ảnh GPT")}
                     </h3>
                     <p>
                       {t(
                         "codex.deepSeek.start.imageGenHint",
-                        "仅网关模式支持。对话仍由该供应商的模型处理；生图走 gpt-image 原链路，由所选 GPT 账号执行并消耗其额度。",
+                        "Chỉ hỗ trợ ở chế độ cổng. Hội thoại vẫn do model của nhà cung cấp này xử lý; tạo ảnh đi theo luồng gpt-image gốc, do các tài khoản GPT đã chọn thực hiện và tiêu tốn hạn mức của chúng.",
                       )}
                     </p>
                     {imageForwardAction.meta}
@@ -1974,17 +1974,17 @@ export function CodexLaunchPreviewModal({
                     <Link2 size={16} />
                   </div>
                   <div className="codex-launch-preview-tool-copy">
-                    <h3>{t("codex.api.oauthBinding.label", "OAuth 绑定")}</h3>
+                    <h3>{t("codex.api.oauthBinding.label", "Liên kết OAuth")}</h3>
                     <p>
                       {t(
                         "codex.launchPreview.oauthBindingHint",
-                        "绑定后启动与普通账号没有任何差异，可使用 OAuth 的全部能力（远端压缩，浏览器操作，各类插件等）；对话仍由当前 API Key 供应商处理。",
+                        "Sau khi liên kết, việc khởi chạy giống hệt tài khoản thường và mọi khả năng OAuth (nén từ xa, điều khiển trình duyệt, các loại plugin, v.v.) đều khả dụng; hội thoại vẫn do nhà cung cấp API Key hiện tại xử lý.",
                       )}
                     </p>
                     <div className="codex-launch-preview-tool-meta">
                       <span>
                         {oauthBinding?.boundAccountLabel ||
-                          t("codex.api.oauthBinding.unbound", "未绑定")}
+                          t("codex.api.oauthBinding.unbound", "Chưa liên kết")}
                       </span>
                       {oauthBinding?.needsReauth && (
                         <span
@@ -1992,7 +1992,7 @@ export function CodexLaunchPreviewModal({
                           title={oauthBinding.reauthDescription || undefined}
                         >
                           <CircleAlert size={12} />
-                          {t("codex.authError.badge", "授权异常")}
+                          {t("codex.authError.badge", "Lỗi ủy quyền")}
                         </span>
                       )}
                     </div>
@@ -2005,7 +2005,7 @@ export function CodexLaunchPreviewModal({
                         onClick={onReauthorizeOAuth}
                         disabled={busy}
                       >
-                        {t("common.reauthorize", "重新授权")}
+                        {t("common.reauthorize", "Ủy quyền lại")}
                       </button>
                     )}
                     {onBindOAuth && (
@@ -2018,9 +2018,9 @@ export function CodexLaunchPreviewModal({
                         {oauthBinding?.boundAccountLabel
                           ? t(
                               "codex.launchPreview.oauthBindingChange",
-                              "更换",
+                              "Đổi",
                             )
-                          : t("codex.api.oauthBinding.action", "绑定 OAuth")}
+                          : t("codex.api.oauthBinding.action", "Liên kết OAuth")}
                       </button>
                     )}
                   </div>
@@ -2062,31 +2062,31 @@ export function CodexLaunchPreviewModal({
                 </div>
                 <div className="codex-launch-preview-tool-copy">
                   <h3>
-                    {t("codex.contextOverride.title", "上下文管理")}
+                    {t("codex.contextOverride.title", "Quản lý ngữ cảnh")}
                   </h3>
                   <p>
                     {t(
                       "codex.contextOverride.dialogDescription",
-                      "对当前 Codex 实例的所有账号生效，切号后保持不变；可选择跟随官方、预设或自定义。",
+                      "Cài đặt này áp dụng cho mọi tài khoản trong phiên bản Codex hiện tại và được giữ nguyên khi chuyển tài khoản. Chọn cấu hình chính thức, cài đặt sẵn hoặc ngữ cảnh tùy chỉnh.",
                     )}
                   </p>
                   <div className="codex-launch-preview-tool-meta">
                     <span className={contextOverrideEnabled ? "is-enabled" : ""}>
                       {loading
-                        ? t("common.loading", "加载中...")
+                        ? t("common.loading", "Đang tải...")
                         : contextOverridePreset === "preset_516k"
                           ? "516K / 464K"
                           : contextOverridePreset === "preset_1m"
                             ? "1M / 900K"
                             : contextOverridePreset === "custom"
-                              ? t("codex.contextOverride.custom", "自定义上下文")
-                              : t("codex.contextOverride.followOfficial", "跟随官方")}
+                              ? t("codex.contextOverride.custom", "Ngữ cảnh tùy chỉnh")
+                              : t("codex.contextOverride.followOfficial", "Theo chính thức")}
                     </span>
                     {contextOverridePreset === "custom" && contextWindowInput && (
                       <span>
                         {t(
                           "codex.experimentalModelCatalog.models.contextWindow",
-                          "上下文窗口",
+                          "Cửa sổ ngữ cảnh",
                         )}：{contextWindowInput}
                       </span>
                     )}
@@ -2099,8 +2099,8 @@ export function CodexLaunchPreviewModal({
                   disabled={configBusy}
                 >
                   {contextOverrideEnabled
-                    ? t("codex.contextOverride.manage", "管理上下文")
-                    : t("codex.contextOverride.adjust", "调整上下文")}
+                    ? t("codex.contextOverride.manage", "Quản lý ngữ cảnh")
+                    : t("codex.contextOverride.adjust", "Điều chỉnh ngữ cảnh")}
                 </button>
               </section>
               {!isDeepSeekSubject && (
@@ -2109,34 +2109,34 @@ export function CodexLaunchPreviewModal({
                     <SlidersHorizontal size={16} />
                   </div>
                   <div className="codex-launch-preview-tool-copy">
-                    <h3>{t("codex.modelManagement.title", "模型管理")}</h3>
+                    <h3>{t("codex.modelManagement.title", "Quản lý mô hình")}</h3>
                     <p>
                       {catalogEnabled
                         ? t("codex.modelManagement.enabledDescription")
                         : t(
                             "codex.modelManagement.disabledDescription",
-                            "默认关闭；关闭时模型列表、顺序、默认模型和推理强度均跟随官方。",
+                            "Mặc định tắt. Mô hình, thứ tự và mức suy luận tuân theo danh mục chính thức.",
                           )}
                     </p>
                     {routingEnabled && (
                       <p>
                         {t(
                           "codex.modelManagement.routingManagedHint",
-                          "混合模型路由只在实例运行时临时使用这份模型目录，停止后自动恢复；它不会改动这里的开关状态。",
+                          "Định tuyến hỗn hợp chỉ tạm dùng danh mục mô hình này khi instance đang chạy và tự khôi phục sau khi dừng. Công tắc ở đây không thay đổi.",
                         )}
                       </p>
                     )}
                     <div className="codex-launch-preview-tool-meta">
                       <span className={catalogEnabled ? "is-enabled" : ""}>
                         {loading
-                          ? t("common.loading", "加载中...")
+                          ? t("common.loading", "Đang tải...")
                           : catalogEnabled
-                            ? t("codex.modelManagement.enabled", "已开启")
-                            : t("codex.modelManagement.disabled", "跟随官方")}
+                            ? t("codex.modelManagement.enabled", "Đã bật")
+                            : t("codex.modelManagement.disabled", "Theo chính thức")}
                       </span>
                       {catalogEnabled && (
                         <span>
-                          {t("codex.launchPreview.defaultModel", "默认模型")}：
+                          {t("codex.launchPreview.defaultModel", "Mô hình mặc định")}：
                           {defaultModelLabel}
                         </span>
                       )}
@@ -2144,7 +2144,7 @@ export function CodexLaunchPreviewModal({
                         <span>
                           {t("codex.api.modelCatalog.count", {
                             count: models.length,
-                            defaultValue: "{{count}} 个模型",
+                            defaultValue: "{{count}} mô hình",
                           })}
                         </span>
                       )}
@@ -2167,8 +2167,8 @@ export function CodexLaunchPreviewModal({
                     disabled={configBusy || Boolean(unavailable)}
                   >
                     {catalogEnabled
-                      ? t("codex.modelManagement.manage", "管理模型")
-                      : t("codex.modelManagement.enable", "开启模型管理")}
+                      ? t("codex.modelManagement.manage", "Quản lý mô hình")
+                      : t("codex.modelManagement.enable", "Bật quản lý mô hình")}
                   </button>
                 </section>
               )}
@@ -2181,20 +2181,20 @@ export function CodexLaunchPreviewModal({
                   <h3>
                     {t(
                       "codex.sessionManager.actions.repairVisibility",
-                      "修复可见性",
+                      "Sửa hiển thị",
                     )}
                   </h3>
                   <p>
                     {t(
                       "codex.sessionManager.repairModal.modeQuickDesc",
-                      "只校正官方 state DB 和会话文件首条元数据，适合日常切号后恢复。",
+                      "Chuẩn hóa nhà cung cấp trong cơ sở dữ liệu chính thức và chỉ mục phiên. Giữ nguyên tệp rollout. Phù hợp khi đổi tài khoản thông thường.",
                     )}
                   </p>
                   <div className="codex-launch-preview-tool-meta">
                     <span>
                       {t(
                         "codex.sessionManager.repairModal.modeQuick",
-                        "快速修复",
+                        "Sửa nhanh",
                       )}
                     </span>
                     <span>{t("codex.launchPreview.notApplied")}</span>
@@ -2208,7 +2208,7 @@ export function CodexLaunchPreviewModal({
                 >
                   {t(
                     "codex.sessionManager.actions.repairVisibility",
-                    "修复可见性",
+                    "Sửa hiển thị",
                   )}
                 </button>
               </section>
@@ -2246,7 +2246,7 @@ export function CodexLaunchPreviewModal({
                   className="btn btn-secondary"
                   onClick={requestClose}
                 >
-                  {t("common.close", "关闭")}
+                  {t("common.close", "Đóng")}
                 </button>
               </div>
               <div className="codex-launch-preview-footer-primary">
@@ -2259,8 +2259,8 @@ export function CodexLaunchPreviewModal({
                   >
                     <Save size={15} />
                     {saving || checkingConfig
-                      ? t("common.saving", "保存中...")
-                      : t("common.save", "保存")}
+                      ? t("common.saving", "Đang lưu...")
+                      : t("common.save", "Lưu")}
                   </button>
                 )}
                 {mode === "account" && (
@@ -2271,8 +2271,8 @@ export function CodexLaunchPreviewModal({
                     disabled={configBusy || (catalogEnabled && Boolean(modelsError))}
                   >
                     {executing === "switch"
-                      ? t("common.loading", "加载中...")
-                      : t("codex.switch", "切换")}
+                      ? t("common.loading", "Đang tải...")
+                      : t("codex.switch", "Chuyển")}
                   </button>
                 )}
                 <button
@@ -2283,11 +2283,11 @@ export function CodexLaunchPreviewModal({
                 >
                   {mode !== "instance" && <Play size={15} />}
                   {executing !== null
-                    ? t("common.loading", "加载中...")
+                    ? t("common.loading", "Đang tải...")
                     : mode === "account"
                       ? t("codex.launchPreview.switchAndStart")
                       : mode === "apiService"
-                        ? t("codex.localAccess.activateAction", "启动 API 服务")
+                        ? t("codex.localAccess.activateAction", "Khởi động dịch vụ API")
                         : t("codex.launchPreview.startInstance")}
                 </button>
               </div>
@@ -2307,13 +2307,13 @@ export function CodexLaunchPreviewModal({
           >
             <div className="modal-header">
               <h2 id="codex-launch-preview-mode-title">
-                {t("codex.launchPreview.accessModeTitle", "启动方式")}
+                {t("codex.launchPreview.accessModeTitle", "Chế độ khởi động")}
               </h2>
               <button
                 type="button"
                 className="modal-close"
                 onClick={() => setDeepSeekAccessModeDialogOpen(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2322,7 +2322,7 @@ export function CodexLaunchPreviewModal({
               <p className="form-hint">
                 {t(
                   "codex.launchPreview.accessModeDescription",
-                  "选择 DeepSeek 的启动方式；不同方式在模型切换、OAuth 与生图转发上不同。",
+                  "Chọn cách khởi động nhà cung cấp này; các chế độ khác nhau ở chuyển mô hình, OAuth và chuyển tiếp tạo ảnh.",
                 )}
               </p>
               <div className="codex-launch-preview-mode-list">
@@ -2346,7 +2346,7 @@ export function CodexLaunchPreviewModal({
                     </span>
                     <span className="codex-launch-preview-mode-card-section">
                       <span className="codex-launch-preview-mode-card-label is-pros">
-                        {t("codex.launchPreview.prosLabel", "优点：")}
+                        {t("codex.launchPreview.prosLabel", "Ưu điểm:")}
                       </span>
                       <span className="codex-launch-preview-mode-card-pros">
                         {option.pros}
@@ -2354,7 +2354,7 @@ export function CodexLaunchPreviewModal({
                     </span>
                     <span className="codex-launch-preview-mode-card-section">
                       <span className="codex-launch-preview-mode-card-label is-cons">
-                        {t("codex.launchPreview.consLabel", "缺点：")}
+                        {t("codex.launchPreview.consLabel", "Nhược điểm:")}
                       </span>
                       <span className="codex-launch-preview-mode-card-cons">
                         {option.cons}
@@ -2381,14 +2381,14 @@ export function CodexLaunchPreviewModal({
               <h2 id="codex-launch-preview-imagegen-gateway-title">
                 {t(
                   "codex.launchPreview.imageGenSwitchTitle",
-                  "仅网关模式支持",
+                  "Chỉ hỗ trợ ở chế độ cổng",
                 )}
               </h2>
               <button
                 type="button"
                 className="modal-close"
                 onClick={() => setImageGenModeSwitchOpen(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2397,7 +2397,7 @@ export function CodexLaunchPreviewModal({
               <p className="form-hint">
                 {t(
                   "codex.launchPreview.imageGenSwitchDescription",
-                  "启用 GPT 生图需要先切换到「网关列出」模式，是否切换并勾选？",
+                  "Bật tạo ảnh GPT cần chuyển sang chế độ cổng. Chuyển và bật?",
                 )}
               </p>
             </div>
@@ -2407,7 +2407,7 @@ export function CodexLaunchPreviewModal({
                 className="btn btn-secondary"
                 onClick={() => setImageGenModeSwitchOpen(false)}
               >
-                {t("codex.launchPreview.imageGenSwitchNo", "否")}
+                {t("codex.launchPreview.imageGenSwitchNo", "Không")}
               </button>
               <button
                 type="button"
@@ -2419,7 +2419,7 @@ export function CodexLaunchPreviewModal({
                   setImageGenPickerOpen(true);
                 }}
               >
-                {t("codex.launchPreview.imageGenSwitchYes", "是")}
+                {t("codex.launchPreview.imageGenSwitchYes", "Có")}
               </button>
             </div>
           </div>
@@ -2480,7 +2480,7 @@ export function CodexLaunchPreviewModal({
                 className="modal-close"
                 onClick={closeManualRefreshResult}
                 disabled={forceRefreshing}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2506,7 +2506,7 @@ export function CodexLaunchPreviewModal({
                 onClick={closeManualRefreshResult}
                 disabled={forceRefreshing}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -2516,7 +2516,7 @@ export function CodexLaunchPreviewModal({
               >
                 {forceRefreshing
                   ? t("codex.launchPreview.forceRefreshRunning")
-                  : t("codex.launchPreview.forceRefreshRetry", "重新检测")}
+                  : t("codex.launchPreview.forceRefreshRetry", "Kiểm tra lại")}
               </button>
               {manualRefreshResult.status === "error" && manualRefreshResult.requiresReauth && (
                 <button
@@ -2524,7 +2524,7 @@ export function CodexLaunchPreviewModal({
                   className="btn btn-primary"
                   onClick={() => void handleManualRefreshReauthorize()}
                 >
-                  {t("common.reauthorize", "重新授权")}
+                  {t("common.reauthorize", "Ủy quyền lại")}
                 </button>
               )}
             </div>
@@ -2545,12 +2545,12 @@ export function CodexLaunchPreviewModal({
           <div ref={modelDialog} tabIndex={-1} role="dialog" aria-modal="true" aria-label={t("codex.modelManagement.title")} className="modal codex-launch-preview-model-config-modal">
             <div className="modal-header">
               <div>
-                <h2>{t("codex.modelManagement.title", "模型管理")}</h2>
+                <h2>{t("codex.modelManagement.title", "Quản lý mô hình")}</h2>
                 <p>
                   {routingEnabled && !catalogEnabled
                     ? t(
                         "codex.modelManagement.routingManagedHint",
-                        "混合模型路由只在实例运行时临时使用这份模型目录，停止后自动恢复；它不会改动这里的开关状态。",
+                        "Định tuyến hỗn hợp chỉ tạm dùng danh mục mô hình này khi instance đang chạy và tự khôi phục sau khi dừng. Công tắc ở đây không thay đổi.",
                       )
                     : t("codex.modelManagement.enabledDescription")}
                 </p>
@@ -2560,7 +2560,7 @@ export function CodexLaunchPreviewModal({
                 className="modal-close"
                 onClick={() => closeModelConfig(false)}
                 disabled={busy}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2618,7 +2618,7 @@ export function CodexLaunchPreviewModal({
                   }}
                   disabled={configBusy}
                 >
-                  {t("codex.modelManagement.disable", "关闭模型管理")}
+                  {t("codex.modelManagement.disable", "Tắt quản lý mô hình")}
                 </button>
               )}
               <button
@@ -2627,7 +2627,7 @@ export function CodexLaunchPreviewModal({
                 onClick={() => closeModelConfig(false)}
                 disabled={busy}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -2647,7 +2647,7 @@ export function CodexLaunchPreviewModal({
           <div ref={contextDialog} tabIndex={-1} role="dialog" aria-modal="true" aria-label={t("codex.contextOverride.title")} className="modal codex-launch-preview-model-config-modal codex-launch-preview-context-config-modal">
             <div className="modal-header">
               <div>
-                <h2>{t("codex.contextOverride.title", "上下文管理")}</h2>
+                <h2>{t("codex.contextOverride.title", "Quản lý ngữ cảnh")}</h2>
                 <p>{t("codex.contextOverride.dialogDescription")}</p>
               </div>
               <button
@@ -2655,7 +2655,7 @@ export function CodexLaunchPreviewModal({
                 className="modal-close"
                 onClick={() => closeContextConfig(false)}
                 disabled={busy || contextConfigSaving}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2685,7 +2685,7 @@ export function CodexLaunchPreviewModal({
                 onClick={() => closeContextConfig(false)}
                 disabled={busy || contextConfigSaving}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -2694,8 +2694,8 @@ export function CodexLaunchPreviewModal({
                 disabled={configBusy || contextConfigSaving}
               >
                 {contextConfigSaving
-                  ? t("common.saving", "保存中...")
-                  : t("codex.contextOverride.apply", "应用上下文")}
+                  ? t("common.saving", "Đang lưu...")
+                  : t("codex.contextOverride.apply", "Áp dụng ngữ cảnh")}
               </button>
             </div>
           </div>

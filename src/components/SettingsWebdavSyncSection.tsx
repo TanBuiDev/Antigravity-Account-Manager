@@ -47,7 +47,7 @@ function normalizeError(error: unknown): string {
   const msg = String(error).replace(/^Error:\s*/, '');
   // 针对坚果云等 WebDAV 服务的祖先目录不存在报错进行友好提示
   if (msg.includes('AncestorsNotFound') || msg.includes('The ancestors of this location does not found')) {
-    return `${msg}\n\n提示：检测到祖先目录不存在。如果您使用坚果云 WebDAV，坚果云限制了不能在根目录下直接创建文件夹，请确认您的“远端目录”是否填写正确。例如应填写为已存在的同步文件夹路径，如“我的坚果云/cockpit-tools”；或者先在坚果云网页端创建一个名为“cockpit-tools”的同步文件夹，然后在这里将远端目录填为“cockpit-tools”。`;
+    return `${msg}\n\nLưu ý: Không tìm thấy thư mục cha. Một số dịch vụ WebDAV không cho phép tạo thư mục trực tiếp tại thư mục gốc. Hãy kiểm tra lại đường dẫn thư mục từ xa.例如应填写为已存在的同步文件夹路径，如“我的坚果云/cockpit-tools”；或者先在坚果云网页端创建一个名为“cockpit-tools”的同步文件夹，然后在这里将远端目录填为“cockpit-tools”。`;
   }
   return msg;
 }
@@ -73,23 +73,23 @@ function buildImportFeedback(
   if (result.imported_account_count > 0) {
     parts.push(t('settings.transfer.feedback.accountsImported', {
       count: result.imported_account_count,
-      defaultValue: '已导入 {{count}} 个账号',
+      defaultValue: "Đã nhập {{count}} tài khoản",
     }));
   }
   if (result.config_result?.applied) {
     parts.push(t('settings.transfer.feedback.configImported', {
-      defaultValue: '配置数据已恢复',
+      defaultValue: "Đã khôi phục dữ liệu cấu hình",
     }));
   }
   if (result.config_result?.needs_restart) {
     parts.push(t('settings.transfer.feedback.restartRequired', {
-      defaultValue: '部分变更需重启应用后生效',
+      defaultValue: "Đã khôi phục cài đặt dịch vụ mạng. Một số thay đổi sẽ có hiệu lực sau khi khởi động lại",
     }));
   }
   return parts.length > 0
     ? parts.join(' · ')
     : t('settings.webdav.feedback.restoreEmpty', {
-        defaultValue: '远端备份未恢复任何数据',
+        defaultValue: "Không có dữ liệu nào được khôi phục từ bản sao lưu từ xa",
       });
 }
 
@@ -174,7 +174,7 @@ export function SettingsWebdavSyncSection() {
         tone: 'error',
         text: t('settings.webdav.feedback.listFailed', {
           error: normalizeError(error),
-          defaultValue: '加载远端备份失败：{{error}}',
+          defaultValue: "Tải bản sao lưu từ xa thất bại: {{error}}",
         }),
       });
     } finally {
@@ -195,7 +195,7 @@ export function SettingsWebdavSyncSection() {
         tone: 'error',
         text: t('settings.webdav.feedback.loadSettingsFailed', {
           error: normalizeError(error),
-          defaultValue: '加载 WebDAV 设置失败：{{error}}',
+          defaultValue: "Tải cài đặt WebDAV thất bại: {{error}}",
         }),
       });
     } finally {
@@ -240,7 +240,7 @@ export function SettingsWebdavSyncSection() {
     setFeedback({
       tone: 'loading',
       text: t('settings.webdav.feedback.testingAndSaving', {
-        defaultValue: '正在保存并测试 WebDAV 连接...',
+        defaultValue: "Đang lưu và kiểm tra kết nối WebDAV...",
       }),
     });
     try {
@@ -256,7 +256,7 @@ export function SettingsWebdavSyncSection() {
         setFeedback({
           tone: 'success',
           text: t('settings.webdav.feedback.saveAndTestSuccess', {
-            defaultValue: '配置已保存，连接测试成功！',
+            defaultValue: "Đã lưu cấu hình và kiểm tra kết nối thành công!",
           }),
         });
         if (next.has_password && next.username.trim()) {
@@ -267,7 +267,7 @@ export function SettingsWebdavSyncSection() {
           tone: 'error',
           text: t('settings.webdav.feedback.saveSuccessTestFailed', {
             message: result.message,
-            defaultValue: '配置已保存，但连接测试失败：{{message}}',
+            defaultValue: "Đã lưu cấu hình, nhưng kiểm tra kết nối thất bại: {{message}}",
           }),
         });
       }
@@ -276,7 +276,7 @@ export function SettingsWebdavSyncSection() {
         tone: 'error',
         text: t('settings.webdav.feedback.saveAndTestFailed', {
           error: normalizeError(error),
-          defaultValue: '保存并测试连接失败：{{error}}',
+          defaultValue: "Lưu và kiểm tra kết nối thất bại: {{error}}",
         }),
       });
     } finally {
@@ -289,14 +289,14 @@ export function SettingsWebdavSyncSection() {
     setFeedback({
       tone: 'loading',
       text: t('settings.webdav.feedback.uploading', {
-        defaultValue: '正在生成并上传备份...',
+        defaultValue: "Đang tạo và tải bản sao lưu lên...",
       }),
     });
     try {
       const savedSettings = await persistSettings();
       if (!savedSettings.enabled) {
         throw new Error(t('settings.webdav.errors.notEnabled', {
-          defaultValue: '请先启用 WebDAV 同步',
+          defaultValue: "Hãy bật đồng bộ hóa WebDAV trước",
         }));
       }
       const backupSettings = await getAutoBackupSettings();
@@ -313,7 +313,7 @@ export function SettingsWebdavSyncSection() {
         text: t('settings.webdav.feedback.uploadSuccess', {
           count: result.uploaded_files.length,
           deleted: result.deleted_files.length,
-          defaultValue: '已上传 {{count}} 个文件，清理 {{deleted}} 个远端过期备份',
+          defaultValue: "Đã tải lên {{count}} tệp, dọn dẹp {{deleted}} bản sao lưu từ xa hết hạn",
         }),
       });
     } catch (error) {
@@ -321,7 +321,7 @@ export function SettingsWebdavSyncSection() {
         tone: 'error',
         text: t('settings.webdav.feedback.uploadFailed', {
           error: normalizeError(error),
-          defaultValue: 'WebDAV 上传失败：{{error}}',
+          defaultValue: "Tải lên WebDAV thất bại: {{error}}",
         }),
       });
     } finally {
@@ -350,7 +350,7 @@ export function SettingsWebdavSyncSection() {
       if (!fileToRestore) return;
       if (!window.confirm(t('settings.webdav.restoreConfirm', {
         name: fileToRestore.file_name,
-        defaultValue: '确认从远端备份 {{name}} 恢复数据？',
+        defaultValue: "Khôi phục dữ liệu từ bản sao lưu từ xa {{name}}?",
       }))) {
         return;
       }
@@ -358,7 +358,7 @@ export function SettingsWebdavSyncSection() {
       setFeedback({
         tone: 'loading',
         text: t('settings.webdav.feedback.restoring', {
-          defaultValue: '正在读取远端备份并导入...',
+          defaultValue: "Đang đọc bản sao lưu từ xa và nhập...",
         }),
       });
       try {
@@ -377,7 +377,7 @@ export function SettingsWebdavSyncSection() {
           tone: 'error',
           text: t('common.shared.import.failedMsg', {
             error: normalizeError(error),
-            defaultValue: '导入失败：{{error}}',
+            defaultValue: "Nhập thất bại: {{error}}",
           }),
         });
       } finally {
@@ -391,7 +391,7 @@ export function SettingsWebdavSyncSection() {
     async (group: GroupedWebdavBackup) => {
       if (!window.confirm(t('settings.webdav.deleteConfirm', {
         name: group.display_name,
-        defaultValue: '确认删除远端备份 {{name}}？',
+        defaultValue: "Xóa bản sao lưu từ xa {{name}}?",
       }))) {
         return;
       }
@@ -407,7 +407,7 @@ export function SettingsWebdavSyncSection() {
         setFeedback({
           tone: 'success',
           text: t('settings.webdav.feedback.deleteSuccess', {
-            defaultValue: '远端备份已删除',
+            defaultValue: "Đã xóa bản sao lưu từ xa",
           }),
         });
       } catch (error) {
@@ -415,7 +415,7 @@ export function SettingsWebdavSyncSection() {
           tone: 'error',
           text: t('settings.webdav.feedback.deleteFailed', {
             error: normalizeError(error),
-            defaultValue: '删除远端备份失败：{{error}}',
+            defaultValue: "Xóa bản sao lưu từ xa thất bại: {{error}}",
           }),
         });
       } finally {
@@ -430,7 +430,7 @@ export function SettingsWebdavSyncSection() {
     setFeedback({
       tone: 'loading',
       text: t('settings.webdav.feedback.syncingLatest', {
-        defaultValue: '正在同步远端最新配置...',
+        defaultValue: "Đang đồng bộ cấu hình từ xa mới nhất...",
       }),
     });
     try {
@@ -449,7 +449,7 @@ export function SettingsWebdavSyncSection() {
         setFeedback({
           tone: 'error',
           text: t('settings.webdav.feedback.noRemoteBackup', {
-            defaultValue: '远端未发现可同步的备份文件',
+            defaultValue: "Không tìm thấy tệp sao lưu nào có thể khôi phục từ xa",
           }),
         });
         return;
@@ -457,7 +457,7 @@ export function SettingsWebdavSyncSection() {
 
       if (!window.confirm(t('settings.webdav.syncLatestConfirm', {
         name: latestBackup.file_name,
-        defaultValue: '确认拉取最新的远端备份 {{name}} 并同步到本地？此操作将覆盖本地现有数据。',
+        defaultValue: "Bạn có chắc chắn muốn tải bản sao lưu từ xa mới nhất {{name}} và đồng bộ hóa cục bộ không? Việc này sẽ ghi đè lên dữ liệu cục bộ hiện có.",
       }))) {
         setFeedback(null);
         return;
@@ -466,7 +466,7 @@ export function SettingsWebdavSyncSection() {
       setFeedback({
         tone: 'loading',
         text: t('settings.webdav.feedback.restoring', {
-          defaultValue: '正在读取远端备份并导入...',
+          defaultValue: "Đang đọc bản sao lưu từ xa và nhập...",
         }),
       });
 
@@ -486,7 +486,7 @@ export function SettingsWebdavSyncSection() {
         tone: 'error',
         text: t('settings.webdav.feedback.syncFailed', {
           error: normalizeError(error),
-          defaultValue: '同步最新配置失败：{{error}}',
+          defaultValue: "Đồng bộ cấu hình mới nhất thất bại: {{error}}",
         }),
       });
     } finally {
@@ -498,34 +498,34 @@ export function SettingsWebdavSyncSection() {
   const busy = testing || uploading || remoteLoading || restoringFile !== null || deletingFile !== null || syncingLatest;
   const passwordPlaceholder = settings?.has_password
     ? t('settings.webdav.passwordSavedPlaceholder', {
-        defaultValue: '已保存，留空保持不变',
+        defaultValue: "Đã lưu; để trống để giữ lại",
       })
     : t('settings.webdav.passwordPlaceholder', {
-        defaultValue: '坚果云第三方应用密码',
+        defaultValue: "Mật khẩu ứng dụng bên thứ ba Jianguoyun",
       });
   const lastUploadText = useMemo(() => {
     const time = formatRemoteTime(
       settings?.last_upload_at,
-      t('settings.webdav.never', { defaultValue: '尚未同步' }),
+      t('settings.webdav.never', { defaultValue: "Chưa đồng bộ hóa" }),
     );
     return settings?.last_upload_file_name ? `${time} · ${settings.last_upload_file_name}` : time;
   }, [settings?.last_upload_at, settings?.last_upload_file_name, t]);
   const lastDownloadText = useMemo(() => {
     const time = formatRemoteTime(
       settings?.last_download_at,
-      t('settings.webdav.never', { defaultValue: '尚未恢复' }),
+      t('settings.webdav.never', { defaultValue: "Chưa đồng bộ hóa" }),
     );
     return settings?.last_download_file_name ? `${time} · ${settings.last_download_file_name}` : time;
   }, [settings?.last_download_at, settings?.last_download_file_name, t]);
 
   return (
     <>
-      <div className="group-title">{t('settings.webdav.groupTitle', 'WebDAV 同步')}</div>
+      <div className="group-title">{t('settings.webdav.groupTitle', "Đồng bộ hóa WebDAV")}</div>
       <div className="settings-group">
         <div className="settings-row">
           <div className="row-label">
-            <div className="row-title">{t('settings.webdav.urlTitle', '服务地址')}</div>
-            <div className="row-desc">{t('settings.webdav.urlDesc', '坚果云默认地址：https://dav.jianguoyun.com/dav/')}</div>
+            <div className="row-title">{t('settings.webdav.urlTitle', "Địa chỉ dịch vụ")}</div>
+            <div className="row-desc">{t('settings.webdav.urlDesc', "Địa chỉ mặc định của Jianguoyun: https://dav.jianguoyun.com/dav/")}</div>
           </div>
           <div className="row-control row-control--grow" style={{ maxWidth: '240px' }}>
             <input
@@ -541,8 +541,8 @@ export function SettingsWebdavSyncSection() {
         <div className="settings-webdav-grid-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid var(--border-light)' }}>
           <div className="settings-row" style={{ borderBottom: 'none', paddingRight: '24px' }}>
             <div className="row-label" style={{ minWidth: 'auto' }}>
-              <div className="row-title">{t('settings.webdav.usernameTitle', '账号')}</div>
-              <div className="row-desc">{t('settings.webdav.usernameDesc', '坚果云使用账号邮箱。')}</div>
+              <div className="row-title">{t('settings.webdav.usernameTitle', "Tài khoản")}</div>
+              <div className="row-desc">{t('settings.webdav.usernameDesc', "Jianguoyun sử dụng email tài khoản của bạn.")}</div>
             </div>
             <div className="row-control row-control--grow" style={{ maxWidth: '240px' }}>
               <input
@@ -550,15 +550,15 @@ export function SettingsWebdavSyncSection() {
                 style={{ width: '100%' }}
                 value={username}
                 disabled={settingsLoading || busy}
-                placeholder={t('settings.webdav.usernamePlaceholder', '邮箱或用户名')}
+                placeholder={t('settings.webdav.usernamePlaceholder', "Email hoặc tên người dùng")}
                 onChange={(event) => setUsername(event.target.value)}
               />
             </div>
           </div>
           <div className="settings-row" style={{ borderBottom: 'none', paddingLeft: '24px', borderLeft: '1px solid var(--border-light)' }}>
             <div className="row-label" style={{ minWidth: 'auto' }}>
-              <div className="row-title">{t('settings.webdav.remoteDirTitle', '远端目录')}</div>
-              <div className="row-desc">{t('settings.webdav.remoteDirDesc', '只管理该目录下的 Cockpit 备份文件。')}</div>
+              <div className="row-title">{t('settings.webdav.remoteDirTitle', "Thư mục từ xa")}</div>
+              <div className="row-desc">{t('settings.webdav.remoteDirDesc', "Chỉ các tệp sao lưu Cockpit trong thư mục này mới được quản lý.")}</div>
             </div>
             <div className="row-control row-control--grow" style={{ maxWidth: '240px' }}>
               <input
@@ -575,8 +575,8 @@ export function SettingsWebdavSyncSection() {
         <div className="settings-webdav-grid-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid var(--border-light)' }}>
           <div className="settings-row" style={{ borderBottom: 'none', paddingRight: '24px' }}>
             <div className="row-label" style={{ minWidth: 'auto' }}>
-              <div className="row-title">{t('settings.webdav.passwordTitle', '应用密码')}</div>
-              <div className="row-desc">{t('settings.webdav.passwordDesc', '保存到本地配置；留空会保留已保存密码。')}</div>
+              <div className="row-title">{t('settings.webdav.passwordTitle', "Mật khẩu ứng dụng")}</div>
+              <div className="row-desc">{t('settings.webdav.passwordDesc', "Được lưu cục bộ; để trống để giữ mật khẩu hiện có.")}</div>
             </div>
             <div className="row-control row-control--grow settings-webdav-password-control" style={{ maxWidth: '240px' }}>
               <input
@@ -592,8 +592,8 @@ export function SettingsWebdavSyncSection() {
           </div>
           <div className="settings-row" style={{ borderBottom: 'none', paddingLeft: '24px', borderLeft: '1px solid var(--border-light)' }}>
             <div className="row-label" style={{ minWidth: 'auto' }}>
-              <div className="row-title">{t('settings.webdav.retentionTitle', '云端保留天数')}</div>
-              <div className="row-desc">{t('settings.webdav.retentionDesc', '云端超过天数的备份会在下次同步时自动清理。')}</div>
+              <div className="row-title">{t('settings.webdav.retentionTitle', "Remote Retention Days")}</div>
+              <div className="row-desc">{t('settings.webdav.retentionDesc', "Backups older than this on the cloud will be removed during the next sync.")}</div>
             </div>
             <div className="row-control row-control--grow" style={{ maxWidth: '240px' }}>
               <div className="settings-inline-input settings-backup-retention-input" style={{ width: '100%' }}>
@@ -610,7 +610,7 @@ export function SettingsWebdavSyncSection() {
                   }
                 />
                 <span className="settings-input-unit">
-                  {t('settings.webdav.retentionUnit', '天')}
+                  {t('settings.webdav.retentionUnit', "days")}
                 </span>
               </div>
             </div>
@@ -619,24 +619,24 @@ export function SettingsWebdavSyncSection() {
 
         <div className="settings-row settings-row--align-start">
           <div className="row-label">
-            <div className="row-title">{t('settings.webdav.statusTitle', '同步状态')}</div>
-            <div className="row-desc">{t('settings.webdav.statusDesc', '远端恢复需要手动选择备份，不会静默覆盖本地数据。')}</div>
+            <div className="row-title">{t('settings.webdav.statusTitle', "Trạng thái đồng bộ")}</div>
+            <div className="row-desc">{t('settings.webdav.statusDesc', "Khôi phục từ xa yêu cầu chọn thủ công và không bao giờ âm thầm ghi đè lên dữ liệu cục bộ.")}</div>
             <div className="settings-backup-inline-meta">
               {t('settings.webdav.lastUpload', {
                 time: lastUploadText,
-                defaultValue: '最近上传：{{time}}',
+                defaultValue: "Tải lên cuối: {{time}}",
               })}
               <br />
               {t('settings.webdav.lastDownload', {
                 time: lastDownloadText,
-                defaultValue: '最近恢复：{{time}}',
+                defaultValue: "Khôi phục cuối: {{time}}",
               })}
             </div>
           </div>
           <div className="row-control settings-webdav-actions">
             <button className="btn btn-secondary" disabled={settingsLoading || busy} onClick={() => void handleTestAndSave()}>
               {testing ? <RefreshCw size={16} className="loading-spinner" /> : <Cloud size={16} />}
-              {t('settings.webdav.testAction', '测试/保存配置')}
+              {t('settings.webdav.testAction', "Kiểm tra/Lưu cấu hình")}
             </button>
             <button
               className="btn btn-primary"
@@ -644,7 +644,7 @@ export function SettingsWebdavSyncSection() {
               onClick={() => void handleUploadNow()}
             >
               {uploading ? <RefreshCw size={16} className="loading-spinner" /> : <Upload size={16} />}
-              {t('settings.webdav.uploadAction', '生成并上传')}
+              {t('settings.webdav.uploadAction', "Tạo & Tải lên")}
             </button>
             <button
               className="btn btn-secondary"
@@ -652,7 +652,7 @@ export function SettingsWebdavSyncSection() {
               onClick={() => void handleSyncConfigLatest()}
             >
               {syncingLatest ? <RefreshCw size={16} className="loading-spinner" /> : <RefreshCw size={16} />}
-              {t('settings.webdav.syncAction', '同步配置')}
+              {t('settings.webdav.syncAction', "Đồng bộ cấu hình")}
             </button>
           </div>
         </div>
@@ -673,9 +673,9 @@ export function SettingsWebdavSyncSection() {
               <span className={`settings-webdav-chevron ${isRemoteExpanded ? 'expanded' : ''}`}>
                 <ChevronRight size={16} />
               </span>
-              {t('settings.webdav.remoteListTitle', '远端备份')}
+              {t('settings.webdav.remoteListTitle', "Bản sao lưu từ xa")}
             </div>
-            <div className="row-desc">{t('settings.webdav.remoteListDesc', '仅显示匹配 Cockpit 自动/手动备份命名的 JSON 与 ZIP 文件。')}</div>
+            <div className="row-desc">{t('settings.webdav.remoteListDesc', "Chỉ hiển thị các tệp JSON và ZIP khớp với tên sao lưu tự động/thủ công của Cockpit.")}</div>
           </div>
           <div className="row-control" onClick={(e) => e.stopPropagation()}>
             {isRemoteExpanded && (
@@ -685,7 +685,7 @@ export function SettingsWebdavSyncSection() {
                 onClick={() => void handleRefreshRemoteFiles()}
               >
                 {remoteLoading ? <RefreshCw size={16} className="loading-spinner" /> : <RotateCcw size={16} />}
-                {t('common.refresh', '刷新')}
+                {t('common.refresh', "Làm mới")}
               </button>
             )}
           </div>
@@ -695,12 +695,12 @@ export function SettingsWebdavSyncSection() {
           <div className="settings-webdav-list-wrap">
             {remoteLoading ? (
               <div className="settings-backup-empty">
-                <div className="settings-backup-empty-title">{t('common.loading', '加载中...')}</div>
+                <div className="settings-backup-empty-title">{t('common.loading', "Đang tải...")}</div>
               </div>
             ) : groupedRemoteFiles.length === 0 ? (
               <div className="settings-backup-empty">
-                <div className="settings-backup-empty-title">{t('settings.webdav.emptyTitle', '暂无远端备份')}</div>
-                <div className="settings-backup-empty-desc">{t('settings.webdav.emptyDesc', '保存设置后可以生成并上传一份备份。')}</div>
+                <div className="settings-backup-empty-title">{t('settings.webdav.emptyTitle', "Không có bản sao lưu từ xa")}</div>
+                <div className="settings-backup-empty-desc">{t('settings.webdav.emptyDesc', "Lưu cài đặt, sau đó tạo và tải bản sao lưu lên.")}</div>
               </div>
             ) : (
               <div className="settings-backup-list">
@@ -721,14 +721,14 @@ export function SettingsWebdavSyncSection() {
                       <div className="settings-backup-item-meta">
                         <span>
                           {t('settings.transfer.backup.fileTime', {
-                            time: formatRemoteTime(group.modified_at, t('settings.webdav.unknownTime', '未知')),
-                            defaultValue: '时间：{{time}}',
+                            time: formatRemoteTime(group.modified_at, t('settings.webdav.unknownTime', "Không xác định")),
+                            defaultValue: "Thời gian: {{time}}",
                           })}
                         </span>
                         <span>
                           {t('settings.transfer.backup.fileSize', {
                             size: formatFileSize(group.size_bytes),
-                            defaultValue: '大小：{{size}}',
+                            defaultValue: "Dung lượng: {{size}}",
                           })}
                         </span>
                       </div>
@@ -739,7 +739,7 @@ export function SettingsWebdavSyncSection() {
                           onClick={() => void handleRestore(group)}
                         >
                           {isRestoring ? <RefreshCw size={16} className="loading-spinner" /> : <Download size={16} />}
-                          {t('settings.webdav.restoreAction', '恢复')}
+                          {t('settings.webdav.restoreAction', "Khôi phục")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -747,7 +747,7 @@ export function SettingsWebdavSyncSection() {
                           onClick={() => void handleDelete(group)}
                         >
                           {isDeleting ? <RefreshCw size={16} className="loading-spinner" /> : <Trash2 size={16} />}
-                          {t('settings.transfer.backup.deleteAction', '删除')}
+                          {t('settings.transfer.backup.deleteAction', "Xóa")}
                         </button>
                       </div>
                     </div>
@@ -761,10 +761,10 @@ export function SettingsWebdavSyncSection() {
                       onClick={() => setShowAllRemote((prev) => !prev)}
                     >
                       {showAllRemote
-                        ? t('settings.webdav.collapseAll', '收起远端备份')
+                        ? t('settings.webdav.collapseAll', "Collapse remote backups")
                         : t('settings.webdav.expandAll', {
                             count: groupedRemoteFiles.length - 3,
-                            defaultValue: '展开全部远端备份 (还有 {{count}} 个)',
+                            defaultValue: "Expand all remote backups ({{count}} more)",
                           })}
                     </button>
                   </div>

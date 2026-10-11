@@ -446,13 +446,13 @@ export function FloatingCardWindow() {
     () =>
       isPrimaryFloatingCardWindow || !isInstanceFloatingCardWindow
         ? [
-            t('nav.settings', '设置'),
-            t('settings.general.commonTitle', '通用'),
-            t('settings.general.floatingCardShowNowAction', '显示悬浮卡片'),
+            t('nav.settings', "Cài đặt"),
+            t('settings.general.commonTitle', "Chung"),
+            t('settings.general.floatingCardShowNowAction', "Hiển thị thẻ nổi"),
           ].join(' > ')
         : [
-            t('instances.title', '应用多开'),
-            instanceContext?.instanceName || t('instances.defaultName', '默认实例'),
+            t('instances.title', "Nhiều phiên bản"),
+            instanceContext?.instanceName || t('instances.defaultName', "Phiên bản mặc định"),
           ].join(' > '),
     [instanceContext?.instanceName, isInstanceFloatingCardWindow, isPrimaryFloatingCardWindow, t],
   );
@@ -746,7 +746,7 @@ export function FloatingCardWindow() {
           setErrorText(
             t('floatingCard.errors.closeFailed', {
               error: String(error),
-              defaultValue: '关闭失败：{{error}}',
+              defaultValue: "Đóng thất bại: {{error}}",
             }),
           );
         });
@@ -1139,10 +1139,10 @@ export function FloatingCardWindow() {
   const visibleQuotaItems = presentation?.quotaItems.slice(0, visibleQuotaItemLimit) ?? [];
   const accountStateLabel = viewedAccount
     ? isCurrentViewed
-      ? t('floatingCard.currentAccount', '当前账号')
-      : t('floatingCard.accountPreview', '账号预览')
+      ? t('floatingCard.currentAccount', "Hiện tại")
+      : t('floatingCard.accountPreview', "Xem trước tài khoản")
     : null;
-  const floatingCardTitle = instanceContext?.instanceName || t('instances.defaultName', '默认实例');
+  const floatingCardTitle = instanceContext?.instanceName || t('instances.defaultName', "Phiên bản mặc định");
   const platformLabel = getPlatformLabel(selectedPlatform, t);
   const platformLocked = Boolean(instanceContext);
 
@@ -1224,7 +1224,7 @@ export function FloatingCardWindow() {
           setErrorText(
             t('floatingCard.errors.refreshFailed', {
               error: String(error),
-              defaultValue: '刷新失败：{{error}}',
+              defaultValue: "Làm mới thất bại: {{error}}",
             }),
           );
         }
@@ -1263,7 +1263,7 @@ export function FloatingCardWindow() {
       if (instanceContext) {
         const instanceStore = resolveInstanceStoreApi(selectedPlatform);
         if (!instanceStore) {
-          throw new Error(t('common.shared.instances.unsupported.title', '暂不支持当前系统'));
+          throw new Error(t('common.shared.instances.unsupported.title', "Không hỗ trợ trên hệ thống này"));
         }
         const instances = await instanceStore.refreshInstances();
         const targetInstance = findInstanceById(instances, instanceContext.instanceId);
@@ -1276,7 +1276,7 @@ export function FloatingCardWindow() {
           throw new Error(
             t(
               'floatingCard.errors.stopInstanceBeforeSwitch',
-              '请先停止实例再切换账号',
+              "Dừng phiên bản trước khi chuyển tài khoản",
             ),
           );
         }
@@ -1369,13 +1369,13 @@ export function FloatingCardWindow() {
         rawError === 'CODEX_STALE_ACCOUNT'
           ? t('codex.authError.staleAccount', {
               defaultValue:
-                '该账号已不在本地账号库中，账号列表已刷新。请重新导入或重新登录该 Codex 账号。',
+                "Tài khoản này không còn trong kho tài khoản cục bộ. Danh sách tài khoản đã được làm mới. Hãy nhập lại hoặc đăng nhập lại tài khoản Codex này.",
             })
           : rawError;
       setErrorText(
         t('floatingCard.errors.switchFailed', {
           error: displayError,
-          defaultValue: '切换失败：{{error}}',
+          defaultValue: "Chuyển đổi thất bại: {{error}}",
         }),
       );
     } finally {
@@ -1409,7 +1409,7 @@ export function FloatingCardWindow() {
       setErrorText(
         t('floatingCard.errors.pinFailed', {
           error: String(error),
-          defaultValue: '置顶设置失败：{{error}}',
+          defaultValue: "Không thể cập nhật trạng thái ghim: {{error}}",
         }),
       );
     }
@@ -1427,7 +1427,7 @@ export function FloatingCardWindow() {
       setErrorText(
         t('floatingCard.errors.closeFailed', {
           error: String(error),
-          defaultValue: '关闭失败：{{error}}',
+          defaultValue: "Đóng thất bại: {{error}}",
         }),
       );
       return false;
@@ -1547,8 +1547,8 @@ export function FloatingCardWindow() {
               className="floating-card-icon-button"
               type="button"
               onClick={() => void handleTogglePin()}
-              title={alwaysOnTop ? t('floatingCard.actions.unpin', '取消置顶') : t('floatingCard.actions.pin', '置顶')}
-              aria-label={alwaysOnTop ? t('floatingCard.actions.unpin', '取消置顶') : t('floatingCard.actions.pin', '置顶')}
+              title={alwaysOnTop ? t('floatingCard.actions.unpin', "Bỏ ghim") : t('floatingCard.actions.pin', "Ghim")}
+              aria-label={alwaysOnTop ? t('floatingCard.actions.unpin', "Bỏ ghim") : t('floatingCard.actions.pin', "Ghim")}
             >
               {alwaysOnTop ? <PinOff size={15} /> : <Pin size={15} />}
             </button>
@@ -1556,8 +1556,8 @@ export function FloatingCardWindow() {
               className="floating-card-icon-button"
               type="button"
               onClick={() => void requestCloseWindow()}
-              title={t('floatingCard.actions.close', '关闭')}
-              aria-label={t('floatingCard.actions.close', '关闭')}
+              title={t('floatingCard.actions.close', "Đóng")}
+              aria-label={t('floatingCard.actions.close', "Đóng")}
             >
               <X size={15} />
             </button>
@@ -1582,7 +1582,7 @@ export function FloatingCardWindow() {
                 <div
                   className="floating-card-platform-lock"
                   title={platformLabel}
-                  aria-label={t('floatingCard.lockedPlatform', '实例已锁定平台')}
+                  aria-label={t('floatingCard.lockedPlatform', "Nền tảng đã bị khóa theo instance")}
                 >
                   {platformLabel}
                 </div>
@@ -1591,7 +1591,7 @@ export function FloatingCardWindow() {
                   className="floating-card-platform-select"
                   value={selectedPlatform}
                   onChange={(event) => setSelectedPlatform(event.target.value as PlatformId)}
-                  aria-label={t('floatingCard.selectPlatform', '切换平台')}
+                  aria-label={t('floatingCard.selectPlatform', "Chuyển nền tảng")}
                 >
                   {platformOrder.map((platformId) => (
                     <option key={platformId} value={platformId}>
@@ -1608,7 +1608,7 @@ export function FloatingCardWindow() {
                 type="button"
                 onClick={() => handleMoveAccount(-1)}
                 disabled={accountIndex < 0 || accounts.length <= 1}
-                aria-label={t('floatingCard.actions.previousAccount', '上一个账号')}
+                aria-label={t('floatingCard.actions.previousAccount', "Tài khoản trước")}
               >
                 <ChevronLeft size={15} />
               </button>
@@ -1626,7 +1626,7 @@ export function FloatingCardWindow() {
                 type="button"
                 onClick={() => handleMoveAccount(1)}
                 disabled={accountIndex < 0 || accounts.length <= 1}
-                aria-label={t('floatingCard.actions.nextAccount', '下一个账号')}
+                aria-label={t('floatingCard.actions.nextAccount', "Tài khoản tiếp theo")}
               >
                 <ChevronRight size={15} />
               </button>
@@ -1649,7 +1649,7 @@ export function FloatingCardWindow() {
                   {presentation.cycleText ? (
                     <div className="floating-card-account-subline">
                       <span className="floating-card-section-label">
-                        {t('floatingCard.cycle', '周期')}
+                        {t('floatingCard.cycle', "Chu kỳ")}
                       </span>
                       <span className="floating-card-inline-value">{presentation.cycleText}</span>
                     </div>
@@ -1664,7 +1664,7 @@ export function FloatingCardWindow() {
                 {presentation.sublineText ? (
                   <div className="floating-card-meta-pill">
                     <span className="floating-card-section-label">
-                      {t('floatingCard.status', '状态')}
+                      {t('floatingCard.status', "Trạng thái")}
                     </span>
                     <span
                       className={`floating-card-inline-value floating-card-inline-value--${presentation.sublineClass || 'neutral'}`}
@@ -1706,7 +1706,7 @@ export function FloatingCardWindow() {
                   })
                 ) : (
                   <div className="floating-card-empty-text">
-                    {t('common.shared.quota.noData', '暂无配额数据')}
+                    {t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}
                   </div>
                 )}
               </div>
@@ -1714,12 +1714,12 @@ export function FloatingCardWindow() {
           ) : (
             <div className="floating-card-empty-state">
               <div className="floating-card-section-label">
-                {platformLoading ? t('common.loading', '加载中...') : t('floatingCard.empty.title', '暂无账号')}
+                {platformLoading ? t('common.loading', "Đang tải...") : t('floatingCard.empty.title', "Không có tài khoản")}
               </div>
               <div className="floating-card-empty-text">
                 {platformLoading
-                  ? t('floatingCard.empty.loading', '正在读取当前平台账号信息')
-                  : t('floatingCard.empty.desc', '当前平台还没有可展示的账号')}
+                  ? t('floatingCard.empty.loading', "Đang tải thông tin tài khoản cho nền tảng hiện tại")
+                  : t('floatingCard.empty.desc', "Hiện chưa có tài khoản nào để hiển thị trên nền tảng này")}
               </div>
             </div>
           )}
@@ -1739,7 +1739,7 @@ export function FloatingCardWindow() {
                 onClick={() => selectAccount(selectedPlatform, recommendedAccount.id)}
               >
                 <Star size={14} />
-                {t('floatingCard.actions.viewRecommended', '查看推荐账号')}
+                {t('floatingCard.actions.viewRecommended', "Xem tài khoản đề xuất")}
               </button>
             ) : null}
             {!isCurrentViewed && currentAccount ? (
@@ -1749,7 +1749,7 @@ export function FloatingCardWindow() {
                 onClick={() => selectAccount(selectedPlatform, currentAccount.id)}
               >
                 <Undo2 size={14} />
-                {t('floatingCard.actions.backToCurrent', '回到当前账号')}
+                {t('floatingCard.actions.backToCurrent', "Quay lại")}
               </button>
             ) : null}
             {!isCurrentViewed && viewedAccount ? (
@@ -1762,7 +1762,7 @@ export function FloatingCardWindow() {
                 {switchingAccountId === viewedAccount.id ? (
                   <RefreshCw size={14} className="floating-card-spin" />
                 ) : null}
-                {t('floatingCard.actions.switchToThisAccount', '切换到此账号')}
+                {t('floatingCard.actions.switchToThisAccount', "Chuyển")}
               </button>
             ) : null}
           </div>
@@ -1773,8 +1773,8 @@ export function FloatingCardWindow() {
               type="button"
               onClick={() => void handleRefresh()}
               disabled={!viewedAccount || Boolean(refreshingAccountId)}
-              title={t('common.refresh', '刷新')}
-              aria-label={t('common.refresh', '刷新')}
+              title={t('common.refresh', "Làm mới")}
+              aria-label={t('common.refresh', "Làm mới")}
             >
               <RefreshCw size={14} className={refreshingAccountId ? 'floating-card-spin' : undefined} />
             </button>
@@ -1782,8 +1782,8 @@ export function FloatingCardWindow() {
               className="floating-card-button floating-card-button--ghost floating-card-button--icon"
               type="button"
               onClick={() => void handleOpenDetails()}
-              title={t('floatingCard.actions.openDetails', '打开详情页')}
-              aria-label={t('floatingCard.actions.openDetails', '打开详情页')}
+              title={t('floatingCard.actions.openDetails', "Mở chi tiết")}
+              aria-label={t('floatingCard.actions.openDetails', "Mở chi tiết")}
             >
               <ExternalLink size={14} />
             </button>
@@ -1794,13 +1794,13 @@ export function FloatingCardWindow() {
           <div className="floating-card-close-confirm-backdrop" data-floating-card-no-drag="true">
             <div className="floating-card-close-confirm" data-floating-card-no-drag="true" role="dialog" aria-modal="true">
               <div className="floating-card-close-confirm-title">
-                {t('floatingCard.closeConfirm.title', '关闭悬浮卡片？')}
+                {t('floatingCard.closeConfirm.title', "Đóng thẻ nổi?")}
               </div>
               <div className="floating-card-close-confirm-body">
               <div className="floating-card-close-confirm-message">
                 {t('floatingCard.closeConfirm.message', {
                   path: closeConfirmPath,
-                  defaultValue: '关闭后可在“{{path}}”中重新打开。',
+                  defaultValue: "Sau khi đóng, bạn vẫn có thể mở lại từ \"{{path}}\".",
                 })}
               </div>
               <label className="floating-card-close-confirm-checkbox" data-floating-card-no-drag="true">
@@ -1809,7 +1809,7 @@ export function FloatingCardWindow() {
                   checked={closeConfirmSkipPrompt}
                   onChange={(event) => setCloseConfirmSkipPrompt(event.target.checked)}
                 />
-                <span>{t('floatingCard.closeConfirm.dontAskAgain', '不再提示')}</span>
+                <span>{t('floatingCard.closeConfirm.dontAskAgain', "Đừng hỏi lại")}</span>
               </label>
               </div>
               <div className="floating-card-close-confirm-actions">
@@ -1818,14 +1818,14 @@ export function FloatingCardWindow() {
                   type="button"
                   onClick={handleCloseConfirmDismiss}
                 >
-                  {t('common.cancel', '取消')}
+                  {t('common.cancel', "Hủy")}
                 </button>
                 <button
                   className="floating-card-button floating-card-button--primary"
                   type="button"
                   onClick={() => void handleCloseConfirmAccept()}
                 >
-                  {t('floatingCard.actions.close', '关闭')}
+                  {t('floatingCard.actions.close', "Đóng")}
                 </button>
               </div>
             </div>

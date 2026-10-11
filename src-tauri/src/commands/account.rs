@@ -81,7 +81,7 @@ fn resolve_antigravity_desktop_auth_mode_from_info(
     info: crate::commands::system::AntigravityInstalledVersionInfo,
 ) -> AntigravityDesktopAuthMode {
     modules::logger::log_info(&format!(
-        "[Antigravity] 检测到桌面版版本: version={}, path={}, source={}",
+        "[Antigravity] Đã xác định phiên bản desktop: version={}, path={}, source={}",
         info.version, info.app_path, info.source
     ));
     match compare_versions(&info.version, "2.0.0") {
@@ -89,7 +89,7 @@ fn resolve_antigravity_desktop_auth_mode_from_info(
         Some(_) => AntigravityDesktopAuthMode::SystemCredential,
         None => {
             modules::logger::log_warn(&format!(
-                "[Antigravity] 无法解析 Antigravity 安装版本: {}，默认采用系统凭据认证模式",
+                "[Antigravity] Không thể phân tích phiên bản cài đặt Antigravity: {}，sử dụng chế độ xác thực hệ thống mặc định",
                 info.version
             ));
             AntigravityDesktopAuthMode::SystemCredential
@@ -116,7 +116,7 @@ fn resolve_antigravity_desktop_auth_mode() -> Result<AntigravityDesktopAuthMode,
     }
 
     modules::logger::log_warn(
-        "[Antigravity] 无法确认 Antigravity 安装版本，将默认采用系统凭据认证模式",
+        "[Antigravity] Không thể xác định phiên bản cài đặt Antigravity; sử dụng chế độ xác thực hệ thống mặc định",
     );
     Ok(AntigravityDesktopAuthMode::SystemCredential)
 }
@@ -124,25 +124,25 @@ fn resolve_antigravity_desktop_auth_mode() -> Result<AntigravityDesktopAuthMode,
 fn legacy_antigravity_user_data_dir() -> Result<PathBuf, String> {
     #[cfg(target_os = "macos")]
     {
-        let home = dirs::home_dir().ok_or("无法获取用户主目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục người dùng")?;
         return Ok(home.join("Library/Application Support/Antigravity"));
     }
 
     #[cfg(target_os = "windows")]
     {
         let appdata =
-            std::env::var("APPDATA").map_err(|_| "无法获取 APPDATA 环境变量".to_string())?;
+            std::env::var("APPDATA").map_err(|_| "Không thể đọc biến môi trường APPDATA".to_string())?;
         return Ok(PathBuf::from(appdata).join("Antigravity"));
     }
 
     #[cfg(target_os = "linux")]
     {
-        let home = dirs::home_dir().ok_or("无法获取用户主目录")?;
+        let home = dirs::home_dir().ok_or("Không thể xác định thư mục người dùng")?;
         return Ok(home.join(".config/Antigravity"));
     }
 
     #[allow(unreachable_code)]
-    Err("无法确定 Antigravity 默认目录".to_string())
+    Err("Không thể xác định thư mục mặc định của Antigravity".to_string())
 }
 
 fn legacy_antigravity_state_db_path() -> Result<PathBuf, String> {
@@ -168,7 +168,7 @@ fn legacy_antigravity_state_db_path() -> Result<PathBuf, String> {
 pub async fn list_accounts() -> Result<Vec<models::Account>, String> {
     tauri::async_runtime::spawn_blocking(modules::list_accounts)
         .await
-        .map_err(|e| format!("列出账号任务失败: {}", e))?
+        .map_err(|e| format!("Không thể liệt kê tác vụ tài khoản: {}", e))?
 }
 
 /// 从 VS Code SecretStorage 同步插件账号
@@ -194,7 +194,7 @@ pub async fn add_account(refresh_token: String) -> Result<models::Account, Strin
 
     let account =
         modules::upsert_account(user_info.email.clone(), user_info.get_display_name(), token)?;
-    modules::logger::log_info(&format!("添加账号成功: {}", account.email));
+    modules::logger::log_info(&format!("Đã thêm tài khoản: {}", account.email));
 
     // 广播通知
     modules::websocket::broadcast_data_changed("account_added");
@@ -328,7 +328,7 @@ pub async fn get_current_account(
                 return Ok(Some(account));
             }
             Err(error) => modules::logger::log_warn(&format!(
-                "[Antigravity] 当前账号绑定已失效，将回退全局当前账号: target={:?}, account_id={}, error={}",
+                "[Antigravity] Liên kết tài khoản hiện tại không còn hợp lệ; chuyển về tài khoản hiện tại toàn cục: target={:?}, account_id={}, error={}",
                 runtime_target, account_id, error
             )),
         }
@@ -395,17 +395,17 @@ pub async fn refresh_all_quotas(
         let mut switched = false;
         match run_auto_switch_for_runtime_target(&app, runtime_target.as_deref()).await {
             Ok(Some(account)) => {
-                modules::logger::log_info(&format!("[AutoSwitch] 自动切号完成: {}", account.email));
+                modules::logger::log_info(&format!("[AutoSwitch] Đã tự động chuyển tài khoản: {}", account.email));
                 switched = true;
             }
             Ok(None) => {}
             Err(e) => {
-                modules::logger::log_warn(&format!("[AutoSwitch] 自动切号执行失败: {}", e));
+                modules::logger::log_warn(&format!("[AutoSwitch] Không thể tự động chuyển tài khoản: {}", e));
             }
         }
         if !switched {
             if let Err(e) = modules::account::run_quota_alert_if_needed() {
-                modules::logger::log_warn(&format!("[QuotaAlert] 预警检查失败: {}", e));
+                modules::logger::log_warn(&format!("[QuotaAlert] Không thể kiểm tra cảnh báo: {}", e));
             }
         }
         let _ = crate::modules::tray::update_tray_menu(&app);
@@ -419,7 +419,7 @@ pub async fn refresh_current_quota(
     runtime_target: Option<String>,
 ) -> Result<(), String> {
     let Some(account) = get_current_account(runtime_target.clone()).await? else {
-        return Err("未找到当前账号".to_string());
+        return Err("Không tìm thấy tài khoản hiện tại".to_string());
     };
     let mut account = account;
     let quota = modules::fetch_quota_with_fresh_token(&mut account, true)
@@ -431,20 +431,20 @@ pub async fn refresh_current_quota(
     match run_auto_switch_for_runtime_target(&app, runtime_target.as_deref()).await {
         Ok(Some(account)) => {
             modules::logger::log_info(&format!(
-                "[AutoSwitch] 当前账号刷新后自动切号完成: {}",
+                "[AutoSwitch] Đã tự động chuyển tài khoản sau khi làm mới tài khoản hiện tại: {}",
                 account.email
             ));
             switched = true;
         }
         Ok(None) => {}
         Err(e) => {
-            modules::logger::log_warn(&format!("[AutoSwitch] 当前账号刷新后自动切号失败: {}", e));
+            modules::logger::log_warn(&format!("[AutoSwitch] Không thể tự động chuyển tài khoản sau khi làm mới tài khoản hiện tại: {}", e));
         }
     }
 
     if !switched {
         if let Err(e) = modules::account::run_quota_alert_if_needed() {
-            modules::logger::log_warn(&format!("[QuotaAlert] 当前账号刷新后预警检查失败: {}", e));
+            modules::logger::log_warn(&format!("[QuotaAlert] Không thể kiểm tra cảnh báo sau khi làm mới tài khoản hiện tại: {}", e));
         }
     }
 
@@ -480,7 +480,7 @@ async fn switch_account_legacy_antigravity(
     app: AppHandle,
     account_id: String,
 ) -> Result<models::Account, String> {
-    modules::logger::log_info(&format!("开始切换 Antigravity 账号: {}", account_id));
+    modules::logger::log_info(&format!("Bắt đầu chuyển tài khoản Antigravity: {}", account_id));
 
     if let Err(e) = modules::process::ensure_antigravity_legacy_launch_path_configured() {
         if e.starts_with("APP_PATH_NOT_FOUND:") {
@@ -510,7 +510,7 @@ async fn switch_account_legacy_antigravity(
         None,
         Some(false),
     ) {
-        modules::logger::log_warn(&format!("更新 Antigravity 默认实例绑定账号失败: {}", e));
+        modules::logger::log_warn(&format!("Không thể cập nhật tài khoản liên kết của phiên Antigravity mặc định: {}", e));
     }
 
     let default_dir = legacy_antigravity_user_data_dir()?;
@@ -524,29 +524,29 @@ async fn switch_account_legacy_antigravity(
 
     match auth_mode {
         AntigravityDesktopAuthMode::SystemCredential => {
-            modules::logger::log_info("[Antigravity] 使用系统凭据认证模式写入账号");
+            modules::logger::log_info("[Antigravity] Đang ghi tài khoản bằng xác thực hệ thống");
             modules::antigravity_credential::write_antigravity_system_credential(&account)?;
         }
         AntigravityDesktopAuthMode::LegacyStateDb => {
-            modules::logger::log_info("[Antigravity] 使用旧版 SQLite 认证模式写入账号");
+            modules::logger::log_info("[Antigravity] Đang ghi tài khoản bằng xác thực SQLite cũ");
             let db_path = legacy_antigravity_state_db_path()?;
             modules::db::inject_account_token_to_path(&db_path, &account)?;
         }
     }
 
-    modules::logger::log_info("正在启动 Antigravity 默认实例...");
+    modules::logger::log_info("Đang khởi động phiên Antigravity mặc định...");
     let default_settings = modules::antigravity_legacy_instance::load_default_settings()?;
     let extra_args = modules::process::parse_extra_args(&default_settings.extra_args);
     let launch_result = modules::process::start_antigravity_legacy_with_args("", &extra_args);
     let launch_error = match launch_result {
         Ok(pid) => {
             if let Err(e) = modules::antigravity_legacy_instance::update_default_pid(Some(pid)) {
-                modules::logger::log_warn(&format!("更新默认实例 PID 失败: {}", e));
+                modules::logger::log_warn(&format!("Không thể cập nhật PID phiên mặc định: {}", e));
             }
             None
         }
         Err(e) => {
-            modules::logger::log_warn(&format!("Antigravity 启动失败: {}", e));
+            modules::logger::log_warn(&format!("Không thể khởi động Antigravity: {}", e));
             if e.starts_with("APP_PATH_NOT_FOUND:") {
                 let _ = app.emit(
                     "app:path_missing",
@@ -569,10 +569,10 @@ async fn switch_account_legacy_antigravity(
         if err.starts_with("APP_PATH_NOT_FOUND:") {
             return Err(err);
         }
-        return Err(format!("账号已切换，但启动 Antigravity 失败: {}", err));
+        return Err(format!("Đã chuyển tài khoản nhưng không thể khởi động Antigravity: {}", err));
     }
 
-    modules::logger::log_info(&format!("Antigravity 账号切换完成: {}", account.email));
+    modules::logger::log_info(&format!("Đã hoàn tất chuyển tài khoản Antigravity: {}", account.email));
     modules::websocket::broadcast_account_switched(&account.id, &account.email);
     Ok(account)
 }
@@ -627,12 +627,12 @@ pub async fn switch_account(
         AntigravitySwitchFlow::Restart => {}
     }
 
-    modules::logger::log_info(&format!("开始切换账号: {}", account_id));
+    modules::logger::log_info(&format!("Bắt đầu chuyển tài khoản: {}", account_id));
 
     // 1. 加载并验证账号存在，并预刷新与探测必要元数据
     let mut account = modules::account::prepare_account_for_injection(&account_id).await?;
     modules::logger::log_info(&format!(
-        "正在切换到账号: {} (ID: {})",
+        "Đang chuyển sang tài khoản: {} (ID: {})",
         account.email, account.id
     ));
 
@@ -661,10 +661,10 @@ pub async fn switch_account(
         None,
         Some(false),
     ) {
-        modules::logger::log_warn(&format!("更新 Antigravity IDE 默认实例绑定账号失败: {}", e));
+        modules::logger::log_warn(&format!("Không thể cập nhật tài khoản liên kết của phiên Antigravity IDE mặc định: {}", e));
     } else {
         modules::logger::log_info(&format!(
-            "已同步更新 Antigravity IDE 默认实例绑定账号: {}",
+            "Đã đồng bộ tài khoản liên kết của phiên Antigravity IDE mặc định: {}",
             account_id
         ));
     }
@@ -683,12 +683,12 @@ pub async fn switch_account(
             continue;
         }
         if let Err(e) = modules::instance::inject_account_to_profile_with_account(&target_dir, &account) {
-            modules::logger::log_warn(&format!("[Switch] 注入目录 {} 失败: {}", target_dir.display(), e));
+            modules::logger::log_warn(&format!("[Switch] Không thể ghi vào thư mục {}: {}", target_dir.display(), e));
         }
     }
 
     // 7. 启动 Antigravity IDE（带默认实例自定义启动参数；启动失败不阻断切号，保持原行为）
-    modules::logger::log_info("正在启动 Antigravity IDE 默认实例...");
+    modules::logger::log_info("Đang khởi động phiên Antigravity IDE mặc định...");
     let default_settings = modules::instance::load_default_settings()?;
     let extra_args = modules::process::parse_extra_args(&default_settings.extra_args);
     let launch_result = if extra_args.is_empty() {
@@ -699,12 +699,12 @@ pub async fn switch_account(
     let launch_error = match launch_result {
         Ok(pid) => {
             if let Err(e) = modules::instance::update_default_pid(Some(pid)) {
-                modules::logger::log_warn(&format!("更新默认实例 PID 失败: {}", e));
+                modules::logger::log_warn(&format!("Không thể cập nhật PID phiên mặc định: {}", e));
             }
             None
         }
         Err(e) => {
-            modules::logger::log_warn(&format!("Antigravity IDE 启动失败: {}", e));
+            modules::logger::log_warn(&format!("Không thể khởi động Antigravity IDE: {}", e));
             if e.starts_with("APP_PATH_NOT_FOUND:") {
                 let _ = app.emit(
                     "app:path_missing",
@@ -721,10 +721,10 @@ pub async fn switch_account(
         if err.starts_with("APP_PATH_NOT_FOUND:") {
             return Err(err);
         }
-        return Err(format!("账号已切换，但启动 Antigravity IDE 失败: {}", err));
+        return Err(format!("Đã chuyển tài khoản nhưng không thể khởi động Antigravity IDE: {}", err));
     }
 
-    modules::logger::log_info(&format!("账号切换完成: {}", account.email));
+    modules::logger::log_info(&format!("Đã hoàn tất chuyển tài khoản: {}", account.email));
 
     // 广播切换完成通知
     modules::websocket::broadcast_account_switched(&account.id, &account.email);

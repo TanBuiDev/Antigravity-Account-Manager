@@ -241,31 +241,31 @@ export function buildCodexOverviewSortOptions(
   return [
     {
       value: "created_at",
-      label: t("common.shared.sort.createdAt", "按创建时间"),
+      label: t("common.shared.sort.createdAt", "Thời gian tạo"),
     },
     {
       value: "weekly",
-      label: t("codex.sort.weekly", "按周配额"),
+      label: t("codex.sort.weekly", "Hạn mức tuần"),
     },
     {
       value: "hourly",
-      label: t("codex.sort.hourly", "按5小时配额"),
+      label: t("codex.sort.hourly", "Hạn mức 5 giờ"),
     },
     {
       value: "weekly_reset",
-      label: t("codex.sort.weeklyReset", "按周配额重置时间"),
+      label: t("codex.sort.weeklyReset", "Thời gian đặt lại theo tuần"),
     },
     {
       value: "hourly_reset",
-      label: t("codex.sort.hourlyReset", "按5小时配额重置时间"),
+      label: t("codex.sort.hourlyReset", "Thời gian đặt lại 5 giờ"),
     },
     {
       value: "subscription_expiry",
-      label: t("codex.sort.subscriptionExpiry", "按订阅有效期"),
+      label: t("codex.sort.subscriptionExpiry", "Hạn gói"),
     },
     {
       value: "custom",
-      label: t("codex.sort.custom", "自定义顺序"),
+      label: t("codex.sort.custom", "Thứ tự tùy chỉnh"),
     },
   ];
 }

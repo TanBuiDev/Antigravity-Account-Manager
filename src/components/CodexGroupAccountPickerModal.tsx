@@ -188,7 +188,7 @@ export function CodexGroupAccountPickerModal({
             />
             <div className="group-account-main">
               <span className="group-account-email" style={{ fontWeight: 600, fontSize: '12px', color: 'var(--text-secondary)' }}>
-                {t('common.selectAll', '全选')} ({selectedVisibleCount}/{visibleAccounts.length})
+                {t('common.selectAll', "Chọn tất cả")} ({selectedVisibleCount}/{visibleAccounts.length})
               </span>
             </div>
           </div>
@@ -259,7 +259,7 @@ export function CodexGroupAccountPickerModal({
             onClick={handleConfirm}
             disabled={saving}
           >
-            {saving ? t('common.saving') : `${t('common.save', '保存')} (${selected.size})`}
+            {saving ? t('common.saving') : `${t('common.save', "Lưu")} (${selected.size})`}
           </button>
         </div>
       </div>

@@ -187,11 +187,11 @@ export function KiroAccountsPage() {
     const region = idcRegion.trim();
     const startUrl = idcStartUrl.trim();
     if (!region) {
-      setIdcFormError(t('kiro.idc.regionRequired', '请填写 AWS Region'));
+      setIdcFormError(t('kiro.idc.regionRequired', "Nhập khu vực AWS"));
       return;
     }
     if (!startUrl) {
-      setIdcFormError(t('kiro.idc.startUrlRequired', '请填写 IAM Identity Center Start URL'));
+      setIdcFormError(t('kiro.idc.startUrlRequired', "Nhập URL bắt đầu IAM Identity Center"));
       return;
     }
     setIdcFormError(null);
@@ -347,7 +347,7 @@ export function KiroAccountsPage() {
       const start = credits.planStartsAt ?? null;
 
       if (!end) {
-        const summary = t('common.shared.credits.planEndsUnknown', '配额周期时间未知');
+        const summary = t('common.shared.credits.planEndsUnknown', "Không có thông tin chu kỳ");
         return { summary, detail: '', title: summary };
       }
 
@@ -357,11 +357,11 @@ export function KiroAccountsPage() {
         secondsLeft > 0 && secondsLeft < 86400
           ? t('common.shared.credits.planEndsInHours', {
               hours: Math.max(1, Math.floor(secondsLeft / 3600)),
-              defaultValue: '配额周期剩余 {{hours}} 小时',
+              defaultValue: "Đặt lại sau {{hours}}h",
             })
           : t('common.shared.credits.planEndsIn', {
               days: secondsLeft <= 0 ? 0 : Math.floor(secondsLeft / 86400),
-              defaultValue: '配额周期剩余 {{days}} 天',
+              defaultValue: "Chu kỳ đặt lại sau {{days}} ngày",
             });
 
       const startText = formatCycleDate(start);
@@ -369,11 +369,11 @@ export function KiroAccountsPage() {
       let detail = '';
       if (startText && endText) {
         detail = t('common.shared.credits.periodRange', {
-          start: startText, end: endText, defaultValue: '周期：{{start}} - {{end}}',
+          start: startText, end: endText, defaultValue: "Chu kỳ: {{start}} - {{end}}",
         });
       } else if (endText) {
         detail = t('common.shared.credits.periodEndOnly', {
-          end: endText, defaultValue: '周期结束：{{end}}',
+          end: endText, defaultValue: "Kết thúc chu kỳ: {{end}}",
         });
       }
 
@@ -594,7 +594,7 @@ export function KiroAccountsPage() {
   );
 
   const resolveGroupLabel = (groupKey: string) =>
-    groupKey === untaggedKey ? t('accounts.defaultGroup', '默认分组') : groupKey;
+    groupKey === untaggedKey ? t('accounts.defaultGroup', "Nhóm mặc định") : groupKey;
 
   // ─── Render helpers ──────────────────────────────────────────────────
 
@@ -649,7 +649,7 @@ export function KiroAccountsPage() {
             {quotaError && (
               <span className="status-pill warning" title={quotaError}>
                 <CircleAlert size={12} />
-                {t('common.shared.quota.queryFailed', '配额查询失败')}
+                {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
               </span>
             )}
             {isBanned && (
@@ -713,7 +713,7 @@ export function KiroAccountsPage() {
                 ) : null}
               </>
             ) : (
-              <div className="quota-empty">{t('common.shared.quota.noData', '暂无配额数据')}</div>
+              <div className="quota-empty">{t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}</div>
             )}
           </div>
 
@@ -726,23 +726,23 @@ export function KiroAccountsPage() {
             <span className="card-date">{formatDate(account.created_at)}</span>
             <div className="card-actions">
               <button className="card-action-btn success" onClick={() => handleInjectToVSCode?.(account.id)} disabled={!!injecting || isBanned}
-                title={isBanned ? t('accounts.status.forbidden_msg') : t('kiro.injectToVSCode', '切换到 Kiro')}>
+                title={isBanned ? t('accounts.status.forbidden_msg') : t('kiro.injectToVSCode', "Chuyển sang Kiro")}>
                 {injecting === account.id ? <RefreshCw size={14} className="loading-spinner" /> : <Play size={14} />}
               </button>
-              <button className="card-action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', '编辑标签')}>
+              <button className="card-action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', "Chỉnh sửa thẻ")}>
                 <Tag size={14} />
               </button>
-              <button className="card-action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', '刷新配额')}>
+              <button className="card-action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', "Làm mới hạn mức")}>
                 <RotateCw size={14} className={refreshing === account.id ? 'loading-spinner' : ''} />
               </button>
               <button
                 className="card-action-btn export-btn"
                 onClick={() => handleExportByIds([account.id], resolveSingleExportBaseName(account))}
-                title={t('common.shared.export.title', '导出')}
+                title={t('common.shared.export.title', "Xuất")}
               >
                 <Upload size={14} />
               </button>
-              <button className="card-action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', '删除')}>
+              <button className="card-action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', "Xóa")}>
                 <Trash2 size={14} />
               </button>
             </div>
@@ -797,7 +797,7 @@ export function KiroAccountsPage() {
                 <div className="account-sub-line">
                   <span className="status-pill warning" title={quotaError}>
                     <CircleAlert size={12} />
-                    {t('common.shared.quota.queryFailed', '配额查询失败')}
+                    {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
                   </span>
                 </div>
               )}
@@ -832,7 +832,7 @@ export function KiroAccountsPage() {
                 </div>
               </div>
             ) : (
-              <div className="quota-empty">{t('common.shared.quota.noData', '暂无配额数据')}</div>
+              <div className="quota-empty">{t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}</div>
             )}
           </td>
           <td>
@@ -854,29 +854,29 @@ export function KiroAccountsPage() {
                 </div>
               </div>
             ) : (
-              <div className="quota-empty">{t('common.shared.quota.noData', '暂无配额数据')}</div>
+              <div className="quota-empty">{t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}</div>
             )}
           </td>
           <td className="sticky-action-cell table-action-cell">
             <div className="action-buttons">
               <button className="action-btn success" onClick={() => handleInjectToVSCode?.(account.id)} disabled={!!injecting || isBanned}
-                title={isBanned ? t('accounts.status.forbidden_msg') : t('kiro.injectToVSCode', '切换到 Kiro')}>
+                title={isBanned ? t('accounts.status.forbidden_msg') : t('kiro.injectToVSCode', "Chuyển sang Kiro")}>
                 {injecting === account.id ? <RefreshCw size={14} className="loading-spinner" /> : <Play size={14} />}
               </button>
-              <button className="action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', '编辑标签')}>
+              <button className="action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', "Chỉnh sửa thẻ")}>
                 <Tag size={14} />
               </button>
-              <button className="action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', '刷新配额')}>
+              <button className="action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', "Làm mới hạn mức")}>
                 <RotateCw size={14} className={refreshing === account.id ? 'loading-spinner' : ''} />
               </button>
               <button
                 className="action-btn"
                 onClick={() => handleExportByIds([account.id], resolveSingleExportBaseName(account))}
-                title={t('common.shared.export.title', '导出')}
+                title={t('common.shared.export.title', "Xuất")}
               >
                 <Upload size={14} />
               </button>
-              <button className="action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', '删除')}>
+              <button className="action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', "Xóa")}>
                 <Trash2 size={14} />
               </button>
             </div>
@@ -892,7 +892,7 @@ export function KiroAccountsPage() {
         <button type="button" className="ghcp-flow-notice-toggle" onClick={() => setIsFlowNoticeCollapsed((prev) => !prev)} aria-expanded={!isFlowNoticeCollapsed}>
           <div className="ghcp-flow-notice-title">
             <CircleAlert size={16} />
-            <span>{t('kiro.flowNotice.title', 'Kiro 账号管理说明（点击展开/收起）')}</span>
+            <span>{t('kiro.flowNotice.title', "Hướng dẫn tài khoản Kiro (bấm để mở rộng/thu gọn)")}</span>
           </div>
           <ChevronDown size={16} className={`ghcp-flow-notice-arrow ${isFlowNoticeCollapsed ? 'collapsed' : ''}`} />
         </button>
@@ -923,30 +923,30 @@ export function KiroAccountsPage() {
         <div className="toolbar-left">
           <div className="search-box">
             <Search size={16} className="search-icon" />
-            <input type="text" placeholder={t('common.shared.search', '搜索账号...')} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+            <input type="text" placeholder={t('common.shared.search', "Tìm kiếm tài khoản...")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
 
           <div className="view-switcher">
-            <button className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title={t('common.shared.view.list', '列表视图')}><List size={16} /></button>
-            <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title={t('common.shared.view.grid', '卡片视图')}><LayoutGrid size={16} /></button>
+            <button className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title={t('common.shared.view.list', "Dạng danh sách")}><List size={16} /></button>
+            <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title={t('common.shared.view.grid', "Dạng thẻ")}><LayoutGrid size={16} /></button>
           </div>
 
           <MultiSelectFilterDropdown
             options={tierFilterOptions}
             selectedValues={filterTypes}
-            allLabel={t('common.shared.filter.all', '全部 ({{count}})', { count: tierSummary.all })}
-            filterLabel={t('common.shared.filterLabel', '筛选')}
-            clearLabel={t('accounts.clearFilter', '清空筛选')}
-            emptyLabel={t('common.none', '暂无')}
-            ariaLabel={t('common.shared.filterLabel', '筛选')}
+            allLabel={t('common.shared.filter.all', "Tất cả ({{count}})", { count: tierSummary.all })}
+            filterLabel={t('common.shared.filterLabel', "Bộ lọc")}
+            clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+            emptyLabel={t('common.none', "None​")}
+            ariaLabel={t('common.shared.filterLabel', "Bộ lọc")}
             onToggleValue={toggleFilterTypeValue}
             onClear={clearFilterTypes}
           />
 
           <div className="tag-filter" ref={tagFilterRef}>
-            <button type="button" className={`tag-filter-btn ${tagFilter.length > 0 ? 'active' : ''}`} onClick={() => setShowTagFilter((prev) => !prev)} aria-label={t('accounts.filterTags', '标签筛选')}>
+            <button type="button" className={`tag-filter-btn ${tagFilter.length > 0 ? 'active' : ''}`} onClick={() => setShowTagFilter((prev) => !prev)} aria-label={t('accounts.filterTags', "Lọc thẻ")}>
               <Tag size={14} />
-              {tagFilter.length > 0 ? `${t('accounts.filterTagsCount', '标签')}(${tagFilter.length})` : t('accounts.filterTags', '标签筛选')}
+              {tagFilter.length > 0 ? `${t('accounts.filterTagsCount', "Thẻ")}(${tagFilter.length})` : t('accounts.filterTags', "Lọc thẻ")}
             </button>
             {showTagFilter && (
               <div
@@ -954,7 +954,7 @@ export function KiroAccountsPage() {
                 className={`tag-filter-panel ${page.tagFilterPanelPlacement === 'top' ? 'open-top' : ''}`}
               >
                 {availableTags.length === 0 ? (
-                  <div className="tag-filter-empty">{t('accounts.noAvailableTags', '暂无可用标签')}</div>
+                  <div className="tag-filter-empty">{t('accounts.noAvailableTags', "Không có thẻ nào")}</div>
                 ) : (
                   <div className="tag-filter-options" style={page.tagFilterScrollContainerStyle}>
                     {availableTags.map((tag) => (
@@ -962,7 +962,7 @@ export function KiroAccountsPage() {
                         <input type="checkbox" checked={tagFilter.includes(tag)} onChange={() => toggleTagFilterValue(tag)} />
                         <span className="tag-filter-name">{tag}</span>
                         <button type="button" className="tag-filter-delete" onClick={(e) => { e.preventDefault(); e.stopPropagation(); requestDeleteTag(tag); }}
-                          aria-label={t('accounts.deleteTagAria', { tag, defaultValue: '删除标签 {{tag}}' })}>
+                          aria-label={t('accounts.deleteTagAria', { tag, defaultValue: "Xóa thẻ {{tag}}" })}>
                           <X size={12} />
                         </button>
                       </label>
@@ -972,10 +972,10 @@ export function KiroAccountsPage() {
                 <div className="tag-filter-divider" />
                 <label className="tag-filter-group-toggle">
                   <input type="checkbox" checked={groupByTag} onChange={(e) => setGroupByTag(e.target.checked)} />
-                  <span>{t('accounts.groupByTag', '按标签分组展示')}</span>
+                  <span>{t('accounts.groupByTag', "Nhóm theo thẻ")}</span>
                 </label>
                 {tagFilter.length > 0 && (
-                  <button type="button" className="tag-filter-clear" onClick={clearTagFilter}>{t('accounts.clearFilter', '清空筛选')}</button>
+                  <button type="button" className="tag-filter-clear" onClick={clearTagFilter}>{t('accounts.clearFilter', "Xóa bộ lọc")}</button>
                 )}
               </div>
             )}
@@ -984,35 +984,35 @@ export function KiroAccountsPage() {
           <SingleSelectFilterDropdown
             value={sortBy}
             options={[
-              { value: 'created_at', label: t('common.shared.sort.createdAt', '按创建时间') },
-              { value: 'credits', label: t('common.shared.sort.credits', '按剩余 Credits') },
-              { value: 'plan_end', label: t('common.shared.sort.planEnd', '按配额周期结束时间') },
+              { value: 'created_at', label: t('common.shared.sort.createdAt', "Thời gian tạo") },
+              { value: 'credits', label: t('common.shared.sort.credits', "Bằng số tín chỉ còn lại") },
+              { value: 'plan_end', label: t('common.shared.sort.planEnd', "Theo thời gian kết thúc chu kỳ") },
             ]}
-            ariaLabel={t('common.shared.sortLabel', '排序')}
+            ariaLabel={t('common.shared.sortLabel', "Sắp xếp")}
             icon={<ArrowDownWideNarrow size={14} />}
             onChange={setSortBy}
           />
 
           <button className="sort-direction-btn" onClick={() => setSortDirection((prev) => (prev === 'desc' ? 'asc' : 'desc'))}
-            title={sortDirection === 'desc' ? t('common.shared.sort.descTooltip', '当前：降序，点击切换为升序') : t('common.shared.sort.ascTooltip', '当前：升序，点击切换为降序')}
-            aria-label={t('common.shared.sort.toggleDirection', '切换排序方向')}>
+            title={sortDirection === 'desc' ? t('common.shared.sort.descTooltip', "Giảm dần (nhấn để chuyển Tăng dần)") : t('common.shared.sort.ascTooltip', "Tăng dần (nhấn để chuyển Giảm dần)")}
+            aria-label={t('common.shared.sort.toggleDirection', "Đổi hướng sắp xếp")}>
             {sortDirection === 'desc' ? '⬇' : '⬆'}
           </button>
         </div>
         <div className="toolbar-right">
-          <button className="btn btn-primary icon-only" onClick={() => openAddModal('oauth')} title={t('common.shared.addAccount', '添加账号')} aria-label={t('common.shared.addAccount', '添加账号')}><Plus size={14} /></button>
-          <button className="btn btn-secondary icon-only" onClick={handleRefreshAll} disabled={refreshingAll || accounts.length === 0} title={t('common.shared.refreshAll', '刷新全部')} aria-label={t('common.shared.refreshAll', '刷新全部')}>
+          <button className="btn btn-primary icon-only" onClick={() => openAddModal('oauth')} title={t('common.shared.addAccount', "Thêm tài khoản")} aria-label={t('common.shared.addAccount', "Thêm tài khoản")}><Plus size={14} /></button>
+          <button className="btn btn-secondary icon-only" onClick={handleRefreshAll} disabled={refreshingAll || accounts.length === 0} title={t('common.shared.refreshAll', "Làm mới tất cả")} aria-label={t('common.shared.refreshAll', "Làm mới tất cả")}>
             <RefreshCw size={14} className={refreshingAll ? 'loading-spinner' : ''} />
           </button>
           <button className="btn btn-secondary icon-only" onClick={togglePrivacyMode}
-            title={privacyModeEnabled ? t('privacy.showSensitive', '显示邮箱') : t('privacy.hideSensitive', '隐藏邮箱')}
-            aria-label={privacyModeEnabled ? t('privacy.showSensitive', '显示邮箱') : t('privacy.hideSensitive', '隐藏邮箱')}>
+            title={privacyModeEnabled ? t('privacy.showSensitive', "Hiện email") : t('privacy.hideSensitive', "Ẩn email")}
+            aria-label={privacyModeEnabled ? t('privacy.showSensitive', "Hiện email") : t('privacy.hideSensitive', "Ẩn email")}>
             {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
           </button>
-          <button className="btn btn-secondary icon-only" onClick={() => openAddModal('token')} disabled={importing} title={t('common.shared.import.label', '导入')} aria-label={t('common.shared.import.label', '导入')}><Download size={14} /></button>
+          <button className="btn btn-secondary icon-only" onClick={() => openAddModal('token')} disabled={importing} title={t('common.shared.import.label', "Nhập")} aria-label={t('common.shared.import.label', "Nhập")}><Download size={14} /></button>
           <button className="btn btn-secondary export-btn icon-only" onClick={() => void handleExport(filteredIds)} disabled={exporting || filteredIds.length === 0}
-            title={exportSelectionCount > 0 ? `${t('common.shared.export.title', '导出')} (${exportSelectionCount})` : t('common.shared.export.title', '导出')}
-            aria-label={exportSelectionCount > 0 ? `${t('common.shared.export.title', '导出')} (${exportSelectionCount})` : t('common.shared.export.title', '导出')}>
+            title={exportSelectionCount > 0 ? `${t('common.shared.export.title', "Xuất")} (${exportSelectionCount})` : t('common.shared.export.title', "Xuất")}
+            aria-label={exportSelectionCount > 0 ? `${t('common.shared.export.title', "Xuất")} (${exportSelectionCount})` : t('common.shared.export.title', "Xuất")}>
             <Upload size={14} />
           </button>
             <QuickSettingsPopover type="kiro" />
@@ -1033,8 +1033,8 @@ export function KiroAccountsPage() {
             <button
               className="btn btn-danger icon-only"
               onClick={handleBatchDelete}
-              title={`${t('common.delete', '删除')} (${selected.size})`}
-              aria-label={`${t('common.delete', '删除')} (${selected.size})`}
+              title={`${t('common.delete', "Xóa")} (${selected.size})`}
+              aria-label={`${t('common.delete', "Xóa")} (${selected.size})`}
             >
               <Trash2 size={14} />
             </button>
@@ -1043,27 +1043,27 @@ export function KiroAccountsPage() {
       )}
 
       {loading && accounts.length === 0 ? (
-        <div className="loading-container"><RefreshCw size={24} className="loading-spinner" /><p>{t('common.loading', '加载中...')}</p></div>
+        <div className="loading-container"><RefreshCw size={24} className="loading-spinner" /><p>{t('common.loading', "Đang tải...")}</p></div>
       ) : accounts.length === 0 ? (
         <div className="empty-state">
           <Globe size={48} />
-          <h3>{t('common.shared.empty.title', '暂无账号')}</h3>
-          <p>{t('kiro.empty.description', '点击"添加账号"开始管理您的 Kiro 账号')}</p>
+          <h3>{t('common.shared.empty.title', "Chưa có tài khoản")}</h3>
+          <p>{t('kiro.empty.description', "Nhấp vào \"Thêm tài khoản\" để bắt đầu quản lý tài khoản Kiro của bạn")}</p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '16px' }}>
             <button className="btn btn-primary" onClick={() => openAddModal('oauth')}>
               <Plus size={16} />
-              {t('common.shared.addAccount', '添加账号')}
+              {t('common.shared.addAccount', "Thêm tài khoản")}
             </button>
             <button className="btn btn-secondary" onClick={() => window.dispatchEvent(new CustomEvent('app-request-navigate', { detail: 'manual' }))}>
               <BookOpen size={16} />
-              {t('manual.navTitle', '功能使用手册')}
+              {t('manual.navTitle', "Sổ tay sử dụng")}
             </button>
           </div>
         </div>
       ) : filteredAccounts.length === 0 ? (
         <div className="empty-state">
-          <h3>{t('common.shared.noMatch.title', '没有匹配的账号')}</h3>
-          <p>{t('common.shared.noMatch.desc', '请尝试调整搜索或筛选条件')}</p>
+          <h3>{t('common.shared.noMatch.title', "Không có tài khoản phù hợp")}</h3>
+          <p>{t('common.shared.noMatch.desc', "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid-view-container">
@@ -1091,11 +1091,11 @@ export function KiroAccountsPage() {
                 <th style={{ width: 40 }}>
                   <input type="checkbox" checked={isAllPaginatedSelected} onChange={() => toggleSelectAll(paginatedIds)} />
                 </th>
-                <th style={{ width: 240 }}>{t('common.shared.columns.email', '邮箱')}</th>
-                <th style={{ width: 120 }}>{t('common.shared.columns.plan', '计划')}</th>
+                <th style={{ width: 240 }}>{t('common.shared.columns.email', "E-mail")}</th>
+                <th style={{ width: 120 }}>{t('common.shared.columns.plan', "Gói")}</th>
                 <th>{t('common.shared.columns.promptCredits', 'User Prompt credits')}</th>
                 <th>{t('common.shared.columns.addOnPromptCredits', 'Add-on prompt credits')}</th>
-                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', '操作')}</th>
+                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', "Hành động")}</th>
               </tr>
             </thead>
             <tbody>
@@ -1123,11 +1123,11 @@ export function KiroAccountsPage() {
                 <th style={{ width: 40 }}>
                   <input type="checkbox" checked={isAllPaginatedSelected} onChange={() => toggleSelectAll(paginatedIds)} />
                 </th>
-                <th style={{ width: 240 }}>{t('common.shared.columns.email', '邮箱')}</th>
-                <th style={{ width: 120 }}>{t('common.shared.columns.plan', '计划')}</th>
+                <th style={{ width: 240 }}>{t('common.shared.columns.email', "E-mail")}</th>
+                <th style={{ width: 120 }}>{t('common.shared.columns.plan', "Gói")}</th>
                 <th>{t('common.shared.columns.promptCredits', 'User Prompt credits')}</th>
                 <th>{t('common.shared.columns.addOnPromptCredits', 'Add-on prompt credits')}</th>
-                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', '操作')}</th>
+                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', "Hành động")}</th>
               </tr>
             </thead>
             <tbody>{renderTableRows(paginatedAccounts)}</tbody>
@@ -1154,16 +1154,16 @@ export function KiroAccountsPage() {
         <div className="modal-overlay">
           <div className="modal-content ghcp-add-modal platform-account-add-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeAddModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
-              <h2>{t('kiro.addModal.title', '添加 Kiro 账号')}</h2>
-              <button className="modal-close" onClick={closeAddModal} aria-label={t('common.close', '关闭')}><X /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeAddModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
+              <h2>{t('kiro.addModal.title', "Thêm tài khoản Kiro")}</h2>
+              <button className="modal-close" onClick={closeAddModal} aria-label={t('common.close', "Đóng")}><X /></button>
             </div>
 
             <div className="modal-tabs">
               <button className={`modal-tab ${addTab === 'oauth' ? 'active' : ''}`} onClick={() => openAddModal('oauth')}><Globe size={14} />{t('common.shared.addModal.oauth', 'OAuth Authorization')}</button>
               <button className={`modal-tab ${addTab === 'idc' ? 'active' : ''}`} onClick={() => handleSelectIdcLoginMethod('builderId')}><Lock size={14} />{t('kiro.addModal.idc', 'IAM Identity Center')}</button>
               <button className={`modal-tab ${addTab === 'token' ? 'active' : ''}`} onClick={() => openAddModal('token')}><KeyRound size={14} />{t('common.shared.addModal.token', 'Token / JSON')}</button>
-              <button className={`modal-tab ${addTab === 'import' ? 'active' : ''}`} onClick={() => openAddModal('import')}><Database size={14} />{t('common.shared.addModal.import', '本地导入')}</button>
+              <button className={`modal-tab ${addTab === 'import' ? 'active' : ''}`} onClick={() => openAddModal('import')}><Database size={14} />{t('common.shared.addModal.import', "Nhập từ máy")}</button>
             </div>
 
             <div className="modal-body">
@@ -1214,24 +1214,24 @@ export function KiroAccountsPage() {
                           </label>
                           {idcFormError && <div className="add-status error"><CircleAlert size={16} /><span>{idcFormError}</span></div>}
                           <button className="btn btn-primary btn-full" onClick={handleStartEnterpriseLogin}>
-                            <Globe size={16} />{t('kiro.idc.start', '开始企业登录')}
+                            <Globe size={16} />{t('kiro.idc.start', "Bắt đầu đăng nhập doanh nghiệp")}
                           </button>
                         </div>
                       )}
-                      <p className="section-desc">{t('kiro.idc.desc', '在浏览器中完成 AWS IAM Identity Center 授权，授权完成后账号会自动保存。')}</p>
+                      <p className="section-desc">{t('kiro.idc.desc', "Hoàn tất ủy quyền AWS IAM Identity Center trong trình duyệt. Tài khoản sẽ được lưu tự động.")}</p>
                     </>
                   )}
-                  {addTab === 'oauth' && <p className="section-desc">{t('kiro.oauth.desc', '点击下方按钮，在浏览器中完成 Kiro OAuth 授权。')}</p>}
+                  {addTab === 'oauth' && <p className="section-desc">{t('kiro.oauth.desc', "Nhấp vào nút bên dưới và hoàn tất ủy quyền Kiro trong trình duyệt của bạn.")}</p>}
 
                   {oauthPrepareError ? (
                     <div className="add-status error">
                       <CircleAlert size={16} /><span>{oauthPrepareError}</span>
-                      <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>{t('common.shared.oauth.retry', '重新生成授权信息')}</button>
+                      <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>{t('common.shared.oauth.retry', "Tạo lại thông tin ủy quyền")}</button>
                     </div>
                   ) : oauthUrl ? (
                     <div className="oauth-url-section">
                       <div className="oauth-link">
-                        <label>{t('accounts.oauth.linkLabel', '授权链接')}</label>
+                        <label>{t('accounts.oauth.linkLabel', "Liên kết xác thực")}</label>
                         <div className="oauth-url-box">
                           <input type="text" value={oauthUrl} readOnly />
                           <button onClick={handleCopyOauthUrl}>{oauthUrlCopied ? <Check size={16} /> : <Copy size={16} />}</button>
@@ -1244,18 +1244,18 @@ export function KiroAccountsPage() {
                         </div>
                       )}
                       {oauthMeta && (
-                        <p className="oauth-hint">{t('common.shared.oauth.meta', '授权有效期：{{expires}}s；轮询间隔：{{interval}}s', { expires: oauthMeta.expiresIn, interval: oauthMeta.intervalSeconds })}</p>
+                        <p className="oauth-hint">{t('common.shared.oauth.meta', "Hết hạn sau: {{expires}}s; chu kỳ thăm dò: {{interval}}s", { expires: oauthMeta.expiresIn, interval: oauthMeta.intervalSeconds })}</p>
                       )}
-                      <button className="btn btn-primary btn-full" onClick={handleOpenOauthUrl}><Globe size={16} />{t('common.shared.oauth.openBrowser', '在浏览器中打开')}</button>
+                      <button className="btn btn-primary btn-full" onClick={handleOpenOauthUrl}><Globe size={16} />{t('common.shared.oauth.openBrowser', "Mở trong trình duyệt")}</button>
                       {oauthSupportsManualCallback && (
                         <div className="oauth-link">
-                          <label>{t('common.shared.oauth.manualCallbackLabel', '手动输入回调地址')}</label>
+                          <label>{t('common.shared.oauth.manualCallbackLabel', "Nhập URL callback thủ công")}</label>
                           <div className="oauth-url-box oauth-manual-input">
                             <input
                               type="text"
                               value={oauthManualCallbackInput}
                               onChange={(e) => setOauthManualCallbackInput(e.target.value)}
-                              placeholder={t('common.shared.oauth.manualCallbackPlaceholder', '粘贴完整回调地址，例如：http://localhost:1455/auth/callback?code=...&state=...')}
+                              placeholder={t('common.shared.oauth.manualCallbackPlaceholder', "Dán đầy đủ URL callback, ví dụ: http://localhost:1455/auth/callback?code=...&state=...")}
                             />
                             <button
                               className="oauth-copy-button"
@@ -1263,7 +1263,7 @@ export function KiroAccountsPage() {
                               disabled={oauthManualCallbackSubmitting || !oauthManualCallbackInput.trim()}
                             >
                               {oauthManualCallbackSubmitting ? <RefreshCw size={16} className="loading-spinner" /> : <Check size={16} />}
-                              {t('accounts.oauth.continue', '我已授权，继续')}
+                              {t('accounts.oauth.continue', "Tôi đã xác thực, tiếp tục")}
                             </button>
                           </div>
                         </div>
@@ -1272,25 +1272,25 @@ export function KiroAccountsPage() {
                         <div className="add-status error"><CircleAlert size={16} /><span>{oauthManualCallbackError}</span></div>
                       )}
                       {oauthPolling && (
-                        <div className="add-status loading"><RefreshCw size={16} className="loading-spinner" /><span>{t('common.shared.oauth.waiting', '等待授权完成...')}</span></div>
+                        <div className="add-status loading"><RefreshCw size={16} className="loading-spinner" /><span>{t('common.shared.oauth.waiting', "Đang chờ ủy quyền...")}</span></div>
                       )}
                       {oauthCompleteError && (
                         <div className="add-status error">
                           <CircleAlert size={16} /><span>{oauthCompleteError}</span>
-                          {oauthTimedOut && (<button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>{t('common.shared.oauth.timeoutRetry', '刷新授权链接')}</button>)}
+                          {oauthTimedOut && (<button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>{t('common.shared.oauth.timeoutRetry', "Làm mới liên kết ủy quyền")}</button>)}
                         </div>
                       )}
                       <p className="oauth-hint">{t('common.shared.oauth.hint', 'Once authorized, this window will update automatically')}</p>
                     </div>
                   ) : (!oauthUrl && addTab === 'idc' && idcLoginMethod === 'enterprise' ? null : (
-                    <div className="oauth-loading"><RefreshCw size={24} className="loading-spinner" /><span>{t('common.shared.oauth.preparing', '正在准备授权信息...')}</span></div>
+                    <div className="oauth-loading"><RefreshCw size={24} className="loading-spinner" /><span>{t('common.shared.oauth.preparing', "Đang chuẩn bị liên kết ủy quyền...")}</span></div>
                   ))}
                 </div>
               )}
 
               {addTab === 'token' && (
                 <div className="add-section">
-                  <p className="section-desc">{t('kiro.token.desc', '粘贴您的 Kiro Access Token 或导出的 JSON 数据。')}</p>
+                  <p className="section-desc">{t('kiro.token.desc', "Dán mã thông báo truy cập Kiro của bạn hoặc dữ liệu JSON đã xuất.")}</p>
                   <details className="token-format-collapse">
                     <summary className="token-format-collapse-summary">必填字段与示例（点击展开）</summary>
                     <div className="token-format">
@@ -1305,7 +1305,7 @@ export function KiroAccountsPage() {
                       </div>
                     </div>
                   </details>
-                  <textarea className="token-input" value={tokenInput} onChange={(e) => setTokenInput(e.target.value)} placeholder={t('common.shared.token.placeholder', '粘贴 Token 或 JSON...')} />
+                  <textarea className="token-input" value={tokenInput} onChange={(e) => setTokenInput(e.target.value)} placeholder={t('common.shared.token.placeholder', "Ví dụ: ghu_xxx / sk-ws-xxx / {\"access_token\":\"eyJ...\",\"refresh_token\":\"rt_...\"} / [{...}]")} />
                   <button className="btn btn-primary btn-full" onClick={handleTokenImport} disabled={importing || !tokenInput.trim()}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Download size={16} />}
                     {t('common.shared.token.import', 'Import')}
@@ -1315,17 +1315,17 @@ export function KiroAccountsPage() {
 
               {addTab === 'import' && (
                 <div className="add-section">
-                  <p className="section-desc">{t('kiro.import.localDesc', '支持从本机 Kiro 客户端或 JSON 文件导入账号数据。')}</p>
+                  <p className="section-desc">{t('kiro.import.localDesc', "Nhập dữ liệu tài khoản Kiro từ ứng dụng khách Kiro cục bộ hoặc tệp JSON.")}</p>
                   <button className="btn btn-secondary btn-full" onClick={() => handleImportFromLocal?.()} disabled={importing}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Database size={16} />}
-                    {t('kiro.import.localClient', '从本机 Kiro 导入')}
+                    {t('kiro.import.localClient', "Nhập khẩu từ Kiro địa phương")}
                   </button>
-                  <div className="oauth-hint" style={{ margin: '8px 0 4px' }}>{t('common.shared.import.orJson', '或从 JSON 文件导入')}</div>
+                  <div className="oauth-hint" style={{ margin: '8px 0 4px' }}>{t('common.shared.import.orJson', "Hoặc nhập từ tệp JSON")}</div>
                   <input ref={importFileInputRef} type="file" accept="application/json" style={{ display: 'none' }}
                     onChange={(e) => { const file = e.target.files?.[0]; e.target.value = ''; if (!file) return; void handleImportJsonFile(file); }} />
                   <button className="btn btn-primary btn-full" onClick={handlePickImportFile} disabled={importing}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Database size={16} />}
-                    {t('common.shared.import.pickFile', '选择 JSON 文件导入')}
+                    {t('common.shared.import.pickFile', "Chọn tệp JSON để nhập")}
                   </button>
                 </div>
               )}
@@ -1343,7 +1343,7 @@ export function KiroAccountsPage() {
 
       <ExportJsonModal
         isOpen={showExportModal}
-        title={`${t('common.shared.export.title', '导出')} JSON`}
+        title={`${t('common.shared.export.title', "Xuất")} JSON`}
         jsonContent={exportJsonContent}
         hidden={exportJsonHidden}
         copied={exportJsonCopied}
@@ -1364,7 +1364,7 @@ export function KiroAccountsPage() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{t('common.confirm')}</h2>
-              <button className="modal-close" onClick={() => !deleting && setDeleteConfirm(null)} aria-label={t('common.close', '关闭')}><X /></button>
+              <button className="modal-close" onClick={() => !deleting && setDeleteConfirm(null)} aria-label={t('common.close', "Đóng")}><X /></button>
             </div>
             <div className="modal-body">
               <ModalErrorMessage message={deleteConfirmError} scrollKey={deleteConfirmErrorScrollKey} />
@@ -1383,7 +1383,7 @@ export function KiroAccountsPage() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{t('common.confirm')}</h2>
-              <button className="modal-close" onClick={() => !deletingTag && setTagDeleteConfirm(null)} aria-label={t('common.close', '关闭')}><X /></button>
+              <button className="modal-close" onClick={() => !deletingTag && setTagDeleteConfirm(null)} aria-label={t('common.close', "Đóng")}><X /></button>
             </div>
             <div className="modal-body">
               <ModalErrorMessage message={tagDeleteConfirmError} scrollKey={tagDeleteConfirmErrorScrollKey} />
@@ -1391,7 +1391,7 @@ export function KiroAccountsPage() {
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setTagDeleteConfirm(null)} disabled={deletingTag}>{t('common.cancel')}</button>
-              <button className="btn btn-danger" onClick={confirmDeleteTag} disabled={deletingTag}>{deletingTag ? t('common.processing', '处理中...') : t('common.confirm')}</button>
+              <button className="btn btn-danger" onClick={confirmDeleteTag} disabled={deletingTag}>{deletingTag ? t('common.processing', "Đang xử lý...") : t('common.confirm')}</button>
             </div>
           </div>
         </div>

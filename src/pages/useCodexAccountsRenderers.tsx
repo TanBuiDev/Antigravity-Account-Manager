@@ -370,12 +370,12 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 (account.requires_reauth || serverRevokedReauth) && (
                 <span
                   className={`codex-status-pill ${reauthNoticeOnly ? "quota-refresh" : "quota-error"} codex-client-auth-status-pill`}
-                  title={account.reauth_reason || t("codex.authError.badge", "授权异常")}
+                  title={account.reauth_reason || t("codex.authError.badge", "Lỗi ủy quyền")}
                 >
                   <CircleAlert size={11} />
                   {reauthNoticeOnly
-                    ? t("codex.switchAuth.apiOnlyBadge", "客户端需授权")
-                    : t("codex.authError.badge", "授权异常")}
+                    ? t("codex.switchAuth.apiOnlyBadge", "Cần đăng nhập")
+                    : t("codex.authError.badge", "Lỗi ủy quyền")}
                 </span>
               )}
               {clientAuthRequired && (
@@ -383,11 +383,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   className="codex-status-pill quota-refresh codex-client-auth-status-pill"
                   title={t(
                     "codex.switchAuth.apiOnlyDescription",
-                    "检测到当前账号的客户端需要重新授权，API 服务仍可用。",
+                    "Ứng dụng hiện tại đã chuyển đến trang đăng nhập. Hãy cấp quyền lại để khôi phục ứng dụng; bạn vẫn có thể tiếp tục dùng Dịch vụ API trong lúc này.",
                   )}
                 >
                   <CircleAlert size={11} />
-                  {t("codex.switchAuth.apiOnlyBadge", "客户端需授权")}
+                  {t("codex.switchAuth.apiOnlyBadge", "Cần đăng nhập")}
                 </span>
               )}
             </div>
@@ -400,7 +400,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         "totalBalance",
                         t(
                           "codex.modelProviders.usage.fields.totalBalance",
-                          "总余额",
+                          "Tổng số dư",
                         ),
                         formatApiKeyUsageMoney(
                           compactDeepSeekSummary?.balance,
@@ -411,7 +411,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         "grantedBalance",
                         t(
                           "codex.modelProviders.usage.fields.grantedBalance",
-                          "赠金余额",
+                          "Số dư tặng",
                         ),
                         formatApiKeyUsageDetailByKey(
                           compactDeepSeekSummary,
@@ -422,7 +422,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         "toppedUpBalance",
                         t(
                           "codex.modelProviders.usage.fields.toppedUpBalance",
-                          "充值余额",
+                          "Số dư nạp",
                         ),
                         formatApiKeyUsageDetailByKey(
                           compactDeepSeekSummary,
@@ -499,10 +499,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         void handleRefreshSubscriptionInfo(account.id)
                       }
                       disabled={isSubscriptionRefreshPending}
-                      title={t("common.refresh", "刷新")}
-                      aria-label={t("common.refresh", "刷新")}
+                      title={t("common.refresh", "Làm mới")}
+                      aria-label={t("common.refresh", "Làm mới")}
                     >
-                      {t("common.refresh", "刷新")}
+                      {t("common.refresh", "Làm mới")}
                     </button>
                   )}
                 </span>
@@ -521,8 +521,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   type="button"
                   className="codex-compact-note-btn codex-compact-reauthorize-btn"
                   onClick={() => openCodexAddModal("tempLogin", account)}
-                  title={t("common.reauthorize", "重新授权")}
-                  aria-label={t("common.reauthorize", "重新授权")}
+                  title={t("common.reauthorize", "Ủy quyền lại")}
+                  aria-label={t("common.reauthorize", "Ủy quyền lại")}
                 >
                   <RefreshCw size={13} />
                 </button>
@@ -533,9 +533,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   onClick={() => openAccountNoteModal(account)}
                   title={
                     getCodexAccountNoteTitle(account, "") ||
-                    t("codex.accountNote.emptyTitle", "填写账号备注")
+                    t("codex.accountNote.emptyTitle", "Thêm ghi chú tài khoản")
                   }
-                  aria-label={t("codex.accountNote.title", "账号备注")}
+                  aria-label={t("codex.accountNote.title", "Ghi chú tài khoản")}
                 >
                   <FileText size={13} />
                 </button>
@@ -544,7 +544,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 className={`codex-compact-switch-btn ${!isCurrent ? "success" : ""}`}
                 onClick={() => handleSwitch(account.id)}
                 disabled={!!switching || Boolean(switchOrLaunchBlockedReason)}
-                title={switchOrLaunchBlockedReason || t("codex.switch", "切换")}
+                title={switchOrLaunchBlockedReason || t("codex.switch", "Chuyển")}
               >
                 {switching === account.id ? (
                   <RefreshCw size={14} className="loading-spinner" />
@@ -572,17 +572,17 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
           account.client_auth_status === "login_required";
         const clientAuthNoticeText = t(
           "codex.switchAuth.apiOnlyDescription",
-          "检测到当前账号的客户端需要重新授权，API 服务仍可用。",
+          "Ứng dụng hiện tại đã chuyển đến trang đăng nhập. Hãy cấp quyền lại để khôi phục ứng dụng; bạn vẫn có thể tiếp tục dùng Dịch vụ API trong lúc này.",
         );
         const clientAuthDetailText = [
           t(
             "codex.switchAuth.observationStatus",
-            "检测到跳转到登录页面",
+            "Đã phát hiện chuyển hướng đến trang đăng nhập",
           ),
           account.last_client_launch_at
             ? t("codex.switchAuth.launchTime", {
                 time: new Date(account.last_client_launch_at * 1000).toLocaleString(),
-                defaultValue: "本次实例启动时间：{{time}}",
+                defaultValue: "Thời điểm khởi chạy phiên bản: {{time}}",
               })
             : "",
           account.last_client_login_redirect_at
@@ -590,7 +590,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 time: new Date(
                   account.last_client_login_redirect_at * 1000,
                 ).toLocaleString(),
-                defaultValue: "最近一次跳转登录页：{{time}}",
+                defaultValue: "Lần chuyển hướng gần nhất đến trang đăng nhập: {{time}}",
               })
             : "",
           account.last_client_auth_observed_at
@@ -598,13 +598,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 time: new Date(
                   account.last_client_auth_observed_at * 1000,
                 ).toLocaleString(),
-                defaultValue: "最近一次检测时间：{{time}}",
+                defaultValue: "Lần kiểm tra gần nhất: {{time}}",
               })
             : "",
           account.last_client_auth_instance_id
             ? t("codex.switchAuth.observationInstance", {
                 instance: account.last_client_auth_instance_id,
-                defaultValue: "检测实例：{{instance}}",
+                defaultValue: "Phiên bản được kiểm tra: {{instance}}",
               })
             : "",
         ]
@@ -656,17 +656,17 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
         const accountIssueDisplayText = isRefreshTokenNotice
           ? t(
               "codex.quotaError.authRefreshDeferred",
-              "refresh_token 已失效；当前 access_token 仍可用于 API 服务，但不能切换到官方客户端，请重新授权后再切号。",
+              "refresh_token đã mất hiệu lực. access_token hiện tại vẫn dùng được cho dịch vụ API nhưng không thể chuyển ứng dụng chính thức. Hãy cấp quyền lại trước khi chuyển.",
             )
           : accountIssueMeta.displayText;
         const accountIssueBadge = isRefreshTokenNotice
-          ? t("codex.authError.badge", "授权异常")
+          ? t("codex.authError.badge", "Lỗi ủy quyền")
           : isQuotaRefreshNotice
-            ? t("codex.quotaError.refreshFailedBadge", "刷新失败")
+            ? t("codex.quotaError.refreshFailedBadge", "Làm mới thất bại")
             : reauthErrorMeta.rawMessage
-              ? t("codex.authError.badge", "授权异常")
+              ? t("codex.authError.badge", "Lỗi ủy quyền")
               : accountIssueMeta.statusCode ||
-                t("codex.quotaError.badge", "配额异常");
+                t("codex.quotaError.badge", "Lỗi quota");
         const showReauthorizeAction =
           !isApiKeyAccount &&
           !isRefreshTokenNotice &&
@@ -675,12 +675,12 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
             (hasQuotaError && shouldOfferReauthorizeAction(accountIssueMeta)));
         const accountIdText =
           meta.chatgptAccountId &&
-          meta.chatgptAccountId !== t("common.none", "暂无")
+          meta.chatgptAccountId !== t("common.none", "None​")
             ? meta.chatgptAccountId
             : meta.userId;
         const signInLine = `${meta.signedInWithText} | ${accountIdLabel}: ${accountIdText}`;
         const apiProviderName = resolveApiProviderDisplayName(account);
-        const apiProviderLine = `${t("codex.api.provider.label", "供应商")}：${apiProviderName}`;
+        const apiProviderLine = `${t("codex.api.provider.label", "Nhà cung cấp")}：${apiProviderName}`;
         const apiBaseUrlText = (account.api_base_url || "").trim() || "-";
         const apiBaseUrlLine = `${t("codex.api.baseUrl", "Base URL")}：${apiBaseUrlText}`;
         const apiKeyUsageProvider = resolveUsageProviderForApiKeyAccount(account);
@@ -791,18 +791,18 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 </span>
               )}
               {isCurrent && (
-                <span className="current-tag">{t("codex.current", "当前")}</span>
+                <span className="current-tag">{t("codex.current", "Hiện tại")}</span>
               )}
               {clientAuthRequired && (
                 <span
                   className="codex-status-pill quota-refresh codex-client-auth-status-pill"
                   title={t(
                     "codex.switchAuth.apiOnlyDescription",
-                    "检测到当前账号的客户端需要重新授权，API 服务仍可用。",
+                    "Ứng dụng hiện tại đã chuyển đến trang đăng nhập. Hãy cấp quyền lại để khôi phục ứng dụng; bạn vẫn có thể tiếp tục dùng Dịch vụ API trong lúc này.",
                   )}
                 >
                   <CircleAlert size={12} />
-                  {t("codex.switchAuth.apiOnlyBadge", "客户端需授权")}
+                  {t("codex.switchAuth.apiOnlyBadge", "Cần đăng nhập")}
                 </span>
               )}
               {hasQuotaError && (
@@ -845,10 +845,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       void handleRemoveLocalAccessAccount(account.id);
                     }}
                     disabled={addingLocalAccessAccountId !== null}
-                    title={t("codex.localAccess.removeAction", "移除 API 服务")}
+                    title={t("codex.localAccess.removeAction", "Xóa khỏi API")}
                     aria-label={t(
                       "codex.localAccess.removeAction",
-                      "移除 API 服务",
+                      "Xóa khỏi API",
                     )}
                   >
                     {addingLocalAccessAccountId === account.id ? (
@@ -856,7 +856,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     ) : (
                       <Link2 size={11} />
                     )}
-                    {t("codex.localAccess.removeAction", "移除 API 服务")}
+                    {t("codex.localAccess.removeAction", "Xóa khỏi API")}
                   </button>
                 )}
                 {!isInLocalAccess && canAddToLocalAccess && (
@@ -865,10 +865,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     className="group-account-badge codex-local-access-inline-add"
                     onClick={() => void handleAddLocalAccessAccount(account.id)}
                     disabled={addingLocalAccessAccountId !== null}
-                    title={t("codex.localAccess.entryAction", "添加至 API 服务")}
+                    title={t("codex.localAccess.entryAction", "Thêm vào dịch vụ API")}
                   >
                     <Link2 size={11} />
-                    {t("codex.localAccess.entryAction", "添加至 API 服务")}
+                    {t("codex.localAccess.entryAction", "Thêm vào dịch vụ API")}
                   </button>
                 )}
                 {!isApiKeyAccount && renderAccountNoteButton(account)}
@@ -903,9 +903,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       type="button"
                       className="codex-provider-inline-switch"
                       onClick={() => openQuickSwitchProviderModal(account)}
-                      title={t("codex.quickSwitch.action", "快速切换供应商")}
+                      title={t("codex.quickSwitch.action", "Chuyển nhanh nhà cung cấp")}
                     >
-                      {t("codex.quickSwitch.inlineAction", "切换")}
+                      {t("codex.quickSwitch.inlineAction", "Chuyển")}
                     </button>
                   )}
                 </div>
@@ -923,10 +923,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => setApiKeyUsageDetailAccountId(account.id)}
                       title={t(
                         "codex.modelProviders.usage.detailTitle",
-                        "服务面板",
+                        "Bảng dịch vụ",
                       )}
                     >
-                      {t("common.detail", "详情")}
+                      {t("common.detail", "Chi tiết")}
                     </button>
                   )}
                 </div>
@@ -961,7 +961,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         clearClientAuthObservationAccountId: account.id,
                         detailTitle: t(
                           "codex.switchAuth.apiOnlyTitle",
-                          "客户端需授权",
+                          "Ứng dụng cần đăng nhập",
                         ),
                         isRefreshNotice: true,
                         showReauthorize: true,
@@ -992,7 +992,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         <span>
                           {t(
                             "codex.modelProviders.usage.accountBalance",
-                            "账户余额",
+                            "Số dư tài khoản",
                           )}
                           ：
                         </span>
@@ -1003,7 +1003,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <CodexTeamQuotaHistory account={account} />
                     {quotaItems.length === 0 && !cockpitApiAccountBalanceText && (
                       <div className="quota-empty">
-                        {t("common.shared.quota.noData", "暂无配额数据")}
+                        {t("common.shared.quota.noData", "Không có dữ liệu hạn mức")}
                       </div>
                     )}
                     {isPendingOAuthAccount && (
@@ -1011,9 +1011,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         <button
                           className="btn btn-sm btn-outline"
                           onClick={() => openCodexAddModal("oauth", account)}
-                          title={t("common.shared.addModal.oauth", "OAuth 授权")}
+                          title={t("common.shared.addModal.oauth", "Ủy quyền OAuth")}
                         >
-                          {t("common.shared.addModal.oauth", "OAuth 授权")}
+                          {t("common.shared.addModal.oauth", "Ủy quyền OAuth")}
                         </button>
                       </div>
                     )}
@@ -1032,7 +1032,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <strong>{subscriptionInfo.valueText}</strong>
                   ) : (
                     <>
-                      <span>{t("codex.subscription.label", "有效期")}</span>
+                      <span>{t("codex.subscription.label", "Hết hạn gói")}</span>
                       <strong>{subscriptionInfo.valueText}</strong>
                     </>
                   )}
@@ -1053,10 +1053,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           void handleRefreshSubscriptionInfo(account.id)
                         }
                         disabled={isSubscriptionRefreshPending}
-                        title={t("common.refresh", "刷新")}
-                        aria-label={t("common.refresh", "刷新")}
+                        title={t("common.refresh", "Làm mới")}
+                        aria-label={t("common.refresh", "Làm mới")}
                       >
-                        {t("common.refresh", "刷新")}
+                        {t("common.refresh", "Làm mới")}
                       </button>
                     )}
                   </div>
@@ -1079,7 +1079,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     }
                     title={
                       switchOrLaunchBlockedReason ||
-                      t("common.cliQuickLaunch", "CLI 快速启动")
+                      t("common.cliQuickLaunch", "Mở CLI")
                     }
                   >
                     {cliLaunchingAccountId === account.id ? (
@@ -1092,7 +1092,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={() => setCockpitApiPanelAccountId(account.id)}
-                      title={t("codex.cockpitApi.servicePanel", "服务面板")}
+                      title={t("codex.cockpitApi.servicePanel", "Bảng dịch vụ")}
                     >
                       <Database size={14} />
                     </button>
@@ -1100,7 +1100,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   <button
                     className="card-action-btn"
                     onClick={() => openTagModal(account.id)}
-                    title={t("accounts.editTags", "编辑标签")}
+                    title={t("accounts.editTags", "Chỉnh sửa thẻ")}
                   >
                     <Tag size={14} />
                   </button>
@@ -1110,9 +1110,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => openAccountNoteModal(account)}
                       title={
                         getCodexAccountNoteTitle(account, "") ||
-                        t("codex.accountNote.emptyTitle", "填写账号备注")
+                        t("codex.accountNote.emptyTitle", "Thêm ghi chú tài khoản")
                       }
-                      aria-label={t("codex.accountNote.title", "账号备注")}
+                      aria-label={t("codex.accountNote.title", "Ghi chú tài khoản")}
                     >
                       <FileText size={14} />
                     </button>
@@ -1121,7 +1121,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={() => openApiKeyCredentialsModal(account)}
-                      title={t("instances.actions.edit", "编辑")}
+                      title={t("instances.actions.edit", "Chỉnh sửa")}
                     >
                       <Pencil size={14} />
                     </button>
@@ -1131,7 +1131,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     onClick={() => handleSwitch(account.id)}
                     disabled={!!switching || Boolean(switchOrLaunchBlockedReason)}
                     title={
-                      switchOrLaunchBlockedReason || t("codex.switch", "切换")
+                      switchOrLaunchBlockedReason || t("codex.switch", "Chuyển")
                     }
                   >
                     {switching === account.id ? (
@@ -1159,7 +1159,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                             ? apiKeyUsageMap[account.id]?.loading === true
                             : refreshing === account.id
                         }
-                        title={t("common.shared.refreshQuota", "刷新配额")}
+                        title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
                       >
                         <RotateCw
                           size={14}
@@ -1183,7 +1183,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         resolveSingleExportBaseName(account),
                       )
                     }
-                    title={t("common.shared.export.title", "导出")}
+                    title={t("common.shared.export.title", "Xuất")}
                   >
                     <Upload size={14} />
                   </button>
@@ -1218,7 +1218,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
           : `${localAccessCollection.apiKey.slice(0, 10)}••••••••••••`;
       const localAccessOAuthBindingLabel = t(
         "codex.api.oauthBinding.label",
-        "OAuth 绑定",
+        "Liên kết OAuth",
       );
       const localAccessOAuthBindingValue = boundLocalAccessOAuthAccount
         ? maskAccountText(
@@ -1226,7 +1226,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               boundLocalAccessOAuthAccount.email ||
               boundLocalAccessOAuthAccount.id,
           )
-        : t("codex.api.oauthBinding.unbound", "未绑定");
+        : t("codex.api.oauthBinding.unbound", "Chưa liên kết");
       const localAccessOAuthBindingLine = `${localAccessOAuthBindingLabel}：${localAccessOAuthBindingValue}`;
       const localAccessBoundOAuthNeedsReauth = Boolean(
         boundLocalAccessOAuthAccount?.requires_reauth,
@@ -1235,7 +1235,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
         boundLocalAccessOAuthAccount?.reauth_reason?.trim() ||
         t(
           "codex.switchAuth.reauthorizeDescription",
-          "当前登录凭据无法自动更新，请重新授权后继续使用。",
+          "Không thể làm mới thông tin đăng nhập và access_token không còn dùng được cho dịch vụ API. Hãy ủy quyền lại tài khoản để tiếp tục.",
         );
       const quotaReserveStatus = localAccessState?.quotaReserveStatus ?? null;
       const quotaReserveWarningLine =
@@ -1247,11 +1247,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               quotaReserveStatus.effectiveWindow === "weekly"
                 ? t(
                     "codex.localAccess.oauthBinding.quotaReserveWeeklyLabel",
-                    "周保留",
+                    "Giữ lại theo tuần",
                   )
                 : t(
                     "codex.localAccess.oauthBinding.quotaReserveHourlyLabel",
-                    "5 小时保留",
+                    "Giữ lại 5 giờ",
                   )
             }：${quotaReserveStatus.effectiveRemainingPercent}% / ${quotaReserveStatus.effectiveReservePercent}%`
           : null;
@@ -1263,7 +1263,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
       const isLocalAccessCurrent = localAccessLaunchCurrent;
       const localAccessMemberCountLabel = t("codex.localAccess.accountCount", {
         count: localAccessState?.memberCount ?? 0,
-        defaultValue: "{{count}} 个账号",
+        defaultValue: "{{count}} tài khoản",
       });
       return (
         <div
@@ -1278,7 +1278,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 <div className="folder-inline-info">
                   <div className="codex-local-access-title-row">
                     <span className="codex-local-access-current-mode">
-                      {t("codex.localAccess.title", "API 服务")}
+                      {t("codex.localAccess.title", "Dịch vụ API")}
                     </span>
                   </div>
                 </div>
@@ -1298,14 +1298,14 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 }}
                 title={
                   showLocalAccessDetails
-                    ? t("codex.localAccess.collapseDetails", "收起详情")
-                    : t("codex.localAccess.expandDetails", "展开详情")
+                    ? t("codex.localAccess.collapseDetails", "Thu gọn")
+                    : t("codex.localAccess.expandDetails", "Mở chi tiết")
                 }
               >
                 <div className="folder-inline-info">
                   <div className="codex-local-access-title-row">
                     <span className="codex-local-access-current-mode">
-                      {t("codex.localAccess.title", "API 服务")}
+                      {t("codex.localAccess.title", "Dịch vụ API")}
                     </span>
                     <span className="codex-local-access-summary-text">
                       {localAccessMemberCountLabel}
@@ -1321,8 +1321,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   instanceGatewaySummary.issues > 0 ? " has-issue" : ""
                 }${instanceGatewaySummary.total === 0 ? " is-empty" : ""}`}
                 onClick={openInstanceGateways}
-                title={t("codex.instanceGateways.title", "实例网关")}
-                aria-label={t("codex.instanceGateways.title", "实例网关")}
+                title={t("codex.instanceGateways.title", "Cổng instance")}
+                aria-label={t("codex.instanceGateways.title", "Cổng instance")}
               >
                 {instanceGatewaysLoading ? (
                   <RefreshCw size={12} className="loading-spinner" />
@@ -1333,21 +1333,21 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   {instanceGatewaySummary.total > 0
                     ? t("codex.instanceGateways.entryCount", {
                         count: instanceGatewaySummary.total,
-                        defaultValue: "实例网关 {{count}}",
+                        defaultValue: "Cổng instance {{count}}",
                       })
-                    : t("codex.instanceGateways.entry", "实例网关")}
+                    : t("codex.instanceGateways.entry", "Cổng instance")}
                 </span>
                 {instanceGatewaySummary.issues > 0 && (
                   <span className="codex-local-access-instance-gateways-issue">
                     {t("codex.instanceGateways.issueCount", {
                       count: instanceGatewaySummary.issues,
-                      defaultValue: "{{count}} 异常",
+                      defaultValue: "{{count}} bất thường",
                     })}
                   </span>
                 )}
               </button>
               {isLocalAccessCurrent && (
-                <span className="current-tag">{t("codex.current", "当前")}</span>
+                <span className="current-tag">{t("codex.current", "Hiện tại")}</span>
               )}
               <span
                 className={`codex-local-access-status ${localAccessStatusTone}`}
@@ -1363,13 +1363,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   }
                   title={
                     showLocalAccessDetails
-                      ? t("codex.localAccess.collapseDetails", "收起详情")
-                      : t("codex.localAccess.expandDetails", "展开详情")
+                      ? t("codex.localAccess.collapseDetails", "Thu gọn")
+                      : t("codex.localAccess.expandDetails", "Mở chi tiết")
                   }
                   aria-label={
                     showLocalAccessDetails
-                      ? t("codex.localAccess.collapseDetails", "收起详情")
-                      : t("codex.localAccess.expandDetails", "展开详情")
+                      ? t("codex.localAccess.collapseDetails", "Thu gọn")
+                      : t("codex.localAccess.expandDetails", "Mở chi tiết")
                   }
                 >
                   <ChevronRight
@@ -1386,11 +1386,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 onClick={() => void handleHideLocalAccessEntry()}
                 title={t(
                   "codex.localAccess.hideEntryAction",
-                  "关闭 API 服务入口",
+                  "Ẩn mục Dịch vụ API",
                 )}
                 aria-label={t(
                   "codex.localAccess.hideEntryAction",
-                  "关闭 API 服务入口",
+                  "Ẩn mục Dịch vụ API",
                 )}
               >
                 <X size={14} />
@@ -1413,7 +1413,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       menuWidth={92}
                       menuMaxHeight={120}
                       disabled={localAccessAddressOptions.length < 2}
-                      ariaLabel={t("codex.localAccess.addressKind", "地址类型")}
+                      ariaLabel={t("codex.localAccess.addressKind", "Loại địa chỉ")}
                     />
                   </div>
                   <code className="codex-local-access-code" title={baseUrl}>
@@ -1426,7 +1426,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() =>
                         void handleCopyLocalAccessValue("baseUrl", baseUrl)
                       }
-                      title={t("common.copy", "复制")}
+                      title={t("common.copy", "Copy​")}
                       disabled={!baseUrl}
                     >
                       {localAccessCopiedField === "baseUrl" ? (
@@ -1439,7 +1439,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 </div>
                 <div className="codex-local-access-row">
                   <span className="codex-local-access-label">
-                    {t("codex.localAccess.apiKey", "密钥")}
+                    {t("codex.localAccess.apiKey", "Khóa")}
                   </span>
                   <code
                     className="codex-local-access-code"
@@ -1456,8 +1456,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       }
                       title={
                         localAccessKeyVisible
-                          ? t("codex.localAccess.hideKey", "隐藏密钥")
-                          : t("codex.localAccess.showKey", "显示密钥")
+                          ? t("codex.localAccess.hideKey", "Ẩn khóa")
+                          : t("codex.localAccess.showKey", "Hiện khóa")
                       }
                       disabled={!localAccessCollection}
                     >
@@ -1476,7 +1476,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           localAccessCollection?.apiKey || "",
                         )
                       }
-                      title={t("common.copy", "复制")}
+                      title={t("common.copy", "Copy​")}
                       disabled={!localAccessCollection}
                     >
                       {localAccessCopiedField === "apiKey" ? (
@@ -1500,7 +1500,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       title={localAccessBoundOAuthIssueText}
                     >
                       <CircleAlert size={12} />
-                      {t("codex.authError.badge", "授权异常")}
+                      {t("codex.authError.badge", "Lỗi ủy quyền")}
                     </span>
                   )}
                   {localAccessBoundOAuthNeedsReauth &&
@@ -1514,22 +1514,22 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                             boundLocalAccessOAuthAccount,
                           )
                         }
-                        title={t("common.reauthorize", "重新授权")}
+                        title={t("common.reauthorize", "Ủy quyền lại")}
                         disabled={localAccessBusy}
                       >
                         <RefreshCw size={11} />
-                        {t("common.reauthorize", "重新授权")}
+                        {t("common.reauthorize", "Ủy quyền lại")}
                       </button>
                     )}
                   <button
                     type="button"
                     className="codex-provider-inline-switch codex-oauth-binding-action"
                     onClick={() => openLocalAccessOAuthBindingModal()}
-                    title={t("codex.api.oauthBinding.action", "绑定 OAuth")}
+                    title={t("codex.api.oauthBinding.action", "Liên kết OAuth")}
                     disabled={localAccessBusy}
                   >
                     <Link2 size={11} />
-                    {t("codex.api.oauthBinding.actionShort", "绑定")}
+                    {t("codex.api.oauthBinding.actionShort", "Liên kết")}
                   </button>
                 </div>
                 {quotaReserveWarningLine && (
@@ -1539,7 +1539,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     }`}
                     title={t(
                       "codex.localAccess.oauthBinding.quotaReserveDesc",
-                      "API 服务仅在 5 小时和周剩余额度均高于保留值时使用该 OAuth 账号。",
+                      "Dịch vụ API chỉ dùng tài khoản OAuth này khi hạn mức còn lại của 5 giờ và tuần đều cao hơn mức giữ lại.",
                     )}
                   >
                     <CircleAlert size={13} />
@@ -1576,11 +1576,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => setShowLocalAccessQuotaStatsModal(true)}
                       title={t(
                         "codex.localAccess.quotaPool.viewFull",
-                        "查看完整统计",
+                        "Xem thống kê đầy đủ",
                       )}
                       aria-label={t(
                         "codex.localAccess.quotaPool.viewFull",
-                        "查看完整统计",
+                        "Xem thống kê đầy đủ",
                       )}
                     >
                       +{localAccessQuotaHiddenCount}
@@ -1605,16 +1605,16 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     quotaLimited:
                       localAccessAccountPoolHealthSummary.quotaLimited,
                     defaultValue:
-                      "可用 {{available}}/{{total}}，异常 {{abnormal}}，冷却 {{cooldown}}，缺失 {{missing}}，鉴权 {{authError}}，额度 {{quotaLimited}}",
+                      "OK {{available}}/{{total}}, lỗi {{abnormal}}, chờ {{cooldown}}, thiếu {{missing}}, auth {{authError}}, hạn mức {{quotaLimited}}",
                   })}
                   onClick={() => setShowLocalAccessHealthModal(true)}
                   aria-label={t(
                     "codex.localAccess.accountPoolHealth.openDetails",
-                    "查看异常账号详情",
+                    "Xem lỗi tài khoản",
                   )}
                 >
                   <span className="codex-local-access-health-summary-title">
-                    {t("codex.localAccess.accountPoolHealth.title", "账号状态")}
+                    {t("codex.localAccess.accountPoolHealth.title", "Trạng thái tài khoản")}
                   </span>
                   <span className="codex-local-access-health-summary-value">
                     {localAccessAccountPoolHealthSummary.available ===
@@ -1623,13 +1623,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     localAccessAccountPoolHealthSummary.cooldown === 0
                       ? t("codex.localAccess.accountPoolHealth.allAvailable", {
                           count: localAccessAccountPoolHealthSummary.total,
-                          defaultValue: "全部可用 {{count}}",
+                          defaultValue: "Tất cả OK {{count}}",
                         })
                       : t("codex.localAccess.accountPoolHealth.availableRatio", {
                           available:
                             localAccessAccountPoolHealthSummary.available,
                           total: localAccessAccountPoolHealthSummary.total,
-                          defaultValue: "可用 {{available}}/{{total}}",
+                          defaultValue: "Tốt {{available}}/{{total}}",
                         })}
                   </span>
                   {(localAccessAccountPoolHealthSummary.abnormal > 0 ||
@@ -1638,7 +1638,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       {t("codex.localAccess.accountPoolHealth.issueSummary", {
                         abnormal: localAccessAccountPoolHealthSummary.abnormal,
                         cooldown: localAccessAccountPoolHealthSummary.cooldown,
-                        defaultValue: "异常 {{abnormal}} · 冷却 {{cooldown}}",
+                        defaultValue: "Lỗi {{abnormal}} · Chờ {{cooldown}}",
                       })}
                     </span>
                   )}
@@ -1664,13 +1664,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       className="btn btn-sm btn-outline quota-error-action"
                       onClick={() =>
                         openQuotaErrorDetail(
-                          t("codex.localAccess.title", "API 服务"),
+                          t("codex.localAccess.title", "Dịch vụ API"),
                           localAccessState.lastError ?? "",
                         )
                       }
-                      title={t("codex.quotaError.viewDetails", "查看详情")}
+                      title={t("codex.quotaError.viewDetails", "Chi tiết")}
                     >
-                      {t("codex.quotaError.viewDetails", "查看详情")}
+                      {t("codex.quotaError.viewDetails", "Chi tiết")}
                     </button>
                   )}
                   <button
@@ -1694,7 +1694,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 <span className="card-date">
                   {t("codex.localAccess.footerHint", {
                     scope: localAccessScopeLabel,
-                    defaultValue: "监听范围：{{scope}}",
+                    defaultValue: "Phạm vi truy cập: {{scope}}",
                   })}
                 </span>
                 <CodexSpeedControl scope="api" disabled={localAccessBusy || localAccessStarting}
@@ -1712,7 +1712,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={openLocalAccessMemberPicker}
-                      title={t("common.shared.addAccount", "添加账号")}
+                      title={t("common.shared.addAccount", "Thêm tài khoản")}
                       disabled={localAccessBusy}
                     >
                       <FolderPlus size={14} />
@@ -1720,7 +1720,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={() => void handleLaunchLocalAccessCli()}
-                      title={t("common.cliQuickLaunch", "CLI 快速启动")}
+                      title={t("common.cliQuickLaunch", "Mở CLI")}
                       disabled={
                         localAccessBusy ||
                         !localAccessCollection ||
@@ -1736,7 +1736,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={openLocalAccessPanel}
-                      title={t("codex.localAccess.dashboardAction", "服务面板")}
+                      title={t("codex.localAccess.dashboardAction", "Bảng dịch vụ")}
                       disabled={localAccessBusy}
                     >
                       <Database size={14} />
@@ -1744,7 +1744,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={openCodexApiServicePage}
-                      title={t("codex.apiService.openPage", "进入 API 服务")}
+                      title={t("codex.apiService.openPage", "Mở dịch vụ API")}
                       disabled={localAccessBusy}
                     >
                       <ExternalLink size={14} />
@@ -1752,7 +1752,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <button
                       className="card-action-btn"
                       onClick={() => void handleQuickRefreshLocalAccessQuota()}
-                      title={t("common.shared.refreshQuota", "刷新配额")}
+                      title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
                       disabled={localAccessBusy || !localAccessCollection}
                     >
                       <RotateCw
@@ -1769,7 +1769,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                             role="dialog"
                             aria-label={t(
                               "codex.importApiService.guideTitle",
-                              "账号已加入 API 服务",
+                              "Đã thêm tài khoản vào dịch vụ API",
                             )}
                             onClick={(event) => event.stopPropagation()}
                           >
@@ -1777,20 +1777,20 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                               type="button"
                               className="codex-local-access-gateway-guide-close"
                               onClick={() => setImportApiServiceGuideCount(null)}
-                              aria-label={t("common.close", "关闭")}
+                              aria-label={t("common.close", "Đóng")}
                             >
                               <X size={12} />
                             </button>
                             <div className="codex-local-access-gateway-guide-title">
                               {t(
                                 "codex.importApiService.guideTitle",
-                                "账号已加入 API 服务",
+                                "Đã thêm tài khoản vào dịch vụ API",
                               )}
                             </div>
                             <p>
                               {t(
                                 "codex.importApiService.guideDescription",
-                                "已将 {{count}} 个账号加入 API 服务。点击“启动 API 服务”即可切换并使用。",
+                                "Đã thêm {{count}} tài khoản vào dịch vụ API. Chọn “Khởi động dịch vụ API” để chuyển đổi và sử dụng.",
                               ).replace(
                                 "{{count}}",
                                 String(importApiServiceGuideCount),
@@ -1801,7 +1801,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                               className="codex-local-access-gateway-guide-action"
                               onClick={() => setImportApiServiceGuideCount(null)}
                             >
-                              {t("codex.importApiService.later", "稍后")}
+                              {t("codex.importApiService.later", "Để sau")}
                             </button>
                           </div>
                         )}
@@ -1816,7 +1816,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         }}
                         title={t(
                           "codex.localAccess.activateAction",
-                          "启动 API 服务",
+                          "Khởi động dịch vụ API",
                         )}
                         disabled={localAccessBusy || !localAccessCollection}
                       >
@@ -1832,8 +1832,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => void handleQuickToggleLocalAccessEnabled()}
                       title={
                         localAccessCollection?.enabled
-                          ? t("codex.localAccess.disableService", "停用服务")
-                          : t("codex.localAccess.enableService", "启用服务")
+                          ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+                          : t("codex.localAccess.enableService", "Bật dịch vụ")
                       }
                       disabled={localAccessBusy || !localAccessCollection}
                     >
@@ -1912,17 +1912,17 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
         const accountIssueDisplayText = isRefreshTokenNotice
           ? t(
               "codex.quotaError.authRefreshDeferred",
-              "refresh_token 已失效；当前 access_token 仍可用于 API 服务，但不能切换到官方客户端，请重新授权后再切号。",
+              "refresh_token đã mất hiệu lực. access_token hiện tại vẫn dùng được cho dịch vụ API nhưng không thể chuyển ứng dụng chính thức. Hãy cấp quyền lại trước khi chuyển.",
             )
           : accountIssueMeta.displayText;
         const accountIssueBadge = isRefreshTokenNotice
-          ? t("codex.authError.badge", "授权异常")
+          ? t("codex.authError.badge", "Lỗi ủy quyền")
           : isQuotaRefreshNotice
-            ? t("codex.quotaError.refreshFailedBadge", "刷新失败")
+            ? t("codex.quotaError.refreshFailedBadge", "Làm mới thất bại")
             : reauthErrorMeta.rawMessage
-              ? t("codex.authError.badge", "授权异常")
+              ? t("codex.authError.badge", "Lỗi ủy quyền")
               : accountIssueMeta.statusCode ||
-                t("codex.quotaError.badge", "配额异常");
+                t("codex.quotaError.badge", "Lỗi quota");
         const showReauthorizeAction =
           !isApiKeyAccount &&
           !isRefreshTokenNotice &&
@@ -1931,12 +1931,12 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
             (hasQuotaError && shouldOfferReauthorizeAction(accountIssueMeta)));
         const accountIdText =
           meta.chatgptAccountId &&
-          meta.chatgptAccountId !== t("common.none", "暂无")
+          meta.chatgptAccountId !== t("common.none", "None​")
             ? meta.chatgptAccountId
             : meta.userId;
         const signInLine = `${meta.signedInWithText} | ${accountIdLabel}: ${accountIdText}`;
         const apiProviderName = resolveApiProviderDisplayName(account);
-        const apiProviderLine = `${t("codex.api.provider.label", "供应商")}：${apiProviderName}`;
+        const apiProviderLine = `${t("codex.api.provider.label", "Nhà cung cấp")}：${apiProviderName}`;
         const apiBaseUrlText = (account.api_base_url || "").trim() || "-";
         const apiBaseUrlLine = `${t("codex.api.baseUrl", "Base URL")}：${apiBaseUrlText}`;
         const apiKeyUsageProvider = resolveUsageProviderForApiKeyAccount(account);
@@ -2036,7 +2036,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   )}
                   {isCurrent && (
                     <span className="mini-tag current">
-                      {t("codex.current", "当前")}
+                      {t("codex.current", "Hiện tại")}
                     </span>
                   )}
                 </div>
@@ -2064,11 +2064,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         disabled={addingLocalAccessAccountId !== null}
                         title={t(
                           "codex.localAccess.removeAction",
-                          "移除 API 服务",
+                          "Xóa khỏi API",
                         )}
                         aria-label={t(
                           "codex.localAccess.removeAction",
-                          "移除 API 服务",
+                          "Xóa khỏi API",
                         )}
                       >
                         {addingLocalAccessAccountId === account.id ? (
@@ -2076,7 +2076,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         ) : (
                           <Link2 size={11} />
                         )}
-                        {t("codex.localAccess.removeAction", "移除 API 服务")}
+                        {t("codex.localAccess.removeAction", "Xóa khỏi API")}
                       </button>
                     )}
                     {!isApiKeyAccount && renderAccountNoteButton(account)}
@@ -2112,9 +2112,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           type="button"
                           className="codex-provider-inline-switch"
                           onClick={() => openQuickSwitchProviderModal(account)}
-                          title={t("codex.quickSwitch.action", "快速切换供应商")}
+                          title={t("codex.quickSwitch.action", "Chuyển nhanh nhà cung cấp")}
                         >
-                          {t("codex.quickSwitch.inlineAction", "切换")}
+                          {t("codex.quickSwitch.inlineAction", "Chuyển")}
                         </button>
                       )}
                     </div>
@@ -2134,10 +2134,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           }
                           title={t(
                             "codex.modelProviders.usage.detailTitle",
-                            "服务面板",
+                            "Bảng dịch vụ",
                           )}
                         >
-                          {t("common.detail", "详情")}
+                          {t("common.detail", "Chi tiết")}
                         </button>
                       )}
                     </div>
@@ -2198,10 +2198,10 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           void handleRefreshSubscriptionInfo(account.id)
                         }
                         disabled={isSubscriptionRefreshPending}
-                        title={t("common.refresh", "刷新")}
-                        aria-label={t("common.refresh", "刷新")}
+                        title={t("common.refresh", "Làm mới")}
+                        aria-label={t("common.refresh", "Làm mới")}
                       >
-                        {t("common.refresh", "刷新")}
+                        {t("common.refresh", "Làm mới")}
                       </button>
                     )}
                   </div>
@@ -2226,7 +2226,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         <span>
                           {t(
                             "codex.modelProviders.usage.accountBalance",
-                            "账户余额",
+                            "Số dư tài khoản",
                           )}
                           ：
                         </span>
@@ -2237,7 +2237,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <CodexTeamQuotaHistory account={account} />
                     {quotaItems.length === 0 && !cockpitApiAccountBalanceText && (
                       <span style={{ color: "var(--text-muted)", fontSize: 13 }}>
-                        {t("common.shared.quota.noData", "暂无配额数据")}
+                        {t("common.shared.quota.noData", "Không có dữ liệu hạn mức")}
                       </span>
                     )}
                   </div>
@@ -2265,14 +2265,14 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     <div className="quota-error-inline table quota-refresh-notice">
                       <Info size={12} />
                       <span>
-                        {t("common.shared.quota.noData", "暂无配额数据")}
+                        {t("common.shared.quota.noData", "Không có dữ liệu hạn mức")}
                       </span>
                       <button
                         className="btn btn-sm btn-outline"
                         onClick={() => openCodexAddModal("oauth", account)}
-                        title={t("common.shared.addModal.oauth", "OAuth 授权")}
+                        title={t("common.shared.addModal.oauth", "Ủy quyền OAuth")}
                       >
-                        {t("common.shared.addModal.oauth", "OAuth 授权")}
+                        {t("common.shared.addModal.oauth", "Ủy quyền OAuth")}
                       </button>
                     </div>
                   )}
@@ -2290,7 +2290,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   }
                   title={
                     switchOrLaunchBlockedReason ||
-                    t("common.cliQuickLaunch", "CLI 快速启动")
+                    t("common.cliQuickLaunch", "Mở CLI")
                   }
                 >
                   {cliLaunchingAccountId === account.id ? (
@@ -2304,7 +2304,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   <button
                     className="action-btn"
                     onClick={() => setCockpitApiPanelAccountId(account.id)}
-                    title={t("codex.cockpitApi.servicePanel", "服务面板")}
+                    title={t("codex.cockpitApi.servicePanel", "Bảng dịch vụ")}
                   >
                     <Database size={14} />
                   </button>
@@ -2312,7 +2312,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 <button
                   className="action-btn"
                   onClick={() => openTagModal(account.id)}
-                  title={t("accounts.editTags", "编辑标签")}
+                  title={t("accounts.editTags", "Chỉnh sửa thẻ")}
                 >
                   <Tag size={14} />
                 </button>
@@ -2322,9 +2322,9 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     onClick={() => openAccountNoteModal(account)}
                     title={
                       getCodexAccountNoteTitle(account, "") ||
-                      t("codex.accountNote.emptyTitle", "填写账号备注")
+                      t("codex.accountNote.emptyTitle", "Thêm ghi chú tài khoản")
                     }
-                    aria-label={t("codex.accountNote.title", "账号备注")}
+                    aria-label={t("codex.accountNote.title", "Ghi chú tài khoản")}
                   >
                     <FileText size={14} />
                   </button>
@@ -2333,7 +2333,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   <button
                     className="action-btn"
                     onClick={() => openApiKeyCredentialsModal(account)}
-                    title={t("instances.actions.edit", "编辑")}
+                    title={t("instances.actions.edit", "Chỉnh sửa")}
                   >
                     <Pencil size={14} />
                   </button>
@@ -2342,7 +2342,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   className={`action-btn ${!isCurrent ? "success" : ""}`}
                   onClick={() => handleSwitch(account.id)}
                   disabled={!!switching || Boolean(switchOrLaunchBlockedReason)}
-                  title={switchOrLaunchBlockedReason || t("codex.switch", "切换")}
+                  title={switchOrLaunchBlockedReason || t("codex.switch", "Chuyển")}
                 >
                   {switching === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -2366,7 +2366,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           ? apiKeyUsageMap[account.id]?.loading === true
                           : refreshing === account.id
                       }
-                      title={t("common.shared.refreshQuota", "刷新配额")}
+                      title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
                     >
                       <RotateCw
                         size={14}
@@ -2390,7 +2390,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       resolveSingleExportBaseName(account),
                     )
                   }
-                  title={t("common.shared.export.title", "导出")}
+                  title={t("common.shared.export.title", "Xuất")}
                 >
                   <Upload size={14} />
                 </button>
@@ -2442,11 +2442,11 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
       }
     })();
     const externalImportSteps = [
-      t("common.shared.externalImport.stepReceive", "接收导入请求"),
-      t("common.shared.externalImport.stepFetch", "获取导入包"),
-      t("common.shared.externalImport.stepParse", "解析 Codex JSON"),
-      t("common.shared.externalImport.stepImport", "导入账号"),
-      t("common.shared.externalImport.stepRefresh", "刷新账号列表"),
+      t("common.shared.externalImport.stepReceive", "Nhận yêu cầu"),
+      t("common.shared.externalImport.stepFetch", "Lấy gói"),
+      t("common.shared.externalImport.stepParse", "Phân tích nội dung"),
+      t("common.shared.externalImport.stepImport", "Nhập tài khoản"),
+      t("common.shared.externalImport.stepRefresh", "Làm mới danh sách"),
     ];
     const externalImportPercent = Math.max(
       0,
@@ -2459,7 +2459,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
       if (!content) return;
       await navigator.clipboard.writeText(content).catch(() => {});
       setMessage({
-        text: t("common.shared.externalImport.copied", "已复制"),
+        text: t("common.shared.externalImport.copied", "Đã sao chép"),
         tone: "success",
       });
     };
@@ -2521,7 +2521,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 key: "totalGranted",
                 label: t(
                   "codex.modelProviders.usage.fields.totalGranted",
-                  "授予额度",
+                  "Đã cấp",
                 ),
                 value: formatApiKeyUsageMoney(newApiQuota.granted, summary?.unit),
               },
@@ -2529,7 +2529,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 key: "totalAvailable",
                 label: t(
                   "codex.modelProviders.usage.fields.totalAvailable",
-                  "可用额度",
+                  "Khả dụng",
                 ),
                 value: formatApiKeyUsageMoney(
                   newApiQuota.available,
@@ -2540,7 +2540,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 key: "expiresAt",
                 label: t(
                   "codex.modelProviders.usage.fields.expiresAt",
-                  "过期时间",
+                  "Hết hạn",
                 ),
                 value:
                   newApiQuota.expiresAt != null
@@ -2591,7 +2591,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     key: "accountBalance",
                     label: t(
                       "codex.modelProviders.usage.accountBalance",
-                      "账户余额",
+                      "Số dư tài khoản",
                     ),
                     value: formatApiKeyUsageQuotaValue(
                       summary,
@@ -2604,7 +2604,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     key: "todayRequests",
                     label: t(
                       "codex.modelProviders.usage.fields.todayRequests",
-                      "今日请求",
+                      "Yêu cầu hôm nay",
                     ),
                     value: summary
                       ? formatCockpitApiInteger(summary.todayRequests ?? 0)
@@ -2614,7 +2614,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     key: "todayTokens",
                     label: t(
                       "codex.modelProviders.usage.fields.todayTokens",
-                      "今日 Token",
+                      "Token hôm nay",
                     ),
                     value: summary
                       ? formatCockpitApiTokenCount(summary.todayTotalTokens ?? 0)
@@ -2627,7 +2627,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       key: "totalBalance",
                       label: t(
                         "codex.modelProviders.usage.fields.totalBalance",
-                        "总余额",
+                        "Tổng số dư",
                       ),
                       value: formatApiKeyUsageMoney(
                         summary?.balance,
@@ -2638,7 +2638,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       key: "grantedBalance",
                       label: t(
                         "codex.modelProviders.usage.fields.grantedBalance",
-                        "赠金余额",
+                        "Số dư tặng",
                       ),
                       value: formatApiKeyUsageDetailByKey(
                         summary,
@@ -2649,7 +2649,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       key: "toppedUpBalance",
                       label: t(
                         "codex.modelProviders.usage.fields.toppedUpBalance",
-                        "充值余额",
+                        "Số dư nạp",
                       ),
                       value: formatApiKeyUsageDetailByKey(
                         summary,
@@ -2673,7 +2673,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
           >
             <div className="modal-header cockpit-api-panel-header">
               <div>
-                <h2>{t("codex.modelProviders.usage.detailTitle", "服务面板")}</h2>
+                <h2>{t("codex.modelProviders.usage.detailTitle", "Bảng dịch vụ")}</h2>
                 <span className="cockpit-api-panel-subtitle">
                   {maskAccountText(resolvePresentation(account).displayName)}
                   {provider ? ` · ${provider.name}` : ""}
@@ -2682,7 +2682,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               <button
                 className="modal-close"
                 onClick={() => setApiKeyUsageDetailAccountId(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2690,7 +2690,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
             <div className="cockpit-api-panel-body">
               <section className="cockpit-api-connection-card">
                 <div className="cockpit-api-connection-row">
-                  <span>{t("codex.localAccess.baseUrl", "地址")}</span>
+                  <span>{t("codex.localAccess.baseUrl", "Địa chỉ")}</span>
                   <code title={baseUrl}>{baseUrl}</code>
                   <button
                     type="button"
@@ -2698,13 +2698,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     onClick={() =>
                       void navigator.clipboard.writeText(baseUrl).catch(() => {})
                     }
-                    title={t("common.copy", "复制")}
+                    title={t("common.copy", "Copy​")}
                   >
                     <Copy size={14} />
                   </button>
                 </div>
                 <div className="cockpit-api-connection-row">
-                  <span>{t("codex.localAccess.apiKey", "密钥")}</span>
+                  <span>{t("codex.localAccess.apiKey", "Khóa")}</span>
                   <code title={visible ? account.openai_api_key || "" : ""}>
                     {apiKeyDisplay}
                   </code>
@@ -2715,8 +2715,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => toggleAccountApiKeyVisible(account.id)}
                       title={
                         visible
-                          ? t("codex.localAccess.hideKey", "隐藏密钥")
-                          : t("codex.localAccess.showKey", "显示密钥")
+                          ? t("codex.localAccess.hideKey", "Ẩn khóa")
+                          : t("codex.localAccess.showKey", "Hiện khóa")
                       }
                     >
                       {visible ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -2729,7 +2729,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           .writeText(account.openai_api_key || "")
                           .catch(() => {})
                       }
-                      title={t("common.copy", "复制")}
+                      title={t("common.copy", "Copy​")}
                       disabled={!account.openai_api_key}
                     >
                       <Copy size={14} />
@@ -2767,7 +2767,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               <section className="cockpit-api-panel-section">
                 <div className="cockpit-api-section-head">
                   <strong>
-                    {t("codex.modelProviders.usage.rawFields", "服务数据")}
+                    {t("codex.modelProviders.usage.rawFields", "Dữ liệu dịch vụ")}
                   </strong>
                 </div>
                 <div className="cockpit-api-usage-card-grid">
@@ -2785,7 +2785,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     ))
                   ) : (
                     <div className="cockpit-api-empty-row">
-                      {t("codex.cockpitApi.noStats", "暂无统计")}
+                      {t("codex.cockpitApi.noStats", "Chưa có thống kê")}
                     </div>
                   )}
                 </div>
@@ -2801,14 +2801,14 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   size={14}
                   className={state?.loading ? "loading-spinner" : ""}
                 />
-                {t("common.shared.refreshQuota", "刷新配额")}
+                {t("common.shared.refreshQuota", "Làm mới hạn mức")}
               </button>
               <button
                 className="btn btn-secondary"
                 onClick={() => openApiKeyCredentialsModal(account)}
               >
                 <Pencil size={14} />
-                {t("instances.actions.edit", "编辑")}
+                {t("instances.actions.edit", "Chỉnh sửa")}
               </button>
               <button
                 className="btn btn-primary"
@@ -2820,7 +2820,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 ) : (
                   <Terminal size={14} />
                 )}
-                {t("common.cliQuickLaunch", "CLI 快速启动")}
+                {t("common.cliQuickLaunch", "Mở CLI")}
               </button>
             </div>
           </div>
@@ -2863,13 +2863,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
       const summaryItems = [
         {
           key: "requests",
-          label: t("codex.cockpitApi.requests", "请求"),
+          label: t("codex.cockpitApi.requests", "Yêu cầu"),
           value: formatCockpitApiInteger(requestCount),
-          meta: `${t("codex.cockpitApi.today", "今日")} ${formatCockpitApiInteger(todayCount)}`,
+          meta: `${t("codex.cockpitApi.today", "Hôm nay")} ${formatCockpitApiInteger(todayCount)}`,
         },
         {
           key: "periods",
-          label: t("codex.cockpitApi.periods", "周期"),
+          label: t("codex.cockpitApi.periods", "Kỳ"),
           value: `7d ${formatCockpitApiInteger(last7Count)}`,
           meta: `30d ${formatCockpitApiInteger(last30Count)}`,
         },
@@ -2877,7 +2877,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
           key: "tokens",
           label: t("codex.cockpitApi.tokens", "Tokens"),
           value: formatCockpitApiTokenCount(totalTokens),
-          meta: `${t("codex.cockpitApi.quotaUsed", "消耗")} ${totalQuotaDisplay || "-"}`,
+          meta: `${t("codex.cockpitApi.quotaUsed", "Đã dùng")} ${totalQuotaDisplay || "-"}`,
         },
       ];
   
@@ -2890,7 +2890,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
             <div className="modal-header cockpit-api-panel-header">
               <div>
                 <h2>
-                  {t("codex.cockpitApi.panelTitle", "Cockpit Api 服务面板")}
+                  {t("codex.cockpitApi.panelTitle", "Bảng dịch vụ Cockpit Api")}
                 </h2>
                 <span className="cockpit-api-panel-subtitle">
                   {maskAccountText(panelDisplayName)}
@@ -2899,7 +2899,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               <button
                 className="modal-close"
                 onClick={() => setCockpitApiPanelAccountId(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -2908,7 +2908,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
             <div className="cockpit-api-panel-body">
               <section className="cockpit-api-connection-card">
                 <div className="cockpit-api-connection-row">
-                  <span>{t("codex.localAccess.baseUrl", "地址")}</span>
+                  <span>{t("codex.localAccess.baseUrl", "Địa chỉ")}</span>
                   <code title={baseUrl}>{baseUrl}</code>
                   <button
                     type="button"
@@ -2916,13 +2916,13 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                     onClick={() =>
                       void navigator.clipboard.writeText(baseUrl).catch(() => {})
                     }
-                    title={t("common.copy", "复制")}
+                    title={t("common.copy", "Copy​")}
                   >
                     <Copy size={14} />
                   </button>
                 </div>
                 <div className="cockpit-api-connection-row">
-                  <span>{t("codex.localAccess.apiKey", "密钥")}</span>
+                  <span>{t("codex.localAccess.apiKey", "Khóa")}</span>
                   <code title={visible ? account.openai_api_key || "" : ""}>
                     {apiKeyDisplay}
                   </code>
@@ -2933,8 +2933,8 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                       onClick={() => toggleAccountApiKeyVisible(account.id)}
                       title={
                         visible
-                          ? t("codex.localAccess.hideKey", "隐藏密钥")
-                          : t("codex.localAccess.showKey", "显示密钥")
+                          ? t("codex.localAccess.hideKey", "Ẩn khóa")
+                          : t("codex.localAccess.showKey", "Hiện khóa")
                       }
                     >
                       {visible ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -2947,7 +2947,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                           .writeText(account.openai_api_key || "")
                           .catch(() => {})
                       }
-                      title={t("common.copy", "复制")}
+                      title={t("common.copy", "Copy​")}
                       disabled={!account.openai_api_key}
                     >
                       <Copy size={14} />
@@ -2959,12 +2959,12 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
               <section className="cockpit-api-summary-grid">
                 <div className="cockpit-api-balance-card">
                   <span className="cockpit-api-card-label">
-                    {t("codex.cockpitApi.balance", "额度")}
+                    {t("codex.cockpitApi.balance", "Số dư")}
                   </span>
                   <strong>{quotaText}</strong>
                   {cockpitApiAccountBalanceText && (
                     <small className="cockpit-api-balance-meta">
-                      {t("codex.modelProviders.usage.accountBalance", "账户余额")}
+                      {t("codex.modelProviders.usage.accountBalance", "Số dư tài khoản")}
                       ：{cockpitApiAccountBalanceText}
                     </small>
                   )}
@@ -2992,7 +2992,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   <section className="cockpit-api-panel-section">
                     <div className="cockpit-api-section-head">
                       <strong>
-                        {t("codex.cockpitApi.modelStats", "模型统计")}
+                        {t("codex.cockpitApi.modelStats", "Thống kê mô hình")}
                       </strong>
                     </div>
                     <div className="cockpit-api-usage-list">
@@ -3022,7 +3022,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                                   {modelName}
                                 </span>
                                 <small>
-                                  {t("codex.cockpitApi.requests", "请求")}{" "}
+                                  {t("codex.cockpitApi.requests", "Yêu cầu")}{" "}
                                   {formatCockpitApiInteger(count)}
                                 </small>
                               </div>
@@ -3038,7 +3038,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         })
                       ) : (
                         <div className="cockpit-api-empty-row">
-                          {t("codex.cockpitApi.noStats", "暂无统计")}
+                          {t("codex.cockpitApi.noStats", "Chưa có thống kê")}
                         </div>
                       )}
                     </div>
@@ -3047,7 +3047,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   <section className="cockpit-api-panel-section">
                     <div className="cockpit-api-section-head">
                       <strong>
-                        {t("codex.cockpitApi.dailyStats", "每日统计")}
+                        {t("codex.cockpitApi.dailyStats", "Thống kê hằng ngày")}
                       </strong>
                     </div>
                     <div className="cockpit-api-usage-list">
@@ -3073,7 +3073,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                                   {date}
                                 </span>
                                 <small>
-                                  {t("codex.cockpitApi.requests", "请求")}{" "}
+                                  {t("codex.cockpitApi.requests", "Yêu cầu")}{" "}
                                   {formatCockpitApiInteger(count)}
                                 </small>
                               </div>
@@ -3089,7 +3089,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                         })
                       ) : (
                         <div className="cockpit-api-empty-row">
-                          {t("codex.cockpitApi.noStats", "暂无统计")}
+                          {t("codex.cockpitApi.noStats", "Chưa có thống kê")}
                         </div>
                       )}
                     </div>
@@ -3099,7 +3099,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 <div className="cockpit-api-empty-state">
                   {t(
                     "codex.cockpitApi.refreshHint",
-                    "点击刷新后会同步当前 API key 的统计。",
+                    "Bấm làm mới để đồng bộ thống kê của API key này.",
                   )}
                 </div>
               )}
@@ -3115,7 +3115,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                   size={14}
                   className={refreshing === account.id ? "loading-spinner" : ""}
                 />
-                {t("common.shared.refreshQuota", "刷新配额")}
+                {t("common.shared.refreshQuota", "Làm mới hạn mức")}
               </button>
               <button
                 className="btn btn-primary"
@@ -3127,7 +3127,7 @@ export function useCodexAccountsRenderers(context: Pick<ReturnType<typeof useCod
                 ) : (
                   <Terminal size={14} />
                 )}
-                {t("common.cliQuickLaunch", "CLI 快速启动")}
+                {t("common.cliQuickLaunch", "Mở CLI")}
               </button>
             </div>
           </div>

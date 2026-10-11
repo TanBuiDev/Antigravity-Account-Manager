@@ -35,12 +35,12 @@ export function CodexSshSyncModal({ open, onClose }: CodexSshSyncModalProps) {
             </div>
             <div className="codex-ssh-sync-modal__titles">
               <h2 id="codex-ssh-sync-modal-title">
-                {t('codex.ssh.modalTitle', 'SSH 同步配置')}
+                {t('codex.ssh.modalTitle', "Thiết lập đồng bộ hóa SSH")}
               </h2>
               <p className="codex-ssh-sync-modal__subtitle">
                 {t(
                   'codex.ssh.modalHint',
-                  '添加并选中一台 SSH 服务器，开启「切号后自动同步」后，Codex 切号会把当前账号同步到远端。',
+                  "Thêm và chọn máy chủ SSH có bật tính năng tự động đồng bộ hóa để chuyển đổi tài khoản Codex cập nhật xác thực từ xa.",
                 )}
               </p>
             </div>
@@ -49,8 +49,8 @@ export function CodexSshSyncModal({ open, onClose }: CodexSshSyncModalProps) {
             type="button"
             className="codex-ssh-sync-modal__close"
             onClick={onClose}
-            title={t('common.close', '关闭')}
-            aria-label={t('common.close', '关闭')}
+            title={t('common.close', "Đóng")}
+            aria-label={t('common.close', "Đóng")}
           >
             <X size={16} />
           </button>
@@ -64,11 +64,11 @@ export function CodexSshSyncModal({ open, onClose }: CodexSshSyncModalProps) {
           <span className="codex-ssh-sync-modal__footer-hint">
             {t(
               'codex.ssh.footerHint',
-              '保存后开关会点亮；关闭开关可随时停用自动同步。',
+              "Công tắc bật sau khi lưu; tắt nó bất cứ lúc nào để ngừng tự động đồng bộ hóa.",
             )}
           </span>
           <button type="button" className="btn btn-primary" onClick={onClose}>
-            {t('common.done', '完成')}
+            {t('common.done', 'Hoàn tất')}
           </button>
         </div>
       </div>

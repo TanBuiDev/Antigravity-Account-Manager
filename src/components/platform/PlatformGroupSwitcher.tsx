@@ -153,7 +153,7 @@ export function PlatformGroupSwitcher({
         className={`platform-group-switcher-trigger ${open ? 'is-open' : ''}`}
         ref={triggerRef}
         onClick={handleTriggerClick}
-        aria-label={t('platformLayout.groupSwitchLabel', '切换同组平台')}
+        aria-label={t('platformLayout.groupSwitchLabel', "Chuyển nền tảng trong nhóm")}
         aria-haspopup="listbox"
         aria-expanded={open}
       >
@@ -228,7 +228,7 @@ export function PlatformGroupSwitcher({
                 <Pencil size={16} />
               </span>
               <span className="platform-group-switcher-action-label">
-                {t('accounts.groups.manageTitle', '分组管理')}
+                {t('accounts.groups.manageTitle', "Quản lý nhóm")}
               </span>
             </button>
           </div>,

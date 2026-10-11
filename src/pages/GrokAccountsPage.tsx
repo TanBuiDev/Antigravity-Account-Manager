@@ -226,7 +226,7 @@ export function GrokAccountsPage() {
       }
     },
     resolveOauthSuccessMessage: () =>
-      t("grok.oauth.success", "Grok OAuth 登录成功"),
+      t("grok.oauth.success", "Đăng nhập OAuth Grok thành công"),
   });
 
   useEffect(() => {
@@ -340,7 +340,7 @@ export function GrokAccountsPage() {
     const selected = await openFileDialog({
       directory: true,
       multiple: false,
-      title: t("grok.instances.selectWorkingDir", "选择 Grok CLI 工作目录"),
+      title: t("grok.instances.selectWorkingDir", "Chọn thư mục làm việc Grok CLI"),
     });
     if (!selected || typeof selected !== "string") return;
     try {
@@ -450,7 +450,7 @@ export function GrokAccountsPage() {
               ...current,
               executeError: t(
                 "common.shared.export.copyFailed",
-                "复制失败，请手动复制",
+                "Sao chép thất bại, vui lòng sao chép thủ công",
               ),
               errorScrollKey: current.errorScrollKey + 1,
             }
@@ -546,7 +546,7 @@ export function GrokAccountsPage() {
                 onClick={() => handleReauthorize(account)}
               >
                 <KeyRound size={12} />
-                {t("common.reauthorize", "重新授权")}
+                {t("common.reauthorize", "Ủy quyền lại")}
               </button>
             </div>
           )}
@@ -562,7 +562,7 @@ export function GrokAccountsPage() {
               >
                 {t(
                   "grok.quota.apiKeyUnsupported",
-                  "API Key 账号无套餐配额",
+                  "Tài khoản API Key không có hạn mức gói",
                 )}
               </div>
             )}
@@ -588,7 +588,7 @@ export function GrokAccountsPage() {
                 amountText || null,
                 remainingLabel,
                 resetText
-                  ? t("grok.quota.resetAt", "{{label}} 重置：{{time}}", {
+                  ? t("grok.quota.resetAt", "{{label}} đặt lại: {{time}}", {
                       label: item.label,
                       time: resetText,
                     })
@@ -668,7 +668,7 @@ export function GrokAccountsPage() {
                     : undefined
                 }
               >
-                {t("grok.quota.empty", "暂无额度")}
+                {t("grok.quota.empty", "Không có hạn mức")}
               </div>
             )}
             {errorMessage && (
@@ -707,7 +707,7 @@ export function GrokAccountsPage() {
       window.setTimeout(() => setInstallCommandCopied(false), 1200);
     } catch {
       reportInstallError(
-        t("common.shared.export.copyFailed", "复制失败，请手动复制"),
+        t("common.shared.export.copyFailed", "Sao chép thất bại, vui lòng sao chép thủ công"),
       );
     }
   };
@@ -729,11 +729,11 @@ export function GrokAccountsPage() {
 
   const renderGrokCliInstallGuide = () => (
     <div className="grok-cli-install-guide">
-      <strong>{t("grok.instances.installCommand", "官方安装命令")}</strong>
+      <strong>{t("grok.instances.installCommand", "Lệnh cài đặt chính thức")}</strong>
       <p>
         {t(
           "grok.instances.installLaunchHint",
-          "可在终端运行以下官方命令，安装完成后重新点击终端执行。",
+          "Bạn có thể chạy lệnh chính thức dưới đây trong terminal, sau khi cài đặt hãy nhấp chạy trong terminal lần nữa.",
         )}
       </p>
       <div className="grok-cli-install-command">
@@ -744,17 +744,17 @@ export function GrokAccountsPage() {
           onClick={() => void handleCopyInstallCommand()}
           title={
             installCommandCopied
-              ? t("common.success", "成功")
-              : t("common.copy", "复制")
+              ? t("common.success", "Thành công")
+              : t("common.copy", "Copy​")
           }
-          aria-label={t("common.copy", "复制")}
+          aria-label={t("common.copy", "Copy​")}
         >
           {installCommandCopied ? <Check size={14} /> : <Copy size={14} />}
         </button>
       </div>
       <div className="grok-cli-install-actions">
         <div className="grok-cli-install-terminal">
-          <label>{t("instances.launchDialog.terminal", "终端")}</label>
+          <label>{t("instances.launchDialog.terminal", "Cửa sổ lệnh")}</label>
           <SingleSelectDropdown
             value={selectedTerminal}
             onChange={handleInstallTerminalChange}
@@ -770,14 +770,14 @@ export function GrokAccountsPage() {
         >
           <Play size={14} />
           {installExecuting
-            ? t("common.loading", "加载中...")
-            : t("grok.instances.runInTerminal", "终端执行")}
+            ? t("common.loading", "Đang tải...")
+            : t("grok.instances.runInTerminal", "Chạy trong terminal")}
         </button>
       </div>
       {installOpened && (
         <div className="add-status success">
           <Check size={14} />
-          <span>{t("common.success", "成功")}</span>
+          <span>{t("common.success", "Thành công")}</span>
         </div>
       )}
       <ModalErrorMessage
@@ -803,20 +803,20 @@ export function GrokAccountsPage() {
   const apiBaseUrlError =
     apiProviderMode === "custom" && apiBaseUrlTouched
       ? !apiBaseUrl.trim()
-        ? t("grok.import.apiFieldRequired", "请填写{{field}}", {
-            field: t("grok.import.apiBaseUrl", "接口地址"),
+        ? t("grok.import.apiFieldRequired", "Nhập {{field}}", {
+            field: t("grok.import.apiBaseUrl", "URL cơ sở"),
           })
         : !customApiBaseUrlValid
           ? t(
               "grok.import.apiBaseUrlInvalid",
-              "请输入完整的 http:// 或 https:// 地址，且不要包含用户名、查询参数或片段",
+              "Nhập URL http:// hoặc https:// đầy đủ, không chứa thông tin xác thực, tham số truy vấn hay phân đoạn",
             )
           : null
       : null;
   const apiModelError =
     apiProviderMode === "custom" && apiModelTouched && !apiModel.trim()
-      ? t("grok.import.apiFieldRequired", "请填写{{field}}", {
-          field: t("grok.import.apiModel", "模型 ID"),
+      ? t("grok.import.apiFieldRequired", "Nhập {{field}}", {
+          field: t("grok.import.apiModel", "ID mô hình"),
         })
       : null;
 
@@ -824,43 +824,43 @@ export function GrokAccountsPage() {
     pageClassName: "grok-accounts-page",
     quickSettingsType: "grok",
     searchPlaceholderKey: "grok.search",
-    searchPlaceholderDefault: "搜索 Grok CLI 账号...",
+    searchPlaceholderDefault: "Tìm tài khoản Grok CLI...",
     flowNotice: {
       titleKey: "grok.flowNotice.title",
-      titleDefault: "Grok CLI 账号管理说明",
+      titleDefault: "Hướng dẫn quản lý tài khoản Grok CLI",
       descKey: "grok.flowNotice.desc",
       descDefault:
-        "默认使用独立 GROK_HOME；开启“切号同步官方登录”后，默认实例切换 OAuth 账号会写入官方 ~/.grok/auth.json，多开实例仍保持隔离。",
+        "Mặc định dùng GROK_HOME riêng; khi bật Đồng bộ đăng nhập chính thức lúc chuyển tài khoản, phiên mặc định sẽ ghi OAuth vào ~/.grok/auth.json, còn các phiên khác vẫn tách biệt.",
       permissionKey: "grok.flowNotice.permission",
       permissionDefault:
-        "本地范围：可读取默认 ~/.grok/auth.json 用于导入；仅在开关开启且默认实例切换 OAuth 账号时写入该文件，API Key 不会覆盖官方登录。",
+        "Phạm vi cục bộ: có thể đọc ~/.grok/auth.json để nhập; chỉ ghi khi bật đồng bộ và chuyển tài khoản OAuth ở phiên mặc định; API Key không ghi đè đăng nhập chính thức.",
       networkKey: "grok.flowNotice.network",
       networkDefault:
-        "网络范围：OAuth 授权、凭据刷新及账号用量查询；不会上传凭据到 Cockpit 服务。",
+        "Phạm vi mạng: cấp quyền OAuth, làm mới thông tin xác thực và truy vấn mức sử dụng; không tải thông tin xác thực lên dịch vụ Cockpit.",
     },
     noAccountsKey: "grok.empty",
-    noAccountsDefault: "暂无 Grok CLI 账号",
+    noAccountsDefault: "Chưa có tài khoản Grok CLI",
     addAccountTitleKey: "grok.addAccount",
-    addAccountTitleDefault: "添加 Grok CLI 账号",
+    addAccountTitleDefault: "Thêm tài khoản Grok CLI",
     oauthDescKey: "grok.oauth.desc",
-    oauthDescDefault: "打开 xAI 授权页并输入设备验证码，完成后账号会自动保存。",
+    oauthDescDefault: "Mở trang cấp quyền xAI và nhập mã xác minh thiết bị; tài khoản sẽ tự lưu sau khi hoàn tất.",
     oauthFeatureCardClassName: "grok-oauth-feature-card",
     oauthFeatureTitleKey: "grok.oauth.title",
     oauthFeatureTitleDefault: "Grok Device OAuth",
     oauthFeatureItem1Key: "grok.oauth.item1",
     oauthFeatureItem1Default:
-      "使用 Grok CLI 官方 device flow，不占用本地回调端口。",
+      "Sử dụng quy trình xác minh thiết bị chính thức của Grok CLI, không chiếm cổng callback cục bộ.",
     oauthFeatureItem2Key: "grok.oauth.item2",
     oauthFeatureItem2Default:
-      "授权成功后保存独立 GROK_HOME，并维护凭据有效状态。",
+      "Sau khi cấp quyền thành công, lưu GROK_HOME riêng và duy trì trạng thái hợp lệ của thông tin xác thực.",
     oauthFeatureItem3Key: "grok.oauth.item3",
-    oauthFeatureItem3Default: "每个账号独立目录，可同时启动多个账号互不影响。",
+    oauthFeatureItem3Default: "Mỗi tài khoản có thư mục riêng, có thể chạy đồng thời mà không ảnh hưởng lẫn nhau.",
     oauthUrlInputPlaceholderKey: "grok.oauth.urlPlaceholder",
-    oauthUrlInputPlaceholderDefault: "Grok OAuth 授权地址",
+    oauthUrlInputPlaceholderDefault: "URL cấp quyền Grok OAuth",
     oauthWaitingKey: "grok.oauth.waiting",
-    oauthWaitingDefault: "等待 Grok OAuth 授权...",
+    oauthWaitingDefault: "Đang chờ cấp quyền Grok OAuth...",
     oauthOpenButtonKey: "grok.oauth.openWindow",
-    oauthOpenButtonDefault: "打开授权页",
+    oauthOpenButtonDefault: "Mở trang cấp quyền",
     // 与 Codex 对齐：Token / JSON（粘贴）| API Key
     tokenTabLabelKey: "grok.import.apiKeyTab",
     tokenTabLabelDefault: "API Key",
@@ -870,18 +870,18 @@ export function GrokAccountsPage() {
         : "grok.import.apiKeyDesc",
     tokenDescDefault:
       apiProviderMode === "custom"
-        ? "配置 OpenAI 兼容的 Base URL、模型 ID 与 API Key。启动时写入账号专属 config.toml，并仅向该 CLI 进程注入密钥。"
-        : "粘贴 xAI API Key（官方 XAI_API_KEY / xai-…）。启动 CLI 时通过账号专属 GROK_HOME 注入，不会覆盖官方 OAuth 登录。",
+        ? "Cấu hình Base URL, ID mô hình và API Key tương thích OpenAI. Khi chạy, ghi vào config.toml riêng cho tài khoản và chỉ truyền khóa cho tiến trình CLI này."
+        : "Dán xAI API Key (XAI_API_KEY / xai-… chính thức). Khóa được truyền qua GROK_HOME riêng khi chạy CLI, không ghi đè đăng nhập OAuth chính thức.",
     tokenInputPlaceholderKey:
       apiProviderMode === "custom"
         ? "grok.import.customApiKeyPlaceholder"
         : "grok.import.apiKeyPlaceholder",
     tokenInputPlaceholderDefault:
       apiProviderMode === "custom"
-        ? "粘贴第三方 API Key"
-        : "粘贴 xai- 开头的密钥",
+        ? "Dán API Key bên thứ ba"
+        : "Dán khóa bắt đầu bằng xai-",
     tokenSubmitLabelKey: "grok.import.apiKeyAction",
-    tokenSubmitLabelDefault: "添加 API Key",
+    tokenSubmitLabelDefault: "Thêm API Key",
     tokenInputSecret: true,
     tokenSubmitDisabled: customApiFieldsIncomplete,
     tokenControl: (
@@ -889,7 +889,7 @@ export function GrokAccountsPage() {
         <div
           className="grok-api-provider-modes"
           role="tablist"
-          aria-label={t("grok.import.apiMode", "API 类型")}
+          aria-label={t("grok.import.apiMode", "Loại API")}
         >
           <button
             type="button"
@@ -904,7 +904,7 @@ export function GrokAccountsPage() {
               page.setAddMessage(null);
             }}
           >
-            {t("grok.import.apiModeOfficial", "xAI 官方")}
+            {t("grok.import.apiModeOfficial", "xAI chính thức")}
           </button>
           <button
             type="button"
@@ -919,7 +919,7 @@ export function GrokAccountsPage() {
               page.setAddMessage(null);
             }}
           >
-            {t("grok.import.apiModeCustom", "第三方兼容")}
+            {t("grok.import.apiModeCustom", "Bên thứ ba")}
           </button>
         </div>
       </div>
@@ -963,7 +963,7 @@ export function GrokAccountsPage() {
           </div>
           <div className="grok-api-provider-field">
             <label htmlFor="grok-api-model">
-              {t("grok.import.apiModel", "模型 ID")}
+              {t("grok.import.apiModel", "ID mô hình")}
             </label>
             <input
               id="grok-api-model"
@@ -976,7 +976,7 @@ export function GrokAccountsPage() {
               }
               placeholder={t(
                 "grok.import.apiModelPlaceholder",
-                "例如 grok-4.1-fast",
+                "Ví dụ: grok-4.1-fast",
               )}
               onChange={(event) => {
                 setApiModel(event.target.value);
@@ -1001,21 +1001,21 @@ export function GrokAccountsPage() {
     pasteJsonTabLabelDefault: "Token / JSON",
     pasteJsonDescKey: "grok.import.pasteDesc",
     pasteJsonDescDefault:
-      "粘贴官方 Grok CLI auth.json，或本应用导出的完整账号 JSON（含凭据，可再导入恢复）。凭据仅在本机处理。",
+      "Dán auth.json chính thức của Grok CLI hoặc JSON tài khoản đầy đủ đã xuất (có thông tin xác thực để nhập khôi phục). Thông tin xác thực chỉ được xử lý cục bộ.",
     pasteJsonPlaceholderKey: "grok.import.pastePlaceholder",
-    pasteJsonPlaceholderDefault: "粘贴 Grok 账号 JSON",
+    pasteJsonPlaceholderDefault: "Dán JSON tài khoản Grok",
     pasteJsonSubmitLabelKey: "grok.import.pasteAction",
-    pasteJsonSubmitLabelDefault: "导入 JSON",
+    pasteJsonSubmitLabelDefault: "Nhập JSON",
     importLocalDescKey: "grok.import.localDesc",
     importLocalDescDefault:
-      "从默认 ~/.grok/auth.json 导入；也可选择官方 auth.json 或本应用导出的完整账号 JSON 文件。",
+      "Nhập từ ~/.grok/auth.json mặc định hoặc chọn auth.json chính thức hay tệp JSON tài khoản đầy đủ đã xuất từ ứng dụng.",
     importLocalClientKey: "grok.import.localClient",
-    importLocalClientDefault: "从本机 Grok CLI 导入",
+    importLocalClientDefault: "Nhập từ Grok CLI cục bộ",
     getDisplayEmail: getGrokAccountDisplayEmail,
     getPlanBadge: (account) =>
-      getGrokPlanBadge(account) || t("common.none", "暂无"),
+      getGrokPlanBadge(account) || t("common.none", "None​"),
     getPlanBadgeTitle: (account) =>
-      getGrokPlanRawValue(account) || t("common.none", "暂无"),
+      getGrokPlanRawValue(account) || t("common.none", "None​"),
     getPlanBadgeClass: (planBadge, account) => {
       if (isGrokApiKeyAccount(account) || planBadge === "API_KEY") return "pro";
       // Missing tier (暂无) uses Free styling — not the red "unknown" tone.
@@ -1034,7 +1034,7 @@ export function GrokAccountsPage() {
         account.api_base_url,
         account.api_model,
         account.quota?.subscriptionStatus,
-        getGrokPlanBadge(account) || t("common.none", "暂无"),
+        getGrokPlanBadge(account) || t("common.none", "None​"),
       ]
         .filter(Boolean)
         .join(" "),
@@ -1079,16 +1079,16 @@ export function GrokAccountsPage() {
               <button
                 className="btn btn-secondary icon-only"
                 onClick={() => setLaunchModal(null)}
-                title={t("common.back", "返回")}
-                aria-label={t("common.back", "返回")}
+                title={t("common.back", "Quay lại")}
+                aria-label={t("common.back", "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t("grok.instances.launchDialogTitle", "启动实例")}</h2>
+              <h2>{t("grok.instances.launchDialogTitle", "Chạy phiên bản")}</h2>
               <button
                 className="modal-close"
                 onClick={() => setLaunchModal(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -1097,7 +1097,7 @@ export function GrokAccountsPage() {
               <div className="add-status success">
                 <Check size={16} />
                 <span>
-                  {t("accounts.switched", "已切换至 {{email}}", {
+                  {t("accounts.switched", "Đã chuyển sang {{email}}", {
                     email: launchModal.accountEmail,
                   })}
                 </span>
@@ -1112,22 +1112,22 @@ export function GrokAccountsPage() {
                 ) &&
                 renderGrokCliInstallGuide()}
               <div className="form-group">
-                <label>{t("instances.columns.instance", "实例")}</label>
+                <label>{t("instances.columns.instance", "Phiên bản")}</label>
                 <input
                   className="form-input"
-                  value={t("instances.defaultName", "默认实例")}
+                  value={t("instances.defaultName", "Phiên bản mặc định")}
                   readOnly
                 />
               </div>
               <div className="form-group">
-                <label>{t("instances.form.workingDir", "工作目录")}</label>
+                <label>{t("instances.form.workingDir", "Thư mục làm việc")}</label>
                 <div className="grok-launch-working-dir-row">
                   <input
                     className="form-input"
                     value={launchModal.workingDir}
                     placeholder={t(
                       "instances.form.workingDirPlaceholder",
-                      "默认当前路径",
+                      "Mặc định dùng đường dẫn hiện tại",
                     )}
                     onChange={(event) =>
                       updateLaunchWorkingDir(event.target.value)
@@ -1146,11 +1146,11 @@ export function GrokAccountsPage() {
                     }
                     title={t(
                       "grok.instances.selectWorkingDir",
-                      "选择 Grok CLI 工作目录",
+                      "Chọn thư mục làm việc Grok CLI",
                     )}
                     aria-label={t(
                       "grok.instances.selectWorkingDir",
-                      "选择 Grok CLI 工作目录",
+                      "Chọn thư mục làm việc Grok CLI",
                     )}
                   >
                     <FolderOpen size={16} />
@@ -1159,21 +1159,21 @@ export function GrokAccountsPage() {
                 <p className="form-hint">
                   {t(
                     "grok.instances.workingDirAccountHint",
-                    "工作目录与该账号绑定，下次从该账号启动会自动回填。",
+                    "Thư mục làm việc được gắn với tài khoản này và sẽ được khôi phục lần khởi chạy sau.",
                   )}
                 </p>
               </div>
               <div className="form-group">
-                <label>{t("instances.launchDialog.command", "启动命令")}</label>
+                <label>{t("instances.launchDialog.command", "Lệnh khởi chạy")}</label>
                 <textarea
                   className="form-input instance-args-input"
                   value={launchModal.launchCommand}
                   placeholder={
                     launchModal.regeneratingCommand
-                      ? t("common.loading", "加载中...")
+                      ? t("common.loading", "Đang tải...")
                       : t(
                           "grok.instances.launchCommandPlaceholder",
-                          "选择或确认工作目录后生成启动命令",
+                          "Chọn hoặc xác nhận thư mục để tạo lệnh khởi chạy",
                         )
                   }
                   readOnly
@@ -1181,12 +1181,12 @@ export function GrokAccountsPage() {
                 <p className="form-hint">
                   {t(
                     "grok.instances.launchHint",
-                    "可复制命令手动执行，或点击下方按钮直接在终端执行。",
+                    "Sao chép lệnh để chạy thủ công hoặc thực thi trực tiếp trong terminal.",
                   )}
                 </p>
               </div>
               <div className="form-group">
-                <label>{t("instances.launchDialog.terminal", "终端")}</label>
+                <label>{t("instances.launchDialog.terminal", "Cửa sổ lệnh")}</label>
                 <SingleSelectDropdown
                   value={selectedTerminal}
                   onChange={handleTerminalChange}
@@ -1194,7 +1194,7 @@ export function GrokAccountsPage() {
                   disabled={
                     launchModal.executing || launchModal.regeneratingCommand
                   }
-                  ariaLabel={t("instances.launchDialog.terminal", "终端")}
+                  ariaLabel={t("instances.launchDialog.terminal", "Cửa sổ lệnh")}
                 />
               </div>
               {launchModal.executeMessage && (
@@ -1214,8 +1214,8 @@ export function GrokAccountsPage() {
               >
                 <Copy size={16} />
                 {launchModal.copied
-                  ? t("common.success", "成功")
-                  : t("common.copy", "复制")}
+                  ? t("common.success", "Thành công")
+                  : t("common.copy", "Copy​")}
               </button>
               <button
                 className="btn btn-primary"
@@ -1226,8 +1226,8 @@ export function GrokAccountsPage() {
               >
                 <Play size={16} />
                 {launchModal.executing
-                  ? t("common.loading", "加载中...")
-                  : t("grok.instances.runInTerminal", "终端执行")}
+                  ? t("common.loading", "Đang tải...")
+                  : t("grok.instances.runInTerminal", "Chạy trong terminal")}
               </button>
             </div>
           </div>

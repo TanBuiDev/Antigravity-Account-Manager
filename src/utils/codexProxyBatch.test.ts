@@ -127,7 +127,7 @@ test('every locale carries the batch binding keys with real translations', () =>
     'batchEmpty', 'batchApply', 'batchRunning', 'batchProgress', 'batchResult', 'batchUnbindMessage'];
   const dir = new URL('../locales/', import.meta.url);
   const locales = readdirSync(dir).filter((file) => file.endsWith('.json'));
-  assert.ok(locales.length >= 18);
+  assert.ok(locales.length >= 16);
   const english = JSON.parse(readFileSync(new URL('en-US.json', dir), 'utf8')).codex.proxy;
   for (const file of locales) {
     const proxy = JSON.parse(readFileSync(new URL(file, dir), 'utf8')).codex.proxy;

@@ -789,7 +789,7 @@ export function useCodexModelProviderManagerController({
     () => {
       const counts = new Map<string, { label: string; count: number }>();
       providers.forEach((provider) => {
-        const label = provider.name.trim() || t("common.unknown", "未知");
+        const label = provider.name.trim() || t("common.unknown", "Không xác định");
         const value = label.toLowerCase();
         const previous = counts.get(value);
         counts.set(value, {
@@ -924,7 +924,7 @@ export function useCodexModelProviderManagerController({
     } catch (err) {
       setError(
         t("codex.modelProviders.loadFailed", {
-          defaultValue: "加载模型供应商失败：{{error}}",
+          defaultValue: "Không thể tải nhà cung cấp mô hình: {{error}}",
           error: String(err),
         }),
       );
@@ -1308,13 +1308,13 @@ export function useCodexModelProviderManagerController({
         value: "",
         label: t(
           "codex.modelProviders.batchTest.modelAuto",
-          "自动选择（按目录/探测）",
+          "Tự động (danh mục / phát hiện)",
         ),
       },
       ...models.map((model) => ({ value: model, label: model })),
       {
         value: "__custom__",
-        label: t("codex.modelProviders.batchTest.modelCustom", "自定义模型…"),
+        label: t("codex.modelProviders.batchTest.modelCustom", "Mô hình tùy chỉnh…"),
       },
     ];
   }, [batchTestSelectedProviderIds, providers, t, getSelectedProviderApiKey]);
@@ -1499,7 +1499,7 @@ export function useCodexModelProviderManagerController({
 
   const maskAccountText = useCallback((value?: string | null): string => {
     const trimmed = (value || "").trim();
-    if (!trimmed) return t("common.none", "暂无");
+    if (!trimmed) return t("common.none", "None​");
     if (trimmed.includes("@")) {
       const [name, domain] = trimmed.split("@");
       if (!domain) return trimmed;
@@ -1525,7 +1525,7 @@ export function useCodexModelProviderManagerController({
   const getInstanceName = useCallback(
     (instance: InstanceProfile | null): string => {
       if (!instance || instance.id === DEFAULT_INSTANCE_ID) {
-        return t("codex.modelProviders.instance.default", "默认实例");
+        return t("codex.modelProviders.instance.default", "Phiên bản mặc định");
       }
       return instance.name;
     },
@@ -1550,7 +1550,7 @@ export function useCodexModelProviderManagerController({
     if (!options.some((item) => item.value === DEFAULT_INSTANCE_ID)) {
       options.unshift({
         value: DEFAULT_INSTANCE_ID,
-        label: t("codex.modelProviders.instance.default", "默认实例"),
+        label: t("codex.modelProviders.instance.default", "Phiên bản mặc định"),
       });
     }
     return options;
@@ -1770,25 +1770,25 @@ export function useCodexModelProviderManagerController({
       if (raw.includes("PROVIDER_NAME_REQUIRED")) {
         return t(
           "codex.modelProviders.validation.nameRequired",
-          "供应商名称不能为空",
+          "Tên nhà cung cấp là bắt buộc.",
         );
       }
       if (raw.includes("PROVIDER_BASE_URL_INVALID")) {
         return t(
           "codex.modelProviders.validation.baseUrlInvalid",
-          "Base URL 格式无效",
+          "Base URL không hợp lệ.",
         );
       }
       if (raw.includes("PROVIDER_BASE_URL_EXISTS")) {
         return t(
           "codex.modelProviders.validation.baseUrlExists",
-          "该 Base URL 已存在",
+          "Base URL này đã tồn tại.",
         );
       }
       if (raw.includes("PROVIDER_NOT_FOUND")) {
         return t(
           "codex.modelProviders.validation.providerNotFound",
-          "供应商不存在",
+          "Không tìm thấy nhà cung cấp.",
         );
       }
       return raw.replace(/^Error:\s*/, "");
@@ -1801,46 +1801,46 @@ export function useCodexModelProviderManagerController({
       const titleByStage: Record<string, string> = {
         credential: t(
           "codex.modelProviders.testFailure.credential",
-          "API Key 不可用",
+          "API Key không khả dụng",
         ),
-        url: t("codex.modelProviders.testFailure.url", "Base URL 无效"),
+        url: t("codex.modelProviders.testFailure.url", "Base URL không hợp lệ"),
         network: t(
           "codex.modelProviders.testFailure.network",
-          "网络连接失败",
+          "Kết nối mạng thất bại",
         ),
         models: t(
           "codex.modelProviders.testFailure.models",
-          "模型列表接口异常",
+          "Endpoint mô hình lỗi",
         ),
         parse: t(
           "codex.modelProviders.testFailure.parse",
-          "响应解析失败",
+          "Không đọc được phản hồi",
         ),
       };
       const suggestionByCode: Record<string, string> = {
         add_api_key: t(
           "codex.modelProviders.testSuggestion.addApiKey",
-          "请先为该供应商添加 API Key，然后再测试连接。",
+          "Hãy thêm API Key cho nhà cung cấp này trước khi kiểm tra.",
         ),
         check_base_url: t(
           "codex.modelProviders.testSuggestion.checkBaseUrl",
-          "请检查 Base URL 是否包含正确版本路径，例如 /v1。",
+          "Kiểm tra Base URL có chứa đúng đường dẫn phiên bản, ví dụ /v1.",
         ),
         check_network: t(
           "codex.modelProviders.testSuggestion.checkNetwork",
-          "请检查供应商地址、网络代理、防火墙或上游服务状态。",
+          "Kiểm tra URL nhà cung cấp, proxy, tường lửa hoặc trạng thái dịch vụ upstream.",
         ),
         check_api_key: t(
           "codex.modelProviders.testSuggestion.checkApiKey",
-          "请检查 API Key 是否有效、权限是否包含模型列表接口。",
+          "Kiểm tra API Key có hợp lệ và có quyền truy cập endpoint mô hình không.",
         ),
         check_provider_status: t(
           "codex.modelProviders.testSuggestion.checkProviderStatus",
-          "请检查供应商服务状态、网络代理或供应商接口兼容性。",
+          "Kiểm tra trạng thái dịch vụ nhà cung cấp, proxy hoặc khả năng tương thích API.",
         ),
         check_openai_compatible_models: t(
           "codex.modelProviders.testSuggestion.checkModelsApi",
-          "请确认该供应商提供 OpenAI 兼容的模型列表响应。",
+          "Xác nhận nhà cung cấp trả về danh sách mô hình tương thích OpenAI.",
         ),
       };
       const detail =
@@ -1879,37 +1879,37 @@ export function useCodexModelProviderManagerController({
     () => [
       {
         key: "all" as const,
-        label: t("codex.modelProviders.batchTest.status.all", "全部"),
+        label: t("codex.modelProviders.batchTest.status.all", "Tất cả"),
         count: providerBatchTestCounts.all,
         tone: "all",
       },
       {
         key: "success" as const,
-        label: t("codex.modelProviders.batchTest.status.success", "成功"),
+        label: t("codex.modelProviders.batchTest.status.success", "Thành công"),
         count: providerBatchTestCounts.success,
         tone: "success",
       },
       {
         key: "error" as const,
-        label: t("codex.modelProviders.batchTest.status.error", "失败"),
+        label: t("codex.modelProviders.batchTest.status.error", "Thất bại"),
         count: providerBatchTestCounts.error,
         tone: "error",
       },
       {
         key: "running" as const,
-        label: t("codex.modelProviders.batchTest.status.running", "测试中"),
+        label: t("codex.modelProviders.batchTest.status.running", "Đang chạy"),
         count: providerBatchTestCounts.running,
         tone: "running",
       },
       {
         key: "pending" as const,
-        label: t("codex.modelProviders.batchTest.status.pending", "等待中"),
+        label: t("codex.modelProviders.batchTest.status.pending", "Đang chờ"),
         count: providerBatchTestCounts.pending,
         tone: "pending",
       },
       {
         key: "cancelled" as const,
-        label: t("common.cancelled", "已取消"),
+        label: t("common.cancelled", "Đã hủy"),
         count: providerBatchTestCounts.cancelled,
         tone: "cancelled",
       },
@@ -1968,7 +1968,7 @@ export function useCodexModelProviderManagerController({
       if (!text) {
         return t(
           "codex.modelProviders.batchTest.unknownError",
-          "未知错误",
+          "Lỗi không xác định",
         );
       }
       if (
@@ -1978,7 +1978,7 @@ export function useCodexModelProviderManagerController({
       ) {
         return t(
           "codex.modelProviders.batchTest.officialClientOnlyError",
-          "该供应商限制只允许 Codex 官方客户端请求；当前一键测试已走本地网关，但上游仍拒绝了这次测试请求。请以官方 Codex 实际启动后的表现为准。",
+          "Nhà cung cấp này chỉ nhận yêu cầu từ ứng dụng Codex chính thức. Kiểm thử một lần bấm hiện dùng gateway cục bộ, nhưng upstream vẫn từ chối yêu cầu kiểm thử này. Hãy dựa vào hành vi khi chạy trong Codex chính thức.",
         );
       }
       return text;
@@ -2011,7 +2011,7 @@ export function useCodexModelProviderManagerController({
       setBatchTestError(
         t(
           "codex.modelProviders.batchTest.emptySelection",
-          "请选择至少一个带 API Key 的供应商。",
+          "Chọn ít nhất một nhà cung cấp có API Key.",
         ),
       );
       return;
@@ -2108,15 +2108,15 @@ export function useCodexModelProviderManagerController({
     const confirmed = await confirmDialog(
       t("codex.modelProviders.batchTest.deleteConfirm", {
         defaultValue:
-          "确认删除选中的 {{providerCount}} 个供应商吗？会同时删除 {{accountCount}} 个精确关联的 Codex API Key 账号。",
+          "Xóa {{providerCount}} nhà cung cấp đã chọn? Thao tác này cũng xóa {{accountCount}} tài khoản Codex API Key được liên kết chính xác.",
         providerCount: providerIds.length,
         accountCount: linkedAccountIds.length,
       }),
       {
-        title: t("common.delete", "删除"),
+        title: t("common.delete", "Xóa"),
         kind: "warning",
-        okLabel: t("common.delete", "删除"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("common.delete", "Xóa"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -2166,7 +2166,7 @@ export function useCodexModelProviderManagerController({
         tone: "success",
         text: t("codex.modelProviders.batchTest.deleteSuccess", {
           defaultValue:
-            "已删除 {{providerCount}} 个供应商和 {{accountCount}} 个关联账号。",
+            "Đã xóa {{providerCount}} nhà cung cấp và {{accountCount}} tài khoản liên kết.",
           providerCount: providerIds.length,
           accountCount: linkedAccountIds.length,
         }),
@@ -2174,7 +2174,7 @@ export function useCodexModelProviderManagerController({
     } catch (err) {
       setBatchTestError(
         t("codex.modelProviders.batchTest.deleteFailed", {
-          defaultValue: "删除选中项失败：{{error}}",
+          defaultValue: "Không thể xóa các mục đã chọn: {{error}}",
           error: parseServiceError(err),
         }),
       );
@@ -2209,7 +2209,7 @@ export function useCodexModelProviderManagerController({
       setFormError(
         t(
           "codex.api.modelCatalog.contextWindowInvalid",
-          "上下文窗口必须是大于 0 的整数",
+          "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
         ),
       );
       return;
@@ -2224,7 +2224,7 @@ export function useCodexModelProviderManagerController({
 
     if (!name) {
       setFormError(
-        t("codex.modelProviders.validation.nameRequired", "供应商名称不能为空"),
+        t("codex.modelProviders.validation.nameRequired", "Tên nhà cung cấp là bắt buộc."),
       );
       return;
     }
@@ -2232,7 +2232,7 @@ export function useCodexModelProviderManagerController({
       setFormError(
         t(
           "codex.modelProviders.validation.baseUrlInvalid",
-          "Base URL 格式无效",
+          "Base URL không hợp lệ.",
         ),
       );
       return;
@@ -2245,7 +2245,7 @@ export function useCodexModelProviderManagerController({
       setFormError(
         t(
           "codex.modelProviders.validation.apiKeyRequiredOnCreate",
-          "新增供应商时必须至少填写一个 API Key",
+          "Khi tạo nhà cung cấp, cần ít nhất một API Key.",
         ),
       );
       return;
@@ -2254,7 +2254,7 @@ export function useCodexModelProviderManagerController({
       setFormError(
         t(
           "codex.modelProviders.validation.apiKeyRequiredWhenEmpty",
-          "当前供应商没有可用 API Key，请先添加一个",
+          "Nhà cung cấp này chưa có API Key. Hãy thêm một key trước.",
         ),
       );
       return;
@@ -2368,11 +2368,11 @@ export function useCodexModelProviderManagerController({
       setNotice({
         tone: "success",
         text: currentEditingProvider
-          ? `${t("codex.modelProviders.saveSuccess", "模型供应商已保存")} ${t(
+          ? `${t("codex.modelProviders.saveSuccess", "Đã lưu nhà cung cấp mô hình.")} ${t(
               "codex.modelProviders.settingsRestartHint",
-              "供应商配置已更新。若关联的 Codex 或 API 服务正在运行，请重启后生效。",
+              "Đã cập nhật cài đặt nhà cung cấp. Hãy khởi động lại phiên Codex hoặc dịch vụ API đang dùng nhà cung cấp này để áp dụng.",
             )}`
-          : t("codex.modelProviders.saveSuccess", "模型供应商已保存"),
+          : t("codex.modelProviders.saveSuccess", "Đã lưu nhà cung cấp mô hình."),
       });
     } catch (err) {
       setFormError(parseServiceError(err));
@@ -2398,7 +2398,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.deleteBlocked", {
-            defaultValue: "该供应商已被 {{count}} 个账号引用，禁止删除。",
+            defaultValue: "Nhà cung cấp này đang được liên kết với {{count}} tài khoản nên không thể xóa.",
             count: referenceCount,
           }),
         });
@@ -2406,14 +2406,14 @@ export function useCodexModelProviderManagerController({
       }
       const confirmed = await confirmDialog(
         t("codex.modelProviders.confirmDelete", {
-          defaultValue: "确认删除供应商「{{name}}」吗？",
+          defaultValue: "Xóa nhà cung cấp \"{{name}}\"?",
           name: provider.name,
         }),
         {
-          title: t("common.confirm", "确认"),
+          title: t("common.confirm", "Xác nhận"),
           kind: "warning",
-          okLabel: t("common.delete", "删除"),
-          cancelLabel: t("common.cancel", "取消"),
+          okLabel: t("common.delete", "Xóa"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmed) return;
@@ -2424,7 +2424,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.deleteFailed", {
-            defaultValue: "删除供应商失败：{{error}}",
+            defaultValue: "Không thể xóa nhà cung cấp: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -2444,7 +2444,7 @@ export function useCodexModelProviderManagerController({
         await reloadProviders(false);
       } catch (err) {
         setFormError(t("codex.modelProviders.deleteApiKeyFailed", {
-          defaultValue: "删除 API Key 失败：{{error}}",
+          defaultValue: "Không thể xóa API Key: {{error}}",
           error: parseServiceError(err),
         }));
       } finally {
@@ -2463,7 +2463,7 @@ export function useCodexModelProviderManagerController({
     if (!nextApiKey) {
       setNotice({
         tone: "error",
-        text: t("codex.modelProviders.validation.apiKeyRequired", "API Key 不能为空"),
+        text: t("codex.modelProviders.validation.apiKeyRequired", "API Key không được để trống"),
       });
       return;
     }
@@ -2523,22 +2523,22 @@ export function useCodexModelProviderManagerController({
       setEditingApiKey(null);
       setNotice({
         tone: "success",
-        text: t("codex.modelProviders.updateApiKeySuccess", "API Key 已更新"),
+        text: t("codex.modelProviders.updateApiKeySuccess", "Đã cập nhật API Key"),
       });
     } catch (err) {
       const raw = String(err ?? "");
       const message = raw.includes("API_KEY_EXISTS")
         ? t(
             "codex.modelProviders.validation.apiKeyExists",
-            "该 API Key 已存在于当前供应商",
+            "API Key này đã tồn tại ở nhà cung cấp hiện tại",
           )
         : raw.includes("API_KEY_REQUIRED")
           ? t(
               "codex.modelProviders.validation.apiKeyRequired",
-              "API Key 不能为空",
+              "API Key không được để trống",
             )
           : t("codex.modelProviders.updateApiKeyFailed", {
-              defaultValue: "更新 API Key 失败：{{error}}",
+              defaultValue: "Không thể cập nhật API Key: {{error}}",
               error: raw.replace(/^Error:\s*/, ""),
             });
       setNotice({ tone: "error", text: message });
@@ -2550,7 +2550,7 @@ export function useCodexModelProviderManagerController({
   const handleRenameApiKey = useCallback(
     async (provider: CodexModelProvider, apiKey: CodexModelProviderApiKey) => {
       const next = window.prompt(
-        t("codex.modelProviders.renameApiKeyPrompt", "重命名 API Key"),
+        t("codex.modelProviders.renameApiKeyPrompt", "Đổi tên API key"),
         apiKey.name || "",
       );
       if (next === null) return;
@@ -2588,13 +2588,13 @@ export function useCodexModelProviderManagerController({
         await reloadProviders();
         setNotice({
           tone: "success",
-          text: t("codex.modelProviders.renameApiKeySuccess", "API Key 已重命名"),
+          text: t("codex.modelProviders.renameApiKeySuccess", "Đã đổi tên API key"),
         });
       } catch (err) {
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.renameApiKeyFailed", {
-            defaultValue: "重命名 API Key 失败：{{error}}",
+            defaultValue: "Đổi tên API key thất bại: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -2608,11 +2608,11 @@ export function useCodexModelProviderManagerController({
     if (ids.length === 0) return;
     const confirmed = await confirmDialog(
       t("codex.modelProviders.batchDeleteConfirm", {
-        defaultValue: "确定要删除选中的 {{count}} 个供应商吗？",
+        defaultValue: "Bạn có chắc muốn xóa {{count}} nhà cung cấp đã chọn không?",
         count: ids.length,
       }),
       {
-        title: t("common.delete", "删除"),
+        title: t("common.delete", "Xóa"),
         kind: "warning",
       },
     );
@@ -2627,7 +2627,7 @@ export function useCodexModelProviderManagerController({
       setNotice({
         tone: "success",
         text: t("codex.modelProviders.batchDeleteSuccess", {
-          defaultValue: "已删除 {{count}} 个供应商",
+          defaultValue: "Đã xóa {{count}} nhà cung cấp",
           count: ids.length,
         }),
       });
@@ -2635,7 +2635,7 @@ export function useCodexModelProviderManagerController({
       setNotice({
         tone: "error",
         text: t("codex.modelProviders.deleteFailed", {
-          defaultValue: "删除供应商失败：{{error}}",
+          defaultValue: "Không thể xóa nhà cung cấp: {{error}}",
           error: parseServiceError(err),
         }),
       });
@@ -2666,7 +2666,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.instance.saveFailed", {
-            defaultValue: "保存实例绑定失败：{{error}}",
+            defaultValue: "Không thể lưu liên kết phiên bản: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -2726,7 +2726,7 @@ export function useCodexModelProviderManagerController({
     () =>
       buildCodexPlanFilterOptions(providerOauthTierCounts, {
         includeError: false,
-        pendingLabel: t("codex.pendingAuth.badge", "待授权"),
+        pendingLabel: t("codex.pendingAuth.badge", "Chờ xác thực"),
       }),
     [providerOauthTierCounts, t],
   );
@@ -2853,8 +2853,8 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "success",
           text: boundOauthAccountId
-            ? t("codex.api.oauthBinding.saveSuccess", "OAuth 绑定已更新")
-            : t("codex.api.oauthBinding.clearSuccess", "OAuth 绑定已解除"),
+            ? t("codex.api.oauthBinding.saveSuccess", "Đã cập nhật liên kết OAuth")
+            : t("codex.api.oauthBinding.clearSuccess", "Đã bỏ liên kết OAuth."),
         });
         setProviderOauthPickerId(null);
       } catch (err) {
@@ -2862,11 +2862,11 @@ export function useCodexModelProviderManagerController({
           tone: "error",
           text: boundOauthAccountId
             ? t("codex.api.oauthBinding.saveFailed", {
-                defaultValue: "OAuth 绑定失败：{{error}}",
+                defaultValue: "Liên kết OAuth thất bại: {{error}}",
                 error: parseServiceError(err),
               })
             : t("codex.api.oauthBinding.clearFailed", {
-                defaultValue: "解除 OAuth 绑定失败：{{error}}",
+                defaultValue: "Không thể bỏ liên kết OAuth: {{error}}",
                 error: parseServiceError(err),
               }),
         });
@@ -3047,7 +3047,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.enableFailed", {
-            defaultValue: "启用供应商失败：{{error}}",
+            defaultValue: "Không thể bật nhà cung cấp: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -3112,7 +3112,7 @@ export function useCodexModelProviderManagerController({
           setNotice({
             tone: "success",
             text: t("codex.modelProviders.enableSuccess", {
-              defaultValue: "已启用 {{name}}，并启动 {{instance}}。",
+              defaultValue: "Đã bật {{name}} và khởi chạy {{instance}}.",
               name: preview.provider.name,
               instance: preview.instanceName,
             }),
@@ -3123,7 +3123,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.enableFailed", {
-            defaultValue: "启用供应商失败：{{error}}",
+            defaultValue: "Không thể bật nhà cung cấp: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -3167,7 +3167,7 @@ export function useCodexModelProviderManagerController({
           tone: "success",
           text: t("codex.modelProviders.testSuccess", {
             defaultValue:
-              "供应商连接正常：{{protocol}}，{{model}}，{{latency}}。",
+              "Kết nối nhà cung cấp ổn định: {{protocol}}, {{model}}, {{latency}}.",
             protocol:
               wireApi === "chat_completions"
                 ? t(
@@ -3176,7 +3176,7 @@ export function useCodexModelProviderManagerController({
                   )
                 : t(
                     "codex.modelProviders.wireApi.responses",
-                    "Responses 原生",
+                    "Responses gốc",
                   ),
             model: result.output ?? result.modelId ?? provider.name,
             latency:
@@ -3189,7 +3189,7 @@ export function useCodexModelProviderManagerController({
         setNotice({
           tone: "error",
           text: t("codex.modelProviders.testFailed", {
-            defaultValue: "测试供应商失败：{{error}}",
+            defaultValue: "Kiểm tra nhà cung cấp thất bại: {{error}}",
             error: parseServiceError(err),
           }),
         });
@@ -3293,7 +3293,7 @@ export function useCodexModelProviderManagerController({
       value?: number | null,
     ): string => {
       if (summary?.quotaUnlimited === true) {
-        return t("codex.modelProviders.usage.unlimitedQuota", "无限额度");
+        return t("codex.modelProviders.usage.unlimitedQuota", "Không giới hạn");
       }
       return formatUsageMoney(value, summary?.unit);
     },
@@ -3336,64 +3336,64 @@ export function useCodexModelProviderManagerController({
           "codex.modelProviders.usage.fields.weeklyExpiresAt",
           "Weekly Reset",
         ),
-        status: t("codex.modelProviders.usage.fields.status", "状态"),
-        planName: t("codex.modelProviders.usage.fields.planName", "订阅"),
-        remaining: t("codex.modelProviders.usage.fields.remaining", "剩余额度"),
-        balance: t("codex.modelProviders.usage.fields.balance", "余额"),
+        status: t("codex.modelProviders.usage.fields.status", "Trạng thái"),
+        planName: t("codex.modelProviders.usage.fields.planName", "Gói"),
+        remaining: t("codex.modelProviders.usage.fields.remaining", "Còn lại"),
+        balance: t("codex.modelProviders.usage.fields.balance", "Số dư"),
         quotaUnlimited: t(
           "codex.modelProviders.usage.fields.quotaUnlimited",
-          "无限额度",
+          "Không giới hạn",
         ),
         todayRequests: t(
           "codex.modelProviders.usage.fields.todayRequests",
-          "今日请求",
+          "Yêu cầu hôm nay",
         ),
         todayTokens: t(
           "codex.modelProviders.usage.fields.todayTokens",
-          "今日 Token",
+          "Token hôm nay",
         ),
-        todayCost: t("codex.modelProviders.usage.fields.todayCost", "今日消耗"),
+        todayCost: t("codex.modelProviders.usage.fields.todayCost", "Chi phí hôm nay"),
         totalRequests: t(
           "codex.modelProviders.usage.fields.totalRequests",
-          "累计请求",
+          "Tổng yêu cầu",
         ),
         totalTokens: t(
           "codex.modelProviders.usage.fields.totalTokens",
-          "累计 Token",
+          "Tổng Token",
         ),
-        totalCost: t("codex.modelProviders.usage.fields.totalCost", "累计消耗"),
+        totalCost: t("codex.modelProviders.usage.fields.totalCost", "Tổng chi phí"),
         hardLimitUsd: t(
           "codex.modelProviders.usage.fields.hardLimitUsd",
-          "硬额度",
+          "Giới hạn cứng",
         ),
         softLimitUsd: t(
           "codex.modelProviders.usage.fields.softLimitUsd",
-          "软额度",
+          "Giới hạn mềm",
         ),
         systemHardLimitUsd: t(
           "codex.modelProviders.usage.fields.systemHardLimitUsd",
-          "系统额度",
+          "Giới hạn hệ thống",
         ),
-        accessUntil: t("codex.modelProviders.usage.fields.accessUntil", "可用至"),
-        expiresAt: t("codex.modelProviders.usage.fields.expiresAt", "过期时间"),
+        accessUntil: t("codex.modelProviders.usage.fields.accessUntil", "Truy cập đến"),
+        expiresAt: t("codex.modelProviders.usage.fields.expiresAt", "Hết hạn"),
         totalGranted: t(
           "codex.modelProviders.usage.fields.totalGranted",
-          "授予额度",
+          "Đã cấp",
         ),
         totalAvailable: t(
           "codex.modelProviders.usage.fields.totalAvailable",
-          "可用额度",
+          "Khả dụng",
         ),
         modelLimitsEnabled: t(
           "codex.modelProviders.usage.fields.modelLimitsEnabled",
-          "模型限制",
+          "Giới hạn mô hình",
         ),
-        totalUsage: t("codex.modelProviders.usage.fields.totalUsage", "累计消耗"),
-        isAvailable: t("codex.modelProviders.usage.fields.isAvailable", "余额可用"),
-        currency: t("codex.modelProviders.usage.fields.currency", "币种"),
-        totalBalance: t("codex.modelProviders.usage.fields.totalBalance", "总余额"),
-        grantedBalance: t("codex.modelProviders.usage.fields.grantedBalance", "赠金余额"),
-        toppedUpBalance: t("codex.modelProviders.usage.fields.toppedUpBalance", "充值余额"),
+        totalUsage: t("codex.modelProviders.usage.fields.totalUsage", "Tổng sử dụng"),
+        isAvailable: t("codex.modelProviders.usage.fields.isAvailable", "Số dư khả dụng"),
+        currency: t("codex.modelProviders.usage.fields.currency", "Loại tiền"),
+        totalBalance: t("codex.modelProviders.usage.fields.totalBalance", "Tổng số dư"),
+        grantedBalance: t("codex.modelProviders.usage.fields.grantedBalance", "Số dư tặng"),
+        toppedUpBalance: t("codex.modelProviders.usage.fields.toppedUpBalance", "Số dư nạp"),
       };
       return labels[key] ?? fallback;
     },
@@ -3429,8 +3429,8 @@ export function useCodexModelProviderManagerController({
         item.key === "modelLimitsEnabled" ||
         item.key === "isAvailable"
       ) {
-        if (raw === "true") return t("codex.modelProviders.usage.booleanTrue", "是");
-        if (raw === "false") return t("codex.modelProviders.usage.booleanFalse", "否");
+        if (raw === "true") return t("codex.modelProviders.usage.booleanTrue", "Có");
+        if (raw === "false") return t("codex.modelProviders.usage.booleanFalse", "Không");
       }
       if (
         Number.isFinite(numeric) &&
@@ -3485,7 +3485,7 @@ export function useCodexModelProviderManagerController({
         (item) => item.value === providerLaunchPreview.instanceId,
       )?.label ||
       getInstanceName(resolveInstanceById(providerLaunchPreview.instanceId))
-    : t("codex.modelProviders.instance.default", "默认实例");
+    : t("codex.modelProviders.instance.default", "Phiên bản mặc định");
 
   /** 启动预览里的 OAuth 绑定状态（仅 API Key 账号展示）。 */
   const providerLaunchOAuthBinding = useMemo(() => {

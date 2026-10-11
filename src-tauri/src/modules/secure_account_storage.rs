@@ -37,13 +37,13 @@ fn read_or_create_key() -> Result<[u8; 32], String> {
 }
 
 fn read_key(path: &Path) -> Result<[u8; 32], String> {
-    let raw = fs::read_to_string(path).map_err(|e| format!("读取账号详情加密密钥失败: {}", e))?;
+    let raw = fs::read_to_string(path).map_err(|e| format!("Không thể đọc khóa mã hóa chi tiết tài khoản: {}", e))?;
     let bytes = general_purpose::STANDARD
         .decode(raw.trim())
-        .map_err(|e| format!("解析账号详情加密密钥失败: {}", e))?;
+        .map_err(|e| format!("Không thể giải mã cấu trúc khóa mã hóa chi tiết tài khoản: {}", e))?;
     bytes
         .try_into()
-        .map_err(|_| "账号详情加密密钥长度无效".to_string())
+        .map_err(|_| "Độ dài khóa mã hóa chi tiết tài khoản không hợp lệ".to_string())
 }
 
 fn read_or_create_key_at(path: &Path) -> Result<[u8; 32], String> {
@@ -54,7 +54,7 @@ fn read_or_create_key_at(path: &Path) -> Result<[u8; 32], String> {
     // first creation across threads/processes without blocking the caller.
     let lock_path = path.with_extension("key.lock");
     if lock_path.is_symlink() {
-        return Err("账号详情加密密钥锁无效".into());
+        return Err("Khóa đồng bộ mã hóa chi tiết tài khoản không hợp lệ".into());
     }
     let lock = fs::OpenOptions::new()
         .read(true)
@@ -62,9 +62,9 @@ fn read_or_create_key_at(path: &Path) -> Result<[u8; 32], String> {
         .create(true)
         .truncate(false)
         .open(lock_path)
-        .map_err(|e| format!("创建账号详情加密密钥锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể tạo khóa đồng bộ mã hóa chi tiết tài khoản: {}", e))?;
     fs2::FileExt::try_lock_exclusive(&lock)
-        .map_err(|_| "账号详情加密密钥正在初始化，请重试".to_string())?;
+        .map_err(|_| "Khóa mã hóa chi tiết tài khoản đang được khởi tạo, vui lòng thử lại".to_string())?;
     if path.exists() {
         return read_key(path);
     }
@@ -73,13 +73,13 @@ fn read_or_create_key_at(path: &Path) -> Result<[u8; 32], String> {
     rand::thread_rng().fill_bytes(&mut key);
     let encoded = general_purpose::STANDARD.encode(key);
     crate::modules::atomic_write::write_secret_string_atomic(path, &encoded)
-        .map_err(|e| format!("写入账号详情加密密钥失败: {}", e))?;
+        .map_err(|e| format!("Không thể ghi khóa mã hóa chi tiết tài khoản: {}", e))?;
     Ok(key)
 }
 
 fn cipher() -> Result<Aes256Gcm, String> {
     Aes256Gcm::new_from_slice(&read_or_create_key()?)
-        .map_err(|e| format!("初始化账号详情加密失败: {}", e))
+        .map_err(|e| format!("Không thể khởi tạo mã hóa chi tiết tài khoản: {}", e))
 }
 
 /// Recovery must not create a missing key, rotate credentials or restore a
@@ -89,18 +89,18 @@ pub(crate) fn read_account_file_readonly<T: DeserializeOwned>(
     path: &Path,
     key_path: &Path,
 ) -> Result<T, String> {
-    let content = fs::read_to_string(path).map_err(|e| format!("读取账号详情失败: {}", e))?;
+    let content = fs::read_to_string(path).map_err(|e| format!("Không thể đọc chi tiết tài khoản: {}", e))?;
     if let Ok(envelope) = serde_json::from_str::<SecureAccountEnvelope>(&content) {
         let raw =
-            fs::read_to_string(key_path).map_err(|e| format!("读取账号详情加密密钥失败: {}", e))?;
+            fs::read_to_string(key_path).map_err(|e| format!("Không thể đọc khóa mã hóa chi tiết tài khoản: {}", e))?;
         let key = general_purpose::STANDARD
             .decode(raw.trim())
-            .map_err(|e| format!("解析账号详情加密密钥失败: {}", e))?;
+            .map_err(|e| format!("Không thể giải mã cấu trúc khóa mã hóa chi tiết tài khoản: {}", e))?;
         let cipher = Aes256Gcm::new_from_slice(&key)
-            .map_err(|e| format!("初始化账号详情加密失败: {}", e))?;
+            .map_err(|e| format!("Không thể khởi tạo mã hóa chi tiết tài khoản: {}", e))?;
         return decrypt_envelope(&envelope, cipher);
     }
-    serde_json::from_str(&content).map_err(|e| format!("解析账号详情失败: {}", e))
+    serde_json::from_str(&content).map_err(|e| format!("Không thể phân tích chi tiết tài khoản: {}", e))
 }
 
 fn decrypt_envelope<T: DeserializeOwned>(
@@ -108,31 +108,31 @@ fn decrypt_envelope<T: DeserializeOwned>(
     cipher: Aes256Gcm,
 ) -> Result<T, String> {
     if envelope.version != VERSION || envelope.algorithm != "AES-256-GCM" {
-        return Err("账号详情加密版本不受支持".to_string());
+        return Err("Phiên bản mã hóa chi tiết tài khoản không được hỗ trợ".to_string());
     }
     let nonce = general_purpose::STANDARD
         .decode(envelope.nonce.trim())
-        .map_err(|e| format!("解析账号详情 nonce 失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích nonce chi tiết tài khoản: {}", e))?;
     if nonce.len() != 12 {
-        return Err("账号详情 nonce 长度无效".to_string());
+        return Err("Độ dài nonce chi tiết tài khoản không hợp lệ".to_string());
     }
     let ciphertext = general_purpose::STANDARD
         .decode(envelope.ciphertext.trim())
-        .map_err(|e| format!("解析账号详情密文失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích dữ liệu mã hóa chi tiết tài khoản: {}", e))?;
     let plaintext = cipher
         .decrypt(Nonce::from_slice(&nonce), ciphertext.as_ref())
-        .map_err(|e| format!("解密账号详情失败: {:?}", e))?;
-    serde_json::from_slice(&plaintext).map_err(|e| format!("解析账号详情明文失败: {}", e))
+        .map_err(|e| format!("Không thể giải mã chi tiết tài khoản: {:?}", e))?;
+    serde_json::from_slice(&plaintext).map_err(|e| format!("Không thể phân tích dữ liệu rõ của chi tiết tài khoản: {}", e))
 }
 
 pub fn serialize_account_file<T: Serialize>(kind: &str, account: &T) -> Result<String, String> {
     let plaintext =
-        serde_json::to_vec(account).map_err(|e| format!("序列化账号详情失败: {}", e))?;
+        serde_json::to_vec(account).map_err(|e| format!("Không thể tuần tự hóa chi tiết tài khoản: {}", e))?;
     let mut nonce_bytes = [0u8; 12];
     rand::thread_rng().fill_bytes(&mut nonce_bytes);
     let ciphertext = cipher()?
         .encrypt(Nonce::from_slice(&nonce_bytes), plaintext.as_ref())
-        .map_err(|e| format!("加密账号详情失败: {:?}", e))?;
+        .map_err(|e| format!("Không thể mã hóa chi tiết tài khoản: {:?}", e))?;
     let envelope = SecureAccountEnvelope {
         version: VERSION,
         kind: kind.to_string(),
@@ -142,7 +142,7 @@ pub fn serialize_account_file<T: Serialize>(kind: &str, account: &T) -> Result<S
         ciphertext: general_purpose::STANDARD.encode(ciphertext),
         encrypted_at: chrono::Utc::now().timestamp(),
     };
-    serde_json::to_string_pretty(&envelope).map_err(|e| format!("序列化账号详情密文失败: {}", e))
+    serde_json::to_string_pretty(&envelope).map_err(|e| format!("Không thể tuần tự hóa dữ liệu mã hóa chi tiết tài khoản: {}", e))
 }
 
 /// Decode an immutable encrypted snapshot without restoring backups, rotating
@@ -169,7 +169,7 @@ pub fn deserialize_account_file<T: DeserializeOwned>(
     }
 
     let value = crate::modules::atomic_write::parse_json_with_auto_restore::<T>(path, content)
-        .map_err(|e| format!("解析账号详情失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích chi tiết tài khoản: {}", e))?;
     Ok((value, true))
 }
 
@@ -209,7 +209,7 @@ mod tests {
         for result in results {
             match result {
                 Ok(created) => assert_eq!(created, key),
-                Err(error) => assert_eq!(error, "账号详情加密密钥正在初始化，请重试"),
+                Err(error) => assert_eq!(error, "Khóa mã hóa chi tiết tài khoản đang được khởi tạo, vui lòng thử lại"),
             }
         }
         assert_eq!(read_or_create_key_at(&path).unwrap(), key);

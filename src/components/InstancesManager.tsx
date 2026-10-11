@@ -803,7 +803,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     [appType],
   );
   const resolveApiServiceLabel = useCallback(
-    () => t("codex.localAccess.title", "API 服务"),
+    () => t("codex.localAccess.title", "Dịch vụ API"),
     [t],
   );
   const isApiServiceBindId = useCallback(
@@ -1022,7 +1022,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     if (!query) return sortedInstances;
     return sortedInstances.filter((instance) => {
       const displayName = instance.isDefault
-        ? t("instances.defaultName", "默认实例")
+        ? t("instances.defaultName", "Phiên bản mặc định")
         : instance.name || "";
       const { account, isApiService } = resolveBoundAccount(
         instance.bindAccountId,
@@ -1149,7 +1149,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     setEditing(instance);
     setFormName(
       instance.isDefault
-        ? t("instances.defaultName", "默认实例")
+        ? t("instances.defaultName", "Phiên bản mặc định")
         : instance.name || "",
     );
     setFormPath(instance.userDataDir || "");
@@ -1233,9 +1233,9 @@ export function InstancesManager<TAccount extends AccountLike>({
       const confirmed = await confirmDialog(
         t("codex.modelManagement.enableConfirmDescription"),
         {
-          title: t("codex.modelManagement.enableConfirmTitle", "开启模型管理？"),
-          okLabel: t("codex.modelManagement.enableConfirmAction", "开启并配置"),
-          cancelLabel: t("common.cancel", "取消"),
+          title: t("codex.modelManagement.enableConfirmTitle", "Bật quản lý mô hình?"),
+          okLabel: t("codex.modelManagement.enableConfirmAction", "Bật và cấu hình"),
+          cancelLabel: t("common.cancel", "Hủy"),
           kind: "warning",
         },
       );
@@ -1312,12 +1312,12 @@ export function InstancesManager<TAccount extends AccountLike>({
 
     if (!isEditingDefault) {
       if (!formName.trim()) {
-        setFormError(t("instances.form.nameRequired", "请输入实例名称"));
+        setFormError(t("instances.form.nameRequired", "Vui lòng nhập tên phiên bản"));
         setFormErrorTick((prev) => prev + 1);
         return;
       }
       if (!formPath.trim()) {
-        setFormError(t("instances.form.pathRequired", "请选择实例目录"));
+        setFormError(t("instances.form.pathRequired", "Vui lòng chọn thư mục phiên bản"));
         setFormErrorTick((prev) => prev + 1);
         return;
       }
@@ -1336,7 +1336,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       !formCopySourceInstanceId
     ) {
       setFormError(
-        t("instances.form.copySourceRequired", "请选择复制来源实例"),
+        t("instances.form.copySourceRequired", "Vui lòng chọn một phiên bản nguồn"),
       );
       setFormErrorTick((prev) => prev + 1);
       return;
@@ -1349,7 +1349,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       !isExistingDir &&
       !formBindAccountId
     ) {
-      setFormError(t("instances.form.bindRequired", "请选择要绑定的账号"));
+      setFormError(t("instances.form.bindRequired", "Vui lòng chọn một tài khoản để liên kết"));
       setFormErrorTick((prev) => prev + 1);
       return;
     }
@@ -1381,7 +1381,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           formExperimentalModelUnavailableMessage ||
             t(
               "instances.form.modelRouting.catalogUnavailable",
-              "当前实例的可见模型目录不可由 Cockpit 管理，暂不能启用模型路由。",
+              "Không thể quản lý danh sách model của phiên hiện tại; chưa thể bật định tuyến model.",
             ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1391,7 +1391,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.desktopOnly",
-            "混合模型路由仅支持桌面版实例。",
+            "Định tuyến model hỗn hợp chỉ hỗ trợ phiên desktop.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1409,7 +1409,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setMessage({
           text: t(
             "instances.form.modelRouting.oauthRequired",
-            "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+            "Định tuyến model hỗn hợp cần tài khoản thuê bao OAuth được đăng nhập trực tiếp.",
           ),
         });
         setFormModelRoutingEnabled(false);
@@ -1421,7 +1421,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.routeRequired",
-            "请至少添加一个 API 模型路由。",
+            "Hãy thêm ít nhất một tuyến model API.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1439,7 +1439,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.invalidNamespace",
-              "命名空间需为 2-32 位小写字母、数字、下划线或连字符，且不能使用保留名称。",
+              "Không gian tên phải có 2–32 ký tự chữ thường, chữ số, dấu gạch dưới hoặc gạch ngang và không được dùng tên dành riêng.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1449,7 +1449,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.duplicateNamespace",
-              "模型路由命名空间不能重复。",
+              "Không gian tên của các tuyến model không được trùng nhau.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1463,7 +1463,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           setFormError(
             t(
               "instances.form.modelRouting.providerRequired",
-              "每个模型路由都必须选择一个 API 账号。",
+              "Mỗi tuyến model phải chọn một tài khoản API.",
             ),
           );
           setFormErrorTick((prev) => prev + 1);
@@ -1479,7 +1479,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         setFormError(
           t(
             "instances.form.modelRouting.enabledRouteRequired",
-            "请至少启用一个 API 模型路由。",
+            "Hãy bật ít nhất một tuyến model API.",
           ),
         );
         setFormErrorTick((prev) => prev + 1);
@@ -1526,20 +1526,20 @@ export function InstancesManager<TAccount extends AccountLike>({
           restartAfterSave = await confirmDialog(
             t(
               "instances.form.modelRouting.runningSaveMessage",
-              "此 Codex 实例正在运行。立即替换本地服务会中断当前对话。\n\n选择“保存并重启 Codex”立即生效；选择“仅保存，稍后生效”不会影响当前会话。",
+              "Phiên bản Codex này đang chạy. Thay thế dịch vụ cục bộ ngay bây giờ sẽ làm gián đoạn cuộc trò chuyện hiện tại.\n\nChọn «Lưu và khởi động lại Codex» để áp dụng ngay, hoặc «Lưu để dùng sau» để giữ nguyên phiên hiện tại.",
             ),
             {
               title: t(
                 "instances.form.modelRouting.runningSaveTitle",
-                "路由配置何时生效？",
+                "Khi nào định tuyến có hiệu lực?",
               ),
               okLabel: t(
                 "instances.form.modelRouting.saveAndRestart",
-                "保存并重启 Codex",
+                "Lưu và khởi động lại Codex",
               ),
               cancelLabel: t(
                 "instances.form.modelRouting.saveForLater",
-                "仅保存，稍后生效",
+                "Lưu để dùng sau",
               ),
               kind: "warning",
             },
@@ -1627,20 +1627,20 @@ export function InstancesManager<TAccount extends AccountLike>({
               throw new Error(
                 `${String(restartError)}\n${t(
                   "instances.form.modelRouting.restartRollbackFailed",
-                  "新路由启动失败，恢复原配置后仍无法启动：",
+                  "Không thể khởi động tuyến mới và không thể khởi động lại cấu hình gốc: ",
                 )}${String(rollbackError)}`,
               );
             }
             throw new Error(
               t("instances.form.modelRouting.restartRolledBack", {
                 defaultValue:
-                  "新路由启动失败，已恢复原配置并重新启动 Codex：{{error}}",
+                  "Không thể khởi động tuyến mới. Cấu hình gốc đã được khôi phục và Codex đã khởi động lại: {{error}}",
                 error: String(restartError).replace(/^Error:\s*/, ""),
               }),
             );
           }
         }
-        setMessage({ text: t("instances.messages.updated", "实例已更新") });
+        setMessage({ text: t("instances.messages.updated", "Đã cập nhật phiên bản") });
       } else {
         setActionLoading("create");
         const created = await createInstance({
@@ -1673,9 +1673,9 @@ export function InstancesManager<TAccount extends AccountLike>({
           text: isCreateEmpty
             ? t(
                 "instances.messages.emptyCreated",
-                "空白实例已创建，请先启动一次后再绑定账号",
+                "Đã tạo phiên bản trống. Hãy khởi chạy một lần trước khi liên kết tài khoản.",
               )
-            : t("instances.messages.created", "实例已创建"),
+            : t("instances.messages.created", "Đã tạo phiên bản"),
         });
       }
       closeModal();
@@ -1700,13 +1700,13 @@ export function InstancesManager<TAccount extends AccountLike>({
     setActionLoading(target.id);
     try {
       await deleteInstance(target.id);
-      setMessage({ text: t("instances.messages.deleted", "实例已删除") });
+      setMessage({ text: t("instances.messages.deleted", "Đã xóa phiên bản") });
       clearDeleteConfirm();
     } catch (e) {
       const errorMessage = String(e)
         .replace(/^Error:\s*/, "")
         .trim();
-      reportDeleteInstanceError(errorMessage || t("common.failed", "失败"));
+      reportDeleteInstanceError(errorMessage || t("common.failed", "Thất bại"));
     } finally {
       setActionLoading(null);
     }
@@ -1825,7 +1825,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         if (showSuccessMessage && !startHookError) {
           const successMessage = resolveStartSuccessMessage
             ? resolveStartSuccessMessage(startedInstance)
-            : t("instances.messages.started", "实例已启动");
+            : t("instances.messages.started", "Đã bắt đầu phiên bản");
           setMessage({ text: successMessage });
         }
         return "started";
@@ -1904,10 +1904,10 @@ export function InstancesManager<TAccount extends AccountLike>({
       const confirmed = await confirmDialog(
         t(
           "instances.stop.message",
-          "将向实例进程发送终止信号（SIGTERM）强制关闭，可能导致未保存的数据丢失。确认继续？",
+          "Gửi tín hiệu kết thúc (SIGTERM) đến tiến trình phiên bản. Dữ liệu chưa lưu có thể bị mất. Tiếp tục?",
         ),
         {
-          title: t("instances.stop.title", "强制关闭实例"),
+          title: t("instances.stop.title", "Buộc dừng phiên bản"),
           kind: "warning",
         },
       );
@@ -1919,7 +1919,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     markInstanceStopping(instance.id);
     try {
       await stopInstance(instance.id);
-      setMessage({ text: t("instances.messages.stopped", "实例已关闭") });
+      setMessage({ text: t("instances.messages.stopped", "Đã dừng phiên bản") });
     } catch (e) {
       const retryStop = async () => {
         await stopInstance(instance.id);
@@ -1999,8 +1999,8 @@ export function InstancesManager<TAccount extends AccountLike>({
         platformId: floatingCardPlatformId,
         instanceId: instance.id,
         instanceName: instance.isDefault
-          ? t("instances.defaultName", "默认实例")
-          : instance.name || t("instances.defaultName", "默认实例"),
+          ? t("instances.defaultName", "Phiên bản mặc định")
+          : instance.name || t("instances.defaultName", "Phiên bản mặc định"),
         boundAccountId: accountId,
       });
     } catch (e) {
@@ -2062,7 +2062,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         .map((item) => item.id);
       if (stoppedIds.length === 0) {
         setMessage({
-          text: t("instances.messages.allAlreadyRunning", "所有实例已在运行"),
+          text: t("instances.messages.allAlreadyRunning", "Tất cả các phiên bản đã đang chạy"),
         });
         return;
       }
@@ -2095,11 +2095,11 @@ export function InstancesManager<TAccount extends AccountLike>({
 
       if (startedCount > 0) {
         setMessage({
-          text: t("instances.messages.startedAll", "已启动所有未运行实例"),
+          text: t("instances.messages.startedAll", "Tất cả các phiên bản đã dừng đã được bắt đầu"),
         });
       } else {
         setMessage({
-          text: t("instances.messages.allAlreadyRunning", "所有实例已在运行"),
+          text: t("instances.messages.allAlreadyRunning", "Tất cả các phiên bản đã đang chạy"),
         });
       }
     } catch (e) {
@@ -2124,7 +2124,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     try {
       await refreshInstances();
       await closeAllInstances();
-      setMessage({ text: t("instances.messages.closedAll", "已关闭所有实例") });
+      setMessage({ text: t("instances.messages.closedAll", "Tất cả các phiên bản đã được dừng") });
     } catch (e) {
       setMessage({ text: String(e), tone: "error" });
     } finally {
@@ -2201,9 +2201,9 @@ export function InstancesManager<TAccount extends AccountLike>({
         source.modelRouting?.routes?.map((route) => ({ ...route })) ?? [],
       );
       const sourceName = source.isDefault
-        ? t("instances.defaultName", "默认实例")
+        ? t("instances.defaultName", "Phiên bản mặc định")
         : source.name?.trim() || source.id;
-      const nextName = t("instances.form.copyName", "{{name}} 副本", {
+      const nextName = t("instances.form.copyName", "Bản sao của {{name}}", {
         name: sourceName,
       });
       setFormName((current) => {
@@ -2270,7 +2270,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     if (reason === "catalog_conflict") {
       return t(
         "codex.experimentalModelCatalog.unavailable.catalogConflict",
-        "已有其他 model_catalog_json，禁止覆盖。",
+        "Một model_catalog_json khác đã được cấu hình và sẽ không bị ghi đè.",
       );
     }
     return null;
@@ -2284,7 +2284,7 @@ export function InstancesManager<TAccount extends AccountLike>({
     } catch (error) {
       setFormCodexQuickConfigError(
         t("instances.form.codexQuickConfig.openFailed", {
-          defaultValue: "打开 config.toml 失败：{{error}}",
+          defaultValue: "Không mở được config.toml: {{error}}",
           error: String(error),
         }),
       );
@@ -2317,7 +2317,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         if (!active) return;
         setFormCodexQuickConfigError(
           t("instances.form.codexQuickConfig.loadFailed", {
-            defaultValue: "加载当前 Codex 配置失败：{{error}}",
+            defaultValue: "Không tải được cấu hình Codex hiện tại: {{error}}",
             error: String(error),
           }),
         );
@@ -2356,13 +2356,13 @@ export function InstancesManager<TAccount extends AccountLike>({
             type="text"
             value={searchValue}
             onChange={(event) => onSearchChange(event.target.value)}
-            placeholder={t("accounts.search", "搜索账号...")}
+            placeholder={t("accounts.search", "Tìm kiếm tài khoản...")}
           />
         </label>
         {availableTags.length > 0 ? (
           <div className="account-select-tag-filter">
             <span className="account-select-tag-filter-label">
-              {t("accounts.filterTags", "标签筛选")}
+              {t("accounts.filterTags", "Lọc thẻ")}
             </span>
             <div className="account-select-tag-filter-list">
               {availableTags.map((tag) => (
@@ -2383,7 +2383,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   className="account-select-tag-clear"
                   onClick={onClearTagFilter}
                 >
-                  {t("accounts.clearFilter", "清空筛选")}
+                  {t("accounts.clearFilter", "Xóa bộ lọc")}
                 </button>
               ) : null}
             </div>
@@ -2406,7 +2406,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         >
           <span className="account-select-email-row">
             <span className="account-select-email">
-              {t("instances.form.followCurrent", "跟随当前账号")}
+              {t("instances.form.followCurrent", "Theo tài khoản hiện tại")}
             </span>
             {selectedAccount ? renderAccountBadge?.(selectedAccount) : null}
           </span>
@@ -2426,7 +2426,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           }}
         >
           <span className="account-select-email muted">
-            {t("instances.form.unbound", "不绑定")}
+            {t("instances.form.unbound", "Chưa liên kết")}
           </span>
         </button>
       )}
@@ -2482,7 +2482,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       !allowUnbound &&
       !allowFollowCurrent ? (
         <div className="account-select-empty">
-          {t("common.noData", "暂无数据")}
+          {t("common.noData", "Chưa có dữ liệu")}
         </div>
       ) : null}
     </>
@@ -2503,10 +2503,10 @@ export function InstancesManager<TAccount extends AccountLike>({
       maskAccountText={maskAccountText}
       resolveApiServiceLabel={resolveApiServiceLabel}
       renderAccountMenuItems={renderAccountMenuItems}
-      unboundLabel={t("instances.form.unbound", "不绑定")}
-      selectAccountLabel={t("instances.form.selectAccount", "选择账号")}
-      missingAccountLabel={t("instances.quota.accountMissing", "账号不存在")}
-      followCurrentLabel={t("instances.form.followCurrent", "跟随当前账号")}
+      unboundLabel={t("instances.form.unbound", "Chưa liên kết")}
+      selectAccountLabel={t("instances.form.selectAccount", "Chọn tài khoản")}
+      missingAccountLabel={t("instances.quota.accountMissing", "Không tìm thấy tài khoản")}
+      followCurrentLabel={t("instances.form.followCurrent", "Theo tài khoản hiện tại")}
     />
   );
 
@@ -2517,7 +2517,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       availableCopySourceInstances.map((instance) => ({
         value: instance.id,
         label: instance.isDefault
-          ? t("instances.defaultName", "默认实例")
+          ? t("instances.defaultName", "Phiên bản mặc định")
           : instance.name || instance.id,
       })),
     [availableCopySourceInstances, t],
@@ -2537,7 +2537,7 @@ export function InstancesManager<TAccount extends AccountLike>({
       setMessage({
         text: t(
           "instances.form.modelRouting.oauthRequired",
-          "混合模型路由需要绑定一个直接登录的 OAuth 订阅账号。",
+          "Định tuyến model hỗn hợp cần tài khoản thuê bao OAuth được đăng nhập trực tiếp.",
         ),
       });
     }
@@ -2599,7 +2599,7 @@ export function InstancesManager<TAccount extends AccountLike>({
         instanceId: instance.id,
         appSpeed: speed,
       });
-      setMessage({ text: t("instances.messages.speedUpdated", "速度已更新") });
+      setMessage({ text: t("instances.messages.speedUpdated", "Đã cập nhật tốc độ") });
     } catch (e) {
       setMessage({ text: String(e), tone: "error" });
     } finally {
@@ -2622,7 +2622,7 @@ export function InstancesManager<TAccount extends AccountLike>({
             <Search size={16} className="search-icon" />
             <input
               type="text"
-              placeholder={t("instances.search", "搜索实例")}
+              placeholder={t("instances.search", "Tìm kiếm phiên bản")}
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
@@ -2634,13 +2634,13 @@ export function InstancesManager<TAccount extends AccountLike>({
               onChange={(event) =>
                 setSortField(event.target.value as InstanceSortField)
               }
-              aria-label={t("instances.sort.label", "排序")}
+              aria-label={t("instances.sort.label", "Sắp xếp")}
             >
               <option value="createdAt">
-                {t("instances.sort.createdAt", "按创建时间")}
+                {t("instances.sort.createdAt", "Theo thời gian tạo")}
               </option>
               <option value="lastLaunchedAt">
-                {t("instances.sort.lastLaunchedAt", "按启动时间")}
+                {t("instances.sort.lastLaunchedAt", "Theo thời gian khởi chạy")}
               </option>
             </select>
           </div>
@@ -2651,10 +2651,10 @@ export function InstancesManager<TAccount extends AccountLike>({
             }
             title={
               sortDirection === "asc"
-                ? t("instances.sort.ascTooltip", "当前：正序，点击切换为倒序")
-                : t("instances.sort.descTooltip", "当前：倒序，点击切换为正序")
+                ? t("instances.sort.ascTooltip", "Hiện tại: tăng dần, bấm để chuyển sang giảm dần")
+                : t("instances.sort.descTooltip", "Hiện tại: giảm dần, bấm để chuyển sang tăng dần")
             }
-            aria-label={t("instances.sort.toggleDirection", "切换排序方向")}
+            aria-label={t("instances.sort.toggleDirection", "Chuyển hướng sắp xếp")}
           >
             {sortDirection === "asc" ? "⬆" : "⬇"}
           </button>
@@ -2663,13 +2663,13 @@ export function InstancesManager<TAccount extends AccountLike>({
             onClick={togglePrivacyMode}
             title={
               privacyModeEnabled
-                ? t("privacy.showSensitive", "显示邮箱")
-                : t("privacy.hideSensitive", "隐藏邮箱")
+                ? t("privacy.showSensitive", "Hiện email")
+                : t("privacy.hideSensitive", "Ẩn email")
             }
             aria-label={
               privacyModeEnabled
-                ? t("privacy.showSensitive", "显示邮箱")
-                : t("privacy.hideSensitive", "隐藏邮箱")
+                ? t("privacy.showSensitive", "Hiện email")
+                : t("privacy.hideSensitive", "Ẩn email")
             }
           >
             {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -2679,8 +2679,8 @@ export function InstancesManager<TAccount extends AccountLike>({
           <button
             className="btn btn-primary icon-only"
             onClick={openCreateModal}
-            title={t("instances.actions.create", "新建实例")}
-            aria-label={t("instances.actions.create", "新建实例")}
+            title={t("instances.actions.create", "Phiên bản mới")}
+            aria-label={t("instances.actions.create", "Phiên bản mới")}
           >
             <Plus size={16} />
           </button>
@@ -2689,8 +2689,8 @@ export function InstancesManager<TAccount extends AccountLike>({
               className="btn btn-secondary icon-only"
               onClick={handleStartAll}
               disabled={bulkActionLoading || restartingAll}
-              title={t("instances.actions.startAll", "全部启动")}
-              aria-label={t("instances.actions.startAll", "全部启动")}
+              title={t("instances.actions.startAll", "Bắt đầu tất cả")}
+              aria-label={t("instances.actions.startAll", "Bắt đầu tất cả")}
             >
               <Play size={16} />
             </button>
@@ -2700,8 +2700,8 @@ export function InstancesManager<TAccount extends AccountLike>({
               className="btn btn-secondary icon-only"
               onClick={handleCloseAll}
               disabled={bulkActionLoading || restartingAll}
-              title={t("instances.actions.stopAll", "全部关闭")}
-              aria-label={t("instances.actions.stopAll", "全部关闭")}
+              title={t("instances.actions.stopAll", "Dừng tất cả")}
+              aria-label={t("instances.actions.stopAll", "Dừng tất cả")}
             >
               <Square size={16} />
             </button>
@@ -2710,8 +2710,8 @@ export function InstancesManager<TAccount extends AccountLike>({
             className="btn btn-secondary icon-only"
             onClick={handleRefresh}
             disabled={refreshing || bulkActionLoading || restartingAll}
-            title={t("instances.actions.refresh", "刷新")}
-            aria-label={t("instances.actions.refresh", "刷新")}
+            title={t("instances.actions.refresh", "Làm mới")}
+            aria-label={t("instances.actions.refresh", "Làm mới")}
           >
             <RefreshCw size={16} className={refreshing ? "icon-spin" : ""} />
           </button>
@@ -2727,7 +2727,7 @@ export function InstancesManager<TAccount extends AccountLike>({
           <button
             className="action-message-close"
             onClick={() => setMessage(null)}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X size={14} />
           </button>
@@ -2735,19 +2735,19 @@ export function InstancesManager<TAccount extends AccountLike>({
       )}
 
       {loading && instances.length === 0 ? (
-        <div className="loading-state">{t("common.loading", "加载中...")}</div>
+        <div className="loading-state">{t("common.loading", "Đang tải...")}</div>
       ) : sortedInstances.length === 0 ? (
         <div className="empty-state">
-          <h3>{t("instances.empty.title", "还没有实例")}</h3>
+          <h3>{t("instances.empty.title", "Không có phiên bản nào")}</h3>
           <p>
             {t(
               "instances.empty.desc",
-              "创建一个独立配置目录，快速开启多实例。",
+              "Tạo một thư mục cấu hình riêng biệt để khởi động nhanh nhiều phiên bản.",
             )}
           </p>
           <button className="btn btn-primary" onClick={openCreateModal}>
             <Plus size={16} />
-            {t("instances.actions.create", "新建实例")}
+            {t("instances.actions.create", "Phiên bản mới")}
           </button>
         </div>
       ) : (
@@ -2758,12 +2758,12 @@ export function InstancesManager<TAccount extends AccountLike>({
         >
           <div className="instances-list-header">
             <div></div>
-            <div>{t("instances.columns.instance", "实例")}</div>
+            <div>{t("instances.columns.instance", "Phiên bản")}</div>
             <div></div>
-            <div>{t("instances.columns.email", "账号")}</div>
-            {isCodexApp && <div>{t("instances.columns.speed", "速度")}</div>}
+            <div>{t("instances.columns.email", "Tài khoản")}</div>
+            {isCodexApp && <div>{t("instances.columns.speed", "Tốc độ")}</div>}
             <div>PID</div>
-            <div>{t("instances.columns.actions", "操作")}</div>
+            <div>{t("instances.columns.actions", "Hành động")}</div>
           </div>
           {filteredInstances.map((instance) => {
             const {
@@ -2792,28 +2792,28 @@ export function InstancesManager<TAccount extends AccountLike>({
                     ? "ready"
                     : "stopped";
             const statusLabel = restartingAll
-              ? t("instances.status.restarting", "重启中")
+              ? t("instances.status.restarting", "Đang khởi động lại")
               : isInstanceStarting
-                ? t("instances.status.starting", "启动中")
+                ? t("instances.status.starting", "Bắt đầu")
                 : instance.running
-                  ? t("instances.status.running", "运行中")
+                  ? t("instances.status.running", "Đang chạy")
                   : isTerminalLaunchInstance && instance.lastLaunchedAt
-                    ? t("instances.status.ready", "已准备")
-                    : t("instances.status.stopped", "未运行");
+                    ? t("instances.status.ready", "Sẵn sàng")
+                    : t("instances.status.stopped", "Đã dừng");
             const canShowFloatingCard =
               Boolean(instance.bindAccountId) &&
               !accountMissing &&
               !accountIsApiService;
             const floatingCardActionTitle = canShowFloatingCard
-              ? t("instances.actions.showFloatingCard", "显示悬浮框")
+              ? t("instances.actions.showFloatingCard", "Hiện thẻ nổi")
               : accountMissing
                 ? t(
                     "instances.actions.showFloatingCardMissing",
-                    "绑定账号不存在，无法显示悬浮框",
+                    "Tài khoản đã liên kết không còn tồn tại nên không thể hiển thị thẻ nổi",
                   )
                 : t(
                     "instances.actions.showFloatingCardDisabled",
-                    "请先绑定账号后再显示悬浮框",
+                    "Hãy liên kết tài khoản trước khi hiển thị thẻ nổi",
                   );
             return (
               <div
@@ -2827,7 +2827,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   <div className="instance-title-row">
                     <span className="instance-name">
                       {instance.isDefault
-                        ? t("instances.defaultName", "默认实例")
+                        ? t("instances.defaultName", "Phiên bản mặc định")
                         : instance.name}
                     </span>
                     {(isCodexApp || isClaudeApp) && (
@@ -2836,14 +2836,14 @@ export function InstancesManager<TAccount extends AccountLike>({
                       >
                         {launchMode === "cli"
                           ? t("instances.form.launchModeCli", "CLI")
-                        : t("instances.form.launchModeApp", "桌面版")}
+                        : t("instances.form.launchModeApp", "Bản desktop")}
                       </span>
                     )}
                     {isCodexApp && instance.modelRouting?.enabled && (
                       <span className="instance-model-routing-badge">
                         {t(
                           "instances.form.modelRouting.statusBadge",
-                          "混合路由",
+                          "Định tuyến hỗn hợp",
                         )}
                       </span>
                     )}
@@ -2852,7 +2852,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                     <div className="instance-sub-info">
                       <span className="info-item" title={instance.extraArgs}>
                         <Terminal size={12} />
-                        {t("instances.labels.argsPresent", "有参数")}
+                        {t("instances.labels.argsPresent", "Có args")}
                       </span>
                     </div>
                   )}
@@ -2873,7 +2873,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                     >
                       {t(
                         "instances.labels.pendingInit",
-                        "待初始化（先启动一次）",
+                        "Chờ khởi tạo (hãy chạy một lần trước)",
                       )}
                     </button>
                   ) : (
@@ -2896,19 +2896,19 @@ export function InstancesManager<TAccount extends AccountLike>({
                       renderAccountMenuItems={renderAccountMenuItems}
                       disabled={isInstanceBusy}
                       missing={accountMissing}
-                      placeholder={t("instances.labels.unbound", "未绑定")}
-                      unboundLabel={t("instances.form.unbound", "不绑定")}
+                      placeholder={t("instances.labels.unbound", "Chưa liên kết")}
+                      unboundLabel={t("instances.form.unbound", "Chưa liên kết")}
                       selectAccountLabel={t(
                         "instances.form.selectAccount",
-                        "选择账号",
+                        "Chọn tài khoản",
                       )}
                       missingAccountLabel={t(
                         "instances.quota.accountMissing",
-                        "账号不存在",
+                        "Không tìm thấy tài khoản",
                       )}
                       followCurrentLabel={t(
                         "instances.form.followCurrent",
-                        "跟随当前账号",
+                        "Theo tài khoản hiện tại",
                       )}
                       instanceId={instance.id}
                       currentOpenId={openInlineMenuId}
@@ -2929,7 +2929,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       busy={isInstanceBusy}
                       compact
                       preferredPlacement="top"
-                      ariaLabel={t("codex.speed.title", "速度")}
+                      ariaLabel={t("codex.speed.title", "Tốc độ")}
                     />
                   </div>
                 )}
@@ -2956,7 +2956,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   </button>
                   <button
                     className="icon-button"
-                    title={t("instances.actions.start", "启动")}
+                    title={t("instances.actions.start", "Bắt đầu")}
                     onClick={() => handleStart(instance)}
                     disabled={
                       isInstanceBusy || restartingAll || bulkActionLoading
@@ -2967,7 +2967,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   {!isTerminalLaunchInstance && (
                     <button
                       className="icon-button"
-                      title={t("instances.actions.openWindow", "定位窗口")}
+                      title={t("instances.actions.openWindow", "Mở cửa sổ")}
                       onClick={() => handleLocateInstance(instance)}
                       disabled={
                         !instance.running ||
@@ -2982,7 +2982,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   {!isTerminalLaunchInstance && (
                     <button
                       className="icon-button danger"
-                      title={t("instances.actions.stop", "停止")}
+                      title={t("instances.actions.stop", "Dừng")}
                       onClick={() => handleStop(instance)}
                       disabled={
                         !instance.running ||
@@ -2996,7 +2996,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   )}
                   <button
                     className="icon-button"
-                    title={t("instances.actions.duplicate", "复制实例")}
+                    title={t("instances.actions.duplicate", "Sao chép phiên")}
                     onClick={() => openDuplicateModal(instance)}
                     disabled={
                       isInstanceBusy || restartingAll || bulkActionLoading
@@ -3006,7 +3006,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   </button>
                   <button
                     className="icon-button"
-                    title={t("instances.actions.edit", "编辑")}
+                    title={t("instances.actions.edit", "Chỉnh sửa")}
                     onClick={() => openEditModal(instance)}
                     disabled={
                       isInstanceBusy || restartingAll || bulkActionLoading
@@ -3016,7 +3016,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   </button>
                   <button
                     className="icon-button danger"
-                    title={t("common.delete", "删除")}
+                    title={t("common.delete", "Xóa")}
                     onClick={() => handleDelete(instance)}
                     disabled={
                       instance.isDefault ||
@@ -3044,16 +3044,16 @@ export function InstancesManager<TAccount extends AccountLike>({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={() => setInitGuideInstance(null)}
-                title={t("common.back", "返回")}
-                aria-label={t("common.back", "返回")}
+                title={t("common.back", "Quay lại")}
+                aria-label={t("common.back", "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t("instances.initGuide.title", "实例尚未初始化")}</h2>
+              <h2>{t("instances.initGuide.title", "Phiên bản chưa được khởi tạo")}</h2>
               <button
                 className="modal-close"
                 onClick={() => setInitGuideInstance(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -3062,18 +3062,18 @@ export function InstancesManager<TAccount extends AccountLike>({
               <p className="form-hint">
                 {t(
                   "instances.initGuide.desc",
-                  "该实例为“空白实例”，当前仅创建了目录，尚未生成实例数据。",
+                  "Đây là \"phiên bản trống\". Hiện tại chỉ mới tạo thư mục, dữ liệu phiên bản vẫn chưa được tạo.",
                 )}
               </p>
               <div className="instance-init-guide-box">
                 {t(
                   "instances.initGuide.tip",
-                  "请先启动一次实例，初始化完成后即可绑定账号。",
+                  "Vui lòng khởi chạy phiên bản một lần trước. Sau khi khởi tạo xong, bạn có thể liên kết tài khoản.",
                 )}
               </div>
               <div className="form-group">
                 <label>
-                  {t("instances.runningDialog.pathLabel", "实例目录")}
+                  {t("instances.runningDialog.pathLabel", "Thư mục phiên bản")}
                 </label>
                 <input
                   className="form-input"
@@ -3087,7 +3087,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                 className="btn btn-secondary"
                 onClick={() => setInitGuideInstance(null)}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -3097,7 +3097,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                   startingInstanceIdSet.has(initGuideInstance.id)
                 }
               >
-                {t("instances.initGuide.startNow", "立即启动")}
+                {t("instances.initGuide.startNow", "Khởi chạy ngay")}
               </button>
             </div>
           </div>
@@ -3108,12 +3108,12 @@ export function InstancesManager<TAccount extends AccountLike>({
         <div className="modal-overlay">
           <div className="modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t("instances.delete.title", "删除实例")}</h2>
+              <h2>{t("instances.delete.title", "Xóa phiên bản")}</h2>
               <button
                 className="modal-close"
                 onClick={dismissDeleteConfirm}
                 disabled={actionLoading === deleteConfirmInstance.id}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -3126,7 +3126,7 @@ export function InstancesManager<TAccount extends AccountLike>({
               <p className="form-hint">
                 {t(
                   "instances.delete.message",
-                  "确认删除实例 {{name}}？将移除实例记录，并将受管实例目录移入回收站；自定义目录和受保护目录会保留。",
+                  "Xóa phiên bản {{name}}? Mục đăng ký sẽ bị xóa và các thư mục phiên bản được quản lý sẽ chuyển vào thùng rác. Các thư mục tùy chỉnh và được bảo vệ sẽ được giữ lại.",
                   {
                     name: deleteConfirmInstance.name,
                   },
@@ -3139,14 +3139,14 @@ export function InstancesManager<TAccount extends AccountLike>({
                 onClick={dismissDeleteConfirm}
                 disabled={actionLoading === deleteConfirmInstance.id}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-danger"
                 onClick={handleConfirmDelete}
                 disabled={actionLoading === deleteConfirmInstance.id}
               >
-                {t("common.delete", "删除")}
+                {t("common.delete", "Xóa")}
               </button>
             </div>
           </div>
@@ -3157,11 +3157,11 @@ export function InstancesManager<TAccount extends AccountLike>({
         <div className="modal-overlay">
           <div className="modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t("instances.runningDialog.title", "实例已在运行")}</h2>
+              <h2>{t("instances.runningDialog.title", "Phiên bản đã đang chạy")}</h2>
               <button
                 className="modal-close"
                 onClick={() => setRunningNoticeInstance(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -3170,12 +3170,12 @@ export function InstancesManager<TAccount extends AccountLike>({
               <p className="form-hint">
                 {t(
                   "instances.runningDialog.desc",
-                  "实例已在运行中，可立马前往或关闭后重启。",
+                  "Phiên bản này đã được bắt đầu. Bạn có thể chuyển sang cửa sổ đó hoặc khởi động lại theo chiến lược hiện tại.",
                 )}
               </p>
               <div className="form-group">
                 <label>
-                  {t("instances.runningDialog.pathLabel", "实例目录")}
+                  {t("instances.runningDialog.pathLabel", "Thư mục phiên bản")}
                 </label>
                 <input
                   className="form-input"
@@ -3189,10 +3189,10 @@ export function InstancesManager<TAccount extends AccountLike>({
                 className="btn btn-secondary"
                 onClick={handleOpenRunningInstance}
               >
-                {t("instances.runningDialog.go", "立马前往")}
+                {t("instances.runningDialog.go", "Chuyển sang ngay")}
               </button>
               <button className="btn btn-danger" onClick={handleForceRestart}>
-                {t("instances.runningDialog.restart", "关闭并重启")}
+                {t("instances.runningDialog.restart", "Đóng và khởi động lại")}
               </button>
             </div>
           </div>
@@ -3209,34 +3209,34 @@ export function InstancesManager<TAccount extends AccountLike>({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={closeModal}
-                title={t("common.back", "返回")}
-                aria-label={t("common.back", "返回")}
+                title={t("common.back", "Quay lại")}
+                aria-label={t("common.back", "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
               <h2>
                 {editing
-                  ? t("instances.modal.editTitle", "编辑实例")
-                  : t("instances.modal.createTitle", "新建实例")}
+                  ? t("instances.modal.editTitle", "Chỉnh sửa phiên bản")
+                  : t("instances.modal.createTitle", "Tạo phiên bản mới")}
               </h2>
               <button
                 className="modal-close"
                 onClick={closeModal}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
             </div>
             <div className="modal-body">
               <div className="form-group">
-                <label>{t("instances.form.name", "实例名称")}</label>
+                <label>{t("instances.form.name", "Tên phiên bản")}</label>
                 <input
                   className="form-input"
                   value={formName}
                   onChange={(e) => handleNameChange(e.target.value)}
                   placeholder={t(
                     "instances.form.namePlaceholder",
-                    "例如：工作账号",
+                    "vd: Tài khoản công việc",
                   )}
                   disabled={Boolean(editing?.isDefault)}
                 />
@@ -3244,7 +3244,7 @@ export function InstancesManager<TAccount extends AccountLike>({
 
               {!editing && supportsInstanceInitialization && (
                 <div className="form-group">
-                  <label>{t("instances.form.initMode", "初始化方式")}</label>
+                  <label>{t("instances.form.initMode", "Chế độ khởi tạo")}</label>
                   <div className="instance-init-mode-group">
                     <label
                       className={`instance-init-mode-option ${formInitMode === "copy" ? "active" : ""}`}
@@ -3258,7 +3258,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       <span>
                         {t(
                           "instances.form.initModeCopy",
-                          "复制来源实例（默认）",
+                          "Sao chép từ phiên bản nguồn (mặc định)",
                         )}
                       </span>
                     </label>
@@ -3274,7 +3274,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       <span>
                         {t(
                           "instances.form.initModeEmpty",
-                          "空白实例（不复制）",
+                          "Phiên bản trống (không sao chép)",
                         )}
                       </span>
                     </label>
@@ -3293,7 +3293,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       <span>
                         {t(
                           "instances.form.initModeExistingDir",
-                          "使用已存在目录",
+                          "Dùng thư mục có sẵn",
                         )}
                       </span>
                     </label>
@@ -3302,7 +3302,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                     <div className="instance-init-note">
                       {t(
                         "instances.form.emptyInitHint",
-                        "选择无需复制实例，只会创建空白目录。需要启动一次后，才可以进行账号绑定。",
+                        "Khi chọn không sao chép, chỉ tạo thư mục trống. Cần khởi chạy một lần trước khi liên kết tài khoản.",
                       )}
                     </div>
                   )}
@@ -3311,7 +3311,7 @@ export function InstancesManager<TAccount extends AccountLike>({
 
               {!hidePathFieldInEditModal && (
                 <div className="form-group">
-                  <label>{t("instances.form.path", "实例目录")}</label>
+                  <label>{t("instances.form.path", "Thư mục phiên bản")}</label>
                   <div className="instance-path-row">
                     <input
                       className="form-input"
@@ -3319,7 +3319,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       onChange={(e) => setFormPath(e.target.value)}
                       placeholder={t(
                         "instances.form.pathPlaceholder",
-                        "选择实例目录",
+                        "Chọn thư mục",
                       )}
                       disabled={Boolean(editing)}
                     />
@@ -3329,7 +3329,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         onClick={handleSelectPath}
                       >
                         <FolderOpen size={16} />
-                        {t("instances.actions.selectPath", "选择目录")}
+                        {t("instances.actions.selectPath", "Chọn đường dẫn")}
                       </button>
                     )}
                   </div>
@@ -3337,13 +3337,13 @@ export function InstancesManager<TAccount extends AccountLike>({
                     <p className="form-hint">
                       {t(
                         "instances.form.pathAutoHint",
-                        "修改名称时自动更新路径，也可手动选择",
+                        "Đường dẫn tự động cập nhật khi đổi tên (hoặc chọn thủ công)",
                       )}
                     </p>
                   )}
                   {editing && (
                     <p className="form-hint">
-                      {t("instances.form.pathReadOnly", "编辑时不可修改路径")}
+                      {t("instances.form.pathReadOnly", "Đường dẫn không thể thay đổi khi chỉnh sửa")}
                     </p>
                   )}
                 </div>
@@ -3351,7 +3351,7 @@ export function InstancesManager<TAccount extends AccountLike>({
 
               {supportsLaunchModeSelect && (
                 <div className="form-group">
-                  <label>{t("instances.form.launchMode", "启动方式")}</label>
+                  <label>{t("instances.form.launchMode", "Chế độ khởi chạy")}</label>
                   <div className="instance-init-mode-group">
                     <label
                       className={`instance-init-mode-option ${formLaunchMode === "app" ? "active" : ""}`}
@@ -3362,7 +3362,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         checked={formLaunchMode === "app"}
                         onChange={() => setFormLaunchMode("app")}
                       />
-                      <span>{t("instances.form.launchModeApp", "桌面版")}</span>
+                      <span>{t("instances.form.launchModeApp", "Bản desktop")}</span>
                     </label>
                     <label
                       className={`instance-init-mode-option ${formLaunchMode === "cli" ? "active" : ""}`}
@@ -3381,17 +3381,17 @@ export function InstancesManager<TAccount extends AccountLike>({
 
               {isCodexApp && (
                 <div className="form-group">
-                  <label>{t("instances.form.appSpeed", "速度")}</label>
+                  <label>{t("instances.form.appSpeed", "Tốc độ")}</label>
                   <CodexSpeedSelect
                     value={formAppSpeed}
                     onChange={setFormAppSpeed}
                     preferredPlacement="bottom"
-                    ariaLabel={t("codex.speed.title", "速度")}
+                    ariaLabel={t("codex.speed.title", "Tốc độ")}
                   />
                   <p className="form-hint">
                     {t(
                       "instances.form.appSpeedDesc",
-                      "启动官方 Codex 前写入对应速度",
+                      "Ghi tốc độ đã chọn trước khi mở Codex chính thức",
                     )}
                   </p>
                 </div>
@@ -3399,7 +3399,7 @@ export function InstancesManager<TAccount extends AccountLike>({
 
               {showWorkingDirField && (
                 <div className="form-group">
-                  <label>{t("instances.form.workingDir", "工作目录")}</label>
+                  <label>{t("instances.form.workingDir", "Thư mục làm việc")}</label>
                   <div className="instance-path-row">
                     <input
                       className="form-input"
@@ -3407,7 +3407,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                       onChange={(e) => setFormWorkingDir(e.target.value)}
                       placeholder={t(
                         "instances.form.workingDirPlaceholder",
-                        "默认当前路径",
+                        "Mặc định dùng đường dẫn hiện tại",
                       )}
                     />
                     <button
@@ -3415,13 +3415,13 @@ export function InstancesManager<TAccount extends AccountLike>({
                       onClick={handleSelectWorkingDir}
                     >
                       <FolderOpen size={16} />
-                      {t("instances.actions.selectPath", "选择目录")}
+                      {t("instances.actions.selectPath", "Chọn đường dẫn")}
                     </button>
                   </div>
                   <p className="form-hint">
                     {t(
                       "instances.form.workingDirDesc",
-                      "启动时将首先切换到此目录",
+                      "Khi khởi động sẽ chuyển vào thư mục này trước",
                     )}
                   </p>
                 </div>
@@ -3432,7 +3432,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                 formInitMode === "copy" && (
                   <div className="form-group">
                     <label>
-                      {t("instances.form.copySource", "复制来源实例")}
+                      {t("instances.form.copySource", "Sao chép từ phiên bản nguồn")}
                     </label>
                     <SingleSelectDropdown
                       value={formCopySourceInstanceId}
@@ -3443,28 +3443,28 @@ export function InstancesManager<TAccount extends AccountLike>({
                           : [
                               {
                                 value: "__default__",
-                                label: t("instances.defaultName", "默认实例"),
+                                label: t("instances.defaultName", "Phiên bản mặc định"),
                               },
                             ]
                       }
                       placeholder={t(
                         "instances.form.copySourcePlaceholder",
-                        "选择来源实例",
+                        "Chọn phiên bản nguồn",
                       )}
-                      ariaLabel={t("instances.form.copySource", "复制来源实例")}
+                      ariaLabel={t("instances.form.copySource", "Sao chép từ phiên bản nguồn")}
                       className="instance-copy-source-select"
                     />
                     <p className="form-hint">
                       {t(
                         "instances.form.copySourceDesc",
-                        "会复制来源实例的目录、绑定账号、启动方式和混合路由，不必重新配一遍。",
+                        "Sao chép cấu hình và dữ liệu đăng nhập từ phiên bản đã chọn",
                       )}
                     </p>
                     {selectedCopySourceInstance?.running && (
                       <p className="form-hint warning">
                         {t(
                           "instances.form.copySourceRunningHint",
-                          "该实例正在运行，建议先关闭以避免数据不一致",
+                          "Phiên bản nguồn đang chạy. Khuyên dùng đóng nó trước để tránh không nhất quán dữ liệu.",
                         )}
                       </p>
                     )}
@@ -3474,9 +3474,9 @@ export function InstancesManager<TAccount extends AccountLike>({
               {!editing ? (
                 <div className="form-group">
                   <label>
-                    {t("instances.form.bindInject", "绑定账号")}
+                    {t("instances.form.bindInject", "Liên kết tài khoản")}
                     {formInitMode === "existingDir"
-                      ? `（${t("instances.form.optional", "可选")}）`
+                      ? `（${t("instances.form.optional", "Tùy chọn")}）`
                       : ""}
                   </label>
                   {supportsInstanceInitialization &&
@@ -3488,13 +3488,13 @@ export function InstancesManager<TAccount extends AccountLike>({
                         disabled: true,
                         placeholder: t(
                           "instances.form.bindAfterInit",
-                          "初始化后可绑定",
+                          "Có thể liên kết sau khi khởi tạo",
                         ),
                       })}
                       <p className="form-hint">
                         {t(
                           "instances.form.bindDisabledHint",
-                          "空白实例需先启动一次生成实例数据后，才可绑定账号。",
+                          "Với phiên bản trống, hãy khởi chạy một lần để tạo dữ liệu rồi mới liên kết tài khoản.",
                         )}
                       </p>
                     </>
@@ -3507,7 +3507,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                 </div>
               ) : (
                 <div className="form-group">
-                  <label>{t("instances.form.bindAccount", "绑定账号")}</label>
+                  <label>{t("instances.form.bindAccount", "Liên kết tài khoản")}</label>
                   {!isGrokApp &&
                   editing?.initialized === false &&
                   !editing.isDefault ? (
@@ -3518,13 +3518,13 @@ export function InstancesManager<TAccount extends AccountLike>({
                         disabled: true,
                         placeholder: t(
                           "instances.form.bindAfterInit",
-                          "初始化后可绑定",
+                          "Có thể liên kết sau khi khởi tạo",
                         ),
                       })}
                       <p className="form-hint">
                         {t(
                           "instances.form.bindDisabledHint",
-                          "空白实例需先启动一次生成实例数据后，才可绑定账号。",
+                          "Với phiên bản trống, hãy khởi chạy một lần để tạo dữ liệu rồi mới liên kết tài khoản.",
                         )}
                       </p>
                     </>
@@ -3555,7 +3555,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         ? undefined
                         : t(
                             "instances.form.modelRouting.createHint",
-                            "新建时请复制默认实例，这样不用先走一遍 Codex 安装。空白实例才需要先启动一次。",
+                            "Khi tạo phiên mới, hãy sao chép phiên mặc định để tránh cài lại Codex. Phiên trống cần khởi động một lần.",
                           )
                     }
                     onEnabledChange={(enabled) => {
@@ -3575,7 +3575,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                         setFormName(
                           t(
                             "instances.form.modelRouting.defaultInstanceName",
-                            "混合路由",
+                            "Định tuyến hỗn hợp",
                           ),
                         );
                       }
@@ -3609,20 +3609,20 @@ export function InstancesManager<TAccount extends AccountLike>({
                 )}
 
               <div className="form-group">
-                <label>{t("instances.form.extraArgs", "自定义启动参数")}</label>
+                <label>{t("instances.form.extraArgs", "Đối số khởi động tùy chỉnh")}</label>
                 <textarea
                   className="form-input instance-args-input"
                   value={formExtraArgs}
                   onChange={(e) => setFormExtraArgs(e.target.value)}
                   placeholder={t(
                     "instances.form.extraArgsPlaceholder",
-                    "例如：--disable-gpu --log-level=2",
+                    "vd: --disable-gpu --log-level=2",
                   )}
                 />
                 <p className="form-hint">
                   {t(
                     "instances.form.extraArgsDesc",
-                    "按空格分隔参数，支持引号包裹",
+                    "Phân cách các đối số bằng khoảng trắng, hỗ trợ dấu ngoặc kép",
                   )}
                 </p>
               </div>
@@ -3630,7 +3630,7 @@ export function InstancesManager<TAccount extends AccountLike>({
               {isCodexApp && editing && (
                 <div className="form-group instance-codex-quick-config">
                   <div className="instance-codex-quick-header">
-                    <label>{t("codex.modelManagement.title", "模型管理")}</label>
+                    <label>{t("codex.modelManagement.title", "Quản lý mô hình")}</label>
                     <button
                       type="button"
                       className="btn btn-secondary instance-codex-quick-open-btn"
@@ -3642,23 +3642,23 @@ export function InstancesManager<TAccount extends AccountLike>({
                     >
                       <FolderOpen size={14} />
                       {formCodexOpenConfigLoading
-                        ? t("common.loading", "加载中...")
+                        ? t("common.loading", "Đang tải...")
                         : t(
                             "instances.form.codexQuickConfig.openConfig",
-                            "打开 config.toml",
+                            "Mở config.toml",
                           )}
                     </button>
                   </div>
                   {formCodexQuickConfigLoading ? (
                     <p className="form-hint">
-                      {t("common.loading", "加载中...")}
+                      {t("common.loading", "Đang tải...")}
                     </p>
                   ) : (
                     <>
                       <div className="instance-codex-experimental-model">
                         <div className="instance-codex-experimental-model__copy">
                           <label htmlFor="instance-codex-experimental-model-catalog">
-                            {t("codex.modelManagement.title", "模型管理")}
+                            {t("codex.modelManagement.title", "Quản lý mô hình")}
                           </label>
                           <p className="form-hint">
                             {formExperimentalModelCatalogEnabled
@@ -3669,7 +3669,7 @@ export function InstancesManager<TAccount extends AccountLike>({
                             <p className="form-hint">
                               {t(
                                 "codex.modelManagement.routingManagedHint",
-                                "混合模型路由只在实例运行时临时使用这份模型目录，停止后自动恢复；它不会改动这里的开关状态。",
+                                "Định tuyến hỗn hợp chỉ tạm dùng danh mục mô hình này khi instance đang chạy và tự khôi phục sau khi dừng. Công tắc ở đây không thay đổi.",
                               )}
                             </p>
                           )}
@@ -3742,7 +3742,7 @@ export function InstancesManager<TAccount extends AccountLike>({
 
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={closeModal}>
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -3753,8 +3753,8 @@ export function InstancesManager<TAccount extends AccountLike>({
                 }
               >
                 {editing
-                  ? t("common.save", "保存")
-                  : t("instances.actions.create", "新建实例")}
+                  ? t("common.save", "Lưu")
+                  : t("instances.actions.create", "Phiên bản mới")}
               </button>
             </div>
           </div>

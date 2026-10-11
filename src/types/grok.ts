@@ -398,7 +398,7 @@ export function getGrokQuotaGroups(
     );
   });
   return [
-    group("base", t("grok.quota.included", "套餐用量"), baseItems),
+    group("base", t("grok.quota.included", "Mức dùng trong gói"), baseItems),
   ];
 }
 
@@ -446,7 +446,7 @@ export function getGrokQuotaSummaryItems(
   if (weeklyUsedPercent != null || (weeklyUsed != null && weeklyTotal != null)) {
     items.push({
       key: "weekly",
-      label: t("grok.quota.weekly", "每周用量"),
+      label: t("grok.quota.weekly", "Mức dùng hằng tuần"),
       percentage: clampPercent(weeklyUsedPercent ?? 0),
       used: weeklyUsed,
       total: weeklyTotal,
@@ -478,7 +478,7 @@ export function getGrokQuotaSummaryItems(
     }
     items.push({
       key: `product-${index}`,
-      label: product.product || t("grok.quota.included", "套餐用量"),
+      label: product.product || t("grok.quota.included", "Mức dùng trong gói"),
       percentage: clampPercent(usagePercent ?? 0),
       used: resolvedUsed,
       total: resolvedTotal,
@@ -491,7 +491,7 @@ export function getGrokQuotaSummaryItems(
   if (frequentLimit != null && frequentLimit > 0 && frequentUsage != null) {
     items.push({
       key: "frequent",
-      label: t("grok.quota.frequent", "高频任务"),
+      label: t("grok.quota.frequent", "Tác vụ thường xuyên"),
       percentage: clampPercent((frequentUsage / frequentLimit) * 100),
       used: frequentUsage,
       total: frequentLimit,
@@ -509,7 +509,7 @@ export function getGrokQuotaSummaryItems(
   ) {
     items.push({
       key: "occasional",
-      label: t("grok.quota.occasional", "普通任务"),
+      label: t("grok.quota.occasional", "Tác vụ thông thường"),
       percentage: clampPercent((occasionalUsage / occasionalLimit) * 100),
       used: occasionalUsage,
       total: occasionalLimit,
@@ -522,7 +522,7 @@ export function getGrokQuotaSummaryItems(
   if (onDemandCap != null && onDemandCap > 0 && onDemandUsed != null) {
     items.push({
       key: "on-demand",
-      label: t("grok.quota.onDemand", "按量用量"),
+      label: t("grok.quota.onDemand", "Mức dùng theo nhu cầu"),
       percentage: clampPercent((onDemandUsed / onDemandCap) * 100),
       used: onDemandUsed,
       total: onDemandCap,

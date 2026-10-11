@@ -112,11 +112,11 @@ function formatCooldown(
   cooldown: CodexLocalAccessAccountCooldown,
   t: ReturnType<typeof useTranslation>["t"],
 ): string {
-  const model = cooldown.modelId.trim() || t("common.unknown", "未知模型");
+  const model = cooldown.modelId.trim() || t("common.unknown", "Mô hình không xác định");
   if (!cooldown.nextRetryAt) {
     return t("codex.localAccess.accountPoolHealth.dialog.cooldownModel", {
       model,
-      defaultValue: "模型 {{model}} 处于冷却状态",
+      defaultValue: "Mô hình {{model}} đang chờ",
     });
   }
   const time = new Date(cooldown.nextRetryAt).toLocaleTimeString(undefined, {
@@ -126,7 +126,7 @@ function formatCooldown(
   return t("codex.localAccess.accountPoolHealth.dialog.cooldownUntil", {
     model,
     time,
-    defaultValue: "模型 {{model}} 冷却至 {{time}}",
+    defaultValue: "Mô hình {{model}} chờ đến {{time}}",
   });
 }
 
@@ -277,10 +277,10 @@ export function CodexAccountPoolHealthModal({
             t("messages.actionFailed", {
               action: t(
                 "codex.localAccess.accountPoolHealth.recover",
-                "恢复账号状态",
+                "Khôi phục trạng thái",
               ),
-              error: errorText || t("common.failed", "失败"),
-              defaultValue: "{{action}}失败：{{error}}",
+              error: errorText || t("common.failed", "Thất bại"),
+              defaultValue: "{{action}} thất bại: {{error}}",
             }),
           );
           return;
@@ -288,7 +288,7 @@ export function CodexAccountPoolHealthModal({
         setRecoverySuccess(
           t("codex.localAccess.accountPoolHealth.recoverSuccess", {
             count: matched.length,
-            defaultValue: "已提交 {{count}} 个账号的恢复操作",
+            defaultValue: "Đã yêu cầu khôi phục {{count}} tài khoản",
           }),
         );
       },
@@ -307,15 +307,15 @@ export function CodexAccountPoolHealthModal({
   const issueLabel = (kind: HealthIssueKind): string => {
     switch (kind) {
       case "missing":
-        return t("codex.localAccess.accountPoolHealth.dialog.missing", "账号缺失");
+        return t("codex.localAccess.accountPoolHealth.dialog.missing", "Thiếu tài khoản");
       case "cooldown":
-        return t("codex.localAccess.accountPoolHealth.dialog.cooldown", "冷却中");
+        return t("codex.localAccess.accountPoolHealth.dialog.cooldown", "Đang chờ");
       case "auth":
-        return t("codex.apiService.accountHealth.authError", "鉴权异常");
+        return t("codex.apiService.accountHealth.authError", "Lỗi xác thực");
       case "quota":
-        return t("codex.localAccess.accountPoolHealth.dialog.quota", "额度受限");
+        return t("codex.localAccess.accountPoolHealth.dialog.quota", "Giới hạn hạn mức");
       default:
-        return t("codex.apiService.accountHealth.unavailable", "暂不可用");
+        return t("codex.apiService.accountHealth.unavailable", "Tạm thời không khả dụng");
     }
   };
 
@@ -323,14 +323,14 @@ export function CodexAccountPoolHealthModal({
     if (issue.kind === "missing") {
       return t(
         "codex.localAccess.accountPoolHealth.dialog.missingDetail",
-        "账号已不在当前账号列表中",
+        "Tài khoản không còn trong danh sách",
       );
     }
     if (issue.kind === "cooldown" && issue.health) {
       if (hasQuotaCooldown(issue.health)) {
         return t(
           "codex.localAccess.accountPoolHealth.dialog.quotaDetail",
-          "账号额度暂时不可用，请等待额度恢复或检查套餐状态",
+          "Hạn mức tạm thời không khả dụng. Hãy chờ hoặc kiểm tra gói.",
         );
       }
       return issue.health.cooldowns
@@ -340,42 +340,42 @@ export function CodexAccountPoolHealthModal({
     if (issue.kind === "auth") {
       return t(
         "codex.localAccess.accountPoolHealth.dialog.authDetail",
-        "OAuth 授权可能已失效，请重新授权后再试",
+        "Ủy quyền OAuth có thể đã hết hạn. Hãy ủy quyền lại.",
       );
     }
     if (issue.kind === "quota") {
       return t(
         "codex.localAccess.accountPoolHealth.dialog.quotaDetail",
-        "账号额度暂时不可用，请等待额度恢复或检查套餐状态",
+        "Hạn mức tạm thời không khả dụng. Hãy chờ hoặc kiểm tra gói.",
       );
     }
     switch (issue.health?.schedulerReason) {
       case "payment_required":
         return t(
           "codex.localAccess.accountPoolHealth.dialog.paymentDetail",
-          "账号套餐或付款状态不可用，请检查订阅状态",
+          "Gói hoặc trạng thái thanh toán không khả dụng. Hãy kiểm tra đăng ký.",
         );
       case "not_found":
       case "model_not_supported":
       case "model_not_available":
         return t(
           "codex.localAccess.accountPoolHealth.dialog.modelDetail",
-          "当前账号不支持请求的模型",
+          "Tài khoản không hỗ trợ mô hình được yêu cầu.",
         );
       case "transient_upstream":
         return t(
           "codex.localAccess.accountPoolHealth.dialog.upstreamDetail",
-          "上游服务暂时异常，恢复后会重新尝试",
+          "Dịch vụ thượng nguồn tạm thời lỗi. Sẽ thử lại sau khi phục hồi.",
         );
       case "disabled":
         return t(
           "codex.localAccess.accountPoolHealth.dialog.disabledDetail",
-          "该账号已被停用，请先启用账号",
+          "Tài khoản đã bị tắt. Hãy bật trước.",
         );
     }
     return t(
       "codex.localAccess.accountPoolHealth.dialog.unavailableDetail",
-      "Sidecar 当前未将该账号列为可调度账号",
+      "Sidecar hiện không xem tài khoản này là có thể lập lịch.",
     );
   };
 
@@ -455,7 +455,7 @@ export function CodexAccountPoolHealthModal({
       setRecoverySuccess(
         t("codex.localAccess.accountPoolHealth.recoverSuccess", {
           count: normalizedAccountIds.length,
-          defaultValue: "已提交 {{count}} 个账号的恢复操作",
+          defaultValue: "Đã yêu cầu khôi phục {{count}} tài khoản",
         }),
       );
     } catch (error) {
@@ -529,14 +529,14 @@ export function CodexAccountPoolHealthModal({
               <h3 id="codex-account-pool-health-title">
                 {t(
                   "codex.localAccess.accountPoolHealth.dialog.title",
-                  "账号状态",
+                  "Lỗi tài khoản",
                 )}
               </h3>
             </div>
             <p>
               {t(
                 "codex.localAccess.accountPoolHealth.dialog.description",
-                "显示账号池与账号异常；只有明确归属账号的故障才提供相应操作。",
+                "Hiển thị sự cố của nhóm tài khoản và từng tài khoản. Chỉ cung cấp thao tác tài khoản khi lỗi được xác định thuộc tài khoản đó.",
               )}
             </p>
           </div>
@@ -544,7 +544,7 @@ export function CodexAccountPoolHealthModal({
             type="button"
             className="modal-close"
             onClick={handleClose}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X size={18} />
           </button>
@@ -571,7 +571,7 @@ export function CodexAccountPoolHealthModal({
               <span>
                 {t(
                   "codex.localAccess.accountPoolHealth.dialog.noIssues",
-                  "当前没有待展示的异常",
+                  "Không có vấn đề cần hiển thị",
                 )}
               </span>
             </div>
@@ -587,7 +587,7 @@ export function CodexAccountPoolHealthModal({
                       <strong>
                         {t(
                           "codex.localAccess.accountPoolHealth.dialog.poolUnavailable",
-                          "账号池无可用账号",
+                          "Không có tài khoản khả dụng trong nhóm",
                         )}
                       </strong>
                       {health.model.trim() && (
@@ -619,11 +619,11 @@ export function CodexAccountPoolHealthModal({
                   <p className="codex-account-pool-health-item-detail">
                     {health.apiKeyLabel.trim()
                       ? (maskAccountText ? maskAccountText(health.apiKeyLabel) : health.apiKeyLabel)
-                      : t("codex.localAccess.accountPoolHealth.dialog.unscopedApiKey", "当前 API Key")}
+                      : t("codex.localAccess.accountPoolHealth.dialog.unscopedApiKey", "API Key hiện tại")}
                     {" · "}
                     {t("codex.localAccess.accountPoolHealth.dialog.poolUnavailableDetail", {
-                      model: health.model.trim() || t("common.unknown", "未知模型"),
-                      defaultValue: "模型 {{model}} 的请求没有选出可用账号",
+                      model: health.model.trim() || t("common.unknown", "Mô hình không xác định"),
+                      defaultValue: "Không chọn được tài khoản khả dụng cho mô hình {{model}}",
                     })}
                   </p>
                   <p className="codex-account-pool-health-item-detail">
@@ -674,7 +674,7 @@ export function CodexAccountPoolHealthModal({
                   {health.diagnosticAvailable && (
                     <p className="codex-account-pool-health-item-detail">
                       {t("codex.localAccess.accountPoolHealth.dialog.poolDiagnosticDetail", {
-                        model: health.model.trim() || t("common.unknown", "未知模型"),
+                        model: health.model.trim() || t("common.unknown", "Mô hình không xác định"),
                         candidate: health.candidateAuths,
                         scoped: health.scopedAuths,
                         available: health.availableAuths,
@@ -733,7 +733,7 @@ export function CodexAccountPoolHealthModal({
                             )}
                             <span className="codex-account-pool-health-item-status">
                               {member.available
-                                ? t("codex.apiService.health.availableAccounts", "可用")
+                                ? t("codex.apiService.health.availableAccounts", "Tài khoản khả dụng")
                                 : issueLabel(memberKind)}
                             </span>
                             {member.reasonCode.trim() && (
@@ -747,11 +747,11 @@ export function CodexAccountPoolHealthModal({
                               onClick={() => onReauthorize(member.accountId)}
                               title={t(
                                 "codex.localAccess.accountPoolHealth.dialog.reauthorizeHint",
-                                "账号凭据已失效，需要重新走官方登录；仅恢复调度状态无法修复。",
+                                "Thông tin xác thực của tài khoản không còn hợp lệ; hãy đăng nhập chính thức lại. Chỉ đặt lại bộ lập lịch sẽ không khắc phục được.",
                               )}
                             >
                               <RefreshCw size={13} />
-                              {t("common.reauthorize", "重新授权")}
+                              {t("common.reauthorize", "Ủy quyền lại")}
                             </button>
                           ) : recoverable ? (
                             <button
@@ -769,11 +769,11 @@ export function CodexAccountPoolHealthModal({
                               {recovering
                                 ? t(
                                     "codex.localAccess.accountPoolHealth.dialog.recovering",
-                                    "恢复中…",
+                                    "Đang khôi phục…",
                                   )
                                 : t(
                                     "codex.localAccess.accountPoolHealth.dialog.recover",
-                                    "恢复",
+                                    "Khôi phục",
                                   )}
                             </button>
                           ) : null}
@@ -827,11 +827,11 @@ export function CodexAccountPoolHealthModal({
                         onClick={() => onReauthorize(issue.accountId)}
                         title={t(
                           "codex.localAccess.accountPoolHealth.dialog.reauthorizeHint",
-                          "账号凭据已失效，需要重新走官方登录；仅恢复调度状态无法修复。",
+                          "Thông tin xác thực của tài khoản không còn hợp lệ; hãy đăng nhập chính thức lại. Chỉ đặt lại bộ lập lịch sẽ không khắc phục được.",
                         )}
                       >
                         <RefreshCw size={13} />
-                        {t("common.reauthorize", "重新授权")}
+                        {t("common.reauthorize", "Ủy quyền lại")}
                       </button>
                     ) : isRecoverable(issue) ? (
                       <button
@@ -853,11 +853,11 @@ export function CodexAccountPoolHealthModal({
                         {recoveringAccountIds.has(issue.accountId)
                           ? t(
                               "codex.localAccess.accountPoolHealth.dialog.recovering",
-                              "恢复中…",
+                              "Đang khôi phục…",
                             )
                           : t(
                               "codex.localAccess.accountPoolHealth.dialog.recover",
-                              "恢复",
+                              "Khôi phục",
                             )}
                       </button>
                     ) : null}
@@ -877,7 +877,7 @@ export function CodexAccountPoolHealthModal({
             className="btn btn-secondary"
             onClick={handleClose}
           >
-            {t("common.close", "关闭")}
+            {t("common.close", "Đóng")}
           </button>
           {(recoverableAccountIds.length > 0 ||
             poolMemberRecoveryIds.length > 0) && (
@@ -901,11 +901,11 @@ export function CodexAccountPoolHealthModal({
               {recoveringAll
                 ? t(
                     "codex.localAccess.accountPoolHealth.dialog.recovering",
-                    "恢复中…",
+                    "Đang khôi phục…",
                   )
                 : t(
                     "codex.localAccess.accountPoolHealth.dialog.recoverAll",
-                    "全部恢复",
+                    "Khôi phục tất cả",
                   )}
             </button>
           )}

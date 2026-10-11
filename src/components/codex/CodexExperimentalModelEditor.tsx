@@ -136,19 +136,19 @@ function CustomContextDialog({
           <h3 id="codex-experimental-model-custom-context-title">
             {t(
               "codex.experimentalModelCatalog.models.contextCustomShort",
-              "自定义",
+              "Tùy chỉnh",
             )}
             {" · "}
             {t(
               "codex.experimentalModelCatalog.models.contextConfig",
-              "上下文与压缩",
+              "Ngữ cảnh & nén",
             )}
           </h3>
           <button
             type="button"
             className="codex-experimental-model-manager-modal__close"
             onClick={onClose}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X size={16} />
           </button>
@@ -158,7 +158,7 @@ function CustomContextDialog({
             <span>
               {t(
                 "codex.experimentalModelCatalog.models.contextWindow",
-                "上下文窗口",
+                "Cửa sổ ngữ cảnh",
               )}
             </span>
             <input
@@ -178,7 +178,7 @@ function CustomContextDialog({
               <small className="codex-experimental-model-editor__error">
                 {t(
                   "codex.experimentalModelCatalog.models.validation.contextWindow",
-                  "上下文窗口必须是大于 0 的整数。",
+                  "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0.",
                 )}
               </small>
             )}
@@ -187,7 +187,7 @@ function CustomContextDialog({
             <span>
               {t(
                 "codex.experimentalModelCatalog.models.autoCompactLimit",
-                "压缩阈值",
+                "Ngưỡng nén",
               )}
             </span>
             <input
@@ -211,7 +211,7 @@ function CustomContextDialog({
               <small className="codex-experimental-model-editor__error">
                 {t(
                   "codex.experimentalModelCatalog.models.validation.autoCompact",
-                  "压缩阈值必须是大于 0 的整数。",
+                  "Ngưỡng nén phải là số nguyên lớn hơn 0.",
                 )}
               </small>
             )}
@@ -221,7 +221,7 @@ function CustomContextDialog({
                 <small className="codex-experimental-model-editor__error">
                   {t(
                     "codex.experimentalModelCatalog.models.validation.autoCompactRange",
-                    "压缩阈值必须小于上下文窗口。",
+                    "Ngưỡng nén phải nhỏ hơn cửa sổ ngữ cảnh.",
                   )}
                 </small>
               )}
@@ -234,7 +234,7 @@ function CustomContextDialog({
         )}
         <div className="codex-experimental-model-custom-context-modal__footer">
           <button type="button" className="btn btn-secondary" onClick={onClose}>
-            {t("common.cancel", "取消")}
+            {t("common.cancel", "Hủy")}
           </button>
           <button
             type="button"
@@ -242,7 +242,7 @@ function CustomContextDialog({
             onClick={onSave}
             disabled={Boolean(error)}
           >
-            {t("common.confirm", "确认")}
+            {t("common.confirm", "Xác nhận")}
           </button>
         </div>
       </div>
@@ -285,7 +285,7 @@ export function validateCodexExperimentalModels(
   if (models.length === 0) {
     return translate(
       "codex.experimentalModelCatalog.models.validation.required",
-      "至少保留一个模型。",
+      "Cần giữ ít nhất một mô hình.",
     );
   }
   const seen = new Set<string>();
@@ -294,27 +294,27 @@ export function validateCodexExperimentalModels(
     if (!modelId || modelId.length > 128 || !MODEL_ID_PATTERN.test(modelId)) {
       return translate(
         "codex.experimentalModelCatalog.models.validation.modelId",
-        "模型 ID 只能包含字母、数字、点、横线、下划线、斜杠和冒号。",
+        "ID mô hình chỉ được chứa chữ cái, chữ số, dấu chấm, gạch ngang, gạch dưới, dấu gạch chéo và dấu hai chấm.",
       );
     }
     if (!model.display_name.trim() || model.display_name.trim().length > 100) {
       return translate(
         "codex.experimentalModelCatalog.models.validation.displayName",
-        "请输入不超过 100 个字符的展示名。",
+        "Tên hiển thị không được vượt quá 100 ký tự.",
       );
     }
     const key = modelId.toLowerCase();
     if (seen.has(key)) {
       return translate(
         "codex.experimentalModelCatalog.models.validation.duplicate",
-        "模型 ID 不能重复。",
+        "ID mô hình không được trùng lặp.",
       );
     }
     const contextError = validateModelContext(model);
     if (contextError) return translate(contextError, contextError);
     const efforts = effectiveEfforts?.[model.model_id] ?? model.reasoning_efforts;
     if (model.default_reasoning_effort && efforts && !efforts.includes(model.default_reasoning_effort)) {
-      return translate("codex.experimentalModels.defaultReasoningInvalid", "默认推理档位必须属于当前支持的档位。");
+      return translate("codex.experimentalModels.defaultReasoningInvalid", "Mức suy luận mặc định phải thuộc các mức đang được hỗ trợ.");
     }
     seen.add(key);
   }
@@ -614,19 +614,19 @@ export function CodexExperimentalModelEditor({
           !modelId || modelId.length > 128 || !MODEL_ID_PATTERN.test(modelId)
             ? t(
                 "codex.experimentalModelCatalog.models.validation.modelId",
-                "模型 ID 只能包含字母、数字、点、横线、下划线、斜杠和冒号。",
+                "ID mô hình chỉ được chứa chữ cái, chữ số, dấu chấm, dấu gạch ngang, dấu gạch dưới, dấu gạch chéo và dấu hai chấm.",
               )
             : counts.get(modelId.toLowerCase())! > 1
               ? t(
                   "codex.experimentalModelCatalog.models.validation.duplicate",
-                  "模型 ID 不能重复。",
+                  "ID mô hình không được trùng lặp.",
                 )
               : null,
         displayName:
           !model.display_name.trim() || model.display_name.trim().length > 100
             ? t(
                 "codex.experimentalModelCatalog.models.validation.displayName",
-                "请输入不超过 100 个字符的展示名。",
+                "Nhập tên hiển thị không quá 100 ký tự.",
               )
             : null,
         context: (() => {
@@ -815,7 +815,7 @@ export function CodexExperimentalModelEditor({
     if (value === undefined) {
       return t(
         "codex.experimentalModelCatalog.models.contextDefault",
-        "跟随模型",
+        "Theo mô hình",
       );
     }
     if (value === 1_000_000) return "1M";
@@ -828,7 +828,7 @@ export function CodexExperimentalModelEditor({
     if (preset === "default") {
       return t(
         "codex.experimentalModelCatalog.models.contextDefault",
-        "跟随模型",
+        "Theo mô hình",
       );
     }
     if (preset === "preset_516k") return "516K/464K";
@@ -854,7 +854,7 @@ export function CodexExperimentalModelEditor({
     <div className="codex-experimental-model-editor">
       <div className="codex-experimental-model-editor__header">
         <span>
-          {t("codex.experimentalModelCatalog.models.title", "模型列表")}
+          {t("codex.experimentalModelCatalog.models.title", "Danh sách mô hình")}
         </span>
         <div className="codex-experimental-model-editor__header-actions">
           {transferButton}
@@ -866,14 +866,14 @@ export function CodexExperimentalModelEditor({
               disabled={disabled || isResetState}
               title={t(
                 "codex.experimentalModelCatalog.models.resetDefaults",
-                "恢复默认",
+                "Khôi phục mặc định",
               )}
             >
               <RotateCcw size={14} />
               <span>
                 {t(
                   "codex.experimentalModelCatalog.models.resetDefaults",
-                  "恢复默认",
+                  "Khôi phục mặc định",
                 )}
               </span>
             </button>
@@ -890,11 +890,11 @@ export function CodexExperimentalModelEditor({
               }
             }}
             disabled={disabled}
-            title={t("codex.experimentalModelCatalog.models.add", "添加模型")}
+            title={t("codex.experimentalModelCatalog.models.add", "Thêm mô hình")}
             aria-expanded={addMenuOpen}
           >
             <Plus size={14} />
-            <span>{t("codex.experimentalModelCatalog.models.add", "添加模型")}</span>
+            <span>{t("codex.experimentalModelCatalog.models.add", "Thêm mô hình")}</span>
             {availableChannels && availableChannels.length > 0 && (
               <ChevronDown size={13} className={addMenuOpen ? "is-open" : undefined} />
             )}
@@ -905,7 +905,7 @@ export function CodexExperimentalModelEditor({
               <div className="codex-experimental-model-editor__add-menu-search">
                 <input
                   type="text"
-                  placeholder={t("common.search", "搜索渠道或模型...")}
+                  placeholder={t("common.search", "Tìm kênh hoặc mô hình...")}
                   value={channelSearchQuery}
                   onChange={(e) => setChannelSearchQuery(e.target.value)}
                   autoFocus
@@ -919,7 +919,7 @@ export function CodexExperimentalModelEditor({
                   onClick={handleAddBlankModel}
                 >
                   <Plus size={14} />
-                  <span>{t("codex.experimentalModelCatalog.models.addCustomBlank", "新建自定义空白模型")}</span>
+                  <span>{t("codex.experimentalModelCatalog.models.addCustomBlank", "Tạo mô hình tùy chỉnh trống")}</span>
                 </button>
 
                 {availableChannels?.map((channel) => {
@@ -953,7 +953,7 @@ export function CodexExperimentalModelEditor({
                             className="codex-experimental-model-editor__channel-add-all is-remove"
                             onClick={() => handleRemoveAllChannelModels(channel.namespace, channel.models)}
                           >
-                            {t("common.clearAll", "全部取消")}
+                            {t("common.clearAll", "Bỏ chọn tất cả")}
                           </button>
                         ) : (
                           <button
@@ -961,7 +961,7 @@ export function CodexExperimentalModelEditor({
                             className="codex-experimental-model-editor__channel-add-all"
                             onClick={() => handleAddAllChannelModels(channel.namespace, unaddedModels)}
                           >
-                            {t("codex.experimentalModelCatalog.models.addAll", "+ 全部 ({{count}})", {
+                            {t("codex.experimentalModelCatalog.models.addAll", "+ Tất cả ({{count}})", {
                               count: unaddedModels.length,
                             })}
                           </button>
@@ -979,7 +979,7 @@ export function CodexExperimentalModelEditor({
                               isAdded ? " is-added" : ""
                             }`}
                             onClick={() => handleToggleChannelModel(channel.namespace, upstreamModel)}
-                            title={isAdded ? t("common.clickToRemove", "点击取消选择") : t("common.clickToAdd", "点击添加模型")}
+                            title={isAdded ? t("common.clickToRemove", "Nhấp để bỏ chọn") : t("common.clickToAdd", "Nhấp để thêm mô hình")}
                           >
                             <span className="codex-experimental-model-editor__menu-item-left">
                               <span className="codex-experimental-model-editor__menu-checkbox">
@@ -988,7 +988,7 @@ export function CodexExperimentalModelEditor({
                               <span className="codex-experimental-model-editor__menu-model-id">{fullId}</span>
                             </span>
                             <span className="codex-experimental-model-editor__menu-status">
-                              {isAdded ? t("common.added", "已添加") : t("common.add", "+ 添加")}
+                              {isAdded ? t("common.added", "Đã thêm") : t("common.add", "Add​")}
                             </span>
                           </button>
                         );
@@ -1015,26 +1015,26 @@ export function CodexExperimentalModelEditor({
       >
         <span className="codex-experimental-model-editor__drag-head" />
         <span>
-          {t("codex.experimentalModelCatalog.models.modelId", "模型 ID")}
+          {t("codex.experimentalModelCatalog.models.modelId", "ID mô hình")}
         </span>
         <span>
-          {t("codex.experimentalModelCatalog.models.displayName", "展示名")}
+          {t("codex.experimentalModelCatalog.models.displayName", "Tên hiển thị")}
         </span>
         {showModelSource && (
-          <span>{t("codex.experimentalModelCatalog.models.source", "来源")}</span>
+          <span>{t("codex.experimentalModelCatalog.models.source", "Nguồn")}</span>
         )}
         <span>
-          {t("codex.experimentalModelCatalog.models.reasoning", "推理强度")}
+          {t("codex.experimentalModelCatalog.models.reasoning", "Mức suy luận")}
         </span>
         <span>{t("codex.experimentalModels.defaultReasoning")}</span>
         <span>
           {t(
             "codex.experimentalModelCatalog.models.contextConfig",
-            "上下文与压缩",
+            "Ngữ cảnh & nén",
           )}
         </span>
         <span>
-          {t("codex.experimentalModelCatalog.models.operation", "操作")}
+          {t("codex.experimentalModelCatalog.models.operation", "Thao tác")}
         </span>
       </div>
 
@@ -1069,11 +1069,11 @@ export function CodexExperimentalModelEditor({
                 }
                 title={t(
                   "platformLayout.dragHandleLabel",
-                  "拖动排序",
+                  "Kéo để sắp xếp lại",
                 )}
                 aria-label={t(
                   "platformLayout.dragHandleLabel",
-                  "拖动排序",
+                  "Kéo để sắp xếp lại",
                 )}
               >
                 <GripVertical size={12} strokeWidth={1.75} />
@@ -1082,7 +1082,7 @@ export function CodexExperimentalModelEditor({
                 <span>
                   {t(
                     "codex.experimentalModelCatalog.models.modelId",
-                    "模型 ID",
+                    "ID mô hình",
                   )}
                 </span>
                 <input
@@ -1105,7 +1105,7 @@ export function CodexExperimentalModelEditor({
                 <span>
                   {t(
                     "codex.experimentalModelCatalog.models.displayName",
-                    "展示名",
+                    "Tên hiển thị",
                   )}
                 </span>
                 <input
@@ -1127,7 +1127,7 @@ export function CodexExperimentalModelEditor({
               {showModelSource && (
                 <div className="codex-experimental-model-editor__source">
                   <span className="codex-experimental-model-editor__field-label">
-                    {t("codex.experimentalModelCatalog.models.source", "来源")}
+                    {t("codex.experimentalModelCatalog.models.source", "Nguồn")}
                   </span>
                   {source ? (
                     <span
@@ -1139,7 +1139,7 @@ export function CodexExperimentalModelEditor({
                     </span>
                   ) : (
                     <span className="codex-experimental-model-editor__source-badge" data-kind="subscription">
-                      {t("instances.form.modelRouting.subscriptionSource", "订阅")}
+                      {t("instances.form.modelRouting.subscriptionSource", "Gói đăng ký")}
                     </span>
                   )}
                 </div>
@@ -1153,7 +1153,7 @@ export function CodexExperimentalModelEditor({
                 <span className="codex-experimental-model-editor__field-label">
                   {t(
                     "codex.experimentalModelCatalog.models.reasoning",
-                    "推理强度",
+                    "Mức suy luận",
                   )}
                 </span>
                 <div className="codex-experimental-model-editor__reasoning-picker">
@@ -1173,7 +1173,7 @@ export function CodexExperimentalModelEditor({
                         ? model.reasoning_efforts.map(reasoningLabel).join("、")
                         : t(
                             "codex.experimentalModelCatalog.models.followOfficial",
-                            "跟随官方",
+                            "Theo chính thức",
                           )
                     }
                   >
@@ -1182,7 +1182,7 @@ export function CodexExperimentalModelEditor({
                         ? model.reasoning_efforts.map(reasoningLabel).join("、")
                         : t(
                             "codex.experimentalModelCatalog.models.followOfficial",
-                            "跟随官方",
+                            "Theo chính thức",
                           )}
                     </span>
                     <ChevronDown size={14} />
@@ -1208,7 +1208,7 @@ export function CodexExperimentalModelEditor({
                         </span>
                         {t(
                           "codex.experimentalModelCatalog.models.followOfficial",
-                          "跟随官方",
+                          "Theo chính thức",
                         )}
                       </button>
                       {REASONING_EFFORT_OPTIONS.map((effort) => {
@@ -1265,7 +1265,7 @@ export function CodexExperimentalModelEditor({
                 <span className="codex-experimental-model-editor__field-label">
                   {t(
                     "codex.experimentalModelCatalog.models.contextConfig",
-                    "上下文与压缩",
+                    "Ngữ cảnh & nén",
                   )}
                 </span>
                 <div className="codex-experimental-model-editor__context-picker">
@@ -1293,7 +1293,7 @@ export function CodexExperimentalModelEditor({
                             "default",
                             t(
                               "codex.experimentalModelCatalog.models.contextDefaultShort",
-                              "默认",
+                              "Mặc định",
                             ),
                           ],
                           ["preset_516k", "516K/464K"],
@@ -1302,7 +1302,7 @@ export function CodexExperimentalModelEditor({
                             "custom",
                             t(
                               "codex.experimentalModelCatalog.models.contextCustomShort",
-                              "自定义",
+                              "Tùy chỉnh",
                             ),
                           ],
                         ] as Array<[ContextPresetId, string]>
@@ -1337,7 +1337,7 @@ export function CodexExperimentalModelEditor({
               </div>
               <div className="codex-experimental-model-editor__operation">
                 <span className="codex-experimental-model-editor__field-label">
-                  {t("codex.experimentalModelCatalog.models.operation", "操作")}
+                  {t("codex.experimentalModelCatalog.models.operation", "Thao tác")}
                 </span>
                 <div className="codex-experimental-model-editor__operation-actions">
                   <button
@@ -1350,11 +1350,11 @@ export function CodexExperimentalModelEditor({
                     disabled={disabled || !onDefaultModelChange}
                     title={t(
                       "codex.experimentalModelCatalog.models.setDefault",
-                      "设为默认模型",
+                      "Đặt làm mặc định",
                     )}
                     aria-label={t(
                       "codex.experimentalModelCatalog.models.setDefault",
-                      "设为默认模型",
+                      "Đặt làm mặc định",
                     )}
                     aria-pressed={defaultModelId === model.model_id}
                   >
@@ -1382,11 +1382,11 @@ export function CodexExperimentalModelEditor({
                     disabled={disabled || models.length === 1}
                     title={t(
                       "codex.experimentalModelCatalog.models.remove",
-                      "删除模型",
+                      "Xóa mô hình",
                     )}
                     aria-label={t(
                       "codex.experimentalModelCatalog.models.remove",
-                      "删除模型",
+                      "Xóa mô hình",
                     )}
                   >
                     <Trash2 size={14} />
@@ -1401,7 +1401,7 @@ export function CodexExperimentalModelEditor({
       <p className="codex-experimental-model-editor__hint">
         {t(
           "codex.experimentalModelCatalog.models.inheritHint",
-          "官方模型保留原有能力字段；自定义模型使用通用能力模板。可见模型可直接新增或删除。",
+          "Mô hình chính thức giữ nguyên khả năng; mô hình tùy chỉnh dùng mẫu khả năng chung. Bạn có thể thêm hoặc xóa mô hình hiển thị.",
         )}
       </p>
     </div>
@@ -1413,7 +1413,7 @@ export function CodexExperimentalModelEditor({
         <div className="codex-experimental-model-summary">
           <div className="codex-experimental-model-summary__header">
             <span>
-              {t("codex.experimentalModelCatalog.models.title", "模型列表")}
+              {t("codex.experimentalModelCatalog.models.title", "Danh sách mô hình")}
             </span>
             <div className="codex-experimental-model-editor__header-actions">
             {transferButton}
@@ -1423,7 +1423,7 @@ export function CodexExperimentalModelEditor({
               onClick={() => setManagerOpen(true)}
               disabled={disabled}
             >
-              {t("codex.experimentalModelCatalog.models.manage", "管理")}
+              {t("codex.experimentalModelCatalog.models.manage", "Quản lý")}
             </button>
             </div>
           </div>
@@ -1435,26 +1435,26 @@ export function CodexExperimentalModelEditor({
           >
             <span className="codex-experimental-model-editor__drag-head" />
             <span>
-              {t("codex.experimentalModelCatalog.models.modelId", "模型 ID")}
+              {t("codex.experimentalModelCatalog.models.modelId", "ID mô hình")}
             </span>
             <span>
-              {t("codex.experimentalModelCatalog.models.displayName", "展示名")}
+              {t("codex.experimentalModelCatalog.models.displayName", "Tên hiển thị")}
             </span>
             {showModelSource && (
-              <span>{t("codex.experimentalModelCatalog.models.source", "来源")}</span>
+              <span>{t("codex.experimentalModelCatalog.models.source", "Nguồn")}</span>
             )}
             <span>
-              {t("codex.experimentalModelCatalog.models.reasoning", "推理强度")}
+              {t("codex.experimentalModelCatalog.models.reasoning", "Mức suy luận")}
             </span>
             <span>{t("codex.experimentalModels.defaultReasoning")}</span>
             <span>
               {t(
                 "codex.experimentalModelCatalog.models.contextConfig",
-                "上下文与压缩",
+                "Ngữ cảnh & nén",
               )}
             </span>
             <span>
-              {t("codex.experimentalModelCatalog.models.default", "默认")}
+              {t("codex.experimentalModelCatalog.models.default", "Mô hình mặc định")}
             </span>
           </div>
           <div
@@ -1483,11 +1483,11 @@ export function CodexExperimentalModelEditor({
                   }
                   title={t(
                     "platformLayout.dragHandleLabel",
-                    "拖动排序",
+                    "Kéo để sắp xếp lại",
                   )}
                   aria-label={t(
                     "platformLayout.dragHandleLabel",
-                    "拖动排序",
+                    "Kéo để sắp xếp lại",
                   )}
                 >
                   <GripVertical size={12} strokeWidth={1.75} />
@@ -1500,9 +1500,9 @@ export function CodexExperimentalModelEditor({
                   <span
                     className="codex-experimental-model-summary__source"
                     data-kind={source?.kind ?? "subscription"}
-                    title={source?.label ?? t("instances.form.modelRouting.subscriptionSource", "订阅")}
+                    title={source?.label ?? t("instances.form.modelRouting.subscriptionSource", "Gói đăng ký")}
                   >
-                    {source?.label ?? t("instances.form.modelRouting.subscriptionSource", "订阅")}
+                    {source?.label ?? t("instances.form.modelRouting.subscriptionSource", "Gói đăng ký")}
                   </span>
                 )}
                 <span className="codex-experimental-model-summary__reasoning">
@@ -1510,7 +1510,7 @@ export function CodexExperimentalModelEditor({
                     ? model.reasoning_efforts.map(reasoningLabel).join("、")
                     : t(
                         "codex.experimentalModelCatalog.models.followOfficial",
-                        "跟随官方",
+                        "Theo chính thức",
                       )}
                 </span>
                 <span className="codex-experimental-model-summary__reasoning">
@@ -1526,7 +1526,7 @@ export function CodexExperimentalModelEditor({
                   }`}
                 >
                   {defaultModelId === model.model_id
-                    ? t("codex.experimentalModelCatalog.models.default", "默认")
+                    ? t("codex.experimentalModelCatalog.models.default", "Mô hình mặc định")
                     : "—"}
                 </span>
               </div>
@@ -1544,13 +1544,13 @@ export function CodexExperimentalModelEditor({
             >
               <div className="codex-experimental-model-manager-modal__header">
                 <h3 id="codex-experimental-model-manager-title">
-                  {t("codex.experimentalModelCatalog.models.title", "模型列表")}
+                  {t("codex.experimentalModelCatalog.models.title", "Danh sách mô hình")}
                 </h3>
                 <button
                   type="button"
                   className="codex-experimental-model-manager-modal__close"
                   onClick={() => setManagerOpen(false)}
-                  aria-label={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
                 >
                   <X size={16} />
                 </button>

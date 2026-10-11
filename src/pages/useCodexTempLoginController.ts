@@ -59,20 +59,20 @@ export function useCodexTempLoginController(
     (phase: CodexTempLoginPhase): string => {
       switch (phase) {
         case "preparing":
-          return t("codex.tempLogin.phase.prepare", "正在准备临时配置…");
+          return t("codex.tempLogin.phase.prepare", "Chuẩn bị hồ sơ tạm");
         case "launching":
-          return t("codex.tempLogin.phase.launch", "正在打开官方客户端…");
+          return t("codex.tempLogin.phase.launch", "Mở ứng dụng chính thức");
         case "waiting-login":
           return t(
             "codex.tempLogin.phase.wait",
-            "请在官方客户端完成登录…",
+            "Chờ đăng nhập",
           );
         case "importing":
-          return t("codex.tempLogin.phase.import", "正在读取登录信息…");
+          return t("codex.tempLogin.phase.import", "Đọc thông tin đăng nhập");
         case "closing":
-          return t("codex.tempLogin.phase.close", "正在关闭官方客户端…");
+          return t("codex.tempLogin.phase.close", "Đóng ứng dụng chính thức");
         case "cleaning":
-          return t("codex.tempLogin.phase.clean", "正在清理临时配置…");
+          return t("codex.tempLogin.phase.clean", "Xóa hồ sơ tạm");
         default:
           return "";
       }
@@ -106,7 +106,7 @@ export function useCodexTempLoginController(
       }
       return `${t(
         "common.windowsOperation.storeLaunchBlockedDescription",
-        "Windows 拒绝了商店版 Codex 客户端的全部启动方式（直接启动、PowerShell 启动、包身份启动），已阻止启动以免打开错误的账号。多数情况下需要修复或重新安装商店版 Codex（可在 Microsoft Store 检查更新并重新安装）；也可「重新检测路径并重试」；仍失败时请把该实例的启动方式改为 CLI。",
+        "Không thể xác nhận phiên bản cô lập từ cửa hàng đã khởi động thành công. Cockpit không chuyển sang mở tài khoản mặc định. Hãy dò lại đường dẫn ứng dụng rồi thử lại. Nếu vẫn thất bại, hãy sao chép thông tin chẩn đoán hoặc chuyển phiên bản này sang chế độ CLI.",
       )}\n${parsed.originalReason}`;
     },
     [t],
@@ -117,7 +117,7 @@ export function useCodexTempLoginController(
       setTempLoginError(describeTempLoginFailure(message));
       page.setAddStatus("error");
       page.setAddMessage(
-        t("codex.tempLogin.failed", "官方登录失败：{{error}}").replace(
+        t("codex.tempLogin.failed", "Đăng nhập chính thức thất bại: {{error}}").replace(
           "{{error}}",
           describeTempLoginFailure(message),
         ),
@@ -131,7 +131,7 @@ export function useCodexTempLoginController(
       const email = account?.email ?? null;
       page.setAddStatus("success");
       page.setAddMessage(
-        t("codex.tempLogin.success", "已获取账号：{{email}}").replace(
+        t("codex.tempLogin.success", "Đã lấy tài khoản: {{email}}").replace(
           "{{email}}",
           maskAccountText(email ?? ""),
         ),
@@ -156,7 +156,7 @@ export function useCodexTempLoginController(
             page.setAddMessage(
               t(
                 "codex.importApiService.syncFailed",
-                "账号已导入，但加入 API 服务失败：{{error}}",
+                "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
               ).replace("{{error}}", String(error).replace(/^Error:\s*/, "")),
             );
             return;
@@ -211,7 +211,7 @@ export function useCodexTempLoginController(
           resetTempLoginState();
           reportTempLoginFailure(
             payload.error?.trim() ||
-              t("codex.tempLogin.failed", "官方登录失败：{{error}}").replace(
+              t("codex.tempLogin.failed", "Đăng nhập chính thức thất bại: {{error}}").replace(
                 "{{error}}",
                 "-",
               ),
@@ -227,7 +227,7 @@ export function useCodexTempLoginController(
           }
           setTempLoginError(null);
           setTempLoginNotice(
-            t("codex.tempLogin.cancelled", "已取消官方登录，临时配置已清理。"),
+            t("codex.tempLogin.cancelled", "Đã hủy đăng nhập chính thức và xóa hồ sơ tạm."),
           );
           page.setAddStatus("idle");
           page.setAddMessage("");
@@ -303,7 +303,7 @@ export function useCodexTempLoginController(
     setTempLoginCancelling(true);
     page.setAddStatus("loading");
     page.setAddMessage(
-      t("codex.tempLogin.cancelling", "正在取消官方登录…"),
+      t("codex.tempLogin.cancelling", "Đang hủy đăng nhập chính thức…"),
     );
     try {
       await codexTempLoginService.cancelCodexTempLogin(sessionId);

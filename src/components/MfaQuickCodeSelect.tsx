@@ -73,7 +73,7 @@ export function MfaQuickCodeSelect({ className = '' }: MfaQuickCodeSelectProps) 
       <div className="mfa-quick-code-select__header">
         <span className="mfa-quick-code-select__title">
           <KeyRound size={14} />
-          {t('mfaQuick.title', '2FA 验证码')}
+          {t('mfaQuick.title', "Mã 2FA")}
         </span>
         <span className={`mfa-quick-code-select__timer ${isWarning ? 'warning' : ''}`}>
           {t('mfaQuick.refreshIn', '{{time}}s', { time: timeRemaining })}
@@ -83,25 +83,25 @@ export function MfaQuickCodeSelect({ className = '' }: MfaQuickCodeSelectProps) 
         <select
           value={selectedRecord?.id ?? ''}
           onChange={(event) => setSelectedId(event.target.value)}
-          aria-label={t('mfaQuick.selectLabel', '选择 2FA 秘钥')}
+          aria-label={t('mfaQuick.selectLabel', "Chọn khóa 2FA")}
         >
           {records.map((record) => (
             <option key={record.id} value={record.id}>
-              {formatMfaOption(record, t('mfaQuick.unnamedSecret', '未命名秘钥'))}
+              {formatMfaOption(record, t('mfaQuick.unnamedSecret', "Khóa chưa đặt tên"))}
             </option>
           ))}
         </select>
         <div className="mfa-quick-code-select__code" aria-live="polite">
           <span className={token ? '' : 'invalid'}>
-            {token || t('mfaQuick.invalidCode', '无效秘钥')}
+            {token || t('mfaQuick.invalidCode', "Khóa không hợp lệ")}
           </span>
           <button
             type="button"
             className="action-btn"
             onClick={handleCopyCode}
             disabled={!token}
-            title={copied ? t('mfaQuick.copied', '已复制') : t('mfaQuick.copyCode', '复制验证码')}
-            aria-label={copied ? t('mfaQuick.copied', '已复制') : t('mfaQuick.copyCode', '复制验证码')}
+            title={copied ? t('mfaQuick.copied', "Đã sao chép") : t('mfaQuick.copyCode', "Sao chép mã")}
+            aria-label={copied ? t('mfaQuick.copied', "Đã sao chép") : t('mfaQuick.copyCode', "Sao chép mã")}
           >
             {copied ? <Check size={14} className="is-success" /> : <Copy size={14} />}
           </button>

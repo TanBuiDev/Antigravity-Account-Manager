@@ -124,9 +124,9 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
       setLocalMessage({
         kind: event.payload.verified ? 'success' : 'warning',
         text: event.payload.verified
-          ? t('codex.ssh.syncVerified', 'SSH 已校验同步成功')
+          ? t('codex.ssh.syncVerified', "Đã xác minh đồng bộ hóa SSH")
           : event.payload.error ??
-            t('codex.ssh.syncFailed', '本地切号成功，但 SSH 同步失败'),
+            t('codex.ssh.syncFailed', "Đồng bộ hóa SSH không thành công"),
       });
     }).then((dispose) => {
       if (disposed) {
@@ -162,7 +162,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
         }
       }
       setForm(emptyForm);
-      setLocalMessage({ kind: 'success', text: t('common.saved', '已保存') });
+      setLocalMessage({ kind: 'success', text: t('common.saved', 'Đã lưu') });
     } catch (err) {
       setLocalMessage({ kind: 'error', text: String(err) });
     } finally {
@@ -177,7 +177,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
       await testConnection(serverId);
       setLocalMessage({
         kind: 'success',
-        text: t('codex.ssh.connectionOk', '连接成功'),
+        text: t('codex.ssh.connectionOk', "Đã kết nối"),
       });
     } catch (err) {
       setLocalMessage({ kind: 'error', text: String(err) });
@@ -194,8 +194,8 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
       setLocalMessage({
         kind: result.verified ? 'success' : 'warning',
         text: result.verified
-          ? t('codex.ssh.syncVerified', 'SSH 已校验同步成功')
-          : result.error ?? t('codex.ssh.syncFailed', 'SSH 同步失败'),
+          ? t('codex.ssh.syncVerified', "Đã xác minh đồng bộ hóa SSH")
+          : result.error ?? t('codex.ssh.syncFailed', "Đồng bộ hóa SSH không thành công"),
       });
     } catch (err) {
       setLocalMessage({ kind: 'error', text: String(err) });
@@ -210,12 +210,12 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
         <div className="codex-ssh-panel__header">
           <div className="codex-ssh-panel__header-copy">
             <h2 className="codex-ssh-panel__title">
-              {t('codex.ssh.title', 'SSH 服务器')}
+              {t('codex.ssh.title', "Đồng bộ SSH Codex")}
             </h2>
             <p className="codex-ssh-panel__subtitle">
               {t(
                 'codex.ssh.subtitle',
-                '选中的服务器会在 Codex 切号后接收当前账号鉴权包。',
+                "Máy chủ đã chọn sẽ nhận được gói xác thực Codex hiện tại sau khi chuyển đổi tài khoản.",
               )}
             </p>
           </div>
@@ -226,7 +226,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
             disabled={loading}
           >
             <RefreshCw size={14} className={loading ? 'spin' : undefined} />
-            <span>{t('common.refresh', '刷新')}</span>
+            <span>{t('common.refresh', "Làm mới")}</span>
           </button>
         </div>
       )}
@@ -252,11 +252,11 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
             <div>
               <div className="codex-ssh-panel__section-kicker">
                 {form.id
-                  ? t('codex.ssh.editServer', '编辑服务器')
-                  : t('codex.ssh.addServer', '添加服务器')}
+                  ? t('codex.ssh.editServer', "Chỉnh sửa máy chủ")
+                  : t('codex.ssh.addServer', "Thêm máy chủ")}
               </div>
               <h3 className="codex-ssh-panel__form-title">
-                {t('codex.ssh.formLead', '填写远端主机信息')}
+                {t('codex.ssh.formLead', "Chi tiết máy chủ từ xa")}
               </h3>
             </div>
             <div className="codex-ssh-panel__form-header-actions">
@@ -264,8 +264,8 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 <button
                   className="btn btn-secondary icon-only"
                   type="button"
-                  title={t('common.refresh', '刷新')}
-                  aria-label={t('common.refresh', '刷新')}
+                  title={t('common.refresh', "Làm mới")}
+                  aria-label={t('common.refresh', "Làm mới")}
                   onClick={() => void fetchServers()}
                   disabled={loading}
                 >
@@ -276,8 +276,8 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 <button
                   className="btn btn-secondary icon-only"
                   type="button"
-                  title={t('common.cancel', '取消')}
-                  aria-label={t('common.cancel', '取消')}
+                  title={t('common.cancel', "Hủy")}
+                  aria-label={t('common.cancel', "Hủy")}
                   onClick={() => setForm(emptyForm)}
                 >
                   <X size={14} />
@@ -288,19 +288,19 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
 
           <div className="codex-ssh-panel__fields">
             <label className="codex-ssh-panel__field">
-              <span>{t('codex.ssh.name', '名称')}</span>
+              <span>{t('codex.ssh.name', "Tên")}</span>
               <input
                 className="form-input"
                 value={form.name}
                 onChange={(event) => setForm({ ...form, name: event.target.value })}
-                placeholder={t('codex.ssh.namePlaceholder', '例如：家里 NAS')}
+                placeholder={t('codex.ssh.namePlaceholder', "ví dụ. Trang chủ NAS")}
                 required
               />
             </label>
 
             <div className="codex-ssh-panel__field-grid codex-ssh-panel__field-grid--host">
               <label className="codex-ssh-panel__field">
-                <span>{t('codex.ssh.host', '主机')}</span>
+                <span>{t('codex.ssh.host', "Host")}</span>
                 <input
                   className="form-input"
                   value={form.host}
@@ -310,7 +310,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 />
               </label>
               <label className="codex-ssh-panel__field">
-                <span>{t('codex.ssh.port', '端口')}</span>
+                <span>{t('codex.ssh.port', "Cổng")}</span>
                 <input
                   className="form-input"
                   inputMode="numeric"
@@ -323,7 +323,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
 
             <div className="codex-ssh-panel__field-grid">
               <label className="codex-ssh-panel__field">
-                <span>{t('codex.ssh.username', '用户名')}</span>
+                <span>{t('codex.ssh.username', "Tên người dùng")}</span>
                 <input
                   className="form-input"
                   value={form.username}
@@ -335,7 +335,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 />
               </label>
               <label className="codex-ssh-panel__field">
-                <span>{t('codex.ssh.codexHome', '远端 Codex 目录')}</span>
+                <span>{t('codex.ssh.codexHome', "Thư mục Codex từ xa")}</span>
                 <input
                   className="form-input"
                   value={form.codexHome}
@@ -349,12 +349,12 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
 
             <div className="codex-ssh-panel__auth">
               <span className="codex-ssh-panel__field-label">
-                {t('codex.ssh.authMethod', '认证方式')}
+                {t('codex.ssh.authMethod', "Phương thức xác thực")}
               </span>
               <div
                 className="codex-ssh-panel__segmented"
                 role="radiogroup"
-                aria-label={t('codex.ssh.authMethod', '认证方式')}
+                aria-label={t('codex.ssh.authMethod', "Phương thức xác thực")}
               >
                 <button
                   type="button"
@@ -372,14 +372,14 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                     setForm({ ...form, authKind: 'private_key_file' })
                   }
                 >
-                  {t('codex.ssh.privateKeyAuth', '私钥文件')}
+                  {t('codex.ssh.privateKeyAuth', "Khóa riêng")}
                 </button>
               </div>
             </div>
 
             {form.authKind === 'private_key_file' && (
               <label className="codex-ssh-panel__field">
-                <span>{t('codex.ssh.privateKeyPath', '私钥路径')}</span>
+                <span>{t('codex.ssh.privateKeyPath', "Đường dẫn chính")}</span>
                 <input
                   className="form-input"
                   value={form.privateKeyPath}
@@ -394,11 +394,11 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
 
             <label className="codex-ssh-panel__switch-card">
               <span className="codex-ssh-panel__switch-copy">
-                <strong>{t('codex.ssh.syncOnSwitch', '切号后自动同步')}</strong>
+                <strong>{t('codex.ssh.syncOnSwitch', "Đồng bộ hóa sau khi chuyển đổi")}</strong>
                 <em>
                   {t(
                     'codex.ssh.syncOnSwitchHint',
-                    '保存并选中后，Codex 切号会推送鉴权到这台主机',
+                    "Sau khi lưu và chọn, Codex chuyển sang đẩy xác thực đến máy chủ này",
                   )}
                 </em>
               </span>
@@ -422,15 +422,15 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 type="button"
                 onClick={() => setForm(emptyForm)}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
             )}
             <button className="btn btn-primary" type="submit" disabled={saving}>
               <Check size={14} />
               <span>
                 {form.id
-                  ? t('common.save', '保存')
-                  : t('codex.ssh.addAndSave', '添加并保存')}
+                  ? t('common.save', "Lưu")
+                  : t('codex.ssh.addAndSave', "Thêm và lưu")}
               </span>
             </button>
           </div>
@@ -440,14 +440,14 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
           <div className="codex-ssh-panel__list-header">
             <div>
               <div className="codex-ssh-panel__section-kicker">
-                {t('codex.ssh.serverList', '服务器列表')}
+                {t('codex.ssh.serverList', "Máy chủ")}
               </div>
               <h3 className="codex-ssh-panel__list-title">
-                {t('codex.ssh.serverListLead', '选择同步目标')}
+                {t('codex.ssh.serverListLead', "Chọn mục tiêu đồng bộ hóa")}
               </h3>
             </div>
             <span className="codex-ssh-panel__count">
-              {t('codex.ssh.serverCount', '{{count}} 台', {
+              {t('codex.ssh.serverCount', "{{count}} máy chủ", {
                 count: servers.length,
               })}
             </span>
@@ -459,11 +459,11 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                 <div className="codex-ssh-panel__empty-icon" aria-hidden="true">
                   <Server size={22} />
                 </div>
-                <h3>{t('codex.ssh.emptyTitle', '暂无 SSH 服务器')}</h3>
+                <h3>{t('codex.ssh.emptyTitle', "Không có máy chủ SSH")}</h3>
                 <p>
                   {t(
                     'codex.ssh.emptyBody',
-                    '在左侧填写主机信息并保存，即可作为切号同步目标。',
+                    "Điền vào máy chủ ở bên trái và lưu nó làm mục tiêu đồng bộ hóa chuyển đổi.",
                   )}
                 </p>
               </div>
@@ -492,12 +492,12 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                           <strong>{server.name}</strong>
                           {isSelected && (
                             <span className="codex-ssh-panel__badge">
-                              {t('codex.ssh.selected', '已选中')}
+                              {t('codex.ssh.selected', "Đã chọn")}
                             </span>
                           )}
                           {server.sync_on_codex_switch && (
                             <span className="codex-ssh-panel__badge codex-ssh-panel__badge--soft">
-                              {t('codex.ssh.autoSyncBadge', '自动同步')}
+                              {t('codex.ssh.autoSyncBadge', "Tự động")}
                             </span>
                           )}
                         </div>
@@ -518,13 +518,13 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                     >
                       {sync
                         ? sync.verified
-                          ? t('codex.ssh.syncedAs', '已同步 {{email}} · {{time}}', {
+                          ? t('codex.ssh.syncedAs', "Đã đồng bộ hóa {{email}} · {{time}}", {
                               email: sync.account_email,
                               time: formatSyncTime(sync.synced_at),
                             })
                           : sync.error ??
-                            t('codex.ssh.syncFailed', 'SSH 同步失败')
-                        : t('codex.ssh.neverSynced', '尚未同步')}
+                            t('codex.ssh.syncFailed', "Đồng bộ hóa SSH không thành công")
+                        : t('codex.ssh.neverSynced', "Chưa được đồng bộ hóa")}
                     </div>
                   </button>
 
@@ -540,8 +540,8 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                       <Check size={14} />
                       <span>
                         {isSelected
-                          ? t('codex.ssh.selected', '已选中')
-                          : t('codex.ssh.select', '选中')}
+                          ? t('codex.ssh.selected', "Đã chọn")
+                          : t('codex.ssh.select', "Lựa chọn")}
                       </span>
                     </button>
                     <button
@@ -551,7 +551,7 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                       onClick={() => void handleTest(server.id)}
                     >
                       <PlugZap size={14} />
-                      <span>{t('codex.ssh.testConnection', '测连')}</span>
+                      <span>{t('codex.ssh.testConnection', "Bài kiểm tra")}</span>
                     </button>
                     <button
                       className="btn btn-secondary"
@@ -560,13 +560,13 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                       onClick={() => void handleSync(server.id)}
                     >
                       <KeyRound size={14} />
-                      <span>{t('codex.ssh.syncNow', '同步')}</span>
+                      <span>{t('codex.ssh.syncNow', "Đồng bộ hóa ngay bây giờ")}</span>
                     </button>
                     <button
                       className="btn btn-secondary icon-only"
                       type="button"
-                      title={t('common.edit', '编辑')}
-                      aria-label={t('common.edit', '编辑')}
+                      title={t('common.edit', 'Chỉnh sửa')}
+                      aria-label={t('common.edit', 'Chỉnh sửa')}
                       onClick={() => setForm(formFromServer(server))}
                     >
                       <Pencil size={14} />
@@ -574,8 +574,8 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
                     <button
                       className="btn btn-danger icon-only"
                       type="button"
-                      title={t('common.delete', '删除')}
-                      aria-label={t('common.delete', '删除')}
+                      title={t('common.delete', "Xóa")}
+                      aria-label={t('common.delete', "Xóa")}
                       onClick={() => void deleteServer(server.id)}
                     >
                       <Trash2 size={14} />
@@ -595,9 +595,9 @@ export function CodexSshServersPanel({ embedded = false }: CodexSshServersPanelP
           }`}
         >
           {lastSyncResult.verified
-            ? t('codex.ssh.latestVerified', '最近一次 SSH 同步已校验通过')
+            ? t('codex.ssh.latestVerified', "Đã xác minh đồng bộ hóa SSH lần cuối")
             : lastSyncResult.error ??
-              t('codex.ssh.syncFailed', 'SSH 同步失败')}
+              t('codex.ssh.syncFailed', "Đồng bộ hóa SSH không thành công")}
         </div>
       )}
     </div>

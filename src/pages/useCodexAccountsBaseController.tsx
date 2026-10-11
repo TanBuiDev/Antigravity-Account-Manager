@@ -943,7 +943,7 @@ export function useCodexAccountsBaseController() {
     ).length;
     const batchImportSelectedCountLabel = t(
       "codex.batchImport.selectedCount",
-      "已选 {{count}}/{{total}}",
+      "Đã chọn {{count}}/{{total}}",
     )
       .replace("{{count}}", String(batchImportSelectedSelectableCount))
       .replace("{{total}}", String(batchImportSelectableIds.length));
@@ -1177,7 +1177,7 @@ export function useCodexAccountsBaseController() {
         console.error("Failed to load codex local access state:", error);
         setMessage({
           text: t("messages.actionFailed", {
-            action: t("codex.localAccess.title", "API 服务"),
+            action: t("codex.localAccess.title", "Dịch vụ API"),
             error: String(error),
           }),
           tone: "error",
@@ -1461,7 +1461,7 @@ export function useCodexAccountsBaseController() {
       reportExportModalError(
         t(
           "codex.exportFormat.buildFailed",
-          "无法生成导出内容：所选账号包含不支持的类型或认证信息不完整。",
+          "Không thể tạo bản xuất: các tài khoản đã chọn có loại không được hỗ trợ hoặc thông tin xác thực chưa đầy đủ.",
         ),
       );
     }, [
@@ -1738,8 +1738,8 @@ export function useCodexAccountsBaseController() {
             >
               {exportJsonHidden ? <Eye size={14} /> : <EyeOff size={14} />}
               {exportJsonHidden
-                ? t("common.preview", "预览")
-                : t("common.close", "关闭")}
+                ? t("common.preview", "Preview​")
+                : t("common.close", "Đóng")}
             </button>
             <button
               className="btn btn-primary btn-sm"
@@ -1748,8 +1748,8 @@ export function useCodexAccountsBaseController() {
             >
               <Download size={14} />
               {formattedBatchSavingExportJson
-                ? t("common.loading", "加载中...")
-                : t("codex.exportFormat.downloadAll", "一键下载全部")}
+                ? t("common.loading", "Đang tải...")
+                : t("codex.exportFormat.downloadAll", "Tải xuống tất cả")}
             </button>
           </div>
   
@@ -1759,7 +1759,7 @@ export function useCodexAccountsBaseController() {
                 <div className="export-json-card-header">
                   <div className="export-json-card-heading">
                     <div className="export-json-card-title">
-                      {t("codex.exportFormat.cpaCardTitle", "账号 {{index}}", {
+                      {t("codex.exportFormat.cpaCardTitle", "Tài khoản {{index}}", {
                         index: index + 1,
                       })}
                     </div>
@@ -1786,7 +1786,7 @@ export function useCodexAccountsBaseController() {
                     >
                       <Download size={14} />
                       {formattedSavingExportDocumentId === document.id
-                        ? t("common.loading", "加载中...")
+                        ? t("common.loading", "Đang tải...")
                         : t("settings.about.download", "Download")}
                     </button>
                   </div>
@@ -1810,8 +1810,8 @@ export function useCodexAccountsBaseController() {
             <div className="export-json-path-box">
               <div className="export-json-path-title">
                 {formattedExportSavedPathIsDirectory
-                  ? t("codex.exportFormat.savedFolder", "保存目录")
-                  : t("codex.exportFormat.savedPath", "保存路径")}
+                  ? t("codex.exportFormat.savedFolder", "Thư mục đã lưu")
+                  : t("codex.exportFormat.savedPath", "Đường dẫn đã lưu")}
               </div>
               <div className="export-json-path-value">
                 {formattedExportSavedPath}
@@ -1823,7 +1823,7 @@ export function useCodexAccountsBaseController() {
                   disabled={!canOpenFormattedExportSavedDirectory}
                 >
                   <FolderOpen size={14} />
-                  {t("instances.actions.openFolder", "打开文件夹")}
+                  {t("instances.actions.openFolder", "Mở thư mục")}
                 </button>
                 <button
                   className="btn btn-secondary btn-sm"
@@ -1835,8 +1835,8 @@ export function useCodexAccountsBaseController() {
                     <Copy size={14} />
                   )}
                   {formattedExportPathCopied
-                    ? t("common.success", "成功")
-                    : t("common.copy", "复制")}
+                    ? t("common.success", "Thành công")
+                    : t("common.copy", "Copy​")}
                 </button>
               </div>
             </div>
@@ -1908,7 +1908,7 @@ export function useCodexAccountsBaseController() {
         if (!apiKey) {
           return {
             ok: false,
-            message: t("common.shared.token.empty", "请输入 Token 或 JSON"),
+            message: t("common.shared.token.empty", "Vui lòng nhập Token hoặc JSON"),
           };
         }
         if (isHttpLikeUrl(apiKey)) {
@@ -1916,7 +1916,7 @@ export function useCodexAccountsBaseController() {
             ok: false,
             message: t(
               "codex.api.validation.apiKeyCannotBeUrl",
-              "API Key 不能是 URL，请检查是否填反",
+              "API key không thể là URL. Hãy kiểm tra xem bạn có điền nhầm hai trường hay không.",
             ),
           };
         }
@@ -1931,7 +1931,7 @@ export function useCodexAccountsBaseController() {
             ok: false,
             message: t(
               "codex.api.validation.baseUrlInvalid",
-              "Base URL 格式无效，请输入完整的 http:// 或 https:// 地址",
+              "Base URL không hợp lệ. Vui lòng nhập URL đầy đủ bắt đầu bằng http:// hoặc https://.",
             ),
           };
         }
@@ -1940,7 +1940,7 @@ export function useCodexAccountsBaseController() {
             ok: false,
             message: t(
               "codex.api.validation.apiKeyEqualsBaseUrl",
-              "API Key 不能与 Base URL 相同",
+              "API key không được trùng với Base URL.",
             ),
           };
         }
@@ -2025,7 +2025,7 @@ export function useCodexAccountsBaseController() {
       (timestamp: number | null | undefined) => {
         return timestamp
           ? formatCodexResetTime(timestamp, t)
-          : t("codex.quota.resetCreditTimeUnknown", "时间未知");
+          : t("codex.quota.resetCreditTimeUnknown", "Không rõ thời gian");
       },
       [t],
     );
@@ -2034,7 +2034,7 @@ export function useCodexAccountsBaseController() {
       (timestamp: number | null | undefined) => {
         return timestamp
           ? formatCodexResetTimeAbsolute(timestamp)
-          : t("codex.quota.resetCreditTimeUnknown", "时间未知");
+          : t("codex.quota.resetCreditTimeUnknown", "Không rõ thời gian");
       },
       [t],
     );
@@ -2049,23 +2049,23 @@ export function useCodexAccountsBaseController() {
           normalizedStatus === "used" ||
           normalizedStatus === "consumed"
         ) {
-          return t("codex.quota.resetCreditStatusRedeemed", "已使用");
+          return t("codex.quota.resetCreditStatusRedeemed", "Đã dùng");
         }
         if (normalizedStatus === "available") {
           return isAvailableResetCredit(credit)
-            ? t("codex.quota.resetCreditStatusAvailable", "可用")
-            : t("codex.quota.resetCreditStatusExpired", "已过期");
+            ? t("codex.quota.resetCreditStatusAvailable", "Có sẵn")
+            : t("codex.quota.resetCreditStatusExpired", "Hết hạn");
         }
         if (normalizedStatus === "expired") {
-          return t("codex.quota.resetCreditStatusExpired", "已过期");
+          return t("codex.quota.resetCreditStatusExpired", "Hết hạn");
         }
         if (!isAvailableResetCredit(credit)) {
-          return t("codex.quota.resetCreditStatusExpired", "已过期");
+          return t("codex.quota.resetCreditStatusExpired", "Hết hạn");
         }
         return (
           credit.raw_status ||
           credit.status ||
-          t("codex.quota.resetCreditStatusUnknown", "未知")
+          t("codex.quota.resetCreditStatusUnknown", "Không rõ")
         );
       },
       [isAvailableResetCredit, t],
@@ -2097,7 +2097,7 @@ export function useCodexAccountsBaseController() {
     const buildResetCreditsTitle = useCallback(
       (account: CodexAccount, availableCount: number) => {
         if (availableCount <= 0) {
-          return t("codex.quota.resetCreditNoCredits", "没有可用的主动重置次数");
+          return t("codex.quota.resetCreditNoCredits", "Không còn lượt đặt lại");
         }
   
         const nextExpiresAt = getResetCreditNextExpiresAt(account);
@@ -2106,7 +2106,7 @@ export function useCodexAccountsBaseController() {
             count: availableCount,
             time: formatResetCreditTime(nextExpiresAt),
             defaultValue:
-              "可用于重置当前 5 小时窗口的剩余次数：{{count}}，最近到期：{{time}}",
+              "Lượt đặt lại còn lại cho cửa sổ 5 giờ: {{count}}. Hết hạn gần nhất: {{time}}",
           });
         }
   
@@ -2198,7 +2198,7 @@ export function useCodexAccountsBaseController() {
       const availableCount = resetCreditConfirmAvailableCount;
       if (availableCount == null || availableCount <= 0) {
         setResetCreditConfirmError(
-          t("codex.quota.resetCreditNoCredits", "没有可用的主动重置次数"),
+          t("codex.quota.resetCreditNoCredits", "Không còn lượt đặt lại"),
         );
         return;
       }
@@ -2212,7 +2212,7 @@ export function useCodexAccountsBaseController() {
         try {
           await refreshQuota(account.id);
           setMessage({
-            text: t("codex.quota.resetCreditConsumed", "已重置 5 小时额度"),
+            text: t("codex.quota.resetCreditConsumed", "Đã đặt lại hạn mức 5 giờ"),
           });
           setResetCreditConfirmAccountId(null);
         } catch (error) {
@@ -2279,7 +2279,7 @@ export function useCodexAccountsBaseController() {
     const activeAccountNoteDisplayName =
       activeAccountNoteMode === "pendingOAuth"
         ? pendingOAuthEmailInput.trim() ||
-          t("codex.pendingAuth.emailLabel", "待授权账号")
+          t("codex.pendingAuth.emailLabel", "Tài khoản chờ xác thực")
         : editingAccountNoteAccount
           ? buildCodexAccountPresentation(editingAccountNoteAccount, t)
               .displayName
@@ -2333,7 +2333,7 @@ export function useCodexAccountsBaseController() {
           const preview = findFirstMailVerificationCode(response.body);
           if (!preview) {
             setAccountNoteMailPreviewError(
-              t("codex.accountNote.mailPreviewNoCode", "未匹配到连续 6 位验证码"),
+              t("codex.accountNote.mailPreviewNoCode", "Không tìm thấy mã 6 chữ số liên tiếp"),
             );
             return;
           }
@@ -2360,20 +2360,20 @@ export function useCodexAccountsBaseController() {
           const httpError = rawError.match(/^MAIL_PREVIEW_HTTP_FAILED:(\d+)$/);
           const errorDetail =
             rawError === "MAIL_URL_EMPTY"
-              ? t("codex.accountNote.mailPreviewUrlRequired", "请输入邮件地址")
+              ? t("codex.accountNote.mailPreviewUrlRequired", "Nhập URL email")
               : rawError === "MAIL_URL_INVALID"
                 ? t(
                     "codex.accountNote.mailPreviewUrlInvalid",
-                    "邮件地址格式无效，请输入完整的 http:// 或 https:// 地址",
+                    "URL email không hợp lệ. Nhập địa chỉ http:// hoặc https:// đầy đủ.",
                   )
                 : rawError === "MAIL_URL_UNSUPPORTED_SCHEME"
                   ? t(
                       "codex.accountNote.mailPreviewUnsupportedProtocol",
-                      "邮件地址仅支持 http 或 https 协议",
+                      "URL email chỉ hỗ trợ http hoặc https.",
                     )
                   : httpError
                     ? t("codex.accountNote.mailPreviewHttpFailed", {
-                        defaultValue: "邮件地址请求失败：HTTP {{status}}",
+                        defaultValue: "Yêu cầu URL email thất bại: HTTP {{status}}",
                         status: httpError[1],
                       })
                     : rawError
@@ -2383,7 +2383,7 @@ export function useCodexAccountsBaseController() {
           setAccountNoteMailPreviewError(
             t("codex.accountNote.mailPreviewFetchFailed", {
               error: errorDetail,
-              defaultValue: "读取邮件失败：{{error}}",
+              defaultValue: "Không đọc được email: {{error}}",
             }),
           );
         } finally {
@@ -2496,7 +2496,7 @@ export function useCodexAccountsBaseController() {
           setAccountNoteFieldErrors({
             twoFactorSecret: t(
               "codex.accountNote.twoFactorSecretInvalid",
-              "2FA 秘钥格式无效，请输入 Base32 secret 或 otpauth:// 链接",
+              "Mã bí mật 2FA không hợp lệ. Nhập mã Base32 hoặc URI otpauth://.",
             ),
           });
           return;
@@ -2544,7 +2544,7 @@ export function useCodexAccountsBaseController() {
           return;
         }
         setMessage({
-          text: t("codex.accountNote.saved", "账号备注已保存"),
+          text: t("codex.accountNote.saved", "Đã lưu ghi chú tài khoản"),
           tone: "success",
         });
         setEditingAccountNoteId(null);
@@ -2556,7 +2556,7 @@ export function useCodexAccountsBaseController() {
         setAccountNoteError(
           t("codex.accountNote.saveFailed", {
             error: String(error).replace(/^Error:\s*/, ""),
-            defaultValue: "保存账号备注失败：{{error}}",
+            defaultValue: "Không thể lưu ghi chú tài khoản: {{error}}",
           }),
         );
       } finally {
@@ -2596,7 +2596,7 @@ export function useCodexAccountsBaseController() {
           }, 1200);
         } catch {
           setAccountNoteError(
-            t("common.shared.export.copyFailed", "复制失败，请手动复制"),
+            t("common.shared.export.copyFailed", "Sao chép thất bại, vui lòng sao chép thủ công"),
           );
         }
       },
@@ -2616,7 +2616,7 @@ export function useCodexAccountsBaseController() {
         setAccountNoteError(
           t("codex.accountNote.mailOpenFailed", {
             error: String(error).replace(/^Error:\s*/, ""),
-            defaultValue: "打开邮件地址失败：{{error}}",
+            defaultValue: "Không mở được URL email: {{error}}",
           }),
         );
       }
@@ -2634,16 +2634,16 @@ export function useCodexAccountsBaseController() {
               hasNote
                 ? getCodexAccountNoteTitle(
                     account,
-                    t("codex.accountNote.short", "账号备注"),
+                    t("codex.accountNote.short", "Ghi chú"),
                   )
-                : t("codex.accountNote.emptyTitle", "填写账号备注")
+                : t("codex.accountNote.emptyTitle", "Thêm ghi chú tài khoản")
             }
           >
             <FileText size={12} />
             <span>
               {hasNote
-                ? t("codex.accountNote.short", "账号备注")
-                : t("codex.accountNote.addShort", "加备注")}
+                ? t("codex.accountNote.short", "Ghi chú")
+                : t("codex.accountNote.addShort", "Thêm")}
             </span>
           </button>
         );

@@ -94,8 +94,8 @@ export function CodexTopLayoutPage({
                       className="btn btn-secondary compact icon-only"
                       disabled={index === 0}
                       onClick={() => moveTab(index, -1)}
-                      aria-label={t('codex.more.moveUp', '上移')}
-                      title={t('codex.more.moveUp', '上移')}
+                      aria-label={t('codex.more.moveUp', "Di chuyển lên")}
+                      title={t('codex.more.moveUp', "Di chuyển lên")}
                     >
                       <ArrowUp size={14} />
                     </button>
@@ -104,8 +104,8 @@ export function CodexTopLayoutPage({
                       className="btn btn-secondary compact icon-only"
                       disabled={index === normalizedOrder.length - 1}
                       onClick={() => moveTab(index, 1)}
-                      aria-label={t('codex.more.moveDown', '下移')}
-                      title={t('codex.more.moveDown', '下移')}
+                      aria-label={t('codex.more.moveDown', "Di chuyển xuống")}
+                      title={t('codex.more.moveDown', "Di chuyển xuống")}
                     >
                       <ArrowDown size={14} />
                     </button>
@@ -121,7 +121,7 @@ export function CodexTopLayoutPage({
           <p className="codex-top-layout-hint">
             {t(
               'codex.more.topLayoutHint',
-              '“更多”按钮始终显示在右侧，不参与排序或隐藏。',
+              "Nút “Thêm” luôn cố định bên phải, không thể di chuyển hoặc ẩn.",
             )}
           </p>
         </div>
@@ -132,10 +132,10 @@ export function CodexTopLayoutPage({
             onClick={() => onChange(createDefaultCodexTopLayout(pages.map(page => page.id)))}
           >
             <RotateCcw size={14} />
-            {t('codex.more.resetLayout', '恢复默认')}
+            {t('codex.more.resetLayout', "Khôi phục mặc định")}
           </button>
           <button type="button" className="btn btn-primary" onClick={onBack}>
-            {t('codex.more.done', '完成')}
+            {t('codex.more.done', "Xong")}
           </button>
         </div>
       </div>

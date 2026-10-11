@@ -22,10 +22,10 @@ export function getCodexLocalAccessRiskNoticeConfirmLabel(
   t: TFunction,
 ): string {
   if (action === 'switch') {
-    return t('codex.localAccess.riskNotice.continueSwitch', '继续切号');
+    return t('codex.localAccess.riskNotice.continueSwitch', "Tiếp tục");
   }
   if (action === 'service') {
-    return t('codex.localAccess.riskNotice.continueStart', '继续启动');
+    return t('codex.localAccess.riskNotice.continueStart', "Tiếp tục");
   }
-  return t('common.confirm', '确认');
+  return t('common.confirm', "Xác nhận");
 }

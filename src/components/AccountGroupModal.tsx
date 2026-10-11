@@ -398,7 +398,7 @@ export const AccountGroupModal = ({
                     {/* 拖动手柄 */}
                     <div
                       className="group-drag-handle"
-                      title={t('accounts.groups.dragToSort', '按住拖动排序')}
+                      title={t('accounts.groups.dragToSort', 'Giữ và kéo để sắp xếp')}
                     >
                       <GripVertical size={14} />
                     </div>
@@ -467,17 +467,17 @@ export const AccountGroupModal = ({
                                 setPickerTargetGroup(group);
                               }
                             }}
-                            title={t('accounts.groups.addAccounts', '添加账号')}
+                            title={t('accounts.groups.addAccounts', "Thêm tài khoản")}
                           >
                             <FolderPlus size={14} />
-                            <span>{t('accounts.groups.addAccounts', '添加账号')}</span>
+                            <span>{t('accounts.groups.addAccounts', "Thêm tài khoản")}</span>
                           </button>
                           <button
                             type="button"
                             className="group-action-btn"
                             disabled={busy || loading || loadFailed || index === 0}
                             onClick={() => handleMove(index, 'up')}
-                            title={t('accounts.groups.moveUp', '上移')}
+                            title={t('accounts.groups.moveUp', 'Di chuyển lên')}
                           >
                             <ChevronUp size={14} />
                           </button>
@@ -486,7 +486,7 @@ export const AccountGroupModal = ({
                             className="group-action-btn"
                             disabled={busy || loading || loadFailed || index === groups.length - 1}
                             onClick={() => handleMove(index, 'down')}
-                            title={t('accounts.groups.moveDown', '下移')}
+                            title={t('accounts.groups.moveDown', 'Di chuyển xuống')}
                           >
                             <ChevronDown size={14} />
                           </button>
@@ -722,13 +722,13 @@ export function UniversalGroupAccountPickerModal({
         <div className="modal-header">
           <h2 className="group-account-picker-title">
             <FolderPlus size={18} />
-            <span>{t('accounts.groups.addAccounts', '添加账号')}</span>
+            <span>{t('accounts.groups.addAccounts', "Thêm tài khoản")}</span>
             <span className="group-account-picker-target">{targetGroup.name}</span>
           </h2>
           <button
             className="modal-close"
             onClick={onClose}
-            aria-label={t('common.close', '关闭')}
+            aria-label={t('common.close', "Đóng")}
           >
             <X size={18} />
           </button>
@@ -742,7 +742,7 @@ export function UniversalGroupAccountPickerModal({
                 type="text"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder={t('accounts.search', '搜索账号...')}
+                placeholder={t('accounts.search', "Tìm kiếm tài khoản...")}
               />
             </div>
           </div>
@@ -757,14 +757,14 @@ export function UniversalGroupAccountPickerModal({
             />
             <div className="group-account-main">
               <span className="group-account-email" style={{ fontWeight: 600, fontSize: '12px', color: 'var(--text-secondary)' }}>
-                {t('common.selectAll', '全选')} ({selectedVisibleCount}/{visibleAccounts.length})
+                {t('common.selectAll', "Chọn tất cả")} ({selectedVisibleCount}/{visibleAccounts.length})
               </span>
             </div>
           </div>
 
           <div className="group-account-list">
             {visibleAccounts.length === 0 ? (
-              <div className="group-account-empty">{t('accounts.groups.accountPickerEmpty', '没有符合条件的账号')}</div>
+              <div className="group-account-empty">{t('accounts.groups.accountPickerEmpty', "Không có tài khoản phù hợp")}</div>
             ) : (
               visibleAccounts.map((account) => {
                 const currentGroups = groupsByAccountId.get(account.id) || [];
@@ -822,7 +822,7 @@ export function UniversalGroupAccountPickerModal({
                         )}
                         {isUngrouped ? (
                           <span className="group-account-badge is-ungrouped">
-                            {t('accounts.groups.ungrouped', '未分组')}
+                            {t('accounts.groups.ungrouped', "Chưa phân nhóm")}
                           </span>
                         ) : (
                           currentGroups.map((g) => (
@@ -847,7 +847,7 @@ export function UniversalGroupAccountPickerModal({
 
         <div className="modal-footer group-account-picker-footer">
           <button className="btn btn-secondary" onClick={onClose} disabled={saving}>
-            {t('common.cancel', '取消')}
+            {t('common.cancel', "Hủy")}
           </button>
           <button
             className="btn btn-primary"
@@ -855,8 +855,8 @@ export function UniversalGroupAccountPickerModal({
             disabled={saving}
           >
             {saving
-              ? t('common.saving', '保存中...')
-              : `${t('common.save', '保存')} (${selected.size})`}
+              ? t('common.saving', "Đang lưu...")
+              : `${t('common.save', "Lưu")} (${selected.size})`}
           </button>
         </div>
       </div>

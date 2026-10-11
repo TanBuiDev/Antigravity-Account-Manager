@@ -170,7 +170,7 @@ export function CodexApiRequestLogs(props: Props) {
                 <div className="codex-api-service-log-filters">
                   <label>
                     <span>
-                      {t("codex.apiService.logs.modelFilter", "模型")}
+                      {t("codex.apiService.logs.modelFilter", "Mô hình")}
                     </span>
                     <input
                       value={requestLogModelQuery}
@@ -328,7 +328,7 @@ export function CodexApiRequestLogs(props: Props) {
                   )}
                   {initialLoading && requestLogEvents.length === 0 && (
                     <div className="codex-api-service-empty">
-                      {t("codex.apiService.logs.loading", "正在加载请求日志")}
+                      {t("codex.apiService.logs.loading", "Đang tải nhật ký")}
                     </div>
                   )}
                   {requestLogEvents.length > 0 && <div className="codex-request-log-scroll" tabIndex={0} role="region" aria-label={t("codex.localAccess.requestLogTitle")} aria-busy={requestLogLoading}>
@@ -349,9 +349,9 @@ export function CodexApiRequestLogs(props: Props) {
                         const maskedAccount = maskAccountText(accountDisplayName);
                         const serviceTier = (event.serviceTier || "").trim().toLowerCase();
                         const serviceTierLabel = serviceTier === "priority"
-                          ? t("codex.speed.fast", "快速")
+                          ? t("codex.speed.fast", "Nhanh")
                           : serviceTier === "standard"
-                            ? t("codex.speed.standard", "标准")
+                            ? t("codex.speed.standard", "Chuẩn")
                             : event.serviceTier
                               ? t("codex.apiService.logs.serviceTierValue", { tier: event.serviceTier, defaultValue: "Tier {{tier}}" })
                               : "";
@@ -366,17 +366,17 @@ export function CodexApiRequestLogs(props: Props) {
                           {columnVisible("model") && <td>
                             <div className="codex-request-log-model">
                               <strong title={requestedModel}>{requestedModel}</strong>
-                              {upstreamModel && <span className="codex-request-log-truncate codex-request-log-upstream" title={`${t("codex.apiService.logs.upstreamModel", "实际模型")}: ${upstreamModel}`}>↳ {upstreamModel}</span>}
+                              {upstreamModel && <span className="codex-request-log-truncate codex-request-log-upstream" title={`${t("codex.apiService.logs.upstreamModel", "Mô hình gửi đi")}: ${upstreamModel}`}>↳ {upstreamModel}</span>}
                               <div className="codex-request-log-tags">
                                 <span className="codex-api-service-pill muted">{requestKindLabel(event.requestKind, t)}</span>
-                                {event.reasoningEffort && <span className="codex-api-service-pill muted" title={t("codex.apiService.logs.reasoningEffort", "思考强度")}>{event.reasoningEffort}</span>}
-                                {serviceTierLabel && <span className={`codex-api-service-pill ${serviceTier === "priority" ? "fast" : "muted"}`} title={t("codex.apiService.logs.serviceTier", "服务等级")}>{serviceTierLabel}</span>}
+                                {event.reasoningEffort && <span className="codex-api-service-pill muted" title={t("codex.apiService.logs.reasoningEffort", "Cường độ suy luận")}>{event.reasoningEffort}</span>}
+                                {serviceTierLabel && <span className={`codex-api-service-pill ${serviceTier === "priority" ? "fast" : "muted"}`} title={t("codex.apiService.logs.serviceTier", "Hạng dịch vụ")}>{serviceTierLabel}</span>}
                               </div>
                             </div>
                           </td>}
                           {columnVisible("result") && <td>
                             <div className="codex-request-log-stack">
-                              <span className={`codex-api-service-pill ${event.success ? "success" : "error"}`}>{event.success ? t("codex.localAccess.requestLogSuccess", "成功") : t("codex.localAccess.requestLogFailed", "失败")}</span>
+                              <span className={`codex-api-service-pill ${event.success ? "success" : "error"}`}>{event.success ? t("codex.localAccess.requestLogSuccess", "Thành công") : t("codex.localAccess.requestLogFailed", "Thất bại")}</span>
                               {event.httpStatus ? <span>{t("codex.apiService.logs.httpStatus", { status: event.httpStatus, defaultValue: "HTTP {{status}}" })}</span> : null}
                               {(event.errorCategory || errorDetail) && <span className="codex-request-log-truncate codex-request-log-error" title={fullErrorDetail || event.errorCategory}>{event.errorCategory || errorDetail}</span>}
                             </div>
@@ -408,7 +408,7 @@ export function CodexApiRequestLogs(props: Props) {
                     !requestLogError &&
                     requestLogEvents.length === 0 && (
                       <div className="codex-api-service-empty">
-                        {t("codex.localAccess.requestLogEmpty", "暂无请求日志")}
+                        {t("codex.localAccess.requestLogEmpty", "Chưa có nhật ký yêu cầu")}
                       </div>
                     )}
                 </div>

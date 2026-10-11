@@ -240,12 +240,12 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           if (statusCode) {
             displayText = t("codex.quotaError.httpStatusSummary", {
               status: statusCode,
-              defaultValue: "API 返回错误 {{status}}",
+              defaultValue: "Lỗi API {{status}}",
             });
           } else if (isVerbose) {
             displayText = t(
               "codex.quotaError.generic",
-              "配额刷新失败，请稍后重试",
+              "Làm mới quota thất bại, vui lòng thử lại sau",
             );
           } else {
             displayText = summarizeCodexQuotaErrorMessage(normalizedRawMessage);
@@ -255,7 +255,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           displayText = statusCode
             ? t("codex.quotaError.httpStatusSummary", {
                 status: statusCode,
-                defaultValue: "API 返回错误 {{status}}",
+                defaultValue: "Lỗi API {{status}}",
               })
             : summarizeCodexQuotaErrorMessage(displayText);
         }
@@ -287,7 +287,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         if (!text) return;
         const normalizedSummary = summary?.trim();
         setQuotaErrorDetail({
-          accountName: accountName.trim() || t("common.unknown", "未知"),
+          accountName: accountName.trim() || t("common.unknown", "Không xác định"),
           title: title?.trim() || undefined,
           summary:
             normalizedSummary && normalizedSummary !== text
@@ -365,9 +365,9 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                     clearClientAuthObservationAccountId,
                   )
                 }
-                title={t("codex.quotaError.viewDetails", "查看详情")}
+                title={t("codex.quotaError.viewDetails", "Chi tiết")}
               >
-                {t("codex.quotaError.viewDetails", "查看详情")}
+                {t("codex.quotaError.viewDetails", "Chi tiết")}
               </button>
             )}
             {showReauthorize && onReauthorize && (
@@ -375,9 +375,9 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                 type="button"
                 className="btn btn-sm btn-outline quota-error-action"
                 onClick={onReauthorize}
-                title={t("common.reauthorize", "重新授权")}
+                title={t("common.reauthorize", "Ủy quyền lại")}
               >
-                {t("common.reauthorize", "重新授权")}
+                {t("common.reauthorize", "Ủy quyền lại")}
               </button>
             )}
           </div>
@@ -415,13 +415,13 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             <div className="modal-header">
               <h3>
                 {quotaErrorDetail.title ||
-                  t("codex.quotaError.detailTitle", "错误详情")}
+                  t("codex.quotaError.detailTitle", "Chi tiết lỗi")}
               </h3>
               <button
                 type="button"
                 className="modal-close"
                 onClick={() => setQuotaErrorDetail(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={16} />
               </button>
@@ -454,8 +454,8 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                   disabled={clearClientAuthBusy}
                 >
                   {clearClientAuthBusy
-                    ? t("common.loading", "加载中...")
-                    : t("codex.switchAuth.clearClientAuth", "清除异常标识")}
+                    ? t("common.loading", "Đang tải...")
+                    : t("codex.switchAuth.clearClientAuth", "Xóa cảnh báo")}
                 </button>
               )}
               {quotaErrorDetail.reauthorizeAccountId && (
@@ -472,7 +472,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                     }
                   }}
                 >
-                  {t("common.reauthorize", "重新授权")}
+                  {t("common.reauthorize", "Ủy quyền lại")}
                 </button>
               )}
               <button
@@ -484,7 +484,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                     .catch(() => undefined);
                 }}
               >
-                {t("common.copy", "复制")}
+                {t("common.copy", "Copy​")}
               </button>
               <button
                 type="button"
@@ -495,7 +495,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
                 }`}
                 onClick={() => setQuotaErrorDetail(null)}
               >
-                {t("common.close", "关闭")}
+                {t("common.close", "Đóng")}
               </button>
             </div>
           </div>
@@ -617,12 +617,12 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           accountContextText: string;
         }
       >();
-      const noneText = t("common.none", "暂无");
+      const noneText = t("common.none", "None​");
   
       accounts.forEach((account) => {
         if (isCodexApiKeyAccount(account)) {
           map.set(account.id, {
-            chatgptAccountId: t("common.none", "暂无"),
+            chatgptAccountId: t("common.none", "None​"),
             signedInWithText: "",
             userId: "",
             accountContextText: "",
@@ -648,9 +648,9 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         const isTeamLikePlan = isCodexTeamLikePlan(account.plan_type);
         const isPersonalStructure = structure.includes("personal");
         const accountContextText = isPersonalStructure
-          ? t("codex.account.personal", "个人账户")
+          ? t("codex.account.personal", "Tài khoản cá nhân")
           : !structure && !isTeamLikePlan
-            ? t("codex.account.personal", "个人账户")
+            ? t("codex.account.personal", "Tài khoản cá nhân")
             : accountName || workspaceTitle || "";
         const loginProvider =
           formatCodexLoginProvider(metadata.authProvider) ||
@@ -677,12 +677,12 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
     const resolveAccountMeta = useCallback(
       (account: CodexAccount) =>
         accountMetaMap.get(account.id) ?? {
-          chatgptAccountId: t("common.none", "暂无"),
+          chatgptAccountId: t("common.none", "None​"),
           signedInWithText: t("kiro.account.signedInWith", {
             provider: t("kiro.account.providerUnknown", "Unknown"),
             defaultValue: "Signed in with {{provider}}",
           }),
-          userId: t("common.none", "暂无"),
+          userId: t("common.none", "None​"),
           accountContextText: "",
         },
       [accountMetaMap, t],
@@ -802,8 +802,8 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
       localAccessAccountPoolHealthSummary.cooldown > 0;
     const localAccessQuotaPoolLabels = useMemo(
       () => ({
-        weekly: t("codex.localAccess.quotaPool.weeklyShort", "周"),
-        title: t("codex.localAccess.quotaPool.title", "额度池"),
+        weekly: t("codex.localAccess.quotaPool.weeklyShort", "Tuần"),
+        title: t("codex.localAccess.quotaPool.title", "Nhóm hạn mức"),
       }),
       [t],
     );
@@ -828,8 +828,8 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
     const localAccessScope = localAccessCollection?.accessScope ?? "localhost";
     const localAccessScopeLabel =
       localAccessScope === "lan"
-        ? t("codex.localAccess.accessScopeLanShort", "本机+局域网")
-        : t("codex.localAccess.accessScopeLocalhostShort", "仅本机");
+        ? t("codex.localAccess.accessScopeLanShort", "Cục bộ+mạng")
+        : t("codex.localAccess.accessScopeLocalhostShort", "Chỉ cục bộ");
     const localAccessBusy =
       localAccessSaving ||
       localAccessStarting ||
@@ -844,13 +844,13 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
       () => [
         {
           value: "local",
-          label: t("codex.localAccess.addressLocal", "本机"),
+          label: t("codex.localAccess.addressLocal", "Cục bộ"),
         },
         ...(localAccessState?.lanBaseUrl
           ? [
               {
                 value: "lan",
-                label: t("codex.localAccess.addressLan", "局域网"),
+                label: t("codex.localAccess.addressLan", "Mạng cục bộ"),
               },
             ]
           : []),
@@ -896,7 +896,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         } catch (error) {
           console.error("Failed to copy local access value:", error);
           setMessage({
-            text: t("common.shared.export.copyFailed", "复制失败，请手动复制"),
+            text: t("common.shared.export.copyFailed", "Sao chép thất bại, vui lòng sao chép thủ công"),
             tone: "error",
           });
         }
@@ -936,15 +936,15 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         const confirmed = await confirmDialog(
           t(
             "codex.instanceGateways.stopConfirmDescription",
-            "混合模型路由网关会同时停用该实例的混合模型路由（渠道配置保留）；其他网关关闭后可在需要时点击“重启”。",
+            "Dừng gateway định tuyến hỗn hợp cũng sẽ tắt định tuyến hỗn hợp của instance đó (cấu hình kênh vẫn được giữ); các gateway khác có thể chạy lại bằng “Khởi động lại”.",
           ),
           {
             title: t(
               "codex.instanceGateways.stopConfirmTitle",
-              "关闭该实例网关？",
+              "Dừng gateway của instance này?",
             ),
-            okLabel: t("codex.instanceGateways.stop", "关闭"),
-            cancelLabel: t("common.cancel", "取消"),
+            okLabel: t("codex.instanceGateways.stop", "Dừng"),
+            cancelLabel: t("common.cancel", "Hủy"),
             kind: "warning",
           },
         );
@@ -960,7 +960,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         } catch (actionError) {
           setInstanceGatewaysError(
             t("codex.instanceGateways.stopFailed", {
-              defaultValue: "关闭网关失败：{{error}}",
+              defaultValue: "Không dừng được gateway: {{error}}",
               error: String(actionError).replace(/^Error:\s*/, ""),
             }),
           );
@@ -984,7 +984,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         } catch (actionError) {
           setInstanceGatewaysError(
             t("codex.instanceGateways.restartFailed", {
-              defaultValue: "重启网关失败：{{error}}",
+              defaultValue: "Không khởi động lại được gateway: {{error}}",
               error: String(actionError).replace(/^Error:\s*/, ""),
             }),
           );
@@ -1039,7 +1039,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setMessage({
             text: t("codex.localAccess.accountPoolHealth.recoverSuccess", {
               count: accountIds.length,
-              defaultValue: "已提交 {{count}} 个账号的恢复操作",
+              defaultValue: "Đã yêu cầu khôi phục {{count}} tài khoản",
             }),
           });
         } catch (error) {
@@ -1049,7 +1049,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             text: t("messages.actionFailed", {
               action: t(
                 "codex.localAccess.accountPoolHealth.recover",
-                "恢复账号状态",
+                "Khôi phục trạng thái",
               ),
               error: message,
             }),
@@ -1081,7 +1081,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         console.error("Failed to hide codex local access entry:", error);
         setMessage({
           text: t("messages.actionFailed", {
-            action: t("codex.localAccess.hideEntryAction", "关闭 API 服务入口"),
+            action: t("codex.localAccess.hideEntryAction", "Ẩn mục Dịch vụ API"),
             error: String(error).replace(/^Error:\s*/, ""),
           }),
           tone: "error",
@@ -1137,20 +1137,20 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             throw new Error(
               t(
                 "codex.localAccess.noEligibleAccountsSelected",
-                "所选账号不在当前环境中，或不符合 API 服务条件。请先在当前环境导入可用 Codex 账号后再添加。",
+                "Các tài khoản đã chọn không có trong môi trường này hoặc không thể dùng với dịch vụ API. Trước tiên hãy nhập một tài khoản Codex dùng được trong môi trường này.",
               ),
             );
           }
           await ensureLocalAccessEntryVisible();
           window.dispatchEvent(new Event("codex-local-access-state-updated"));
           setMessage({
-            text: t("codex.localAccess.saveSuccess", "API 服务集合已更新"),
+            text: t("codex.localAccess.saveSuccess", "Đã cập nhật bộ dịch vụ API"),
           });
         } catch (error) {
           console.error("Failed to add account to API service:", error);
           setMessage({
             text: t("messages.actionFailed", {
-              action: t("codex.localAccess.entryAction", "添加至 API 服务"),
+              action: t("codex.localAccess.entryAction", "Thêm vào dịch vụ API"),
               error: String(error).replace(/^Error:\s*/, ""),
             }),
             tone: "error",
@@ -1174,13 +1174,13 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setLocalAccessState(nextState);
           window.dispatchEvent(new Event("codex-local-access-state-updated"));
           setMessage({
-            text: t("codex.localAccess.removeSuccess", "已从 API 服务移除该账号"),
+            text: t("codex.localAccess.removeSuccess", "Đã xóa tài khoản khỏi dịch vụ API"),
           });
         } catch (error) {
           console.error("Failed to remove account from API service:", error);
           setMessage({
             text: t("messages.actionFailed", {
-              action: t("codex.localAccess.removeAction", "移除 API 服务"),
+              action: t("codex.localAccess.removeAction", "Xóa khỏi API"),
               error: String(error).replace(/^Error:\s*/, ""),
             }),
             tone: "error",
@@ -1198,7 +1198,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
       iconSize = 14,
     ) => {
       if (!canDirectlyAddLocalAccessAccount(account)) return null;
-      const label = t("codex.localAccess.entryAction", "添加至 API 服务");
+      const label = t("codex.localAccess.entryAction", "Thêm vào dịch vụ API");
       return (
         <button
           type="button"
@@ -1244,7 +1244,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             throw new Error(
               t(
                 "codex.localAccess.noEligibleAccountsSelected",
-                "所选账号不在当前环境中，或不符合 API 服务条件。请先在当前环境导入可用 Codex 账号后再添加。",
+                "Các tài khoản đã chọn không có trong môi trường này hoặc không thể dùng với dịch vụ API. Trước tiên hãy nhập một tài khoản Codex dùng được trong môi trường này.",
               ),
             );
           }
@@ -1267,7 +1267,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             );
           setLocalAccessState(nextState);
           setMessage({
-            text: t("codex.localAccess.saveSuccess", "API 服务集合已更新"),
+            text: t("codex.localAccess.saveSuccess", "Đã cập nhật bộ dịch vụ API"),
           });
           return nextState;
         } catch (error) {
@@ -1301,10 +1301,10 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           includeValid: true,
           includeZeroQuota: true,
           includeExpired: true,
-          pendingLabel: t("codex.pendingAuth.badge", "待授权"),
-          errorLabel: t("codex.filters.authError", "授权失败"),
-          zeroQuotaLabel: t("codex.filters.zeroQuota", "0% 额度"),
-          expiredLabel: t("codex.filters.expired", "已过期"),
+          pendingLabel: t("codex.pendingAuth.badge", "Chờ xác thực"),
+          errorLabel: t("codex.filters.authError", "Auth lỗi"),
+          zeroQuotaLabel: t("codex.filters.zeroQuota", "Hạn mức 0%"),
+          expiredLabel: t("codex.filters.expired", "Hết hạn"),
           validOption: buildValidAccountsFilterOption(t, tierCounts.VALID),
         }),
       [t, tierCounts],
@@ -1365,10 +1365,10 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           includeValid: true,
           includeZeroQuota: true,
           includeExpired: true,
-          pendingLabel: t("codex.pendingAuth.badge", "待授权"),
-          errorLabel: t("codex.filters.authError", "授权失败"),
-          zeroQuotaLabel: t("codex.filters.zeroQuota", "0% 额度"),
-          expiredLabel: t("codex.filters.expired", "已过期"),
+          pendingLabel: t("codex.pendingAuth.badge", "Chờ xác thực"),
+          errorLabel: t("codex.filters.authError", "Auth lỗi"),
+          zeroQuotaLabel: t("codex.filters.zeroQuota", "Hạn mức 0%"),
+          expiredLabel: t("codex.filters.expired", "Hết hạn"),
           validOption: buildValidAccountsFilterOption(
             t,
             oauthBindingTierCounts.VALID,
@@ -1615,7 +1615,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           await codexLocalAccessService.rotateCodexLocalAccessApiKey();
         setLocalAccessState(nextState);
         setMessage({
-          text: t("codex.localAccess.rotateSuccess", "API 服务密钥已重置"),
+          text: t("codex.localAccess.rotateSuccess", "Đã đặt lại khóa dịch vụ API"),
         });
         return nextState;
       } catch (error) {
@@ -1633,7 +1633,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           await codexLocalAccessService.clearCodexLocalAccessStats();
         setLocalAccessState(nextState);
         setMessage({
-          text: t("codex.localAccess.clearStatsSuccess", "API 服务统计已清空"),
+          text: t("codex.localAccess.clearStatsSuccess", "Đã xóa thống kê dịch vụ API"),
         });
         return nextState;
       } catch (error) {
@@ -1650,13 +1650,13 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         t("codex.localAccess.killPortConfirmMessage", {
           port: localAccessCollection.port,
           defaultValue:
-            "将强制结束占用本机 {{port}} 端口的其他进程，然后重新启动 API 服务。确认继续吗？",
+            "Các tiến trình khác đang dùng cổng cục bộ {{port}} sẽ bị buộc đóng, sau đó dịch vụ API sẽ khởi động lại. Tiếp tục?",
         }),
         {
-          title: t("codex.localAccess.killPortTitle", "清理 API 服务端口"),
+          title: t("codex.localAccess.killPortTitle", "Dọn cổng dịch vụ API"),
           kind: "warning",
-          okLabel: t("codex.localAccess.killPortAction", "清理端口"),
-          cancelLabel: t("common.cancel", "取消"),
+          okLabel: t("codex.localAccess.killPortAction", "Dọn cổng"),
+          cancelLabel: t("common.cancel", "Hủy"),
         },
       );
       if (!confirmed) return;
@@ -1670,11 +1670,11 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             result.killedCount > 0
               ? t("codex.localAccess.killPortSuccess", {
                   count: result.killedCount,
-                  defaultValue: "端口已清理（结束 {{count}} 个进程）",
+                  defaultValue: "Đã dọn cổng (đã đóng {{count}} tiến trình)",
                 })
               : t(
                   "codex.localAccess.killPortSuccessNone",
-                  "端口已检查，未发现外部占用进程",
+                  "Đã kiểm tra cổng. Không có tiến trình bên ngoài nào đang dùng.",
                 ),
         });
         return result.state;
@@ -1693,7 +1693,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           await codexLocalAccessService.restartCodexLocalAccessSidecar();
         setLocalAccessState(nextState);
         setMessage({
-          text: t("codex.localAccess.restartSuccess", "API 服务 Sidecar 已重启"),
+          text: t("codex.localAccess.restartSuccess", "Đã khởi động lại Sidecar dịch vụ API"),
         });
         return nextState;
       } catch (error) {
@@ -1712,7 +1712,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             await codexLocalAccessService.updateCodexLocalAccessPort(port);
           setLocalAccessState(nextState);
           setMessage({
-            text: t("codex.localAccess.portSaveSuccess", "API 服务端口已更新"),
+            text: t("codex.localAccess.portSaveSuccess", "Đã cập nhật cổng dịch vụ API"),
           });
           return nextState;
         } catch (error) {
@@ -1737,7 +1737,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setMessage({
             text: t(
               "codex.localAccess.routingSaveSuccess",
-              "API 服务调度策略已更新",
+              "Đã cập nhật định tuyến dịch vụ API",
             ),
           });
           return nextState;
@@ -1763,7 +1763,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setMessage({
             text: t(
               "codex.localAccess.customRoutingSaveSuccess",
-              "API 服务自定义调度已更新",
+              "Đã cập nhật định tuyến tùy chỉnh của dịch vụ API",
             ),
           });
           return nextState;
@@ -1789,7 +1789,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setMessage({
             text: t(
               "codex.localAccess.upstreamProxySaveSuccess",
-              "API 代理地址已更新",
+              "Đã cập nhật URL proxy API",
             ),
           });
           return nextState;
@@ -1818,7 +1818,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setMessage({
             text: t(
               "codex.localAccess.accessScopeSaveSuccess",
-              "API 服务访问范围已更新",
+              "Đã cập nhật phạm vi truy cập dịch vụ API",
             ),
           });
           return nextState;
@@ -1847,8 +1847,8 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         setLocalAccessState(nextState);
         setMessage({
           text: nextState.collection?.enabled
-            ? t("codex.localAccess.enabledSuccess", "API 服务已启用")
-            : t("codex.localAccess.disabledSuccess", "API 服务已停用"),
+            ? t("codex.localAccess.enabledSuccess", "Đã bật dịch vụ API")
+            : t("codex.localAccess.disabledSuccess", "Đã tắt dịch vụ API"),
         });
         return nextState;
       } catch (error) {
@@ -1866,26 +1866,26 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
       }) => {
         if (!localAccessCollection) {
           throw new Error(
-            t("codex.localAccess.testUnavailable", "当前 API 服务地址不可用"),
+            t("codex.localAccess.testUnavailable", "URL dịch vụ API hiện tại không khả dụng"),
           );
         }
         if (!localAccessCollection.enabled) {
           const confirmedEnableAndSwitch = await confirmDialog(
             t(
               "codex.localAccess.enableBeforeActivateMessage",
-              "API 服务当前未启用，需要先启用服务。是否启用并切号？",
+              "Dịch vụ API hiện đang tắt và cần bật trước. Bật và chuyển ngay?",
             ),
             {
               title: t(
                 "codex.localAccess.enableBeforeActivateTitle",
-                "服务未启用",
+                "Dịch vụ chưa bật",
               ),
               kind: "warning",
               okLabel: t(
                 "codex.localAccess.enableAndActivateAction",
-                "启用并切号",
+                "Bật và chuyển",
               ),
-              cancelLabel: t("common.cancel", "取消"),
+              cancelLabel: t("common.cancel", "Hủy"),
             },
           );
           if (!confirmedEnableAndSwitch) return;
@@ -1905,7 +1905,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           setLocalAccessLaunchCurrent(true);
           if (options?.showSuccessMessage ?? true) {
             setMessage({
-              text: t("codex.localAccess.activateSuccess", "已切换到 API 服务"),
+              text: t("codex.localAccess.activateSuccess", "Đã chuyển sang dịch vụ API"),
             });
           }
           return nextState;
@@ -1935,7 +1935,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           presentWindowsOperationError({
             error,
             operation: "start_sidecar",
-            summary: t("codex.localAccess.toggleService", "切换 API 服务"),
+            summary: t("codex.localAccess.toggleService", "Chuyển dịch vụ API"),
             retry: async () => {
               await handleToggleLocalAccessEnabled();
             },
@@ -1945,7 +1945,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         }
         setMessage({
           text: t("messages.actionFailed", {
-            action: t("codex.localAccess.toggleService", "切换 API 服务"),
+            action: t("codex.localAccess.toggleService", "Chuyển dịch vụ API"),
             error: String(error).replace(/^Error:\s*/, ""),
           }),
           tone: "error",
@@ -1983,7 +1983,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
             presentWindowsOperationError({
               error,
               operation: "start_sidecar",
-              summary: t("codex.localAccess.activateAction", "启动 API 服务"),
+              summary: t("codex.localAccess.activateAction", "Khởi động dịch vụ API"),
               retry: async () => {
                 await activateSelectedTarget();
               },
@@ -2015,7 +2015,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
       if (targetIds.length === 0) {
         setMessage({
           text: t("codex.refreshFailed", {
-            error: t("common.shared.quota.noData", "暂无配额数据"),
+            error: t("common.shared.quota.noData", "Không có dữ liệu hạn mức"),
           }),
           tone: "error",
         });
@@ -2051,7 +2051,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
   
         setMessage({
           text: t("codex.refreshFailed", {
-            error: t("common.shared.quota.queryFailed", "配额查询失败"),
+            error: t("common.shared.quota.queryFailed", "Truy vấn hạn mức thất bại"),
           }),
           tone: "error",
         });
@@ -2060,7 +2060,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
           text: t("codex.refreshFailed", {
             error:
               String(error ?? "").replace(/^Error:\s*/, "") ||
-              t("common.shared.quota.queryFailed", "配额查询失败"),
+              t("common.shared.quota.queryFailed", "Truy vấn hạn mức thất bại"),
           }),
           tone: "error",
         });

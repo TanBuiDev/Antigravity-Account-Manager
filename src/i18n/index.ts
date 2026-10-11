@@ -1,25 +1,18 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enResources from '../locales/en.json';
-import zhCnResources from '../locales/zh-CN.json';
+import viResources from '../locales/vi.json';
 
 type LocaleModule = { default: Record<string, unknown> };
 
 const languageAliases: Record<string, string> = {
-  'zh-CN': 'zh-cn',
-  'zh-TW': 'zh-tw',
-  'en-US': 'en',
-  'pt-BR': 'pt-br',
-  'vi-VN': 'vi',
+  'en-us': 'en',
   'vi-vn': 'vi',
-  'id-ID': 'id',
   'id-id': 'id',
 };
 
 export const supportedLanguages = [
   'en',
-  'zh-cn',
-  'zh-tw',
   'ja',
   'es',
   'de',
@@ -37,7 +30,6 @@ export const supportedLanguages = [
 ];
 
 const localeLoaders: Record<string, () => Promise<LocaleModule>> = {
-  'zh-tw': () => import('../locales/zh-tw.json'),
   ja: () => import('../locales/ja.json'),
   es: () => import('../locales/es.json'),
   de: () => import('../locales/de.json'),
@@ -49,7 +41,6 @@ const localeLoaders: Record<string, () => Promise<LocaleModule>> = {
   tr: () => import('../locales/tr.json'),
   pl: () => import('../locales/pl.json'),
   cs: () => import('../locales/cs.json'),
-  vi: () => import('../locales/vi.json'),
   ar: () => import('../locales/ar.json'),
   id: () => import('../locales/id.json'),
 };
@@ -59,26 +50,17 @@ let initPromise: Promise<void> | null = null;
 let i18nBootstrapped = false;
 
 export function normalizeLanguage(lang: string): string {
-  const trimmed = lang.trim();
-  if (!trimmed) {
-    return 'zh-cn';
+  const normalized = lang.trim().replace(/_/g, '-').toLowerCase();
+  if (!normalized || normalized === 'zh' || normalized.startsWith('zh-')) {
+    // Migrate previously saved Chinese locales to Vietnamese.
+    return 'vi';
   }
-
-  if (languageAliases[trimmed]) {
-    return languageAliases[trimmed];
-  }
-
-  const lower = trimmed.toLowerCase();
-  if (languageAliases[lower]) {
-    return languageAliases[lower];
-  }
-
-  return lower;
+  return languageAliases[normalized] || normalized;
 }
 
 function resolveSupportedLanguage(lang: string): string {
   const normalized = normalizeLanguage(lang);
-  return supportedLanguages.includes(normalized) ? normalized : 'en';
+  return supportedLanguages.includes(normalized) ? normalized : 'vi';
 }
 
 async function ensureLanguageResources(lang: string): Promise<string> {
@@ -100,17 +82,14 @@ async function ensureLanguageResources(lang: string): Promise<string> {
 
 function getSavedLanguage(): string {
   try {
-    return resolveSupportedLanguage(localStorage.getItem('app-language') || 'en');
+    return resolveSupportedLanguage(localStorage.getItem('app-language') || 'vi');
   } catch {
-    return 'en';
+    return 'vi';
   }
 }
 
 function getBootstrapLanguage(savedLanguage: string): string {
-  if (savedLanguage === 'zh-cn') {
-    return 'zh-cn';
-  }
-  return 'en';
+  return savedLanguage === 'en' ? 'en' : 'vi';
 }
 
 function bootstrapI18n(savedLanguage: string): string {
@@ -124,21 +103,21 @@ function bootstrapI18n(savedLanguage: string): string {
     .init({
       resources: {
         en: { translation: enResources },
-        'zh-cn': { translation: zhCnResources },
+        vi: { translation: viResources },
       },
       lng: bootstrapLanguage,
-      fallbackLng: 'en',
+      fallbackLng: ['vi', 'en'],
       supportedLngs: supportedLanguages,
       lowerCaseLng: true,
       load: 'currentOnly',
       initImmediate: false,
       interpolation: {
-        escapeValue: false, // React 已经处理了 XSS
+        escapeValue: false, // React escapes interpolated content
       },
     });
 
   loadedLanguages.add('en');
-  loadedLanguages.add('zh-cn');
+  loadedLanguages.add('vi');
   i18nBootstrapped = true;
   return bootstrapLanguage;
 }
@@ -177,18 +156,14 @@ export async function syncLanguage(lang: string): Promise<string> {
   return resolved;
 }
 
-/**
- * 切换语言
- */
+/** Change the display language. */
 export async function changeLanguage(lang: string): Promise<void> {
   await syncLanguage(lang);
 }
 
-/**
- * 获取当前语言
- */
+/** Return the active language. */
 export function getCurrentLanguage(): string {
-  return normalizeLanguage(i18n.language || 'zh-CN');
+  return normalizeLanguage(i18n.language || 'vi');
 }
 
 export default i18n;

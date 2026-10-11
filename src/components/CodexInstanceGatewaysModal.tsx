@@ -79,26 +79,26 @@ export function CodexInstanceGatewaysModal({
   const kindLabel = (kind: CodexInstanceGatewayView["kind"]) => {
     switch (kind) {
       case "mixedModel":
-        return t("codex.instanceGateways.kindMixedModel", "混合模型路由");
+        return t("codex.instanceGateways.kindMixedModel", "Định tuyến nhiều mô hình");
       case "boundOauth":
-        return t("codex.instanceGateways.kindBoundOauth", "OAuth 本地网关");
+        return t("codex.instanceGateways.kindBoundOauth", "Cổng OAuth cục bộ");
       default:
-        return t("codex.instanceGateways.kindProviderGateway", "供应商网关");
+        return t("codex.instanceGateways.kindProviderGateway", "Cổng nhà cung cấp");
     }
   };
 
   const statusLabel = (status: CodexInstanceGatewayStatus) => {
     switch (status) {
       case "running":
-        return t("codex.localAccess.statusRunning", "运行中");
+        return t("codex.localAccess.statusRunning", "Đang chạy");
       case "unreachable":
-        return t("codex.instanceGateways.statusUnreachable", "已启动但不可用");
+        return t("codex.instanceGateways.statusUnreachable", "Đã khởi động nhưng không truy cập được");
       case "portConflict":
-        return t("codex.instanceGateways.statusPortConflict", "端口被占用");
+        return t("codex.instanceGateways.statusPortConflict", "Cổng đang bị chiếm");
       case "notStarted":
-        return t("codex.instanceGateways.statusNotStarted", "未启动");
+        return t("codex.instanceGateways.statusNotStarted", "Chưa khởi động");
       default:
-        return t("codex.localAccess.statusStopped", "未运行");
+        return t("codex.localAccess.statusStopped", "Đã dừng");
     }
   };
 
@@ -146,13 +146,13 @@ export function CodexInstanceGatewaysModal({
             <div className="codex-instance-gateways-title-row">
               <Waypoints size={18} />
               <h3 id="codex-instance-gateways-title">
-                {t("codex.instanceGateways.title", "实例网关")}
+                {t("codex.instanceGateways.title", "Cổng instance")}
               </h3>
             </div>
             <p>
               {t(
                 "codex.instanceGateways.subtitle",
-                "随 Codex 实例启动的本地网关",
+                "Cổng cục bộ khởi động cùng các instance Codex",
               )}
             </p>
           </div>
@@ -167,14 +167,14 @@ export function CodexInstanceGatewaysModal({
                 size={14}
                 className={loading ? "loading-spinner" : ""}
               />
-              <span>{t("common.refresh", "刷新")}</span>
+              <span>{t("common.refresh", "Làm mới")}</span>
             </button>
             <button
               type="button"
               className="folder-icon-btn"
               onClick={onClose}
-              title={t("common.close", "关闭")}
-              aria-label={t("common.close", "关闭")}
+              title={t("common.close", "Đóng")}
+              aria-label={t("common.close", "Đóng")}
             >
               <X size={14} />
             </button>
@@ -188,31 +188,31 @@ export function CodexInstanceGatewaysModal({
                 total,
                 running,
                 issues,
-                defaultValue: "共 {{total}} · 运行中 {{running}} · 异常 {{issues}}",
+                defaultValue: "Tổng {{total}} · đang chạy {{running}} · bất thường {{issues}}",
               })}
             </div>
           )}
           {error && (
             <div className="codex-instance-gateways-error">
-              {t("codex.instanceGateways.loadFailed", "读取实例网关失败")}：
+              {t("codex.instanceGateways.loadFailed", "Không tải được cổng instance")}：
               {error}
             </div>
           )}
           {loading && total === 0 && (
             <div className="codex-instance-gateways-empty">
-              {t("common.loading", "加载中...")}
+              {t("common.loading", "Đang tải...")}
             </div>
           )}
           {!loading && !error && total === 0 && (
             <div className="codex-instance-gateways-empty">
               <Server size={22} />
               <strong>
-                {t("codex.instanceGateways.empty", "当前没有实例级网关")}
+                {t("codex.instanceGateways.empty", "Không có cổng cấp instance")}
               </strong>
               <span>
                 {t(
                   "codex.instanceGateways.emptyHint",
-                  "绑定 Chat 协议 API Key 账号或开启混合模型路由后会自动出现。",
+                  "Chúng sẽ tự xuất hiện sau khi liên kết tài khoản khóa API theo giao thức Chat hoặc bật định tuyến nhiều mô hình.",
                 )}
               </span>
             </div>
@@ -253,13 +253,13 @@ export function CodexInstanceGatewaysModal({
                   <dl className="codex-instance-gateways-fields">
                     <div className="codex-instance-gateways-field">
                       <dt>
-                        {t("codex.instanceGateways.fieldAccount", "账号")}
+                        {t("codex.instanceGateways.fieldAccount", "Tài khoản")}
                       </dt>
                       <dd title={displayAccount}>{displayAccount}</dd>
                     </div>
                     <div className="codex-instance-gateways-field">
                       <dt>
-                        {t("codex.instanceGateways.fieldAddress", "本地地址")}
+                        {t("codex.instanceGateways.fieldAddress", "Địa chỉ cục bộ")}
                       </dt>
                       <dd className="codex-instance-gateways-field-address">
                         <code title={address}>{address}</code>
@@ -268,8 +268,8 @@ export function CodexInstanceGatewaysModal({
                           className="folder-icon-btn codex-instance-gateways-copy-btn"
                           onClick={() => void handleCopyAddress(gateway)}
                           disabled={!gateway.baseUrl}
-                          title={t("common.copy", "复制")}
-                          aria-label={t("common.copy", "复制")}
+                          title={t("common.copy", "Copy​")}
+                          aria-label={t("common.copy", "Copy​")}
                         >
                           {copiedGatewayId === gateway.id ? (
                             <Check size={14} />
@@ -282,7 +282,7 @@ export function CodexInstanceGatewaysModal({
                     {gateway.wireApi && (
                       <div className="codex-instance-gateways-field">
                         <dt>
-                          {t("codex.instanceGateways.fieldProtocol", "协议")}
+                          {t("codex.instanceGateways.fieldProtocol", "Giao thức")}
                         </dt>
                         <dd>
                           <span className="codex-instance-gateways-chip">
@@ -294,7 +294,7 @@ export function CodexInstanceGatewaysModal({
                     {models.length > 0 && (
                       <div className="codex-instance-gateways-field">
                         <dt>
-                          {t("codex.instanceGateways.fieldModels", "上游模型")}
+                          {t("codex.instanceGateways.fieldModels", "Mô hình nguồn")}
                         </dt>
                         <dd title={models.join(", ")}>
                           {models.slice(0, 2).join(", ")}
@@ -321,7 +321,7 @@ export function CodexInstanceGatewaysModal({
                         void handleGatewayAction(gateway, onRestartGateway)
                       }
                       disabled={Boolean(busyGatewayId) || loading}
-                      title={t("codex.instanceGateways.restart", "重启")}
+                      title={t("codex.instanceGateways.restart", "Khởi động lại")}
                     >
                       <RefreshCw
                         size={14}
@@ -330,7 +330,7 @@ export function CodexInstanceGatewaysModal({
                         }
                       />
                       <span>
-                        {t("codex.instanceGateways.restart", "重启")}
+                        {t("codex.instanceGateways.restart", "Khởi động lại")}
                       </span>
                     </button>
                   )}
@@ -342,10 +342,10 @@ export function CodexInstanceGatewaysModal({
                         void handleGatewayAction(gateway, onStopGateway)
                       }
                       disabled={Boolean(busyGatewayId) || loading}
-                      title={t("codex.instanceGateways.stop", "关闭")}
+                      title={t("codex.instanceGateways.stop", "Dừng")}
                     >
                       <Power size={14} />
-                      <span>{t("codex.instanceGateways.stop", "关闭")}</span>
+                      <span>{t("codex.instanceGateways.stop", "Dừng")}</span>
                     </button>
                   )}
                 </div>

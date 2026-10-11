@@ -67,9 +67,9 @@ export function useLaunchTerminalOptions(enabled = true) {
         label: isWindows
           ? t(
               "settings.general.terminalSystemWindowsCompatibility",
-              "系统兼容（PowerShell）",
+              "Tương thích hệ thống (PowerShell)",
             )
-          : t("settings.general.terminalSystem", "跟随系统"),
+          : t("settings.general.terminalSystem", "Mặc định hệ thống"),
       },
     ];
 

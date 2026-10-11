@@ -46,15 +46,15 @@ export function CodexModelContextWindowTable({
   if (models.length === 0) return null;
   const showContext = showContextWindow;
   const showVision = typeof onVisionChange === "function";
-  const visionLabel = t("codex.modelProviders.vision.allModels", "图片输入");
+  const visionLabel = t("codex.modelProviders.vision.allModels", "Ảnh");
   const presetOptions = [
     {
       value: "official",
-      label: t("codex.contextOverride.followOfficial", "跟随官方"),
+      label: t("codex.contextOverride.followOfficial", "Theo chính thức"),
     },
     { value: "preset_516k", label: "516K" },
     { value: "preset_1m", label: "1M" },
-    { value: "custom", label: t("codex.api.modelCatalog.contextCustom", "自定义") },
+    { value: "custom", label: t("codex.api.modelCatalog.contextCustom", "Tùy chỉnh") },
   ];
 
   return (
@@ -64,12 +64,12 @@ export function CodexModelContextWindowTable({
       } ${showContext ? "" : "no-context"}`}
     >
       <div className="api-model-context-window-head">
-        <span>{t("codex.api.modelCatalog.modelColumn", "模型")}</span>
+        <span>{t("codex.api.modelCatalog.modelColumn", "Mô hình")}</span>
         {showContext ? (
           <span>
-            {t("codex.api.modelCatalog.contextWindow", "上下文")}
+            {t("codex.api.modelCatalog.contextWindow", "Ngữ cảnh")}
             <em className="api-model-context-window-optional">
-              {t("codex.api.modelCatalog.contextWindowOptional", "可选")}
+              {t("codex.api.modelCatalog.contextWindowOptional", "Tùy chọn")}
             </em>
           </span>
         ) : null}
@@ -119,7 +119,7 @@ export function CodexModelContextWindowTable({
                     disabled={disabled}
                     ariaLabel={`${model} ${t(
                       "codex.api.modelCatalog.contextWindow",
-                      "上下文",
+                      "Ngữ cảnh",
                     )}`}
                     menuPlacement="up"
                   />
@@ -133,7 +133,7 @@ export function CodexModelContextWindowTable({
                       disabled={disabled}
                       aria-label={`${model} ${t(
                         "codex.api.modelCatalog.contextWindow",
-                        "上下文",
+                        "Ngữ cảnh",
                       )}`}
                     />
                   ) : null}

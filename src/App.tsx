@@ -343,7 +343,7 @@ function normalizeStoredActivePage(value: string | null): Page | null {
   return RENDERABLE_PAGE_SET.has(normalized) ? (normalized as Page) : null;
 }
 
-/** 启动页偏好：`last` 表示恢复上次页面，其它为具体 Page id */
+/** Tùy chọn trang khởi động: `last` khôi phục trang trước, các giá trị khác là Page ID */
 function normalizeStartupPagePreference(value: string | null | undefined): 'last' | Page {
   if (resolveAntigravityStartupTarget(value)) return 'overview';
   const normalized = value?.trim().toLowerCase();
@@ -811,7 +811,7 @@ function MainApp() {
     }
   }, [page]);
 
-  // 冷启动：若设置了固定启动页，则覆盖 localStorage 中的上次页面
+  // Khởi động nguội: trang cố định được ưu tiên hơn trang lưu trong localStorage
   useEffect(() => {
     let disposed = false;
     const applyStartupPagePreference = async () => {
@@ -836,12 +836,12 @@ function MainApp() {
     };
   }, []);
 
-  // 冷启动：根据用户配置自动恢复 Codex 代理接管状态
+  // Khởi động nguội: khôi phục trạng thái proxy Codex theo cấu hình
   useEffect(() => {
     void useCodexAccountStore.getState().restoreActiveTakeoverIfNeeded();
   }, []);
 
-  // 主窗口切到某平台页（如 Grok）时，同步悬浮窗/菜单栏当前平台，避免一直停在默认 antigravity
+  // Đồng bộ nền tảng của cửa sổ nổi/menu khi chuyển nền tảng ở cửa sổ chính
   useEffect(() => {
     const platformId = resolvePlatformIdFromPage(page);
     if (!platformId) {
@@ -932,7 +932,7 @@ function MainApp() {
       try {
         currentVersion = await getVersion();
       } catch (error) {
-        console.warn('[ExternalImport][App] 读取当前应用版本失败，已终止外部导入', error);
+        console.warn('[ExternalImport][App] Không thể đọc phiên bản ứng dụng; đã hủy yêu cầu nhập', error);
       }
 
       if (currentVersion && !isVersionLowerThan(currentVersion, requiredVersion)) {
@@ -940,16 +940,16 @@ function MainApp() {
       }
 
       showModal({
-        title: t('common.shared.externalImport.versionUnsupportedTitle', '应用版本过低'),
+        title: t('common.shared.externalImport.versionUnsupportedTitle', "Phiên bản ứng dụng quá thấp"),
         description: t(
           'common.shared.externalImport.versionUnsupportedDesc',
-          '暂不支持此方式，请下载最新版。',
+          "Cách này chưa được hỗ trợ. Vui lòng tải phiên bản mới nhất.",
         ),
         width: 'sm',
         actions: [
           {
             id: 'check-update',
-            label: t('common.shared.externalImport.checkUpdate', '检查更新'),
+            label: t('common.shared.externalImport.checkUpdate', "Kiểm tra cập nhật"),
             variant: 'primary',
             onClick: () => {
               window.dispatchEvent(
@@ -961,12 +961,12 @@ function MainApp() {
           },
           {
             id: 'close',
-            label: t('common.close', '关闭'),
+            label: t('common.close', "Đóng"),
             variant: 'secondary',
           },
         ],
       });
-      console.warn('[ExternalImport][App] 当前版本不支持外部导入方式，已终止导入', {
+      console.warn('[ExternalImport][App] Phiên bản hiện tại không hỗ trợ cách nhập này; đã hủy yêu cầu', {
         currentVersion: currentVersion || null,
         requiredVersion,
         providerId: payload.providerId,
@@ -977,10 +977,10 @@ function MainApp() {
   );
 
   const handleExternalProviderImportRawPayload = useCallback(async (rawPayload: unknown) => {
-    console.info('[ExternalImport][App] 收到原始 payload:', rawPayload);
+    console.info('[ExternalImport][App] Đã nhận payload gốc:', rawPayload);
     const normalized = normalizeExternalProviderImportPayload(rawPayload);
     if (!normalized) {
-      console.warn('[ExternalImport][App] payload 归一化失败，已忽略');
+      console.warn('[ExternalImport][App] Chuẩn hóa payload thất bại; đã bỏ qua');
       return;
     }
     if (!(await ensureExternalImportVersionCompatible(normalized))) {
@@ -994,11 +994,11 @@ function MainApp() {
     }
     const dedupeKey = buildExternalImportDedupeKey(normalized);
     if (externalImportHandledAtRef.current.has(dedupeKey)) {
-      console.info('[ExternalImport][App] 重复外部导入 payload 已忽略');
+      console.info('[ExternalImport][App] Đã bỏ qua payload nhập trùng lặp');
       return;
     }
     externalImportHandledAtRef.current.set(dedupeKey, now);
-    console.info('[ExternalImport][App] payload 归一化成功:', {
+    console.info('[ExternalImport][App] Đã chuẩn hóa payload:', {
       providerId: normalized.providerId,
       page: normalized.page,
       autoImport: normalized.autoImport,
@@ -1010,7 +1010,7 @@ function MainApp() {
     });
     setPage(normalized.page);
     window.setTimeout(() => {
-      console.info('[ExternalImport][App] 分发前端外部导入事件');
+      console.info('[ExternalImport][App] Đã phát sự kiện nhập đến giao diện');
       dispatchExternalProviderImportEvent(normalized);
     }, 0);
   }, [ensureExternalImportVersionCompatible]);
@@ -1044,10 +1044,10 @@ function MainApp() {
     handleEasterEggTriggerClick();
   }, [handleEasterEggTriggerClick, handleResumeBreakout, hasBreakoutSession, resetEasterEggTrigger]);
   
-  // 启用自动刷新 hook
+  // Bật hook tự động làm mới
   useAutoRefresh();
 
-  // 初始化唤醒通知监听器
+  // Khởi tạo trình lắng nghe thông báo đánh thức
   useEffect(() => {
     initWakeupNotificationListener();
   }, []);
@@ -1099,7 +1099,7 @@ function MainApp() {
     };
   }, []);
 
-  // ⌘+/⌘-（Windows/Linux: Ctrl+/Ctrl-）步进界面缩放；⌘0 / Ctrl+0 重置。
+  // Điều chỉnh tỷ lệ giao diện bằng phím tắt; dùng ⌘0 / Ctrl+0 để đặt lại.
   useEffect(() => {
     let disposed = false;
     let currentScale = UI_SCALE_DEFAULT;
@@ -1155,7 +1155,7 @@ function MainApp() {
       if (!zoomIn && !zoomOut && !reset) {
         return;
       }
-      // 重置不需要连发；放大缩小允许按住连按。
+      // Đặt lại chỉ một lần; cho phép giữ phím khi phóng to/thu nhỏ.
       if (reset && event.repeat) {
         return;
       }
@@ -1358,7 +1358,7 @@ function MainApp() {
       return false;
     }
     openUpdateNotificationDetails('auto');
-    writeUpdateLog('info', `远端更新策略已自动打开更新弹框: version=${version}`);
+    writeUpdateLog('info', `Chính sách từ xa đã mở hộp thoại cập nhật: version=${version}`);
     return true;
   }, [openUpdateNotificationDetails, writeUpdateLog]);
 
@@ -1374,24 +1374,24 @@ function MainApp() {
 
   const prepareCodexLocalAccessBeforeRelaunch = useCallback(async () => {
     setUpdateRetryStatus(
-      t('update_notification.stoppingApiService', '正在关闭 API 服务...'),
+      t('update_notification.stoppingApiService', "Đang dừng dịch vụ API..."),
     );
     try {
       const state = await prepareCodexLocalAccessForRestart();
       writeUpdateLog(
         'info',
-        `应用重启前已关闭 Codex API 服务监听: enabled=${Boolean(state.collection?.enabled)}, running=${state.running}`,
+        `Đã dừng trình lắng nghe Codex API trước khi khởi động lại: enabled=${Boolean(state.collection?.enabled)}, running=${state.running}`,
       );
     } catch (error) {
       const compactError = sanitizeUpdaterErrorMessage(error);
       writeUpdateLog(
         'warn',
-        `应用重启前关闭 Codex API 服务监听失败，将继续重启: error=${compactError}`,
+        `Không thể dừng Codex API; vẫn tiếp tục khởi động lại: error=${compactError}`,
       );
       setUpdateRetryStatus(
         t(
           'update_notification.stopApiServiceFailedContinue',
-          'API 服务未正常关闭，将继续重启...',
+          "Dịch vụ API chưa dừng đúng cách. Vẫn tiếp tục khởi động lại...",
         ),
       );
     }
@@ -1401,7 +1401,7 @@ function MainApp() {
     await invoke('codex_local_access_get_state').catch((error) => {
       writeUpdateLog(
         'warn',
-        `应用重启失败后恢复 Codex API 服务状态失败: error=${sanitizeUpdaterErrorMessage(error)}`,
+        `Không thể khôi phục Codex API sau khi khởi động lại thất bại: error=${sanitizeUpdaterErrorMessage(error)}`,
       );
     });
   }, [writeUpdateLog]);
@@ -1476,7 +1476,7 @@ function MainApp() {
           return;
         }
         console.error('[App] Failed to load update runtime info:', error);
-        writeUpdateLog('warn', `加载更新运行时信息失败: error=${sanitizeUpdaterErrorMessage(error)}`);
+        writeUpdateLog('warn', `Không thể tải thông tin môi trường cập nhật: error=${sanitizeUpdaterErrorMessage(error)}`);
       })
       .finally(() => {
         if (!cancelled) {
@@ -1579,7 +1579,7 @@ function MainApp() {
             );
             writeUpdateLog(
               'warn',
-              `交互式更新检查失败，准备重试(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
+              `Kiểm tra cập nhật tương tác thất bại; chuẩn bị thử lại(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
             );
           },
         },
@@ -1628,7 +1628,7 @@ function MainApp() {
       console.error('[App] Interactive update check failed:', error);
       writeUpdateLog(
         'warn',
-        `交互式更新检查失败，关闭弹窗: error=${sanitizeUpdaterErrorMessage(error)}`,
+        `Kiểm tra cập nhật tương tác thất bại; đóng hộp thoại: error=${sanitizeUpdaterErrorMessage(error)}`,
       );
       updatePromptPolicyRef.current.close();
       setShowUpdateNotification(false);
@@ -1662,10 +1662,10 @@ function MainApp() {
     try {
       writeUpdateLog(
         'info',
-        `用户点击立即重启应用更新: version=${targetVersion || 'unknown'}, install_before_restart=${shouldInstall}`,
+        `Người dùng chọn khởi động lại để cập nhật: version=${targetVersion || 'unknown'}, install_before_restart=${shouldInstall}`,
       );
       setUpdateRetryStatus(
-        t('update_notification.stoppingApiService', '正在关闭 API 服务...'),
+        t('update_notification.stoppingApiService', "Đang dừng dịch vụ API..."),
       );
       setUpdateDownloadError('');
       setUpdateErrorDetails('');
@@ -1697,16 +1697,16 @@ function MainApp() {
       console.error('[App] Failed to apply pending update:', error);
       const compactError = sanitizeUpdaterErrorMessage(error);
       const errorMessage = failureStage === 'prepare'
-        ? t('update_notification.stopApiServiceFailed', '无法关闭 API 服务，请先停用后重试。')
+        ? t('update_notification.stopApiServiceFailed', "Không thể dừng dịch vụ API. Hãy tắt dịch vụ trước rồi thử lại.")
         : failureStage === 'install'
-          ? t('update_notification.installFailed', '系统安装失败，请稍后重试或手动下载安装。')
-          : t('update_notification.restartRequiredAfterInstall', '更新已安装，请手动重启应用完成切换。');
+          ? t('update_notification.installFailed', "Cài đặt hệ thống thất bại. Hãy thử lại sau hoặc tải gói về thủ công.")
+          : t('update_notification.restartRequiredAfterInstall', "Bản cập nhật đã được cài. Hãy khởi động lại ứng dụng thủ công để hoàn tất chuyển đổi.");
       setUpdateRetryStatus('');
       setUpdateDownloadError(errorMessage);
       setUpdateErrorDetails(compactError);
       writeUpdateLog(
         'error',
-        `用户手动应用更新失败: stage=${failureStage}, error=${compactError}`,
+        `Không thể cài đặt bản cập nhật thủ công: stage=${failureStage}, error=${compactError}`,
       );
       throw error;
     }
@@ -1736,7 +1736,7 @@ function MainApp() {
       pendingSilentUpdateRef.current = null;
     }
 
-    writeUpdateLog('info', `Linux 托管更新开始执行: version=${expectedVersion}`);
+    writeUpdateLog('info', `Bắt đầu cập nhật qua trình quản lý Linux: version=${expectedVersion}`);
 
     try {
       await invoke('install_linux_update', {
@@ -1749,7 +1749,7 @@ function MainApp() {
         progress: 100,
         requiresInstall: false,
       });
-      setUpdateRetryStatus(t('update_notification.installSuccess', '更新已安装，正在重启...'));
+      setUpdateRetryStatus(t('update_notification.installSuccess', "Đã cài đặt bản cập nhật! Đang khởi động lại..."));
       setUpdateDownloadError('');
       setUpdateErrorDetails('');
 
@@ -1765,23 +1765,23 @@ function MainApp() {
         console.error('[App] Linux managed update installed but relaunch failed:', error);
         writeUpdateLog(
           'error',
-          `Linux 托管更新安装完成但重启失败: version=${expectedVersion}, error=${compactError}`,
+          `Đã cài bản cập nhật Linux nhưng không thể khởi động lại: version=${expectedVersion}, error=${compactError}`,
         );
         setUpdateRetryStatus('');
         setUpdateDownloadError(
           relaunchStage === 'prepare'
-            ? t('update_notification.stopApiServiceFailed', '无法关闭 API 服务，请先停用后重试。')
-            : t('update_notification.restartRequiredAfterInstall', '更新已安装，请手动重启应用完成切换。'),
+            ? t('update_notification.stopApiServiceFailed', "Không thể dừng dịch vụ API. Hãy tắt dịch vụ trước rồi thử lại.")
+            : t('update_notification.restartRequiredAfterInstall', "Bản cập nhật đã được cài. Hãy khởi động lại ứng dụng thủ công để hoàn tất chuyển đổi."),
         );
         setUpdateErrorDetails(compactError);
       }
     } catch (error) {
       console.error('[App] Linux managed update failed:', error);
       const compactError = sanitizeUpdaterErrorMessage(error);
-      writeUpdateLog('error', `Linux 托管更新失败: version=${expectedVersion}, error=${compactError}`);
+      writeUpdateLog('error', `Cập nhật qua trình quản lý Linux thất bại: version=${expectedVersion}, error=${compactError}`);
       setUpdateRetryStatus('');
       setUpdateDownloadError(
-        t('update_notification.installFailed', '系统安装失败，请稍后重试或手动下载安装。'),
+        t('update_notification.installFailed', "Cài đặt hệ thống thất bại. Hãy thử lại sau hoặc tải gói về thủ công."),
       );
       setUpdateErrorDetails(compactError);
       setUpdateAction({
@@ -1814,7 +1814,7 @@ function MainApp() {
       progress: 0,
       requiresInstall: true,
     });
-    writeUpdateLog('info', `统一更新任务开始下载: version=${expectedVersion}`);
+    writeUpdateLog('info', `Bắt đầu tải bản cập nhật: version=${expectedVersion}`);
 
     let usedAttempts = 0;
     try {
@@ -1843,7 +1843,7 @@ function MainApp() {
               console.error('[App] Failed to cache shared update notes:', error);
               writeUpdateLog(
                 'warn',
-                `缓存统一更新说明失败: version=${candidateVersion}, error=${sanitizeUpdaterErrorMessage(error)}`,
+                `Không thể lưu ghi chú cập nhật vào bộ nhớ đệm: version=${candidateVersion}, error=${sanitizeUpdaterErrorMessage(error)}`,
               );
             });
 
@@ -1915,7 +1915,7 @@ function MainApp() {
             );
             writeUpdateLog(
               'warn',
-              `统一更新下载失败，准备重试(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
+              `Tải bản cập nhật thất bại; chuẩn bị thử lại(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
             );
             setUpdateAction((prev) => {
               if (prev.state !== 'downloading') {
@@ -1950,18 +1950,18 @@ function MainApp() {
         progress: 100,
         requiresInstall: true,
       });
-      writeUpdateLog('info', `统一更新下载完成，等待重启安装: version=${downloadedUpdate.version}`);
+      writeUpdateLog('info', `Đã tải bản cập nhật; cần khởi động lại để cài: version=${downloadedUpdate.version}`);
     } catch (error) {
       if (isUpdaterCanceledError(error) || updateCancelRequestedRef.current || updateDownloadTaskIdRef.current !== taskId) {
-        writeUpdateLog('info', `统一更新下载已取消: version=${expectedVersion}`);
-        setUpdateRetryStatus(t('update_notification.updateCancelled', '已取消更新'));
+        writeUpdateLog('info', `Đã hủy tải bản cập nhật: version=${expectedVersion}`);
+        setUpdateRetryStatus(t('update_notification.updateCancelled', "Đã hủy cập nhật."));
         setUpdateDownloadError('');
         setUpdateErrorDetails('');
         return;
       }
 
       console.error('[App] Shared update download failed:', error);
-      writeUpdateLog('error', `统一更新下载失败: error=${sanitizeUpdaterErrorMessage(error)}`);
+      writeUpdateLog('error', `Không thể tải bản cập nhật: error=${sanitizeUpdaterErrorMessage(error)}`);
       setUpdateRetryStatus('');
       setUpdateDownloadError(
         t('update_notification.autoUpdateFailedAfterRetries', {
@@ -1988,7 +1988,7 @@ function MainApp() {
       return;
     }
     if (updateDownloadOwnerRef.current !== 'shared') {
-      writeUpdateLog('info', '当前下载任务不支持取消（非统一更新任务）');
+      writeUpdateLog('info', 'Tác vụ tải hiện tại không hỗ trợ hủy');
       return;
     }
 
@@ -2021,7 +2021,7 @@ function MainApp() {
       });
     }
     updateDownloadOwnerRef.current = 'none';
-    writeUpdateLog('info', `用户取消统一更新下载: version=${version || 'unknown'}`);
+    writeUpdateLog('info', `Người dùng đã hủy tải bản cập nhật: version=${version || 'unknown'}`);
   }, [closeUpdaterHandle, updateAction.state, updateAction.version, writeUpdateLog]);
 
   const handleUpdatePrimaryAction = useCallback(async () => {
@@ -2039,7 +2039,7 @@ function MainApp() {
         await handleApplyPendingUpdate();
       } catch (error) {
         console.error('[App] Update restart failed:', error);
-        writeUpdateLog('error', `更新重启失败: error=${sanitizeUpdaterErrorMessage(error)}`);
+        writeUpdateLog('error', `Không thể khởi động lại để cập nhật: error=${sanitizeUpdaterErrorMessage(error)}`);
         openUpdateNotificationDetails();
       }
       return;
@@ -2058,7 +2058,7 @@ function MainApp() {
       }
     } catch (error) {
       console.error('[App] Update download failed:', error);
-      writeUpdateLog('error', `更新下载失败: error=${sanitizeUpdaterErrorMessage(error)}`);
+      writeUpdateLog('error', `Không thể tải bản cập nhật: error=${sanitizeUpdaterErrorMessage(error)}`);
       openUpdateNotificationDetails();
     }
   }, [
@@ -2112,7 +2112,7 @@ function MainApp() {
         await closeUpdaterHandle(pendingUpdate);
         pendingSilentUpdateRef.current = null;
       }
-      writeUpdateLog('info', `用户跳过更新版本: version=${targetVersion}`);
+      writeUpdateLog('info', `Người dùng bỏ qua phiên bản cập nhật: version=${targetVersion}`);
       setUpdateAction((prev) => {
         if (
           prev.version === targetVersion
@@ -2143,7 +2143,7 @@ function MainApp() {
           error: sanitizeUpdaterErrorMessage(error),
         }),
       );
-      writeUpdateLog('error', `跳过更新版本失败: error=${sanitizeUpdaterErrorMessage(error)}`);
+      writeUpdateLog('error', `Không thể bỏ qua phiên bản cập nhật: error=${sanitizeUpdaterErrorMessage(error)}`);
     }
   }, [closeUpdaterHandle, t, updateNotificationInfo, writeUpdateLog]);
 
@@ -2255,7 +2255,7 @@ function MainApp() {
     const syncWakeupStateOnStartup = async () => {
       let officialLsVersionMode = loadWakeupOfficialLsVersionMode();
       try {
-        // 一次性迁移：升级到该版本后先将唤醒总开关置为关闭，用户仍可手动再开启
+        // Chuyển đổi một lần: tắt công tắc đánh thức sau nâng cấp; người dùng có thể bật lại
         if (localStorage.getItem(WAKEUP_FORCE_DISABLE_MIGRATION_KEY) !== '1') {
           localStorage.setItem(WAKEUP_ENABLED_KEY, 'false');
           localStorage.setItem(WAKEUP_FORCE_DISABLE_MIGRATION_KEY, '1');
@@ -2271,7 +2271,7 @@ function MainApp() {
           runStartupTasks: true,
         });
       } catch (error) {
-        console.error('唤醒任务状态同步失败:', error);
+        console.error('Không thể đồng bộ trạng thái tác vụ đánh thức:', error);
       }
     };
     void syncWakeupStateOnStartup();
@@ -2292,7 +2292,7 @@ function MainApp() {
       try {
         await runAutoBackupCycle();
       } catch (error) {
-        console.warn('[AutoBackup] 定期备份执行失败:', error);
+        console.warn('[AutoBackup] Không thể sao lưu định kỳ:', error);
       } finally {
         inFlight = false;
       }
@@ -2315,11 +2315,11 @@ function MainApp() {
     };
   }, []);
 
-  // 将旧版本保存在 WebView localStorage 中的设置迁移到 Rust 后台调度器。
+  // Chuyển cài đặt cũ từ WebView localStorage sang bộ lập lịch Rust
   useEffect(() => {
     clearLegacyWorkbuddyAutoCheckinLogs();
     void migrateWorkbuddyAutoCheckinConfigAsync(getWorkbuddyAutoCheckinConfig()).catch((err) => {
-      console.warn('[WorkbuddyAutoCheckin] 迁移旧版自动签到配置失败:', err);
+      console.warn('[WorkbuddyAutoCheckin] Không thể di chuyển cài đặt điểm danh cũ:', err);
     });
   }, []);
 
@@ -2335,16 +2335,16 @@ function MainApp() {
 
     const checkUpdates = async (trigger: 'startup' | 'hourly') => {
       if (updateCheckInFlight) {
-        writeUpdateLog('info', `${trigger === 'startup' ? '启动' : '每小时轮询'}更新检查跳过：上一次尚未结束`);
+        writeUpdateLog('info', `${trigger === 'startup' ? 'Khởi động' : 'Kiểm tra hàng giờ'}Bỏ qua kiểm tra cập nhật vì lượt trước chưa hoàn tất`);
         return;
       }
       updateCheckInFlight = true;
-      const triggerLabel = trigger === 'startup' ? '启动' : '每小时轮询';
+      const triggerLabel = trigger === 'startup' ? 'Khởi động' : 'Kiểm tra hàng giờ';
       const updateFlowStartedAt = performance.now();
       try {
         console.log(`[App] ${triggerLabel} update check triggered.`);
         console.log(`[StartupPerf][UpdateCheck] ${triggerLabel} update check started`);
-        writeUpdateLog('info', `${triggerLabel}触发自动更新检查流程`);
+        writeUpdateLog('info', `${triggerLabel}Đã kích hoạt quy trình kiểm tra cập nhật tự động`);
 
         const settingsInvokeStartedAt = performance.now();
         const preferenceRevision = updatePromptPolicyRef.current.revision;
@@ -2366,15 +2366,15 @@ function MainApp() {
         const updatePromptMode = remoteConfigState.updatePromptMode;
         writeUpdateLog(
           'info',
-          `读取更新设置: auto_install=${autoInstall}, update_prompt_mode=${updatePromptMode}；启动始终执行更新检查`,
+          `Đã đọc cài đặt cập nhật: auto_install=${autoInstall}, update_prompt_mode=${updatePromptMode}; luôn kiểm tra cập nhật khi khởi động`,
         );
 
-        writeUpdateLog('info', '启动检查立即执行');
+        writeUpdateLog('info', 'Kiểm tra cập nhật ngay khi khởi động');
 
         if (autoInstall && !isLinuxManagedUpdate) {
           // Silent update: check and download in background, install on restart
           console.log('[App] Auto-install enabled, attempting silent update...');
-          writeUpdateLog('info', '后台自动更新已开启，尝试静默检查并下载');
+          writeUpdateLog('info', 'Đã bật tự động cập nhật nền; thử kiểm tra và tải không hiện hộp thoại');
           let preparedUpdateInfo: UpdateInfo | null = null;
           try {
             const silentCheckStartedAt = performance.now();
@@ -2391,7 +2391,7 @@ function MainApp() {
                   );
                   writeUpdateLog(
                     'warn',
-                    `静默更新检查失败，准备重试(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
+                    `Kiểm tra cập nhật nền thất bại; chuẩn bị thử lại(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
                   );
                 },
               },
@@ -2402,7 +2402,7 @@ function MainApp() {
             if (update) {
               if (skippedVersion && update.version === skippedVersion) {
                 console.log('[App] Update skipped by user, ignoring:', update.version);
-                writeUpdateLog('info', `检测到新版本但已跳过: version=${update.version}`);
+                writeUpdateLog('info', `Phát hiện phiên bản mới nhưng đã bỏ qua: version=${update.version}`);
                 await closeUpdaterHandle(update);
                 setUpdateAction((prev) => {
                   if (prev.state === 'available' && prev.version === update.version) {
@@ -2426,7 +2426,7 @@ function MainApp() {
                 });
                 openAutomaticUpdatePrompt(update.version, updatePromptMode);
                 console.log('[App] Update found, downloading silently with retry...');
-                writeUpdateLog('info', `检测到新版本，开始静默下载: version=${update.version}`);
+                writeUpdateLog('info', `Phát hiện phiên bản mới; bắt đầu tải ở chế độ nền: version=${update.version}`);
                 updateDownloadOwnerRef.current = 'silent';
                 setUpdateRetryStatus('');
                 setUpdateDownloadError('');
@@ -2450,7 +2450,7 @@ function MainApp() {
                   console.error('[App] Failed to cache silent update notes:', error);
                   writeUpdateLog(
                     'warn',
-                    `缓存待安装更新说明失败: version=${update.version}, error=${sanitizeUpdaterErrorMessage(error)}`,
+                    `Không thể lưu ghi chú của bản cập nhật sắp cài: version=${update.version}, error=${sanitizeUpdaterErrorMessage(error)}`,
                   );
                 });
                 const silentDownloadStartedAt = performance.now();
@@ -2530,7 +2530,7 @@ function MainApp() {
                       );
                       writeUpdateLog(
                         'warn',
-                        `静默更新下载失败，准备重试(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
+                        `Tải cập nhật nền thất bại; chuẩn bị thử lại(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
                       );
                       setUpdateAction((prev) => {
                         if (prev.state !== 'downloading') {
@@ -2555,7 +2555,7 @@ function MainApp() {
                 console.log('[App] Silent download complete, waiting for restart to install.');
                 writeUpdateLog(
                   'info',
-                  `静默更新下载完成，等待用户重启应用生效: version=${downloadedUpdate.version}`,
+                  `Đã tải cập nhật nền; cần khởi động lại ứng dụng: version=${downloadedUpdate.version}`,
                 );
                 updateDownloadOwnerRef.current = 'none';
                 setUpdateRetryStatus('');
@@ -2569,12 +2569,12 @@ function MainApp() {
                   requiresInstall: true,
                 });
                 if (updatePromptPolicyRef.current.enabled) {
-                  writeUpdateLog('info', `静默更新已在左上角显示待重启入口: version=${downloadedUpdate.version}`);
+                  writeUpdateLog('info', `Đã hiển thị yêu cầu khởi động lại ở góc trên bên trái: version=${downloadedUpdate.version}`);
                 }
               }
             } else {
               console.log('[App] No update available.');
-              writeUpdateLog('info', '更新检查完成：当前已是最新版本');
+              writeUpdateLog('info', 'Đã kiểm tra cập nhật; hiện đang ở phiên bản mới nhất');
               updateDownloadOwnerRef.current = 'none';
               setUpdateRetryStatus('');
               setUpdateDownloadError('');
@@ -2596,7 +2596,7 @@ function MainApp() {
             updateDownloadOwnerRef.current = 'none';
             writeUpdateLog(
               'error',
-              `静默更新失败，保留左上角更新入口: error=${sanitizeUpdaterErrorMessage(err)}`,
+              `Cập nhật nền thất bại; vẫn giữ lối vào cập nhật ở góc trên trái: error=${sanitizeUpdaterErrorMessage(err)}`,
             );
             if (!updatePromptPolicyRef.current.enabled) {
               setUpdateRetryStatus('');
@@ -2622,7 +2622,7 @@ function MainApp() {
                 progress: 0,
                 requiresInstall: true,
               });
-              writeUpdateLog('info', `静默更新失败后已在左上角显示更新入口: version=${preparedUpdateInfo.latest_version}`);
+              writeUpdateLog('info', `Cập nhật nền thất bại; đã hiển thị lối vào cập nhật ở góc trên trái: version=${preparedUpdateInfo.latest_version}`);
             }
           }
         } else {
@@ -2630,10 +2630,10 @@ function MainApp() {
           if (autoInstall && isLinuxManagedUpdate) {
             writeUpdateLog(
               'info',
-              `Linux 包管理安装(${updateRuntimeInfo?.linux_install_kind || 'unknown'})跳过静默下载，改为左上角一键安装入口`,
+              `Cài đặt bằng trình quản lý gói Linux(${updateRuntimeInfo?.linux_install_kind || 'unknown'})Bỏ qua tải nền; hiển thị lối vào cài đặt một chạm ở góc trên trái`,
             );
           }
-          writeUpdateLog('info', '后台自动更新关闭，先执行无弹窗检查，仅在发现新版本时显示左上角入口');
+          writeUpdateLog('info', 'Đã tắt cập nhật nền; chỉ kiểm tra và hiển thị khi có phiên bản mới');
           try {
             const manualCheckStartedAt = performance.now();
             const update = await retryWithBackoff(
@@ -2649,7 +2649,7 @@ function MainApp() {
                   );
                   writeUpdateLog(
                     'warn',
-                    `后台手动更新检查失败，准备重试(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
+                    `Kiểm tra cập nhật nền theo yêu cầu thất bại; chuẩn bị thử lại(${retryIndex}/${totalRetries})，delay=${delayMs}ms，error=${compactError}`,
                   );
                 },
               },
@@ -2661,7 +2661,7 @@ function MainApp() {
             if (update) {
               if (skippedVersion && update.version === skippedVersion) {
                 console.log('[App] Update skipped by user, ignoring:', update.version);
-                writeUpdateLog('info', `检测到新版本但已跳过: version=${update.version}`);
+                writeUpdateLog('info', `Phát hiện phiên bản mới nhưng đã bỏ qua: version=${update.version}`);
                 await closeUpdaterHandle(update);
                 setUpdateAction((prev) => {
                   if (prev.state === 'available' && prev.version === update.version) {
@@ -2687,13 +2687,13 @@ function MainApp() {
                 writeUpdateLog(
                   'info',
                   openedPrompt
-                    ? `检测到新版本，已按远端策略打开更新弹框: version=${update.version}`
-                    : `检测到新版本，已在左上角显示更新入口: version=${update.version}`,
+                    ? `Phát hiện bản mới; đã mở hộp thoại theo chính sách từ xa: version=${update.version}`
+                    : `Phát hiện bản mới; đã hiển thị lối vào cập nhật ở góc trên trái: version=${update.version}`,
                 );
                 await closeUpdaterHandle(update);
               }
             } else {
-              writeUpdateLog('info', '更新检查完成：当前已是最新版本');
+              writeUpdateLog('info', 'Đã kiểm tra cập nhật; hiện đang ở phiên bản mới nhất');
               setUpdateRetryStatus('');
               setUpdateDownloadError('');
               setUpdateErrorDetails('');
@@ -2713,7 +2713,7 @@ function MainApp() {
             console.error('[App] Background update check failed:', err);
             writeUpdateLog(
               'warn',
-              `后台手动更新检查失败，跳过弹窗: error=${sanitizeUpdaterErrorMessage(err)}`,
+              `Kiểm tra cập nhật nền theo yêu cầu thất bại; bỏ qua hộp thoại: error=${sanitizeUpdaterErrorMessage(err)}`,
             );
           }
         }
@@ -2723,7 +2723,7 @@ function MainApp() {
         console.log(
           `[StartupPerf][UpdateCheck] update_last_check_time completed in ${(performance.now() - updateLastCheckStartedAt).toFixed(2)}ms`,
         );
-        writeUpdateLog('info', '已更新 last_check_time，结束本次更新检查流程');
+        writeUpdateLog('info', 'Đã cập nhật last_check_time; kết thúc lượt kiểm tra cập nhật');
         console.log('[App] Update check cycle completed.');
         console.log(
           `[StartupPerf][UpdateCheck] ${triggerLabel} update check completed in ${(performance.now() - updateFlowStartedAt).toFixed(2)}ms`,
@@ -2734,7 +2734,7 @@ function MainApp() {
           `[StartupPerf][UpdateCheck] ${triggerLabel} update check failed after ${(performance.now() - updateFlowStartedAt).toFixed(2)}ms:`,
           error,
         );
-        writeUpdateLog('error', `更新检查流程异常中断: error=${sanitizeUpdaterErrorMessage(error)}`);
+        writeUpdateLog('error', `Quy trình kiểm tra cập nhật bị gián đoạn: error=${sanitizeUpdaterErrorMessage(error)}`);
       } finally {
         updateCheckInFlight = false;
       }
@@ -2845,46 +2845,46 @@ function MainApp() {
       const lowQuotaItemsText = payload.low_models.length > 0
         ? payload.low_models.join(', ')
         : platform === 'grok'
-          ? t('grok.quotaAlert.unknownItem', '未知配额项')
-          : t('quotaAlert.modal.unknownModel', '未知模型');
+          ? t('grok.quotaAlert.unknownItem', "Mục hạn mức không xác định")
+          : t('quotaAlert.modal.unknownModel', "Mô hình không xác định");
 
       showModal({
-        title: t('quotaAlert.modal.title', '配额预警'),
+        title: t('quotaAlert.modal.title', "Cảnh báo hạn mức"),
         description: t(
           'quotaAlert.modal.desc',
-          '当前账号配额已达到预警阈值，请尽快处理。'
+          "Hạn mức của tài khoản hiện tại đã chạm ngưỡng cảnh báo. Vui lòng xử lý sớm."
         ),
         width: 'md',
         content: (
           <div className="quota-alert-modal-content">
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.platform', '平台')}</span>
+              <span>{t('quotaAlert.modal.platform', "Nền tảng")}</span>
               <strong>{platformLabel}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.account', '当前账号')}</span>
+              <span>{t('quotaAlert.modal.account', "Tài khoản hiện tại")}</span>
               <strong>{payload.current_email}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.threshold', '预警阈值')}</span>
+              <span>{t('quotaAlert.modal.threshold', "Ngưỡng cảnh báo")}</span>
               <strong>{payload.threshold_display || `${payload.threshold}%`}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.lowest', '当前最低')}</span>
+              <span>{t('quotaAlert.modal.lowest', "Mức thấp nhất hiện tại")}</span>
               <strong>{payload.lowest_percentage}%</strong>
             </div>
             <div className="quota-alert-modal-row quota-alert-modal-row--stack">
               <span>
                 {platform === 'grok'
-                  ? t('grok.quotaAlert.items', '触发配额项')
-                  : t('quotaAlert.modal.models', '触发模型')}
+                  ? t('grok.quotaAlert.items', "Mục hạn mức")
+                  : t('quotaAlert.modal.models', "Mô hình kích hoạt")}
               </span>
               <strong>{lowQuotaItemsText}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.recommended', '建议切换')}</span>
+              <span>{t('quotaAlert.modal.recommended', "Đề xuất chuyển")}</span>
               <strong>
-                {payload.recommended_email || t('quotaAlert.modal.noRecommendation', '暂无可切换账号')}
+                {payload.recommended_email || t('quotaAlert.modal.noRecommendation', "Không có tài khoản phù hợp để chuyển")}
               </strong>
             </div>
           </div>
@@ -2892,12 +2892,12 @@ function MainApp() {
         actions: [
           {
             id: 'quota-alert-later',
-            label: t('quotaAlert.modal.later', '稍后处理'),
+            label: t('quotaAlert.modal.later', "Để sau"),
             variant: 'secondary',
           },
           {
             id: 'quota-alert-open-settings',
-            label: t('quotaAlert.modal.openSettings', '调整预警设置'),
+            label: t('quotaAlert.modal.openSettings', "Điều chỉnh cài đặt cảnh báo"),
             variant: 'secondary',
             autoClose: false,
             onClick: () => {
@@ -2907,7 +2907,7 @@ function MainApp() {
           ...(hasRecommendation
             ? [{
                 id: 'quota-alert-switch',
-                label: t('quotaAlert.modal.switchNow', '快捷切号到 {{email}}', {
+                label: t('quotaAlert.modal.switchNow', "Chuyển nhanh sang {{email}}", {
                   email: payload.recommended_email as string,
                 }),
                 variant: 'primary' as const,
@@ -2961,15 +2961,15 @@ function MainApp() {
                     closeModal();
                   } catch (error) {
                     showModal({
-                      title: t('quotaAlert.modal.switchFailedTitle', '切号失败'),
-                      description: t('quotaAlert.modal.switchFailedBody', '快捷切号失败：{{error}}', {
+                      title: t('quotaAlert.modal.switchFailedTitle', "Chuyển thất bại"),
+                      description: t('quotaAlert.modal.switchFailedBody', "Chuyển nhanh thất bại: {{error}}", {
                         error: String(error),
                       }),
                       width: 'sm',
                       actions: [
                         {
                           id: 'quota-alert-switch-failed-ok',
-                          label: t('common.confirm', '确定'),
+                          label: t('common.confirm', "Xác nhận"),
                           variant: 'primary',
                         },
                       ],
@@ -3002,7 +3002,7 @@ function MainApp() {
     const handleWakeupResult = (payload: WakeupTaskResultPayload) => {
       if (!payload || typeof payload.taskId !== 'string') return;
 
-      // 更新任务的最后运行时间
+      // Cập nhật thời gian chạy cuối của tác vụ
       const tasksRaw = localStorage.getItem(TASKS_STORAGE_KEY);
       if (tasksRaw) {
         try {
@@ -3012,11 +3012,11 @@ function MainApp() {
           );
           localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(nextTasks));
         } catch (error) {
-          console.error('更新唤醒任务时间失败:', error);
+          console.error('Không thể cập nhật giờ đánh thức:', error);
         }
       }
 
-      // 历史记录已由后端写入文件，这里只需通知前端刷新
+      // Backend đã lưu lịch sử; chỉ cần báo frontend làm mới
       window.dispatchEvent(new CustomEvent('wakeup-task-result', { detail: payload }));
       window.dispatchEvent(new Event('wakeup-tasks-updated'));
     };
@@ -3092,21 +3092,21 @@ function MainApp() {
 
       if (phase === 'auth_required' || phase === 'downloaded') {
         setUpdateRetryStatus(
-          t('update_notification.authorizing', '等待系统授权安装...'),
+          t('update_notification.authorizing', "Đang chờ cấp quyền hệ thống..."),
         );
         return;
       }
 
       if (phase === 'installing') {
         setUpdateRetryStatus(
-          t('update_notification.installing', '安装中...'),
+          t('update_notification.installing', "Đang cài đặt..."),
         );
         return;
       }
 
       if (phase === 'completed') {
         setUpdateRetryStatus(
-          t('update_notification.installSuccess', '更新已安装，正在重启...'),
+          t('update_notification.installSuccess', "Đã cài đặt bản cập nhật! Đang khởi động lại..."),
         );
         return;
       }
@@ -3335,7 +3335,7 @@ function MainApp() {
         setAppLaunchCandidates([]);
       }
     } catch (error) {
-      console.error('选择应用路径失败:', error);
+      console.error('Không thể chọn đường dẫn ứng dụng:', error);
     }
   };
 
@@ -3352,7 +3352,7 @@ function MainApp() {
       setAppPathActionError(
         t(
           'appPath.missing.claudeMultiInstanceRequiresExe',
-          'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+          "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
         ),
       );
       return;
@@ -3449,7 +3449,7 @@ function MainApp() {
         setAppPathSetting(false);
         return;
       }
-      console.error('设置应用路径失败:', error);
+      console.error('Không thể lưu đường dẫn ứng dụng:', error);
       setAppPathActionError(String(error));
       setAppPathSetting(false);
     }
@@ -3481,7 +3481,7 @@ function MainApp() {
             setAppPathScanError(
               t(
                 'appPath.missing.claudeMultiInstanceRequiresExe',
-                'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+                "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
               ),
             );
           }
@@ -3490,13 +3490,13 @@ function MainApp() {
           setAppPathScanError(
             t(
               'appPath.missing.scanEmptyGeneric',
-              '未检测到正在运行的 {{app}}，请先启动应用后重试，或手动选择路径。',
+              'Không tìm thấy {{app}} đang chạy. Hãy mở ứng dụng và thử lại hoặc chọn đường dẫn thủ công.',
               { app: appPathMissingAppName },
             ),
           );
         }
       } catch (error) {
-        console.error('扫描 Claude Desktop 启动目标失败:', error);
+        console.error('Không thể tìm ứng dụng Claude Desktop đang chạy:', error);
         setAppPathScanError(String(error));
       } finally {
         setAppPathDetecting(false);
@@ -3513,7 +3513,7 @@ function MainApp() {
       setAppPathScanError('');
       setAppPathDraft((detected || '').trim());
     } catch (error) {
-      console.error('自动探测应用路径失败:', error);
+      console.error('Không thể tự phát hiện đường dẫn ứng dụng:', error);
     } finally {
       setAppPathDetecting(false);
     }
@@ -3532,7 +3532,7 @@ function MainApp() {
     setAppPathDraft(candidate.target);
   };
 
-  // 监听窗口关闭请求事件
+  // Lắng nghe yêu cầu đóng cửa sổ
   useEffect(() => {
     let unlisten: UnlistenFn | undefined;
 
@@ -3582,7 +3582,7 @@ function MainApp() {
   useEffect(() => {
     let unlisten: UnlistenFn | undefined;
     listen('external:provider-import', (event) => {
-      console.info('[ExternalImport][App] 收到 Tauri 事件 external:provider-import');
+      console.info('[ExternalImport][App] Đã nhận sự kiện Tauri external:provider-import');
       void handleExternalProviderImportRawPayload(event.payload);
     }).then((fn) => {
       unlisten = fn;
@@ -3601,21 +3601,21 @@ function MainApp() {
       .then((payload) => {
         if (canceled) return;
         if (!payload) {
-          console.info('[ExternalImport][App] 启动时无待处理导入 payload');
+          console.info('[ExternalImport][App] Không có payload nhập chờ xử lý khi khởi động');
           return;
         }
-        console.info('[ExternalImport][App] 启动时读取到待处理导入 payload');
+        console.info('[ExternalImport][App] Đã tìm thấy payload nhập chờ xử lý khi khởi động');
         void handleExternalProviderImportRawPayload(payload);
       })
       .catch((error) => {
-        console.warn('[ExternalImport] 读取待处理导入请求失败:', error);
+        console.warn('[ExternalImport] Không thể đọc yêu cầu nhập đang chờ:', error);
       });
     return () => {
       canceled = true;
     };
   }, [handleExternalProviderImportRawPayload]);
 
-  // 窗口拖拽处理
+  // Xử lý kéo cửa sổ
   const handleDragStart = (event: ReactMouseEvent<HTMLDivElement>) => {
     if (event.button !== 0) {
       return;
@@ -3656,7 +3656,7 @@ function MainApp() {
   }, []);
   const suspenseFallback = (
     <div className="loading-state">
-      {t('common.loading', '加载中...')}
+      {t('common.loading', "Đang tải...")}
     </div>
   );
 
@@ -3691,27 +3691,27 @@ function MainApp() {
 
   const appPathMissingPathLabel = appPathMissing
     ? appPathMissing.app === 'codex'
-      ? t('quickSettings.codex.appPath', '启动路径')
+      ? t('quickSettings.codex.appPath', "Đường dẫn ứng dụng")
       : appPathMissing.app === 'claude'
-        ? t('quickSettings.claude.appPath', 'Claude Desktop 启动目标')
+        ? t('quickSettings.claude.appPath', "Đường dẫn Claude")
       : appPathMissing.app === 'vscode'
-        ? t('quickSettings.githubCopilot.appPath', 'VS Code 路径')
+        ? t('quickSettings.githubCopilot.appPath', "Đường dẫn VS Code")
         : appPathMissing.app === 'windsurf'
-          ? t('quickSettings.windsurf.appPath', 'Devin 路径')
+          ? t('quickSettings.windsurf.appPath', "Đường dẫn Devin")
           : appPathMissing.app === 'kiro'
-            ? t('quickSettings.kiro.appPath', 'Kiro 路径')
+            ? t('quickSettings.kiro.appPath', "Con đường Kiro")
             : appPathMissing.app === 'cursor'
-            ? t('quickSettings.cursor.appPath', 'Cursor 路径')
+            ? t('quickSettings.cursor.appPath', "Đường dẫn Cursor")
             : appPathMissing.app === 'codebuddy'
-              ? t('quickSettings.codebuddy.appPath', 'CodeBuddy 路径')
+              ? t('quickSettings.codebuddy.appPath', "Đường dẫn CodeBuddy")
               : appPathMissing.app === 'codebuddy_cn'
-                ? t('quickSettings.codebuddyCn.appPath', 'CodeBuddy CN 路径')
+                ? t('quickSettings.codebuddyCn.appPath', "Đường dẫn CodeBuddy CN")
               : appPathMissing.app === 'qoder'
-                ? t('quickSettings.qoder.appPath', 'Qoder 路径')
+                ? t('quickSettings.qoder.appPath', "Đường dẫn Qoder")
               : isTraePlatformApp(appPathMissing.app)
-                ? t('quickSettings.trae.appPath', 'Trae 路径')
-              : t('quickSettings.antigravity.appPath', '启动路径')
-    : t('quickSettings.antigravity.appPath', '启动路径');
+                ? t('quickSettings.trae.appPath', "Đường dẫn Trae")
+              : t('quickSettings.antigravity.appPath', "Đường dẫn ứng dụng")
+    : t('quickSettings.antigravity.appPath', "Đường dẫn ứng dụng");
   const appPathMissingBusy = appPathSetting || appPathDetecting;
   const claudeMultiInstanceNeedsExe =
     appPathMissing?.app === 'claude' && appPathMissing.retry?.kind === 'instance';
@@ -3722,7 +3722,7 @@ function MainApp() {
     <div
       className={`app-container${isWindowsPlatform() ? ' app-container-windows' : ''}${sideNavLayoutMode === 'classic' ? ' app-container-side-nav-classic' : ''}${sideNavLayoutMode === 'classic' && sideNavClassicCollapsed ? ' app-container-side-nav-classic-collapsed' : ''}`}
     >
-      {/* 更新通知：活跃状态时保持挂载，关闭后继续保留当前更新状态 */}
+      {/* Thông báo cập nhật: giữ component khi hoạt động và lưu trạng thái sau khi đóng */}
       {shouldRenderUpdateNotification && (
         <div style={showUpdateNotification ? undefined : { display: 'none' }}>
         <Suspense fallback={null}>
@@ -3746,7 +3746,7 @@ function MainApp() {
         </Suspense>
         </div>
       )}
-      {/* 版本跳跃通知（更新后首次启动） */}
+      {/* Thông báo thay đổi phiên bản ở lần chạy đầu sau cập nhật */}
       {versionJumpInfo && (
         <Suspense fallback={null}>
           {showVersionJumpNotification && (
@@ -3768,7 +3768,7 @@ function MainApp() {
       <CodexPelicanHost />
       <WindowsOperationDialog />
 
-      {/* 关闭确认对话框 */}
+      {/* Hộp thoại xác nhận đóng */}
       {showCloseDialog && (
         <Suspense fallback={null}>
           <CloseConfirmDialog onClose={() => setShowCloseDialog(false)} />
@@ -3789,11 +3789,11 @@ function MainApp() {
         <div className="qs-overlay" style={{ zIndex: 10100 }}>
           <div className="qs-modal app-path-missing-modal" onClick={(e) => e.stopPropagation()}>
             <div className="qs-header">
-              <span className="qs-title">{t('appPath.missing.title', '未找到应用程序路径')}</span>
+              <span className="qs-title">{t('appPath.missing.title', "Không tìm thấy đường dẫn ứng dụng")}</span>
               <button
                 className="qs-close"
                 onClick={() => setAppPathMissing(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
                 disabled={appPathMissingBusy}
               >
                 <X size={16} />
@@ -3803,7 +3803,7 @@ function MainApp() {
             <div className="qs-body">
               <div className="qs-section">
                 <p className="app-path-missing-desc">
-                  {t('appPath.missing.desc', '未找到 {{app}} 应用程序路径，请立即设置后继续启动。', {
+                  {t('appPath.missing.desc', "Không tìm thấy đường dẫn ứng dụng {{app}}. Vui lòng đặt ngay để tiếp tục.", {
                     app: appPathMissingAppName,
                   })}
                 </p>
@@ -3811,7 +3811,7 @@ function MainApp() {
                   <p className="app-path-missing-hint">
                     {t(
                       'appPath.missing.claudeMultiInstanceRequiresExe',
-                      'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+                      "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
                     )}
                   </p>
                 ) : null}
@@ -3819,7 +3819,7 @@ function MainApp() {
                   <p className="app-path-missing-hint">
                     {t(
                       'appPath.missing.codexLaunchHint',
-                      '切号已完成。启动应用请先设置路径；若切号后不需要启动，请到设置中关闭「切换 Codex 时自动启动 Codex App」。',
+                      "Đã chuyển tài khoản xong. Muốn khởi chạy thì hãy đặt đường dẫn. Nếu không cần khởi chạy sau khi chuyển, hãy tắt «Tự động khởi chạy Codex App khi chuyển Codex» trong Cài đặt.",
                     )}
                   </p>
                 ) : null}
@@ -3839,9 +3839,9 @@ function MainApp() {
                       appPathMissing.app === 'claude'
                         ? t(
                             'appPath.missing.claudeTargetPlaceholder',
-                            'Claude.exe 路径或 shell:AppsFolder\\...',
+                            "Đường dẫn Claude.exe hoặc shell:AppsFolder\\...",
                           )
-                        : t('settings.general.codexAppPathPlaceholder', '默认路径')
+                        : t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")
                     }
                     onChange={(e) => {
                       setAppPathActionError('');
@@ -3857,7 +3857,7 @@ function MainApp() {
                       onClick={handlePickMissingAppPath}
                       disabled={appPathMissingBusy}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="qs-btn"
@@ -3865,34 +3865,34 @@ function MainApp() {
                       disabled={appPathMissingBusy}
                       title={
                         appPathDetecting
-                          ? t('common.loading', '加载中...')
+                          ? t('common.loading', "Đang tải...")
                           : isWindowsPlatform()
-                            ? t('appPath.missing.scanApps', '检测运行中应用')
+                            ? t('appPath.missing.scanApps', "Quét ứng dụng")
                             : (
                             appPathMissing.app === 'vscode'
-                              ? t('settings.general.vscodePathReset', '重置默认')
+                              ? t('settings.general.vscodePathReset', "Đặt lại mặc định")
                               : appPathMissing.app === 'windsurf'
-                                ? t('settings.general.windsurfPathReset', '重置默认')
+                                ? t('settings.general.windsurfPathReset', "Đặt lại mặc định")
                                 : appPathMissing.app === 'kiro'
-                                  ? t('settings.general.kiroPathReset', '重置默认')
+                                  ? t('settings.general.kiroPathReset', "Đặt lại về mặc định")
                                   : appPathMissing.app === 'cursor'
-                                  ? t('settings.general.cursorPathReset', '重置默认')
+                                  ? t('settings.general.cursorPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'codebuddy'
-                                      ? t('settings.general.codebuddyPathReset', '重置默认')
+                                      ? t('settings.general.codebuddyPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'codebuddy_cn'
-                                      ? t('settings.general.codebuddyPathReset', '重置默认')
+                                      ? t('settings.general.codebuddyPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'qoder'
-                                      ? t('settings.general.qoderPathReset', '重置默认')
+                                      ? t('settings.general.qoderPathReset', "Đặt lại mặc định")
                                     : isTraePlatformApp(appPathMissing.app)
-                                      ? t('settings.general.traePathReset', '重置默认')
-                                    : t('settings.general.codexPathReset', '重置默认')
+                                      ? t('settings.general.traePathReset', "Đặt lại mặc định")
+                                    : t('settings.general.codexPathReset', "Đặt lại mặc định")
                           )
                       }
                     >
                       {isWindowsPlatform() ? (
                         appPathDetecting
-                          ? t('common.loading', '加载中...')
-                          : t('appPath.missing.scanApps', '检测运行中应用')
+                          ? t('common.loading', "Đang tải...")
+                          : t('appPath.missing.scanApps', "Quét ứng dụng")
                       ) : (
                         <RefreshCw size={12} className={appPathDetecting ? 'spin' : undefined} />
                       )}
@@ -3929,7 +3929,7 @@ function MainApp() {
                               <div className="app-path-candidate-note">
                                 {t(
                                   'appPath.missing.defaultOnly',
-                                  '仅适用于默认桌面端；应用多开请选择真实 Claude.exe',
+                                  "Chỉ dành cho desktop mặc định; hãy chọn Claude.exe thật cho hồ sơ đa phiên bản.",
                                 )}
                               </div>
                             ) : null}
@@ -3953,28 +3953,28 @@ function MainApp() {
                 onClick={() => setAppPathMissing(null)}
                 disabled={appPathMissingBusy}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
                 onClick={handleSaveMissingAppPath}
                 disabled={appPathMissingBusy || !appPathDraft.trim()}
               >
-                {t('common.save', '保存')}
+                {t('common.save', "Lưu")}
               </button>
             </div>
           </div>
         </div>
       )}
       
-      {/* 顶部固定拖拽区域 */}
+      {/* Vùng kéo cố định phía trên */}
       <div
         className="drag-region"
         data-tauri-drag-region
         onMouseDown={handleDragStart}
       />
 
-      {/* 左侧悬浮导航 */}
+      {/* Thanh điều hướng nổi bên trái */}
       <SideNav
         page={page}
         setPage={setPage}
@@ -3996,8 +3996,8 @@ function MainApp() {
         <button
           className="log-entry-fab"
           onClick={() => setShowLogViewer(true)}
-          title={t('manual.dataPrivacy.keywords.5', '日志')}
-          aria-label={t('manual.dataPrivacy.keywords.5', '日志')}
+          title={t('manual.dataPrivacy.keywords.5', "khắc phục lỗi")}
+          aria-label={t('manual.dataPrivacy.keywords.5', "khắc phục lỗi")}
         >
           <FileText size={18} />
         </button>
@@ -4024,7 +4024,7 @@ function MainApp() {
             <TopCenterPromoBanner ads={visibleTopCenterPromoAds} reserveWhenEmpty={false} />
           </div>
         ) : null}
-        {/* overview 现在是合并后的账号总览页面 */}
+        {/* overview hiện là trang tổng quan tài khoản đã hợp nhất */}
         <Suspense fallback={suspenseFallback}>
           <VisibleBootPage when={page === 'dashboard'}>
             <DashboardPage

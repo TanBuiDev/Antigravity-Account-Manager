@@ -302,33 +302,33 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               </span>
               <div className="codex-api-service-title-copy">
                 <div className="codex-api-service-title-line">
-                  <h1>{t("codex.apiService.title", "Codex API 服务")}</h1>
+                  <h1>{t("codex.apiService.title", "Dịch vụ API Codex")}</h1>
                   {apiServiceIsCurrent && (
                     <span className="codex-api-service-current-tag">
-                      {t("codex.current", "当前")}
+                      {t("codex.current", "Hiện tại")}
                     </span>
                   )}
                   <span
                     className={`codex-api-service-status ${localAccessStatus}`}
                   >
                     {!state?.running && collection?.enabled && (state?.preparing || state?.recovering)
-                      ? t("instances.status.starting", "启动中")
+                      ? t("instances.status.starting", "Bắt đầu")
                       : t(CODEX_LOCAL_ACCESS_STATUS_KEYS[localAccessStatus])}
                   </span>
                   {state?.preparing && state.preparationTotal > 0 && (
                     <span className="codex-api-service-current-tag">
-                      {t("common.loading", "加载中...")} {state.preparationCompleted}/
+                      {t("common.loading", "Đang tải...")} {state.preparationCompleted}/
                       {state.preparationTotal}
                     </span>
                   )}
                   {state?.refreshingAccounts && state.accountRefreshTotal > 0 && (
                     <span className="codex-api-service-current-tag">
-                      {t("common.loading", "加载中...")} {state.accountRefreshCompleted}/
+                      {t("common.loading", "Đang tải...")} {state.accountRefreshCompleted}/
                       {state.accountRefreshTotal}
                     </span>
                   )}
                   <span className="codex-api-service-current-tag">
-                    {t("codex.localAccess.title", "API 服务")}
+                    {t("codex.localAccess.title", "Dịch vụ API")}
                   </span>
                 </div>
               </div>
@@ -342,7 +342,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               disabled={busy || activating || testDialogRunning || sidecarRestarting}
             >
               <RefreshCw size={14} />
-              {t("codex.localAccess.refreshStats", "刷新统计")}
+              {t("codex.localAccess.refreshStats", "Làm mới thống kê")}
             </button>
             <button
               type="button"
@@ -355,13 +355,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 testDialogRunning ||
                 sidecarRestarting
               }
-              title={t("codex.localAccess.restartAction", "重启 Sidecar")}
+              title={t("codex.localAccess.restartAction", "Khởi động lại Sidecar")}
             >
               <RefreshCw
                 size={14}
                 className={sidecarRestarting ? "loading-spinner" : ""}
               />
-              {t("codex.localAccess.restartAction", "重启 Sidecar")}
+              {t("codex.localAccess.restartAction", "Khởi động lại Sidecar")}
             </button>
             <button
               type="button"
@@ -379,7 +379,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 size={14}
                 className={testDialogRunning ? "loading-spinner" : ""}
               />
-              {t("codex.localAccess.testAction", "测试")}
+              {t("codex.localAccess.testAction", "Kiểm tra")}
             </button>
             <button
               type="button"
@@ -392,14 +392,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 state?.preparing ||
                 testDialogRunning
               }
-              title={t("codex.localAccess.activateAction", "启动 API 服务")}
+              title={t("codex.localAccess.activateAction", "Khởi động dịch vụ API")}
             >
               {activating ? (
                 <RefreshCw size={14} className="loading-spinner" />
               ) : (
                 <Play size={14} />
               )}
-              {t("codex.localAccess.activateAction", "启动 API 服务")}
+              {t("codex.localAccess.activateAction", "Khởi động dịch vụ API")}
             </button>
             <button
               type="button"
@@ -409,8 +409,8 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             >
               <Power size={14} />
               {collection?.enabled
-                ? t("codex.localAccess.disableService", "停用服务")
-                : t("codex.localAccess.enableService", "启用服务")}
+                ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+                : t("codex.localAccess.enableService", "Bật dịch vụ")}
             </button>
           </div>
           <div className="codex-api-service-hero-speed">
@@ -448,8 +448,8 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   type="button"
                   className="codex-api-service-message-dismiss"
                   onClick={() => setError("")}
-                  aria-label={t("common.close", "关闭")}
-                  title={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
+                  title={t("common.close", "Đóng")}
                 >
                   <X size={14} />
                 </button>
@@ -474,7 +474,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   disabled={portKilling || busy || activating}
                 >
                   <Wrench size={13} />
-                  {t("codex.localAccess.killPortAction", "清理端口")}
+                  {t("codex.localAccess.killPortAction", "Dọn cổng")}
                 </button>}
               </div>
             )}
@@ -486,8 +486,8 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   type="button"
                   className="codex-api-service-message-dismiss"
                   onClick={() => setNotice("")}
-                  aria-label={t("common.close", "关闭")}
-                  title={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
+                  title={t("common.close", "Đóng")}
                 >
                   <X size={14} />
                 </button>
@@ -556,7 +556,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
           <div className="codex-api-service-grid two">
             <section className="codex-api-service-panel">
               <div className="codex-api-service-panel-head">
-                <h2>{t("codex.localAccess.configTitle", "服务配置")}</h2>
+                <h2>{t("codex.localAccess.configTitle", "Cấu hình dịch vụ")}</h2>
               </div>
               <div className="codex-api-service-config-list">
                 <label>
@@ -581,7 +581,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <span>
                     {t(
                       "codex.localAccess.clientBaseUrlHostLabel",
-                      "客户端地址",
+                      "Địa chỉ client",
                     )}
                   </span>
                   <div className="codex-api-service-input-row codex-api-service-stacked-control">
@@ -596,19 +596,19 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       disabled={busy || !collection}
                       ariaLabel={t(
                         "codex.localAccess.clientBaseUrlHostLabel",
-                        "客户端地址",
+                        "Địa chỉ client",
                       )}
                     />
                     <small className="codex-api-service-field-hint">
                       {t(
                         "codex.localAccess.clientBaseUrlHostDesc",
-                        "仅影响写入 Codex Provider 和复制给客户端的 Base URL，不改变服务监听地址。",
+                        "Chỉ ảnh hưởng đến Base URL ghi vào Codex Provider và sao chép cho client; không đổi địa chỉ lắng nghe của dịch vụ.",
                       )}
                     </small>
                   </div>
                 </label>
                 <label>
-                  <span>{t("codex.localAccess.apiKey", "密钥")}</span>
+                  <span>{t("codex.localAccess.apiKey", "Khóa")}</span>
                   <div className="codex-api-service-copy-row">
                     <code title={collection?.apiKey || "-"}>
                       {collection
@@ -642,7 +642,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </div>
                 </label>
                 <label>
-                  <span>{t("codex.localAccess.portLabel", "服务端口")}</span>
+                  <span>{t("codex.localAccess.portLabel", "Cổng dịch vụ")}</span>
                   <div className="codex-api-service-input-row">
                     <input
                       type="number"
@@ -658,13 +658,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       onClick={() => void handleSavePort()}
                       disabled={busy}
                     >
-                      {t("codex.localAccess.portSave", "保存端口")}
+                      {t("codex.localAccess.portSave", "Lưu cổng")}
                     </button>
                   </div>
                 </label>
                 <label>
                   <span>
-                    {t("codex.localAccess.upstreamProxyLabel", "API 代理地址")}
+                    {t("codex.localAccess.upstreamProxyLabel", "URL proxy API")}
                   </span>
                   <div className="codex-api-service-input-row codex-api-service-proxy-input-row">
                     <input
@@ -673,7 +673,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       onChange={(event) => setProxyInput(event.target.value)}
                       placeholder={t(
                         "codex.localAccess.upstreamProxyUrlPlaceholderSidecar",
-                        "留空用全局代理",
+                        "De trong de dung proxy toan cuc",
                       )}
                       disabled={busy}
                     />
@@ -685,14 +685,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     >
                       {t(
                         "codex.localAccess.upstreamProxySaveAction",
-                        "保存代理",
+                        "Lưu proxy",
                       )}
                     </button>
                   </div>
                 </label>
                 <label>
                   <span>
-                    {t("codex.apiService.timeouts.entryLabel", "高级参数")}
+                    {t("codex.apiService.timeouts.entryLabel", "Nâng cao")}
                   </span>
                   <div className="codex-api-service-input-row">
                     <button
@@ -712,7 +712,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       disabled={!collection}
                     >
                       <SlidersHorizontal size={14} />
-                      {t("codex.apiService.timeouts.openAction", "超时与重试")}
+                      {t("codex.apiService.timeouts.openAction", "Hết hạn & thử lại")}
                     </button>
                   </div>
                 </label>
@@ -721,7 +721,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
 
             <section className="codex-api-service-panel">
               <div className="codex-api-service-panel-head">
-                <h2>{t("codex.apiService.healthTitle", "服务健康")}</h2>
+                <h2>{t("codex.apiService.healthTitle", "Sức khỏe dịch vụ")}</h2>
               </div>
               <div className="codex-api-service-health-grid">
                 <button
@@ -730,38 +730,38 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   onClick={() => setHealthModalOpen(true)}
                   aria-label={t(
                     "codex.localAccess.accountPoolHealth.openDetails",
-                    "查看异常账号详情",
+                    "Xem lỗi tài khoản",
                   )}
                 >
                   <span>
-                    {t("codex.apiService.health.availableAccounts", "可用账号")}
+                    {t("codex.apiService.health.availableAccounts", "Tài khoản khả dụng")}
                   </span>
                   <strong>
                     {availableAccountCount}/{memberAccounts.length}
                   </strong>
                 </button>
                 <div>
-                  <span>{t("codex.apiService.health.cooldowns", "冷却")}</span>
+                  <span>{t("codex.apiService.health.cooldowns", "Thời gian chờ")}</span>
                   <strong>{cooldownCount}</strong>
                 </div>
                 <div>
                   <span>
                     {t(
                       "codex.apiService.health.imageUnavailable",
-                      "图片不可用",
+                      "Ảnh không khả dụng",
                     )}
                   </span>
                   <strong>{imageUnavailableCount}</strong>
                 </div>
                 <div>
-                  <span>{t("codex.apiService.health.keys", "客户端 Key")}</span>
+                  <span>{t("codex.apiService.health.keys", "Khóa máy khách")}</span>
                   <strong>{collection?.apiKeys.length ?? 0}</strong>
                 </div>
               </div>
               <div className="codex-api-service-quota-strip">
                 {quotaPoolSummary.visiblePlans.length === 0 ? (
                   <span>
-                    {t("codex.localAccess.emptyMembers", "当前集合暂无账号")}
+                    {t("codex.localAccess.emptyMembers", "Hiện chưa có tài khoản trong bộ sưu tập")}
                   </span>
                 ) : (
                   quotaPoolSummary.visiblePlans.map((item) => (
@@ -773,7 +773,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               (window) =>
                                 `${formatCodexQuotaPoolWindowLabel(
                                   window.label,
-                                  t("codex.localAccess.quotaPool.weeklyShort", "周"),
+                                  t("codex.localAccess.quotaPool.weeklyShort", "Tuần"),
                                 )} ${formatCodexQuotaPoolPercent(window.percentage)}`,
                             )
                             .join(" · ")}`
@@ -790,13 +790,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <h2>
                     {t(
                       "codex.apiService.compat.title",
-                      "协议兼容",
+                      "Tương thích giao thức",
                     )}
                   </h2>
                   <p className="codex-api-service-panel-desc">
                     {t(
                       "codex.apiService.compat.desc",
-                      "同一个 API 服务地址支持 OpenAI Chat、Responses、Anthropic Messages、Gemini 和 Ollama 入口。",
+                      "Cùng một URL dịch vụ API hỗ trợ các ngõ OpenAI Chat, Responses, Anthropic Messages, Gemini và Ollama.",
                     )}
                   </p>
                 </div>
@@ -816,7 +816,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           className="folder-icon-btn"
                           onClick={() => void handleCopy(copyField, item.value)}
                           disabled={!displayBaseUrl}
-                          title={t("common.copy", "复制")}
+                          title={t("common.copy", "Copy​")}
                         >
                           {copiedField === copyField ? (
                             <Check size={14} />
@@ -835,7 +835,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <span>
                   {t(
                     "codex.apiService.compat.modelCatalogLabel",
-                    "模型目录",
+                    "Danh mục mô hình",
                   )}
                 </span>
                 <code>/v1/models · /v1beta/models · /api/tags</code>
@@ -847,7 +847,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
         {activeTab === "keys" && (
           <section className="codex-api-service-panel">
             <div className="codex-api-service-panel-head">
-              <h2>{t("codex.localAccess.apiKeysTitle", "客户端 Key")}</h2>
+              <h2>{t("codex.localAccess.apiKeysTitle", "Khóa máy khách")}</h2>
                 <div className="codex-api-service-head-actions">
                 <button
                   type="button"
@@ -856,7 +856,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   disabled={busy || !collection}
                 >
                   <Plus size={14} />
-                  {t("codex.localAccess.apiKeyAdd", "新增 Key")}
+                  {t("codex.localAccess.apiKeyAdd", "Thêm khóa")}
                 </button>
               </div>
             </div>
@@ -926,7 +926,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         disabled={busy}
                         aria-label={t(
                           "codex.localAccess.apiKeyLabel",
-                          "Key 名称",
+                          "Tên khóa",
                         )}
                       />
                       <code title={apiKey.key}>
@@ -1121,7 +1121,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         <span>
                           {t(
                             "codex.apiService.keys.advancedPolicyTitle",
-                            "账号池与模型策略",
+                            "Nhóm tài khoản, mô hình và giới hạn token",
                           )}
                         </span>
                       </span>
@@ -1130,13 +1130,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span className="api-key-policy-dirty">
                             {t(
                               "codex.apiService.keys.unsaved",
-                              "未保存",
+                              "Chưa lưu",
                             )}
                           </span>
                         )}
                         {policyExpanded
-                          ? t("common.collapse", "收起")
-                          : t("common.expand", "展开")}
+                          ? t("common.collapse", "Thu gọn")
+                          : t("common.expand", "Mở rộng")}
                         <ChevronDown size={14} />
                       </span>
                     </button>
@@ -1191,28 +1191,28 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <span>
                               {t(
                                 "codex.apiService.keys.accountScope",
-                                "账号轮转范围",
+                                "Phạm vi luân chuyển",
                               )}
                             </span>
                             <span className="api-key-account-scope-hint">
                               {accountScopeLocked
                                 ? t(
                                     "codex.apiService.keys.accountScopeFixed",
-                                    "此 Key 已固定绑定账号，不能继承服务池或清空账号范围",
+                                    "Khóa này cố định với tài khoản liên kết và không thể kế thừa nhóm dịch vụ",
                                   )
                                 : policyDraft.inheritAccountPool
                                   ? t(
                                       "codex.apiService.keys.accountScopeInherit",
-                                      "随服务账号池自动更新",
+                                      "Tự động theo nhóm tài khoản dịch vụ",
                                     )
                                   : customScopeInvalid
                                     ? t(
                                         "codex.apiService.keys.accountScopeRequired",
-                                        "自定义账号池至少需要选择 1 个账号",
+                                        "Chọn ít nhất một tài khoản",
                                       )
                                     : t(
                                         "codex.apiService.keys.accountScopeSelected",
-                                        "已选择 {{count}} 个账号",
+                                        "Đã chọn {{count}} tài khoản",
                                         { count: policyDraft.accountIds.length },
                                       )}
                             </span>
@@ -1222,7 +1222,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             role="group"
                             aria-label={t(
                               "codex.apiService.keys.accountScope",
-                              "账号轮转范围",
+                              "Phạm vi luân chuyển",
                             )}
                           >
                             <button
@@ -1245,14 +1245,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 accountScopeLocked
                                   ? t(
                                       "codex.apiService.keys.accountScopeFixed",
-                                      "此 Key 已固定绑定账号，不能继承服务池或清空账号范围",
+                                      "Khóa này cố định với tài khoản liên kết và không thể kế thừa nhóm dịch vụ",
                                     )
                                   : undefined
                               }
                             >
                               {t(
                                 "codex.apiService.keys.accountScopeModeInherit",
-                                "继承服务池",
+                                "Kế thừa nhóm dịch vụ",
                               )}
                             </button>
                             <button
@@ -1290,7 +1290,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             >
                               {t(
                                 "codex.apiService.keys.accountScopeModeCustom",
-                                "自定义账号池",
+                                "Nhóm tài khoản tùy chỉnh",
                               )}
                             </button>
                           </div>
@@ -1298,7 +1298,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <div className="codex-api-service-empty">
                               {t(
                                 "codex.localAccess.emptyMembers",
-                                "当前集合暂无账号",
+                                "Hiện chưa có tài khoản trong bộ sưu tập",
                               )}
                             </div>
                           ) : (
@@ -1379,16 +1379,16 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                         isTopPriorityAccount
                                           ? t(
                                               "codex.apiService.keys.accountPriorityClear",
-                                              "取消置顶账号",
+                                              "Bỏ ghim tài khoản ưu tiên",
                                             )
                                           : isPrioritizedAccount
                                             ? t(
                                                 "codex.apiService.keys.accountPriorityPromote",
-                                                "提升为最高优先级",
+                                                "Đưa tài khoản lên ưu tiên cao nhất",
                                               )
                                           : t(
                                               "codex.apiService.keys.accountPrioritySet",
-                                              "置顶账号优先调用",
+                                              "Ghim tài khoản ưu tiên",
                                             )
                                       }
                                       aria-pressed={isPrioritizedAccount}
@@ -1396,16 +1396,16 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                         isTopPriorityAccount
                                           ? t(
                                               "codex.apiService.keys.accountPriorityClear",
-                                              "取消置顶账号",
+                                              "Bỏ ghim tài khoản ưu tiên",
                                             )
                                           : isPrioritizedAccount
                                             ? t(
                                                 "codex.apiService.keys.accountPriorityPromote",
-                                                "提升为最高优先级",
+                                                "Đưa tài khoản lên ưu tiên cao nhất",
                                               )
                                           : t(
                                               "codex.apiService.keys.accountPrioritySet",
-                                              "置顶账号优先调用",
+                                              "Ghim tài khoản ưu tiên",
                                             )
                                       }
                                       onClick={() =>
@@ -1434,7 +1434,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <span>
                               {t(
                                 "codex.apiService.keys.modelPrefix",
-                                "模型前缀",
+                                "Tiền tố mô hình",
                               )}
                             </span>
                             <input
@@ -1450,7 +1450,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               }
                               placeholder={t(
                                 "codex.apiService.keys.modelPrefixPlaceholder",
-                                "例如 codex",
+                                "Ví dụ: codex",
                               )}
                               disabled={busy}
                             />
@@ -1459,7 +1459,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <span>
                               {t(
                                 "codex.apiService.keys.allowedModels",
-                                "允许模型",
+                                "Mô hình được phép",
                               )}
                             </span>
                             <textarea
@@ -1475,7 +1475,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               }
                               placeholder={t(
                                 "codex.apiService.keys.allowedModelsPlaceholder",
-                                "留空允许全部；每行一个模型或通配符",
+                                "Để trống là tất cả; mỗi dòng một mô hình hoặc mẫu",
                               )}
                               disabled={busy}
                             />
@@ -1484,7 +1484,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <span>
                               {t(
                                 "codex.apiService.keys.excludedModels",
-                                "排除模型",
+                                "Mô hình loại trừ",
                               )}
                             </span>
                             <textarea
@@ -1500,7 +1500,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               }
                               placeholder={t(
                                 "codex.apiService.keys.excludedModelsPlaceholder",
-                                "每行一个模型或通配符",
+                                "Mỗi dòng một mô hình hoặc mẫu",
                               )}
                               disabled={busy}
                             />
@@ -1515,7 +1515,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <Undo2 size={14} />
                               {t(
                                 "codex.apiService.keys.resetPolicy",
-                                "撤销修改",
+                                "Bỏ thay đổi",
                               )}
                             </button>
                             <button
@@ -1531,7 +1531,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <Check size={14} />
                               {t(
                                 "codex.apiService.keys.savePolicy",
-                                "保存策略",
+                                "Lưu chính sách",
                               )}
                             </button>
                           </div>
@@ -1550,7 +1550,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             <section className="codex-api-service-panel">
               <div className="codex-api-service-panel-head">
                 <h2>
-                  {t("codex.localAccess.accountStatsTitle", "按账号统计")}
+                  {t("codex.localAccess.accountStatsTitle", "Theo tài khoản")}
                 </h2>
                 <div className="codex-api-service-head-actions">
                   <button
@@ -1558,10 +1558,10 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     className="btn btn-secondary btn-sm"
                     onClick={handleOpenAddAccount}
                     disabled={busy || activating || testDialogRunning}
-                    title={t("common.shared.addAccount", "添加账号")}
+                    title={t("common.shared.addAccount", "Thêm tài khoản")}
                   >
                     <Plus size={14} />
-                    {t("common.shared.addAccount", "添加账号")}
+                    {t("common.shared.addAccount", "Thêm tài khoản")}
                   </button>
                   <button
                     type="button"
@@ -1574,7 +1574,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <Route size={14} />
                     {t(
                       "codex.apiService.accountModelMappings.action",
-                      "模型映射",
+                      "Bản đồ mô hình",
                     )}
                   </button>
                   <button
@@ -1586,7 +1586,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <Wrench size={14} />
                     {t(
                       "codex.apiService.accountModelRules.action",
-                      "禁用模型",
+                      "Chặn mô hình",
                     )}
                     {accountModelRuleCount > 0 ? ` ${accountModelRuleCount}` : ""}
                   </button>
@@ -1597,7 +1597,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     disabled={busy || !collection}
                   >
                     <FolderPlus size={14} />
-                    {t("codex.localAccess.modal.manageMembers", "管理成员")}
+                    {t("codex.localAccess.modal.manageMembers", "Quản lý thành viên")}
                   </button>
                 </div>
               </div>
@@ -1605,7 +1605,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 {memberAccounts.length === 0 ? (
                   <div className="codex-api-service-empty codex-api-service-empty-with-action">
                     <span>
-                      {t("codex.localAccess.emptyMembers", "当前集合暂无账号")}
+                      {t("codex.localAccess.emptyMembers", "Hiện chưa có tài khoản trong bộ sưu tập")}
                     </span>
                     <div className="codex-api-service-empty-actions">
                       <button
@@ -1615,7 +1615,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         disabled={busy || activating || testDialogRunning}
                       >
                         <Plus size={14} />
-                        {t("common.shared.addAccount", "添加账号")}
+                        {t("common.shared.addAccount", "Thêm tài khoản")}
                       </button>
                       <button
                         type="button"
@@ -1624,7 +1624,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         disabled={busy || !collection}
                       >
                         <FolderPlus size={14} />
-                        {t("codex.localAccess.modal.manageMembers", "管理成员")}
+                        {t("codex.localAccess.modal.manageMembers", "Quản lý thành viên")}
                       </button>
                     </div>
                   </div>
@@ -1661,7 +1661,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span>
                             {t("codex.localAccess.stats.accountRequests", {
                               count: stat?.usage.requestCount ?? 0,
-                              defaultValue: "{{count}} 次",
+                              defaultValue: "{{count}} yêu cầu",
                             })}
                           </span>
                           <span className="codex-api-service-account-meta-token">
@@ -1674,14 +1674,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span>
                             {t("codex.apiService.accountHealth.failures", {
                               count: health?.consecutiveFailures ?? 0,
-                              defaultValue: "连续失败 {{count}}",
+                              defaultValue: "{{count}} lỗi liên tiếp",
                             })}
                           </span>
                           <span>
                             {health?.cooldowns.length
                               ? t("codex.localAccess.healthCooldown", {
                                   count: health.cooldowns.length,
-                                  defaultValue: "冷却 {{count}}",
+                                  defaultValue: "Chờ {{count}}",
                                 })
                               : health && !health.available
                                 ? t(
@@ -1689,16 +1689,16 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                       ? "codex.apiService.accountHealth.authError"
                                       : "codex.apiService.accountHealth.unavailable",
                                     health.schedulerReason === "unauthorized"
-                                      ? "鉴权异常"
-                                      : "暂不可用",
+                                      ? "Xác thực bất thường"
+                                      : "Tạm thời không khả dụng",
                                   )
-                                : t("codex.localAccess.healthAvailable", "可用")}
+                                : t("codex.localAccess.healthAvailable", "Khả dụng")}
                           </span>
                           <span>
                             {t("codex.apiService.accountHealth.image", {
                               status:
                                 health?.imageGenerationStatus ?? "unknown",
-                              defaultValue: "图片 {{status}}",
+                              defaultValue: "Ảnh {{status}}",
                             })}
                           </span>
                           {(account.api_model_mappings?.length ?? 0) > 0 && (
@@ -1707,7 +1707,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 "codex.apiService.accountModelMappings.cardCount",
                                 {
                                   count: account.api_model_mappings?.length ?? 0,
-                                  defaultValue: "映射 {{count}}",
+                                  defaultValue: "{{count}} đã ánh xạ",
                                 },
                               )}
                             </span>
@@ -1718,7 +1718,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 "codex.apiService.accountModelRules.cardCount",
                                 {
                                   count: disabledModelCount,
-                                  defaultValue: "禁用 {{count}}",
+                                  defaultValue: "Chặn {{count}}",
                                 },
                               )}
                             </span>
@@ -1743,7 +1743,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div className="codex-api-service-panel-head">
                 <h2 className="codex-api-service-title-with-icon">
                   <Route size={16} />
-                  {t("codex.apiService.routing.optionsTitle", "调度选项")}
+                  {t("codex.apiService.routing.optionsTitle", "Tùy chọn định tuyến")}
                 </h2>
                 <button
                   type="button"
@@ -1752,25 +1752,25 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   disabled={busy || routingSaving || !collection}
                 >
                   <Check size={14} />
-                  {t("codex.apiService.routing.saveOptions", "保存选项")}
+                  {t("codex.apiService.routing.saveOptions", "Lưu tùy chọn")}
                 </button>
               </div>
               <div className="codex-api-service-config-list codex-api-service-routing-form">
                 <label>
-                  <span>{t("codex.localAccess.routingLabel", "调度策略")}</span>
+                  <span>{t("codex.localAccess.routingLabel", "Định tuyến")}</span>
                   <SingleSelectDropdown
                     value={routingStrategy}
                     options={routingOptions}
                     onChange={(value) => void handleUpdateRouting(value)}
                     disabled={busy || !collection}
-                    ariaLabel={t("codex.localAccess.routingLabel", "调度策略")}
+                    ariaLabel={t("codex.localAccess.routingLabel", "Định tuyến")}
                   />
                 </label>
                 <label>
                   <span>
                     {t(
                       "codex.apiService.routing.sessionAffinity",
-                      "会话亲和",
+                      "Gắn phiên",
                     )}
                   </span>
                   <input
@@ -1786,7 +1786,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <span>
                     {t(
                       "codex.apiService.routing.sessionAffinityTtl",
-                      "过期时间（秒）",
+                      "Thời gian hết hạn (giây)",
                     )}
                   </span>
                   <input
@@ -1820,7 +1820,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <span>
                     {t(
                       "codex.apiService.routing.maxRetryCredentials",
-                      "重试账号数",
+                      "Tài khoản retry",
                     )}
                   </span>
                   <input
@@ -1836,7 +1836,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 </label>
                 <label>
                   <span>
-                    {t("codex.apiService.routing.maxRetryInterval", "重试等待")}
+                    {t("codex.apiService.routing.maxRetryInterval", "Chờ retry")}
                   </span>
                   <input
                     type="number"
@@ -1851,7 +1851,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 </label>
                 <label>
                   <span>
-                    {t("codex.apiService.routing.disableCooling", "禁用冷却")}
+                    {t("codex.apiService.routing.disableCooling", "Tắt cooldown")}
                   </span>
                   <input
                     type="checkbox"
@@ -1866,7 +1866,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <span>
                     {t(
                       "codex.apiService.routing.immediateSseResponse",
-                      "SSE 立即返回 200",
+                      "SSE trả 200 ngay",
                     )}
                   </span>
                   <input
@@ -1942,7 +1942,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             <section className="codex-api-service-panel">
               <div className="codex-api-service-panel-head">
                 <h2>
-                  {t("codex.apiService.models.availableTitle", "可用模型")}
+                  {t("codex.apiService.models.availableTitle", "Mô hình khả dụng")}
                 </h2>
                 <div className="codex-api-service-head-actions">
                   <button
@@ -1952,7 +1952,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     disabled={!collection}
                   >
                     <BadgeDollarSign size={14} />
-                    {t("codex.apiService.models.pricingAction", "价格设置")}
+                    {t("codex.apiService.models.pricingAction", "Giá")}
                   </button>
                   <button
                     type="button"
@@ -1986,13 +1986,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <section className="codex-api-service-panel">
                 <div className="codex-api-service-panel-head">
                   <h2>
-                    {t("codex.apiService.models.capabilityTitle", "能力开关")}
+                    {t("codex.apiService.models.capabilityTitle", "Công tắc năng lực")}
                   </h2>
                 </div>
                 <div className="codex-api-service-config-list">
                   <label>
                     <span>
-                      {t("codex.localAccess.accessScopeLabel", "访问范围")}
+                      {t("codex.localAccess.accessScopeLabel", "Phạm vi truy cập")}
                     </span>
                     <SingleSelectDropdown
                       value={accessScope}
@@ -2001,21 +2001,21 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       disabled={busy || !collection}
                       ariaLabel={t(
                         "codex.localAccess.accessScopeLabel",
-                        "访问范围",
+                        "Phạm vi truy cập",
                       )}
                     />
                   </label>
                   <p className="codex-api-service-muted">
                     {t(
                       "codex.apiService.models.capabilityDesc",
-                      "gpt-image-2 会根据服务开关、账号套餐和已记录的图片能力状态自动暴露或隐藏。",
+                      "gpt-image-2 được tự động hiển thị hoặc ẩn theo công tắc dịch vụ, gói tài khoản và trạng thái năng lực ảnh đã ghi nhận.",
                     )}
                   </p>
                 </div>
               </section>
               <section className="codex-api-service-panel">
                 <div className="codex-api-service-panel-head">
-                  <h2>{t("codex.apiService.models.rulesTitle", "模型规则")}</h2>
+                  <h2>{t("codex.apiService.models.rulesTitle", "Quy tắc mô hình")}</h2>
                   <button
                     type="button"
                     className="btn btn-secondary btn-sm"
@@ -2023,13 +2023,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     disabled={busy || !collection}
                   >
                     <Check size={14} />
-                    {t("codex.apiService.models.saveRules", "保存规则")}
+                    {t("codex.apiService.models.saveRules", "Lưu quy tắc")}
                   </button>
                 </div>
                 <div className="codex-api-service-policy-grid model-rules">
                   <label>
                     <span>
-                      {t("codex.apiService.models.aliasTitle", "模型别名")}
+                      {t("codex.apiService.models.aliasTitle", "Bí danh mô hình")}
                     </span>
                     <textarea
                       value={modelAliasesText}
@@ -2038,14 +2038,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       }
                       placeholder={t(
                         "codex.apiService.models.aliasPlaceholder",
-                        "gpt-5 => g5；保留原模型加 +",
+                        "gpt-5 => g5; thêm + để giữ mô hình gốc",
                       )}
                       disabled={busy || !collection}
                     />
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.models.excludedTitle", "隐藏模型")}
+                      {t("codex.apiService.models.excludedTitle", "Mô hình ẩn")}
                     </span>
                     <textarea
                       value={excludedModelsText}
@@ -2054,7 +2054,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       }
                       placeholder={t(
                         "codex.apiService.models.excludedPlaceholder",
-                        "每行一个模型或通配符，例如 gpt-5-*",
+                        "Mỗi dòng một mô hình hoặc mẫu, ví dụ gpt-5-*",
                       )}
                       disabled={busy || !collection}
                     />
@@ -2071,7 +2071,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div
                 className="codex-api-service-subtabs"
                 role="tablist"
-                aria-label={t("codex.apiService.tabs.logs", "统计与日志")}
+                aria-label={t("codex.apiService.tabs.logs", "Thống kê và nhật ký")}
               >
                 {statsLogTabs.map((tab) => (
                   <button
@@ -2092,13 +2092,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   className="btn btn-secondary btn-sm"
                   onClick={() => void handleRefreshStatsDetails()}
                   disabled={busy || statsDetailsRefreshing}
-                  title={t("codex.localAccess.refreshStats", "刷新统计")}
+                  title={t("codex.localAccess.refreshStats", "Làm mới thống kê")}
                 >
                   <RefreshCw
                     size={14}
                     className={statsDetailsRefreshing ? "loading-spinner" : ""}
                   />
-                  {t("common.refresh", "刷新")}
+                  {t("common.refresh", "Làm mới")}
                 </button>
                 <button
                   type="button"
@@ -2107,7 +2107,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   disabled={busy}
                 >
                   <Trash2 size={14} />
-                  {t("codex.localAccess.clearStats", "清除统计")}
+                  {t("codex.localAccess.clearStats", "Xóa thống kê")}
                 </button>
               </div>
             </div>
@@ -2116,7 +2116,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div className="codex-api-service-account-grid codex-api-service-stats-account-grid">
                 {memberAccounts.length === 0 ? (
                   <div className="codex-api-service-empty">
-                    {t("codex.localAccess.emptyMembers", "当前集合暂无账号")}
+                    {t("codex.localAccess.emptyMembers", "Hiện chưa có tài khoản trong bộ sưu tập")}
                   </div>
                 ) : (
                   memberAccounts.map((account) => {
@@ -2147,7 +2147,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span>
                             {t("codex.localAccess.stats.accountRequests", {
                               count: stat?.usage.requestCount ?? 0,
-                              defaultValue: "{{count}} 次",
+                              defaultValue: "{{count}} yêu cầu",
                             })}
                           </span>
                           <span className="codex-api-service-account-meta-token">
@@ -2160,14 +2160,14 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span>
                             {t("codex.apiService.accountHealth.failures", {
                               count: health?.consecutiveFailures ?? 0,
-                              defaultValue: "连续失败 {{count}}",
+                              defaultValue: "{{count}} lỗi liên tiếp",
                             })}
                           </span>
                           <span>
                             {health?.cooldowns.length
                               ? t("codex.localAccess.healthCooldown", {
                                   count: health.cooldowns.length,
-                                  defaultValue: "冷却 {{count}}",
+                                  defaultValue: "Chờ {{count}}",
                                 })
                               : health && !health.available
                                 ? t(
@@ -2175,16 +2175,16 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                       ? "codex.apiService.accountHealth.authError"
                                       : "codex.apiService.accountHealth.unavailable",
                                     health.schedulerReason === "unauthorized"
-                                      ? "鉴权异常"
-                                      : "暂不可用",
+                                      ? "Xác thực bất thường"
+                                      : "Tạm thời không khả dụng",
                                   )
-                                : t("codex.localAccess.healthAvailable", "可用")}
+                                : t("codex.localAccess.healthAvailable", "Khả dụng")}
                           </span>
                           <span>
                             {t("codex.apiService.accountHealth.image", {
                               status:
                                 health?.imageGenerationStatus ?? "unknown",
-                              defaultValue: "图片 {{status}}",
+                              defaultValue: "Ảnh {{status}}",
                             })}
                           </span>
                         </div>
@@ -2199,7 +2199,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div className="codex-api-service-log-list">
                 {(selectedStatsWindow?.models?.length ?? 0) === 0 ? (
                   <div className="codex-api-service-empty">
-                    {t("codex.localAccess.statsEmpty", "当前还没有统计数据")}
+                    {t("codex.localAccess.statsEmpty", "Chưa có thống kê")}
                   </div>
                 ) : (
                   selectedStatsWindow?.models.map((item) => (
@@ -2214,7 +2214,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         <span>
                           {t("codex.localAccess.stats.accountRequests", {
                             count: item.usage.requestCount,
-                            defaultValue: "{{count}} 次",
+                            defaultValue: "{{count}} yêu cầu",
                           })}
                         </span>
                         <span>{formatRequestResultDetail(item.usage)}</span>
@@ -2235,7 +2235,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div className="codex-api-service-log-list">
                 {(selectedStatsWindow?.apiKeys?.length ?? 0) === 0 ? (
                   <div className="codex-api-service-empty">
-                    {t("codex.localAccess.statsEmpty", "当前还没有统计数据")}
+                    {t("codex.localAccess.statsEmpty", "Chưa có thống kê")}
                   </div>
                 ) : (
                   selectedStatsWindow?.apiKeys.map((item) => (
@@ -2252,7 +2252,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         <span>
                           {t("codex.localAccess.stats.accountRequests", {
                             count: item.usage.requestCount,
-                            defaultValue: "{{count}} 次",
+                            defaultValue: "{{count}} yêu cầu",
                           })}
                         </span>
                         <span>{formatRequestResultDetail(item.usage)}</span>
@@ -2290,12 +2290,12 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             <div className="modal-header">
               <div>
                 <h2 id="codex-api-service-timeouts-title">
-                  {t("codex.apiService.timeouts.title", "超时与重试")}
+                  {t("codex.apiService.timeouts.title", "Hết hạn & thử lại")}
                 </h2>
                 <p className="codex-api-service-pricing-desc">
                   {t(
                     "codex.apiService.timeouts.desc",
-                    "单位为秒，保存后会重启或重载 API 服务。",
+                    "Giá trị tính bằng giây. Khi lưu, dịch vụ API sẽ khởi động lại hoặc tải lại.",
                   )}
                 </p>
               </div>
@@ -2303,7 +2303,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 type="button"
                 className="modal-close"
                 onClick={() => setTimeoutsModalOpen(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2317,12 +2317,12 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               )}
               <section className="codex-api-service-timeout-section codex-api-service-timeout-preset-section">
                 <h3>
-                  {t("codex.apiService.timeouts.presetTitle", "参数方案")}
+                  {t("codex.apiService.timeouts.presetTitle", "Mẫu tham số")}
                 </h3>
                 <div className="codex-api-service-timeout-preset-row">
                   <label className="codex-api-service-timeout-preset-select">
                     <span>
-                      {t("codex.apiService.timeouts.presetSelect", "选择方案")}
+                      {t("codex.apiService.timeouts.presetSelect", "Chọn mẫu")}
                     </span>
                     <select
                       value={selectedTimeoutPresetId}
@@ -2339,7 +2339,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label className="codex-api-service-timeout-preset-name">
                     <span>
-                      {t("codex.apiService.timeouts.presetName", "方案名称")}
+                      {t("codex.apiService.timeouts.presetName", "Tên mẫu")}
                     </span>
                     <input
                       type="text"
@@ -2351,7 +2351,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                       }}
                       placeholder={t(
                         "codex.apiService.timeouts.presetNamePlaceholder",
-                        "新的自定义方案",
+                        "Mẫu tùy chỉnh mới",
                       )}
                     />
                   </label>
@@ -2364,7 +2364,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     disabled={!collection || busy}
                   >
                     <Plus size={14} />
-                    {t("codex.apiService.timeouts.saveAsPreset", "另存为方案")}
+                    {t("codex.apiService.timeouts.saveAsPreset", "Lưu thành mẫu")}
                   </button>
                   <button
                     type="button"
@@ -2377,7 +2377,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <Check size={14} />
                     {t(
                       "codex.apiService.timeouts.updatePreset",
-                      "更新当前方案",
+                      "Cập nhật mẫu hiện tại",
                     )}
                   </button>
                   <button
@@ -2389,18 +2389,18 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     }
                   >
                     <Trash2 size={14} />
-                    {t("codex.apiService.timeouts.deletePreset", "删除方案")}
+                    {t("codex.apiService.timeouts.deletePreset", "Xóa mẫu")}
                   </button>
                 </div>
               </section>
               <section className="codex-api-service-timeout-section">
                 <h3>
-                  {t("codex.apiService.timeouts.sidecarTitle", "流式超时")}
+                  {t("codex.apiService.timeouts.sidecarTitle", "Thời gian luồng")}
                 </h3>
                 <div className="codex-api-service-policy-grid">
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.streamOpen", "流打开超时")}
+                      {t("codex.apiService.timeouts.streamOpen", "Mở stream")}
                     </span>
                     <input
                       type="number"
@@ -2417,7 +2417,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.streamIdle", "流空闲超时")}
+                      {t("codex.apiService.timeouts.streamIdle", "Stream rỗi")}
                     </span>
                     <input
                       type="number"
@@ -2434,7 +2434,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.imageOpen", "图片流打开")}
+                      {t("codex.apiService.timeouts.imageOpen", "Mở ảnh")}
                     </span>
                     <input
                       type="number"
@@ -2451,7 +2451,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.imageIdle", "图片流空闲")}
+                      {t("codex.apiService.timeouts.imageIdle", "Ảnh rỗi")}
                     </span>
                     <input
                       type="number"
@@ -2468,7 +2468,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.openAttempts", "打开尝试")}
+                      {t("codex.apiService.timeouts.openAttempts", "Lần mở")}
                     </span>
                     <input
                       type="number"
@@ -2504,7 +2504,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.bootstrapRetries",
-                        "启动重试",
+                        "Thử lại khởi động",
                       )}
                     </span>
                     <input
@@ -2526,7 +2526,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h3>
                   {t(
                     "codex.apiService.timeouts.retryTitle",
-                    "发送与账号重试",
+                    "Gửi và thử lại tài khoản",
                   )}
                 </h3>
                 <div className="codex-api-service-policy-grid">
@@ -2534,7 +2534,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.sendRetryAttempts",
-                        "发送重试",
+                        "Thử lại gửi",
                       )}
                     </span>
                     <input
@@ -2554,7 +2554,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.sendRetryBaseDelay",
-                        "发送基础延迟(ms)",
+                        "Trễ cơ bản gửi (ms)",
                       )}
                     </span>
                     <input
@@ -2574,7 +2574,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.sendRetryMaxDelay",
-                        "发送最大延迟(ms)",
+                        "Trễ tối đa gửi (ms)",
                       )}
                     </span>
                     <input
@@ -2594,7 +2594,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.singleStatusAttempts",
-                        "单账号重试",
+                        "Thử lại một tài khoản",
                       )}
                     </span>
                     <input
@@ -2614,7 +2614,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.singleStatusBaseDelay",
-                        "单账号基础延迟(ms)",
+                        "Trễ cơ bản tài khoản (ms)",
                       )}
                     </span>
                     <input
@@ -2634,7 +2634,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.singleStatusMaxDelay",
-                        "单账号最大延迟(ms)",
+                        "Trễ tối đa tài khoản (ms)",
                       )}
                     </span>
                     <input
@@ -2656,7 +2656,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h3>
                   {t(
                     "codex.apiService.timeouts.websocketTitle",
-                    "WebSocket 设置",
+                    "Thiết lập WebSocket",
                   )}
                 </h3>
                 <div className="codex-api-service-policy-grid">
@@ -2664,7 +2664,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.websocketConnect",
-                        "连接超时",
+                        "Hết hạn kết nối",
                       )}
                     </span>
                     <input
@@ -2684,7 +2684,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.websocketInitial",
-                        "首包超时",
+                        "Hết hạn tin đầu",
                       )}
                     </span>
                     <input
@@ -2702,7 +2702,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   </label>
                   <label>
                     <span>
-                      {t("codex.apiService.timeouts.websocketIdle", "空闲超时")}
+                      {t("codex.apiService.timeouts.websocketIdle", "Hết hạn nhàn rỗi")}
                     </span>
                     <input
                       type="number"
@@ -2721,7 +2721,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     <span>
                       {t(
                         "codex.apiService.timeouts.websocketHeartbeat",
-                        "心跳间隔",
+                        "Khoảng heartbeat",
                       )}
                     </span>
                     <input
@@ -2748,21 +2748,21 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 disabled={busy}
               >
                 <RefreshCw size={15} />
-                {t("codex.apiService.models.pricingReprice", "重算历史估值")}
+                {t("codex.apiService.models.pricingReprice", "Tính lại lịch sử")}
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
                 onClick={handleResetTimeoutDrafts}
               >
-                {t("codex.apiService.timeouts.resetDefaults", "恢复默认")}
+                {t("codex.apiService.timeouts.resetDefaults", "Khôi phục mặc định")}
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => setTimeoutsModalOpen(false)}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -2771,7 +2771,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 disabled={busy}
               >
                 <Check size={15} />
-                {t("common.save", "保存")}
+                {t("common.save", "Lưu")}
               </button>
             </div>
           </div>
@@ -2794,13 +2794,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h2 id="codex-api-service-account-model-rules-title">
                   {t(
                     "codex.apiService.accountModelRules.title",
-                    "账号禁用模型",
+                    "Chặn mô hình theo tài khoản",
                   )}
                 </h2>
                 <p className="codex-api-service-pricing-desc">
                   {t(
                     "codex.apiService.accountModelRules.desc",
-                    "命中规则的账号不会参与该模型请求；每行一个模型或通配符。",
+                    "Tài khoản khớp quy tắc sẽ bị bỏ qua với yêu cầu mô hình đó. Mỗi dòng một mô hình hoặc ký tự đại diện.",
                   )}
                 </p>
               </div>
@@ -2808,7 +2808,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 type="button"
                 className="modal-close"
                 onClick={handleCloseAccountModelRules}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2819,7 +2819,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <span>
                     {t(
                       "codex.apiService.accountModelRules.bulkLabel",
-                      "批量规则",
+                      "Quy tắc hàng loạt",
                     )}
                   </span>
                   <textarea
@@ -2841,7 +2841,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 >
                   {t(
                     "codex.apiService.accountModelRules.applySelected",
-                    "应用到已选",
+                    "Áp dụng đã chọn",
                   )}
                 </button>
                 <button
@@ -2859,11 +2859,11 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   {accountModelRuleAllSelected
                     ? t(
                         "codex.apiService.accountModelRules.clearSelection",
-                        "清除选择",
+                        "Bỏ chọn",
                       )
                     : t(
                         "codex.apiService.accountModelRules.selectAll",
-                        "全选账号",
+                        "Chọn tài khoản",
                       )}
                 </button>
               </div>
@@ -2926,7 +2926,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 className="btn btn-secondary"
                 onClick={handleCloseAccountModelRules}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -2935,7 +2935,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 disabled={busy}
               >
                 <Check size={15} />
-                {t("common.save", "保存")}
+                {t("common.save", "Lưu")}
               </button>
             </div>
           </div>
@@ -2958,13 +2958,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h2 id="codex-api-service-account-model-mappings-title">
                   {t(
                     "codex.apiService.accountModelMappings.title",
-                    "账号模型映射",
+                    "Ánh xạ mô hình tài khoản",
                   )}
                 </h2>
                 <p className="codex-api-service-pricing-desc">
                   {t(
                     "codex.apiService.accountModelMappings.desc",
-                    "只改这个账号被抽中后发给上游的模型名。左侧是调用方请求的模型，右侧是实际上游模型。上下文窗口可选，官方 / DeepSeek 留空则保留厂商默认值。",
+                    "Chỉ viết lại tên mô hình sau khi tài khoản này được chọn. Bên trái là yêu cầu của máy khách; bên phải là mô hình thực sự được gửi lên.",
                   )}
                 </p>
               </div>
@@ -2972,7 +2972,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 type="button"
                 className="modal-close"
                 onClick={handleCloseAccountModelMappings}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2988,7 +2988,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <div className="codex-api-service-empty">
                   {t(
                     "codex.apiService.accountModelMappings.empty",
-                    "当前成员里没有可映射的 API Key 账号",
+                    "Không có tài khoản khóa API nào trong nhóm này có thể ánh xạ",
                   )}
                 </div>
               ) : (
@@ -3017,7 +3017,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           >
                             {t(
                               "codex.apiService.accountModelMappings.fillDeepSeek",
-                              "填入 DeepSeek",
+                              "Điền DeepSeek",
                             )}
                           </button>
                           <button
@@ -3029,7 +3029,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                             <Plus size={14} />
                             {t(
                               "codex.apiService.accountModelMappings.addRow",
-                              "添加一行",
+                              "Thêm hàng",
                             )}
                           </button>
                         </div>
@@ -3044,7 +3044,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <span>
                                 {t(
                                   "codex.apiService.accountModelMappings.clientModel",
-                                  "请求模型",
+                                  "Yêu cầu",
                                 )}
                               </span>
                               <input
@@ -3068,7 +3068,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <span>
                                 {t(
                                   "codex.apiService.accountModelMappings.upstreamModel",
-                                  "发送模型",
+                                  "Gửi",
                                 )}
                               </span>
                               <input
@@ -3089,7 +3089,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                               <span>
                                 {t(
                                   "codex.api.modelCatalog.contextWindow",
-                                  "上下文窗口",
+                                  "Cửa sổ ngữ cảnh",
                                 )}
                               </span>
                               <input
@@ -3104,7 +3104,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 }
                                 placeholder={t(
                                   "codex.api.modelCatalog.contextWindowPlaceholder",
-                                  "留空=默认",
+                                  "Để trống = mặc định",
                                 )}
                                 inputMode="numeric"
                                 disabled={busy}
@@ -3117,7 +3117,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                                 removeAccountModelMappingRow(account.id, index)
                               }
                               disabled={busy}
-                              aria-label={t("common.delete", "删除")}
+                              aria-label={t("common.delete", "Xóa")}
                             >
                               <Trash2 size={14} />
                             </button>
@@ -3135,7 +3135,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 className="btn btn-secondary"
                 onClick={handleCloseAccountModelMappings}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -3144,7 +3144,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 disabled={busy || mappingMemberAccounts.length === 0}
               >
                 <Check size={15} />
-                {t("common.save", "保存")}
+                {t("common.save", "Lưu")}
               </button>
             </div>
           </div>
@@ -3165,12 +3165,12 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             <div className="modal-header">
               <div>
                 <h2 id="codex-api-service-pricing-title">
-                  {t("codex.apiService.models.pricingTitle", "模型价格设置")}
+                  {t("codex.apiService.models.pricingTitle", "Giá mô hình")}
                 </h2>
                 <p className="codex-api-service-pricing-desc">
                   {t(
                     "codex.apiService.models.pricingDesc",
-                    "单位为 USD / 1M tokens，仅用于本地价值统计。",
+                    "USD / 1M token, chỉ dùng thống kê cục bộ.",
                   )}
                 </p>
               </div>
@@ -3178,7 +3178,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 type="button"
                 className="modal-close"
                 onClick={() => setPricingModalOpen(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -3209,61 +3209,61 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
               <div className="codex-api-service-pricing-table">
                 <div className="codex-api-service-pricing-head">
                   <span>
-                    {t("codex.apiService.models.pricingModel", "模型")}
+                    {t("codex.apiService.models.pricingModel", "Mô hình")}
                   </span>
                   <span>
                     {t(
                       "codex.apiService.models.pricingLongThreshold",
-                      "长上下文阶梯阈值（tokens）",
+                      "Ngưỡng ngữ cảnh dài (tokens)",
                     )}
                   </span>
                   <span className="codex-api-service-pricing-head-tier">
                     {t(
                       "codex.apiService.models.pricingStandard",
-                      "标准",
+                      "Chuẩn",
                     )}
                     <span className="codex-api-service-pricing-head-fields">
-                      <span>{t("codex.apiService.models.pricingInput", "输入")}</span>
+                      <span>{t("codex.apiService.models.pricingInput", "Đầu vào")}</span>
                       <span>
-                        {t("codex.apiService.models.pricingCache", "缓存输入")}
+                        {t("codex.apiService.models.pricingCache", "Đầu vào cache")}
                       </span>
-                      <span>{t("codex.apiService.models.pricingOutput", "输出")}</span>
+                      <span>{t("codex.apiService.models.pricingOutput", "Đầu ra")}</span>
                     </span>
                   </span>
                   <span className="codex-api-service-pricing-head-tier">
                     {t(
                       "codex.apiService.models.pricingStandardLong",
-                      "标准（长上下文）",
+                      "Chuẩn (dài)",
                     )}
                     <span className="codex-api-service-pricing-head-fields">
-                      <span>{t("codex.apiService.models.pricingInput", "输入")}</span>
+                      <span>{t("codex.apiService.models.pricingInput", "Đầu vào")}</span>
                       <span>
-                        {t("codex.apiService.models.pricingCache", "缓存输入")}
+                        {t("codex.apiService.models.pricingCache", "Đầu vào cache")}
                       </span>
-                      <span>{t("codex.apiService.models.pricingOutput", "输出")}</span>
+                      <span>{t("codex.apiService.models.pricingOutput", "Đầu ra")}</span>
                     </span>
                   </span>
                   <span className="codex-api-service-pricing-head-tier">
                     {t(
                       "codex.apiService.models.pricingPriority",
-                      "快速",
+                      "Ưu tiên",
                     )}
                     <span className="codex-api-service-pricing-head-fields">
-                      <span>{t("codex.apiService.models.pricingInput", "输入")}</span>
+                      <span>{t("codex.apiService.models.pricingInput", "Đầu vào")}</span>
                       <span>
-                        {t("codex.apiService.models.pricingCache", "缓存输入")}
+                        {t("codex.apiService.models.pricingCache", "Đầu vào cache")}
                       </span>
-                      <span>{t("codex.apiService.models.pricingOutput", "输出")}</span>
+                      <span>{t("codex.apiService.models.pricingOutput", "Đầu ra")}</span>
                     </span>
                   </span>
                   <div className="codex-api-service-pricing-cell">
                     <span>
-                      {t("codex.apiService.models.pricingSource", "来源")}
+                      {t("codex.apiService.models.pricingSource", "Nguồn")}
                     </span>
                   </div>
                   <div className="codex-api-service-pricing-cell">
                     <span>
-                      {t("codex.apiService.models.pricingActions", "操作")}
+                      {t("codex.apiService.models.pricingActions", "Thao tác")}
                     </span>
                   </div>
                 </div>
@@ -3282,11 +3282,11 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           value={draft.longContextThresholdTokens}
                           placeholder={t(
                             "codex.apiService.models.pricingLongThreshold",
-                            "长上下文阶梯阈值（tokens）",
+                            "Ngưỡng ngữ cảnh dài (tokens)",
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingLongThreshold",
-                            "长上下文阶梯阈值（tokens）",
+                            "Ngưỡng ngữ cảnh dài (tokens)",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3309,7 +3309,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingInput",
-                            "输入",
+                            "Đầu vào",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3330,7 +3330,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingCache",
-                            "缓存输入",
+                            "Đầu vào cache",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3351,7 +3351,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingOutput",
-                            "输出",
+                            "Đầu ra",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3374,7 +3374,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingStandardLongInput",
-                            "标准（长上下文）输入",
+                            "Input chuẩn (dài)",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3395,7 +3395,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingStandardLongCache",
-                            "标准（长上下文）缓存输入",
+                            "Input cache chuẩn (dài)",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3416,7 +3416,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingStandardLongOutput",
-                            "标准（长上下文）输出",
+                            "Output chuẩn (dài)",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3439,7 +3439,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingPriorityInput",
-                            "快速 输入",
+                            "Input ưu tiên",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3460,7 +3460,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingPriorityCache",
-                            "快速 缓存输入",
+                            "Input cache ưu tiên",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3481,7 +3481,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           )}
                           aria-label={t(
                             "codex.apiService.models.pricingPriorityOutput",
-                            "快速 输出",
+                            "Output ưu tiên",
                           )}
                           onChange={(event) =>
                             updatePricingDraft(
@@ -3499,16 +3499,16 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           {draft.custom
                             ? t(
                                 "codex.apiService.models.pricingCustom",
-                                "自定义",
+                                "Tùy chỉnh",
                               )
                             : draft.hasPreset
                               ? t(
                                   "codex.apiService.models.pricingPreset",
-                                  "预设",
+                                  "Cài sẵn",
                                 )
                               : t(
                                   "codex.apiService.models.pricingUnset",
-                                  "未设置",
+                                  "Chưa đặt",
                                 )}
                         </span>
                       </div>
@@ -3518,7 +3518,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           className="btn btn-secondary btn-sm"
                           onClick={() => resetPricingDraft(draft.modelId)}
                         >
-                          {t("codex.apiService.models.pricingReset", "重置")}
+                          {t("codex.apiService.models.pricingReset", "Đặt lại")}
                         </button>
                       </div>
                     </div>
@@ -3532,7 +3532,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 className="btn btn-secondary"
                 onClick={() => setPricingModalOpen(false)}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 type="button"
@@ -3541,7 +3541,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 disabled={busy || pricingRepriceActive}
               >
                 <Check size={15} />
-                {t("common.save", "保存")}
+                {t("common.save", "Lưu")}
               </button>
             </div>
           </div>
@@ -3564,13 +3564,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 <h3 id="codex-api-service-test-dialog-title">
                   <ShieldCheck size={18} />
                   <span>
-                    {t("codex.localAccess.testDialogTitle", "测试 API 服务")}
+                    {t("codex.localAccess.testDialogTitle", "Kiểm tra dịch vụ API")}
                   </span>
                 </h3>
                 <p>
                   {t(
                     "codex.localAccess.testDialogDesc",
-                    "像游乐场一样通过当前 API 服务发起真实对话，便于检查模型、账号路由和上游响应。",
+                    "Bắt đầu cuộc trò chuyện thật kiểu playground qua dịch vụ API hiện tại để kiểm tra mô hình, định tuyến tài khoản và phản hồi upstream.",
                   )}
                 </p>
               </div>
@@ -3587,7 +3587,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
             <div className="modal-body codex-local-access-test-dialog-body">
               <div className="codex-local-access-test-chat-toolbar">
                 <div className="codex-local-access-test-chat-model">
-                  <span>{t("codex.localAccess.testChatModel", "模型")}</span>
+                  <span>{t("codex.localAccess.testChatModel", "Mô hình")}</span>
                   <SingleSelectDropdown
                     value={selectedModelId}
                     options={modelIds.map((modelId) => ({
@@ -3596,10 +3596,10 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                     }))}
                     onChange={setSelectedModelId}
                     disabled={modelIds.length === 0 || testDialogRunning}
-                    ariaLabel={t("codex.localAccess.testChatModel", "模型")}
+                    ariaLabel={t("codex.localAccess.testChatModel", "Mô hình")}
                     placeholder={t(
                       "codex.localAccess.modelIdPlaceholder",
-                      "选择模型 ID",
+                      "Chọn ID mô hình",
                     )}
                     menuPlacement="down"
                     menuMaxHeight={240}
@@ -3611,7 +3611,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   onClick={clearTestChat}
                   disabled={testDialogRunning || testChatMessages.length === 0}
                 >
-                  {t("codex.localAccess.testChatClear", "清空对话")}
+                  {t("codex.localAccess.testChatClear", "Xóa chat")}
                 </button>
               </div>
 
@@ -3623,7 +3623,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                   <div className="codex-local-access-test-chat-empty">
                     {t(
                       "codex.localAccess.testChatEmpty",
-                      "输入一条消息后，会通过当前 API 服务发起真实对话。",
+                      "Gửi một tin nhắn để bắt đầu cuộc trò chuyện thật qua dịch vụ API hiện tại.",
                     )}
                   </div>
                 ) : (
@@ -3650,7 +3650,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                           <span className="codex-local-access-test-chat-meta">
                             {t("codex.localAccess.testChatLatency", {
                               latency: formatLatencyMs(message.latencyMs),
-                              defaultValue: "耗时 {{latency}}",
+                              defaultValue: "Mất {{latency}}",
                             })}
                           </span>
                         )}
@@ -3665,7 +3665,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                         <RefreshCw size={14} className="loading-spinner" />
                         {t(
                           "codex.localAccess.testChatSending",
-                          "正在请求 API 服务",
+                          "Đang gọi API",
                         )}
                       </span>
                     </div>
@@ -3699,7 +3699,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 rows={2}
                 placeholder={t(
                   "codex.localAccess.testChatInputPlaceholder",
-                  "输入测试消息，Enter 发送",
+                  "Nhập tin nhắn thử, Enter để gửi",
                 )}
               />
               <button
@@ -3710,7 +3710,7 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
                 }
               >
                 <Send size={15} />
-                {t("codex.localAccess.testChatSend", "发送")}
+                {t("codex.localAccess.testChatSend", "Gửi")}
               </button>
               <button
                 className="btn btn-secondary"
@@ -3755,13 +3755,13 @@ export function CodexApiServiceView(props: CodexApiServiceViewProps) {
         addressOptions={[
           {
             value: "local",
-            label: t("codex.localAccess.addressLocal", "本机"),
+            label: t("codex.localAccess.addressLocal", "Cục bộ"),
           },
           ...(state?.lanBaseUrl
             ? [
                 {
                   value: "lan",
-                  label: t("codex.localAccess.addressLan", "局域网"),
+                  label: t("codex.localAccess.addressLan", "Mạng cục bộ"),
                 },
               ]
             : []),

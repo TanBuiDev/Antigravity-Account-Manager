@@ -85,15 +85,15 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
     () => [
       {
         value: '',
-        label: t('codebuddy.sessionManager.statusAll', '全部状态'),
+        label: t('codebuddy.sessionManager.statusAll', 'Tất cả trạng thái'),
       },
       {
         value: 'Completed',
-        label: t('codebuddy.sessionManager.statusCompleted', '已完成'),
+        label: t('codebuddy.sessionManager.statusCompleted', 'Đã hoàn tất'),
       },
       {
         value: 'InProgress',
-        label: t('codebuddy.sessionManager.statusInProgress', '进行中'),
+        label: t('codebuddy.sessionManager.statusInProgress', 'Đang thực hiện'),
       },
     ],
     [t],
@@ -181,7 +181,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
                 type="text"
                 value={keywordInput}
                 onChange={(e) => handleKeywordChange(e.target.value)}
-                placeholder={t('codebuddy.sessionManager.searchPlaceholder', '搜索标题或工作目录...')}
+                placeholder={t('codebuddy.sessionManager.searchPlaceholder', 'Tìm theo tiêu đề hoặc thư mục làm việc...')}
                 disabled={loading}
               />
             </div>
@@ -193,7 +193,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
             disabled={loading || !keywordInput}
           >
             <X size={14} />
-            {t('codex.sessionManager.search.clear', '清空')}
+            {t('codex.sessionManager.search.clear', "Xóa")}
           </button>
           <SingleSelectDropdown
             className="codex-session-manager__kind-filter"
@@ -201,7 +201,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
             options={statusOptions}
             onChange={setStatusFilter}
             disabled={loading}
-            ariaLabel={t('codebuddy.sessionManager.statusFilter', '会话状态')}
+            ariaLabel={t('codebuddy.sessionManager.statusFilter', 'Trạng thái phiên')}
             menuWidth={160}
             menuMaxHeight={220}
           />
@@ -213,7 +213,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
             type="button"
             onClick={loadSessions}
             disabled={loading}
-            title={t('common.refresh', '刷新')}
+            title={t('common.refresh', "Làm mới")}
           >
             <RefreshCw size={14} />
           </button>
@@ -224,14 +224,14 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
       <div className="codex-session-manager__list">
         {loading && sessions.length === 0 && (
           <div className="codex-session-manager__empty">
-            {t('common.loading', '加载中...')}
+            {t('common.loading', "Đang tải...")}
           </div>
         )}
         {!loading && sessions.length === 0 && (
           <div className="codex-session-manager__empty">
             {keyword || statusFilter
-              ? t('codebuddy.sessionManager.noMatching', '没有匹配的会话')
-              : t('codebuddy.sessionManager.noSessions', '暂无会话记录')}
+              ? t('codebuddy.sessionManager.noMatching', 'Không có phiên phù hợp')
+              : t('codebuddy.sessionManager.noSessions', 'Chưa có lịch sử phiên')}
           </div>
         )}
         {groupedSessions.map((group) => {
@@ -276,15 +276,15 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
                             </span>
                           )}
                           <span className="codex-session-row__meta codex-session-row__session-id" title={session.conversationId}>
-                            {t('codebuddy.sessionManager.labels.session', '会话')}: {formatConversationId(session.conversationId)}
+                            {t('codebuddy.sessionManager.labels.session', 'Phiên')}: {formatConversationId(session.conversationId)}
                           </span>
                           {session.userId && (
                             <span className="codex-session-row__meta codex-session-row__session-id codex-session-row__user" title={session.userId}>
-                              {t('codebuddy.sessionManager.labels.user', '用户')}: {resolveUserName(session.userId)}
+                              {t('codebuddy.sessionManager.labels.user', 'Người dùng')}: {resolveUserName(session.userId)}
                             </span>
                           )}
                           <span className="codex-session-row__meta codex-session-row__cwd" title={session.cwd}>
-                            {t('codebuddy.sessionManager.labels.dir', '目录')}: {formatCwdDisplay(session.cwd)}
+                            {t('codebuddy.sessionManager.labels.dir', 'Thư mục')}: {formatCwdDisplay(session.cwd)}
                           </span>
                         </div>
                       </div>

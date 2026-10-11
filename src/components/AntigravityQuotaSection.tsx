@@ -76,7 +76,7 @@ export function AntigravityQuotaSection({ items, isList = false, isNeedsReauth =
           }}
         >
           {isNeedsReauth
-            ? t('common.shared.quota.cachedNeedsReauth', '⚠️ 账号需完成网页验证以继续使用（以下为上次成功数据）')
+            ? t('common.shared.quota.cachedNeedsReauth', "⚠️ Cần xác minh web để tiếp tục (dữ liệu lưu trong bộ nhớ đệm bên dưới)")
             : t('common.shared.quota.cachedRefreshFailed')}
         </div>
       )}

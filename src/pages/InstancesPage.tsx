@@ -80,7 +80,7 @@ export function InstancesPage({ onNavigate }: InstancesPageProps) {
     const presentation = buildAntigravityAccountPresentation(account, displayGroups, t);
     const lines = buildQuotaPreviewLines(presentation.quotaItems, 3);
     if (lines.length === 0) {
-      return <span className="account-quota-empty">{t('instances.quota.empty', '暂无配额缓存')}</span>;
+      return <span className="account-quota-empty">{t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm")}</span>;
     }
     return (
       <div className="account-quota-preview">
@@ -101,7 +101,7 @@ export function InstancesPage({ onNavigate }: InstancesPageProps) {
       <OverviewTabsHeader
         active="instances"
         onNavigate={onNavigate}
-        subtitle={t('instances.subtitle', '多实例独立配置，多账号并行运行。')}
+        subtitle={t('instances.subtitle', "Hồ sơ riêng biệt để chạy song song nhiều tài khoản.")}
       />
       <InstancesManager
         instanceStore={instanceStore}

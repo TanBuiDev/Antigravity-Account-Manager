@@ -59,14 +59,14 @@ export function CodexSshSyncSettingsControl({
   };
 
   const hintText = enabled && selectedServer
-    ? t('codex.ssh.syncSwitchActive', '已启用 · {{name}}（{{user}}@{{host}}）', {
+    ? t('codex.ssh.syncSwitchActive', "Bật · {{name}} ({{user}}@{{host}})", {
         name: selectedServer.name,
         user: selectedServer.username,
         host: selectedServer.host,
       })
     : t(
         'codex.ssh.syncSwitchDesc',
-        '开启后配置 SSH 主机；Codex 切号时把当前账号同步到远端。',
+        "Bật để định cấu hình máy chủ SSH; Công tắc Codex đồng bộ hóa tài khoản hiện tại từ xa.",
       );
 
   if (variant === 'quick') {
@@ -75,14 +75,14 @@ export function CodexSshSyncSettingsControl({
         <div className="qs-row" style={{ marginTop: 8 }}>
           <div className="qs-row-label">
             <Server size={15} />
-            <span>{t('codex.ssh.syncSwitch', '切号同步 SSH')}</span>
+            <span>{t('codex.ssh.syncSwitch', "SSH trên công tắc")}</span>
           </div>
           <div className="qs-row-control" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <button
               type="button"
               className="btn btn-secondary icon-only"
-              title={t('codex.ssh.configure', '配置')}
-              aria-label={t('codex.ssh.configure', '配置')}
+              title={t('codex.ssh.configure', "Cài đặt")}
+              aria-label={t('codex.ssh.configure', "Cài đặt")}
               onClick={openModal}
             >
               <Settings2 size={14} />
@@ -108,7 +108,7 @@ export function CodexSshSyncSettingsControl({
     <>
       <div className="settings-row">
         <div className="row-label">
-          <div className="row-title">{t('codex.ssh.syncSwitch', '切号同步 SSH')}</div>
+          <div className="row-title">{t('codex.ssh.syncSwitch', "SSH trên công tắc")}</div>
           <div className="row-desc">{hintText}</div>
         </div>
         <div className="row-control" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -118,7 +118,7 @@ export function CodexSshSyncSettingsControl({
             onClick={openModal}
           >
             <Settings2 size={14} />
-            <span>{t('codex.ssh.configure', '配置')}</span>
+            <span>{t('codex.ssh.configure', "Cài đặt")}</span>
           </button>
           <label className="switch">
             <input
