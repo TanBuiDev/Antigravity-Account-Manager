@@ -940,16 +940,16 @@ function MainApp() {
       }
 
       showModal({
-        title: t('common.shared.externalImport.versionUnsupportedTitle', '应用版本过低'),
+        title: t('common.shared.externalImport.versionUnsupportedTitle', "Phiên bản ứng dụng quá thấp"),
         description: t(
           'common.shared.externalImport.versionUnsupportedDesc',
-          '暂不支持此方式，请下载最新版。',
+          "Cách này chưa được hỗ trợ. Vui lòng tải phiên bản mới nhất.",
         ),
         width: 'sm',
         actions: [
           {
             id: 'check-update',
-            label: t('common.shared.externalImport.checkUpdate', '检查更新'),
+            label: t('common.shared.externalImport.checkUpdate', "Kiểm tra cập nhật"),
             variant: 'primary',
             onClick: () => {
               window.dispatchEvent(
@@ -961,7 +961,7 @@ function MainApp() {
           },
           {
             id: 'close',
-            label: t('common.close', '关闭'),
+            label: t('common.close', "Đóng"),
             variant: 'secondary',
           },
         ],
@@ -1374,7 +1374,7 @@ function MainApp() {
 
   const prepareCodexLocalAccessBeforeRelaunch = useCallback(async () => {
     setUpdateRetryStatus(
-      t('update_notification.stoppingApiService', '正在关闭 API 服务...'),
+      t('update_notification.stoppingApiService', "Đang dừng dịch vụ API..."),
     );
     try {
       const state = await prepareCodexLocalAccessForRestart();
@@ -1391,7 +1391,7 @@ function MainApp() {
       setUpdateRetryStatus(
         t(
           'update_notification.stopApiServiceFailedContinue',
-          'API 服务未正常关闭，将继续重启...',
+          "Dịch vụ API chưa dừng đúng cách. Vẫn tiếp tục khởi động lại...",
         ),
       );
     }
@@ -1665,7 +1665,7 @@ function MainApp() {
         `用户点击立即重启应用更新: version=${targetVersion || 'unknown'}, install_before_restart=${shouldInstall}`,
       );
       setUpdateRetryStatus(
-        t('update_notification.stoppingApiService', '正在关闭 API 服务...'),
+        t('update_notification.stoppingApiService', "Đang dừng dịch vụ API..."),
       );
       setUpdateDownloadError('');
       setUpdateErrorDetails('');
@@ -1697,10 +1697,10 @@ function MainApp() {
       console.error('[App] Failed to apply pending update:', error);
       const compactError = sanitizeUpdaterErrorMessage(error);
       const errorMessage = failureStage === 'prepare'
-        ? t('update_notification.stopApiServiceFailed', '无法关闭 API 服务，请先停用后重试。')
+        ? t('update_notification.stopApiServiceFailed', "Không thể dừng dịch vụ API. Hãy tắt dịch vụ trước rồi thử lại.")
         : failureStage === 'install'
-          ? t('update_notification.installFailed', '系统安装失败，请稍后重试或手动下载安装。')
-          : t('update_notification.restartRequiredAfterInstall', '更新已安装，请手动重启应用完成切换。');
+          ? t('update_notification.installFailed', "Cài đặt hệ thống thất bại. Hãy thử lại sau hoặc tải gói về thủ công.")
+          : t('update_notification.restartRequiredAfterInstall', "Bản cập nhật đã được cài. Hãy khởi động lại ứng dụng thủ công để hoàn tất chuyển đổi.");
       setUpdateRetryStatus('');
       setUpdateDownloadError(errorMessage);
       setUpdateErrorDetails(compactError);
@@ -1749,7 +1749,7 @@ function MainApp() {
         progress: 100,
         requiresInstall: false,
       });
-      setUpdateRetryStatus(t('update_notification.installSuccess', '更新已安装，正在重启...'));
+      setUpdateRetryStatus(t('update_notification.installSuccess', "Đã cài đặt bản cập nhật! Đang khởi động lại..."));
       setUpdateDownloadError('');
       setUpdateErrorDetails('');
 
@@ -1770,8 +1770,8 @@ function MainApp() {
         setUpdateRetryStatus('');
         setUpdateDownloadError(
           relaunchStage === 'prepare'
-            ? t('update_notification.stopApiServiceFailed', '无法关闭 API 服务，请先停用后重试。')
-            : t('update_notification.restartRequiredAfterInstall', '更新已安装，请手动重启应用完成切换。'),
+            ? t('update_notification.stopApiServiceFailed', "Không thể dừng dịch vụ API. Hãy tắt dịch vụ trước rồi thử lại.")
+            : t('update_notification.restartRequiredAfterInstall', "Bản cập nhật đã được cài. Hãy khởi động lại ứng dụng thủ công để hoàn tất chuyển đổi."),
         );
         setUpdateErrorDetails(compactError);
       }
@@ -1781,7 +1781,7 @@ function MainApp() {
       writeUpdateLog('error', `Linux 托管更新失败: version=${expectedVersion}, error=${compactError}`);
       setUpdateRetryStatus('');
       setUpdateDownloadError(
-        t('update_notification.installFailed', '系统安装失败，请稍后重试或手动下载安装。'),
+        t('update_notification.installFailed', "Cài đặt hệ thống thất bại. Hãy thử lại sau hoặc tải gói về thủ công."),
       );
       setUpdateErrorDetails(compactError);
       setUpdateAction({
@@ -1954,7 +1954,7 @@ function MainApp() {
     } catch (error) {
       if (isUpdaterCanceledError(error) || updateCancelRequestedRef.current || updateDownloadTaskIdRef.current !== taskId) {
         writeUpdateLog('info', `统一更新下载已取消: version=${expectedVersion}`);
-        setUpdateRetryStatus(t('update_notification.updateCancelled', '已取消更新'));
+        setUpdateRetryStatus(t('update_notification.updateCancelled', "Đã hủy cập nhật."));
         setUpdateDownloadError('');
         setUpdateErrorDetails('');
         return;
@@ -2845,46 +2845,46 @@ function MainApp() {
       const lowQuotaItemsText = payload.low_models.length > 0
         ? payload.low_models.join(', ')
         : platform === 'grok'
-          ? t('grok.quotaAlert.unknownItem', '未知配额项')
-          : t('quotaAlert.modal.unknownModel', '未知模型');
+          ? t('grok.quotaAlert.unknownItem', "Mục hạn mức không xác định")
+          : t('quotaAlert.modal.unknownModel', "Mô hình không xác định");
 
       showModal({
-        title: t('quotaAlert.modal.title', '配额预警'),
+        title: t('quotaAlert.modal.title', "Cảnh báo hạn mức"),
         description: t(
           'quotaAlert.modal.desc',
-          '当前账号配额已达到预警阈值，请尽快处理。'
+          "Hạn mức của tài khoản hiện tại đã chạm ngưỡng cảnh báo. Vui lòng xử lý sớm."
         ),
         width: 'md',
         content: (
           <div className="quota-alert-modal-content">
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.platform', '平台')}</span>
+              <span>{t('quotaAlert.modal.platform', "Nền tảng")}</span>
               <strong>{platformLabel}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.account', '当前账号')}</span>
+              <span>{t('quotaAlert.modal.account', "Tài khoản hiện tại")}</span>
               <strong>{payload.current_email}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.threshold', '预警阈值')}</span>
+              <span>{t('quotaAlert.modal.threshold', "Ngưỡng cảnh báo")}</span>
               <strong>{payload.threshold_display || `${payload.threshold}%`}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.lowest', '当前最低')}</span>
+              <span>{t('quotaAlert.modal.lowest', "Mức thấp nhất hiện tại")}</span>
               <strong>{payload.lowest_percentage}%</strong>
             </div>
             <div className="quota-alert-modal-row quota-alert-modal-row--stack">
               <span>
                 {platform === 'grok'
-                  ? t('grok.quotaAlert.items', '触发配额项')
-                  : t('quotaAlert.modal.models', '触发模型')}
+                  ? t('grok.quotaAlert.items', "Mục hạn mức")
+                  : t('quotaAlert.modal.models', "Mô hình kích hoạt")}
               </span>
               <strong>{lowQuotaItemsText}</strong>
             </div>
             <div className="quota-alert-modal-row">
-              <span>{t('quotaAlert.modal.recommended', '建议切换')}</span>
+              <span>{t('quotaAlert.modal.recommended', "Đề xuất chuyển")}</span>
               <strong>
-                {payload.recommended_email || t('quotaAlert.modal.noRecommendation', '暂无可切换账号')}
+                {payload.recommended_email || t('quotaAlert.modal.noRecommendation', "Không có tài khoản phù hợp để chuyển")}
               </strong>
             </div>
           </div>
@@ -2892,12 +2892,12 @@ function MainApp() {
         actions: [
           {
             id: 'quota-alert-later',
-            label: t('quotaAlert.modal.later', '稍后处理'),
+            label: t('quotaAlert.modal.later', "Để sau"),
             variant: 'secondary',
           },
           {
             id: 'quota-alert-open-settings',
-            label: t('quotaAlert.modal.openSettings', '调整预警设置'),
+            label: t('quotaAlert.modal.openSettings', "Điều chỉnh cài đặt cảnh báo"),
             variant: 'secondary',
             autoClose: false,
             onClick: () => {
@@ -2907,7 +2907,7 @@ function MainApp() {
           ...(hasRecommendation
             ? [{
                 id: 'quota-alert-switch',
-                label: t('quotaAlert.modal.switchNow', '快捷切号到 {{email}}', {
+                label: t('quotaAlert.modal.switchNow', "Chuyển nhanh sang {{email}}", {
                   email: payload.recommended_email as string,
                 }),
                 variant: 'primary' as const,
@@ -2961,15 +2961,15 @@ function MainApp() {
                     closeModal();
                   } catch (error) {
                     showModal({
-                      title: t('quotaAlert.modal.switchFailedTitle', '切号失败'),
-                      description: t('quotaAlert.modal.switchFailedBody', '快捷切号失败：{{error}}', {
+                      title: t('quotaAlert.modal.switchFailedTitle', "Chuyển thất bại"),
+                      description: t('quotaAlert.modal.switchFailedBody', "Chuyển nhanh thất bại: {{error}}", {
                         error: String(error),
                       }),
                       width: 'sm',
                       actions: [
                         {
                           id: 'quota-alert-switch-failed-ok',
-                          label: t('common.confirm', '确定'),
+                          label: t('common.confirm', "Xác nhận"),
                           variant: 'primary',
                         },
                       ],
@@ -3092,21 +3092,21 @@ function MainApp() {
 
       if (phase === 'auth_required' || phase === 'downloaded') {
         setUpdateRetryStatus(
-          t('update_notification.authorizing', '等待系统授权安装...'),
+          t('update_notification.authorizing', "Đang chờ cấp quyền hệ thống..."),
         );
         return;
       }
 
       if (phase === 'installing') {
         setUpdateRetryStatus(
-          t('update_notification.installing', '安装中...'),
+          t('update_notification.installing', "Đang cài đặt..."),
         );
         return;
       }
 
       if (phase === 'completed') {
         setUpdateRetryStatus(
-          t('update_notification.installSuccess', '更新已安装，正在重启...'),
+          t('update_notification.installSuccess', "Đã cài đặt bản cập nhật! Đang khởi động lại..."),
         );
         return;
       }
@@ -3352,7 +3352,7 @@ function MainApp() {
       setAppPathActionError(
         t(
           'appPath.missing.claudeMultiInstanceRequiresExe',
-          'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+          "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
         ),
       );
       return;
@@ -3481,7 +3481,7 @@ function MainApp() {
             setAppPathScanError(
               t(
                 'appPath.missing.claudeMultiInstanceRequiresExe',
-                'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+                "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
               ),
             );
           }
@@ -3656,7 +3656,7 @@ function MainApp() {
   }, []);
   const suspenseFallback = (
     <div className="loading-state">
-      {t('common.loading', '加载中...')}
+      {t('common.loading', "Đang tải...")}
     </div>
   );
 
@@ -3691,27 +3691,27 @@ function MainApp() {
 
   const appPathMissingPathLabel = appPathMissing
     ? appPathMissing.app === 'codex'
-      ? t('quickSettings.codex.appPath', '启动路径')
+      ? t('quickSettings.codex.appPath', "Đường dẫn ứng dụng")
       : appPathMissing.app === 'claude'
-        ? t('quickSettings.claude.appPath', 'Claude Desktop 启动目标')
+        ? t('quickSettings.claude.appPath', "Đường dẫn Claude")
       : appPathMissing.app === 'vscode'
-        ? t('quickSettings.githubCopilot.appPath', 'VS Code 路径')
+        ? t('quickSettings.githubCopilot.appPath', "Đường dẫn VS Code")
         : appPathMissing.app === 'windsurf'
-          ? t('quickSettings.windsurf.appPath', 'Devin 路径')
+          ? t('quickSettings.windsurf.appPath', "Đường dẫn Devin")
           : appPathMissing.app === 'kiro'
-            ? t('quickSettings.kiro.appPath', 'Kiro 路径')
+            ? t('quickSettings.kiro.appPath', "Con đường Kiro")
             : appPathMissing.app === 'cursor'
-            ? t('quickSettings.cursor.appPath', 'Cursor 路径')
+            ? t('quickSettings.cursor.appPath', "Đường dẫn Cursor")
             : appPathMissing.app === 'codebuddy'
-              ? t('quickSettings.codebuddy.appPath', 'CodeBuddy 路径')
+              ? t('quickSettings.codebuddy.appPath', "Đường dẫn CodeBuddy")
               : appPathMissing.app === 'codebuddy_cn'
-                ? t('quickSettings.codebuddyCn.appPath', 'CodeBuddy CN 路径')
+                ? t('quickSettings.codebuddyCn.appPath', "Đường dẫn CodeBuddy CN")
               : appPathMissing.app === 'qoder'
-                ? t('quickSettings.qoder.appPath', 'Qoder 路径')
+                ? t('quickSettings.qoder.appPath', "Đường dẫn Qoder")
               : isTraePlatformApp(appPathMissing.app)
-                ? t('quickSettings.trae.appPath', 'Trae 路径')
-              : t('quickSettings.antigravity.appPath', '启动路径')
-    : t('quickSettings.antigravity.appPath', '启动路径');
+                ? t('quickSettings.trae.appPath', "Đường dẫn Trae")
+              : t('quickSettings.antigravity.appPath', "Đường dẫn ứng dụng")
+    : t('quickSettings.antigravity.appPath', "Đường dẫn ứng dụng");
   const appPathMissingBusy = appPathSetting || appPathDetecting;
   const claudeMultiInstanceNeedsExe =
     appPathMissing?.app === 'claude' && appPathMissing.retry?.kind === 'instance';
@@ -3789,11 +3789,11 @@ function MainApp() {
         <div className="qs-overlay" style={{ zIndex: 10100 }}>
           <div className="qs-modal app-path-missing-modal" onClick={(e) => e.stopPropagation()}>
             <div className="qs-header">
-              <span className="qs-title">{t('appPath.missing.title', '未找到应用程序路径')}</span>
+              <span className="qs-title">{t('appPath.missing.title', "Không tìm thấy đường dẫn ứng dụng")}</span>
               <button
                 className="qs-close"
                 onClick={() => setAppPathMissing(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
                 disabled={appPathMissingBusy}
               >
                 <X size={16} />
@@ -3803,7 +3803,7 @@ function MainApp() {
             <div className="qs-body">
               <div className="qs-section">
                 <p className="app-path-missing-desc">
-                  {t('appPath.missing.desc', '未找到 {{app}} 应用程序路径，请立即设置后继续启动。', {
+                  {t('appPath.missing.desc', "Không tìm thấy đường dẫn ứng dụng {{app}}. Vui lòng đặt ngay để tiếp tục.", {
                     app: appPathMissingAppName,
                   })}
                 </p>
@@ -3811,7 +3811,7 @@ function MainApp() {
                   <p className="app-path-missing-hint">
                     {t(
                       'appPath.missing.claudeMultiInstanceRequiresExe',
-                      'Claude 应用多开需要真实 Claude.exe 路径；Microsoft Store 启动目标仅适用于默认桌面端。',
+                      "Hồ sơ đa phiên bản Claude cần đường dẫn Claude.exe thật. Mục tiêu Microsoft Store chỉ dùng cho hồ sơ desktop mặc định.",
                     )}
                   </p>
                 ) : null}
@@ -3819,7 +3819,7 @@ function MainApp() {
                   <p className="app-path-missing-hint">
                     {t(
                       'appPath.missing.codexLaunchHint',
-                      '切号已完成。启动应用请先设置路径；若切号后不需要启动，请到设置中关闭「切换 Codex 时自动启动 Codex App」。',
+                      "Đã chuyển tài khoản xong. Muốn khởi chạy thì hãy đặt đường dẫn. Nếu không cần khởi chạy sau khi chuyển, hãy tắt «Tự động khởi chạy Codex App khi chuyển Codex» trong Cài đặt.",
                     )}
                   </p>
                 ) : null}
@@ -3839,9 +3839,9 @@ function MainApp() {
                       appPathMissing.app === 'claude'
                         ? t(
                             'appPath.missing.claudeTargetPlaceholder',
-                            'Claude.exe 路径或 shell:AppsFolder\\...',
+                            "Đường dẫn Claude.exe hoặc shell:AppsFolder\\...",
                           )
-                        : t('settings.general.codexAppPathPlaceholder', '默认路径')
+                        : t('settings.general.codexAppPathPlaceholder', "Đường dẫn mặc định")
                     }
                     onChange={(e) => {
                       setAppPathActionError('');
@@ -3857,7 +3857,7 @@ function MainApp() {
                       onClick={handlePickMissingAppPath}
                       disabled={appPathMissingBusy}
                     >
-                      {t('settings.general.codexPathSelect', '选择')}
+                      {t('settings.general.codexPathSelect', "Chọn")}
                     </button>
                     <button
                       className="qs-btn"
@@ -3865,34 +3865,34 @@ function MainApp() {
                       disabled={appPathMissingBusy}
                       title={
                         appPathDetecting
-                          ? t('common.loading', '加载中...')
+                          ? t('common.loading', "Đang tải...")
                           : isWindowsPlatform()
-                            ? t('appPath.missing.scanApps', '检测运行中应用')
+                            ? t('appPath.missing.scanApps', "Quét ứng dụng")
                             : (
                             appPathMissing.app === 'vscode'
-                              ? t('settings.general.vscodePathReset', '重置默认')
+                              ? t('settings.general.vscodePathReset', "Đặt lại mặc định")
                               : appPathMissing.app === 'windsurf'
-                                ? t('settings.general.windsurfPathReset', '重置默认')
+                                ? t('settings.general.windsurfPathReset', "Đặt lại mặc định")
                                 : appPathMissing.app === 'kiro'
-                                  ? t('settings.general.kiroPathReset', '重置默认')
+                                  ? t('settings.general.kiroPathReset', "Đặt lại về mặc định")
                                   : appPathMissing.app === 'cursor'
-                                  ? t('settings.general.cursorPathReset', '重置默认')
+                                  ? t('settings.general.cursorPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'codebuddy'
-                                      ? t('settings.general.codebuddyPathReset', '重置默认')
+                                      ? t('settings.general.codebuddyPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'codebuddy_cn'
-                                      ? t('settings.general.codebuddyPathReset', '重置默认')
+                                      ? t('settings.general.codebuddyPathReset', "Đặt lại mặc định")
                                     : appPathMissing.app === 'qoder'
-                                      ? t('settings.general.qoderPathReset', '重置默认')
+                                      ? t('settings.general.qoderPathReset', "Đặt lại mặc định")
                                     : isTraePlatformApp(appPathMissing.app)
-                                      ? t('settings.general.traePathReset', '重置默认')
-                                    : t('settings.general.codexPathReset', '重置默认')
+                                      ? t('settings.general.traePathReset', "Đặt lại mặc định")
+                                    : t('settings.general.codexPathReset', "Đặt lại mặc định")
                           )
                       }
                     >
                       {isWindowsPlatform() ? (
                         appPathDetecting
-                          ? t('common.loading', '加载中...')
-                          : t('appPath.missing.scanApps', '检测运行中应用')
+                          ? t('common.loading', "Đang tải...")
+                          : t('appPath.missing.scanApps', "Quét ứng dụng")
                       ) : (
                         <RefreshCw size={12} className={appPathDetecting ? 'spin' : undefined} />
                       )}
@@ -3929,7 +3929,7 @@ function MainApp() {
                               <div className="app-path-candidate-note">
                                 {t(
                                   'appPath.missing.defaultOnly',
-                                  '仅适用于默认桌面端；应用多开请选择真实 Claude.exe',
+                                  "Chỉ dành cho desktop mặc định; hãy chọn Claude.exe thật cho hồ sơ đa phiên bản.",
                                 )}
                               </div>
                             ) : null}
@@ -3953,14 +3953,14 @@ function MainApp() {
                 onClick={() => setAppPathMissing(null)}
                 disabled={appPathMissingBusy}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
                 onClick={handleSaveMissingAppPath}
                 disabled={appPathMissingBusy || !appPathDraft.trim()}
               >
-                {t('common.save', '保存')}
+                {t('common.save', "Lưu")}
               </button>
             </div>
           </div>
@@ -3996,8 +3996,8 @@ function MainApp() {
         <button
           className="log-entry-fab"
           onClick={() => setShowLogViewer(true)}
-          title={t('manual.dataPrivacy.keywords.5', '日志')}
-          aria-label={t('manual.dataPrivacy.keywords.5', '日志')}
+          title={t('manual.dataPrivacy.keywords.5', "khắc phục lỗi")}
+          aria-label={t('manual.dataPrivacy.keywords.5', "khắc phục lỗi")}
         >
           <FileText size={18} />
         </button>

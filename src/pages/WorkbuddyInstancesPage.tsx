@@ -31,9 +31,9 @@ export function WorkbuddyInstancesContent({
       <DosageNotifyQuotaPreview
         usage={usage}
         locale={locale}
-        emptyText={t('instances.quota.empty', '暂无配额缓存')}
-        normalText={t('workbuddy.usageNormal', '正常')}
-        abnormalText={t('workbuddy.usageAbnormal', '异常')}
+        emptyText={t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm")}
+        normalText={t('workbuddy.usageNormal', "Bình thường")}
+        abnormalText={t('workbuddy.usageAbnormal', "Bất thường")}
         abnormalDisplay="short"
       />
     );

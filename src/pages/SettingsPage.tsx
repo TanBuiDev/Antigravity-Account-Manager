@@ -425,9 +425,9 @@ export function useSettingsPageController() {
       label: isWindows
         ? t(
             'settings.general.terminalSystemWindowsCompatibility',
-            '系统兼容（PowerShell）',
+            "Tương thích hệ thống (PowerShell)",
           )
-        : t('settings.general.terminalSystem', '系统默认'),
+        : t('settings.general.terminalSystem', "Mặc định hệ thống"),
     }];
     const allOptions = isMacOS ? [
       { value: 'Terminal', label: 'Terminal.app' },
@@ -2132,48 +2132,48 @@ export function useSettingsPageController() {
 
   const getResetLabelByTarget = (target: AppPathTarget) => {
     if (isWindows) {
-      return t('appPath.missing.scanApps', '检测运行中应用');
+      return t('appPath.missing.scanApps', "Quét ứng dụng");
     }
     if (target === 'vscode') {
-      return t('settings.general.vscodePathReset', '重置默认');
+      return t('settings.general.vscodePathReset', "Đặt lại mặc định");
     }
     if (target === 'windsurf') {
-      return t('settings.general.windsurfPathReset', '重置默认');
+      return t('settings.general.windsurfPathReset', "Đặt lại mặc định");
     }
     if (target === 'kiro') {
-      return t('settings.general.kiroPathReset', '重置默认');
+      return t('settings.general.kiroPathReset', "Đặt lại về mặc định");
     }
     if (target === 'cursor') {
-      return t('settings.general.cursorPathReset', '重置默认');
+      return t('settings.general.cursorPathReset', "Đặt lại mặc định");
     }
     if (target === 'codebuddy') {
-      return t('settings.general.codebuddyPathReset', '重置默认');
+      return t('settings.general.codebuddyPathReset', "Đặt lại mặc định");
     }
     if (target === 'codebuddy_cn') {
-      return t('settings.general.codebuddyCnPathReset', '重置默认');
+      return t('settings.general.codebuddyCnPathReset', "Đặt lại mặc định");
     }
     if (target === 'qoder') {
-      return t('settings.general.qoderPathReset', '重置默认');
+      return t('settings.general.qoderPathReset', "Đặt lại mặc định");
     }
     if (target === 'zcode') {
-      return t('settings.general.codexPathReset', '重置默认');
+      return t('settings.general.codexPathReset', "Đặt lại mặc định");
     }
     if (isTraeAppPathTarget(target)) {
-      return t('settings.general.traePathReset', '重置默认');
+      return t('settings.general.traePathReset', "Đặt lại mặc định");
     }
     if (target === 'workbuddy') {
-      return t('settings.general.workbuddyPathReset', '重置默认');
+      return t('settings.general.workbuddyPathReset', "Đặt lại mặc định");
     }
     if (target === 'zed') {
-      return t('settings.general.zedPathReset', '重置默认');
+      return t('settings.general.zedPathReset', "Đặt lại mặc định");
     }
     if (target === 'opencode') {
-      return t('settings.general.opencodePathReset', '重置默认');
+      return t('settings.general.opencodePathReset', "Đặt lại mặc định");
     }
     if (target === 'claude') {
-      return t('settings.general.codexPathReset', '重置默认');
+      return t('settings.general.codexPathReset', "Đặt lại mặc định");
     }
-    return t('settings.general.codexPathReset', '重置默认');
+    return t('settings.general.codexPathReset', "Đặt lại mặc định");
   };
 
   const handlePickAppPath = async (target: AppPathTarget) => {
@@ -2302,7 +2302,7 @@ export function useSettingsPageController() {
       <div className="settings-row" key={target}>
         <div className="row-label">
           <div className="row-title">{t(titleKey, titleDefault)}</div>
-          <div className="row-desc">{t('settings.general.traeAppPathDesc', '留空则使用默认路径')}</div>
+          <div className="row-desc">{t('settings.general.traeAppPathDesc', "Để trống để dùng đường dẫn mặc định")}</div>
         </div>
         <div className="row-control row-control--grow settings-claude-launch-control">
           <div className="settings-claude-launch-row">
@@ -2310,7 +2310,7 @@ export function useSettingsPageController() {
               type="text"
               className="settings-input settings-input--path"
               value={appPath}
-              placeholder={t('settings.general.traeAppPathPlaceholder', '默认路径')}
+              placeholder={t('settings.general.traeAppPathPlaceholder', "Đường dẫn mặc định")}
               onChange={(e) => setTraeAppPathValue(target, e.target.value)}
             />
             <button
@@ -2318,7 +2318,7 @@ export function useSettingsPageController() {
               onClick={() => handlePickAppPath(target)}
               disabled={isAppPathResetDetecting(target)}
             >
-              {t('settings.general.traePathSelect', '选择')}
+              {t('settings.general.traePathSelect', "Chọn")}
             </button>
             <button
               className="btn btn-secondary"
@@ -2327,7 +2327,7 @@ export function useSettingsPageController() {
             >
               <RefreshCw size={16} className={isAppPathResetDetecting(target) ? 'spin' : undefined} />
               {isAppPathResetDetecting(target)
-                ? t('common.loading', '加载中...')
+                ? t('common.loading', "Đang tải...")
                 : getResetLabelByTarget(target)}
             </button>
           </div>
@@ -2438,7 +2438,7 @@ export function useSettingsPageController() {
               ? t('settings.general.currentAccountRefreshItemDesc')
               : t(
                 'settings.general.currentAccountRefreshRequiresAutoRefresh',
-                '需先开启“配额自动刷新”后，才能设置当前账号刷新。',
+                "Hãy bật \"Tự động làm mới hạn ngạch\" trước để cấu hình làm mới tài khoản hiện tại.",
               )}
           </div>
         </div>
@@ -2452,7 +2452,7 @@ export function useSettingsPageController() {
                   max={999}
                   className="settings-select settings-select--input-mode settings-select--with-unit"
                   value={value}
-                  placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                  placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                   onChange={(event) =>
                     setCurrentAccountRefreshValue(platform, sanitizeNumberInput(event.target.value))
                   }
@@ -2679,7 +2679,7 @@ export function useSettingsPageController() {
                           max={999}
                           className="settings-select settings-select--input-mode settings-select--with-unit"
                           value={overrideValue !== undefined ? String(overrideValue) : '1'}
-                          placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                          placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                           onChange={(e) => {
                             const sanitized = sanitizeNumberInput(e.target.value);
                             if (sanitized) {
@@ -2742,7 +2742,7 @@ export function useSettingsPageController() {
                             {overrideValue} {t('settings.general.minutes')}
                           </option>
                         )}
-                        <option value="custom">{t('settings.general.autoRefreshCustom', '自定义')}</option>
+                        <option value="custom">{t('settings.general.autoRefreshCustom', "Tùy chỉnh...")}</option>
                       </select>
                     )}
                   </div>
@@ -2787,7 +2787,7 @@ export function useSettingsPageController() {
                 max={999}
                 className="settings-select settings-select--input-mode settings-select--with-unit"
                 value={value}
-                placeholder={t('quickSettings.inputMinutes', '输入分钟数')}
+                placeholder={t('quickSettings.inputMinutes', "Nhập số phút")}
                 onChange={(event) => setValue(sanitizeNumberInput(event.target.value))}
                 onBlur={() => {
                   setValue(normalizeNumberInput(value, 1, 999));
@@ -2857,11 +2857,11 @@ export function useSettingsPageController() {
     <>
       <div className="settings-row">
         <div className="row-label">
-          <div className="row-title">{t('quickSettings.quotaAlert.enable', '超额预警')}</div>
+          <div className="row-title">{t('quickSettings.quotaAlert.enable', "Bật cảnh báo hạn mức")}</div>
           <div className="row-desc">
             {t(
               'quickSettings.quotaAlert.hint',
-              '当当前账号任意模型配额低于阈值时，发送原生通知并在页面提示快捷切号。',
+              "Khi hạn mức của bất kỳ mô hình nào trong tài khoản hiện tại thấp hơn ngưỡng, gửi thông báo hệ thống và hiển thị thao tác chuyển tài khoản nhanh trong ứng dụng.",
             )}
           </div>
         </div>
@@ -2879,9 +2879,9 @@ export function useSettingsPageController() {
       {enabled && (
         <div className="settings-row" style={{ animation: 'fadeUp 0.3s ease both' }}>
           <div className="row-label">
-            <div className="row-title">{t('quickSettings.quotaAlert.threshold', '预警阈值')}</div>
+            <div className="row-title">{t('quickSettings.quotaAlert.threshold', "Ngưỡng cảnh báo")}</div>
             <div className="row-desc">
-              {t('quickSettings.quotaAlert.thresholdDesc', '任意模型配额低于此百分比时触发预警')}
+              {t('quickSettings.quotaAlert.thresholdDesc', "Kích hoạt cảnh báo khi hạn mức của bất kỳ mô hình nào thấp hơn tỷ lệ này")}
             </div>
           </div>
           <div className="row-control">
@@ -2893,7 +2893,7 @@ export function useSettingsPageController() {
                   max={100}
                   className="settings-select settings-select--input-mode settings-select--with-unit"
                   value={threshold}
-                  placeholder={t('quickSettings.inputPercent', '输入百分比')}
+                  placeholder={t('quickSettings.inputPercent', "Nhập phần trăm")}
                   onChange={(event) => setThreshold(sanitizeNumberInput(event.target.value))}
                   onBlur={() => {
                     setThreshold(normalizeNumberInput(threshold, 0, 100));
@@ -3097,11 +3097,11 @@ export function useSettingsPageController() {
     Array<{ key: ReleaseHistorySectionKey; label: string }>
   >(
     () => [
-      { key: 'highlights', label: t('settings.about.releaseHistorySectionHighlights', '重要更新') },
-      { key: 'added', label: t('settings.about.releaseHistorySectionAdded', '新增') },
-      { key: 'changed', label: t('settings.about.releaseHistorySectionChanged', '变更') },
-      { key: 'fixed', label: t('settings.about.releaseHistorySectionFixed', '修复') },
-      { key: 'removed', label: t('settings.about.releaseHistorySectionRemoved', '移除') },
+      { key: 'highlights', label: t('settings.about.releaseHistorySectionHighlights', "Cập nhật nổi bật") },
+      { key: 'added', label: t('settings.about.releaseHistorySectionAdded', "Đã thêm") },
+      { key: 'changed', label: t('settings.about.releaseHistorySectionChanged', "Đã thay đổi") },
+      { key: 'fixed', label: t('settings.about.releaseHistorySectionFixed', "Đã sửa") },
+      { key: 'removed', label: t('settings.about.releaseHistorySectionRemoved', "LOẠI BỎ") },
     ],
     [t],
   );

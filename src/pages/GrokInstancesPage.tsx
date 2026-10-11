@@ -151,12 +151,12 @@ export function GrokInstancesContent({
       return configuredPath
         ? t(
             'grok.instances.cliPathInvalid',
-            '配置的 Grok CLI 路径无效：{{path}}',
+            "Đường dẫn Grok CLI đã cấu hình không hợp lệ: {{path}}",
             { path: configuredPath },
           )
         : t(
             'quickSettings.grok.cliMissing',
-            '未检测到 Grok CLI，可填写自定义路径',
+            "Không tìm thấy Grok CLI. Hãy nhập đường dẫn riêng.",
           );
     },
     [t],
@@ -200,8 +200,8 @@ export function GrokInstancesContent({
     );
     const boundAccount = accountId ? accountMap.get(accountId) : undefined;
     const instanceName = instance.isDefault
-      ? t('instances.defaultName', '默认实例')
-      : instance.name || t('instances.defaultName', '默认实例');
+      ? t('instances.defaultName', "Phiên bản mặc định")
+      : instance.name || t('instances.defaultName', "Phiên bản mặc định");
     try {
       const launchInfo = await grokInstanceService.getGrokInstanceLaunchCommand(
         instance.id,
@@ -224,7 +224,7 @@ export function GrokInstancesContent({
                 email: getGrokAccountDisplayEmail(boundAccount),
               },
             )
-          : t('instances.messages.launchPrepared', '启动命令已准备'),
+          : t('instances.messages.launchPrepared', "Lệnh khởi chạy đã sẵn sàng"),
         launchCommand: launchInfo.launchCommand,
         regeneratingCommand: false,
         copied: false,
@@ -243,10 +243,10 @@ export function GrokInstancesContent({
         accountId,
         workingDir,
         switchMessage: boundAccount
-          ? t('accounts.switched', '已切换至 {{email}}', {
+          ? t('accounts.switched', "Đã chuyển sang {{email}}", {
               email: getGrokAccountDisplayEmail(boundAccount),
             })
-          : t('instances.messages.launchPrepared', '启动命令已准备'),
+          : t('instances.messages.launchPrepared', "Lệnh khởi chạy đã sẵn sàng"),
         launchCommand: '',
         regeneratingCommand: false,
         copied: false,
@@ -337,13 +337,13 @@ export function GrokInstancesContent({
   };
 
   const cliStatusText = cliStatus?.available
-    ? t('quickSettings.grok.cliDetected', '已检测 {{version}} · {{path}}', {
+    ? t('quickSettings.grok.cliDetected', "Đã phát hiện: {{version}} · {{path}}", {
         version: cliStatus.version || '--',
         path: cliStatus.binaryPath || '--',
       })
     : t(
         'quickSettings.grok.cliMissing',
-        '未检测到 Grok CLI，可填写自定义路径',
+        "Không tìm thấy Grok CLI. Hãy nhập đường dẫn riêng.",
       );
   const showLaunchInstallGuide = Boolean(
     launchModal?.executeError &&
@@ -359,7 +359,7 @@ export function GrokInstancesContent({
       window.setTimeout(() => setInstallCommandCopied(false), 1200);
     } catch {
       reportCliActionError(
-        t('common.shared.export.copyFailed', '复制失败，请手动复制'),
+        t('common.shared.export.copyFailed', "Sao chép thất bại, vui lòng sao chép thủ công"),
       );
     }
   };
@@ -477,7 +477,7 @@ export function GrokInstancesContent({
     const selected = await openFileDialog({
       directory: true,
       multiple: false,
-      title: t('grok.instances.selectWorkingDir', '选择 Grok CLI 工作目录'),
+      title: t('grok.instances.selectWorkingDir', "Chọn thư mục làm việc Grok CLI"),
     });
     if (!selected || typeof selected !== 'string') return;
     try {
@@ -577,7 +577,7 @@ export function GrokInstancesContent({
               ...current,
               executeError: t(
                 'common.shared.export.copyFailed',
-                '复制失败，请手动复制',
+                "Sao chép thất bại, vui lòng sao chép thủ công",
               ),
               errorScrollKey: current.errorScrollKey + 1,
             }
@@ -657,12 +657,12 @@ export function GrokInstancesContent({
     controlsDisabled: boolean,
     hintText = t(
       'grok.instances.installHint',
-      '可在终端运行以下官方命令，安装完成后点击刷新。',
+      "Chạy lệnh chính thức sau trong terminal, rồi nhấn Làm mới sau khi cài đặt xong.",
     ),
   ) => (
     <div className="grok-cli-install-guide">
       <strong>
-        {t('grok.instances.installCommand', '官方安装命令')}
+        {t('grok.instances.installCommand', "Lệnh cài đặt chính thức")}
       </strong>
       <p>{hintText}</p>
       <div className="grok-cli-install-command">
@@ -673,17 +673,17 @@ export function GrokInstancesContent({
           onClick={() => void handleCopyInstallCommand()}
           title={
             installCommandCopied
-              ? t('common.success', '成功')
-              : t('common.copy', '复制')
+              ? t('common.success', "Thành công")
+              : t('common.copy', "Copy​")
           }
-          aria-label={t('common.copy', '复制')}
+          aria-label={t('common.copy', "Copy​")}
         >
           {installCommandCopied ? <Check size={14} /> : <Copy size={14} />}
         </button>
       </div>
       <div className="grok-cli-install-actions">
         <div className="grok-cli-install-terminal">
-          <label>{t('instances.launchDialog.terminal', '终端')}</label>
+          <label>{t('instances.launchDialog.terminal', "Cửa sổ lệnh")}</label>
           <SingleSelectDropdown
             value={selectedTerminal}
             onChange={handleInstallTerminalChange}
@@ -699,14 +699,14 @@ export function GrokInstancesContent({
         >
           <Play size={14} />
           {installExecuting
-            ? t('common.loading', '加载中...')
-            : t('grok.instances.runInTerminal', '终端执行')}
+            ? t('common.loading', "Đang tải...")
+            : t('grok.instances.runInTerminal', "Chạy trong terminal")}
         </button>
       </div>
       {installOpened && (
         <div className="add-status success">
           <Check size={14} />
-          <span>{t('common.success', '成功')}</span>
+          <span>{t('common.success', "Thành công")}</span>
         </div>
       )}
       <ModalErrorMessage
@@ -726,15 +726,15 @@ export function GrokInstancesContent({
           <DosageNotifyQuotaPreview
             usage={getGrokUsage(account)}
             locale={i18n.language || 'zh-CN'}
-            emptyText={t('instances.quota.empty', '暂无配额缓存')}
-            normalText={t('grok.usageNormal', '正常')}
-            abnormalText={t('grok.usageAbnormal', '异常')}
+            emptyText={t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm")}
+            normalText={t('grok.usageNormal', "Ổn định")}
+            abnormalText={t('grok.usageAbnormal', "Bất thường")}
             abnormalDisplay="short"
           />
         )}
         renderAccountBadge={(account) => (
           <span className="instance-plan-badge">
-            {getGrokPlanBadge(account) || t('common.none', '暂无')}
+            {getGrokPlanBadge(account) || t('common.none', "None​")}
           </span>
         )}
         getAccountDisplayText={getGrokAccountDisplayEmail}
@@ -745,7 +745,7 @@ export function GrokInstancesContent({
             account.last_name,
             account.principal_id,
             account.team_id,
-            getGrokPlanBadge(account) || t('common.none', '暂无'),
+            getGrokPlanBadge(account) || t('common.none', "None​"),
           ]
             .filter(Boolean)
             .join(' ')
@@ -759,7 +759,7 @@ export function GrokInstancesContent({
         onInstanceStarted={handleInstanceStarted}
         onInstanceStartError={handleInstanceStartError}
         resolveStartSuccessMessage={() =>
-          t('instances.messages.launchPrepared', '启动命令已准备')
+          t('instances.messages.launchPrepared', "Lệnh khởi chạy đã sẵn sàng")
         }
         toolbarExtraActions={
           <button
@@ -769,16 +769,16 @@ export function GrokInstancesContent({
             }`}
             onClick={openCliModal}
             title={cliStatusText}
-            aria-label={t('quickSettings.grok.title', 'Grok CLI 设置')}
+            aria-label={t('quickSettings.grok.title', "Cài đặt Grok CLI")}
           >
             <Terminal size={14} />
             <span>
               {cliStatusLoading
-                ? t('common.loading', '加载中...')
+                ? t('common.loading', "Đang tải...")
                 : cliStatus?.available
                   ? cliStatus.version ||
-                    t('grok.instances.cliReady', '已检测')
-                  : t('grok.instances.cliMissingShort', '未检测')}
+                    t('grok.instances.cliReady', "Đã phát hiện")
+                  : t('grok.instances.cliMissingShort', "Chưa phát hiện")}
             </span>
           </button>
         }
@@ -794,16 +794,16 @@ export function GrokInstancesContent({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={closeCliModal}
-                title={t('common.back', '返回')}
-                aria-label={t('common.back', '返回')}
+                title={t('common.back', "Quay lại")}
+                aria-label={t('common.back', "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t('quickSettings.grok.title', 'Grok CLI 设置')}</h2>
+              <h2>{t('quickSettings.grok.title', "Cài đặt Grok CLI")}</h2>
               <button
                 className="modal-close"
                 onClick={closeCliModal}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -825,8 +825,8 @@ export function GrokInstancesContent({
                   className="btn btn-secondary icon-only"
                   onClick={() => void loadCliStatus(true)}
                   disabled={cliStatusLoading || cliSaving || installExecuting}
-                  title={t('common.refresh', '刷新')}
-                  aria-label={t('common.refresh', '刷新')}
+                  title={t('common.refresh', "Làm mới")}
+                  aria-label={t('common.refresh', "Làm mới")}
                 >
                   <RefreshCw
                     size={14}
@@ -837,7 +837,7 @@ export function GrokInstancesContent({
               {cliStatus && !cliStatus.available &&
                 renderGrokCliInstallGuide(cliSaving)}
               <div className="form-group">
-                <label>{t('quickSettings.grok.cliPath', 'CLI 路径')}</label>
+                <label>{t('quickSettings.grok.cliPath', "Đường dẫn CLI")}</label>
                 <input
                   className="form-input"
                   value={cliPath}
@@ -861,7 +861,7 @@ export function GrokInstancesContent({
                 onClick={closeCliModal}
                 disabled={cliSaving || installExecuting}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -869,10 +869,10 @@ export function GrokInstancesContent({
                 disabled={cliSaving || installExecuting}
               >
                 {cliSaving
-                  ? t('common.loading', '加载中...')
+                  ? t('common.loading', "Đang tải...")
                   : retryInstanceId
-                    ? t('grok.instances.saveAndRetry', '保存并重试')
-                    : t('common.save', '保存')}
+                    ? t('grok.instances.saveAndRetry', "Lưu và thử lại")
+                    : t('common.save', "Lưu")}
               </button>
             </div>
           </div>
@@ -889,16 +889,16 @@ export function GrokInstancesContent({
               <button
                 className="btn btn-secondary icon-only"
                 onClick={() => setLaunchModal(null)}
-                title={t('common.back', '返回')}
-                aria-label={t('common.back', '返回')}
+                title={t('common.back', "Quay lại")}
+                aria-label={t('common.back', "Quay lại")}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t('grok.instances.launchDialogTitle', '启动实例')}</h2>
+              <h2>{t('grok.instances.launchDialogTitle', "Chạy phiên bản")}</h2>
               <button
                 className="modal-close"
                 onClick={() => setLaunchModal(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -921,7 +921,7 @@ export function GrokInstancesContent({
                   ),
                 )}
               <div className="form-group">
-                <label>{t('instances.columns.instance', '实例')}</label>
+                <label>{t('instances.columns.instance', "Phiên bản")}</label>
                 <input
                   className="form-input"
                   value={launchModal.instanceName}
@@ -929,14 +929,14 @@ export function GrokInstancesContent({
                 />
               </div>
               <div className="form-group">
-                <label>{t('instances.form.workingDir', '工作目录')}</label>
+                <label>{t('instances.form.workingDir', "Thư mục làm việc")}</label>
                 <div className="grok-launch-working-dir-row">
                   <input
                     className="form-input"
                     value={launchModal.workingDir}
                     placeholder={t(
                       'instances.form.workingDirPlaceholder',
-                      '默认当前路径',
+                      "Mặc định dùng đường dẫn hiện tại",
                     )}
                     onChange={(event) =>
                       updateLaunchWorkingDir(event.target.value)
@@ -955,11 +955,11 @@ export function GrokInstancesContent({
                     }
                     title={t(
                       'grok.instances.selectWorkingDir',
-                      '选择 Grok CLI 工作目录',
+                      "Chọn thư mục làm việc Grok CLI",
                     )}
                     aria-label={t(
                       'grok.instances.selectWorkingDir',
-                      '选择 Grok CLI 工作目录',
+                      "Chọn thư mục làm việc Grok CLI",
                     )}
                   >
                     <FolderOpen size={16} />
@@ -969,25 +969,25 @@ export function GrokInstancesContent({
                   {launchModal.accountId
                     ? t(
                         'grok.instances.workingDirAccountHint',
-                        '工作目录与当前账号绑定，下次切号启动会自动回填。',
+                        "Thư mục làm việc được gắn với tài khoản này và sẽ được khôi phục lần khởi chạy sau.",
                       )
                     : t(
                         'instances.form.workingDirDesc',
-                        '启动时将首先切换到此目录',
+                        "Khi khởi động sẽ chuyển vào thư mục này trước",
                       )}
                 </p>
               </div>
               <div className="form-group">
-                <label>{t('instances.launchDialog.command', '启动命令')}</label>
+                <label>{t('instances.launchDialog.command', "Lệnh khởi chạy")}</label>
                 <textarea
                   className="form-input instance-args-input"
                   value={launchModal.launchCommand}
                   placeholder={
                     launchModal.regeneratingCommand
-                      ? t('common.loading', '加载中...')
+                      ? t('common.loading', "Đang tải...")
                       : t(
                           'grok.instances.launchCommandPlaceholder',
-                          '选择或确认工作目录后生成启动命令',
+                          "Chọn hoặc xác nhận thư mục để tạo lệnh khởi chạy",
                         )
                   }
                   readOnly
@@ -995,12 +995,12 @@ export function GrokInstancesContent({
                 <p className="form-hint">
                   {t(
                     'grok.instances.launchHint',
-                    '可复制命令手动执行，或点击下方按钮直接在终端执行。',
+                    "Sao chép lệnh để chạy thủ công hoặc thực thi trực tiếp trong terminal.",
                   )}
                 </p>
               </div>
               <div className="form-group">
-                <label>{t('instances.launchDialog.terminal', '终端')}</label>
+                <label>{t('instances.launchDialog.terminal', "Cửa sổ lệnh")}</label>
                 <SingleSelectDropdown
                   value={selectedTerminal}
                   onChange={handleTerminalChange}
@@ -1008,7 +1008,7 @@ export function GrokInstancesContent({
                   disabled={
                     launchModal.executing || launchModal.regeneratingCommand
                   }
-                  ariaLabel={t('instances.launchDialog.terminal', '终端')}
+                  ariaLabel={t('instances.launchDialog.terminal', "Cửa sổ lệnh")}
                 />
               </div>
               {launchModal.executeMessage && (
@@ -1028,8 +1028,8 @@ export function GrokInstancesContent({
               >
                 <Copy size={16} />
                 {launchModal.copied
-                  ? t('common.success', '成功')
-                  : t('common.copy', '复制')}
+                  ? t('common.success', "Thành công")
+                  : t('common.copy', "Copy​")}
               </button>
               <button
                 className="btn btn-primary"
@@ -1040,8 +1040,8 @@ export function GrokInstancesContent({
               >
                 <Play size={16} />
                 {launchModal.executing
-                  ? t('common.loading', '加载中...')
-                  : t('grok.instances.runInTerminal', '终端执行')}
+                  ? t('common.loading', "Đang tải...")
+                  : t('grok.instances.runInTerminal', "Chạy trong terminal")}
               </button>
             </div>
           </div>

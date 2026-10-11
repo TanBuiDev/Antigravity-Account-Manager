@@ -55,8 +55,8 @@ export function AccountSelectionToolbar({
             type="button"
             className="btn btn-secondary icon-only"
             onClick={() => grouping.setShowAddToGroupModal(true)}
-            title={t('accounts.groups.addToGroup', '加入分组')}
-            aria-label={t('accounts.groups.addToGroup', '加入分组')}
+            title={t('accounts.groups.addToGroup', "Thêm vào nhóm")}
+            aria-label={t('accounts.groups.addToGroup', "Thêm vào nhóm")}
           >
             <FolderPlus size={14} />
           </button>
@@ -65,8 +65,8 @@ export function AccountSelectionToolbar({
               type="button"
               className="btn btn-secondary icon-only"
               onClick={() => void grouping.handleRemoveFromGroup(selectedIds || [])}
-              title={t('accounts.groups.removeFromGroup', '从分组移出')}
-              aria-label={t('accounts.groups.removeFromGroup', '从分组移出')}
+              title={t('accounts.groups.removeFromGroup', "Xóa khỏi nhóm")}
+              aria-label={t('accounts.groups.removeFromGroup', "Xóa khỏi nhóm")}
             >
               <LogOut size={14} />
             </button>
@@ -88,19 +88,19 @@ export function AccountSelectionToolbar({
               disabled={disabled}
               onChange={onToggleSelectAll}
             />
-            <span>{t('common.selectAll', '全选')}</span>
+            <span>{t('common.selectAll', "Chọn tất cả")}</span>
           </label>
           {hasSelection && (
             <>
               <span className="codex-overview-selected-count">
-                {t('claude.selection.selected', '已选 {{count}}', { count: selectedCount })}
+                {t('claude.selection.selected', "Đã chọn {{count}}", { count: selectedCount })}
               </span>
               <button
                 type="button"
                 className="codex-overview-clear-selection-btn"
                 onClick={onClearSelection}
               >
-                {t('messages.clearSelection', '取消选择')}
+                {t('messages.clearSelection', "Bỏ chọn")}
               </button>
             </>
           )}

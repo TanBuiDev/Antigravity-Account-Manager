@@ -106,7 +106,7 @@ export function WorkbuddyAutoCheckinConfigModal({
     const endMin = parseTimeToMinutes(endTime);
 
     if (startMin > endMin) {
-      setError(t('workbuddy.checkin.timeRangeError', '开始时间不能晚于结束时间'));
+      setError(t('workbuddy.checkin.timeRangeError', "Thời gian bắt đầu không thể sau thời gian kết thúc"));
       return;
     }
 
@@ -224,12 +224,12 @@ export function WorkbuddyAutoCheckinConfigModal({
               <div className="config-form-item toggle-item">
                 <div className="toggle-label">
                   <span className="label-title">
-                    {t('workbuddy.checkin.enableAutoCheckin', '开启自动签到')}
+                    {t('workbuddy.checkin.enableAutoCheckin', "Bật điểm danh tự động")}
                   </span>
                   <span className="label-desc">
                     {t(
                       'workbuddy.checkin.enableAutoCheckinDesc',
-                      '每天在指定时间段内随机选取一个时间完成自动签到',
+                      "Tự động điểm danh ngẫu nhiên mỗi ngày trong khoảng thời gian quy định",
                     )}
                   </span>
                 </div>
@@ -245,12 +245,12 @@ export function WorkbuddyAutoCheckinConfigModal({
 
               <div className={`config-form-section ${!enabled ? 'disabled' : ''}`}>
                 <h3 className="section-title">
-                  {t('workbuddy.checkin.randomTimeRange', '随机签到时间段')}
+                  {t('workbuddy.checkin.randomTimeRange', "Khoảng thời gian điểm danh ngẫu nhiên")}
                 </h3>
 
                 <div className="time-range-inputs">
                   <div className="time-input-group">
-                    <label>{t('workbuddy.checkin.startTime', '开始时间')}</label>
+                    <label>{t('workbuddy.checkin.startTime', "Thời gian bắt đầu")}</label>
                     <input
                       type="time"
                       value={startTime}
@@ -265,7 +265,7 @@ export function WorkbuddyAutoCheckinConfigModal({
                   <span className="time-separator">{t('common.to', '至')}</span>
 
                   <div className="time-input-group">
-                    <label>{t('workbuddy.checkin.endTime', '结束时间')}</label>
+                    <label>{t('workbuddy.checkin.endTime', "Thời gian kết thúc")}</label>
                     <input
                       type="time"
                       value={endTime}
@@ -281,7 +281,7 @@ export function WorkbuddyAutoCheckinConfigModal({
                 <p className="section-hint">
                   {t(
                     'workbuddy.checkin.timeRangeHint',
-                    '在这个时间段内随机选取一个时间点完成后台自动签到。系统将自动保持运行并检测。',
+                    "Tự động chọn một thời điểm ngẫu nhiên mỗi ngày trong khoảng này để điểm danh chạy ngầm.",
                   )}
                 </p>
               </div>
@@ -430,7 +430,7 @@ export function WorkbuddyAutoCheckinConfigModal({
           {activeTab === 'settings' ? (
             <>
               <button className="btn btn-secondary" onClick={onClose}>
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -438,12 +438,12 @@ export function WorkbuddyAutoCheckinConfigModal({
                 disabled={saving}
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
-                {t('common.save', '保存')}
+                {t('common.save', "Lưu")}
               </button>
             </>
           ) : (
             <button className="btn btn-secondary" onClick={onClose}>
-              {t('common.close', '关闭')}
+              {t('common.close', "Đóng")}
             </button>
           )}
         </div>

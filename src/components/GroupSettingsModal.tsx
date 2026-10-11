@@ -125,7 +125,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
     if (otherModels.length > 0) {
       groupsWithOther.push({
         id: 'other',
-        name: t('group_settings.other_group', '其他模型'),
+        name: t('group_settings.other_group', "Mô hình khác"),
         models: otherModels,
       });
     }
@@ -199,7 +199,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
         <div className="modal-header">
           <h2>
             <Package size={20} />
-            {t('group_settings.title', '分组管理')}
+            {t('group_settings.title', "Quản lý nhóm")}
           </h2>
           <button className="modal-close" onClick={onClose}>
             <X size={20} />
@@ -218,7 +218,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
           <div className="group-list-section">
             <h3>
               <Package size={16} />
-              {t('group_settings.group_list', '分组列表')}
+              {t('group_settings.group_list', "Danh sách nhóm")}
             </h3>
             
             <div className="group-list">
@@ -236,7 +236,7 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
                         }
                       }}
                       className="group-name-input"
-                      placeholder={t('group_settings.group_name_placeholder', '分组名称')}
+                      placeholder={t('group_settings.group_name_placeholder', "Tên nhóm")}
                     />
                   </div>
                   
@@ -255,10 +255,10 @@ export const GroupSettingsModal: React.FC<GroupSettingsModalProps> = ({
         
         <div className="modal-footer">
           <button className="btn btn-secondary" onClick={onClose} disabled={saving}>
-            {t('common.cancel', '取消')}
+            {t('common.cancel', "Hủy")}
           </button>
           <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
-            {saving ? t('common.saving', '保存中...') : t('group_settings.save', '保存分组')}
+            {saving ? t('common.saving', "Đang lưu...") : t('group_settings.save', "Lưu nhóm")}
           </button>
         </div>
       </div>

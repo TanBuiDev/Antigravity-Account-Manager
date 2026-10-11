@@ -53,7 +53,7 @@ export function CodeBuddyQuotaCategoryList({ groups, formatNumber, formatDateTim
   if (visibleGroups.length === 0) {
     return (
       <div className="quota-category-empty">
-        {t('common.shared.quota.noData', '暂无配额数据')}
+        {t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}
       </div>
     );
   }
@@ -84,7 +84,7 @@ export function CodeBuddyQuotaCategoryList({ groups, formatNumber, formatDateTim
               <div className="quota-category-stats">
                 <span className="quota-category-value">
                   {group.unlimited
-                    ? t('common.shared.quota.unlimited', '无限额度')
+                    ? t('common.shared.quota.unlimited', "Hạn mức không giới hạn")
                     : `${formatNumber(group.used)} / ${formatNumber(group.total)}`}
                 </span>
                 {hasDetails && (
@@ -136,20 +136,20 @@ function QuotaItemDetail({ item, formatNumber, formatDateTime }: QuotaItemDetail
   // 时间显示逻辑
   let timeText = '';
   if (item.expireAt) {
-    timeText = t('common.shared.quota.expiresAt', '到期时间：{{time}}', { time: formatDateTime(item.expireAt) });
+    timeText = t('common.shared.quota.expiresAt', "Hết hạn lúc: {{time}}", { time: formatDateTime(item.expireAt) });
   } else if (item.refreshAt) {
-    timeText = t('common.shared.quota.resetAt', '重置：{{time}}', { time: formatDateTime(item.refreshAt) });
+    timeText = t('common.shared.quota.resetAt', "Đặt lại: {{time}}", { time: formatDateTime(item.refreshAt) });
   }
 
   return (
     <div className={`quota-category-detail-item ${getQuotaClass(remainPercent)}`}>
       <div className="quota-detail-header">
         <span className="quota-detail-name" title={item.packageName || ''}>
-          {item.packageName || t('common.shared.quota.noData', '暂无配额数据')}
+          {item.packageName || t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}
         </span>
         <span className={`quota-detail-value ${getQuotaClass(remainPercent)}`}>
           {item.unlimited
-            ? t('common.shared.quota.unlimited', '无限额度')
+            ? t('common.shared.quota.unlimited', "Hạn mức không giới hạn")
             : `${formatNumber(item.used)} / ${formatNumber(item.total)}`}
         </span>
       </div>

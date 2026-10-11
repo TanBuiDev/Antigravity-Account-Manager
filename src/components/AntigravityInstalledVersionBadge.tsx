@@ -63,10 +63,10 @@ export function AntigravityInstalledVersionBadge() {
 
   const title = useMemo(() => {
     if (!loaded) {
-      return t('runtime.installedVersion.loading', '正在检测安装版本');
+      return t('runtime.installedVersion.loading', "Đang phát hiện phiên bản đã cài");
     }
     if (!info?.version) {
-      return t('runtime.installedVersion.missing', '未检测到已安装版本');
+      return t('runtime.installedVersion.missing', "Không phát hiện phiên bản đã cài");
     }
     return `${info.product_name || 'Antigravity'} v${info.version}\n${info.app_path || ''}`;
   }, [info, loaded, t]);
@@ -76,7 +76,7 @@ export function AntigravityInstalledVersionBadge() {
       <div className="installed-version-badge is-loading" title={title}>
         <span className="installed-version-dot" />
         <span className="installed-version-value">
-          {t('runtime.installedVersion.detecting', '检测中')}
+          {t('runtime.installedVersion.detecting', "Đang phát hiện")}
         </span>
       </div>
     );
@@ -87,7 +87,7 @@ export function AntigravityInstalledVersionBadge() {
       <div className="installed-version-badge is-missing" title={title}>
         <span className="installed-version-dot" />
         <span className="installed-version-value">
-          {t('runtime.installedVersion.notFound', '未检测到版本')}
+          {t('runtime.installedVersion.notFound', "Không phát hiện phiên bản")}
         </span>
       </div>
     );

@@ -31,9 +31,9 @@ export function CodebuddyInstancesContent({
       <DosageNotifyQuotaPreview
         usage={usage}
         locale={locale}
-        emptyText={t('instances.quota.empty', '暂无配额缓存')}
-        normalText={t('codebuddy.usageNormal', '正常')}
-        abnormalText={t('codebuddy.usageAbnormal', '异常')}
+        emptyText={t('instances.quota.empty', "Không có hạn ngạch trong bộ nhớ đệm")}
+        normalText={t('codebuddy.usageNormal', "Bình thường")}
+        abnormalText={t('codebuddy.usageAbnormal', "Bất thường")}
         abnormalDisplay="detail"
       />
     );

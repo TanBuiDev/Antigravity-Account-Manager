@@ -71,7 +71,7 @@ export function CodexServicePanelModal({
           <button
             className="modal-close"
             onClick={onClose}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X />
           </button>
@@ -80,7 +80,7 @@ export function CodexServicePanelModal({
         <div className="cockpit-api-panel-body">
           <section className="cockpit-api-connection-card">
             <div className="cockpit-api-connection-row">
-              <span>{t("codex.localAccess.baseUrl", "地址")}</span>
+              <span>{t("codex.localAccess.baseUrl", "Địa chỉ")}</span>
               <code title={baseUrl}>{baseUrl}</code>
               <button
                 type="button"
@@ -88,13 +88,13 @@ export function CodexServicePanelModal({
                 onClick={() =>
                   void navigator.clipboard.writeText(baseUrl).catch(() => {})
                 }
-                title={t("common.copy", "复制")}
+                title={t("common.copy", "Copy​")}
               >
                 <Copy size={14} />
               </button>
             </div>
             <div className="cockpit-api-connection-row">
-              <span>{t("codex.localAccess.apiKey", "密钥")}</span>
+              <span>{t("codex.localAccess.apiKey", "Khóa")}</span>
               <code title={apiKeyVisible ? rawApiKey || "" : ""}>
                 {apiKeyDisplay}
               </code>
@@ -106,8 +106,8 @@ export function CodexServicePanelModal({
                     onClick={onToggleApiKeyVisible}
                     title={
                       apiKeyVisible
-                        ? t("codex.localAccess.hideKey", "隐藏密钥")
-                        : t("codex.localAccess.showKey", "显示密钥")
+                        ? t("codex.localAccess.hideKey", "Ẩn khóa")
+                        : t("codex.localAccess.showKey", "Hiện khóa")
                     }
                   >
                     {apiKeyVisible ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -119,7 +119,7 @@ export function CodexServicePanelModal({
                   onClick={() =>
                     void navigator.clipboard.writeText(rawApiKey || "").catch(() => {})
                   }
-                  title={t("common.copy", "复制")}
+                  title={t("common.copy", "Copy​")}
                   disabled={!rawApiKey}
                 >
                   <Copy size={14} />
@@ -145,7 +145,7 @@ export function CodexServicePanelModal({
           <section className="cockpit-api-panel-section">
             <div className="cockpit-api-section-head">
               <strong>
-                {t("codex.modelProviders.usage.rawFields", "服务数据")}
+                {t("codex.modelProviders.usage.rawFields", "Dữ liệu dịch vụ")}
               </strong>
             </div>
             <div className="cockpit-api-usage-card-grid">
@@ -159,7 +159,7 @@ export function CodexServicePanelModal({
                 ))
               ) : (
                 <div className="cockpit-api-empty-row">
-                  {emptyDetailText || t("codex.cockpitApi.noStats", "暂无统计")}
+                  {emptyDetailText || t("codex.cockpitApi.noStats", "Chưa có thống kê")}
                 </div>
               )}
             </div>

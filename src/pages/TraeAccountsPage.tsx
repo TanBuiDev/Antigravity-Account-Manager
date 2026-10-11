@@ -589,7 +589,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
 
   const resolveGroupLabel = useCallback(
     (groupKey: string) =>
-      groupKey === untaggedKey ? t('accounts.defaultGroup', '默认分组') : groupKey,
+      groupKey === untaggedKey ? t('accounts.defaultGroup', "Nhóm mặc định") : groupKey,
     [t],
   );
 
@@ -615,8 +615,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
         usage.usageModel === 'fast_request' && usage.fastRequestAvailable != null;
       const formatFastTimes = (value: number) =>
         value === -1
-          ? t('trae.quota.fastUnlimited', '无限次')
-          : t('trae.quota.fastTimes', '{{count}} 次', {
+          ? t('trae.quota.fastUnlimited', "Không giới hạn")
+          : t('trae.quota.fastTimes', "{{count}} lần", {
               count: value,
             });
 
@@ -624,16 +624,16 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
       let costText: string;
       if (isCnAccount) {
         if (hasFastRequest) {
-          costText = t('trae.quota.fastAvailable', '速通可用 {{times}}', {
+          costText = t('trae.quota.fastAvailable', "Nhanh còn {{times}}", {
             times: formatFastTimes(usage.fastRequestAvailable ?? 0),
           });
         } else if ((usage.fastRequestPerMonth ?? 0) > 0) {
-          costText = t('trae.quota.fastPerMonth', '快请求/月：{{count}}', {
+          costText = t('trae.quota.fastPerMonth', "Nhanh/tháng: {{count}}", {
             count: usage.fastRequestPerMonth ?? 0,
           });
         } else if (isFreePlan) {
           costText = hasUsageRaw
-            ? t('trae.quota.freeRemainingUnknown', '免费剩余：--')
+            ? t('trae.quota.freeRemainingUnknown', "Free còn: --")
             : t('trae.quota.usageUnknown', 'Usage: --');
         } else if (usage.spentUsd != null && usage.totalUsd != null && (usage.totalUsd ?? 0) > 0) {
           costText = t('trae.quota.usedOfTotal', {
@@ -643,7 +643,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
           });
         } else {
           costText = hasUsageRaw
-            ? t('trae.quota.timesRemainingUnknown', '剩余次数：--')
+            ? t('trae.quota.timesRemainingUnknown', "Còn lại: --")
             : t('trae.quota.usageUnknown', 'Usage: --');
         }
       } else {
@@ -677,8 +677,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
           ? hasFastRequest
             ? usage.usageExhausted
               ? t('trae.quota.statusExhaustedFree', 'Status: Usage exhausted, upgrade recommended')
-              : t('trae.quota.statusSynced', '状态：已同步')
-            : t('trae.quota.statusSyncedPending', '状态：已同步，剩余额待确认')
+              : t('trae.quota.statusSynced', "Trạng thái: đã đồng bộ")
+            : t('trae.quota.statusSyncedPending', "Trạng thái: đã đồng bộ, còn lại chưa xác nhận")
           : usage.usageExhausted
             ? isFreePlan
               ? t(
@@ -697,11 +697,11 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
         ? hasFastRequest
           ? ''
           : (usage.fastRequestPerMonth ?? 0) > 0
-            ? t('trae.quota.fastChannelPerMonth', '快通道: {{count}}/月', {
+            ? t('trae.quota.fastChannelPerMonth', "Express: {{count}}/tháng", {
                 count: usage.fastRequestPerMonth ?? 0,
               })
             : usage.canGetExpressStatus != null
-              ? t('trae.quota.fastChannelStatus', '快通道: {{status}}', {
+              ? t('trae.quota.fastChannelStatus', "Kênh nhanh: {{status}}", {
                   status: usage.canGetExpressStatus,
                 })
               : t('trae.quota.bonusEmpty', 'Bonus: --')
@@ -717,7 +717,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
       const packageText = isCnAccount
         ? usage.hasSoloPackage || usage.hasPackage
           ? usage.soloParallelLimit != null
-            ? t('trae.quota.soloParallel', '权益包: Solo 并发 {{count}}', {
+            ? t('trae.quota.soloParallel', "Gói: Solo ×{{count}}", {
                 count: usage.soloParallelLimit,
               })
             : t('trae.quota.packageAvailable', 'Package: Available')
@@ -747,9 +747,9 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
           (usage.resetAt ?? account.plan_reset_at ?? null) != null
             ? t('trae.quota.resetAt', {
                 date: formatTraeResetAt(usage.resetAt ?? account.plan_reset_at ?? 0),
-                defaultValue: '重置时间：{{date}}',
+                defaultValue: "Thoi gian dat lai: {{date}}",
               })
-            : t('trae.quota.resetUnknown', '重置时间未知'),
+            : t('trae.quota.resetUnknown', "Khong ro thoi gian dat lai"),
         packageText,
         payAsYouGoText: isCnAccount
           ? t('trae.quota.payAsYouGoEmpty', 'On-Demand Usage: --')
@@ -809,7 +809,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
       return (
         <div className={`quota-item trae-compact-quota ${variant === 'table' ? 'is-table windsurf-table-credit-item' : 'is-card'}`}>
           <div className="quota-header trae-compact-quota-header">
-            <span className={labelClass}>{t('instances.labels.quota', '配额')}</span>
+            <span className={labelClass}>{t('instances.labels.quota', "Hạn ngạch")}</span>
             <div className="trae-compact-quota-main">
               <span className="trae-compact-quota-total" title={quota.costText}>
                 {quota.costText}
@@ -859,7 +859,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
         const isSelected = selected.has(account.id);
         const isCurrent = currentAccountId === account.id;
         const hasStatusError = (account.status || '').toLowerCase() === 'error';
-        const statusTitle = account.status_reason || t('accounts.status.refreshFailed', '刷新失败');
+        const statusTitle = account.status_reason || t('accounts.status.refreshFailed', "Làm mới không thành công");
         const signedInWithText = resolveSignedInWithText(account);
         const userIdText = account.user_id || '--';
         const quotaError = account.quota_query_last_error?.trim();
@@ -885,18 +885,18 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 <span className={`tier-badge ${planClass} raw-value`}>{planLabel}</span>
               )}
               {isCurrent && (
-                <span className="current-tag">{t('accounts.status.current', '当前')}</span>
+                <span className="current-tag">{t('accounts.status.current', "Hiện tại")}</span>
               )}
               {hasStatusError && (
                 <span className="status-pill warning" title={statusTitle}>
                   <CircleAlert size={12} />
-                  {t('accounts.status.refreshFailed', '刷新失败')}
+                  {t('accounts.status.refreshFailed', "Làm mới không thành công")}
                 </span>
               )}
               {quotaError && (
                 <span className="status-pill warning" title={quotaError}>
                   <CircleAlert size={12} />
-                  {t('common.shared.quota.queryFailed', '配额查询失败')}
+                  {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
                 </span>
               )}
             </div>
@@ -928,7 +928,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
               {hasQuotaData ? (
                 renderCompactQuota(quota, 'card')
               ) : (
-                <div className="quota-empty">{t('common.shared.quota.noData', '暂无配额数据')}</div>
+                <div className="quota-empty">{t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}</div>
               )}
             </div>
 
@@ -939,7 +939,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   className="card-action-btn success"
                   onClick={() => handleInjectToVSCode?.(account.id)}
                   disabled={injecting === account.id}
-                  title={t('dashboard.switch', '切换')}
+                  title={t('dashboard.switch', "Chuyển")}
                 >
                   {injecting === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -950,7 +950,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 <button
                   className="card-action-btn"
                   onClick={() => openTagModal(account.id)}
-                  title={t('accounts.editTags', '编辑标签')}
+                  title={t('accounts.editTags', "Chỉnh sửa thẻ")}
                 >
                   <Tag size={14} />
                 </button>
@@ -958,7 +958,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   className="card-action-btn"
                   onClick={() => handleRefresh(account.id)}
                   disabled={refreshing === account.id}
-                  title={t('common.refresh', '刷新')}
+                  title={t('common.refresh', "Làm mới")}
                 >
                   <RotateCw
                     size={14}
@@ -970,14 +970,14 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   onClick={() =>
                     handleExportByIds([account.id], resolveSingleExportBaseName(account))
                   }
-                  title={t('common.shared.export.title', '导出')}
+                  title={t('common.shared.export.title', "Xuất")}
                 >
                   <Upload size={14} />
                 </button>
                 <button
                   className="card-action-btn danger"
                   onClick={() => handleDelete(account.id)}
-                  title={t('common.delete', '删除')}
+                  title={t('common.delete', "Xóa")}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -1024,7 +1024,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
         const moreTagCount = Math.max(0, accountTags.length - visibleTags.length);
         const isCurrent = currentAccountId === account.id;
         const hasStatusError = (account.status || '').toLowerCase() === 'error';
-        const statusTitle = account.status_reason || t('accounts.status.refreshFailed', '刷新失败');
+        const statusTitle = account.status_reason || t('accounts.status.refreshFailed', "Làm mới không thành công");
         const signedInWithText = resolveSignedInWithText(account);
         const userIdText = account.user_id || '--';
         const quotaError = account.quota_query_last_error?.trim();
@@ -1049,14 +1049,14 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                     <span className={`tier-badge ${planClass} raw-value`}>{planLabel}</span>
                   )}
                   {isCurrent && (
-                    <span className="mini-tag current">{t('accounts.status.current', '当前')}</span>
+                    <span className="mini-tag current">{t('accounts.status.current', "Hiện tại")}</span>
                   )}
                 </div>
                 {hasStatusError && (
                   <div className="account-sub-line">
                     <span className="status-pill warning" title={statusTitle}>
                       <CircleAlert size={12} />
-                      {t('accounts.status.refreshFailed', '刷新失败')}
+                      {t('accounts.status.refreshFailed', "Làm mới không thành công")}
                     </span>
                   </div>
                 )}
@@ -1064,7 +1064,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   <div className="account-sub-line">
                     <span className="status-pill warning" title={quotaError}>
                       <CircleAlert size={12} />
-                      {t('common.shared.quota.queryFailed', '配额查询失败')}
+                      {t('common.shared.quota.queryFailed', "Truy vấn hạn mức thất bại")}
                     </span>
                   </div>
                 )}
@@ -1095,7 +1095,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
               {hasQuotaData ? (
                 renderCompactQuota(quota, 'table')
               ) : (
-                <div className="quota-empty">{t('common.shared.quota.noData', '暂无配额数据')}</div>
+                <div className="quota-empty">{t('common.shared.quota.noData', "Không có dữ liệu hạn mức")}</div>
               )}
             </td>
             <td>{formatDate(account.created_at)}</td>
@@ -1105,7 +1105,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   className="action-btn success"
                   onClick={() => handleInjectToVSCode?.(account.id)}
                   disabled={injecting === account.id}
-                  title={t('dashboard.switch', '切换')}
+                  title={t('dashboard.switch', "Chuyển")}
                 >
                   {injecting === account.id ? (
                     <RefreshCw size={14} className="loading-spinner" />
@@ -1116,7 +1116,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 <button
                   className="action-btn"
                   onClick={() => openTagModal(account.id)}
-                  title={t('accounts.editTags', '编辑标签')}
+                  title={t('accounts.editTags', "Chỉnh sửa thẻ")}
                 >
                   <Tag size={14} />
                 </button>
@@ -1124,7 +1124,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   className="action-btn"
                   onClick={() => handleRefresh(account.id)}
                   disabled={refreshing === account.id}
-                  title={t('common.refresh', '刷新')}
+                  title={t('common.refresh', "Làm mới")}
                 >
                   <RotateCw
                     size={14}
@@ -1136,14 +1136,14 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   onClick={() =>
                     handleExportByIds([account.id], resolveSingleExportBaseName(account))
                   }
-                  title={t('common.shared.export.title', '导出')}
+                  title={t('common.shared.export.title', "Xuất")}
                 >
                   <Upload size={14} />
                 </button>
                 <button
                   className="action-btn danger"
                   onClick={() => handleDelete(account.id)}
-                  title={t('common.delete', '删除')}
+                  title={t('common.delete', "Xóa")}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -1201,7 +1201,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
             <span>
               {t('trae.flowNotice.titleWithPlatform', {
                 platform: platformConfig.platformKey,
-                defaultValue: '{{platform}} 账号接入说明（点击展开/收起）',
+                defaultValue: "Hướng dẫn tài khoản {{platform}} (nhấp để mở/thu gọn)",
               })}
             </span>
           </div>
@@ -1218,7 +1218,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 {
                   platform: platformConfig.platformKey,
                   defaultValue:
-                    '支持 {{platform}} 官方 OAuth 授权、本机导入、JSON 导入与本地注入切号；切号过程按 {{platform}} 客户端真实落盘规则写回。',
+                    "Hỗ trợ OAuth chính thức của {{platform}}, nhập cục bộ, nhập JSON và chuyển tài khoản bằng ghi cục bộ. Việc chuyển tài khoản ghi lại theo quy tắc lưu trữ thực tế của client {{platform}}.",
                 },
               )}
             </div>
@@ -1229,7 +1229,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   {
                     platform: platformConfig.platformKey,
                     defaultValue:
-                      '权限范围：读取并写入本机 {{platform}} 配置目录中的 storage.json 登录相关字段，用于账号导入、切号注入与套餐信息展示；所有数据仅在本机处理。',
+                      "Phạm vi quyền: đọc và ghi các trường đăng nhập trong storage.json cục bộ của {{platform}} để nhập tài khoản, ghi chuyển tài khoản và hiển thị gói. Tất cả dữ liệu chỉ được xử lý trên máy.",
                   },
                 )}
               </li>
@@ -1253,7 +1253,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
           {message && (
             <div className={`message-bar ${message.tone === 'error' ? 'error' : 'success'}`}>
               {message.text}
-              <button onClick={() => setMessage(null)} aria-label={t('common.close', '关闭')}>
+              <button onClick={() => setMessage(null)} aria-label={t('common.close', "Đóng")}>
                 <X size={14} />
               </button>
             </div>
@@ -1275,14 +1275,14 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 <button
                   className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
                   onClick={() => setViewMode('list')}
-                  title={t('common.shared.view.list', '列表视图')}
+                  title={t('common.shared.view.list', "Dạng danh sách")}
                 >
                   <List size={16} />
                 </button>
                 <button
                   className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
                   onClick={() => setViewMode('grid')}
-                  title={t('common.shared.view.grid', '卡片视图')}
+                  title={t('common.shared.view.grid', "Dạng thẻ")}
                 >
                   <LayoutGrid size={16} />
                 </button>
@@ -1291,11 +1291,11 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
               <MultiSelectFilterDropdown
                 options={tierFilterOptions}
                 selectedValues={filterTypes}
-                allLabel={t('common.shared.filter.all', '全部 ({{count}})', { count: tierSummary.all })}
-                filterLabel={t('common.shared.filterLabel', '筛选')}
-                clearLabel={t('accounts.clearFilter', '清空筛选')}
-                emptyLabel={t('common.none', '暂无')}
-                ariaLabel={t('common.shared.filterLabel', '筛选')}
+                allLabel={t('common.shared.filter.all', "Tất cả ({{count}})", { count: tierSummary.all })}
+                filterLabel={t('common.shared.filterLabel', "Bộ lọc")}
+                clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+                emptyLabel={t('common.none', "None​")}
+                ariaLabel={t('common.shared.filterLabel', "Bộ lọc")}
                 onToggleValue={toggleFilterTypeValue}
                 onClear={clearFilterTypes}
               />
@@ -1305,12 +1305,12 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   type="button"
                   className={`tag-filter-btn ${tagFilter.length > 0 ? 'active' : ''}`}
                   onClick={() => setShowTagFilter((prev) => !prev)}
-                  aria-label={t('accounts.filterTags', '标签筛选')}
+                  aria-label={t('accounts.filterTags', "Lọc thẻ")}
                 >
                   <Tag size={14} />
                   {tagFilter.length > 0
-                    ? `${t('accounts.filterTagsCount', '标签')}(${tagFilter.length})`
-                    : t('accounts.filterTags', '标签筛选')}
+                    ? `${t('accounts.filterTagsCount', "Thẻ")}(${tagFilter.length})`
+                    : t('accounts.filterTags', "Lọc thẻ")}
                 </button>
                 {showTagFilter && (
                   <div
@@ -1319,7 +1319,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   >
                     {availableTags.length === 0 ? (
                       <div className="tag-filter-empty">
-                        {t('accounts.noAvailableTags', '暂无可用标签')}
+                        {t('accounts.noAvailableTags', "Không có thẻ nào")}
                       </div>
                     ) : (
                       <div className="tag-filter-options" style={page.tagFilterScrollContainerStyle}>
@@ -1344,7 +1344,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                               }}
                               aria-label={t('accounts.deleteTagAria', {
                                 tag,
-                                defaultValue: '删除标签 {{tag}}',
+                                defaultValue: "Xóa thẻ {{tag}}",
                               })}
                             >
                               <X size={12} />
@@ -1360,11 +1360,11 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         checked={groupByTag}
                         onChange={(event) => setGroupByTag(event.target.checked)}
                       />
-                      <span>{t('accounts.groupByTag', '按标签分组展示')}</span>
+                      <span>{t('accounts.groupByTag', "Nhóm theo thẻ")}</span>
                     </label>
                     {tagFilter.length > 0 && (
                       <button type="button" className="tag-filter-clear" onClick={clearTagFilter}>
-                        {t('accounts.clearFilter', '清空筛选')}
+                        {t('accounts.clearFilter', "Xóa bộ lọc")}
                       </button>
                     )}
                   </div>
@@ -1388,10 +1388,10 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 onClick={() => setSortDirection((prev) => (prev === 'desc' ? 'asc' : 'desc'))}
                 title={
                   sortDirection === 'desc'
-                    ? t('common.shared.sort.descTooltip', '当前：降序，点击切换为升序')
-                    : t('common.shared.sort.ascTooltip', '当前：升序，点击切换为降序')
+                    ? t('common.shared.sort.descTooltip', "Giảm dần (nhấn để chuyển Tăng dần)")
+                    : t('common.shared.sort.ascTooltip', "Tăng dần (nhấn để chuyển Giảm dần)")
                 }
-                aria-label={t('common.shared.sort.toggleDirection', '切换排序方向')}
+                aria-label={t('common.shared.sort.toggleDirection', "Đổi hướng sắp xếp")}
               >
                 {sortDirection === 'desc' ? '⬇' : '⬆'}
               </button>
@@ -1410,8 +1410,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 className="btn btn-secondary icon-only"
                 onClick={handleRefreshAll}
                 disabled={refreshingAll || accounts.length === 0}
-                title={t('common.shared.refreshAll', '刷新全部')}
-                aria-label={t('common.shared.refreshAll', '刷新全部')}
+                title={t('common.shared.refreshAll', "Làm mới tất cả")}
+                aria-label={t('common.shared.refreshAll', "Làm mới tất cả")}
               >
                 <RefreshCw size={14} className={refreshingAll ? 'loading-spinner' : ''} />
               </button>
@@ -1420,13 +1420,13 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 onClick={togglePrivacyMode}
                 title={
                   privacyModeEnabled
-                    ? t('privacy.showSensitive', '显示邮箱')
-                    : t('privacy.hideSensitive', '隐藏邮箱')
+                    ? t('privacy.showSensitive', "Hiện email")
+                    : t('privacy.hideSensitive', "Ẩn email")
                 }
                 aria-label={
                   privacyModeEnabled
-                    ? t('privacy.showSensitive', '显示邮箱')
-                    : t('privacy.hideSensitive', '隐藏邮箱')
+                    ? t('privacy.showSensitive', "Hiện email")
+                    : t('privacy.hideSensitive', "Ẩn email")
                 }
               >
                 {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -1435,8 +1435,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 className="btn btn-secondary icon-only"
                 onClick={() => openAddModal('import')}
                 disabled={importing}
-                title={t('common.shared.import.label', '导入')}
-                aria-label={t('common.shared.import.label', '导入')}
+                title={t('common.shared.import.label', "Nhập")}
+                aria-label={t('common.shared.import.label', "Nhập")}
               >
                 <Download size={14} />
               </button>
@@ -1446,13 +1446,13 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 disabled={exporting || filteredIds.length === 0}
                 title={
                   exportSelectionCount > 0
-                    ? `${t('common.shared.export.title', '导出')} (${exportSelectionCount})`
-                    : t('common.shared.export.title', '导出')
+                    ? `${t('common.shared.export.title', "Xuất")} (${exportSelectionCount})`
+                    : t('common.shared.export.title', "Xuất")
                 }
                 aria-label={
                   exportSelectionCount > 0
-                    ? `${t('common.shared.export.title', '导出')} (${exportSelectionCount})`
-                    : t('common.shared.export.title', '导出')
+                    ? `${t('common.shared.export.title', "Xuất")} (${exportSelectionCount})`
+                    : t('common.shared.export.title', "Xuất")
                 }
               >
                 <Upload size={14} />
@@ -1475,8 +1475,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                 <button
                   className="btn btn-danger icon-only"
                   onClick={handleBatchDelete}
-                  title={`${t('common.delete', '删除')} (${selected.size})`}
-                  aria-label={`${t('common.delete', '删除')} (${selected.size})`}
+                  title={`${t('common.delete', "Xóa")} (${selected.size})`}
+                  aria-label={`${t('common.delete', "Xóa")} (${selected.size})`}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -1487,17 +1487,17 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
           {loading && accounts.length === 0 ? (
             <div className="loading-container">
               <RefreshCw size={24} className="loading-spinner" />
-              <p>{t('common.loading', '加载中...')}</p>
+              <p>{t('common.loading', "Đang tải...")}</p>
             </div>
           ) : accounts.length === 0 ? (
             <div className="empty-state">
               <Globe size={48} />
-              <h3>{t('common.shared.empty.title', '暂无账号')}</h3>
+              <h3>{t('common.shared.empty.title', "Chưa có tài khoản")}</h3>
               <p>
                 {t('trae.empty.descriptionWithPlatform', {
                   platform: platformConfig.platformKey,
                   defaultValue:
-                    '点击“添加账号”开始管理您的 {{platform}} 账号，也可以从本机 {{platform}} 数据或 JSON 文件导入。',
+                    "Nhấp \"Thêm tài khoản\" để quản lý tài khoản {{platform}}, hoặc nhập dữ liệu {{platform}} cục bộ hay tệp JSON.",
                 })}
               </p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '16px' }}>
@@ -1514,14 +1514,14 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                   }
                 >
                   <BookOpen size={16} />
-                  {t('manual.navTitle', '功能使用手册')}
+                  {t('manual.navTitle', "Sổ tay sử dụng")}
                 </button>
               </div>
             </div>
           ) : filteredAccounts.length === 0 ? (
             <div className="empty-state">
-              <h3>{t('common.shared.noMatch.title', '没有匹配的账号')}</h3>
-              <p>{t('common.shared.noMatch.desc', '请尝试调整搜索或筛选条件')}</p>
+              <h3>{t('common.shared.noMatch.title', "Không có tài khoản phù hợp")}</h3>
+              <p>{t('common.shared.noMatch.desc', "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
             </div>
           ) : viewMode === 'grid' ? (
         <div className="grid-view-container">
@@ -1556,7 +1556,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                       />
                     </th>
                     <th style={{ width: 260 }}>{t('common.shared.columns.account')}</th>
-                    <th>{t('instances.labels.quota', '配额')}</th>
+                    <th>{t('instances.labels.quota', "Hạn ngạch")}</th>
                     <th style={{ width: 160 }}>{t('common.shared.columns.createdAt')}</th>
                     <th className="sticky-action-header table-action-header">
                       {t('common.shared.columns.actions')}
@@ -1593,7 +1593,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                       />
                     </th>
                     <th style={{ width: 260 }}>{t('common.shared.columns.account')}</th>
-                    <th>{t('instances.labels.quota', '配额')}</th>
+                    <th>{t('instances.labels.quota', "Hạn ngạch")}</th>
                     <th style={{ width: 160 }}>{t('common.shared.columns.createdAt')}</th>
                     <th className="sticky-action-header table-action-header">
                       {t('common.shared.columns.actions')}
@@ -1624,17 +1624,17 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
             <div className="modal-overlay">
               <div className="modal-content ghcp-add-modal platform-account-add-modal" onClick={(event) => event.stopPropagation()}>
                 <div className="modal-header">
-                  <button className="btn btn-secondary icon-only" onClick={closeAddModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                  <button className="btn btn-secondary icon-only" onClick={closeAddModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
                   <h2>
                     {t('trae.addModal.titleWithPlatform', {
                       platform: platformConfig.platformKey,
-                      defaultValue: '添加 {{platform}} 账号',
+                      defaultValue: "Thêm tài khoản {{platform}}",
                     })}
                   </h2>
                   <button
                     className="modal-close"
                     onClick={closeAddModal}
-                    aria-label={t('common.close', '关闭')}
+                    aria-label={t('common.close', "Đóng")}
                   >
                     <X />
                   </button>
@@ -1646,7 +1646,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                     onClick={() => openAddModal('oauth')}
                   >
                     <Globe size={14} />
-                    {t('common.shared.addModal.oauth', 'OAuth 授权')}
+                    {t('common.shared.addModal.oauth', "Ủy quyền OAuth")}
                   </button>
                   <button
                     className={`modal-tab ${addTab === 'token' ? 'active' : ''}`}
@@ -1660,7 +1660,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                     onClick={() => openAddModal('import')}
                   >
                     <Database size={14} />
-                    {t('accounts.tabs.import', '导入')}
+                    {t('accounts.tabs.import', "Nhập")}
                   </button>
                 </div>
 
@@ -1672,7 +1672,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         {t('trae.oauth.descWithPlatform', {
                           platform: platformConfig.platformKey,
                           defaultValue:
-                            '点击下方按钮，在浏览器中完成 {{platform}} OAuth 授权登录。',
+                            "Nhấp nút bên dưới và hoàn tất ủy quyền OAuth của {{platform}} trong trình duyệt.",
                         })}
                       </p>
 
@@ -1681,13 +1681,13 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                           <CircleAlert size={16} />
                           <span>{oauthPrepareError}</span>
                           <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>
-                            {t('common.shared.oauth.retry', '重新生成授权信息')}
+                            {t('common.shared.oauth.retry', "Tạo lại thông tin ủy quyền")}
                           </button>
                         </div>
                       ) : oauthUrl ? (
                         <div className="oauth-url-section">
                           <div className="oauth-link">
-                            <label>{t('accounts.oauth.linkLabel', '授权链接')}</label>
+                            <label>{t('accounts.oauth.linkLabel', "Liên kết xác thực")}</label>
                             <div className="oauth-url-box">
                               <input type="text" value={oauthUrl} readOnly />
                               <button onClick={handleCopyOauthUrl}>
@@ -1697,7 +1697,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                           </div>
                           {oauthMeta && (
                             <p className="oauth-hint">
-                              {t('common.shared.oauth.meta', '授权有效期：{{expires}}s；轮询间隔：{{interval}}s', {
+                              {t('common.shared.oauth.meta', "Hết hạn sau: {{expires}}s; chu kỳ thăm dò: {{interval}}s", {
                                 expires: oauthMeta.expiresIn,
                                 interval: oauthMeta.intervalSeconds,
                               })}
@@ -1705,17 +1705,17 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                           )}
                           <button className="btn btn-primary btn-full" onClick={handleOpenOauthUrl}>
                             <Globe size={16} />
-                            {t('common.shared.oauth.openBrowser', '在浏览器中打开')}
+                            {t('common.shared.oauth.openBrowser', "Mở trong trình duyệt")}
                           </button>
                           {oauthSupportsManualCallback && (
                             <div className="oauth-link">
-                              <label>{t('common.shared.oauth.manualCallbackLabel', '手动输入回调地址')}</label>
+                              <label>{t('common.shared.oauth.manualCallbackLabel', "Nhập URL callback thủ công")}</label>
                               <div className="oauth-url-box oauth-manual-input">
                                 <input
                                   type="text"
                                   value={oauthManualCallbackInput}
                                   onChange={(e) => setOauthManualCallbackInput(e.target.value)}
-                                  placeholder={t('common.shared.oauth.manualCallbackPlaceholder', '粘贴完整回调地址，例如：http://localhost:1455/auth/callback?code=...&state=...')}
+                                  placeholder={t('common.shared.oauth.manualCallbackPlaceholder', "Dán đầy đủ URL callback, ví dụ: http://localhost:1455/auth/callback?code=...&state=...")}
                                 />
                                 <button
                                   className="oauth-copy-button"
@@ -1723,7 +1723,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                                   disabled={oauthManualCallbackSubmitting || !oauthManualCallbackInput.trim()}
                                 >
                                   {oauthManualCallbackSubmitting ? <RefreshCw size={16} className="loading-spinner" /> : <Check size={16} />}
-                                  {t('accounts.oauth.continue', '我已授权，继续')}
+                                  {t('accounts.oauth.continue', "Tôi đã xác thực, tiếp tục")}
                                 </button>
                               </div>
                             </div>
@@ -1737,7 +1737,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                           {oauthPolling && (
                             <div className="add-status loading">
                               <RefreshCw size={16} className="loading-spinner" />
-                              <span>{t('common.shared.oauth.waiting', '等待授权完成...')}</span>
+                              <span>{t('common.shared.oauth.waiting', "Đang chờ ủy quyền...")}</span>
                             </div>
                           )}
                           {oauthCompleteError && (
@@ -1746,8 +1746,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                               <span>{oauthCompleteError}</span>
                               <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>
                                 {oauthTimedOut
-                                  ? t('common.shared.oauth.timeoutRetry', '刷新授权链接')
-                                  : t('common.shared.oauth.retry', '重新生成授权信息')}
+                                  ? t('common.shared.oauth.timeoutRetry', "Làm mới liên kết ủy quyền")
+                                  : t('common.shared.oauth.retry', "Tạo lại thông tin ủy quyền")}
                               </button>
                             </div>
                           )}
@@ -1761,7 +1761,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                       ) : (
                         <div className="oauth-loading">
                           <RefreshCw size={24} className="loading-spinner" />
-                          <span>{t('common.shared.oauth.preparing', '正在准备授权信息...')}</span>
+                          <span>{t('common.shared.oauth.preparing', "Đang chuẩn bị liên kết ủy quyền...")}</span>
                         </div>
                       )}
                     </div>
@@ -1771,9 +1771,9 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         {platformId === 'trae_cn' || platformId === 'trae_solo_cn'
                           ? t(
                               'trae.token.jsonOnlyDesc',
-                              '粘贴完整 Trae CN 账号 JSON。暂不支持裸 Token，避免导入后无法稳定识别账号或写入不可用登录态。',
+                              "Dán JSON tài khoản Trae CN đầy đủ. Không hỗ trợ token thô.",
                             )
-                          : t('accounts.importJsonHint', '导入由本工具导出的 Trae JSON 文件。')}
+                          : t('accounts.importJsonHint', "Nhập file Qoder JSON được xuất từ công cụ này.")}
                       </p>
                       <textarea
                         className="token-input"
@@ -1781,8 +1781,8 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         onChange={(event) => setTokenInput(event.target.value)}
                         placeholder={
                           platformId === 'trae_cn' || platformId === 'trae_solo_cn'
-                            ? t('trae.token.jsonOnlyPlaceholder', '粘贴完整 Trae CN JSON...')
-                            : t('common.shared.token.placeholder', '粘贴 Token 或 JSON...')
+                            ? t('trae.token.jsonOnlyPlaceholder', "JSON Trae CN đầy đủ...")
+                            : t('common.shared.token.placeholder', "Ví dụ: ghu_xxx / sk-ws-xxx / {\"access_token\":\"eyJ...\",\"refresh_token\":\"rt_...\"} / [{...}]")
                         }
                       />
                       <button
@@ -1795,7 +1795,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         ) : (
                           <Download size={16} />
                         )}
-                        {t('common.shared.token.import', '导入')}
+                        {t('common.shared.token.import', "Nhập")}
                       </button>
                     </div>
                   ) : (
@@ -1804,7 +1804,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         {t('trae.import.localDescWithPlatform', {
                           platform: platformConfig.platformKey,
                           defaultValue:
-                            '支持从本机 {{platform}} 配置目录读取当前登录账号、套餐信息和配额缓存数据。',
+                            "Nhập tài khoản đang đăng nhập, thông tin gói và dữ liệu hạn mức đã lưu cache từ thư mục cấu hình {{platform}} cục bộ.",
                         })}
                       </p>
                       <button
@@ -1820,7 +1820,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         {t('common.shared.addModal.import')}
                       </button>
                       <div className="oauth-hint" style={{ margin: '8px 0 4px' }}>
-                        {t('common.shared.import.orJson', '或从 JSON 文件导入')}
+                        {t('common.shared.import.orJson', "Hoặc nhập từ tệp JSON")}
                       </div>
                       <input
                         ref={importFileInputRef}
@@ -1844,7 +1844,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                         ) : (
                           <Upload size={16} />
                         )}
-                        {t('common.shared.import.pickFile', '选择 JSON 文件导入')}
+                        {t('common.shared.import.pickFile', "Chọn tệp JSON để nhập")}
                       </button>
                     </div>
                   )}
@@ -1868,7 +1868,7 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
 
           <ExportJsonModal
             isOpen={showExportModal}
-            title={`${t('common.shared.export.title', '导出')} JSON`}
+            title={`${t('common.shared.export.title', "Xuất")} JSON`}
             jsonContent={exportJsonContent}
             hidden={exportJsonHidden}
             copied={exportJsonCopied}
@@ -1888,11 +1888,11 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
             <div className="modal-overlay">
               <div className="modal" onClick={(event) => event.stopPropagation()}>
                 <div className="modal-header">
-                  <h2>{t('common.confirm', '确认')}</h2>
+                  <h2>{t('common.confirm', "Xác nhận")}</h2>
                   <button
                     className="modal-close"
                     onClick={() => !deleting && setDeleteConfirm(null)}
-                    aria-label={t('common.close', '关闭')}
+                    aria-label={t('common.close', "Đóng")}
                   >
                     <X />
                   </button>
@@ -1907,10 +1907,10 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                     onClick={() => setDeleteConfirm(null)}
                     disabled={deleting}
                   >
-                    {t('common.cancel', '取消')}
+                    {t('common.cancel', "Hủy")}
                   </button>
                   <button className="btn btn-danger" onClick={confirmDelete} disabled={deleting}>
-                    {t('common.confirm', '确认')}
+                    {t('common.confirm', "Xác nhận")}
                   </button>
                 </div>
               </div>
@@ -1921,11 +1921,11 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
             <div className="modal-overlay">
               <div className="modal" onClick={(event) => event.stopPropagation()}>
                 <div className="modal-header">
-                  <h2>{t('common.confirm', '确认')}</h2>
+                  <h2>{t('common.confirm', "Xác nhận")}</h2>
                   <button
                     className="modal-close"
                     onClick={() => !deletingTag && setTagDeleteConfirm(null)}
-                    aria-label={t('common.close', '关闭')}
+                    aria-label={t('common.close', "Đóng")}
                   >
                     <X />
                   </button>
@@ -1949,10 +1949,10 @@ export function TraeAccountsPage({ platformId = 'trae' }: TraeAccountsPageProps)
                     onClick={() => setTagDeleteConfirm(null)}
                     disabled={deletingTag}
                   >
-                    {t('common.cancel', '取消')}
+                    {t('common.cancel', "Hủy")}
                   </button>
                   <button className="btn btn-danger" onClick={confirmDeleteTag} disabled={deletingTag}>
-                    {deletingTag ? t('common.processing', '处理中...') : t('common.confirm', '确认')}
+                    {deletingTag ? t('common.processing', "Đang xử lý...") : t('common.confirm', "Xác nhận")}
                   </button>
                 </div>
               </div>

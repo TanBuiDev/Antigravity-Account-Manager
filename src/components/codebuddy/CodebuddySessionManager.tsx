@@ -193,7 +193,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
             disabled={loading || !keywordInput}
           >
             <X size={14} />
-            {t('codex.sessionManager.search.clear', '清空')}
+            {t('codex.sessionManager.search.clear', "Xóa")}
           </button>
           <SingleSelectDropdown
             className="codex-session-manager__kind-filter"
@@ -213,7 +213,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
             type="button"
             onClick={loadSessions}
             disabled={loading}
-            title={t('common.refresh', '刷新')}
+            title={t('common.refresh', "Làm mới")}
           >
             <RefreshCw size={14} />
           </button>
@@ -224,7 +224,7 @@ export function CodebuddySessionManager({ platform, accounts = [] }: Props) {
       <div className="codex-session-manager__list">
         {loading && sessions.length === 0 && (
           <div className="codex-session-manager__empty">
-            {t('common.loading', '加载中...')}
+            {t('common.loading', "Đang tải...")}
           </div>
         )}
         {!loading && sessions.length === 0 && (

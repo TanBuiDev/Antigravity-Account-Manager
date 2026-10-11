@@ -2112,7 +2112,7 @@ export function DashboardPage({
   ) => {
     const quotaItems = presentation.quotaItems.slice(0, Math.max(0, limit));
     if (quotaItems.length === 0) {
-      return <span className="no-data-text">{t('dashboard.noData', '暂无数据')}</span>;
+      return <span className="no-data-text">{t('dashboard.noData', "Không có dữ liệu")}</span>;
     }
 
     return quotaItems.map((item) => {
@@ -2199,7 +2199,7 @@ export function DashboardPage({
             <button
               className="mini-icon-btn"
               onClick={onEditTags}
-              title={t('accounts.editTags', '编辑标签')}
+              title={t('accounts.editTags', "Chỉnh sửa thẻ")}
             >
               <Tag size={14} />
             </button>
@@ -2207,7 +2207,7 @@ export function DashboardPage({
           <button
             className="mini-icon-btn"
             onClick={onRefresh}
-            title={t('common.refresh', '刷新')}
+            title={t('common.refresh', "Làm mới")}
             disabled={isRefreshing || isSwitching}
           >
             <RotateCw size={14} className={isRefreshing ? 'loading-spinner' : ''} />
@@ -2215,7 +2215,7 @@ export function DashboardPage({
           <button
             className="mini-icon-btn"
             onClick={onSwitch}
-            title={t('dashboard.switch', '切换')}
+            title={t('dashboard.switch', "Chuyển")}
             disabled={isSwitching || switchDisabled}
           >
             {isSwitching ? <RotateCw size={14} className="loading-spinner" /> : <Play size={14} />}
@@ -2226,7 +2226,7 @@ export function DashboardPage({
   };
 
   const renderAgAccountContent = (account: Account | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildAntigravityAccountPresentation(account, agDisplayGroups, t);
     const quotaDisplayItems = presentation.quotaItems.slice(0, 4);
@@ -2262,21 +2262,21 @@ export function DashboardPage({
               )}
             </div>
           ))}
-          {quotaDisplayItems.length === 0 && <span className="no-data-text">{t('dashboard.noData', '暂无数据')}</span>}
+          {quotaDisplayItems.length === 0 && <span className="no-data-text">{t('dashboard.noData', "Không có dữ liệu")}</span>}
         </div>
 
         <div className="account-mini-actions icon-only-row">
           <button
             className="mini-icon-btn"
             onClick={() => setTagModalState({ accountId: account.id, platform: 'antigravity', tags: account.tags || [] })}
-            title={t('accounts.editTags', '编辑标签')}
+            title={t('accounts.editTags', "Chỉnh sửa thẻ")}
           >
             <Tag size={14} />
           </button>
           <button
             className="mini-icon-btn"
             onClick={() => handleRefreshAg(account.id)}
-            title={t('common.refresh', '刷新')}
+            title={t('common.refresh', "Làm mới")}
             disabled={refreshing.has(account.id)}
           >
             <RotateCw size={14} className={refreshing.has(account.id) ? 'loading-spinner' : ''} />
@@ -2284,7 +2284,7 @@ export function DashboardPage({
           <button
             className="mini-icon-btn"
             onClick={() => switchAgAccount(account.id, antigravityRuntimeTarget)}
-            title={t('dashboard.switch', '切换')}
+            title={t('dashboard.switch', "Chuyển")}
           >
             <Play size={14} />
           </button>
@@ -2294,7 +2294,7 @@ export function DashboardPage({
   };
 
   const renderCodexAccountContent = (account: CodexAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     if (isCodexApiKeyAccount(account) && !isCodexNewApiAccount(account)) {
       const isChatCompletionsApiKey =
@@ -2346,10 +2346,10 @@ export function DashboardPage({
               {usageMode === 'new_api' ? (
                 <div className="mini-quota-row-stacked">
                   <div className="mini-quota-header">
-                    <span className="model-name">{t('codex.cockpitApi.balance', '额度')}</span>
+                    <span className="model-name">{t('codex.cockpitApi.balance', "Số dư")}</span>
                     <span className="model-pct high">
                       {isUnlimited
-                        ? t('codex.newApi.quota.unlimited', '不限量')
+                        ? t('codex.newApi.quota.unlimited', "Không giới hạn")
                         : newApiAvailable != null && newApiGranted != null
                           ? `$${newApiAvailable.toFixed(2)} / $${newApiGranted.toFixed(2)}`
                           : '-'}
@@ -2363,42 +2363,42 @@ export function DashboardPage({
                   </div>
                   <div className="mini-reset-time">
                     {newApiExpiresAt != null && newApiExpiresAt > 0
-                      ? `${t('codex.modelProviders.usage.fields.expiresAt', '过期时间')} ${new Date(newApiExpiresAt * 1000).toLocaleDateString()}`
-                      : t('dashboard.noData', '暂无数据')}
+                      ? `${t('codex.modelProviders.usage.fields.expiresAt', "Hết hạn")} ${new Date(newApiExpiresAt * 1000).toLocaleDateString()}`
+                      : t('dashboard.noData', "Không có dữ liệu")}
                   </div>
                 </div>
               ) : usageMode === 'sub2api' ? (
                 <div className="codex-api-mini-stats">
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.accountBalance', '账户余额')}</span>
+                    <span>{t('codex.modelProviders.usage.accountBalance', "Số dư tài khoản")}</span>
                     <strong>{typeof usageSummary?.balance === 'number' || typeof usageSummary?.remaining === 'number' ? `$${(usageSummary?.remaining ?? usageSummary?.balance ?? 0).toFixed(2)}` : '-'}</strong>
                   </div>
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.fields.todayRequests', '今日请求')}</span>
+                    <span>{t('codex.modelProviders.usage.fields.todayRequests', "Yêu cầu hôm nay")}</span>
                     <strong>{usageSummary?.todayRequests ?? '-'}</strong>
                   </div>
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.fields.todayTokens', '今日 Token')}</span>
+                    <span>{t('codex.modelProviders.usage.fields.todayTokens', "Token hôm nay")}</span>
                     <strong>{typeof usageSummary?.todayTotalTokens === 'number' ? usageSummary.todayTotalTokens.toLocaleString('en-US') : '-'}</strong>
                   </div>
                 </div>
               ) : usageMode === 'deepseek' ? (
                 <div className="codex-api-mini-stats">
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.fields.totalBalance', '总余额')}</span>
+                    <span>{t('codex.modelProviders.usage.fields.totalBalance', "Tổng số dư")}</span>
                     <strong>{formatMiniUsageMoney(usageSummary?.balance, usageSummary?.unit)}</strong>
                   </div>
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.fields.grantedBalance', '赠金余额')}</span>
+                    <span>{t('codex.modelProviders.usage.fields.grantedBalance', "Số dư tặng")}</span>
                     <strong>{deepSeekDetailValue('grantedBalance')}</strong>
                   </div>
                   <div className="codex-api-mini-stat">
-                    <span>{t('codex.modelProviders.usage.fields.toppedUpBalance', '充值余额')}</span>
+                    <span>{t('codex.modelProviders.usage.fields.toppedUpBalance', "Số dư nạp")}</span>
                     <strong>{deepSeekDetailValue('toppedUpBalance')}</strong>
                   </div>
                 </div>
               ) : (
-                <span className="no-data-text">{t('dashboard.noData', '暂无数据')}</span>
+                <span className="no-data-text">{t('dashboard.noData', "Không có dữ liệu")}</span>
               )}
             </div>
           )}
@@ -2408,7 +2408,7 @@ export function DashboardPage({
               <button
                 className="mini-icon-btn"
                 onClick={() => void refreshCodexApiUsage(account, { force: true })}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
                 disabled={refreshing.has(account.id) || usageState?.loading}
               >
                 <RotateCw size={14} className={refreshing.has(account.id) || usageState?.loading ? 'loading-spinner' : ''} />
@@ -2417,7 +2417,7 @@ export function DashboardPage({
             <button
               className="mini-icon-btn"
               onClick={() => switchCodexAccount(account.id)}
-              title={t('dashboard.switch', '切换')}
+              title={t('dashboard.switch', "Chuyển")}
             >
               <Play size={14} />
             </button>
@@ -2463,7 +2463,7 @@ export function DashboardPage({
   }, [codexApiUsageMap, codexCurrentAccount, codexRecommended, refreshCodexApiUsage]);
 
   const renderClaudeAccountContent = (account: ClaudeAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildClaudeAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2478,7 +2478,7 @@ export function DashboardPage({
   };
 
   const renderZedAccountContent = (account: ZedAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildZedAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2492,7 +2492,7 @@ export function DashboardPage({
   };
 
   const renderGitHubCopilotAccountContent = (account: GitHubCopilotAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildGitHubCopilotAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2506,7 +2506,7 @@ export function DashboardPage({
   };
 
   const renderWindsurfAccountContent = (account: WindsurfAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildWindsurfAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2520,7 +2520,7 @@ export function DashboardPage({
   };
 
   const renderKiroAccountContent = (account: KiroAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildKiroAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2535,7 +2535,7 @@ export function DashboardPage({
   };
 
   const renderCursorAccountContent = (account: CursorAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildCursorAccountPresentation(account, t);
     const authIdText = (account.auth_id || '').trim();
@@ -2554,7 +2554,7 @@ export function DashboardPage({
   };
 
   const renderGrokAccountContent = (account: GrokAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
     const presentation = buildGrokAccountPresentation(account, t);
     return renderUnifiedAccountCard({
       presentation,
@@ -2567,7 +2567,7 @@ export function DashboardPage({
   };
 
   const renderCodebuddyAccountContent = (account: CodebuddyAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildCodebuddyAccountPresentation(account, t);
     const mergedQuotaItems = buildCodebuddyCategoryQuotaItems(account);
@@ -2585,7 +2585,7 @@ export function DashboardPage({
   };
 
   const renderCodebuddyCnAccountContent = (account: CodebuddyAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildCodebuddyAccountPresentation(account, t);
     const mergedQuotaItems = buildCodebuddyCategoryQuotaItems(account);
@@ -2603,7 +2603,7 @@ export function DashboardPage({
   };
 
   const renderQoderAccountContent = (account: QoderAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildQoderAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2617,7 +2617,7 @@ export function DashboardPage({
   };
 
   const renderZcodeAccountContent = (account: ZcodeAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildZcodeAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2631,7 +2631,7 @@ export function DashboardPage({
   };
 
   const renderTraeAccountContent = (account: TraeAccount | null, platformId: TraePlatformId = 'trae') => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildTraeAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2645,7 +2645,7 @@ export function DashboardPage({
   };
 
   const renderWorkbuddyAccountContent = (account: WorkbuddyAccount | null) => {
-    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', '无账号')}</div>;
+    if (!account) return <div className="empty-slot">{t('dashboard.noAccount', "Không có tài khoản")}</div>;
 
     const presentation = buildWorkbuddyAccountPresentation(account, t);
     return renderUnifiedAccountCard({
@@ -2762,8 +2762,8 @@ export function DashboardPage({
     <button
       className="header-action-btn header-icon-btn"
       onClick={() => handleHidePlatformCard(platformId)}
-      title={t('accounts.compact.hide', '隐藏')}
-      aria-label={t('accounts.compact.hide', '隐藏')}
+      title={t('accounts.compact.hide', "Ẩn")}
+      aria-label={t('accounts.compact.hide', "Ẩn")}
     >
       <EyeOff size={14} />
     </button>
@@ -2786,10 +2786,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshAgCard}
                 disabled={cardRefreshing.ag}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.ag ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -2797,24 +2797,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderAgAccountContent(agCurrentAccount)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {agRecommended ? (
                 renderAgAccountContent(agRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('overview')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -2833,10 +2833,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshCodexCard}
                 disabled={cardRefreshing.codex || !canRefreshCodexCard}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.codex ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -2844,24 +2844,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderCodexAccountContent(codexCurrentAccount)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {codexRecommended ? (
                 renderCodexAccountContent(codexRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('codex')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -2880,10 +2880,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshClaudeCard}
                 disabled={cardRefreshing.claude}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.claude ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -2891,24 +2891,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderClaudeAccountContent(claudeCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {claudeRecommended ? (
                 renderClaudeAccountContent(claudeRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('claude')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -2927,10 +2927,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshZedCard}
                 disabled={cardRefreshing.zed}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.zed ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -2938,24 +2938,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderZedAccountContent(zedCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {zedRecommended ? (
                 renderZedAccountContent(zedRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('zed')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -2974,10 +2974,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshGitHubCopilotCard}
                 disabled={cardRefreshing.githubCopilot}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.githubCopilot ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -2985,24 +2985,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderGitHubCopilotAccountContent(githubCopilotCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {githubCopilotRecommended ? (
                 renderGitHubCopilotAccountContent(githubCopilotRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('github-copilot')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3021,10 +3021,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshWindsurfCard}
                 disabled={cardRefreshing.windsurf}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.windsurf ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3032,24 +3032,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderWindsurfAccountContent(windsurfCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {windsurfRecommended ? (
                 renderWindsurfAccountContent(windsurfRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('windsurf')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3068,10 +3068,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshKiroCard}
                 disabled={cardRefreshing.kiro}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.kiro ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3079,24 +3079,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderKiroAccountContent(kiroCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {kiroRecommended ? (
                 renderKiroAccountContent(kiroRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('kiro')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3115,10 +3115,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshCursorCard}
                 disabled={cardRefreshing.cursor}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.cursor ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3126,24 +3126,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderCursorAccountContent(cursorCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {cursorRecommended ? (
                 renderCursorAccountContent(cursorRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('cursor')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3162,10 +3162,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshGrokCard}
                 disabled={cardRefreshing.grok}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.grok ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3173,22 +3173,22 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderGrokAccountContent(grokCurrent)}
             </div>
             <div className="split-divider"></div>
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {grokRecommended ? (
                 renderGrokAccountContent(grokRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('grok')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3207,10 +3207,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshCodebuddyCard}
                 disabled={cardRefreshing.codebuddy}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.codebuddy ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3218,24 +3218,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderCodebuddyAccountContent(codebuddyCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {codebuddyRecommended ? (
                 renderCodebuddyAccountContent(codebuddyRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('codebuddy')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3254,10 +3254,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshCodebuddyCnCard}
                 disabled={cardRefreshing.codebuddyCn}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.codebuddyCn ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3265,24 +3265,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderCodebuddyCnAccountContent(codebuddyCnCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {codebuddyCnRecommended ? (
                 renderCodebuddyCnAccountContent(codebuddyCnRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('codebuddy-cn')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3301,10 +3301,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshQoderCard}
                 disabled={cardRefreshing.qoder}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.qoder ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3312,24 +3312,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderQoderAccountContent(qoderCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {qoderRecommended ? (
                 renderQoderAccountContent(qoderRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('qoder')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3348,10 +3348,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshZcodeCard}
                 disabled={cardRefreshing.zcode}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.zcode ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3359,24 +3359,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderZcodeAccountContent(zcodeCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {zcodeRecommended ? (
                 renderZcodeAccountContent(zcodeRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('zcode')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3399,10 +3399,10 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={() => handleRefreshTraeCard(traePlatformId)}
                 disabled={cardRefreshing.trae}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.trae ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
             </div>
@@ -3410,24 +3410,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderTraeAccountContent(current, traePlatformId)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {recommended ? (
                 renderTraeAccountContent(recommended, traePlatformId)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => navigateToPlatform(platformId)}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3450,17 +3450,17 @@ export function DashboardPage({
                 className="header-action-btn"
                 onClick={handleRefreshWorkbuddyCard}
                 disabled={cardRefreshing.workbuddy}
-                title={t('common.refresh', '刷新')}
+                title={t('common.refresh', "Làm mới")}
               >
                 <RotateCw size={14} className={cardRefreshing.workbuddy ? 'loading-spinner' : ''} />
-                <span>{t('common.refresh', '刷新')}</span>
+                <span>{t('common.refresh', "Làm mới")}</span>
               </button>
               {renderHideCardButton(platformId)}
               <button
                 className="header-action-btn header-collapse-btn"
                 onClick={() => toggleDashboardCardCollapse('workbuddy')}
-                title={workbuddyCollapsed ? t('common.expand', '展开') : t('common.collapse', '收起')}
-                aria-label={workbuddyCollapsed ? t('common.expand', '展开') : t('common.collapse', '收起')}
+                title={workbuddyCollapsed ? t('common.expand', "Mở rộng") : t('common.collapse', "Thu gọn")}
+                aria-label={workbuddyCollapsed ? t('common.expand', "Mở rộng") : t('common.collapse', "Thu gọn")}
               >
                 <ChevronDown size={14} className={`collapse-arrow ${workbuddyCollapsed ? 'collapsed' : ''}`} />
               </button>
@@ -3469,24 +3469,24 @@ export function DashboardPage({
 
           <div className="split-content">
             <div className="split-half current-half">
-              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
+              <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
               {renderWorkbuddyAccountContent(workbuddyCurrent)}
             </div>
 
             <div className="split-divider"></div>
 
             <div className="split-half recommend-half">
-              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
+              <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
               {workbuddyRecommended ? (
                 renderWorkbuddyAccountContent(workbuddyRecommended)
               ) : (
-                <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+                <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
               )}
             </div>
           </div>
 
           <button className="card-footer-action" onClick={() => onNavigate('workbuddy')}>
-            {t('dashboard.viewAllAccounts', '查看所有账号')}
+            {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
           </button>
         </div>
       );
@@ -3507,20 +3507,20 @@ export function DashboardPage({
 
         <div className="split-content">
           <div className="split-half current-half">
-            <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', '当前账户')}</span>
-            <div className="empty-slot-text">{t('dashboard.noData', '暂无数据')}</div>
+            <span className="half-label"><CheckCircle2 size={12} /> {t('dashboard.current', "Tài khoản hiện tại")}</span>
+            <div className="empty-slot-text">{t('dashboard.noData', "Không có dữ liệu")}</div>
           </div>
 
           <div className="split-divider"></div>
 
           <div className="split-half recommend-half">
-            <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', '推荐账号')}</span>
-            <div className="empty-slot-text">{t('dashboard.noRecommendation', '暂无更好推荐')}</div>
+            <span className="half-label"><Sparkles size={12} /> {t('dashboard.recommended', "Tài khoản đề xuất")}</span>
+            <div className="empty-slot-text">{t('dashboard.noRecommendation', "Không có đề xuất tốt hơn")}</div>
           </div>
         </div>
 
         <button className="card-footer-action" onClick={() => navigateToPlatform(platformId)}>
-          {t('dashboard.viewAllAccounts', '查看所有账号')}
+          {t('dashboard.viewAllAccounts', "Xem tất cả tài khoản")}
         </button>
       </div>
     );
@@ -3530,12 +3530,12 @@ export function DashboardPage({
     <main className="main-content dashboard-page fade-in">
       <div className="page-tabs-row" style={{ minHeight: '60px' }}>
         <div className="page-tabs-label dashboard-title-label">
-          <span>{t('nav.dashboard', '仪表盘')}</span>
+          <span>{t('nav.dashboard', "Bảng điều khiển")}</span>
           <ManualHelpIconButton className="header-action-btn dashboard-manual-btn dashboard-title-manual-btn" />
         </div>
         <div className="dashboard-top-actions">
           <button className="header-action-btn" onClick={onOpenPlatformLayout}>
-            <span>{t('platformLayout.title', '平台布局')}</span>
+            <span>{t('platformLayout.title', "Bố cục nền tảng")}</span>
           </button>
           <AnnouncementCenter onNavigate={onNavigate} variant="inline" trigger="button" />
         </div>
@@ -3548,7 +3548,7 @@ export function DashboardPage({
             type="button"
             className="action-message-close"
             onClick={() => setGrokActionMessage(null)}
-            aria-label={t('common.close', '关闭')}
+            aria-label={t('common.close', "Đóng")}
           >
             <X size={14} />
           </button>
@@ -3560,7 +3560,7 @@ export function DashboardPage({
         <div className="stat-card">
           <div className="stat-icon-bg primary"><Users size={24} /></div>
           <div className="stat-info">
-            <span className="stat-label">{t('dashboard.totalAccounts', '账号总数')}</span>
+            <span className="stat-label">{t('dashboard.totalAccounts', "Tổng số tài khoản")}</span>
             <span className="stat-value">{stats.total}</span>
           </div>
         </div>
@@ -3572,13 +3572,13 @@ export function DashboardPage({
                 className="stat-card stat-card-button"
                 key="api-relay"
                 onClick={() => onNavigate('api-relay')}
-                title={t('dashboard.apiRelay.openLocalConfig', '打开本地配置页')}
+                title={t('dashboard.apiRelay.openLocalConfig', "Mở cấu hình cục bộ")}
               >
                 <div className="stat-icon-bg info">
                   <img src={apiKeyFunIcon} alt="" className="dashboard-api-relay-stat-icon" />
                 </div>
                 <div className="stat-info">
-                  <span className="stat-label">{t('nav.apiRelay', '中转站')}</span>
+                  <span className="stat-label">{t('nav.apiRelay', "Trạm chuyển")}</span>
                   <span className="stat-value">1</span>
                 </div>
               </button>
@@ -3632,8 +3632,8 @@ export function DashboardPage({
               onClick={() => navigateToPlatform(platformId)}
               title={
                 groupExtraCount > 0
-                  ? `${t('dashboard.switchTo', '切换到此账号')} · ${groupTooltip}`
-                  : t('dashboard.switchTo', '切换到此账号')
+                  ? `${t('dashboard.switchTo', "Chuyển sang tài khoản này")} · ${groupTooltip}`
+                  : t('dashboard.switchTo', "Chuyển sang tài khoản này")
               }
             >
               {groupExtraCount > 0 && (

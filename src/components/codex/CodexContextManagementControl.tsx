@@ -43,7 +43,7 @@ export function CodexContextManagementControl({
       setLoaded(false);
       setError(
         t('settings.general.codexContextManagementLoadFailed', {
-          defaultValue: '读取官方上下文管理开关失败：{{error}}',
+          defaultValue: "Không thể đọc công tắc quản lý ngữ cảnh chính thức: {{error}}",
           error: String(loadError),
         }),
       );
@@ -86,7 +86,7 @@ export function CodexContextManagementControl({
           )
         : await codexService.saveCodexContextManagement(nextEnabled);
       setEnabled(Boolean(saved.context_management_experimental_mode));
-      setNotice(t('settings.general.codexContextManagementSaveSuccess', '官方上下文管理开关已保存'));
+      setNotice(t('settings.general.codexContextManagementSaveSuccess', "Đã lưu công tắc quản lý ngữ cảnh chính thức"));
       window.dispatchEvent(
         new CustomEvent(CONTEXT_MANAGEMENT_UPDATED_EVENT, {
           detail: { instanceId: instanceId ?? null },
@@ -96,7 +96,7 @@ export function CodexContextManagementControl({
       setEnabled(previous);
       setError(
         t('settings.general.codexContextManagementSaveFailed', {
-          defaultValue: '保存官方上下文管理开关失败：{{error}}',
+          defaultValue: "Không thể lưu công tắc quản lý ngữ cảnh chính thức: {{error}}",
           error: String(saveError),
         }),
       );
@@ -107,9 +107,9 @@ export function CodexContextManagementControl({
 
   const description = t(
     'settings.general.codexContextManagementDesc',
-    '默认关闭。仅写入当前官方 Codex 配置的实验性上下文管理开关，完全重启 Codex 后生效；不修改上下文窗口、压缩阈值或 API 服务。',
+    "Tắt theo mặc định. Chỉ ghi công tắc quản lý ngữ cảnh thử nghiệm chính thức của Codex cho hồ sơ hiện tại; hãy khởi động lại hoàn toàn Codex để áp dụng. Không thay đổi cửa sổ ngữ cảnh, ngưỡng nén hoặc API Service.",
   );
-  const status = error || (saving ? t('common.saving', '保存中...') : notice);
+  const status = error || (saving ? t('common.saving', "Đang lưu...") : notice);
 
   if (variant === 'quick') {
     return (
@@ -120,7 +120,7 @@ export function CodexContextManagementControl({
             <span>
               {t(
                 'settings.general.codexContextManagement',
-                '开启experimental_mode = true（实验性上下文管理）',
+                "Bật experimental_mode = true (quản lý ngữ cảnh thử nghiệm)",
               )}
             </span>
           </div>
@@ -133,7 +133,7 @@ export function CodexContextManagementControl({
                 onChange={(event) => void handleChange(event.target.checked)}
                 aria-label={t(
                   'settings.general.codexContextManagement',
-                  '开启experimental_mode = true（实验性上下文管理）',
+                  "Bật experimental_mode = true (quản lý ngữ cảnh thử nghiệm)",
                 )}
               />
               <span className="qs-switch-slider" />
@@ -157,7 +157,7 @@ export function CodexContextManagementControl({
           <div className="row-title">
             {t(
               'settings.general.codexContextManagement',
-              '开启experimental_mode = true（实验性上下文管理）',
+              "Bật experimental_mode = true (quản lý ngữ cảnh thử nghiệm)",
             )}
           </div>
           <div className="row-desc">{description}</div>
@@ -176,7 +176,7 @@ export function CodexContextManagementControl({
               onChange={(event) => void handleChange(event.target.checked)}
               aria-label={t(
                 'settings.general.codexContextManagement',
-                '开启experimental_mode = true（实验性上下文管理）',
+                "Bật experimental_mode = true (quản lý ngữ cảnh thử nghiệm)",
               )}
             />
             <span className="slider" />

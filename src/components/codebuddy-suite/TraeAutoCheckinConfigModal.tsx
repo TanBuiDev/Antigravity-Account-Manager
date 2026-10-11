@@ -118,7 +118,7 @@ export function TraeAutoCheckinConfigModal({
       case 'failed':
         return t('workbuddy.checkin.failed', '失败');
       case 'inactive':
-        return t('workbuddy.checkin.inactive', '不可用');
+        return t('workbuddy.checkin.inactive', "Không khả dụng");
       default:
         return status;
     }
@@ -204,7 +204,7 @@ export function TraeAutoCheckinConfigModal({
                   className="btn btn-primary btn-full"
                   onClick={handleSave}
                 >
-                  {t('common.save', '保存')}
+                  {t('common.save', "Lưu")}
                 </button>
               </div>
 
@@ -244,7 +244,7 @@ export function TraeAutoCheckinConfigModal({
                     }}
                   >
                     <Trash2 size={14} />
-                    {t('common.clear', '清空')}
+                    {t('common.clear', "Xóa")}
                   </button>
                 )}
               </div>

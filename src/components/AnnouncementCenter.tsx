@@ -311,10 +311,10 @@ function AnnouncementSurface({
   };
 
   const currentTypeLabel = (type: string) => {
-    if (type === 'feature') return t('announcement.type.feature', '✨ 新功能');
-    if (type === 'warning') return t('announcement.type.warning', '⚠️ 警告');
-    if (type === 'urgent') return t('announcement.type.urgent', '🚨 紧急');
-    return t('announcement.type.info', 'ℹ️ 信息');
+    if (type === 'feature') return t('announcement.type.feature', "✨ Tính năng mới");
+    if (type === 'warning') return t('announcement.type.warning', "⚠️ Cảnh báo");
+    if (type === 'urgent') return t('announcement.type.urgent', "🚨 Khẩn cấp");
+    return t('announcement.type.info', "ℹ️ Thông tin");
   };
 
   const renderInBody = (node: ReactNode) => {
@@ -331,11 +331,11 @@ function AnnouncementSurface({
           <button
             className={trigger === 'button' ? 'announcement-trigger-btn' : 'announcement-bell-btn'}
             onClick={() => setListOpen(true)}
-            title={t('announcement.title', '公告')}
+            title={t('announcement.title', "Thông báo")}
           >
             <Bell size={16} />
             {trigger === 'button' ? (
-              <span className="announcement-trigger-label">{t('announcement.title', '公告')}</span>
+              <span className="announcement-trigger-label">{t('announcement.title', "Thông báo")}</span>
             ) : null}
             {unreadCount > 0 && (
               <span className={`announcement-bell-badge ${unreadCount === 0 ? 'is-hidden' : ''}`}>
@@ -351,8 +351,8 @@ function AnnouncementSurface({
           <div className="modal-overlay announcement-modal-overlay">
             <div ref={listDialog} tabIndex={-1} role="dialog" aria-modal="true" aria-label={t('announcement.title')} className="modal announcement-list-modal" onClick={(event) => event.stopPropagation()}>
               <div className="modal-header">
-                <h2>{t('announcement.title', '公告')}</h2>
-                <button className="modal-close" onClick={() => setListOpen(false)} aria-label={t('common.close', '关闭')}>
+                <h2>{t('announcement.title', "Thông báo")}</h2>
+                <button className="modal-close" onClick={() => setListOpen(false)} aria-label={t('common.close', "Đóng")}>
                   <X size={16} />
                 </button>
               </div>
@@ -366,7 +366,7 @@ function AnnouncementSurface({
                       }}
                       disabled={unreadCount === 0}
                     >
-                      {t('announcement.markAllRead', '全部已读')}
+                      {t('announcement.markAllRead', "Đánh dấu tất cả đã đọc")}
                     </button>
                     <button
                       className="announcement-toolbar-text-btn"
@@ -375,13 +375,13 @@ function AnnouncementSurface({
                       }}
                       disabled={loading}
                     >
-                      {t('common.refresh', '刷新')}
+                      {t('common.refresh', "Làm mới")}
                     </button>
                   </div>
                 </div>
 
                 {sortedAnnouncements.length === 0 && (
-                  <div className="announcement-empty">{t('announcement.empty', '暂无公告')}</div>
+                  <div className="announcement-empty">{t('announcement.empty', "Không có thông báo")}</div>
                 )}
 
                 {sortedAnnouncements.map((announcement) => {
@@ -422,14 +422,14 @@ function AnnouncementSurface({
                   {detailFromList ? (
                     <button className="btn btn-secondary icon-only" onClick={() => {
                       void closeDetail(true);
-                    }} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                    }} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
                   ) : null}
                   <span className={`announcement-type-chip ${sanitizeTypeClass(String(detailAnnouncement.type))}`}>
                     {currentTypeLabel(String(detailAnnouncement.type))}
                   </span>
                   <h2 className="announcement-detail-header-title">{detailAnnouncement.title}</h2>
                 </div>
-                <button className="modal-close" onClick={() => void closeDetail(false)} aria-label={t('common.close', '关闭')}>
+                <button className="modal-close" onClick={() => void closeDetail(false)} aria-label={t('common.close', "Đóng")}>
                   <X size={16} />
                 </button>
               </div>
@@ -465,7 +465,7 @@ function AnnouncementSurface({
                             />
                           ) : (
                             <div className="announcement-image-error">
-                              {t('announcement.imageLoadFailed', '图片加载失败')}
+                              {t('announcement.imageLoadFailed', "Không thể tải hình ảnh")}
                             </div>
                           )}
                           {image.label ? <span>{image.label}</span> : null}
@@ -478,7 +478,7 @@ function AnnouncementSurface({
 
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => void closeDetail(false)}>
-                  {detailAnnouncement.action ? t('announcement.later', '稍后再说') : t('announcement.gotIt', '知道了')}
+                  {detailAnnouncement.action ? t('announcement.later', "Để sau") : t('announcement.gotIt', "Đã hiểu")}
                 </button>
                 {detailAnnouncement.action ? (
                   <button
@@ -487,7 +487,7 @@ function AnnouncementSurface({
                       void runAction(detailAnnouncement.action as AnnouncementAction);
                     }}
                   >
-                    {(detailAnnouncement.action as AnnouncementAction).label || t('common.open', '打开')}
+                    {(detailAnnouncement.action as AnnouncementAction).label || t('common.open', "Open​")}
                   </button>
                 ) : null}
               </div>
@@ -503,7 +503,7 @@ function AnnouncementSurface({
                 type="button"
                 className="announcement-image-preview-close"
                 onClick={() => setImagePreviewUrl(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>

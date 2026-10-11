@@ -339,8 +339,8 @@ export function CodexLocalAccessModal({
   const stats = state?.stats;
   const quotaPoolLabels = useMemo(
     () => ({
-      weekly: t("codex.localAccess.quotaPool.weeklyShort", "周"),
-      title: t("codex.localAccess.quotaPool.title", "额度池"),
+      weekly: t("codex.localAccess.quotaPool.weeklyShort", "Tuần"),
+      title: t("codex.localAccess.quotaPool.title", "Nhóm hạn mức"),
     }),
     [t],
   );
@@ -359,8 +359,8 @@ export function CodexLocalAccessModal({
   const accessScopeAddress = accessScope === "lan" ? "0.0.0.0" : "127.0.0.1";
   const accessScopeBadge =
     accessScope === "lan"
-      ? t("codex.localAccess.accessScopeLanShort", "本机+局域网")
-      : t("codex.localAccess.accessScopeLocalhostShort", "仅本机");
+      ? t("codex.localAccess.accessScopeLanShort", "Cục bộ+mạng")
+      : t("codex.localAccess.accessScopeLocalhostShort", "Chỉ cục bộ");
   const modelIdOptions = useMemo(
     () => modelIds.map((modelId) => ({ value: modelId, label: modelId })),
     [modelIds],
@@ -658,7 +658,7 @@ export function CodexLocalAccessModal({
     () =>
       buildCodexPlanFilterOptions(tierCounts, {
         includeValid: true,
-        pendingLabel: t("codex.pendingAuth.badge", "待授权"),
+        pendingLabel: t("codex.pendingAuth.badge", "Chờ xác thực"),
         validOption: buildValidAccountsFilterOption(t, tierCounts.VALID),
       }).map((option) => {
         const pool = quotaPoolByPlan[option.value];
@@ -1061,24 +1061,24 @@ export function CodexLocalAccessModal({
     () => [
       {
         value: "lowest",
-        label: t("codex.localAccess.memberPriorityLowest", "最低"),
+        label: t("codex.localAccess.memberPriorityLowest", "Thấp nhất"),
       },
       {
         value: "normal",
-        label: t("codex.localAccess.memberPriorityNormal", "正常"),
+        label: t("codex.localAccess.memberPriorityNormal", "Bình thường"),
       },
       {
         value: "highest",
-        label: t("codex.localAccess.memberPriorityHighest", "最高"),
+        label: t("codex.localAccess.memberPriorityHighest", "Cao nhất"),
       },
     ],
     [t],
   );
   const imageGenerationPolicyOptions = useMemo(
     () => [
-      { value: "inherit", label: t("codex.localAccess.imagePolicy.inherit", "生图：自动") },
-      { value: "enabled", label: t("codex.localAccess.imagePolicy.enabled", "生图：启用") },
-      { value: "disabled", label: t("codex.localAccess.imagePolicy.disabled", "生图：禁用") },
+      { value: "inherit", label: t("codex.localAccess.imagePolicy.inherit", "Hình ảnh: Tự động") },
+      { value: "enabled", label: t("codex.localAccess.imagePolicy.enabled", "Hình ảnh: Bật") },
+      { value: "disabled", label: t("codex.localAccess.imagePolicy.disabled", "Hình ảnh: Tắt") },
     ],
     [t],
   );
@@ -1086,11 +1086,11 @@ export function CodexLocalAccessModal({
     () => [
       {
         value: "localhost",
-        label: t("codex.localAccess.accessScopeLocalhost", "仅本机"),
+        label: t("codex.localAccess.accessScopeLocalhost", "Chỉ cục bộ"),
       },
       {
         value: "lan",
-        label: t("codex.localAccess.accessScopeLan", "局域网"),
+        label: t("codex.localAccess.accessScopeLan", "Mạng nội bộ"),
       },
     ],
     [t],
@@ -1267,7 +1267,7 @@ export function CodexLocalAccessModal({
     () =>
       buildCodexPlanFilterOptions(customRoutingTierCounts, {
         includeValid: true,
-        pendingLabel: t("codex.pendingAuth.badge", "待授权"),
+        pendingLabel: t("codex.pendingAuth.badge", "Chờ xác thực"),
         validOption: buildValidAccountsFilterOption(
           t,
           customRoutingTierCounts.VALID,
@@ -1371,7 +1371,7 @@ export function CodexLocalAccessModal({
         1200,
       );
     } catch (err) {
-      setError(t("common.shared.export.copyFailed", "复制失败，请手动复制"));
+      setError(t("common.shared.export.copyFailed", "Sao chép thất bại, vui lòng sao chép thủ công"));
       console.error("Failed to copy local access value:", err);
     }
   };
@@ -1456,12 +1456,12 @@ export function CodexLocalAccessModal({
     const confirmed = await confirmDialog(
       t(
         "codex.localAccess.modal.sessionAffinityDescription",
-        "开启后，同一个会话会尽量持续使用同一个账号进行对话；账号不可用时仍会按调度策略切换，超过过期时间后会重新选择账号。",
+        "Khi bật, cùng một cuộc trò chuyện sẽ cố gắng tiếp tục dùng cùng một tài khoản. Nếu tài khoản không khả dụng, định tuyến vẫn có thể chuyển đổi; sau khi hết hạn, tài khoản sẽ được chọn lại.",
       ),
       {
         title: t(
           "codex.localAccess.modal.sessionAffinityConfirmTitle",
-          "开启会话亲和？",
+          "Bật gắn kết phiên?",
         ),
       },
     );
@@ -1508,7 +1508,7 @@ export function CodexLocalAccessModal({
       const message = t("codex.apiService.validation.numberRange", {
         min: 60,
         max: 86400,
-        defaultValue: "请输入 {{min}} 到 {{max}} 之间的数字",
+        defaultValue: "Nhập số từ {{min}} đến {{max}}",
       });
       setSessionAffinityTtlError(message);
       requestAnimationFrame(() => sessionAffinityTtlInputRef.current?.focus());
@@ -1563,7 +1563,7 @@ export function CodexLocalAccessModal({
     const nextPort = Number(portInput.trim());
     if (!Number.isInteger(nextPort) || nextPort <= 0 || nextPort > 65535) {
       setError(
-        t("codex.localAccess.portInvalid", "请输入 1 到 65535 之间的端口"),
+        t("codex.localAccess.portInvalid", "Nhập cổng từ 1 đến 65535"),
       );
       return;
     }
@@ -1572,7 +1572,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onUpdatePort(nextPort);
       },
-      t("codex.localAccess.portSaveSuccess", "API 服务端口已更新"),
+      t("codex.localAccess.portSaveSuccess", "Đã cập nhật cổng dịch vụ API"),
     );
   };
 
@@ -1598,7 +1598,7 @@ export function CodexLocalAccessModal({
           nextStrategy as CodexLocalAccessRoutingStrategy,
         );
       },
-      t("codex.localAccess.routingSaveSuccess", "API 服务调度策略已更新"),
+      t("codex.localAccess.routingSaveSuccess", "Đã cập nhật định tuyến dịch vụ API"),
     );
   };
 
@@ -1764,7 +1764,7 @@ export function CodexLocalAccessModal({
       setNotice(
         t(
           "codex.localAccess.customRoutingSaveSuccess",
-          "API 服务自定义调度已更新",
+          "Đã cập nhật định tuyến tùy chỉnh của dịch vụ API",
         ),
       );
       setCustomRoutingOpen(false);
@@ -1783,7 +1783,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onUpdateAccessScope(nextAccessScope);
       },
-      t("codex.localAccess.accessScopeSaveSuccess", "API 服务访问范围已更新"),
+      t("codex.localAccess.accessScopeSaveSuccess", "Đã cập nhật phạm vi truy cập dịch vụ API"),
     );
   };
 
@@ -1799,7 +1799,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onUpdateUpstreamProxyConfig(upstreamProxyUrlDraft || null);
       },
-      t("codex.localAccess.upstreamProxySaveSuccess", "API 代理地址已更新"),
+      t("codex.localAccess.upstreamProxySaveSuccess", "Đã cập nhật URL proxy API"),
     );
   };
 
@@ -1810,26 +1810,26 @@ export function CodexLocalAccessModal({
       nextDebugLogs
         ? t(
             "codex.localAccess.debugLogsEnableConfirmMessage",
-            "打开后会输出 API 服务调试日志，用于定位网关、代理、上游请求和流式响应问题。高并发或长时间流式请求时可能带来少量性能开销，建议排查完成后关闭。确认打开吗？",
+            "Khi bật, dịch vụ API sẽ xuất nhật ký debug để chẩn đoán sự cố gateway, proxy, yêu cầu upstream và phản hồi streaming. Việc này có thể thêm một ít chi phí hiệu năng khi đồng thời cao hoặc streaming dài. Nên tắt sau khi chẩn đoán xong. Bật?",
           )
         : t(
             "codex.localAccess.debugLogsDisableConfirmMessage",
-            "关闭后会停止输出 API 服务调试日志，减少日志噪声和额外开销；后续排查网关、代理或流式响应问题时可再次打开。确认关闭吗？",
+            "Khi tắt, dịch vụ API sẽ dừng xuất nhật ký debug, giảm nhiễu nhật ký và chi phí bổ sung. Bạn có thể bật lại khi chẩn đoán gateway, proxy hoặc streaming. Tắt?",
           ),
       {
         title: nextDebugLogs
           ? t(
               "codex.localAccess.debugLogsEnableConfirmTitle",
-              "是否打开日志调试模式？",
+              "Bật nhật ký debug",
             )
           : t(
               "codex.localAccess.debugLogsDisableConfirmTitle",
-              "是否关闭日志调试模式？",
+              "Tắt nhật ký debug",
             ),
         kind: "info",
         okLabel: nextDebugLogs
-          ? t("codex.localAccess.debugLogsEnableConfirmAction", "打开")
-          : t("codex.localAccess.debugLogsDisableConfirmAction", "关闭"),
+          ? t("codex.localAccess.debugLogsEnableConfirmAction", "Bật")
+          : t("codex.localAccess.debugLogsDisableConfirmAction", "Tắt"),
         cancelLabel: t("common.cancel"),
       },
     );
@@ -1851,10 +1851,10 @@ export function CodexLocalAccessModal({
     const confirmed = await confirmDialog(
       t(
         "codex.localAccess.rotateConfirmMessage",
-        "重置后当前 API 服务密钥会立即失效，正在进行中的请求可能不可用。确认继续吗？",
+        "Sau khi đặt lại, khóa dịch vụ API hiện tại sẽ mất hiệu lực ngay và các yêu cầu đang chạy có thể không dùng được nữa. Tiếp tục chứ?",
       ),
       {
-        title: t("codex.localAccess.rotateKey", "重置密钥"),
+        title: t("codex.localAccess.rotateKey", "Đổi khóa"),
         kind: "warning",
         okLabel: t("common.confirm"),
         cancelLabel: t("common.cancel"),
@@ -1870,15 +1870,15 @@ export function CodexLocalAccessModal({
         await onRotateApiKey();
         setKeyVisible(true);
       },
-      t("codex.localAccess.rotateSuccess", "API 服务密钥已重置"),
+      t("codex.localAccess.rotateSuccess", "Đã đặt lại khóa dịch vụ API"),
     );
   };
 
   const handleClearStats = async () => {
     const confirmed = await confirmDialog(
-      t("codex.localAccess.clearStatsConfirm", "确定要清空 API 服务统计吗？"),
+      t("codex.localAccess.clearStatsConfirm", "Xóa toàn bộ thống kê dịch vụ API?"),
       {
-        title: t("codex.localAccess.clearStats", "清除统计"),
+        title: t("codex.localAccess.clearStats", "Xóa thống kê"),
         kind: "warning",
         okLabel: t("common.confirm"),
         cancelLabel: t("common.cancel"),
@@ -1893,7 +1893,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onClearStats();
       },
-      t("codex.localAccess.clearStatsSuccess", "API 服务统计已清空"),
+      t("codex.localAccess.clearStatsSuccess", "Đã xóa thống kê dịch vụ API"),
     );
   };
 
@@ -1902,7 +1902,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onKillPort();
       },
-      t("codex.localAccess.killPortSuccessUnknown", "API 服务端口已清理"),
+      t("codex.localAccess.killPortSuccessUnknown", "Đã dọn cổng dịch vụ API"),
     );
   };
 
@@ -1910,13 +1910,13 @@ export function CodexLocalAccessModal({
     const confirmed = await confirmDialog(
       t(
         "codex.localAccess.restartConfirmMessage",
-        "将仅重启 API 服务 Sidecar，不修改账号、Token、API Key 或账号池配置。正在进行中的请求可能中断，确认继续吗？",
+        "Chỉ Sidecar của dịch vụ API sẽ được khởi động lại. Tài khoản, token, API key và cài đặt nhóm tài khoản sẽ không thay đổi. Các yêu cầu đang chạy có thể bị gián đoạn. Tiếp tục?",
       ),
       {
-        title: t("codex.localAccess.restartTitle", "重启 API 服务"),
+        title: t("codex.localAccess.restartTitle", "Khởi động lại dịch vụ API"),
         kind: "warning",
-        okLabel: t("codex.localAccess.restartAction", "重启 Sidecar"),
-        cancelLabel: t("common.cancel", "取消"),
+        okLabel: t("codex.localAccess.restartAction", "Khởi động lại Sidecar"),
+        cancelLabel: t("common.cancel", "Hủy"),
       },
     );
     if (!confirmed) return;
@@ -1924,7 +1924,7 @@ export function CodexLocalAccessModal({
       async () => {
         await onRestartSidecar();
       },
-      t("codex.localAccess.restartSuccess", "API 服务 Sidecar 已重启"),
+      t("codex.localAccess.restartSuccess", "Đã khởi động lại Sidecar dịch vụ API"),
     );
   };
 
@@ -1945,8 +1945,8 @@ export function CodexLocalAccessModal({
         if (completed === false) return false;
       },
       collection?.enabled
-        ? t("codex.localAccess.disabledSuccess", "API 服务已停用")
-        : t("codex.localAccess.enabledSuccess", "API 服务已启用"),
+        ? t("codex.localAccess.disabledSuccess", "Đã tắt dịch vụ API")
+        : t("codex.localAccess.enabledSuccess", "Đã bật dịch vụ API"),
     );
   };
 
@@ -1971,13 +1971,13 @@ export function CodexLocalAccessModal({
     const content = testChatInput.trim();
     if (!content) {
       setTestDialogError(
-        t("codex.localAccess.testChatInputRequired", "请输入测试消息"),
+        t("codex.localAccess.testChatInputRequired", "Nhập tin nhắn thử"),
       );
       return;
     }
     if (!selectedModelId) {
       setTestDialogError(
-        t("codex.localAccess.testChatModelRequired", "请选择模型 ID"),
+        t("codex.localAccess.testChatModelRequired", "Chọn ID mô hình"),
       );
       return;
     }
@@ -2042,7 +2042,7 @@ export function CodexLocalAccessModal({
                         message.content ||
                         t(
                           "codex.localAccess.testChatEmptyResponse",
-                          "响应为空",
+                          "Phản hồi trống",
                         ),
                       latencyMs: payload.latencyMs,
                     }
@@ -2092,8 +2092,8 @@ export function CodexLocalAccessModal({
                 <Server size={18} />
                 <span>
                   {isMembersMode
-                    ? t("codex.localAccess.entryAction", "添加至 API 服务")
-                    : t("codex.localAccess.title", "API 服务")}
+                    ? t("codex.localAccess.entryAction", "Thêm vào dịch vụ API")
+                    : t("codex.localAccess.title", "Dịch vụ API")}
                 </span>
               </h2>
               {!isMembersMode && (
@@ -2116,18 +2116,18 @@ export function CodexLocalAccessModal({
                       disabled={!collection || testDialogBusy || saving}
                       title={t(
                         "codex.localAccess.testDialogTitle",
-                        "测试 API 服务",
+                        "Kiểm tra dịch vụ API",
                       )}
                       aria-label={t(
                         "codex.localAccess.testDialogTitle",
-                        "测试 API 服务",
+                        "Kiểm tra dịch vụ API",
                       )}
                     >
                       <ShieldCheck
                         size={13}
                         className={testDialogBusy ? "loading-spinner" : ""}
                       />
-                      <span>{t("codex.localAccess.testAction", "测试")}</span>
+                      <span>{t("codex.localAccess.testAction", "Kiểm tra")}</span>
                     </button>
                     {collection && (
                       <div className="codex-local-access-header-upstream">
@@ -2147,11 +2147,11 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             placeholder={t(
                               "codex.localAccess.upstreamProxyUrlPlaceholder",
-                              "留空使用全局代理",
+                              "Trống = proxy toàn cục",
                             )}
                             aria-label={t(
                               "codex.localAccess.upstreamProxyLabel",
-                              "API 代理地址",
+                              "URL proxy API",
                             )}
                           />
                           <button
@@ -2161,11 +2161,11 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             title={t(
                               "codex.localAccess.upstreamProxySaveAction",
-                              "保存代理",
+                              "Lưu proxy",
                             )}
                             aria-label={t(
                               "codex.localAccess.upstreamProxySaveAction",
-                              "保存代理",
+                              "Lưu proxy",
                             )}
                           >
                             <Check size={13} />
@@ -2182,16 +2182,16 @@ export function CodexLocalAccessModal({
                         onClick={onOpenFullPage}
                         title={t(
                           "codex.apiService.openFullPage",
-                          "查看全部功能",
+                          "Xem tất cả tính năng",
                         )}
                         aria-label={t(
                           "codex.apiService.openFullPage",
-                          "查看全部功能",
+                          "Xem tất cả tính năng",
                         )}
                       >
                         <ExternalLink size={14} />
                         <span>
-                          {t("codex.apiService.openFullPage", "查看全部功能")}
+                          {t("codex.apiService.openFullPage", "Xem tất cả tính năng")}
                         </span>
                       </button>
                     )}
@@ -2200,10 +2200,10 @@ export function CodexLocalAccessModal({
                       className="folder-icon-btn codex-local-access-toolbar-btn"
                       onClick={() => void handleRefreshStats()}
                       disabled={!collection || actionBusy}
-                      title={t("codex.localAccess.refreshStats", "刷新统计")}
+                      title={t("codex.localAccess.refreshStats", "Làm mới thống kê")}
                       aria-label={t(
                         "codex.localAccess.refreshStats",
-                        "刷新统计",
+                        "Làm mới thống kê",
                       )}
                     >
                       <RefreshCw
@@ -2223,7 +2223,7 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             ariaLabel={t(
                               "codex.localAccess.routingLabel",
-                              "调度策略",
+                              "Định tuyến",
                             )}
                           />
                         </div>
@@ -2235,11 +2235,11 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             title={t(
                               "codex.localAccess.customRoutingEdit",
-                              "编辑自定义调度",
+                              "Sửa định tuyến tùy chỉnh",
                             )}
                             aria-label={t(
                               "codex.localAccess.customRoutingEdit",
-                              "编辑自定义调度",
+                              "Sửa định tuyến tùy chỉnh",
                             )}
                           >
                             <SlidersHorizontal size={14} />
@@ -2259,22 +2259,22 @@ export function CodexLocalAccessModal({
                           collection.debugLogs
                             ? t(
                                 "codex.localAccess.debugLogsEnabledSuccess",
-                                "调试日志已开启",
+                                "Đã bật nhật ký debug",
                               )
                             : t(
                                 "codex.localAccess.debugLogsDisabledSuccess",
-                                "调试日志已关闭",
+                                "Đã tắt nhật ký debug",
                               )
                         }
                         aria-label={
                           collection.debugLogs
                             ? t(
                                 "codex.localAccess.debugLogsEnabledSuccess",
-                                "调试日志已开启",
+                                "Đã bật nhật ký debug",
                               )
                             : t(
                                 "codex.localAccess.debugLogsDisabledSuccess",
-                                "调试日志已关闭",
+                                "Đã tắt nhật ký debug",
                               )
                         }
                         aria-pressed={collection.debugLogs}
@@ -2291,13 +2291,13 @@ export function CodexLocalAccessModal({
                       disabled={!collection || saving || testing || starting}
                       title={
                         collection?.enabled
-                          ? t("codex.localAccess.disableService", "停用服务")
-                          : t("codex.localAccess.enableService", "启用服务")
+                          ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+                          : t("codex.localAccess.enableService", "Bật dịch vụ")
                       }
                       aria-label={
                         collection?.enabled
-                          ? t("codex.localAccess.disableService", "停用服务")
-                          : t("codex.localAccess.enableService", "启用服务")
+                          ? t("codex.localAccess.disableService", "Tắt dịch vụ")
+                          : t("codex.localAccess.enableService", "Bật dịch vụ")
                       }
                     >
                       <Power size={14} />
@@ -2333,7 +2333,7 @@ export function CodexLocalAccessModal({
                         size={14}
                         className={sidecarRestarting ? "loading-spinner" : ""}
                       />
-                      {t("codex.localAccess.restartAction", "重启 Sidecar")}
+                      {t("codex.localAccess.restartAction", "Khởi động lại Sidecar")}
                     </button>
                     <button
                       type="button"
@@ -2346,7 +2346,7 @@ export function CodexLocalAccessModal({
                       ) : (
                         <Wrench size={14} />
                       )}
-                      {t("codex.localAccess.killPortAction", "清理端口")}
+                      {t("codex.localAccess.killPortAction", "Dọn cổng")}
                     </button>
                   </>
                 )}
@@ -2377,7 +2377,7 @@ export function CodexLocalAccessModal({
                 <div className="codex-local-access-summary-head">
                   <div className="codex-local-access-section-title">
                     <Activity size={16} />
-                    <span>{t("codex.localAccess.statsTitle", "总量统计")}</span>
+                    <span>{t("codex.localAccess.statsTitle", "Tổng quan")}</span>
                   </div>
                   <div className="codex-local-access-summary-actions">
                     <CodexStatsRangePicker
@@ -2394,11 +2394,11 @@ export function CodexLocalAccessModal({
                       className="btn btn-danger btn-sm"
                       onClick={() => void handleClearStats()}
                       disabled={!collection || actionBusy}
-                      title={t("codex.localAccess.clearStats", "清除统计")}
-                      aria-label={t("codex.localAccess.clearStats", "清除统计")}
+                      title={t("codex.localAccess.clearStats", "Xóa thống kê")}
+                      aria-label={t("codex.localAccess.clearStats", "Xóa thống kê")}
                     >
                       <Trash2 size={14} />
-                      {t("codex.localAccess.clearStats", "清除统计")}
+                      {t("codex.localAccess.clearStats", "Xóa thống kê")}
                     </button>
                   </div>
                 </div>
@@ -2443,18 +2443,18 @@ export function CodexLocalAccessModal({
                           authError: accountPoolHealthSummary.authError,
                           quotaLimited: accountPoolHealthSummary.quotaLimited,
                           defaultValue:
-                            "可用 {{available}}/{{total}}，异常 {{abnormal}}，冷却 {{cooldown}}，缺失 {{missing}}，鉴权 {{authError}}，额度 {{quotaLimited}}",
+                            "OK {{available}}/{{total}}, lỗi {{abnormal}}, chờ {{cooldown}}, thiếu {{missing}}, auth {{authError}}, hạn mức {{quotaLimited}}",
                         })}
                         onClick={() => setHealthModalOpen(true)}
                         aria-label={t(
                           "codex.localAccess.accountPoolHealth.openDetails",
-                          "查看异常账号详情",
+                          "Xem lỗi tài khoản",
                         )}
                       >
                         <span className="codex-local-access-quota-pool-plan">
                           {t(
                             "codex.localAccess.accountPoolHealth.title",
-                            "账号状态",
+                            "Trạng thái tài khoản",
                           )}
                         </span>
                         <span className="codex-local-access-quota-pool-value">
@@ -2466,7 +2466,7 @@ export function CodexLocalAccessModal({
                                 "codex.localAccess.accountPoolHealth.allAvailable",
                                 {
                                   count: accountPoolHealthSummary.total,
-                                  defaultValue: "全部可用 {{count}}",
+                                  defaultValue: "Tất cả OK {{count}}",
                                 },
                               )
                             : t(
@@ -2474,7 +2474,7 @@ export function CodexLocalAccessModal({
                                 {
                                   available: accountPoolHealthSummary.available,
                                   total: accountPoolHealthSummary.total,
-                                  defaultValue: "可用 {{available}}/{{total}}",
+                                  defaultValue: "Tốt {{available}}/{{total}}",
                                 },
                               )}
                         </span>
@@ -2487,7 +2487,7 @@ export function CodexLocalAccessModal({
                                 abnormal: accountPoolHealthSummary.abnormal,
                                 cooldown: accountPoolHealthSummary.cooldown,
                                 defaultValue:
-                                  "异常 {{abnormal}} · 冷却 {{cooldown}}",
+                                  "Lỗi {{abnormal}} · Chờ {{cooldown}}",
                               },
                             )}
                           </span>
@@ -2527,7 +2527,7 @@ export function CodexLocalAccessModal({
                   <div className="codex-local-access-section-title">
                     <KeyRound size={16} />
                     <span>
-                      {t("codex.localAccess.configTitle", "服务配置")}
+                      {t("codex.localAccess.configTitle", "Cấu hình dịch vụ")}
                     </span>
                   </div>
                   {collection ? (
@@ -2545,7 +2545,7 @@ export function CodexLocalAccessModal({
                               disabled={addressOptions.length < 2}
                               ariaLabel={t(
                                 "codex.localAccess.addressKind",
-                                "地址类型",
+                                "Loại địa chỉ",
                               )}
                             />
                           </div>
@@ -2556,7 +2556,7 @@ export function CodexLocalAccessModal({
                               onClick={() =>
                                 void handleCopy("baseUrl", displayBaseUrl)
                               }
-                              title={t("common.copy", "复制")}
+                              title={t("common.copy", "Copy​")}
                             >
                               {copiedField === "baseUrl" ? (
                                 <Check size={14} />
@@ -2577,7 +2577,7 @@ export function CodexLocalAccessModal({
                       <div className="codex-local-access-config-card codex-local-access-config-card-key">
                         <div className="codex-local-access-config-head">
                           <span className="codex-local-access-config-label">
-                            {t("codex.localAccess.apiKey", "密钥")}
+                            {t("codex.localAccess.apiKey", "Khóa")}
                           </span>
                           <div className="codex-local-access-config-actions">
                             <button
@@ -2586,8 +2586,8 @@ export function CodexLocalAccessModal({
                               onClick={() => setKeyVisible((prev) => !prev)}
                               title={
                                 keyVisible
-                                  ? t("codex.localAccess.hideKey", "隐藏密钥")
-                                  : t("codex.localAccess.showKey", "显示密钥")
+                                  ? t("codex.localAccess.hideKey", "Ẩn khóa")
+                                  : t("codex.localAccess.showKey", "Hiện khóa")
                               }
                             >
                               {keyVisible ? (
@@ -2602,7 +2602,7 @@ export function CodexLocalAccessModal({
                               onClick={() =>
                                 void handleCopy("apiKey", collection.apiKey)
                               }
-                              title={t("common.copy", "复制")}
+                              title={t("common.copy", "Copy​")}
                             >
                               {copiedField === "apiKey" ? (
                                 <Check size={14} />
@@ -2624,7 +2624,7 @@ export function CodexLocalAccessModal({
                               ) : (
                                 <RefreshCw size={14} />
                               )}
-                              {t("codex.localAccess.rotateKey", "重置密钥")}
+                              {t("codex.localAccess.rotateKey", "Đổi khóa")}
                             </button>
                           </div>
                         </div>
@@ -2644,7 +2644,7 @@ export function CodexLocalAccessModal({
                             className="codex-local-access-config-label"
                             htmlFor="codex-local-access-port"
                           >
-                            {t("codex.localAccess.portLabel", "服务端口")}
+                            {t("codex.localAccess.portLabel", "Cổng dịch vụ")}
                           </label>
                           <div className="codex-local-access-config-actions">
                             <button
@@ -2661,7 +2661,7 @@ export function CodexLocalAccessModal({
                               ) : (
                                 <Gauge size={14} />
                               )}
-                              {t("codex.localAccess.portSave", "保存端口")}
+                              {t("codex.localAccess.portSave", "Lưu cổng")}
                             </button>
                           </div>
                         </div>
@@ -2685,7 +2685,7 @@ export function CodexLocalAccessModal({
                           <span className="codex-local-access-config-label">
                             {t(
                               "codex.localAccess.accessScopeLabel",
-                              "访问范围",
+                              "Phạm vi truy cập",
                             )}
                           </span>
                           <div className="codex-local-access-config-actions">
@@ -2701,7 +2701,7 @@ export function CodexLocalAccessModal({
                               disabled={saving || testing || starting}
                               ariaLabel={t(
                                 "codex.localAccess.accessScopeLabel",
-                                "访问范围",
+                                "Phạm vi truy cập",
                               )}
                             />
                           </div>
@@ -2718,7 +2718,7 @@ export function CodexLocalAccessModal({
                     <div className="group-account-empty">
                       {t(
                         "codex.localAccess.configEmpty",
-                        "先把账号保存到 API 服务集合，随后会自动生成地址、密钥和端口。",
+                        "Hãy lưu ít nhất một tài khoản vào bộ sưu tập dịch vụ API trước khi tạo URL, khóa và cổng.",
                       )}
                     </div>
                   )}
@@ -2728,7 +2728,7 @@ export function CodexLocalAccessModal({
                         <div className="codex-local-access-config-card codex-local-access-config-card-root">
                           <div className="codex-local-access-config-head">
                             <span className="codex-local-access-config-label">
-                              {t("codex.localAccess.apiPortUrl", "API端口URL")}
+                              {t("codex.localAccess.apiPortUrl", "URL cổng API")}
                             </span>
                             <div className="codex-local-access-config-actions">
                               <button
@@ -2737,7 +2737,7 @@ export function CodexLocalAccessModal({
                                 onClick={() =>
                                   void handleCopy("apiPortUrl", apiPortUrl)
                                 }
-                                title={t("common.copy", "复制")}
+                                title={t("common.copy", "Copy​")}
                               >
                                 {copiedField === "apiPortUrl" ? (
                                   <Check size={14} />
@@ -2760,12 +2760,12 @@ export function CodexLocalAccessModal({
                         <div className="codex-local-access-config-card codex-local-access-config-card-model">
                           <div className="codex-local-access-config-head">
                             <span className="codex-local-access-config-label">
-                              {t("codex.localAccess.modelId", "模型 ID")}
+                              {t("codex.localAccess.modelId", "ID mô hình")}
                             </span>
                             <span className="codex-local-access-view-only-badge">
                               {t(
                                 "codex.localAccess.modelIdViewOnly",
-                                "仅查看使用，无切换功能",
+                                "Chỉ xem",
                               )}
                             </span>
                             <div className="codex-local-access-config-actions">
@@ -2775,7 +2775,7 @@ export function CodexLocalAccessModal({
                                 onClick={() =>
                                   void handleCopy("modelId", selectedModelId)
                                 }
-                                title={t("common.copy", "复制")}
+                                title={t("common.copy", "Copy​")}
                                 disabled={!selectedModelId}
                               >
                                 {copiedField === "modelId" ? (
@@ -2794,11 +2794,11 @@ export function CodexLocalAccessModal({
                               disabled={modelIdOptions.length === 0}
                               ariaLabel={t(
                                 "codex.localAccess.modelId",
-                                "模型 ID",
+                                "ID mô hình",
                               )}
                               placeholder={t(
                                 "codex.localAccess.modelIdPlaceholder",
-                                "选择模型 ID",
+                                "Chọn ID mô hình",
                               )}
                               menuPlacement="up"
                               menuMaxHeight={240}
@@ -2833,7 +2833,7 @@ export function CodexLocalAccessModal({
                   <div className="codex-local-access-section-title">
                     <Server size={16} />
                     <span>
-                      {t("codex.localAccess.accountStatsTitle", "按账号统计")}
+                      {t("codex.localAccess.accountStatsTitle", "Theo tài khoản")}
                     </span>
                   </div>
                   <div className="codex-local-access-account-stats">
@@ -2841,7 +2841,7 @@ export function CodexLocalAccessModal({
                       <div className="group-account-empty">
                         {t(
                           "codex.localAccess.statsEmpty",
-                          "当前还没有统计数据",
+                          "Chưa có thống kê",
                         )}
                       </div>
                     ) : (
@@ -2912,7 +2912,7 @@ export function CodexLocalAccessModal({
                   <div className="codex-local-access-section-title">
                     <FolderPlus size={16} />
                     <span>
-                      {t("codex.localAccess.memberTitle", "集合成员")}
+                      {t("codex.localAccess.memberTitle", "Thành viên bộ sưu tập")}
                     </span>
                   </div>
                   <div className="codex-local-access-member-head-actions">
@@ -2926,7 +2926,7 @@ export function CodexLocalAccessModal({
                       <span>
                         {t(
                           "codex.localAccess.modal.restrictFreeToggle",
-                          "限制 Free 账号使用",
+                          "Giới hạn tài khoản Free",
                         )}
                       </span>
                     </label>
@@ -2942,7 +2942,7 @@ export function CodexLocalAccessModal({
                           <span>
                             {t(
                               "codex.apiService.routing.sessionAffinity",
-                              "会话亲和",
+                              "Gắn phiên",
                             )}
                           </span>
                         </label>
@@ -2950,7 +2950,7 @@ export function CodexLocalAccessModal({
                           <span>
                             {t(
                               "codex.apiService.routing.sessionAffinityTtl",
-                              "过期时间（秒）",
+                              "Thời gian hết hạn (giây)",
                             )}
                           </span>
                           <input
@@ -2987,7 +2987,7 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             ariaLabel={t(
                               "codex.localAccess.routingLabel",
-                              "调度策略",
+                              "Định tuyến",
                             )}
                           />
                         </div>
@@ -2999,11 +2999,11 @@ export function CodexLocalAccessModal({
                             disabled={saving || testing || starting}
                             title={t(
                               "codex.localAccess.customRoutingEdit",
-                              "编辑自定义调度",
+                              "Sửa định tuyến tùy chỉnh",
                             )}
                             aria-label={t(
                               "codex.localAccess.customRoutingEdit",
-                              "编辑自定义调度",
+                              "Sửa định tuyến tùy chỉnh",
                             )}
                           >
                             <SlidersHorizontal size={14} />
@@ -3041,17 +3041,17 @@ export function CodexLocalAccessModal({
                         selectedValues={platformFilter}
                         allLabel={t(
                           "codex.localAccess.memberPlatformAll",
-                          "全部平台",
+                          "Tất cả nền tảng",
                         )}
                         filterLabel={t(
                           "codex.localAccess.memberPlatformLabel",
-                          "平台",
+                          "Nền tảng",
                         )}
-                        clearLabel={t("accounts.clearFilter", "清空筛选")}
-                        emptyLabel={t("common.none", "暂无")}
+                        clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                        emptyLabel={t("common.none", "None​")}
                         ariaLabel={t(
                           "codex.localAccess.memberPlatformLabel",
-                          "平台",
+                          "Nền tảng",
                         )}
                         onToggleValue={(value) =>
                           setPlatformFilter((prev) =>
@@ -3067,10 +3067,10 @@ export function CodexLocalAccessModal({
                       options={memberTierFilterOptions}
                       selectedValues={memberFilterTypes}
                       allLabel={memberTierFilterAllLabel}
-                      filterLabel={t("common.shared.filterLabel", "筛选")}
-                      clearLabel={t("accounts.clearFilter", "清空筛选")}
-                      emptyLabel={t("common.none", "暂无")}
-                      ariaLabel={t("common.shared.filterLabel", "筛选")}
+                      filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                      clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                      emptyLabel={t("common.none", "None​")}
+                      ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                       onToggleValue={(value) => {
                         if (memberView) {
                           memberView.onToggleFilterType(value);
@@ -3115,11 +3115,11 @@ export function CodexLocalAccessModal({
                     <MultiSelectFilterDropdown
                       options={memberGroupFilterOptions}
                       selectedValues={memberGroupFilter}
-                      allLabel={t("accounts.groups.allGroups", "全部分组")}
-                      filterLabel={t("accounts.groups.manageTitle", "分组管理")}
-                      clearLabel={t("accounts.clearFilter", "清空筛选")}
-                      emptyLabel={t("common.none", "暂无")}
-                      ariaLabel={t("accounts.groups.manageTitle", "分组管理")}
+                      allLabel={t("accounts.groups.allGroups", "Tất cả nhóm")}
+                      filterLabel={t("accounts.groups.manageTitle", "Quản lý nhóm")}
+                      clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                      emptyLabel={t("common.none", "None​")}
+                      ariaLabel={t("accounts.groups.manageTitle", "Quản lý nhóm")}
                       onToggleValue={(value) => {
                         if (memberView) {
                           memberView.onToggleGroupFilter(value);
@@ -3159,7 +3159,7 @@ export function CodexLocalAccessModal({
                 <div className="group-account-list codex-local-access-member-list">
                   {!accountsLoaded ? (
                     <div className="group-account-empty">
-                      {t("common.loading", "加载中...")}
+                      {t("common.loading", "Đang tải...")}
                     </div>
                   ) : localAccessAccounts.length === 0 &&
                     grokMemberRowAccounts.length === 0 &&
@@ -3167,14 +3167,14 @@ export function CodexLocalAccessModal({
                     <div className="group-account-empty">
                       {t(
                         "codex.localAccess.modal.empty",
-                        "暂无可加入的 Codex 账号",
+                        "Không có tài khoản OAuth khả dụng",
                       )}
                     </div>
                   ) : visibleSelectableAccounts.length === 0 &&
                     grokMemberRowAccounts.length === 0 &&
                     !grokMemberLoading ? (
                     <div className="group-account-empty">
-                      {t("common.shared.noMatch.title", "没有匹配的账号")}
+                      {t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}
                     </div>
                   ) : (
                     paginatedVisibleSelectableAccounts.map((account) => {
@@ -3270,7 +3270,7 @@ export function CodexLocalAccessModal({
                                 className="codex-local-access-member-priority-slot"
                                 title={t(
                                   "codex.localAccess.memberPriorityDesc",
-                                  "最高优先使用，正常按当前规则调度，最低仅在其他账号不可用时使用。",
+                                  "Cao nhất được dùng trước, Bình thường theo quy tắc hiện tại, còn Thấp nhất chỉ dùng khi các tài khoản khác không khả dụng.",
                                 )}
                               >
                                 {!isJoinUnsupported ? (
@@ -3278,7 +3278,7 @@ export function CodexLocalAccessModal({
                                     <span className="codex-local-access-member-priority-label">
                                       {t(
                                         "codex.localAccess.memberPriorityLabel",
-                                        "优先级",
+                                        "Ưu tiên",
                                       )}
                                     </span>
                                     <SingleSelectDropdown
@@ -3290,7 +3290,7 @@ export function CodexLocalAccessModal({
                                       menuMaxHeight={180}
                                       ariaLabel={t(
                                         "codex.localAccess.memberPriorityLabel",
-                                        "优先级",
+                                        "Ưu tiên",
                                       )}
                                       disabled={
                                         membersInteractionDisabled ||
@@ -3323,7 +3323,7 @@ export function CodexLocalAccessModal({
                                     menuWidth={120}
                                     ariaLabel={t(
                                       "codex.localAccess.imagePolicy.label",
-                                      "生图策略",
+                                      "Chính sách hình ảnh",
                                     )}
                                     disabled={
                                       membersInteractionDisabled ||
@@ -3343,14 +3343,14 @@ export function CodexLocalAccessModal({
                                   className={`tier-badge ${presentation.planClass}`}
                                 >
                                   {grokRowAccount
-                                    ? t("codex.grokAdd.tab", "Grok 账号")
+                                    ? t("codex.grokAdd.tab", "Tài khoản Grok")
                                     : presentation.planLabel}
                                 </span>
                               </span>
                               <span className="codex-local-access-member-metric">
                                 {t("codex.localAccess.stats.accountRequests", {
                                   count: accountStats?.requestCount ?? 0,
-                                  defaultValue: "{{count}} 次请求",
+                                  defaultValue: "{{count}} yêu cầu",
                                 })}
                               </span>
                               <span className="codex-local-access-member-trailing">
@@ -3358,7 +3358,7 @@ export function CodexLocalAccessModal({
                                   <span className="codex-local-access-member-unsupported">
                                     {t(
                                       "codex.localAccess.modal.pendingOauthUnsupported",
-                                      "待授权账号不可加入 API 服务",
+                                      "Chờ xác thực: không",
                                     )}
                                   </span>
                                 )}
@@ -3366,7 +3366,7 @@ export function CodexLocalAccessModal({
                                   <span className="codex-local-access-member-unsupported">
                                     {t(
                                       "codex.webSessionImport.apiIneligible",
-                                      "Web Session 仅支持查看额度，不能加入 API 服务",
+                                      "Web Session chỉ hạn mức, không API",
                                     )}
                                   </span>
                                 )}
@@ -3421,7 +3421,7 @@ export function CodexLocalAccessModal({
                 >
                   {saving
                     ? t("common.saving")
-                    : t("codex.localAccess.modal.save", "保存集合")}
+                    : t("codex.localAccess.modal.save", "Lưu bộ")}
                 </button>
               </>
             ) : (
@@ -3450,13 +3450,13 @@ export function CodexLocalAccessModal({
                 <h3 id="codex-local-access-custom-routing-title">
                   <SlidersHorizontal size={18} />
                   <span>
-                    {t("codex.localAccess.customRoutingTitle", "自定义调度")}
+                    {t("codex.localAccess.customRoutingTitle", "Định tuyến tùy chỉnh")}
                   </span>
                 </h3>
                 <p>
                   {t(
                     "codex.localAccess.customRoutingDesc",
-                    "设置账号的优先级和权重，控制账号选择顺序与负载分配。",
+                    "Đặt mức ưu tiên và trọng số để điều khiển thứ tự chọn tài khoản và phân tải.",
                   )}
                 </p>
               </div>
@@ -3486,24 +3486,24 @@ export function CodexLocalAccessModal({
                   <strong>
                     {t(
                       "codex.localAccess.customRoutingPriorityTitle",
-                      "优先级",
+                      "Ưu tiên",
                     )}
                   </strong>
                   <span>
                     {t(
                       "codex.localAccess.customRoutingPriorityDesc",
-                      "数值越高越先被选中；高优先级账号不可用时，才会继续尝试低优先级账号。",
+                      "Giá trị cao hơn được chọn trước; tài khoản ưu tiên thấp chỉ được thử khi nhóm ưu tiên cao không khả dụng.",
                     )}
                   </span>
                 </div>
                 <div className="codex-local-access-custom-routing-guide-card">
                   <strong>
-                    {t("codex.localAccess.customRoutingWeightTitle", "权重")}
+                    {t("codex.localAccess.customRoutingWeightTitle", "Trọng số")}
                   </strong>
                   <span>
                     {t(
                       "codex.localAccess.customRoutingWeightDesc",
-                      "相同优先级内用于负载均衡；权重越高，分到的请求越多。",
+                      "Dùng để cân bằng tải trong cùng mức ưu tiên. Trọng số càng cao thì nhận càng nhiều yêu cầu.",
                     )}
                   </span>
                 </div>
@@ -3520,7 +3520,7 @@ export function CodexLocalAccessModal({
                     }
                     placeholder={t(
                       "codex.localAccess.customRoutingSearch",
-                      "搜索邮箱、订阅或账号 ID",
+                      "Tìm email, gói hoặc ID tài khoản",
                     )}
                   />
                 </div>
@@ -3529,10 +3529,10 @@ export function CodexLocalAccessModal({
                     options={customRoutingTierFilterOptions}
                     selectedValues={customRoutingFilterTypes}
                     allLabel={customRoutingAllTierFilterLabel}
-                    filterLabel={t("common.shared.filterLabel", "筛选")}
-                    clearLabel={t("accounts.clearFilter", "清空筛选")}
-                    emptyLabel={t("common.none", "暂无")}
-                    ariaLabel={t("common.shared.filterLabel", "筛选")}
+                    filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                    clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                    emptyLabel={t("common.none", "None​")}
+                    ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                     onToggleValue={(value) =>
                       setCustomRoutingFilterTypes((prev) =>
                         prev.includes(value)
@@ -3559,14 +3559,14 @@ export function CodexLocalAccessModal({
                   <span className="codex-local-access-custom-routing-selected-count">
                     {t("codex.localAccess.customRoutingSelected", {
                       count: customRoutingSelected.size,
-                      defaultValue: "已选 {{count}}",
+                      defaultValue: "Đã chọn {{count}}",
                     })}
                   </span>
                   <label>
                     <span>
                       {t(
                         "codex.localAccess.customRoutingPriorityShort",
-                        "优先级",
+                        "Ưu tiên",
                       )}
                     </span>
                     <input
@@ -3582,7 +3582,7 @@ export function CodexLocalAccessModal({
                   </label>
                   <label>
                     <span>
-                      {t("codex.localAccess.customRoutingWeightShort", "权重")}
+                      {t("codex.localAccess.customRoutingWeightShort", "Trọng số")}
                     </span>
                     <input
                       type="number"
@@ -3603,7 +3603,7 @@ export function CodexLocalAccessModal({
                   >
                     {t(
                       "codex.localAccess.customRoutingApplyBatch",
-                      "应用到已选",
+                      "Áp dụng cho mục chọn",
                     )}
                   </button>
                   <button
@@ -3612,7 +3612,7 @@ export function CodexLocalAccessModal({
                     onClick={resetCustomRoutingDraft}
                     disabled={saving || customRoutingAccounts.length === 0}
                   >
-                    {t("codex.localAccess.customRoutingReset", "重置")}
+                    {t("codex.localAccess.customRoutingReset", "Đặt lại")}
                   </button>
                 </div>
               </div>
@@ -3627,22 +3627,22 @@ export function CodexLocalAccessModal({
                     disabled={
                       saving || visibleCustomRoutingAccounts.length === 0
                     }
-                    aria-label={t("common.selectAll", "全选")}
+                    aria-label={t("common.selectAll", "Chọn tất cả")}
                   />
                   <span>
-                    {t("codex.localAccess.customRoutingAccountColumn", "账号")}
+                    {t("codex.localAccess.customRoutingAccountColumn", "Tài khoản")}
                   </span>
                   <span>
-                    {t("codex.localAccess.customRoutingQuotaColumn", "额度")}
+                    {t("codex.localAccess.customRoutingQuotaColumn", "Hạn mức")}
                   </span>
                   <span>
                     {t(
                       "codex.localAccess.customRoutingPriorityShort",
-                      "优先级",
+                      "Ưu tiên",
                     )}
                   </span>
                   <span>
-                    {t("codex.localAccess.customRoutingWeightShort", "权重")}
+                    {t("codex.localAccess.customRoutingWeightShort", "Trọng số")}
                   </span>
                 </div>
 
@@ -3651,12 +3651,12 @@ export function CodexLocalAccessModal({
                     <div className="group-account-empty">
                       {t(
                         "codex.localAccess.customRoutingEmpty",
-                        "当前 API 服务集合没有可配置的账号",
+                        "Không có tài khoản có thể cấu hình trong bộ sưu tập dịch vụ API hiện tại",
                       )}
                     </div>
                   ) : visibleCustomRoutingAccounts.length === 0 ? (
                     <div className="group-account-empty">
-                      {t("common.shared.noMatch.title", "没有匹配的账号")}
+                      {t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}
                     </div>
                   ) : (
                     visibleCustomRoutingAccounts.map((account) => {
@@ -3704,7 +3704,7 @@ export function CodexLocalAccessModal({
                                 className="codex-local-access-custom-routing-usage-priority-badge"
                                 title={t(
                                   "codex.localAccess.memberPriorityDesc",
-                                  "最高优先使用，正常按当前规则调度，最低仅在其他账号不可用时使用。",
+                                  "Cao nhất được dùng trước, Bình thường theo quy tắc hiện tại, còn Thấp nhất chỉ dùng khi các tài khoản khác không khả dụng.",
                                 )}
                               >
                                 {t(
@@ -3719,7 +3719,7 @@ export function CodexLocalAccessModal({
                           <div className="codex-local-access-custom-routing-quota">
                             {renderQuotaPreview(presentation, 2) ?? (
                               <span className="codex-local-access-custom-routing-muted">
-                                {t("common.none", "暂无")}
+                                {t("common.none", "None​")}
                               </span>
                             )}
                           </div>
@@ -3727,7 +3727,7 @@ export function CodexLocalAccessModal({
                             <span>
                               {t(
                                 "codex.localAccess.customRoutingPriorityShort",
-                                "优先级",
+                                "Ưu tiên",
                               )}
                             </span>
                             <input
@@ -3746,7 +3746,7 @@ export function CodexLocalAccessModal({
                               disabled={saving}
                               aria-label={t(
                                 "codex.localAccess.customRoutingPriorityShort",
-                                "优先级",
+                                "Ưu tiên",
                               )}
                             />
                           </label>
@@ -3754,7 +3754,7 @@ export function CodexLocalAccessModal({
                             <span>
                               {t(
                                 "codex.localAccess.customRoutingWeightShort",
-                                "权重",
+                                "Trọng số",
                               )}
                             </span>
                             <input
@@ -3773,7 +3773,7 @@ export function CodexLocalAccessModal({
                               disabled={saving}
                               aria-label={t(
                                 "codex.localAccess.customRoutingWeightShort",
-                                "权重",
+                                "Trọng số",
                               )}
                             />
                           </label>
@@ -3800,7 +3800,7 @@ export function CodexLocalAccessModal({
               >
                 {saving
                   ? t("common.saving")
-                  : t("codex.localAccess.customRoutingSave", "保存自定义调度")}
+                  : t("codex.localAccess.customRoutingSave", "Lưu định tuyến")}
               </button>
             </div>
           </div>
@@ -3821,13 +3821,13 @@ export function CodexLocalAccessModal({
                 <h3 id="codex-local-access-test-dialog-title">
                   <ShieldCheck size={18} />
                   <span>
-                    {t("codex.localAccess.testDialogTitle", "测试 API 服务")}
+                    {t("codex.localAccess.testDialogTitle", "Kiểm tra dịch vụ API")}
                   </span>
                 </h3>
                 <p>
                   {t(
                     "codex.localAccess.testDialogDesc",
-                    "通过本地 API 服务发起一次真实对话，验证本地服务、密钥和上游响应。",
+                    "Bắt đầu cuộc trò chuyện thật kiểu playground qua dịch vụ API hiện tại để kiểm tra mô hình, định tuyến tài khoản và phản hồi upstream.",
                   )}
                 </p>
               </div>
@@ -3844,16 +3844,16 @@ export function CodexLocalAccessModal({
             <div className="modal-body codex-local-access-test-dialog-body">
               <div className="codex-local-access-test-chat-toolbar">
                 <div className="codex-local-access-test-chat-model">
-                  <span>{t("codex.localAccess.testChatModel", "模型")}</span>
+                  <span>{t("codex.localAccess.testChatModel", "Mô hình")}</span>
                   <SingleSelectDropdown
                     value={selectedModelId}
                     options={modelIdOptions}
                     onChange={setSelectedModelId}
                     disabled={modelIdOptions.length === 0 || testDialogBusy}
-                    ariaLabel={t("codex.localAccess.testChatModel", "模型")}
+                    ariaLabel={t("codex.localAccess.testChatModel", "Mô hình")}
                     placeholder={t(
                       "codex.localAccess.modelIdPlaceholder",
-                      "选择模型 ID",
+                      "Chọn ID mô hình",
                     )}
                     menuPlacement="down"
                     menuMaxHeight={240}
@@ -3865,7 +3865,7 @@ export function CodexLocalAccessModal({
                   onClick={clearTestChat}
                   disabled={testDialogBusy || testChatMessages.length === 0}
                 >
-                  {t("codex.localAccess.testChatClear", "清空对话")}
+                  {t("codex.localAccess.testChatClear", "Xóa chat")}
                 </button>
               </div>
 
@@ -3877,7 +3877,7 @@ export function CodexLocalAccessModal({
                   <div className="codex-local-access-test-chat-empty">
                     {t(
                       "codex.localAccess.testChatEmpty",
-                      "输入一条消息后，会通过当前 API 服务发起真实对话。",
+                      "Gửi một tin nhắn để bắt đầu cuộc trò chuyện thật qua dịch vụ API hiện tại.",
                     )}
                   </div>
                 ) : (
@@ -3904,7 +3904,7 @@ export function CodexLocalAccessModal({
                           <span className="codex-local-access-test-chat-meta">
                             {t("codex.localAccess.testChatLatency", {
                               latency: formatLatencyMs(message.latencyMs),
-                              defaultValue: "耗时 {{latency}}",
+                              defaultValue: "Mất {{latency}}",
                             })}
                           </span>
                         )}
@@ -3919,7 +3919,7 @@ export function CodexLocalAccessModal({
                         <RefreshCw size={14} className="loading-spinner" />
                         {t(
                           "codex.localAccess.testChatSending",
-                          "正在请求 API 服务",
+                          "Đang gọi API",
                         )}
                       </span>
                     </div>
@@ -3953,7 +3953,7 @@ export function CodexLocalAccessModal({
                 rows={2}
                 placeholder={t(
                   "codex.localAccess.testChatInputPlaceholder",
-                  "输入测试消息，Enter 发送",
+                  "Nhập tin nhắn thử, Enter để gửi",
                 )}
               />
               <button
@@ -3964,7 +3964,7 @@ export function CodexLocalAccessModal({
                 }
               >
                 <Send size={15} />
-                {t("codex.localAccess.testChatSend", "发送")}
+                {t("codex.localAccess.testChatSend", "Gửi")}
               </button>
               <button
                 className="btn btn-secondary"

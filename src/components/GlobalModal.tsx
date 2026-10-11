@@ -100,7 +100,7 @@ export function GlobalModal() {
             <button
               className="modal-close"
               onClick={closeModal}
-              aria-label={t('common.close', '关闭')}
+              aria-label={t('common.close', "Đóng")}
             >
               <X />
             </button>

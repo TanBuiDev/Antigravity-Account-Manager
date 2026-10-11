@@ -201,30 +201,30 @@ export function PlatformOverviewTabsHeader<T extends string = PlatformOverviewTa
   const tabLabels: Record<string, TabSpec> = {
     overview: {
       key: 'overview',
-      label: t('overview.title', '账号总览'),
+      label: t('overview.title', "Tổng quan tài khoản"),
       icon: config.overviewIcon,
     },
     wakeup: {
       key: 'wakeup',
       label:
         platform === 'codex'
-          ? t('codex.wakeup.tab', '唤醒任务')
-          : t('wakeup.title', '唤醒任务'),
+          ? t('codex.wakeup.tab', "Tác vụ đánh thức")
+          : t('wakeup.title', "Nhiệm vụ đánh thức"),
       icon: <Clock3 className="tab-icon" />,
     },
     instances: {
       key: 'instances',
-      label: t('instances.title', '应用多开'),
+      label: t('instances.title', "Nhiều phiên bản"),
       icon: <Layers className="tab-icon" />,
     },
     sessions: {
       key: 'sessions',
-      label: t('codex.sessionManager.title', '会话管理'),
+      label: t('codex.sessionManager.title', "Quản lý phiên"),
       icon: <FolderOpen className="tab-icon" />,
     },
     providers: {
       key: 'providers',
-      label: t('codex.modelProviders.tab', '模型供应商'),
+      label: t('codex.modelProviders.tab', "Nhà cung cấp mô hình"),
       icon: <Server className="tab-icon" />,
     },
     proxy: {
@@ -315,7 +315,7 @@ export function PlatformOverviewTabsHeader<T extends string = PlatformOverviewTa
               onClick={() => setMoreOpen((previous) => !previous)}
             >
               <MoreHorizontal size={18} />
-              <span>{t('codex.more.title', '更多')}</span>
+              <span>{t('codex.more.title', "Thêm")}</span>
             </button>
             {moreOpen ? (
               <div className="page-more-menu" role="menu">

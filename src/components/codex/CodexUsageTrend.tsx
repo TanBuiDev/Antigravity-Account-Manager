@@ -170,18 +170,18 @@ export function CodexUsageTrend({
       <div className="codex-usage-trend__header">
         <div>
           <h2 id="codex-usage-trend-title">
-            {title ?? t("codex.apiService.usage.title", "用量统计")}
+            {title ?? t("codex.apiService.usage.title", "Thống kê dùng")}
           </h2>
         </div>
         <div className="codex-usage-trend__header-right">
           <strong className="codex-usage-trend__total">
             {formatMetricValue(totalValue, metric, lang)}
           </strong>
-          <div className="codex-usage-trend__metrics" role="group" aria-label={t("codex.apiService.usage.title", "用量统计")}>
+          <div className="codex-usage-trend__metrics" role="group" aria-label={t("codex.apiService.usage.title", "Thống kê dùng")}>
           {([
-            ["totalTokens", labels?.totalTokens ?? t("codex.localAccess.stats.tokens", "总 Token 数")],
-            ["requestCount", labels?.requestCount ?? t("codex.localAccess.stats.requests", "总请求数")],
-            ["estimatedCostUsd", labels?.estimatedCostUsd ?? t("codex.localAccess.stats.estimatedCost", "估算价值")],
+            ["totalTokens", labels?.totalTokens ?? t("codex.localAccess.stats.tokens", "Token")],
+            ["requestCount", labels?.requestCount ?? t("codex.localAccess.stats.requests", "Yêu cầu")],
+            ["estimatedCostUsd", labels?.estimatedCostUsd ?? t("codex.localAccess.stats.estimatedCost", "Giá trị ước tính")],
           ] as const).filter(([value]) => metrics.includes(value)).map(([value, label]) => (
             <button
               key={value}
@@ -201,7 +201,7 @@ export function CodexUsageTrend({
       </div>
       {points.length === 0 ? (
         <div className="codex-usage-trend__empty" role="status">
-          {emptyLabel ?? t("codex.apiService.usage.trendEmpty", "所选时间范围暂无请求记录")}
+          {emptyLabel ?? t("codex.apiService.usage.trendEmpty", "Không có yêu cầu trong khoảng đã chọn")}
         </div>
       ) : (
         <div className="codex-usage-trend__chart-wrap">
@@ -209,9 +209,9 @@ export function CodexUsageTrend({
             className="codex-usage-trend__chart"
             viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`}
             role="img"
-            aria-label={`${title ?? t("codex.apiService.usage.title", "用量统计")} · ${formatMetricValue(maxValue, metric, lang)}`}
+            aria-label={`${title ?? t("codex.apiService.usage.title", "Thống kê dùng")} · ${formatMetricValue(maxValue, metric, lang)}`}
           >
-            <title>{title ?? t("codex.apiService.usage.title", "用量统计")}</title>
+            <title>{title ?? t("codex.apiService.usage.title", "Thống kê dùng")}</title>
             <defs>
               <linearGradient id={`${chartId}-area`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.26" />
@@ -300,16 +300,16 @@ export function CodexUsageTrend({
             <div className="codex-usage-trend__tooltip" role="status" style={tooltipStyle}>
               <strong>{formatBucketLabel(hoveredPoint.point.bucketStart, hourly, lang)}</strong>
               <div>
-                <span>{labels?.totalTokens ?? t("codex.localAccess.stats.tokens", "总 Token 数")}</span>
+                <span>{labels?.totalTokens ?? t("codex.localAccess.stats.tokens", "Token")}</span>
                 <b>{formatMetricValue(hoveredPoint.point.usage.totalTokens, "totalTokens", lang)}</b>
               </div>
               <div>
-                <span>{labels?.requestCount ?? t("codex.localAccess.stats.requests", "总请求数")}</span>
+                <span>{labels?.requestCount ?? t("codex.localAccess.stats.requests", "Yêu cầu")}</span>
                 <b>{formatMetricValue(hoveredPoint.point.usage.requestCount, "requestCount", lang)}</b>
               </div>
               {metrics.includes("estimatedCostUsd") ? (
                 <div>
-                  <span>{labels?.estimatedCostUsd ?? t("codex.localAccess.stats.estimatedCost", "估算价值")}</span>
+                  <span>{labels?.estimatedCostUsd ?? t("codex.localAccess.stats.estimatedCost", "Giá trị ước tính")}</span>
                   <b>{formatMetricValue(hoveredPoint.point.usage.estimatedCostUsd, "estimatedCostUsd", lang)}</b>
                 </div>
               ) : null}

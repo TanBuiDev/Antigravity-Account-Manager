@@ -2373,12 +2373,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeTestModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{t('wakeup.dialogs.testTitle')}</h2>
               <button
                 className="modal-close"
                 onClick={closeTestModal}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -2571,12 +2571,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={() => setShowHistoryModal(false)} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{t('wakeup.dialogs.historyTitle')}</h2>
               <button
                 className="modal-close"
                 onClick={() => setShowHistoryModal(false)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -2645,12 +2645,12 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
         <div className="modal-overlay">
           <div className="modal modal-lg wakeup-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={() => setShowModal(false)} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={() => setShowModal(false)} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{editingTaskId ? t('wakeup.dialogs.taskTitleEdit') : t('wakeup.dialogs.taskTitleNew')}</h2>
               <button
                 className="modal-close"
                 onClick={() => setShowModal(false)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -3254,7 +3254,7 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
               )}
 
               <div className="wakeup-form-group">
-                <label>{t('wakeup.form.executionMode', '执行模式')}</label>
+                <label>{t('wakeup.form.executionMode', "Chế độ thực thi")}</label>
                 <select
                   className="wakeup-select"
                   value={formExecutionMode}
@@ -3262,14 +3262,14 @@ export function WakeupTasksPage({ onNavigate }: WakeupPageProps) {
                     setFormExecutionMode(event.target.value as 'auto' | 'confirm')
                   }
                 >
-                  <option value="auto">{t('wakeup.form.executionModeAuto', '直接执行')}</option>
-                  <option value="confirm">{t('wakeup.form.executionModeConfirm', '需要确认')}</option>
+                  <option value="auto">{t('wakeup.form.executionModeAuto', "Chạy trực tiếp")}</option>
+                  <option value="confirm">{t('wakeup.form.executionModeConfirm', "Cần xác nhận")}</option>
                 </select>
               </div>
 
               {formExecutionMode === 'confirm' && (
                 <div className="wakeup-form-group">
-                  <label>{t('wakeup.form.confirmTimeout', '确认超时（分钟）')}</label>
+                  <label>{t('wakeup.form.confirmTimeout', "Hết hạn xác nhận")}</label>
                   <div className="wakeup-input-with-unit">
                     <input
                       className="wakeup-input"

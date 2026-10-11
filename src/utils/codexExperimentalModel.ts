@@ -8,49 +8,49 @@ export function getCodexExperimentalModelErrorMessage(
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_MODELS_REQUIRED')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.required',
-      '至少保留一个模型。',
+      "Giữ lại ít nhất một mô hình.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_MODEL_ID_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.modelId',
-      '模型 ID 只能包含字母、数字、点、横线、下划线、斜杠和冒号。',
+      "ID mô hình chỉ được chứa chữ cái, chữ số, dấu chấm, dấu gạch ngang, dấu gạch dưới, dấu gạch chéo và dấu hai chấm.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_DISPLAY_NAME_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.displayName',
-      '请输入不超过 100 个字符的展示名。',
+      "Nhập tên hiển thị không quá 100 ký tự.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_MODEL_ID_DUPLICATE')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.duplicate',
-      '模型 ID 不能重复。',
+      "ID mô hình không được trùng lặp.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_REASONING_EFFORT_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.reasoningEffort',
-      '推理强度选项无效。',
+      "Tùy chọn mức suy luận không hợp lệ.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_CONTEXT_WINDOW_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.contextWindow',
-      '上下文窗口必须是大于 0 的整数。',
+      "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_AUTO_COMPACT_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.autoCompact',
-      '压缩阈值必须是大于 0 的整数。',
+      "Ngưỡng nén phải là số nguyên lớn hơn 0.",
     );
   }
   if (message.includes('EXPERIMENTAL_MODEL_CATALOG_AUTO_COMPACT_RANGE_INVALID')) {
     return t(
       'codex.experimentalModelCatalog.models.validation.autoCompactRange',
-      '压缩阈值必须小于上下文窗口。',
+      "Ngưỡng nén phải nhỏ hơn cửa sổ ngữ cảnh.",
     );
   }
   return null;

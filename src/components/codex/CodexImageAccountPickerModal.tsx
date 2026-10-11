@@ -165,14 +165,14 @@ export function CodexImageAccountPickerModal({
       >
         <div className="modal-header">
           <h2 id="codex-image-account-picker-title">
-            {t("codex.deepSeek.start.pickerTitle", "选择生图账号")}
+            {t("codex.deepSeek.start.pickerTitle", "Chọn tài khoản tạo ảnh")}
           </h2>
           <button
             type="button"
             className="modal-close"
             onClick={onCancel}
             disabled={saving}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X />
           </button>
@@ -183,13 +183,13 @@ export function CodexImageAccountPickerModal({
               <p className="section-desc codex-oauth-binding-desc">
                 {t(
                   "codex.launchPreview.imageGenPickerDesc",
-                  "当遇到生图需求时会转发生图请求：先由基础模型处理，再由生图模型出图，会消耗所选账号的部分额度。",
+                  "Khi có yêu cầu tạo ảnh, yêu cầu sẽ được chuyển tiếp: model cơ bản xử lý trước, sau đó model ảnh tạo hình, tiêu tốn một phần hạn mức của các tài khoản đã chọn.",
                 )}
               </p>
               {contextLabel?.trim() && (
                 <div className="section-desc codex-oauth-binding-current-target">
                   {t("codex.modelProviders.oauthBinding.currentProvider", {
-                    defaultValue: "供应商：{{name}}",
+                    defaultValue: "Nhà cung cấp: {{name}}",
                     name: contextLabel.trim(),
                   })}
                 </div>
@@ -198,7 +198,7 @@ export function CodexImageAccountPickerModal({
 
             <div className="codex-oauth-binding-picker">
               <div className="codex-oauth-binding-picker-header">
-                <label>{t("codex.deepSeek.start.pickerTitle", "选择生图账号")}</label>
+                <label>{t("codex.deepSeek.start.pickerTitle", "Chọn tài khoản tạo ảnh")}</label>
                 <div className="codex-oauth-binding-picker-controls">
                   {imageModelControl}
                   <button
@@ -219,8 +219,8 @@ export function CodexImageAccountPickerModal({
                     }}
                   >
                     {allVisibleSelected
-                      ? t("codex.deepSeek.start.pickerClear", "清空")
-                      : t("codex.deepSeek.start.pickerSelectAll", "全选")}
+                      ? t("codex.deepSeek.start.pickerClear", "Xóa")
+                      : t("codex.deepSeek.start.pickerSelectAll", "Chọn tất cả")}
                   </button>
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function CodexImageAccountPickerModal({
                   <span>
                     {t(
                       "codex.deepSeek.start.pickerEmpty",
-                      "没有可用于生图的 OAuth 账号（Free 账号与 API Key 账号不支持）。",
+                      "Không có tài khoản OAuth nào tạo được ảnh (tài khoản Free và API Key không được hỗ trợ).",
                     )}
                   </span>
                 </div>
@@ -241,7 +241,7 @@ export function CodexImageAccountPickerModal({
                       <Search size={16} className="search-icon" />
                       <input
                         type="text"
-                        placeholder={t("common.shared.search", "搜索账号...")}
+                        placeholder={t("common.shared.search", "Tìm kiếm tài khoản...")}
                         value={query}
                         onChange={(event) => setQuery(event.target.value)}
                         disabled={saving}
@@ -253,10 +253,10 @@ export function CodexImageAccountPickerModal({
                       allLabel={t("common.shared.filter.all", {
                         count: candidates.length,
                       })}
-                      filterLabel={t("common.shared.filterLabel", "筛选")}
-                      clearLabel={t("accounts.clearFilter", "清空筛选")}
-                      emptyLabel={t("common.none", "暂无")}
-                      ariaLabel={t("common.shared.filterLabel", "筛选")}
+                      filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                      clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                      emptyLabel={t("common.none", "None​")}
+                      ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                       onToggleValue={(value) =>
                         setPlanFilters((prev) =>
                           prev.includes(value)
@@ -271,22 +271,22 @@ export function CodexImageAccountPickerModal({
                       options={[
                         {
                           value: "last_used",
-                          label: t("accounts.columns.lastUsed", "最后使用"),
+                          label: t("accounts.columns.lastUsed", "Sử dụng lần cuối"),
                         },
                         {
                           value: "created_at",
-                          label: t("common.shared.sort.createdAt", "按创建时间"),
+                          label: t("common.shared.sort.createdAt", "Thời gian tạo"),
                         },
                         {
                           value: "account",
-                          label: t("common.shared.columns.account", "账号"),
+                          label: t("common.shared.columns.account", "Tài khoản"),
                         },
                         {
                           value: "plan",
-                          label: t("accounts.sort.plan", "按套餐"),
+                          label: t("accounts.sort.plan", "Theo gói"),
                         },
                       ]}
-                      ariaLabel={t("common.shared.sortLabel", "排序")}
+                      ariaLabel={t("common.shared.sortLabel", "Sắp xếp")}
                       icon={<ArrowDownWideNarrow size={14} />}
                       disabled={saving}
                       onChange={(value) => setSortBy(value as SortField)}
@@ -300,16 +300,16 @@ export function CodexImageAccountPickerModal({
                         sortDesc
                           ? t(
                               "common.shared.sort.descTooltip",
-                              "当前：降序，点击切换为升序",
+                              "Giảm dần (nhấn để chuyển Tăng dần)",
                             )
                           : t(
                               "common.shared.sort.ascTooltip",
-                              "当前：升序，点击切换为降序",
+                              "Tăng dần (nhấn để chuyển Giảm dần)",
                             )
                       }
                       aria-label={t(
                         "common.shared.sort.toggleDirection",
-                        "切换排序方向",
+                        "Đổi hướng sắp xếp",
                       )}
                     >
                       {sortDesc ? <ArrowDown size={15} /> : <ArrowUp size={15} />}
@@ -319,7 +319,7 @@ export function CodexImageAccountPickerModal({
                   {filtered.length === 0 ? (
                     <div className="group-account-empty">
                       <span>
-                        {t("common.shared.noMatch.title", "没有匹配的账号")}
+                        {t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}
                       </span>
                     </div>
                   ) : (
@@ -377,7 +377,7 @@ export function CodexImageAccountPickerModal({
                               >
                                 <Clock size={12} />
                                 <span>
-                                  {t("codex.subscription.label", "有效期")}
+                                  {t("codex.subscription.label", "Hết hạn gói")}
                                 </span>
                                 <strong>{subscriptionInfo.valueText}</strong>
                                 <span>{subscriptionInfo.detailText}</span>
@@ -414,7 +414,7 @@ export function CodexImageAccountPickerModal({
           <span className="codex-image-account-picker-count">
             {t("codex.deepSeek.start.imageGenSelected", {
               count: draftIds.length,
-              defaultValue: "已选 {{count}} 个账号",
+              defaultValue: "Đã chọn {{count}} tài khoản",
             })}
           </span>
           <button
@@ -422,14 +422,14 @@ export function CodexImageAccountPickerModal({
             onClick={onCancel}
             disabled={saving}
           >
-            {t("common.cancel", "取消")}
+            {t("common.cancel", "Hủy")}
           </button>
           <button
             className="btn btn-primary"
             onClick={() => onConfirm(draftIds)}
             disabled={saving}
           >
-            {saving ? t("common.saving", "保存中...") : t("common.save", "保存")}
+            {saving ? t("common.saving", "Đang lưu...") : t("common.save", "Lưu")}
           </button>
         </div>
       </div>

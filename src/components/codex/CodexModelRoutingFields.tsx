@@ -862,7 +862,7 @@ export function CodexModelRoutingEditor({
                           onClick={() => selectAllModels(route.id)}
                           title="全选该渠道所有模型"
                         >
-                          {t("common.selectAll", "全选")}
+                          {t("common.selectAll", "Chọn tất cả")}
                         </button>
                         <button
                           type="button"
@@ -871,7 +871,7 @@ export function CodexModelRoutingEditor({
                           onClick={() => clearAllModels(route.id)}
                           title="清空已选模型"
                         >
-                          {t("common.clear", "清空")}
+                          {t("common.clear", "Xóa")}
                         </button>
                       </>
                     )}
@@ -892,7 +892,7 @@ export function CodexModelRoutingEditor({
                         }
                       />
                       {fetchingAccountId === provider?.id
-                        ? t("common.loading", "获取中...")
+                        ? t("common.loading", "Đang tải...")
                         : t("instances.form.modelRouting.fetchModels", "获取列表")}
                     </button>
                     {!showManual && (
@@ -946,14 +946,14 @@ export function CodexModelRoutingEditor({
                         setAddingManualRouteId(null);
                       }}
                     >
-                      {t("common.add", "添加")}
+                      {t("common.add", "Add​")}
                     </button>
                     <button
                       type="button"
                       className="btn btn-secondary btn-xs"
                       onClick={() => setAddingManualRouteId(null)}
                     >
-                      {t("common.cancel", "取消")}
+                      {t("common.cancel", "Hủy")}
                     </button>
                   </div>
                 )}
@@ -1050,21 +1050,21 @@ async function confirmRoutingToggle(
   t: TFunction,
 ): Promise<boolean> {
   const title = nextEnabled
-    ? t("instances.form.modelRouting.confirmEnableTitle", "开启第三方 API 路由？")
-    : t("instances.form.modelRouting.confirmDisableTitle", "关闭第三方 API 路由？");
+    ? t("instances.form.modelRouting.confirmEnableTitle", "Bật định tuyến API của bên thứ ba?")
+    : t("instances.form.modelRouting.confirmDisableTitle", "Tắt định tuyến API của bên thứ ba?");
   const message = nextEnabled
     ? t(
         "instances.form.modelRouting.confirmEnableMessage",
-        "开启后，Codex 的模型请求将通过 Cockpit Tools 本地服务分流。服务未运行时，官方订阅和第三方模型都可能无法使用。\n\n确认开启吗？",
+        "Các yêu cầu mô hình Codex sẽ được định tuyến qua dịch vụ Cockpit Tools cục bộ. Nếu dịch vụ không chạy, cả mô hình đăng ký và bên thứ ba có thể không khả dụng.\n\nBật định tuyến?",
       )
     : t(
         "instances.form.modelRouting.confirmDisableMessage",
-        "关闭后将停止本地网关并恢复为 100% 官方原生直连，所有第三方模型将不可用。\n\n确认关闭吗？",
+        "Sau khi thay đổi này có hiệu lực, cổng cục bộ sẽ dừng, quyền truy cập đăng ký chính thức sẽ được khôi phục và các mô hình của bên thứ ba sẽ không khả dụng.\n\nTắt định tuyến?",
       );
   const okLabel = nextEnabled
-    ? t("instances.form.modelRouting.confirmEnableAction", "确认开启")
-    : t("instances.form.modelRouting.confirmDisableAction", "确认关闭");
-  const cancelLabel = t("common.cancel", "取消");
+    ? t("instances.form.modelRouting.confirmEnableAction", "Bật")
+    : t("instances.form.modelRouting.confirmDisableAction", "Tắt");
+  const cancelLabel = t("common.cancel", "Hủy");
 
   let confirmed: boolean;
   try {
@@ -1144,7 +1144,7 @@ export function CodexModelRoutingModal({
             {onEnabledChange && (
               <div className="codex-model-routing-modal__switch-wrap">
                 <span className="codex-model-routing-modal__switch-label">
-                  {enabled ? t("common.enabled", "已开启") : t("common.disabled", "已关闭")}
+                  {enabled ? t("common.enabled", "Đã bật") : t("common.disabled", "Đã tắt")}
                 </span>
                 <label
                   className="codex-model-routing__switch"
@@ -1168,7 +1168,7 @@ export function CodexModelRoutingModal({
               type="button"
               className="modal-close"
               onClick={onClose}
-              aria-label={t("common.close", "关闭")}
+              aria-label={t("common.close", "Đóng")}
             >
               <X size={16} />
             </button>
@@ -1182,7 +1182,7 @@ export function CodexModelRoutingModal({
             <span>
               {t(
                 "instances.form.modelRouting.modalTip",
-                "开启后，官方订阅和第三方模型都会经过本地分流服务。请保持 Cockpit Tools 后台运行；服务异常时会自动恢复，连续失败则回退官方配置。",
+                "Cả mô hình đăng ký và bên thứ ba đều đi qua dịch vụ định tuyến cục bộ. Vui lòng duy trì Cockpit Tools chạy ngầm. Dịch vụ tự động phục hồi và chuyển về cấu hình chính thức sau nhiều lần thất bại.",
               )}
             </span>
           </div>
@@ -1199,10 +1199,10 @@ export function CodexModelRoutingModal({
 
         <div className="modal-footer">
           <button type="button" className="btn btn-secondary" onClick={onClose}>
-            {t("common.cancel", "取消")}
+            {t("common.cancel", "Hủy")}
           </button>
           <button type="button" className="btn btn-primary" disabled={disabled} onClick={handleApply}>
-            {t("common.save", "保存")}
+            {t("common.save", "Lưu")}
           </button>
         </div>
       </div>
@@ -1311,7 +1311,7 @@ export function CodexModelRoutingSummary({
                     <span className="codex-model-routing-summary__models-count">
                       {t("codex.api.modelCatalog.count", {
                         count: modelsCount,
-                        defaultValue: "{{count}} 个模型",
+                        defaultValue: "{{count}} mô hình",
                       })}
                     </span>
                   </div>
@@ -1422,13 +1422,13 @@ export function CodexModelRoutingFields({
           </div>
           <div className="codex-launch-preview-tool-copy">
             <div className="codex-model-routing-row__title-row">
-              <h3>{t("instances.form.modelRouting.title", "第三方 API 路由")}</h3>
+              <h3>{t("instances.form.modelRouting.title", "Định tuyến API của bên thứ ba")}</h3>
               {switchControl}
             </div>
             <p>
               {t(
                 "instances.form.modelRouting.rowSummary",
-                "普通模型使用当前订阅；带前缀模型（如 cpa/gpt-5.5）转发到第三方 API。两者都依赖本地分流服务。",
+                "Các mô hình không có tiền tố sử dụng gói đăng ký hiện tại; các mô hình có tiền tố như cpa/gpt-5.5 được chuyển tiếp đến API của bên thứ ba. Cả hai đều phụ thuộc vào dịch vụ định tuyến cục bộ.",
               )}
             </p>
             <div className="codex-launch-preview-tool-meta">
@@ -1495,12 +1495,12 @@ export function CodexModelRoutingFields({
       <div className="codex-model-routing__header">
         <div>
           <label htmlFor="codex-model-routing-enabled">
-            {t("instances.form.modelRouting.title", "第三方 API 路由")}
+            {t("instances.form.modelRouting.title", "Định tuyến API của bên thứ ba")}
           </label>
           <p className="form-hint">
             {t(
               "instances.form.modelRouting.summary",
-              "普通模型使用当前订阅；带前缀模型（如 cpa/gpt-5.5）转发到第三方 API。两者都依赖本地分流服务。",
+              "Các mô hình không có tiền tố sử dụng gói đăng ký hiện tại; các mô hình có tiền tố như cpa/gpt-5.5 được chuyển tiếp đến API của bên thứ ba. Cả hai đều phụ thuộc vào dịch vụ định tuyến cục bộ.",
             )}
           </p>
         </div>

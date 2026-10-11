@@ -192,7 +192,7 @@ export function formatRequestResultDetail(
     ),
     incomplete: formatCompactNumber(usage?.streamIncompleteCount ?? 0),
     defaultValue:
-      "成功 {{success}} / 失败 {{failed}} / 取消 {{canceled}} / 上游失败 {{upstreamFailed}} / 流未完成 {{incomplete}}",
+      "OK {{success}} / Lỗi {{failed}} / Hủy {{canceled}} / Nguồn {{upstreamFailed}} / Chưa xong {{incomplete}}",
   });
 }
 
@@ -205,23 +205,23 @@ export function buildLocalAccessSummaryStats(
   return [
     {
       key: "requests",
-      label: t("codex.localAccess.stats.requests", "总请求数"),
+      label: t("codex.localAccess.stats.requests", "Yêu cầu"),
       value: formatCompactNumber(selectedTotals?.requestCount ?? 0),
       detail: formatRequestResultDetail(t, selectedTotals),
     },
     {
       key: "tokens",
-      label: t("codex.localAccess.stats.tokens", "总 Token 数"),
+      label: t("codex.localAccess.stats.tokens", "Token"),
       value: formatCompactNumber(selectedTotals?.totalTokens ?? 0),
       detail: t("codex.localAccess.stats.tokensDetail", {
         input: formatCompactNumber(selectedTotals?.inputTokens ?? 0),
         output: formatCompactNumber(selectedTotals?.outputTokens ?? 0),
-        defaultValue: "输入 {{input}} / 输出 {{output}}",
+        defaultValue: "Đầu vào {{input}} / Đầu ra {{output}}",
       }),
     },
     {
       key: "specialTokens",
-      label: t("codex.localAccess.stats.specialTokens", "缓存 / 思考"),
+      label: t("codex.localAccess.stats.specialTokens", "Bộ đệm / Suy luận"),
       value: formatCompactNumber(
         (selectedTotals?.cachedTokens ?? 0) +
           (selectedTotals?.reasoningTokens ?? 0),
@@ -229,25 +229,25 @@ export function buildLocalAccessSummaryStats(
       detail: t("codex.localAccess.stats.specialTokensDetail", {
         cached: formatCompactNumber(selectedTotals?.cachedTokens ?? 0),
         reasoning: formatCompactNumber(selectedTotals?.reasoningTokens ?? 0),
-        defaultValue: "缓存 {{cached}} / 思考 {{reasoning}}",
+        defaultValue: "Bộ đệm {{cached}} / Suy luận {{reasoning}}",
       }),
     },
     {
       key: "cost",
-      label: t("codex.localAccess.stats.estimatedCost", "估算价值"),
+      label: t("codex.localAccess.stats.estimatedCost", "Giá trị ước tính"),
       value: formatUsdCost(selectedTotals?.estimatedCostUsd ?? 0),
       detail: t(
         "codex.localAccess.stats.estimatedCostDetail",
-        "按当前请求价格快照累计",
+        "Cộng dồn từ ảnh chụp giá của từng yêu cầu",
       ),
     },
     {
       key: "latency",
-      label: t("codex.localAccess.stats.avgLatency", "平均延迟"),
+      label: t("codex.localAccess.stats.avgLatency", "Độ trễ TB"),
       value: formatLatencyMs(avgLatencyMs),
       detail: t("codex.localAccess.stats.successRate", {
         rate: successRate,
-        defaultValue: "成功率 {{rate}}%",
+        defaultValue: "Tỷ lệ thành công {{rate}}%",
       }),
     },
   ];
@@ -337,46 +337,46 @@ export function buildLocalAccessRoutingStrategyOptions(t: TFunction) {
   return [
     {
       value: "auto",
-      label: t("codex.localAccess.routingStrategy.auto", "自动（推荐）"),
+      label: t("codex.localAccess.routingStrategy.auto", "Tự động (khuyến nghị)"),
     },
     {
       value: "quota_high_first",
       label: t(
         "codex.localAccess.routingStrategy.quotaHighFirst",
-        "优先高配额",
+        "Ưu tiên hạn mức cao",
       ),
     },
     {
       value: "quota_low_first",
       label: t(
         "codex.localAccess.routingStrategy.quotaLowFirst",
-        "优先低配额",
+        "Ưu tiên hạn mức thấp",
       ),
     },
     {
       value: "plan_high_first",
       label: t(
         "codex.localAccess.routingStrategy.planHighFirst",
-        "优先高订阅",
+        "Ưu tiên gói cao",
       ),
     },
     {
       value: "plan_low_first",
       label: t(
         "codex.localAccess.routingStrategy.planLowFirst",
-        "优先低订阅",
+        "Ưu tiên gói thấp",
       ),
     },
     {
       value: "expiry_soon_first",
       label: t(
         "codex.localAccess.routingStrategy.expirySoonFirst",
-        "优先近到期",
+        "Sắp hết hạn trước",
       ),
     },
     {
       value: "custom",
-      label: t("codex.localAccess.routingStrategy.custom", "自定义"),
+      label: t("codex.localAccess.routingStrategy.custom", "Tùy chỉnh"),
     },
   ] satisfies Array<{
     value: CodexLocalAccessRoutingStrategy;

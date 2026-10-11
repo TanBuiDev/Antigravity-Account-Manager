@@ -391,7 +391,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             ? undefined
             : t(
                 "codex.localAccess.oauthBinding.quotaReserveInvalid",
-                "请输入 1 到 100 的整数",
+                "Nhập số nguyên từ 1 đến 100.",
               ),
         }));
       },
@@ -407,7 +407,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       );
       const invalidMessage = t(
         "codex.localAccess.oauthBinding.quotaReserveInvalid",
-        "请输入 1 到 100 的整数",
+        "Nhập số nguyên từ 1 đến 100.",
       );
       const fieldErrors: OAuthBindingQuotaReserveFieldErrors = {};
       if (hourlyPercent === null) {
@@ -441,7 +441,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         if (raw === "CODEX_STALE_ACCOUNT") {
           return t(
             "codex.authError.staleAccount",
-            "该账号已不在本地账号库中，账号列表已刷新。请重新导入或重新登录该 Codex 账号。",
+            "Tài khoản này không còn trong kho tài khoản cục bộ. Danh sách tài khoản đã được làm mới. Hãy nhập lại hoặc đăng nhập lại tài khoản Codex này.",
           );
         }
         if (
@@ -450,7 +450,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         ) {
           return t(
             "codex.authError.unsupportedCountryRegion",
-            "当前网络地区不支持刷新 Codex 授权。OpenAI 授权服务拒绝了当前网络出口的刷新请求，请切换到支持的网络地区后重试。",
+            "Khu vực mạng hiện tại không hỗ trợ làm mới ủy quyền Codex. Dịch vụ ủy quyền OpenAI đã từ chối lối ra mạng này. Hãy chuyển sang khu vực được hỗ trợ rồi thử lại.",
           );
         }
         if (
@@ -459,7 +459,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         ) {
           return t(
             "codex.authError.refreshTokenExpired",
-            "Codex 登录授权已过期，无法自动刷新。请重新登录 Codex 账号。",
+            "Ủy quyền đăng nhập Codex đã hết hạn và không thể tự động làm mới. Hãy đăng nhập lại tài khoản Codex.",
           );
         }
         if (
@@ -469,7 +469,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         ) {
           return t(
             "codex.authError.refreshTokenInvalidated",
-            "Codex 登录授权已被服务端撤销，无法自动刷新。请重新登录 Codex 账号。",
+            "Ủy quyền đăng nhập Codex đã bị dịch vụ thu hồi và không thể tự động làm mới. Hãy đăng nhập lại tài khoản Codex.",
           );
         }
         if (
@@ -480,7 +480,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         ) {
           return t(
             "codex.authError.invalidGrant",
-            "Codex 登录授权无效，无法自动刷新。请重新登录 Codex 账号。",
+            "Ủy quyền đăng nhập Codex không hợp lệ và không thể tự động làm mới. Hãy đăng nhập lại tài khoản Codex.",
           );
         }
         return raw;
@@ -532,13 +532,13 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         if (isCodexAgentIdentityAccount(account)) {
           return t(
             "codex.agentIdentityRegistration.apiOnlyActionError",
-            "Agent Identity 账号仅支持 API 服务，无法作为普通账号切换或启动。",
+            "Tài khoản Agent Identity chỉ khả dụng qua Dịch vụ API và không thể chuyển sang hoặc khởi chạy trực tiếp.",
           );
         }
         if (isCodexWebSessionAccount(account)) {
           return t(
             "codex.webSessionImport.actionBlocked",
-            "Web Session 账号仅支持查看额度，无法切换或启动。",
+            "Web Session chỉ xem hạn mức.",
           );
         }
         return null;
@@ -586,7 +586,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         .map((instance) => ({
           value: instance.id,
           label: instance.isDefault
-            ? t("instances.defaultName", "默认实例")
+            ? t("instances.defaultName", "Phiên bản mặc định")
             : instance.name || instance.id,
           isDefault: Boolean(instance.isDefault),
         }))
@@ -600,7 +600,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (!values.some((item) => item.value === DEFAULT_CODEX_INSTANCE_ID)) {
         values.unshift({
           value: DEFAULT_CODEX_INSTANCE_ID,
-          label: t("instances.defaultName", "默认实例"),
+          label: t("instances.defaultName", "Phiên bản mặc định"),
         });
       }
       return values;
@@ -610,7 +610,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       () =>
         launchPreviewInstanceOptions.find(
           (item) => item.value === launchPreviewInstanceId,
-        )?.label || t("instances.defaultName", "默认实例"),
+        )?.label || t("instances.defaultName", "Phiên bản mặc định"),
      [launchPreviewInstanceId, launchPreviewInstanceOptions, t],
    );
 
@@ -694,7 +694,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setMessage({
           text: t(
             "codex.webSessionImport.actionBlocked",
-            "Web Session 账号仅支持查看额度，无法切换或启动。",
+            "Web Session chỉ xem hạn mức.",
           ),
           tone: "error",
         });
@@ -782,7 +782,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             presentWindowsOperationError({
               error,
               operation: "unknown",
-              summary: t("codex.switch", "切换账号"),
+              summary: t("codex.switch", "Chuyển"),
               retry: retrySwitch,
               manualContinue: retrySwitch,
             })
@@ -816,7 +816,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       setOauthBindingQuotaReserveFieldErrors({});
       if (!selectedOAuthBindingAccount) {
         setOauthBindingError(
-          t("codex.api.oauthBinding.validationRequired", "请选择 OAuth 账号"),
+          t("codex.api.oauthBinding.validationRequired", "Vui lòng chọn tài khoản OAuth"),
         );
         return;
       }
@@ -824,7 +824,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setOauthBindingError(
           t(
             "codex.agentIdentityRegistration.oauthBindingUnsupported",
-            "Agent Identity 账号仅用于 API 服务，不能作为 OAuth 绑定账号。",
+            "Tài khoản Agent Identity chỉ dành cho Dịch vụ API và không thể dùng làm tài khoản liên kết OAuth.",
           ),
         );
         return;
@@ -833,7 +833,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setOauthBindingError(
           t(
             "codex.webSessionImport.oauthBindingUnsupported",
-            "Web Session 账号仅支持查看额度，不能作为 OAuth 绑定账号。",
+            "Web Session không dùng OAuth.",
           ),
         );
         return;
@@ -842,7 +842,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setOauthBindingError(
           t(
             "codex.api.oauthBinding.validationSubscriptionRequired",
-            "只能绑定带 refresh_token 的 OAuth 账号",
+            "Chỉ có thể liên kết tài khoản OAuth có refresh_token",
           ),
         );
         return;
@@ -869,7 +869,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           );
         }
         setMessage({
-          text: t("codex.api.oauthBinding.saveSuccess", "OAuth 绑定已更新"),
+          text: t("codex.api.oauthBinding.saveSuccess", "Đã cập nhật liên kết OAuth"),
         });
         const shouldSwitch =
           oauthBindingTargetKind === "api_key_account" && oauthBindingAutoSwitch;
@@ -881,7 +881,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       } catch (err) {
         setOauthBindingError(
           t("codex.api.oauthBinding.saveFailed", {
-            defaultValue: "OAuth 绑定失败：{{error}}",
+            defaultValue: "Liên kết OAuth thất bại: {{error}}",
             error: String(err).replace(/^Error:\s*/, ""),
           }),
         );
@@ -921,13 +921,13 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           await updateApiKeyBoundOAuthAccount(oauthBindingAccount.id, null);
         }
         setMessage({
-          text: t("codex.api.oauthBinding.clearSuccess", "OAuth 绑定已解除"),
+          text: t("codex.api.oauthBinding.clearSuccess", "Đã bỏ liên kết OAuth."),
         });
         resetOAuthBindingModal();
       } catch (err) {
         setOauthBindingError(
           t("codex.api.oauthBinding.clearFailed", {
-            defaultValue: "解除 OAuth 绑定失败：{{error}}",
+            defaultValue: "Không thể bỏ liên kết OAuth: {{error}}",
             error: String(err).replace(/^Error:\s*/, ""),
           }),
         );
@@ -1090,7 +1090,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 ...prev,
                 workingDirError: t(
                   "instances.form.pathRequired",
-                  "请选择工作目录",
+                  "Vui lòng chọn thư mục phiên bản",
                 ),
                 executeError: null,
               }
@@ -1118,7 +1118,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           modal.target === "account" &&
           !accounts.some((item) => item.id === modal.accountId)
         ) {
-          throw new Error(t("instances.quota.accountMissing", "账号不存在"));
+          throw new Error(t("instances.quota.accountMissing", "Không tìm thấy tài khoản"));
         }
         const { instanceId, draft } = await buildCodexCliInstanceDraft(
           modal,
@@ -1185,7 +1185,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         accountLabel,
         instanceId: null,
         instanceDraft: null,
-        instanceName: t("common.loading", "加载中..."),
+        instanceName: t("common.loading", "Đang tải..."),
         workingDir: readLastCodexCliWorkingDir(),
         workingDirError: null,
         launchCommand: "",
@@ -1229,7 +1229,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setMessage({
           text: t(
             "codex.webSessionImport.actionBlocked",
-            "Web Session 账号仅支持查看额度，无法切换或启动。",
+            "Web Session chỉ xem hạn mức.",
           ),
           tone: "error",
         });
@@ -1245,7 +1245,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (cliLaunchModal || cliLaunchingAccountId) return;
       if (!localAccessCollection) {
         setMessage({
-          text: t("codex.localAccess.testUnavailable", "当前 API 服务地址不可用"),
+          text: t("codex.localAccess.testUnavailable", "URL dịch vụ API hiện tại không khả dụng"),
           tone: "error",
         });
         return;
@@ -1253,7 +1253,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       openCodexCliLaunchModal(
         "apiService",
         CODEX_API_SERVICE_BIND_ID,
-        t("codex.localAccess.title", "API 服务"),
+        t("codex.localAccess.title", "Dịch vụ API"),
       );
     };
   
@@ -1266,7 +1266,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
               workingDirError: null,
               instanceId: null,
               instanceDraft: null,
-              instanceName: t("common.loading", "加载中..."),
+              instanceName: t("common.loading", "Đang tải..."),
               launchCommand: "",
               terminalCommand: "",
               runtimePrepared: false,
@@ -1319,7 +1319,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 ...prev,
                 executeError: t(
                   "common.shared.export.copyFailed",
-                  "复制失败，请手动复制",
+                  "Sao chép thất bại, vui lòng sao chép thủ công",
                 ),
               }
             : prev,
@@ -1348,7 +1348,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           modal.target === "account" &&
           !accounts.some((item) => item.id === modal.accountId)
         ) {
-          throw new Error(t("instances.quota.accountMissing", "账号不存在"));
+          throw new Error(t("instances.quota.accountMissing", "Không tìm thấy tài khoản"));
         }
         const draft =
           modal.instanceDraft ??
@@ -1533,7 +1533,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
     const reportCodexLocalImportSuccess = (account: CodexAccount) => {
       page.setAddStatus("success");
       page.setAddMessage(
-        t("codex.import.successMsg", "导入成功: {{email}}").replace(
+        t("codex.import.successMsg", "Nhập thành công: {{email}}").replace(
           "{{email}}",
           maskAccountText(account.email),
         ),
@@ -1548,7 +1548,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       instanceId: string | null,
     ) => {
       page.setAddStatus("loading");
-      page.setAddMessage(t("codex.import.importing", "正在导入本地账号..."));
+      page.setAddMessage(t("codex.import.importing", "Đang nhập tài khoản cục bộ..."));
       try {
         const { account, apiServiceError } =
           await importCodexLocalAccount(instanceId);
@@ -1557,7 +1557,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           page.setAddMessage(
             t(
               "codex.importApiService.syncFailed",
-              "账号已导入，但加入 API 服务失败：{{error}}",
+              "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
             ).replace("{{error}}", apiServiceError),
           );
           return;
@@ -1566,7 +1566,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       } catch (e) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.import.failedMsg", "导入失败: {{error}}").replace(
+          t("common.shared.import.failedMsg", "Nhập thất bại: {{error}}").replace(
             "{{error}}",
             String(e).replace(/^Error:\s*/, ""),
           ),
@@ -1582,7 +1582,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
      */
     const handleImportFromLocal = async () => {
       page.setAddStatus("loading");
-      page.setAddMessage(t("codex.import.importing", "正在导入本地账号..."));
+      page.setAddMessage(t("codex.import.importing", "Đang nhập tài khoản cục bộ..."));
       const instances = await codexInstanceStore.refreshInstances();
       const options = buildCodexLocalImportInstanceOptions(instances);
       if (options.length > 1) {
@@ -1607,7 +1607,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           setLocalImportError(
             t(
               "codex.importApiService.syncFailed",
-              "账号已导入，但加入 API 服务失败：{{error}}",
+              "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
             ).replace("{{error}}", apiServiceError),
           );
           return;
@@ -1616,7 +1616,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         reportCodexLocalImportSuccess(account);
       } catch (e) {
         setLocalImportError(
-          t("common.shared.import.failedMsg", "导入失败: {{error}}").replace(
+          t("common.shared.import.failedMsg", "Nhập thất bại: {{error}}").replace(
             "{{error}}",
             String(e).replace(/^Error:\s*/, ""),
           ),
@@ -1907,7 +1907,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       );
       if (!batchImportSessionId || selectedSelectableIds.length === 0) {
         setBatchImportError(
-          t("codex.batchImport.noSelection", "请先选择要导入的账号"),
+          t("codex.batchImport.noSelection", "Hãy chọn tài khoản trước"),
         );
         return;
       }
@@ -1993,7 +1993,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           } catch (apiError) {
             apiServiceError = t(
               "codex.batchImport.addToApiServiceFailed",
-              "账号已导入，但添加到 API 服务失败: {{error}}",
+              "Đã nhập nhưng việc thêm vào dịch vụ API không thành công: {{error}}",
             ).replace("{{error}}", String(apiError).replace(/^Error:\s*/, ""));
           } finally {
             setLocalAccessSaving(false);
@@ -2006,7 +2006,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           } catch (error) {
             apiServiceError = t(
               "codex.importApiService.syncFailed",
-              "账号已导入，但加入 API 服务失败：{{error}}",
+              "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
             ).replace("{{error}}", String(error).replace(/^Error:\s*/, ""));
           }
         }
@@ -2188,7 +2188,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setApiModelCatalogError(
           t(
             "codex.api.modelCatalog.fetchCredentialsRequired",
-            "请先填写 API Key 和 Base URL。",
+            "Hãy nhập API Key và Base URL trước.",
           ),
         );
         return;
@@ -2208,7 +2208,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           setApiModelCatalogError(
             t(
               "codex.api.modelCatalog.fetchEmpty",
-              "上游未返回可用模型，已保留当前列表。",
+              "Nhà cung cấp không trả về mô hình nào. Danh sách hiện tại được giữ nguyên.",
             ),
           );
           return;
@@ -2218,7 +2218,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         if (!isCurrent()) return;
         setApiModelCatalogError(
           t("codex.api.modelCatalog.fetchFailed", {
-            defaultValue: "获取上游模型失败：{{error}}",
+            defaultValue: "Không thể lấy mô hình từ nhà cung cấp: {{error}}",
             error: String(error).replace(/^Error:\s*/, ""),
           }),
         );
@@ -2444,7 +2444,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setEditingApiModelCatalogError(
           t(
             "codex.api.modelCatalog.fetchCredentialsRequired",
-            "请先填写 API Key 和 Base URL。",
+            "Hãy nhập API Key và Base URL trước.",
           ),
         );
         return;
@@ -2464,7 +2464,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           setEditingApiModelCatalogError(
             t(
               "codex.api.modelCatalog.fetchEmpty",
-              "上游未返回可用模型，已保留当前列表。",
+              "Nhà cung cấp không trả về mô hình nào. Danh sách hiện tại được giữ nguyên.",
             ),
           );
           return;
@@ -2474,7 +2474,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         if (!isCurrent()) return;
         setEditingApiModelCatalogError(
           t("codex.api.modelCatalog.fetchFailed", {
-            defaultValue: "获取上游模型失败：{{error}}",
+            defaultValue: "Không thể lấy mô hình từ nhà cung cấp: {{error}}",
             error: String(error).replace(/^Error:\s*/, ""),
           }),
         );
@@ -2533,13 +2533,13 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (!quickSwitchAccount) return;
       if (!selectedQuickSwitchProvider) {
         setQuickSwitchError(
-          t("codex.quickSwitch.validation.providerRequired", "请选择供应商"),
+          t("codex.quickSwitch.validation.providerRequired", "Vui lòng chọn nhà cung cấp."),
         );
         return;
       }
       if (!selectedQuickSwitchApiKey) {
         setQuickSwitchError(
-          t("codex.quickSwitch.validation.apiKeyRequired", "请选择 API Key"),
+          t("codex.quickSwitch.validation.apiKeyRequired", "Vui lòng chọn API Key."),
         );
         return;
       }
@@ -2577,7 +2577,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         );
         setMessage({
           text: t("codex.quickSwitch.success", {
-            defaultValue: "已切换到供应商：{{provider}}",
+            defaultValue: "Đã chuyển sang nhà cung cấp: {{provider}}",
             provider: selectedQuickSwitchProvider.name,
           }),
         });
@@ -2593,7 +2593,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       } catch (err) {
         setQuickSwitchError(
           t("codex.quickSwitch.failed", {
-            defaultValue: "切换供应商失败：{{error}}",
+            defaultValue: "Không thể chuyển nhà cung cấp: {{error}}",
             error: String(err).replace(/^Error:\s*/, ""),
           }),
         );
@@ -2631,7 +2631,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setApiModelCatalogError(
           t(
             "codex.api.modelCatalog.syncRequiresModels",
-            "同步到 Codex 前请先获取或填写模型列表。",
+            "Hãy lấy hoặc nhập ít nhất một mô hình trước khi đồng bộ với Codex.",
           ),
         );
         return;
@@ -2669,7 +2669,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       };
   
       page.setAddStatus("loading");
-      page.setAddMessage(t("common.shared.token.importing", "正在导入..."));
+      page.setAddMessage(t("common.shared.token.importing", "Đang nhập..."));
       try {
         let finalProviderPayload = providerPayload;
         if (
@@ -2764,14 +2764,14 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           page.setAddMessage(
             t(
               "codex.importApiService.syncFailed",
-              "账号已导入，但加入 API 服务失败：{{error}}",
+              "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
             ).replace("{{error}}", String(error).replace(/^Error:\s*/, "")),
           );
           return;
         }
         page.setAddStatus("success");
         page.setAddMessage(
-          `${t("codex.import.successMsg", "导入成功: {{email}}").replace(
+          `${t("codex.import.successMsg", "Nhập thành công: {{email}}").replace(
             "{{email}}",
             maskAccountText(account.email),
           )}${
@@ -2796,7 +2796,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       } catch (e) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.token.importFailedMsg", "导入失败: {{error}}").replace(
+          t("common.shared.token.importFailedMsg", "Nhập thất bại: {{error}}").replace(
             "{{error}}",
             String(e).replace(/^Error:\s*/, ""),
           ),
@@ -2809,7 +2809,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (!trimmed) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.token.empty", "请输入 Token 或 JSON"),
+          t("common.shared.token.empty", "Vui lòng nhập Token hoặc JSON"),
         );
         return;
       }
@@ -2817,7 +2817,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (payloads.length === 0) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.token.empty", "请输入 Token 或 JSON"),
+          t("common.shared.token.empty", "Vui lòng nhập Token hoặc JSON"),
         );
         return;
       }
@@ -2835,7 +2835,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             t("common.shared.externalImport.statusImporting", {
               current,
               total: payloads.length,
-              defaultValue: "正在导入第 {{current}} / {{total}} 个账号",
+              defaultValue: "Đang nhập tài khoản {{current}} / {{total}}",
             }),
           );
           try {
@@ -2898,7 +2898,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           page.setAddMessage(
             t(
               "common.shared.token.importSuccessMsg",
-              "成功导入 {{count}} 个账号",
+              "Đã nhập {{count}} tài khoản",
             ).replace("{{count}}", String(imported.length)),
           );
           if (syncResult && syncResult.syncedAccountIds.length > 0) {
@@ -2913,14 +2913,14 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           page.setAddMessage(
             t(
               "codex.importApiService.syncFailed",
-              "账号已导入，但加入 API 服务失败：{{error}}",
+              "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
             ).replace("{{error}}", String(error).replace(/^Error:\s*/, "")),
           );
         }
       } catch (e) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.token.importFailedMsg", "导入失败: {{error}}").replace(
+          t("common.shared.token.importFailedMsg", "Nhập thất bại: {{error}}").replace(
             "{{error}}",
             String(e).replace(/^Error:\s*/, ""),
           ),
@@ -2936,7 +2936,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       if (!trimmed) {
         page.setAddStatus("error");
         page.setAddMessage(
-          t("common.shared.token.empty", "请输入 Token 或 JSON"),
+          t("common.shared.token.empty", "Vui lòng nhập Token hoặc JSON"),
         );
         return;
       }
@@ -2989,10 +2989,10 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setSavingApiKeyNameId(account.id);
         try {
           await updateAccountName(account.id, nextName);
-          setMessage({ text: t("codex.apiKey.renameSuccess", "已重命名") });
+          setMessage({ text: t("codex.apiKey.renameSuccess", "Đã đổi tên") });
         } catch (e) {
           setMessage({
-            text: `${t("codex.apiKey.renameFailed", "重命名失败")}: ${String(e)}`,
+            text: `${t("codex.apiKey.renameFailed", "Đổi tên thất bại")}: ${String(e)}`,
             tone: "error",
           });
         } finally {
@@ -3025,7 +3025,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
     const resolveApiKeyDisplayText = useCallback(
       (account: CodexAccount, visible: boolean) => {
         const apiKey = (account.openai_api_key || "").trim();
-        if (!apiKey) return t("common.none", "暂无");
+        if (!apiKey) return t("common.none", "None​");
         return visible ? apiKey : maskCodexApiKey(apiKey);
       },
       [t],
@@ -3038,8 +3038,8 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         const value = resolveApiKeyDisplayText(account, visible);
         const line = `${label}：${value}`;
         const actionLabel = visible
-          ? t("codex.api.hideApiKey", "隐藏 API Key")
-          : t("codex.api.showApiKey", "显示 API Key");
+          ? t("codex.api.hideApiKey", "Ẩn API Key")
+          : t("codex.api.showApiKey", "Hiện API Key");
         return (
           <button
             type="button"
@@ -3048,7 +3048,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             title={
               visible
                 ? line
-                : t("codex.api.apiKeyHiddenHint", "API Key 已隐藏，点击显示")
+                : t("codex.api.apiKeyHiddenHint", "API Key đã bị ẩn. Nhấp để hiển thị.")
             }
             aria-label={actionLabel}
           >
@@ -3068,19 +3068,19 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
     const renderOAuthBindingLine = useCallback(
       (account: CodexAccount): ReactElement => {
         const boundAccount = resolveBoundOAuthAccount(account);
-        const label = t("codex.api.oauthBinding.label", "OAuth 绑定");
+        const label = t("codex.api.oauthBinding.label", "Liên kết OAuth");
         const value = boundAccount
           ? maskAccountText(
               boundAccount.account_name || boundAccount.email || boundAccount.id,
             )
-          : t("codex.api.oauthBinding.unbound", "未绑定");
+          : t("codex.api.oauthBinding.unbound", "Chưa liên kết");
         const line = `${label}：${value}`;
         const boundOAuthNeedsReauth = Boolean(boundAccount?.requires_reauth);
         const boundOAuthIssueText =
           boundAccount?.reauth_reason?.trim() ||
           t(
             "codex.switchAuth.reauthorizeDescription",
-            "当前登录凭据无法自动更新，请重新授权后继续使用。",
+            "Không thể làm mới thông tin đăng nhập và access_token không còn dùng được cho dịch vụ API. Hãy ủy quyền lại tài khoản để tiếp tục.",
           );
         return (
           <div className="account-sub-line codex-provider-inline-line codex-oauth-binding-line">
@@ -3096,7 +3096,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 title={boundOAuthIssueText}
               >
                 <CircleAlert size={12} />
-                {t("codex.authError.badge", "授权异常")}
+                {t("codex.authError.badge", "Lỗi ủy quyền")}
               </span>
             )}
             {boundOAuthNeedsReauth && boundAccount && (
@@ -3104,20 +3104,20 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 type="button"
                 className="codex-provider-inline-switch codex-oauth-binding-action"
                 onClick={() => openCodexAddModal("oauth", boundAccount)}
-                title={t("common.reauthorize", "重新授权")}
+                title={t("common.reauthorize", "Ủy quyền lại")}
               >
                 <RefreshCw size={11} />
-                {t("common.reauthorize", "重新授权")}
+                {t("common.reauthorize", "Ủy quyền lại")}
               </button>
             )}
             <button
               type="button"
               className="codex-provider-inline-switch codex-oauth-binding-action"
               onClick={() => openOAuthBindingModal(account)}
-              title={t("codex.api.oauthBinding.action", "绑定 OAuth")}
+              title={t("codex.api.oauthBinding.action", "Liên kết OAuth")}
             >
               <Link2 size={11} />
-              {t("codex.api.oauthBinding.actionShort", "绑定")}
+              {t("codex.api.oauthBinding.actionShort", "Liên kết")}
             </button>
           </div>
         );
@@ -3140,7 +3140,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           );
           return fallback
             ? t(`codex.api.providers.${fallback.id}.name`, fallback.name)
-            : t("common.none", "暂无");
+            : t("common.none", "None​");
         }
         if (account.api_provider_name?.trim()) {
           return account.api_provider_name.trim();
@@ -3156,7 +3156,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         );
         if (preset)
           return t(`codex.api.providers.${preset.id}.name`, preset.name);
-        return t("codex.api.provider.custom", "自定义");
+        return t("codex.api.provider.custom", "Tùy chỉnh");
       },
       [managedProviders, t],
     );
@@ -3569,7 +3569,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setEditingApiModelCatalogError(
           t(
             "codex.api.modelCatalog.syncRequiresModels",
-            "同步到 Codex 前请先获取或填写模型列表。",
+            "Hãy lấy hoặc nhập ít nhất một mô hình trước khi đồng bộ với Codex.",
           ),
         );
         return;
@@ -3735,11 +3735,11 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           text:
             Object.keys(parsedWindows.windows).length > 0 ||
             editingApiSyncModelCatalogToCodex
-              ? `${t("instances.messages.updated", "实例已更新")} ${t(
+              ? `${t("instances.messages.updated", "Đã cập nhật phiên bản")} ${t(
                   "codex.api.modelCatalog.restartHint",
                   "模型目录已更新。若 Codex 正在运行，请重启后生效。",
                 )}`
-              : t("instances.messages.updated", "实例已更新"),
+              : t("instances.messages.updated", "Đã cập nhật phiên bản"),
         });
         setApiKeyUsageMap((previous) => {
           const next = { ...previous };
@@ -3758,7 +3758,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setEditingApiSyncModelCatalogToCodex(false);
         setEditingApiModelCatalogError(null);
       } catch (e) {
-        setEditingApiCredentialsError(`${t("common.failed", "失败")}: ${String(e)}`);
+        setEditingApiCredentialsError(`${t("common.failed", "Thất bại")}: ${String(e)}`);
       } finally {
         setSavingApiKeyCredentials(false);
       }

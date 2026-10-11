@@ -278,7 +278,7 @@ export function SideNav({
     result.splice(insertIndex, 0, {
       id: API_RELAY_LAYOUT_ENTRY_ID,
       kind: 'api-relay',
-      label: t('nav.apiRelay', '中转站'),
+      label: t('nav.apiRelay', "Trạm chuyển"),
       hidden: false,
       targetPlatformId: null,
       platformIds: [],
@@ -585,10 +585,10 @@ export function SideNav({
     }
     classicSwitchDontAskAgainRef.current = false;
     showModal({
-      title: t('nav.switchClassicLayoutTitle', '切换至经典侧边栏布局'),
+      title: t('nav.switchClassicLayoutTitle', "Chuyển sang bố cục thanh bên cổ điển"),
       description: t(
         'nav.switchClassicLayoutDesc',
-        '经典布局会展示完整平台导航并支持折叠。你仍可在“设置 > 通用 > 侧边栏布局”中随时切换回原始布局。',
+        "Bố cục cổ điển hiển thị đầy đủ điều hướng nền tảng và hỗ trợ thu gọn thanh bên. Bạn có thể chuyển lại bất cứ lúc nào tại Cài đặt > Chung > Bố cục thanh bên.",
       ),
       width: 'sm',
       content: (
@@ -600,19 +600,19 @@ export function SideNav({
                 classicSwitchDontAskAgainRef.current = event.target.checked;
               }}
             />
-            <span>{t('nav.switchClassicLayoutDontAskAgain', '不再提示此引导')}</span>
+            <span>{t('nav.switchClassicLayoutDontAskAgain', "Không hiển thị lại thông báo này")}</span>
           </label>
         </div>
       ),
       actions: [
         {
           id: 'classic-switch-cancel',
-          label: t('common.cancel', '取消'),
+          label: t('common.cancel', "Hủy"),
           variant: 'secondary',
         },
         {
           id: 'classic-switch-confirm',
-          label: t('nav.switchClassicLayoutConfirm', '立即切换'),
+          label: t('nav.switchClassicLayoutConfirm', "Chuyển ngay"),
           variant: 'primary',
           onClick: () => {
             if (classicSwitchDontAskAgainRef.current) {
@@ -742,15 +742,15 @@ export function SideNav({
       ? 'progress'
       : 'update';
   const updateEntryTitle = updateActionState === 'downloading'
-    ? t('update_notification.downloading', '下载中...')
+    ? t('update_notification.downloading', "Đang tải xuống...")
     : updateActionState === 'installing'
-      ? t('nav.quickUpdate.installing', '安装中')
+      ? t('nav.quickUpdate.installing', "Đang cài đặt")
       : updateActionState === 'ready'
-        ? t('nav.quickUpdate.restart', '重启')
-        : t('nav.quickUpdate.update', '更新');
+        ? t('nav.quickUpdate.restart', "Khởi động lại")
+        : t('nav.quickUpdate.update', "Cập nhật");
   const updateEntryText = updateActionState === 'ready'
-    ? t('nav.quickUpdate.restart', '重启')
-    : t('nav.quickUpdate.update', '更新');
+    ? t('nav.quickUpdate.restart', "Khởi động lại")
+    : t('nav.quickUpdate.update', "Cập nhật");
 
   const morePopoverContent = showMore ? (
     <div
@@ -767,7 +767,7 @@ export function SideNav({
           : undefined
       }
     >
-      <div className="side-nav-more-title">{t('nav.morePlatforms', '更多平台')}</div>
+      <div className="side-nav-more-title">{t('nav.morePlatforms', "Thêm nền tảng")}</div>
       <div className="side-nav-more-list">
         {moreMenuEntries.map((entry) => {
           const active = entry.kind === 'api-relay'
@@ -791,7 +791,7 @@ export function SideNav({
                   <span className="side-nav-more-item-label">{entry.label}</span>
                   {entry.hidden && (
                     <span className="side-nav-more-item-badge">
-                      {t('platformLayout.hiddenBadge', '已隐藏')}
+                      {t('platformLayout.hiddenBadge', "Ẩn")}
                     </span>
                   )}
                 </button>
@@ -849,7 +849,7 @@ export function SideNav({
         }}
       >
         <SlidersHorizontal size={14} />
-        <span>{t('platformLayout.openFromMore', '管理平台布局')}</span>
+        <span>{t('platformLayout.openFromMore', "Quản lý bố cục nền tảng")}</span>
       </button>
     </div>
   ) : null;
@@ -882,7 +882,7 @@ export function SideNav({
                 <span className="side-nav-update-progress-percent">{clampedUpdateProgress}%</span>
               </span>
             ) : updateActionState === 'installing' ? (
-              <span className="side-nav-update-text">{t('nav.quickUpdate.installing', '安装中')}</span>
+              <span className="side-nav-update-text">{t('nav.quickUpdate.installing', "Đang cài đặt")}</span>
             ) : (
               <span className="side-nav-update-text">
                 {updateEntryText}
@@ -898,7 +898,7 @@ export function SideNav({
             ref={logoRef}
             className={`brand-logo rocket-easter-egg${hasBreakoutSession ? ' rocket-easter-egg-active' : ''}`}
             onClick={handleLogoClick}
-            title={hasBreakoutSession ? t('breakout.resumeGameNav', '继续游戏') : undefined}
+            title={hasBreakoutSession ? t('breakout.resumeGameNav', "Tiếp tục trò chơi") : undefined}
           >
             <Rocket size={isClassicLayout ? classicBrandLogoIconSize : 20} />
             {hasBreakoutSession && <span className="rocket-session-indicator" aria-hidden="true" />}
@@ -975,13 +975,13 @@ export function SideNav({
           ref={moreButtonRef}
           className={`nav-item ${showMore || isMoreActive ? 'active' : ''}`}
           onClick={() => setShowMore((prev) => !prev)}
-          title={t('nav.morePlatforms', '更多平台')}
+          title={t('nav.morePlatforms', "Thêm nền tảng")}
         >
           <LayoutGrid size={isClassicLayout ? classicMainIconSize : 20} />
           {showClassicLabels ? (
-            <span className="nav-item-text">{t('nav.morePlatforms', '更多平台')}</span>
+            <span className="nav-item-text">{t('nav.morePlatforms', "Thêm nền tảng")}</span>
           ) : !isClassicLayout ? (
-            <span className="tooltip">{t('nav.morePlatforms', '更多平台')}</span>
+            <span className="tooltip">{t('nav.morePlatforms', "Thêm nền tảng")}</span>
           ) : null}
         </button>
 
@@ -1000,22 +1000,22 @@ export function SideNav({
           <button
             className={`nav-item ${page === '2fa' && !shouldLockActiveOnMore ? 'active' : ''}`}
             onClick={() => setPage('2fa')}
-            title={t('nav.2faManager', '2FA / MFA 管理')}
+            title={t('nav.2faManager', "Quản lý 2FA")}
           >
             <ShieldCheck size={isClassicLayout ? classicMainIconSize : 20} />
             {showClassicLabels ? (
-              <span className="nav-item-text">{t('nav.2faManager', '2FA / MFA 管理')}</span>
+              <span className="nav-item-text">{t('nav.2faManager', "Quản lý 2FA")}</span>
             ) : null}
           </button>
 
           <button
             className="nav-item"
             onClick={onOpenLogViewer}
-            title={t('nav.logs', '日志')}
+            title={t('nav.logs', "Nhật ký")}
           >
             <FileText size={isClassicLayout ? classicMainIconSize : 20} />
             {showClassicLabels ? (
-              <span className="nav-item-text">{t('nav.logs', '日志')}</span>
+              <span className="nav-item-text">{t('nav.logs', "Nhật ký")}</span>
             ) : null}
           </button>
 
@@ -1049,10 +1049,10 @@ export function SideNav({
             type="button"
             className="side-nav-layout-switch-trigger"
             onClick={handleClassicLayoutEntryClick}
-            aria-label={t('nav.switchClassicLayoutEntry', '切换到经典布局')}
+            aria-label={t('nav.switchClassicLayoutEntry', "Chuyển sang bố cục cổ điển")}
           >
             <ChevronDown size={16} />
-            <span className="tooltip">{t('nav.switchClassicLayoutEntry', '切换到经典布局')}</span>
+            <span className="tooltip">{t('nav.switchClassicLayoutEntry', "Chuyển sang bố cục cổ điển")}</span>
           </button>
         </>
       )}
@@ -1067,13 +1067,13 @@ export function SideNav({
           style={classicHandleStyle}
           title={
             classicCollapsed
-              ? t('nav.expandSidebar', '展开侧边栏')
-              : t('nav.collapseSidebar', '收起侧边栏')
+              ? t('nav.expandSidebar', "Mở rộng thanh bên")
+              : t('nav.collapseSidebar', "Thu gọn thanh bên")
           }
           aria-label={
             classicCollapsed
-              ? t('nav.expandSidebar', '展开侧边栏')
-              : t('nav.collapseSidebar', '收起侧边栏')
+              ? t('nav.expandSidebar', "Mở rộng thanh bên")
+              : t('nav.collapseSidebar', "Thu gọn thanh bên")
           }
         >
           {classicCollapsed

@@ -1720,7 +1720,7 @@ export function SettingsAccountTransferSection({
               role="dialog" aria-modal="true" aria-labelledby={`${dialogId}-export-options-title`}
               onClick={(event) => event.stopPropagation()}>
               <div className="modal-header">
-                <button className="btn btn-secondary icon-only" onClick={closeExportOptionsModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                <button className="btn btn-secondary icon-only" onClick={closeExportOptionsModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
                 <h2 id={`${dialogId}-export-options-title`}>{t('settings.transfer.exportTitle')}</h2>
                 <button
                   className="modal-close"
@@ -1773,7 +1773,7 @@ export function SettingsAccountTransferSection({
               role="dialog" aria-modal="true" aria-labelledby={`${dialogId}-import-title`}
               onClick={(event) => event.stopPropagation()}>
               <div className="modal-header">
-                <button className="btn btn-secondary icon-only" onClick={closeImportModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                <button className="btn btn-secondary icon-only" onClick={closeImportModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
                 <h2 id={`${dialogId}-import-title`}>{t('settings.transfer.importTitle')}</h2>
                 <button className="modal-close" onClick={closeImportModal} aria-label={t('common.close')}>
                   <X />
@@ -1915,7 +1915,7 @@ export function SettingsAccountTransferSection({
               onClick={(event) => event.stopPropagation()}
             >
               <div className="modal-header">
-                <button className="btn btn-secondary icon-only" onClick={closeBackupManagerModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+                <button className="btn btn-secondary icon-only" onClick={closeBackupManagerModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
                 <h2 id={`${dialogId}-backup-title`}>{t('settings.transfer.backup.title')}</h2>
                 <button className="modal-close" onClick={closeBackupManagerModal} aria-label={t('common.close')}>
                   <X />

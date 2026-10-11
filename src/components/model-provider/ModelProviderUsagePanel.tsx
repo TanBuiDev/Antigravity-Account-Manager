@@ -39,12 +39,12 @@ export function ModelProviderUsagePanel({
 
   if (!summary) {
     const emptyText = loading
-      ? t('codex.modelProviders.usage.loading', '正在查询额度...')
+      ? t('codex.modelProviders.usage.loading', "Đang truy vấn hạn mức...")
       : error
         ? error
         : unavailable
-          ? t('codex.modelProviders.usage.noKey', '暂无可查询额度')
-          : t('codex.modelProviders.usage.pending', '等待查询额度');
+          ? t('codex.modelProviders.usage.noKey', "Chưa có hạn mức để truy vấn")
+          : t('codex.modelProviders.usage.pending', "Đang chờ truy vấn hạn mức");
     return (
       <div className={`${classNames} empty`}>
         <div className="codex-api-key-usage-empty" title={emptyText}>
@@ -102,15 +102,15 @@ export function ModelProviderUsagePanel({
     <div className={classNames}>
       <div className="codex-api-key-usage-grid">
         <div>
-          <span>{t('codex.modelProviders.usage.accountBalance', '账户余额')}</span>
+          <span>{t('codex.modelProviders.usage.accountBalance', "Số dư tài khoản")}</span>
           <strong>{balanceText}</strong>
         </div>
         <div>
-          <span>{t('codex.modelProviders.usage.fields.todayRequests', '今日请求')}</span>
+          <span>{t('codex.modelProviders.usage.fields.todayRequests', "Yêu cầu hôm nay")}</span>
           <strong>{todayRequests}</strong>
         </div>
         <div>
-          <span>{t('codex.modelProviders.usage.fields.todayTokens', '今日 Token')}</span>
+          <span>{t('codex.modelProviders.usage.fields.todayTokens', "Token hôm nay")}</span>
           <strong>{todayTokens}</strong>
         </div>
       </div>

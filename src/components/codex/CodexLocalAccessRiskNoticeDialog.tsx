@@ -24,12 +24,12 @@ export function CodexLocalAccessRiskNoticeDialog({ action, remember, onRememberC
     >
       <div className="modal-header">
         <h2>
-          {t("codex.localAccess.riskNotice.title", "使用风险提示")}
+          {t("codex.localAccess.riskNotice.title", "Lưu ý rủi ro")}
         </h2>
         <button
           className="modal-close"
           onClick={() => onClose(false)}
-          aria-label={t("common.close", "关闭")}
+          aria-label={t("common.close", "Đóng")}
         >
           <X />
         </button>
@@ -38,7 +38,7 @@ export function CodexLocalAccessRiskNoticeDialog({ action, remember, onRememberC
         <p className="codex-local-access-hide-confirm-desc">
           {t(
             "codex.localAccess.riskNotice.message",
-            "当前 Codex API 服务相关功能，本质上属于代理转发使用方式。就目前情况看，官方暂未对此类行为进行明确管控，但后续政策、规则或可用性是否发生变化，仍存在不确定性。继续使用该功能，即表示您已知悉相关情况，并愿意自行承担可能产生的风险。",
+            "Việc sử dụng tài khoản chính thức thông thường qua proxy ngược hoặc chuyển tiếp có thể chịu các hạn chế nghiêm ngặt từ dịch vụ chính thức. Cách sử dụng này cũng có thể bị nhận diện là chuyển tiếp và ảnh hưởng đến chất lượng câu trả lời (“giảm trí thông minh”). Hãy sử dụng thận trọng, nhất là khi có nhiều tài khoản.",
           )}
         </p>
         <div className="codex-local-access-hide-confirm-points codex-local-access-risk-notice-points">
@@ -55,7 +55,7 @@ export function CodexLocalAccessRiskNoticeDialog({ action, remember, onRememberC
             <span>
               {t(
                 "codex.localAccess.riskNotice.remember",
-                "我已知晓，不再提示",
+                "Tôi đã hiểu, đừng nhắc lại",
               )}
             </span>
           </label>
@@ -66,7 +66,7 @@ export function CodexLocalAccessRiskNoticeDialog({ action, remember, onRememberC
           className="btn btn-secondary"
           onClick={() => onClose(false)}
         >
-          {t("common.cancel", "取消")}
+          {t("common.cancel", "Hủy")}
         </button>
         <button
           className="btn btn-primary"

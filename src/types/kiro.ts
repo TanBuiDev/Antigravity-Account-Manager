@@ -713,7 +713,7 @@ type Translate = (key: string, options?: Record<string, unknown>) => string;
 export function formatKiroResetTime(resetAt: number | null | undefined, t: Translate): string {
   if (!resetAt || !Number.isFinite(resetAt)) {
     return t('common.shared.credits.planEndsUnknown', {
-      defaultValue: '配额周期时间未知',
+      defaultValue: "Không có thông tin chu kỳ",
     });
   }
   const ts = Math.floor(resetAt);
@@ -721,7 +721,7 @@ export function formatKiroResetTime(resetAt: number | null | undefined, t: Trans
   const diff = ts - now;
   if (diff <= 0) {
     return t('common.shared.quota.resetDone', {
-      defaultValue: '已重置',
+      defaultValue: "Đã đặt lại",
     });
   }
 

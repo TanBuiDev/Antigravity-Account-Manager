@@ -93,7 +93,7 @@ export function useCodexImageForwardConfig({
       setNotice("");
       try {
         await onSave(nextAccountIds);
-        setNotice(t("codex.localAccess.saveSuccess", "API 服务集合已更新"));
+        setNotice(t("codex.localAccess.saveSuccess", "Đã cập nhật bộ dịch vụ API"));
       } catch (cause) {
         setError(cause instanceof Error ? cause.message : String(cause));
       } finally {
@@ -107,9 +107,9 @@ export function useCodexImageForwardConfig({
   const statusText = enabled
     ? t("codex.deepSeek.start.imageGenSelected", {
         count: selectedIds.length,
-        defaultValue: "已选 {{count}} 个账号",
+        defaultValue: "Đã chọn {{count}} tài khoản",
       })
-    : t("codex.deepSeek.start.imageGenEmpty", "尚未选择账号");
+    : t("codex.deepSeek.start.imageGenEmpty", "Chưa chọn tài khoản");
 
   const overlay = pickerOpen
     ? // 账号选择弹框挂在 body 上，避免嵌在弹框遮罩层里被裁剪或随内容滚动。
@@ -117,7 +117,7 @@ export function useCodexImageForwardConfig({
         <CodexImageAccountPickerModal
           accounts={accounts}
           selectedIds={selectedIds}
-          contextLabel={t("codex.localAccess.title", "API 服务")}
+          contextLabel={t("codex.localAccess.title", "Dịch vụ API")}
           imageModelControl={imageModelControl}
           saving={pending}
           onCancel={() => setPickerOpen(false)}
@@ -159,7 +159,7 @@ export function useCodexImageForwardConfig({
           void persist([]);
         }}
       />
-      <span>{t("common.enable", "启用")}</span>
+      <span>{t("common.enable", "Enable​")}</span>
     </label>
   );
 
@@ -181,7 +181,7 @@ export function useCodexImageForwardConfig({
           ) : (
             <ImagePlus size={14} />
           ))}
-        {t("codex.deepSeek.start.imageGenPick", "选择 GPT 账号")}
+        {t("codex.deepSeek.start.imageGenPick", "Chọn tài khoản GPT")}
       </button>
     );
   };
@@ -232,7 +232,7 @@ export function CodexImageForwardConfig({
     <div className="codex-local-access-config-card codex-local-access-config-card-image-forward">
       <div className="codex-local-access-config-head">
         <span className="codex-local-access-config-label">
-          {t("codex.localAccess.imageForwardLabel", "启用 GPT 生图")}
+          {t("codex.localAccess.imageForwardLabel", "Bật tạo ảnh GPT")}
         </span>
         <div className="codex-local-access-config-actions">
           {controller.renderPickButton("btn btn-secondary btn-sm")}
@@ -262,7 +262,7 @@ export function CodexImageForwardConfig({
       <small className="codex-local-access-config-hint">
         {t(
           "codex.localAccess.imageForwardHint",
-          "勾选后选择 GPT 账号：生图与图片编辑请求交给所选账号执行并消耗其额度，对话请求仍按账号池调度。",
+          "Sau khi bật, hãy chọn tài khoản GPT: yêu cầu tạo và chỉnh sửa ảnh sẽ do các tài khoản đã chọn thực hiện và tiêu tốn hạn mức của chúng; yêu cầu trò chuyện vẫn dùng nhóm tài khoản.",
         )}
       </small>
       {controller.overlay}

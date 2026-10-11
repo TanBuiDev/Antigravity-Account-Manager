@@ -299,7 +299,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
       ...groupOptions,
       {
         value: UNGROUPED_ACCOUNT_GROUP_FILTER_KEY,
-        label: `${t('accounts.groups.ungrouped', '未分组')} (${ungroupedCount})`,
+        label: `${t('accounts.groups.ungrouped', "Chưa phân nhóm")} (${ungroupedCount})`,
       },
     ];
   }, [accountById, accountGroups, accountIdsInAnyGroup, accounts, t]);
@@ -1232,7 +1232,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
             disabled={running || accounts.length === 0}
           >
             <ShieldCheck size={16} />
-            {t('wakeup.verification.actions.runCheckNow', '立即检测')}
+            {t('wakeup.verification.actions.runCheckNow', "Hoàn tất xác minh")}
           </button>
         </div>
       </div>
@@ -1340,13 +1340,13 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
               <button
                 className="btn btn-secondary icon-only"
                 onClick={closeConfigModal}
-                title={t('common.back', '返回')}
-                aria-label={t('common.back', '返回')}
+                title={t('common.back', "Quay lại")}
+                aria-label={t('common.back', "Quay lại")}
                 disabled={running}
               >
                 <ChevronLeft size={14} />
               </button>
-              <h2>{t('wakeup.verification.actions.runCheckNow', '立即检测')}</h2>
+              <h2>{t('wakeup.verification.actions.runCheckNow', "Hoàn tất xác minh")}</h2>
               <button className="modal-close" onClick={closeConfigModal} disabled={running}>
                 <X />
               </button>
@@ -1423,33 +1423,33 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
                     <MultiSelectFilterDropdown
                       options={typeFilterOptions}
                       selectedValues={configTypeFilter}
-                      allLabel={t('wakeup.verification.filters.typeShort', '类型')}
-                      filterLabel={t('wakeup.verification.filters.typeShort', '类型')}
-                      clearLabel={t('accounts.clearFilter', '清空筛选')}
-                      emptyLabel={t('common.none', '暂无')}
-                      ariaLabel={t('wakeup.verification.filters.typeShort', '类型')}
+                      allLabel={t('wakeup.verification.filters.typeShort', "Loại")}
+                      filterLabel={t('wakeup.verification.filters.typeShort', "Loại")}
+                      clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+                      emptyLabel={t('common.none', "None​")}
+                      ariaLabel={t('wakeup.verification.filters.typeShort', "Loại")}
                       onToggleValue={toggleConfigFilterTypeValue}
                       onClear={clearConfigTypeFilter}
                     />
                     <MultiSelectFilterDropdown
                       options={availableFilterTagOptions}
                       selectedValues={configTagFilter}
-                      allLabel={t('wakeup.verification.filters.tagsShort', '标签')}
-                      filterLabel={t('wakeup.verification.filters.tagsShort', '标签')}
-                      clearLabel={t('accounts.clearFilter', '清空筛选')}
-                      emptyLabel={t('accounts.noAvailableTags', '暂无可用标签')}
-                      ariaLabel={t('wakeup.verification.filters.tagsShort', '标签')}
+                      allLabel={t('wakeup.verification.filters.tagsShort', "Thẻ")}
+                      filterLabel={t('wakeup.verification.filters.tagsShort', "Thẻ")}
+                      clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+                      emptyLabel={t('accounts.noAvailableTags', "Không có thẻ nào")}
+                      ariaLabel={t('wakeup.verification.filters.tagsShort', "Thẻ")}
                       onToggleValue={toggleConfigTagFilterValue}
                       onClear={clearConfigTagFilter}
                     />
                     <MultiSelectFilterDropdown
                       options={groupFilterOptions}
                       selectedValues={configGroupFilter}
-                      allLabel={t('wakeup.verification.filters.groupsShort', '分组')}
-                      filterLabel={t('wakeup.verification.filters.groupsShort', '分组')}
-                      clearLabel={t('accounts.clearFilter', '清空筛选')}
-                      emptyLabel={t('accounts.groups.noGroups', '暂无分组')}
-                      ariaLabel={t('wakeup.verification.filters.groupsShort', '分组')}
+                      allLabel={t('wakeup.verification.filters.groupsShort', "Nhóm")}
+                      filterLabel={t('wakeup.verification.filters.groupsShort', "Nhóm")}
+                      clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+                      emptyLabel={t('accounts.groups.noGroups', "Chưa có nhóm")}
+                      ariaLabel={t('wakeup.verification.filters.groupsShort', "Nhóm")}
                       onToggleValue={toggleConfigGroupFilterValue}
                       onClear={clearConfigGroupFilter}
                     />
@@ -1506,7 +1506,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
         <div className="modal-overlay">
           <div className="modal wakeup-modal verification-progress-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <button className="btn btn-secondary icon-only" onClick={closeDetailModal} title={t('common.back', '返回')} aria-label={t('common.back', '返回')}><ChevronLeft size={14} /></button>
+              <button className="btn btn-secondary icon-only" onClick={closeDetailModal} title={t('common.back', "Quay lại")} aria-label={t('common.back', "Quay lại")}><ChevronLeft size={14} /></button>
               <h2>{t('accounts.actions.viewDetails')}</h2>
               <button className="modal-close" onClick={closeDetailModal}>
                 <X />

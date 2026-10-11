@@ -91,7 +91,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
             className={`filter-tab ${activeTab === 'data' ? 'active' : ''}`}
             onClick={() => setActiveTab('data')}
           >
-            {t('settings.tabs.data', '数据管理')}
+            {t('settings.tabs.data', "Quản lý dữ liệu")}
           </button>
           <button 
             className={`filter-tab ${activeTab === 'about' ? 'active' : ''}`}
@@ -439,7 +439,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
                     }}
                   >
                     <FileText size={14} />
-                    {t('settings.about.viewReleaseHistory', '更新记录')}
+                    {t('settings.about.viewReleaseHistory', "Ghi chú phát hành")}
                   </button>
                 </div>
                 {updateCheckMessage && (
@@ -478,7 +478,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
 
               <button className="credit-item" onClick={() => openLink('https://github.com/jlcodes99/cockpit-tools/issues')}>
                 <div className="credit-icon" style={{ color: '#3b82f6' }}><MessageSquare size={24} /></div>
-                <h3>{t('settings.about.feedback', '意见反馈')}</h3>
+                <h3>{t('settings.about.feedback', "Phản hồi")}</h3>
                 <p>{t('settings.about.feedbackDesc', 'Issues')}</p>
               </button>
             </div>
@@ -494,13 +494,13 @@ export function SettingsPageView(props: SettingsPageViewProps) {
           >
             <div className="modal-header">
               <h2>
-                {t('settings.general.menuBarQuotaModalTitle', '菜单栏额度')}
+                {t('settings.general.menuBarQuotaModalTitle', "Hạn mức thanh menu")}
               </h2>
               <button
                 type="button"
                 className="modal-close"
                 onClick={handleCloseMenuBarQuotaModal}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={16} />
               </button>
@@ -509,17 +509,17 @@ export function SettingsPageView(props: SettingsPageViewProps) {
               <p className="settings-menu-bar-quota-modal-desc">
                 {t(
                   'settings.general.menuBarQuotaModalDesc',
-                  '以下为菜单栏额度的专属选项：跟随所选平台当前账号。Codex 当前为 API 服务时显示「API + 池剩余%」；API Key 账号显示「API + 剩余额度」；普通账号显示邮箱前缀与剩余%（多条取最低；低红、中橙、高绿）。'
+                  "Chỉ tùy chọn của tính năng này: theo tài khoản hiện tại. Dịch vụ API Codex: “API + % còn lại của pool”; tài khoản API Key: “API + số dư còn lại”; thường: tiền tố email + % (thấp nhất; đỏ/cam/xanh)."
                 )}
               </p>
               <div className="settings-menu-bar-quota-modal-field">
                 <label className="settings-menu-bar-quota-modal-label" htmlFor="menu-bar-quota-platform">
-                  {t('settings.general.menuBarQuotaPlatform', '额度账号平台')}
+                  {t('settings.general.menuBarQuotaPlatform', "Nền tảng tài khoản")}
                 </label>
                 <p className="settings-menu-bar-quota-modal-field-desc">
                   {t(
                     'settings.general.menuBarQuotaPlatformDesc',
-                    '跟随该平台当前正在使用的账号，刷新或切换后自动更新'
+                    "Dùng tài khoản đang dùng của nền tảng đó; cập nhật sau làm mới hoặc chuyển"
                   )}
                 </p>
                 <select
@@ -537,12 +537,12 @@ export function SettingsPageView(props: SettingsPageViewProps) {
               </div>
               <div className="settings-menu-bar-quota-modal-field">
                 <label className="settings-menu-bar-quota-modal-label" htmlFor="menu-bar-quota-prefix">
-                  {t('settings.general.menuBarAccountPrefix', '显示账号邮箱前 4 位')}
+                  {t('settings.general.menuBarAccountPrefix', "4 ký tự đầu email")}
                 </label>
                 <p className="settings-menu-bar-quota-modal-field-desc">
                   {t(
                     'settings.general.menuBarAccountPrefixDesc',
-                    '仅普通账号：关闭后不显示邮箱前缀。Codex API 服务 / API Key 仍会显示 API 标签'
+                    "Chỉ tài khoản thường: tắt sẽ ẩn tiền tố email. Dịch vụ API Codex / API Key vẫn hiện nhãn API"
                   )}
                 </p>
                 <select
@@ -551,8 +551,8 @@ export function SettingsPageView(props: SettingsPageViewProps) {
                   value={menuBarQuotaDraftShowPrefix ? 'true' : 'false'}
                   onChange={(e) => setMenuBarQuotaDraftShowPrefix(e.target.value === 'true')}
                 >
-                  <option value="true">{t('common.enable', '启用')}</option>
-                  <option value="false">{t('common.disable', '停用')}</option>
+                  <option value="true">{t('common.enable', "Enable​")}</option>
+                  <option value="false">{t('common.disable', "Disable​")}</option>
                 </select>
               </div>
             </div>
@@ -562,7 +562,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
                 className="btn btn-secondary"
                 onClick={handleCloseMenuBarQuotaModal}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 type="button"
@@ -570,8 +570,8 @@ export function SettingsPageView(props: SettingsPageViewProps) {
                 onClick={handleConfirmMenuBarQuotaModal}
               >
                 {menuBarQuotaModalMode === 'enable'
-                  ? t('settings.general.menuBarQuotaConfirmEnable', '启用')
-                  : t('common.save', '保存')}
+                  ? t('settings.general.menuBarQuotaConfirmEnable', "Bật")
+                  : t('common.save', "Lưu")}
               </button>
             </div>
           </div>
@@ -581,11 +581,11 @@ export function SettingsPageView(props: SettingsPageViewProps) {
         <div className="modal-overlay">
           <div className="modal settings-release-history-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('settings.about.releaseHistoryTitle', '更新记录')}</h2>
+              <h2>{t('settings.about.releaseHistoryTitle', "Ghi chú phát hành")}</h2>
               <button
                 className="modal-close"
                 onClick={handleCloseReleaseHistory}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={16} />
               </button>
@@ -594,19 +594,19 @@ export function SettingsPageView(props: SettingsPageViewProps) {
               {releaseHistoryLoading && (
                 <div className="settings-release-history-state">
                   <RefreshCw size={14} className="spin" />
-                  <span>{t('settings.about.releaseHistoryLoading', '加载中...')}</span>
+                  <span>{t('settings.about.releaseHistoryLoading', "Đang tải ghi chú phát hành...")}</span>
                 </div>
               )}
               {!releaseHistoryLoading && releaseHistoryError && (
                 <div className="settings-release-history-state settings-release-history-state-error">
-                  {t('settings.about.releaseHistoryLoadFailed', '加载失败：{{error}}', {
+                  {t('settings.about.releaseHistoryLoadFailed', "Không tải được: {{error}}", {
                     error: releaseHistoryError,
                   })}
                 </div>
               )}
               {!releaseHistoryLoading && !releaseHistoryError && releaseHistoryItems.length === 0 && (
                 <div className="settings-release-history-state">
-                  {t('settings.about.releaseHistoryEmpty', '暂无更新记录')}
+                  {t('settings.about.releaseHistoryEmpty', "Chưa có ghi chú phát hành")}
                 </div>
               )}
               {!releaseHistoryLoading &&
@@ -630,7 +630,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
                           type="button"
                         >
                           <Download size={12} />
-                          {t('settings.about.downloadThisVersion', '下载此版本')}
+                          {t('settings.about.downloadThisVersion', "Tải xuống")}
                         </button>
                       </div>
                     </div>
@@ -659,7 +659,7 @@ export function SettingsPageView(props: SettingsPageViewProps) {
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={handleCloseReleaseHistory}>
-                {t('common.close', '关闭')}
+                {t('common.close', "Đóng")}
               </button>
             </div>
           </div>

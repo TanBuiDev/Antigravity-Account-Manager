@@ -54,10 +54,10 @@ export function CodexStatsRangePicker({
   }, [value]);
 
   const presets = [
-    { key: "daily" as const, label: t("codex.localAccess.statsRange.daily", "日") },
-    { key: "rolling7d" as const, label: t("codex.sessionUsage.range.7d", "近 7 天") },
-    { key: "weekly" as const, label: t("codex.localAccess.statsRange.weekly", "周") },
-    { key: "monthly" as const, label: t("codex.localAccess.statsRange.monthly", "月") },
+    { key: "daily" as const, label: t("codex.localAccess.statsRange.daily", "Ngày") },
+    { key: "rolling7d" as const, label: t("codex.sessionUsage.range.7d", "7 ngày") },
+    { key: "weekly" as const, label: t("codex.localAccess.statsRange.weekly", "Tuần") },
+    { key: "monthly" as const, label: t("codex.localAccess.statsRange.monthly", "Tháng") },
   ];
 
   const applyCustomRange = (nextStartInput: string, nextEndInput: string) => {
@@ -65,7 +65,7 @@ export function CodexStatsRangePicker({
     const next = parseCodexStatsTimeRange(nextStartInput, nextEndInput);
     if (!next) {
       setValidationError(
-        t("codex.localAccess.statsRange.invalid", "结束时间不能早于开始时间"),
+        t("codex.localAccess.statsRange.invalid", "Thời gian kết thúc không được sớm hơn thời gian bắt đầu"),
       );
       return;
     }
@@ -75,7 +75,7 @@ export function CodexStatsRangePicker({
 
   return (
     <div className={`codex-stats-range-picker${compact ? " is-compact" : ""}`}>
-      <div className="codex-stats-range-tabs" role="tablist" aria-label={t("codex.localAccess.statsRange.label", "统计范围")}>
+      <div className="codex-stats-range-tabs" role="tablist" aria-label={t("codex.localAccess.statsRange.label", "Khoảng thống kê")}>
         {presets.map((preset) => (
           <button
             key={preset.key}
@@ -97,12 +97,12 @@ export function CodexStatsRangePicker({
           disabled={disabled}
           onClick={() => applyCustomRange(startInput, endInput)}
         >
-          {t("codex.localAccess.statsRange.custom", "自定义")}
+          {t("codex.localAccess.statsRange.custom", "Tùy chỉnh")}
         </button>
       </div>
       <div className="codex-stats-range-fields">
         <label>
-          <span>{t("codex.localAccess.statsRange.start", "开始")}</span>
+          <span>{t("codex.localAccess.statsRange.start", "Bắt đầu")}</span>
           <input
             type="date"
             value={startInput}
@@ -117,7 +117,7 @@ export function CodexStatsRangePicker({
         </label>
         <span className="codex-stats-range-separator">—</span>
         <label>
-          <span>{t("codex.localAccess.statsRange.end", "结束")}</span>
+          <span>{t("codex.localAccess.statsRange.end", "Kết thúc")}</span>
           <input
             type="date"
             value={endInput}

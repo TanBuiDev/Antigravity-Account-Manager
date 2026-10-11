@@ -80,27 +80,27 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
   const addTag = (rawValue: string) => {
     const normalized = normalizeTag(rawValue);
     if (!normalized) {
-      setError(t('accounts.tagModal.error.empty', '标签不能为空'));
+      setError(t('accounts.tagModal.error.empty', "Thẻ không được để trống"));
       return;
     }
     if (normalized.length > MAX_TAG_LENGTH) {
       setError(
         t('accounts.tagModal.error.tooLong', {
           max: MAX_TAG_LENGTH,
-          defaultValue: '标签长度不能超过 {{max}} 个字符',
+          defaultValue: "Thẻ không được dài quá {{max}} ký tự",
         })
       );
       return;
     }
     if (tags.includes(normalized)) {
-      setError(t('accounts.tagModal.error.duplicate', '标签已存在'));
+      setError(t('accounts.tagModal.error.duplicate', "Thẻ đã tồn tại"));
       return;
     }
     if (tags.length >= MAX_TAGS) {
       setError(
         t('accounts.tagModal.error.tooMany', {
           max: MAX_TAGS,
-          defaultValue: '标签数量不能超过 {{max}} 个',
+          defaultValue: "Bạn chỉ có thể thêm tối đa {{max}} thẻ",
         })
       );
       return;
@@ -125,7 +125,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
         nextTags: tags,
         error: t('accounts.tagModal.error.tooLong', {
           max: MAX_TAG_LENGTH,
-          defaultValue: '标签长度不能超过 {{max}} 个字符',
+          defaultValue: "Thẻ không được dài quá {{max}} ký tự",
         }),
       };
     }
@@ -135,7 +135,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
         nextTags: tags,
         error: t('accounts.tagModal.error.tooMany', {
           max: MAX_TAGS,
-          defaultValue: '标签数量不能超过 {{max}} 个',
+          defaultValue: "Bạn chỉ có thể thêm tối đa {{max}} thẻ",
         }),
       };
     }
@@ -165,7 +165,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
     if (saving || !globalRenamingTag) return;
     const newName = normalizeTag(inputValue);
     if (!newName) {
-      setError(t('accounts.tagModal.error.empty', '标签不能为空'));
+      setError(t('accounts.tagModal.error.empty', "Thẻ không được để trống"));
       return;
     }
     if (newName.length > MAX_TAG_LENGTH) {
@@ -215,7 +215,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
       setGlobalDeleteConfirm(null);
     } catch (err: any) {
       setGlobalDeleteError(
-        err?.message || t('accounts.tagModal.globalDeleteFailed', '全局删除失败')
+        err?.message || t('accounts.tagModal.globalDeleteFailed', "Xóa thẻ toàn cục thất bại")
       );
     } finally {
       setSaving(false);
@@ -235,9 +235,9 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
         <div className="modal-header">
           <h2 className="tag-edit-title">
             <Tag size={18} />
-            {t('accounts.tagModal.title', '账户标签')}
+            {t('accounts.tagModal.title', "Chỉnh sửa thẻ")}
           </h2>
-          <button className="modal-close" onClick={onClose} aria-label={t('common.close', '关闭')}>
+          <button className="modal-close" onClick={onClose} aria-label={t('common.close', "Đóng")}>
             <X size={18} />
           </button>
         </div>
@@ -246,7 +246,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
             {t('accounts.tagModal.hint', {
               max: MAX_TAGS,
               maxLength: MAX_TAG_LENGTH,
-              defaultValue: '最多 {{max}} 个标签，单个标签长度不超过 {{maxLength}} 个字符。',
+              defaultValue: "Tối đa {{max}} thẻ. Mỗi thẻ có thể dài tối đa {{maxLength}} ký tự.",
             })}
           </div>
           {initialNotes !== undefined && (
@@ -265,7 +265,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
           )}
           <div className="tag-list">
             {tags.length === 0 ? (
-              <div className="tag-empty">{t('accounts.tagModal.empty', '暂无标签')}</div>
+              <div className="tag-empty">{t('accounts.tagModal.empty', "Không có thẻ nào")}</div>
             ) : (
               tags.map((tag) => (
                 <span key={tag} className="tag-chip">
@@ -286,7 +286,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                     onClick={() => removeTag(tag)}
                     aria-label={t('accounts.deleteTagAria', {
                       tag,
-                      defaultValue: '删除标签 {{tag}}',
+                      defaultValue: "Xóa thẻ {{tag}}",
                     })}
                   >
                     <X size={12} />
@@ -297,9 +297,9 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
           </div>
           {normalizedAvailableTags.length > 0 && (
             <div className="tag-suggestions">
-              <div className="tag-suggestions-title">{t('accounts.tagModal.suggestionsTitle', '已有标签')}</div>
+              <div className="tag-suggestions-title">{t('accounts.tagModal.suggestionsTitle', "Lọc thẻ")}</div>
               {suggestedTags.length === 0 ? (
-                <div className="tag-suggestions-empty">{t('accounts.tagModal.suggestionsEmpty', '暂无可选标签')}</div>
+                <div className="tag-suggestions-empty">{t('accounts.tagModal.suggestionsEmpty', "Không có thẻ nào")}</div>
               ) : (
                 <div className="tag-suggestions-list">
                   {suggestedTags.map((tag) => (
@@ -323,7 +323,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                           setInputValue(tag);
                           setError('');
                         }}
-                        title={t('accounts.tagModal.globalRenameHint', '全局重命名此标签')}
+                        title={t('accounts.tagModal.globalRenameHint', "Đổi tên thẻ này trên toàn cục")}
                         style={{
                           background: 'transparent',
                           border: 'none',
@@ -345,8 +345,8 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                           requestGlobalDelete(tag);
                         }}
                         disabled={saving}
-                        title={t('accounts.tagModal.globalDeleteHint', '全局删除此标签')}
-                        aria-label={t('accounts.tagModal.globalDeleteHint', '全局删除此标签')}
+                        title={t('accounts.tagModal.globalDeleteHint', "Xóa thẻ này trên toàn cục")}
+                        aria-label={t('accounts.tagModal.globalDeleteHint', "Xóa thẻ này trên toàn cục")}
                         style={{
                           background: 'transparent',
                           border: 'none',
@@ -397,7 +397,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                   onClick={handleGlobalRename}
                   disabled={!inputValue.trim() || saving}
                 >
-                  {t('common.save', '保存')}
+                  {t('common.save', "Lưu")}
                 </button>
                 <button
                   type="button"
@@ -428,9 +428,9 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                 placeholder={remaining > 0
                   ? t('accounts.tagModal.inputPlaceholder', {
                     remaining,
-                    defaultValue: '输入标签（还能添加 {{remaining}} 个）',
+                    defaultValue: "Nhập thẻ (còn {{remaining}})",
                   })
-                  : t('accounts.tagModal.inputDisabledPlaceholder', '已达到标签上限')}
+                  : t('accounts.tagModal.inputDisabledPlaceholder', "Đã đạt giới hạn thẻ")}
                 disabled={remaining <= 0}
               />
               <button
@@ -440,7 +440,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
                 disabled={!inputValue.trim() || remaining <= 0}
               >
                 <Plus size={14} />
-                {t('accounts.tagModal.add', '添加')}
+                {t('accounts.tagModal.add', "Thêm")}
               </button>
             </div>
           </div>
@@ -449,10 +449,10 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
         </div>
         <div className="modal-footer tag-edit-footer">
           <button className="btn btn-secondary" onClick={onClose} disabled={saving}>
-            {t('common.cancel', '取消')}
+            {t('common.cancel', "Hủy")}
           </button>
           <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
-            {saving ? t('common.saving', '保存中...') : t('accounts.tagModal.save', '保存标签')}
+            {saving ? t('common.saving', "Đang lưu...") : t('accounts.tagModal.save', "Lưu thẻ")}
           </button>
         </div>
       </div>
@@ -469,14 +469,14 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
         >
           <div className="modal-header">
             <h2 id="tag-global-delete-confirm-title">
-              {t('common.confirmDeleteTag', '确认删除标签')}
+              {t('common.confirmDeleteTag', "Xác nhận xóa thẻ")}
             </h2>
             <button
               type="button"
               className="modal-close"
               onClick={cancelGlobalDelete}
               disabled={saving}
-              aria-label={t('common.close', '关闭')}
+              aria-label={t('common.close', "Đóng")}
             >
               <X size={18} />
             </button>
@@ -491,7 +491,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
               {t('accounts.tagModal.confirmGlobalDelete', {
                 targetTag: globalDeleteConfirm,
                 defaultValue:
-                  '确定要从所有账号中全局删除标签 "{{targetTag}}" 吗？此操作不可逆。',
+                  "Xóa thẻ \"{{targetTag}}\" khỏi tất cả tài khoản? Thao tác này không thể hoàn tác.",
               })}
             </p>
           </div>
@@ -502,7 +502,7 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
               onClick={cancelGlobalDelete}
               disabled={saving}
             >
-              {t('common.cancel', '取消')}
+              {t('common.cancel', "Hủy")}
             </button>
             <button
               type="button"
@@ -511,8 +511,8 @@ export const TagEditModal = ({ isOpen, initialTags, initialNotes, availableTags 
               disabled={saving}
             >
               {saving
-                ? t('common.processing', '处理中...')
-                : t('common.confirm', '确认')}
+                ? t('common.processing', "Đang xử lý...")
+                : t('common.confirm', "Xác nhận")}
             </button>
           </div>
         </div>

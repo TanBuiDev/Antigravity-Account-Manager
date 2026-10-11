@@ -209,7 +209,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
           {notice.text}
           <button
             onClick={() => setNotice(null)}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X size={14} />
           </button>
@@ -235,14 +235,14 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             <button
               className={`view-btn ${providerViewMode === "compact" ? "active" : ""}`}
               onClick={() => setProviderViewMode("compact")}
-              title={t("accounts.view.compact", "紧凑视图")}
+              title={t("accounts.view.compact", "Chế độ thu gọn")}
             >
               <Rows3 size={16} />
             </button>
             <button
               className={`view-btn ${providerViewMode === "grid" ? "active" : ""}`}
               onClick={() => setProviderViewMode("grid")}
-              title={t("common.shared.view.grid", "卡片视图")}
+              title={t("common.shared.view.grid", "Dạng thẻ")}
             >
               <LayoutGrid size={16} />
             </button>
@@ -253,10 +253,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             allLabel={t("common.shared.filter.all", {
               count: providers.length,
             })}
-            filterLabel={t("common.shared.filterLabel", "筛选")}
-            clearLabel={t("accounts.clearFilter", "清空筛选")}
-            emptyLabel={t("common.none", "暂无")}
-            ariaLabel={t("common.shared.filterLabel", "筛选")}
+            filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+            clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+            emptyLabel={t("common.none", "None​")}
+            ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
             onToggleValue={(value) =>
               setProviderNameFilter((previous) =>
                 previous.includes(value)
@@ -275,14 +275,14 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               },
               {
                 value: "created_at",
-                label: t("common.shared.sort.createdAt", "按创建时间"),
+                label: t("common.shared.sort.createdAt", "Thời gian tạo"),
               },
               {
                 value: "custom",
-                label: t("codex.modelProviders.sort.custom", "自定义顺序"),
+                label: t("codex.modelProviders.sort.custom", "Thứ tự tùy chỉnh"),
               },
             ]}
-            ariaLabel={t("common.shared.sortLabel", "排序")}
+            ariaLabel={t("common.shared.sortLabel", "Sắp xếp")}
             icon={<ArrowDownWideNarrow size={14} />}
             onChange={handleProviderSortByChange}
           />
@@ -294,7 +294,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   previous === "asc" ? "desc" : "asc",
                 )
               }
-              title={t("common.shared.sort.toggleDirection", "切换排序方向")}
+              title={t("common.shared.sort.toggleDirection", "Đổi hướng sắp xếp")}
             >
               {providerSortDirection === "desc" ? "⬇" : "⬆"}
             </button>
@@ -308,7 +308,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               providerUsageRefreshingAll ||
               providers.every((provider) => !getSelectedProviderApiKey(provider))
             }
-            title={t("common.shared.refreshQuota", "刷新配额")}
+            title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
           >
             <RefreshCw
               size={14}
@@ -318,14 +318,14 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
           <button
             className="btn btn-primary icon-only"
             onClick={openCreateModal}
-            title={t("codex.modelProviders.add", "新增供应商")}
+            title={t("codex.modelProviders.add", "Thêm nhà cung cấp")}
           >
             <Plus size={14} />
           </button>
           <button
             className="btn btn-secondary icon-only"
             onClick={() => setShowQuickConfigModal(true)}
-            title={t("codex.modelProviders.quickConfig.title", "当前 Codex 配置")}
+            title={t("codex.modelProviders.quickConfig.title", "Cấu hình Codex hiện tại")}
           >
             <Settings size={14} />
           </button>
@@ -333,7 +333,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             <button
               className="btn btn-danger icon-only"
               onClick={() => void handleBatchDeleteProviders()}
-              title={`${t("common.delete", "删除")} (${selectedProviderIds.size})`}
+              title={`${t("common.delete", "Xóa")} (${selectedProviderIds.size})`}
             >
               <Trash2 size={14} />
             </button>
@@ -357,12 +357,12 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 checked={isAllProvidersSelected}
                 onChange={() => toggleSelectAllProviders(filteredProviderIds)}
               />
-              <span>{t("common.selectAll", "全选")}</span>
+              <span>{t("common.selectAll", "Chọn tất cả")}</span>
             </label>
             {selectedProviderIds.size > 0 && (
               <span className="codex-overview-selected-count">
                 {t("codex.modelProviders.batchTest.selectedCount", {
-                  defaultValue: "已选 {{count}} 个",
+                  defaultValue: "Đã chọn {{count}}",
                   count: selectedProviderIds.size,
                 })}
               </span>
@@ -380,32 +380,32 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               disabled={filteredProviders.every((provider) => !getSelectedProviderApiKey(provider))}
               title={t(
                 "codex.modelProviders.batchTest.entryHint",
-                "批量测试供应商真实对话能力",
+                "Kiểm tra hàng loạt năng lực chat thực của nhà cung cấp",
               )}
             >
               <Activity size={14} />
-              {t("codex.modelProviders.batchTest.entry", "一键测试")}
+              {t("codex.modelProviders.batchTest.entry", "Kiểm tra tất cả")}
             </button>
           </div>
         </div>
       )}
 
       {loading ? (
-        <div className="section-desc">{t("common.loading", "加载中...")}</div>
+        <div className="section-desc">{t("common.loading", "Đang tải...")}</div>
       ) : providers.length === 0 ? (
         <div className="empty-state">
-          <h3>{t("codex.modelProviders.emptyTitle", "暂无模型供应商")}</h3>
+          <h3>{t("codex.modelProviders.emptyTitle", "Chưa có nhà cung cấp mô hình")}</h3>
           <p>
             {t(
               "codex.modelProviders.emptyDesc",
-              "点击右上角“新增供应商”开始维护。",
+              "Bấm \"Thêm nhà cung cấp\" ở góc trên bên phải để bắt đầu.",
             )}
           </p>
         </div>
       ) : filteredProviders.length === 0 ? (
         <div className="empty-state">
           <h3>{t("codex.modelProviders.noMatchTitle", "没有匹配的供应商")}</h3>
-          <p>{t("common.shared.noMatch.desc", "请尝试调整搜索或筛选条件")}</p>
+          <p>{t("common.shared.noMatch.desc", "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
         </div>
       ) : (
         <div className={`codex-provider-grid ${providerViewMode === "compact" ? "compact" : ""}`}>
@@ -448,18 +448,18 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 )}`
               : `${t("codex.addModal.token", "API Key")}：${t(
                   "common.none",
-                  "暂无",
+                  "None​",
                 )}`;
             const oauthBindingLine = `${t(
               "codex.api.oauthBinding.label",
-              "OAuth 绑定",
+              "Liên kết OAuth",
             )}：${
               resolveBoundOAuthAccount(provider)?.account_name ||
               resolveBoundOAuthAccount(provider)?.email ||
               resolveBoundOAuthAccount(provider)?.id ||
-              t("codex.api.oauthBinding.unbound", "未绑定")
+              t("codex.api.oauthBinding.unbound", "Chưa liên kết")
             }`;
-            const providerLine = `${t("codex.api.provider.label", "供应商")}：${
+            const providerLine = `${t("codex.api.provider.label", "Nhà cung cấp")}：${
               provider.name
             }`;
             const apiBaseUrlLine = `${t("codex.api.baseUrl", "Base URL")}：${
@@ -549,7 +549,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               ),
                             });
                           }}
-                          title={t("common.copy", "复制")}
+                          title={t("common.copy", "Copy​")}
                         >
                           <Copy size={12} />
                         </button>
@@ -561,7 +561,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               setPickerSearchQuery("");
                               setApiKeyPickerProviderId(provider.id);
                             }}
-                            title={t("codex.modelProviders.existingApiKeys", "已有 API Key")}
+                            title={t("codex.modelProviders.existingApiKeys", "API Key hiện có")}
                           >
                             <ChevronDown size={12} />
                           </button>
@@ -591,12 +591,12 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       setPickerSearchQuery("");
                       setProviderOauthPickerId(provider.id);
                     }}
-                    title={t("codex.api.oauthBinding.action", "绑定 OAuth")}
+                    title={t("codex.api.oauthBinding.action", "Liên kết OAuth")}
                   >
                     <Link2 size={11} />
                     {resolveBoundOAuthAccount(provider)
-                      ? t("common.detail", "详情")
-                      : t("codex.api.oauthBinding.actionShort", "绑定")}
+                      ? t("common.detail", "Chi tiết")
+                      : t("codex.api.oauthBinding.actionShort", "Liên kết")}
                   </button>
                 </div>
                 <div className="account-sub-line codex-provider-inline-line">
@@ -610,9 +610,9 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     type="button"
                     className="codex-provider-inline-switch"
                     onClick={() => setProviderDetailId(provider.id)}
-                    title={t("codex.quickSwitch.inlineAction", "切换")}
+                    title={t("codex.quickSwitch.inlineAction", "Chuyển")}
                   >
-                    {t("codex.quickSwitch.inlineAction", "切换")}
+                    {t("codex.quickSwitch.inlineAction", "Chuyển")}
                   </button>
                 </div>
                 <div className="account-sub-line">
@@ -625,15 +625,15 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <div className="codex-api-key-usage-panel sub2api">
                       <div className="codex-api-key-usage-grid">
                         <div>
-                          <span>{t("codex.modelProviders.usage.fields.totalBalance", "总余额")}</span>
+                          <span>{t("codex.modelProviders.usage.fields.totalBalance", "Tổng số dư")}</span>
                           <strong>{usagePrimaryText}</strong>
                         </div>
                         <div>
-                          <span>{t("codex.modelProviders.usage.fields.grantedBalance", "赠金余额")}</span>
+                          <span>{t("codex.modelProviders.usage.fields.grantedBalance", "Số dư tặng")}</span>
                           <strong>{deepSeekDetailValue("grantedBalance")}</strong>
                         </div>
                         <div>
-                          <span>{t("codex.modelProviders.usage.fields.toppedUpBalance", "充值余额")}</span>
+                          <span>{t("codex.modelProviders.usage.fields.toppedUpBalance", "Số dư nạp")}</span>
                           <strong>{deepSeekDetailValue("toppedUpBalance")}</strong>
                         </div>
                       </div>
@@ -674,15 +674,15 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <div className="codex-api-key-usage-panel sub2api">
                       <div className="codex-api-key-usage-grid">
                         <div>
-                          <span>{t("codex.modelProviders.usage.accountBalance", "账户余额")}</span>
+                          <span>{t("codex.modelProviders.usage.accountBalance", "Số dư tài khoản")}</span>
                           <strong>{usagePrimaryText}</strong>
                         </div>
                         <div>
-                          <span>{t("codex.modelProviders.usage.fields.todayRequests", "今日请求")}</span>
+                          <span>{t("codex.modelProviders.usage.fields.todayRequests", "Yêu cầu hôm nay")}</span>
                           <strong>{usageRequestText}</strong>
                         </div>
                         <div>
-                          <span>{t("codex.modelProviders.usage.fields.todayTokens", "今日 Token")}</span>
+                          <span>{t("codex.modelProviders.usage.fields.todayTokens", "Token hôm nay")}</span>
                           <strong>
                             {typeof usageSummary?.todayTotalTokens === "number"
                               ? usageSummary.todayTotalTokens.toLocaleString("en-US")
@@ -695,9 +695,9 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <div className="codex-api-key-usage-panel">
                       <div
                         className="quota-item codex-api-key-quota-item new-api"
-                        title={`${t("codex.cockpitApi.balance", "额度")}：${
+                        title={`${t("codex.cockpitApi.balance", "Số dư")}：${
                           usageSummary?.quotaUnlimited
-                            ? t("codex.newApi.quota.unlimited", "不限量")
+                            ? t("codex.newApi.quota.unlimited", "Không giới hạn")
                             : totalAvailable != null && totalGranted != null
                               ? `${formatUsageMoney(totalAvailable, usageSummary?.unit)} / ${formatUsageMoney(totalGranted, usageSummary?.unit)}`
                               : totalAvailable != null
@@ -708,11 +708,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         <div className="quota-header">
                           <Database size={14} />
                           <span className="quota-label">
-                            {t("codex.cockpitApi.balance", "额度")}
+                            {t("codex.cockpitApi.balance", "Số dư")}
                           </span>
                           <span className="quota-pct high">
                             {usageSummary?.quotaUnlimited
-                              ? t("codex.newApi.quota.unlimited", "不限量")
+                              ? t("codex.newApi.quota.unlimited", "Không giới hạn")
                               : totalAvailable != null && totalGranted != null
                                 ? `${formatUsageMoney(totalAvailable, usageSummary?.unit)} / ${formatUsageMoney(totalGranted, usageSummary?.unit)}`
                                 : totalAvailable != null
@@ -728,14 +728,14 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         </div>
                         <span className="quota-reset">
                           {expiresAt != null && expiresAt > 0
-                            ? `${t("codex.modelProviders.usage.fields.expiresAt", "过期时间")} ${new Date(expiresAt * 1000).toLocaleDateString()}`
-                            : t("dashboard.noData", "暂无数据")}
+                            ? `${t("codex.modelProviders.usage.fields.expiresAt", "Hết hạn")} ${new Date(expiresAt * 1000).toLocaleDateString()}`
+                            : t("dashboard.noData", "Không có dữ liệu")}
                         </span>
                       </div>
                     </div>
                   ) : (
                     <div className="codex-api-key-usage-panel empty">
-                      {t("codex.modelProviders.usage.noKey", "暂无可查询额度")}
+                      {t("codex.modelProviders.usage.noKey", "Chưa có hạn mức để truy vấn")}
                     </div>
                   )}
                 </div>
@@ -760,7 +760,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <button
                         className="card-action-btn"
                         onClick={() => setProviderDetailId(provider.id)}
-                        title={t("codex.modelProviders.usage.detailTitle", "服务面板")}
+                        title={t("codex.modelProviders.usage.detailTitle", "Bảng dịch vụ")}
                       >
                         <Database size={14} />
                       </button>
@@ -771,7 +771,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           primaryApiKey &&
                           void refreshProviderUsage(provider, primaryApiKey)
                         }
-                        title={t("common.shared.refreshQuota", "刷新配额")}
+                        title={t("common.shared.refreshQuota", "Làm mới hạn mức")}
                       >
                         <RefreshCw
                           size={14}
@@ -783,10 +783,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         disabled={!primaryApiKey || enabling || !targetInstanceReady}
                         title={
                           targetInstanceReady
-                            ? t("codex.modelProviders.enableAndStart", "启用并启动")
+                            ? t("codex.modelProviders.enableAndStart", "Chạy")
                             : t(
                                 "codex.modelProviders.instance.uninitializedHint",
-                                "目标实例尚未初始化，请先到应用多开页启动一次。",
+                                "Phiên bản đích chưa được khởi tạo. Hãy khởi chạy một lần từ trang đa phiên bản trước.",
                               )
                         }
                         onClick={() =>
@@ -817,7 +817,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               capabilityProfile.wireApi,
                             )
                           }
-                          title={t("codex.localAccess.testAction", "测试")}
+                          title={t("codex.localAccess.testAction", "Kiểm tra")}
                         >
                           <Activity size={14} />
                         </button>
@@ -825,7 +825,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <button
                         className="card-action-btn"
                         onClick={() => openEditModal(provider)}
-                        title={t("instances.actions.edit", "编辑")}
+                        title={t("instances.actions.edit", "Chỉnh sửa")}
                       >
                         <Pencil size={14} />
                       </button>
@@ -840,7 +840,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           if (!targetUrl) return;
                           window.open(targetUrl, "_blank", "noopener,noreferrer");
                         }}
-                        title={t("codex.modelProviders.website", "官网")}
+                        title={t("codex.modelProviders.website", "Trang web")}
                         disabled={!(provider.website || provider.apiKeyUrl || provider.baseUrl)}
                       >
                         <ExternalLink size={14} />
@@ -848,7 +848,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <button
                         className="card-action-btn danger"
                         onClick={() => void handleDeleteProvider(provider)}
-                        title={t("common.delete", "删除")}
+                        title={t("common.delete", "Xóa")}
                       >
                         <Trash2 size={14} />
                       </button>
@@ -870,11 +870,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t("codex.modelProviders.batchTest.title", "一键测试模型供应商")}</h2>
+              <h2>{t("codex.modelProviders.batchTest.title", "Kiểm tra hàng loạt nhà cung cấp mô hình")}</h2>
               <button
                 className="modal-close"
                 onClick={closeBatchTestModal}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -893,13 +893,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <strong>
                       {t(
                         "codex.modelProviders.batchTest.selectTitle",
-                        "选择要测试的供应商",
+                        "Chọn nhà cung cấp để kiểm tra",
                       )}
                     </strong>
                     <span>
                       {t(
                         "codex.modelProviders.batchTest.selectDesc",
-                        "会把选中的供应商临时接入本地网关发起对话测试，并按供应商协议能力转发到上游。",
+                        "Nhà cung cấp đã chọn được tạm nối vào gateway cục bộ để kiểm thử chat, rồi chuyển lên upstream theo giao thức của từng nhà cung cấp.",
                       )}
                     </span>
                   </div>
@@ -907,7 +907,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <label>
                       {t(
                         "codex.modelProviders.batchTest.modelLabel",
-                        "测试模型",
+                        "Mô hình kiểm tra",
                       )}
                     </label>
                     <SingleSelectDropdown
@@ -916,11 +916,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       onChange={setBatchTestModelId}
                       ariaLabel={t(
                         "codex.modelProviders.batchTest.modelLabel",
-                        "测试模型",
+                        "Mô hình kiểm tra",
                       )}
                       placeholder={t(
                         "codex.modelProviders.batchTest.modelAuto",
-                        "自动选择（按目录/探测）",
+                        "Tự động (danh mục / phát hiện)",
                       )}
                     />
                     {batchTestModelId === "__custom__" && (
@@ -933,7 +933,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         }
                         placeholder={t(
                           "codex.modelProviders.batchTest.modelCustomPlaceholder",
-                          "输入模型 ID，例如 gpt-6.1-sol",
+                          "ID mô hình, vd. gpt-6.1-sol",
                         )}
                         style={{ marginTop: 8 }}
                       />
@@ -941,7 +941,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <p className="codex-provider-batch-test-model-hint">
                       {t(
                         "codex.modelProviders.batchTest.modelHint",
-                        "可选统一模型。留空则按各供应商目录或探测结果自动选择。",
+                        "Tùy chọn: mô hình chung. Để trống sẽ tự chọn từ danh mục.",
                       )}
                     </p>
                   </div>
@@ -962,11 +962,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         onChange={toggleAllVisibleBatchTestProviders}
                         disabled={providerBatchTestSelectableIds.length === 0}
                       />
-                      <span>{t("common.selectAll", "全选")}</span>
+                      <span>{t("common.selectAll", "Chọn tất cả")}</span>
                     </label>
                     <span className="codex-wakeup-account-selection-summary">
                       {t("codex.modelProviders.batchTest.selectionSummary", {
-                        defaultValue: "已选 {{selected}} / 可测 {{total}}",
+                        defaultValue: "Đã chọn {{selected}} / có thể kiểm tra {{total}}",
                         selected: batchTestSelectedCount,
                         total: providerBatchTestSelectableIds.length,
                       })}
@@ -1000,22 +1000,22 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                                   ? resolveProviderApiKeyLabel(
                                       apiKey,
                                       provider.name,
-                                      t("codex.modelProviders.unnamedKey", "未命名 Key"),
+                                      t("codex.modelProviders.unnamedKey", "Key chưa có tên"),
                                     )
                                   : t(
                                       "codex.modelProviders.batchTest.noApiKey",
-                                      "缺少 API Key",
+                                      "Không có API Key",
                                     )}
                               </span>
                               <span>
                                 {wireApi === "chat_completions"
                                   ? t(
                                       "codex.modelProviders.batchTest.gatewayProtocol",
-                                      "Chat Completions · 网关",
+                                      "Chat Completions · gateway",
                                     )
                                   : t(
                                       "codex.modelProviders.batchTest.directProtocol",
-                                      "Responses · 网关",
+                                      "Responses · gateway",
                                     )}
                               </span>
                             </div>
@@ -1024,7 +1024,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       );
                     })}
                     {providerBatchTestVisibleProviders.length === 0 && (
-                      <p className="wakeup-hint">{t("common.none", "暂无")}</p>
+                      <p className="wakeup-hint">{t("common.none", "None​")}</p>
                     )}
                   </div>
                 </>
@@ -1041,27 +1041,27 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             <h3>
                               {t(
                                 "codex.modelProviders.batchTest.resultsTitle",
-                                "供应商对话测试结果",
+                                "Kết quả kiểm tra chat nhà cung cấp",
                               )}
                             </h3>
                           </div>
                           <div className="codex-wakeup-results-summary-meta">
                             <span>
                               {batchTestSession.cancelled
-                                ? t("common.cancelled", "已取消")
+                                ? t("common.cancelled", "Đã hủy")
                                 : batchTestSession.running
                                 ? t(
                                     "codex.modelProviders.batchTest.status.running",
-                                    "测试中",
+                                    "Đang chạy",
                                   )
                                 : t(
                                     "codex.modelProviders.batchTest.status.completed",
-                                    "已完成",
+                                    "Hoàn tất",
                                   )}
                             </span>
                             <span>
                               {t("codex.modelProviders.batchTest.totalCount", {
-                                defaultValue: "供应商 {{count}} 个",
+                                defaultValue: "{{count}} nhà cung cấp",
                                 count: batchTestSession.total,
                               })}
                             </span>
@@ -1073,15 +1073,15 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           </strong>
                           <span>
                             {batchTestSession.cancelled
-                              ? t("common.cancelled", "已取消")
+                              ? t("common.cancelled", "Đã hủy")
                               : batchTestSession.running
                               ? t(
                                   "codex.modelProviders.batchTest.status.running",
-                                  "测试中",
+                                  "Đang chạy",
                                 )
                               : t(
                                   "codex.modelProviders.batchTest.status.completed",
-                                  "已完成",
+                                  "Hoàn tất",
                                 )}
                           </span>
                         </div>
@@ -1092,7 +1092,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           <span>
                             {t(
                               "codex.modelProviders.batchTest.progress",
-                              "测试进度",
+                              "Tiến độ kiểm tra",
                             )}
                           </span>
                           <strong>
@@ -1145,13 +1145,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             disabled={filteredProviderBatchTestRecords.length === 0}
                           />
                           <span>
-                            {t("codex.modelProviders.batchTest.selectVisible", "选择当前结果")}
+                            {t("codex.modelProviders.batchTest.selectVisible", "Chọn mục đang hiển thị")}
                           </span>
                         </label>
                         <div className="codex-provider-batch-test-result-actions">
                           <span className="codex-overview-selected-count">
                             {t("codex.modelProviders.batchTest.resultSelectedCount", {
-                              defaultValue: "已选 {{count}} 个",
+                              defaultValue: "Đã chọn {{count}}",
                               count: batchTestResultSelectedProviderIds.size,
                             })}
                           </span>
@@ -1161,7 +1161,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             onClick={selectFailedBatchTestResults}
                             disabled={providerBatchTestCounts.error === 0}
                           >
-                            {t("codex.modelProviders.batchTest.selectFailed", "选择失败")}
+                            {t("codex.modelProviders.batchTest.selectFailed", "Chọn lỗi")}
                           </button>
                           <button
                             type="button"
@@ -1178,7 +1178,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             ) : (
                               <Trash2 size={14} />
                             )}
-                            {t("common.delete", "删除")}
+                            {t("common.delete", "Xóa")}
                           </button>
                         </div>
                       </div>
@@ -1192,20 +1192,20 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             record.status === "pending"
                               ? t(
                                   "codex.modelProviders.batchTest.pendingDesc",
-                                  "等待开始测试。",
+                                  "Đang chờ bắt đầu.",
                                 )
                               : record.status === "running"
                                 ? t(
                                     "codex.modelProviders.batchTest.runningDesc",
-                                    "正在发送对话请求。",
+                                    "Đang gửi yêu cầu chat.",
                                   )
                               : record.status === "cancelled"
-                                ? t("common.cancelled", "已取消")
+                                ? t("common.cancelled", "Đã hủy")
                               : record.status === "success"
                                   ? record.reply ||
                                     t(
                                       "codex.modelProviders.batchTest.noReply",
-                                      "上游未返回可读回复。",
+                                      "Upstream không trả về phản hồi đọc được.",
                                     )
                                   : formatProviderBatchTestErrorMessage(
                                       record.error,
@@ -1214,23 +1214,23 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             record.status === "success"
                               ? t(
                                   "codex.modelProviders.batchTest.status.success",
-                                  "成功",
+                                  "Thành công",
                                 )
                               : record.status === "error"
                                 ? t(
                                     "codex.modelProviders.batchTest.status.error",
-                                    "失败",
+                                    "Thất bại",
                                   )
                               : record.status === "cancelled"
-                                ? t("common.cancelled", "已取消")
+                                ? t("common.cancelled", "Đã hủy")
                               : record.status === "running"
                                   ? t(
                                       "codex.modelProviders.batchTest.status.running",
-                                      "测试中",
+                                      "Đang chạy",
                                     )
                                   : t(
                                       "codex.modelProviders.batchTest.status.pending",
-                                      "等待中",
+                                      "Đang chờ",
                                     );
                           return (
                             <article
@@ -1257,7 +1257,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                                       {record.apiKeyName ||
                                         t(
                                           "codex.modelProviders.unnamedKey",
-                                          "未命名 Key",
+                                          "Key chưa có tên",
                                         )}
                                     </span>
                                   </div>
@@ -1281,29 +1281,29 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                                         )
                                       : t(
                                           "codex.modelProviders.wireApi.responses",
-                                          "Responses 原生",
+                                          "Responses gốc",
                                         ),
                                   mode:
                                     record.accessMode === "gateway"
                                       ? t(
                                           "codex.modelProviders.enableMode.gatewayMode",
-                                          "网关模式",
+                                          "Chế độ gateway",
                                         )
                                       : t(
                                           "codex.modelProviders.enableMode.directMode",
-                                          "直连模式",
+                                          "Chế độ trực tiếp",
                                         ),
                                   model:
                                     record.modelId ||
                                     t(
                                       "codex.modelProviders.batchTest.modelUnknown",
-                                      "模型待定",
+                                      "Mô hình đang chờ",
                                     ),
                                 })}
                               </div>
                               {record.prompt && (
                                 <div className="codex-wakeup-execution-row-prompt">
-                                  {t("codex.modelProviders.batchTest.promptLabel", "提示词")}：
+                                  {t("codex.modelProviders.batchTest.promptLabel", "Lời nhắc")}：
                                   {record.prompt}
                                 </div>
                               )}
@@ -1325,7 +1325,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           );
                         })}
                         {filteredProviderBatchTestRecords.length === 0 && (
-                          <p className="wakeup-hint">{t("common.none", "暂无")}</p>
+                          <p className="wakeup-hint">{t("common.none", "None​")}</p>
                         )}
                       </div>
                     </>
@@ -1341,7 +1341,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   onClick={() => setBatchTestStep("select")}
                   disabled={batchTestDeleting}
                 >
-                  {t("common.back", "返回")}
+                  {t("common.back", "Quay lại")}
                 </button>
               )}
               <button
@@ -1349,7 +1349,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 className="btn btn-secondary"
                 onClick={closeBatchTestModal}
               >
-                {t("common.close", "关闭")}
+                {t("common.close", "Đóng")}
               </button>
               {batchTestStep === "results" && batchTestSession?.running && (
                 <button
@@ -1364,8 +1364,8 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <RefreshCw size={14} className="loading-spinner" />
                   )}
                   {batchTestCancelling
-                    ? t("common.cancelling", "正在取消...")
-                    : t("common.cancel", "取消")}
+                    ? t("common.cancelling", "Đang hủy...")
+                    : t("common.cancel", "Hủy")}
                 </button>
               )}
               {batchTestStep === "select" && (
@@ -1376,7 +1376,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   disabled={batchTestSelectedCount === 0}
                 >
                   <Activity size={14} />
-                  {t("codex.modelProviders.batchTest.start", "开始测试")}
+                  {t("codex.modelProviders.batchTest.start", "Bắt đầu kiểm tra")}
                 </button>
               )}
             </div>
@@ -1395,20 +1395,20 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <h2>
                   {t(
                     "codex.modelProviders.sort.customModalTitle",
-                    "自定义供应商排序",
+                    "Sắp xếp nhà cung cấp tùy chỉnh",
                   )}
                 </h2>
                 <p className="codex-custom-sort-modal-desc">
                   {t(
                     "codex.modelProviders.sort.customModalDesc",
-                    "拖动供应商或使用上下按钮调整展示顺序。",
+                    "Kéo nhà cung cấp hoặc dùng nút lên/xuống để chỉnh thứ tự hiển thị.",
                   )}
                 </p>
               </div>
               <button
                 className="modal-close"
                 onClick={() => setShowProviderCustomSortModal(false)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
               >
                 <X />
               </button>
@@ -1461,11 +1461,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           }
                           title={t(
                             "codex.modelProviders.sort.customDragHandle",
-                            "拖拽排序",
+                            "Kéo để sắp xếp",
                           )}
                           aria-label={t(
                             "codex.modelProviders.sort.customDragHandle",
-                            "拖拽排序",
+                            "Kéo để sắp xếp",
                           )}
                         >
                           <GripVertical size={16} />
@@ -1480,11 +1480,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               {wireApi === "chat_completions"
                                 ? t(
                                     "codex.modelProviders.batchTest.gatewayProtocol",
-                                    "Chat Completions · 网关",
+                                    "Chat Completions · gateway",
                                   )
                                 : t(
                                     "codex.modelProviders.batchTest.directProtocol",
-                                    "Responses · 网关",
+                                    "Responses · gateway",
                                   )}
                             </span>
                           </div>
@@ -1494,13 +1494,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             </span>
                             <span>
                               {t("codex.modelProviders.apiKeysCount", {
-                                defaultValue: "API Key {{count}} 个",
+                                defaultValue: "{{count}} API Key",
                                 count: provider.apiKeys.length,
                               })}
                             </span>
                             <span>
                               {t("codex.modelProviders.referencesCount", {
-                                defaultValue: "引用账号 {{count}} 个",
+                                defaultValue: "{{count}} tài khoản đã liên kết",
                                 count: providerReferenceMap.get(provider.id) ?? 0,
                               })}
                             </span>
@@ -1517,11 +1517,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           disabled={index === 0}
                           title={t(
                             "codex.modelProviders.sort.customMoveUp",
-                            "上移",
+                            "Chuyển lên",
                           )}
                           aria-label={t(
                             "codex.modelProviders.sort.customMoveUp",
-                            "上移",
+                            "Chuyển lên",
                           )}
                         >
                           <ArrowUp size={14} />
@@ -1537,11 +1537,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           }
                           title={t(
                             "codex.modelProviders.sort.customMoveDown",
-                            "下移",
+                            "Chuyển xuống",
                           )}
                           aria-label={t(
                             "codex.modelProviders.sort.customMoveDown",
-                            "下移",
+                            "Chuyển xuống",
                           )}
                         >
                           <ArrowDown size={14} />
@@ -1551,7 +1551,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   );
                 })}
                 {providerCustomSortProviders.length === 0 && (
-                  <p className="wakeup-hint">{t("common.none", "暂无")}</p>
+                  <p className="wakeup-hint">{t("common.none", "None​")}</p>
                 )}
               </div>
             </div>
@@ -1563,14 +1563,14 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <RotateCw size={14} />
                 {t(
                   "codex.modelProviders.sort.customReset",
-                  "重置自定义顺序",
+                  "Đặt lại thứ tự",
                 )}
               </button>
               <button
                 className="btn btn-primary"
                 onClick={() => setShowProviderCustomSortModal(false)}
               >
-                {t("common.confirm", "确认")}
+                {t("common.confirm", "Xác nhận")}
               </button>
             </div>
           </div>
@@ -1586,13 +1586,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             <div className="modal-header">
               <h2>
                 {form.providerId
-                  ? t("codex.modelProviders.editTitle", "编辑模型供应商")
-                  : t("codex.modelProviders.createTitle", "新增模型供应商")}
+                  ? t("codex.modelProviders.editTitle", "Chỉnh sửa nhà cung cấp mô hình")
+                  : t("codex.modelProviders.createTitle", "Thêm nhà cung cấp mô hình")}
               </h2>
               <button
                 className="modal-close"
                 onClick={closeModal}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
                 disabled={saving}
               >
                 <X />
@@ -1600,7 +1600,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             </div>
             <div className="modal-body">
               <div className="form-group">
-                <label>{t("codex.api.provider.label", "供应商")}</label>
+                <label>{t("codex.api.provider.label", "Nhà cung cấp")}</label>
                 <div className="api-provider-chip-list">
                   <button
                     className={`api-provider-chip ${selectedPresetId === CODEX_API_PROVIDER_CUSTOM_ID && !selectedSponsorTemplateId ? "active" : ""}`}
@@ -1610,7 +1610,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     type="button"
                     disabled={saving}
                   >
-                    <span>{t("codex.api.provider.custom", "自定义")}</span>
+                    <span>{t("codex.api.provider.custom", "Tùy chỉnh")}</span>
                   </button>
                   {sponsorProviderTemplates.map((template) => (
                     <button
@@ -1650,7 +1650,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               {selectedPreset && selectedPreset.baseUrls.length > 1 && (
                 <div className="form-group">
                   <label>
-                    {t("codex.api.provider.endpoint", "供应商端点")}
+                    {t("codex.api.provider.endpoint", "Điểm cuối nhà cung cấp")}
                   </label>
                   <div className="api-provider-endpoint-list">
                     {selectedPreset.baseUrls.map((baseUrl) => (
@@ -1672,7 +1672,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <p className="api-provider-hint">
                     {t(
                       "codex.api.provider.hint",
-                      "已自动填写兼容 Base URL，可继续手动调整。",
+                      "Base URL tương thích đã được điền tự động. Bạn vẫn có thể chỉnh sửa thủ công.",
                     )}
                   </p>
                   <div className="api-provider-links">
@@ -1684,7 +1684,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         rel="noreferrer"
                       >
                         <ExternalLink size={14} />
-                        {t("codex.api.provider.website", "官网")}
+                        {t("codex.api.provider.website", "Trang web")}
                       </a>
                     )}
                     {selectedPreset.apiKeyUrl && (
@@ -1695,7 +1695,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         rel="noreferrer"
                       >
                         <KeyRound size={14} />
-                        {t("codex.api.provider.apiKeyPage", "API Key 页面")}
+                        {t("codex.api.provider.apiKeyPage", "Trang API Key")}
                       </a>
                     )}
                   </div>
@@ -1706,7 +1706,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <p className="api-provider-hint">
                     {t(
                       "codex.modelProviders.sponsorHint",
-                      "已按专属中转站配置自动填写兼容服务地址。输入 API Key 后，卡片会自动查询余额和用量。",
+                      "URL dịch vụ trạm chuyển riêng đã được điền. Sau khi nhập API Key, thẻ sẽ tự động truy vấn số dư và mức dùng.",
                     )}
                   </p>
                   <div className="api-provider-links">
@@ -1718,7 +1718,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         rel="noreferrer"
                       >
                         <ExternalLink size={14} />
-                        {t("codex.api.provider.website", "官网")}
+                        {t("codex.api.provider.website", "Trang web")}
                       </a>
                     )}
                     {selectedSponsorTemplate.apiKeyUrl && (
@@ -1729,7 +1729,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         rel="noreferrer"
                       >
                         <KeyRound size={14} />
-                        {t("codex.api.provider.apiKeyPage", "API Key 页面")}
+                        {t("codex.api.provider.apiKeyPage", "Trang API Key")}
                       </a>
                     )}
                   </div>
@@ -1737,7 +1737,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               )}
               <div className="form-group">
                 <label>
-                  {t("codex.modelProviders.fields.name", "供应商名称")}
+                  {t("codex.modelProviders.fields.name", "Tên nhà cung cấp")}
                 </label>
                 <input
                   className="form-input"
@@ -1763,16 +1763,16 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               </div>
               <div className="form-group">
                 <label className="codex-provider-label-with-help">
-                  <span>{t("codex.modelProviders.fields.wireApi", "协议")}</span>
+                  <span>{t("codex.modelProviders.fields.wireApi", "Giao thức")}</span>
                   <span
                     className="codex-provider-inline-help"
                     title={t(
                       "codex.modelProviders.wireApi.help",
-                      "大多数供应商请选择 Responses；仅当供应商明确只支持 Chat Completions 时再切换。如果不确定，优先选 Responses。",
+                      "Hãy dùng Responses cho hầu hết nhà cung cấp. Chỉ chuyển sang Chat Completions khi nhà cung cấp nói rõ chỉ hỗ trợ giao thức đó. Nếu chưa chắc, hãy chọn Responses trước.",
                     )}
                     aria-label={t(
                       "codex.modelProviders.wireApi.helpAria",
-                      "查看协议说明",
+                      "Xem trợ giúp giao thức",
                     )}
                   >
                     <HelpCircle size={14} />
@@ -1795,7 +1795,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     disabled={saving}
                   >
                     <span>
-                      {t("codex.modelProviders.wireApi.responses", "Responses 原生")}
+                      {t("codex.modelProviders.wireApi.responses", "Responses gốc")}
                     </span>
                   </button>
                   <button
@@ -1817,7 +1817,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <span>
                       {t(
                         "codex.modelProviders.wireApi.chatCompletions",
-                        "Chat Completions 协议",
+                        "Giao thức Chat Completions",
                       )}
                     </span>
                   </button>
@@ -1827,11 +1827,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     {form.wireApi === "responses"
                       ? t(
                           "codex.modelProviders.wireApi.deepseekResponsesHint",
-                          "原生 Responses 直连官方 API，写入官方 models.json（工具/shell/apply_patch），默认模型 deepseek-flash。",
+                          "Khởi động DeepSeek để chọn cổng kết nối hoặc kết nối trực tiếp chính thức, sau đó chọn Flash hoặc Pro. Cổng kết nối liệt kê mô hình trong Codex; kết nối trực tiếp bỏ qua cổng.",
                         )
                       : t(
                           "codex.modelProviders.wireApi.deepseekChatHint",
-                          "DeepSeek Chat Completions 走本地网关协议转换，适合兼容旧链路；需要官方 Codex 工具形态时请选 Responses。",
+                          "DeepSeek Chat Completions dùng cầu cổng cục bộ cho các đường dẫn cũ. Chọn Responses khi bạn cần hành vi công cụ chính thức của Codex.",
                         )}
                   </p>
                 )}
@@ -1843,7 +1843,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <label>
                     {t(
                       "codex.modelProviders.fields.supportsWebsockets",
-                      "WebSocket 传输",
+                      "Truyền tải WebSocket",
                     )}
                   </label>
                   <label className="provider-vision-toggle">
@@ -1851,13 +1851,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span className="provider-vision-toggle-title">
                         {t(
                           "codex.modelProviders.websockets.title",
-                          "允许 Codex 使用 Responses WebSocket",
+                          "Cho phép Codex dùng Responses qua WebSocket",
                         )}
                       </span>
                       <span className="provider-vision-toggle-desc">
                         {t(
                           "codex.modelProviders.websockets.help",
-                          "仅在供应商明确支持 Responses WebSocket 时开启；连接方式可通过 Codex 或代理服务日志确认。",
+                          "Chỉ bật khi nhà cung cấp hỗ trợ rõ ràng Responses qua WebSocket; hãy xác nhận phương thức truyền trong nhật ký Codex hoặc dịch vụ proxy.",
                         )}
                       </span>
                     </span>
@@ -1884,7 +1884,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <>
                   <div className="form-group">
                     <label>
-                      {t("codex.modelProviders.fields.modelCatalog", "模型目录")}
+                      {t("codex.modelProviders.fields.modelCatalog", "Danh mục mô hình")}
                     </label>
                     <textarea
                       className="form-input"
@@ -1928,7 +1928,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <label>
                       {t(
                         "codex.modelProviders.fields.visionCapability",
-                        "图片输入能力",
+                        "Nhập ảnh",
                       )}
                     </label>
                     <label className="provider-vision-toggle">
@@ -1936,13 +1936,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         <span className="provider-vision-toggle-title">
                           {t(
                             "codex.modelProviders.vision.providerDefault",
-                            "该供应商默认支持图片输入",
+                            "Nhà cung cấp này mặc định hỗ trợ nhập ảnh",
                           )}
                         </span>
                         <span className="provider-vision-toggle-desc">
                           {t(
                             "codex.modelProviders.vision.providerDefaultHint",
-                            "未单独设置的模型使用此默认值，GPT-5.5 及更新模型默认支持图片。可在模型列表中单独关闭。网关无法匹配视觉模型时会省略图片并继续处理文本。",
+                            "Mô hình chưa có cài đặt riêng dùng giá trị mặc định này; GPT-5.5 trở lên mặc định hỗ trợ ảnh. Có thể tắt từng mô hình trong danh sách. Nếu cổng không tìm thấy mô hình hỗ trợ ảnh, ảnh sẽ bị bỏ qua và văn bản tiếp tục được xử lý.",
                           )}
                         </span>
                       </span>
@@ -1963,7 +1963,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <label>
                       {t(
                         "codex.modelProviders.fields.visionModels",
-                        "支持图片的模型",
+                        "Mẫu hỗ trợ ảnh",
                       )}
                     </label>
                     {parseModelCatalogText(form.modelCatalogText).length === 0 ? (
@@ -1981,7 +1981,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                         <p className="api-provider-hint">
                           {t(
                             "codex.modelProviders.vision.modelsHint",
-                            "每行一个模型名。适合同一供应商里只有部分视觉模型支持粘贴图片的情况。",
+                            "Mỗi dòng một mẫu. Dùng khi chỉ một số mẫu của nhà cung cấp hỗ trợ ảnh dán vào.",
                           )}
                         </p>
                       </>
@@ -1991,7 +1991,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <label>
                     {t(
                       "codex.modelProviders.fields.visionRoutingModel",
-                      "图片请求默认模型",
+                      "Mẫu xử lý ảnh",
                     )}
                   </label>
                   <input
@@ -2006,7 +2006,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <p className="api-provider-hint">
                     {t(
                       "codex.modelProviders.vision.routingModelHint",
-                      "当前模型不支持图片时，网关会改用该模型；留空时自动使用唯一视觉模型，否则省略图片并继续处理文本。",
+                      "Khi mô hình hiện tại không đọc được ảnh, cổng dùng mô hình này. Để trống để dùng mô hình hỗ trợ ảnh duy nhất nếu có; nếu không, ảnh bị bỏ qua và văn bản tiếp tục được xử lý.",
                     )}
                   </p>
                 </div>
@@ -2016,7 +2016,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <p className="api-provider-hint">
                     {t(
                       "codex.modelProviders.gatewayHint",
-                      "第三方供应商启动时会使用本地网关隔离实例并完成协议转换；OpenAI 官方供应商保持直连。",
+                      "Nhà cung cấp bên thứ ba khởi động qua cổng cục bộ để tách phiên bản và chuyển đổi giao thức. Nhà cung cấp OpenAI chính thức vẫn dùng kết nối trực tiếp.",
                     )}
                   </p>
                 )}
@@ -2024,7 +2024,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               )}
               <div className="form-group">
                 <label>
-                  {t("codex.modelProviders.fields.website", "官网（可选）")}
+                  {t("codex.modelProviders.fields.website", "Trang web (tùy chọn)")}
                 </label>
                 <input
                   className="form-input"
@@ -2040,7 +2040,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <label>
                   {t(
                     "codex.modelProviders.fields.apiKeyUrl",
-                    "API Key 页面（可选）",
+                    "Trang API Key (tùy chọn)",
                   )}
                 </label>
                 <input
@@ -2060,7 +2060,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <label>
                       {t(
                         "codex.modelProviders.existingApiKeys",
-                        "现有 API Keys",
+                        "API Key hiện có",
                       )}
                     </label>
                     {currentEditingProvider.apiKeys.length > 5 && (
@@ -2070,7 +2070,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           type="text"
                           placeholder={t(
                             "codex.modelProviders.existingApiKeysSearch",
-                            "搜索已有 API Key…",
+                            "Tìm API Key…",
                           )}
                           value={existingApiKeySearchQuery}
                           onChange={(event) =>
@@ -2089,7 +2089,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           if (!query) return true;
                           const label = (
                             item.name ||
-                            t("codex.modelProviders.unnamedKey", "未命名 Key")
+                            t("codex.modelProviders.unnamedKey", "Key chưa có tên")
                           ).toLowerCase();
                           const masked = maskApiKey(item.apiKey).toLowerCase();
                           return (
@@ -2173,7 +2173,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               {item.name ||
                                 t(
                                   "codex.modelProviders.unnamedKey",
-                                  "未命名 Key",
+                                  "Key chưa có tên",
                                 )}
                             </span>
                             <code>{maskApiKey(item.apiKey)}</code>
@@ -2222,7 +2222,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                               )
                             }
                             disabled={saving}
-                            title={t("common.delete", "删除")}
+                            title={t("common.delete", "Xóa")}
                           >
                             <Trash2 size={12} />
                           </button>
@@ -2237,7 +2237,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <label>
                   {t(
                     "codex.modelProviders.fields.newApiKeyName",
-                    "新增 Key 名称（可选）",
+                    "Tên key mới (tùy chọn)",
                   )}
                 </label>
                 <input
@@ -2252,7 +2252,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               </div>
               <div className="form-group">
                 <label>
-                  {t("codex.modelProviders.fields.newApiKey", "新增 API Key")}
+                  {t("codex.modelProviders.fields.newApiKey", "API Key mới")}
                 </label>
                 <input
                   className="form-input"
@@ -2268,16 +2268,16 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               <div className="provider-save-preview">
                 <div className="provider-save-preview-header">
                   <div className="provider-save-preview-title">
-                    {t("codex.modelProviders.preview.title", "保存预览")}
+                    {t("codex.modelProviders.preview.title", "Xem trước khi lưu")}
                   </div>
                   <span className="provider-save-preview-chip primary">
-                    {t("codex.modelProviders.preview.writeNow", "会写入")}
+                    {t("codex.modelProviders.preview.writeNow", "Sẽ ghi")}
                   </span>
                 </div>
                 <p className="provider-save-preview-desc">
                   {t(
                     "codex.modelProviders.preview.desc",
-                    "保存供应商时会先更新供应商仓库；不会因为这次操作立刻切换官方 Codex 的当前配置。",
+                    "Khi lưu nhà cung cấp, kho nhà cung cấp sẽ được cập nhật trước. Cấu hình Codex chính thức hiện tại sẽ không đổi ngay lập tức.",
                   )}
                 </p>
                 <div className="provider-save-preview-list">
@@ -2286,18 +2286,18 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span className="provider-save-preview-item-title">
                         {t(
                           "codex.modelProviders.preview.providerStoreTitle",
-                          "模型供应商仓库",
+                          "Kho nhà cung cấp",
                         )}
                       </span>
                       <span className="provider-save-preview-chip primary">
-                        {t("codex.modelProviders.preview.writeNow", "会写入")}
+                        {t("codex.modelProviders.preview.writeNow", "Sẽ ghi")}
                       </span>
                     </div>
                     <code>{previewPaths.providerStorePath}</code>
                     <p>
                       {t(
                         "codex.modelProviders.preview.providerStoreDesc",
-                        "保存供应商名称、Base URL、官网/API Key 页面链接，以及本弹框新增的 API Key。",
+                        "Lưu tên nhà cung cấp, Base URL, liên kết trang web/API Key và mọi API Key mới được thêm trong hộp thoại này.",
                       )}
                     </p>
                   </div>
@@ -2307,13 +2307,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span className="provider-save-preview-item-title">
                         {t(
                           "codex.modelProviders.preview.codexConfigTitle",
-                          "当前 Codex 配置",
+                          "Cấu hình Codex hiện tại",
                         )}
                       </span>
                       <span className="provider-save-preview-chip muted">
                         {t(
                           "codex.modelProviders.preview.noImmediateChange",
-                          "不会立即修改",
+                          "Chưa đổi ngay",
                         )}
                       </span>
                     </div>
@@ -2321,7 +2321,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <p>
                       {t(
                         "codex.modelProviders.preview.codexConfigDesc",
-                        "不会立即改动当前 provider 或 Base URL；只有在保存或切换 Codex API Key 账号时才会更新。",
+                        "Nhà cung cấp hiện tại hoặc Base URL sẽ không đổi ngay. Tệp này chỉ được cập nhật khi lưu hoặc chuyển tài khoản Codex API key.",
                       )}
                     </p>
                   </div>
@@ -2331,13 +2331,13 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span className="provider-save-preview-item-title">
                         {t(
                           "codex.modelProviders.preview.authFileTitle",
-                          "当前 Codex 登录凭据",
+                          "Thông tin xác thực Codex hiện tại",
                         )}
                       </span>
                       <span className="provider-save-preview-chip muted">
                         {t(
                           "codex.modelProviders.preview.noImmediateChange",
-                          "不会立即修改",
+                          "Chưa đổi ngay",
                         )}
                       </span>
                     </div>
@@ -2345,7 +2345,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     <p>
                       {t(
                         "codex.modelProviders.preview.authFileDesc",
-                        "不会因为保存供应商而覆盖当前 auth.json 中的 OPENAI_API_KEY。",
+                        "Việc lưu nhà cung cấp không ghi đè OPENAI_API_KEY hiện tại trong auth.json.",
                       )}
                     </p>
                   </div>
@@ -2361,7 +2361,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 onClick={closeModal}
                 disabled={saving}
               >
-                {t("common.cancel", "取消")}
+                {t("common.cancel", "Hủy")}
               </button>
               <button
                 className="btn btn-primary codex-provider-save-button"
@@ -2370,10 +2370,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               >
                 <span className="codex-provider-save-button-label">
                   <span aria-hidden={saving}>
-                    {t("common.save", "保存")}
+                    {t("common.save", "Lưu")}
                   </span>
                   <span aria-hidden={!saving}>
-                    {t("common.saving", "保存中...")}
+                    {t("common.saving", "Đang lưu...")}
                   </span>
                 </span>
               </button>
@@ -2387,7 +2387,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         if (!provider) return null;
         const unnamedKeyLabel = t(
           "codex.modelProviders.unnamedKey",
-          "未命名 Key",
+          "Key chưa có tên",
         );
         const filteredApiKeys = provider.apiKeys.filter((item) =>
           resolveProviderApiKeyLabel(item, provider.name, unnamedKeyLabel)
@@ -2401,11 +2401,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               onClick={(event) => event.stopPropagation()}
             >
               <div className="modal-header">
-                <h2>{t("codex.modelProviders.existingApiKeys", "已有 API Key")}</h2>
+                <h2>{t("codex.modelProviders.existingApiKeys", "API Key hiện có")}</h2>
                 <button
                   className="modal-close"
                   onClick={() => setApiKeyPickerProviderId(null)}
-                  aria-label={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
                 >
                   <X />
                 </button>
@@ -2459,11 +2459,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               onClick={(event) => event.stopPropagation()}
             >
               <div className="modal-header">
-                <h2>{t("codex.modelProviders.instance.shortLabel", "实例")}</h2>
+                <h2>{t("codex.modelProviders.instance.shortLabel", "Phiên")}</h2>
                 <button
                   className="modal-close"
                   onClick={() => setInstancePickerProviderId(null)}
-                  aria-label={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
                 >
                   <X />
                 </button>
@@ -2492,7 +2492,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span>
                         {getInstanceName(instance)}
                         {instance.running
-                          ? ` · ${t("codex.modelProviders.instance.running", "运行中")}`
+                          ? ` · ${t("codex.modelProviders.instance.running", "Đang chạy")}`
                           : ""}
                       </span>
                     </button>
@@ -2513,11 +2513,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t("codex.api.oauthBinding.title", "绑定 OAuth 账号")}</h2>
+              <h2>{t("codex.api.oauthBinding.title", "Liên kết tài khoản OAuth")}</h2>
               <button
                 className="modal-close"
                 onClick={() => !providerOauthSaving && setProviderOauthPickerId(null)}
-                aria-label={t("common.close", "关闭")}
+                aria-label={t("common.close", "Đóng")}
                 disabled={providerOauthSaving}
               >
                 <X />
@@ -2529,12 +2529,12 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   <p className="section-desc codex-oauth-binding-desc">
                     {t(
                       "codex.modelProviders.oauthBinding.desc",
-                      "可选绑定。只要 OAuth 账号带 refresh_token 即可选择；未绑定时供应商仍按原 API Key 逻辑运行。",
+                      "Tùy chọn. Có thể liên kết bất kỳ tài khoản OAuth nào có refresh_token. Nếu không liên kết, nhà cung cấp tiếp tục dùng luồng API Key gốc.",
                     )}
                   </p>
                   <div className="section-desc codex-oauth-binding-current-target">
                     {t("codex.modelProviders.oauthBinding.currentProvider", {
-                      defaultValue: "供应商：{{name}}",
+                      defaultValue: "Nhà cung cấp: {{name}}",
                       name: providerOauthTarget.name,
                     })}
                   </div>
@@ -2542,7 +2542,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 <div className="codex-oauth-binding-picker">
                   <div className="codex-oauth-binding-picker-header">
                     <label>
-                      {t("codex.api.oauthBinding.selectLabel", "选择 OAuth 账号")}
+                      {t("codex.api.oauthBinding.selectLabel", "Chọn tài khoản OAuth")}
                     </label>
                   </div>
                   {providerOauthAccounts.length === 0 ? (
@@ -2551,7 +2551,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span>
                         {t(
                           "codex.api.oauthBinding.empty",
-                          "暂无 OAuth 账号，请先添加 OAuth 授权账号。",
+                          "Chưa có tài khoản OAuth. Hãy thêm tài khoản ủy quyền OAuth trước.",
                         )}
                       </span>
                     </div>
@@ -2561,7 +2561,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       <span>
                         {t(
                           "codex.api.oauthBinding.emptyEligible",
-                          "没有带 refresh_token 的 OAuth 账号，请重新 OAuth 授权或添加符合条件的 OAuth 账号。",
+                          "Không có tài khoản OAuth có refresh_token. Hãy ủy quyền OAuth lại hoặc thêm tài khoản OAuth đủ điều kiện.",
                         )}
                       </span>
                     </div>
@@ -2572,7 +2572,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           <Search size={16} className="search-icon" />
                           <input
                             type="text"
-                            placeholder={t("common.shared.search", "搜索账号...")}
+                            placeholder={t("common.shared.search", "Tìm kiếm tài khoản...")}
                             value={providerOauthSearchQuery}
                             onChange={(event) =>
                               setProviderOauthSearchQuery(event.target.value)
@@ -2586,10 +2586,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           allLabel={t("common.shared.filter.all", {
                             count: providerOauthTierCounts.all,
                           })}
-                          filterLabel={t("common.shared.filterLabel", "筛选")}
-                          clearLabel={t("accounts.clearFilter", "清空筛选")}
-                          emptyLabel={t("common.none", "暂无")}
-                          ariaLabel={t("common.shared.filterLabel", "筛选")}
+                          filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                          clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                          emptyLabel={t("common.none", "None​")}
+                          ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                           onToggleValue={toggleProviderOAuthFilterTypeValue}
                           onClear={() => setProviderOauthFilterTypes([])}
                         />
@@ -2604,22 +2604,22 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                           options={[
                             {
                               value: "last_used",
-                              label: t("accounts.columns.lastUsed", "最后使用"),
+                              label: t("accounts.columns.lastUsed", "Sử dụng lần cuối"),
                             },
                             {
                               value: "created_at",
-                              label: t("common.shared.sort.createdAt", "按创建时间"),
+                              label: t("common.shared.sort.createdAt", "Thời gian tạo"),
                             },
                             {
                               value: "account",
-                              label: t("common.shared.columns.account", "账号"),
+                              label: t("common.shared.columns.account", "Tài khoản"),
                             },
                             {
                               value: "plan",
-                              label: t("accounts.sort.plan", "按套餐"),
+                              label: t("accounts.sort.plan", "Theo gói"),
                             },
                           ]}
-                          ariaLabel={t("common.shared.sortLabel", "排序")}
+                          ariaLabel={t("common.shared.sortLabel", "Sắp xếp")}
                           icon={<ArrowDownWideNarrow size={14} />}
                           disabled={providerOauthSaving}
                           onChange={(value) =>
@@ -2639,16 +2639,16 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                             providerOauthSortDirection === "desc"
                               ? t(
                                   "common.shared.sort.descTooltip",
-                                  "当前：降序，点击切换为升序",
+                                  "Giảm dần (nhấn để chuyển Tăng dần)",
                                 )
                               : t(
                                   "common.shared.sort.ascTooltip",
-                                  "当前：升序，点击切换为降序",
+                                  "Tăng dần (nhấn để chuyển Giảm dần)",
                                 )
                           }
                           aria-label={t(
                             "common.shared.sort.toggleDirection",
-                            "切换排序方向",
+                            "Đổi hướng sắp xếp",
                           )}
                         >
                           {providerOauthSortDirection === "desc" ? (
@@ -2661,7 +2661,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       {providerOauthFilteredAccounts.length === 0 ? (
                         <div className="group-account-empty">
                           <span>
-                            {t("common.shared.noMatch.title", "没有匹配的账号")}
+                            {t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}
                           </span>
                         </div>
                       ) : (
@@ -2723,7 +2723,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                                   >
                                     <Clock size={12} />
                                     <span>
-                                      {t("codex.subscription.label", "有效期")}
+                                      {t("codex.subscription.label", "Hết hạn gói")}
                                     </span>
                                     <strong>{subscriptionInfo.valueText}</strong>
                                     <span>{subscriptionInfo.detailText}</span>
@@ -2763,7 +2763,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                       }
                       disabled={providerOauthSaving}
                     >
-                      {t("codex.api.oauthBinding.clearAction", "解除绑定")}
+                      {t("codex.api.oauthBinding.clearAction", "Bỏ liên kết")}
                     </button>
                   )}
                   <button
@@ -2771,7 +2771,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     onClick={() => setProviderOauthPickerId(null)}
                     disabled={providerOauthSaving}
                   >
-                    {t("common.cancel", "取消")}
+                    {t("common.cancel", "Hủy")}
                   </button>
                   <button
                     className="btn btn-primary"
@@ -2789,8 +2789,8 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                     }
                   >
                     {providerOauthSaving
-                      ? t("common.saving", "保存中...")
-                      : t("common.save", "保存")}
+                      ? t("common.saving", "Đang lưu...")
+                      : t("common.save", "Lưu")}
                   </button>
                 </div>
               </div>
@@ -2838,16 +2838,16 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         const detailMetrics: CodexServicePanelMetricItem[] = [
           {
             key: "wireApi",
-            label: t("codex.modelProviders.fields.wireApi", "协议"),
+            label: t("codex.modelProviders.fields.wireApi", "Giao thức"),
             value:
               resolvedWireApi === "chat_completions"
                 ? t(
                     "codex.modelProviders.wireApi.chatCompletions",
-                    "Chat Completions 协议",
+                    "Giao thức Chat Completions",
                   )
                 : t(
                     "codex.modelProviders.wireApi.responses",
-                    "Responses 原生",
+                    "Responses gốc",
                   ),
             rawKey: "wireApi",
           },
@@ -2855,22 +2855,22 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             key: "supportsWebsockets",
             label: t(
               "codex.modelProviders.fields.supportsWebsockets",
-              "WebSocket 传输",
+              "Truyền tải WebSocket",
             ),
             value:
               resolvedWireApi === "responses" && provider.supportsWebsockets
-                ? t("codex.modelProviders.websockets.enabled", "已启用")
-                : t("codex.modelProviders.websockets.disabled", "已停用"),
+                ? t("codex.modelProviders.websockets.enabled", "Đã bật")
+                : t("codex.modelProviders.websockets.disabled", "Đã tắt"),
             rawKey: "supportsWebsockets",
           },
           {
             key: "oauthBinding",
-            label: t("codex.api.oauthBinding.label", "OAuth 绑定"),
+            label: t("codex.api.oauthBinding.label", "Liên kết OAuth"),
             value:
               resolveBoundOAuthAccount(provider)?.account_name ||
               resolveBoundOAuthAccount(provider)?.email ||
               resolveBoundOAuthAccount(provider)?.id ||
-              t("codex.api.oauthBinding.unbound", "未绑定"),
+              t("codex.api.oauthBinding.unbound", "Chưa liên kết"),
             rawKey: "boundOauthAccountId",
           },
           ...(resolveCodexApiProviderPresetId(provider.baseUrl) ===
@@ -2878,10 +2878,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             ? [
                 {
                   key: "enableMode",
-                  label: t("codex.modelProviders.enableMode.label", "接入方式"),
+                  label: t("codex.modelProviders.enableMode.label", "Chế độ kết nối"),
                   value: t(
                     "codex.deepSeek.start.chooseAtStart",
-                    "启动时选择",
+                    "Khi khởi động",
                   ),
                   rawKey: "enableMode",
                 },
@@ -2890,10 +2890,10 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               ? [
                   {
                     key: "enableMode",
-                    label: t("codex.modelProviders.enableMode.label", "接入方式"),
+                    label: t("codex.modelProviders.enableMode.label", "Chế độ kết nối"),
                     value: t(
                       "codex.modelProviders.enableMode.gatewayMode",
-                      "网关模式",
+                      "Chế độ gateway",
                     ),
                     rawKey: "enableMode",
                   },
@@ -2901,17 +2901,17 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               : [
                   {
                     key: "enableMode",
-                    label: t("codex.modelProviders.enableMode.label", "接入方式"),
+                    label: t("codex.modelProviders.enableMode.label", "Chế độ kết nối"),
                     value: t(
                       "codex.modelProviders.enableMode.directMode",
-                      "直连模式",
+                      "Chế độ trực tiếp",
                     ),
                     rawKey: "enableMode",
                   },
                 ]),
           {
             key: "vision",
-            label: t("codex.modelProviders.vision.allModels", "图片输入"),
+            label: t("codex.modelProviders.vision.allModels", "Ảnh"),
             value: provider.supportsVision
               ? t("common.yes", "是")
               : t("common.no", "否"),
@@ -2919,11 +2919,11 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
           },
           {
             key: "modelCatalog",
-            label: t("codex.modelProviders.modelCatalog", "模型"),
+            label: t("codex.modelProviders.modelCatalog", "Mô hình"),
             value:
               (provider.modelCatalog?.length ?? 0) > 0
                 ? (provider.modelCatalog ?? []).join(", ")
-                : t("codex.modelProviders.modelCatalogEmpty", "未配置模型目录"),
+                : t("codex.modelProviders.modelCatalogEmpty", "Chưa có danh mục mô hình"),
             rawKey: "modelCatalog",
           },
           ...((usageSummary?.details ?? [])
@@ -2957,7 +2957,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             ? [
                 {
                   key: "totalGranted",
-                  label: t("codex.modelProviders.usage.fields.totalGranted", "授予额度"),
+                  label: t("codex.modelProviders.usage.fields.totalGranted", "Đã cấp"),
                   value: formatUsageDetailValue(
                     {
                       key: "totalGranted",
@@ -2968,7 +2968,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 },
                 {
                   key: "totalAvailable",
-                  label: t("codex.modelProviders.usage.fields.totalAvailable", "可用额度"),
+                  label: t("codex.modelProviders.usage.fields.totalAvailable", "Khả dụng"),
                   value: formatUsageDetailValue(
                     {
                       key: "totalAvailable",
@@ -2979,7 +2979,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                 },
                 {
                   key: "expiresAt",
-                  label: t("codex.modelProviders.usage.fields.expiresAt", "过期时间"),
+                  label: t("codex.modelProviders.usage.fields.expiresAt", "Hết hạn"),
                   value: formatUsageDetailValue(
                     {
                       key: "expiresAt",
@@ -2993,7 +2993,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
               ? [
                   {
                     key: "accountBalance",
-                    label: t("codex.modelProviders.usage.accountBalance", "账户余额"),
+                    label: t("codex.modelProviders.usage.accountBalance", "Số dư tài khoản"),
                     value: formatUsageQuotaValue(
                       usageSummary,
                       usageSummary?.remaining ??
@@ -3003,12 +3003,12 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
                   },
                   {
                     key: "todayRequests",
-                    label: t("codex.modelProviders.usage.fields.todayRequests", "今日请求"),
+                    label: t("codex.modelProviders.usage.fields.todayRequests", "Yêu cầu hôm nay"),
                     value: String(usageSummary?.todayRequests ?? 0),
                   },
                   {
                     key: "todayTokens",
-                    label: t("codex.modelProviders.usage.fields.todayTokens", "今日 Token"),
+                    label: t("codex.modelProviders.usage.fields.todayTokens", "Token hôm nay"),
                     value: (usageSummary?.todayTotalTokens ?? 0).toLocaleString("en-US"),
                   },
                 ]
@@ -3017,7 +3017,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         const actions: CodexServicePanelActionItem[] = [
           {
             key: "refresh",
-            label: t("common.shared.refreshQuota", "刷新配额"),
+            label: t("common.shared.refreshQuota", "Làm mới hạn mức"),
             variant: "secondary",
             icon: (
               <RefreshCw
@@ -3034,7 +3034,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
           },
           {
             key: "edit",
-            label: t("instances.actions.edit", "编辑"),
+            label: t("instances.actions.edit", "Chỉnh sửa"),
             variant: "secondary",
             icon: <Pencil size={14} />,
             onClick: () => {
@@ -3044,7 +3044,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
           },
           {
             key: "oauth",
-            label: t("codex.api.oauthBinding.action", "绑定 OAuth"),
+            label: t("codex.api.oauthBinding.action", "Liên kết OAuth"),
             variant: "secondary",
             icon: <Link2 size={14} />,
             onClick: () => {
@@ -3057,7 +3057,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         if (provider.website || provider.apiKeyUrl || provider.baseUrl) {
           actions.push({
             key: "website",
-            label: t("codex.modelProviders.website", "官网"),
+            label: t("codex.modelProviders.website", "Trang web"),
             variant: "secondary",
             icon: <ExternalLink size={14} />,
             onClick: () => {
@@ -3073,7 +3073,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
         return (
           <CodexServicePanelModal
             open={true}
-            title={t("codex.modelProviders.usage.detailTitle", "服务面板")}
+            title={t("codex.modelProviders.usage.detailTitle", "Bảng dịch vụ")}
             subtitle={provider.name}
             baseUrl={provider.baseUrl}
             apiKeyDisplay={primaryApiKey ? maskApiKey(primaryApiKey.apiKey) : "-"}
@@ -3082,7 +3082,7 @@ export function CodexModelProviderManagerView(props: CodexModelProviderManagerVi
             detailMetrics={detailMetrics}
             actions={actions}
             onClose={() => setProviderDetailId(null)}
-            emptyDetailText={t("codex.cockpitApi.noStats", "暂无统计")}
+            emptyDetailText={t("codex.cockpitApi.noStats", "Chưa có thống kê")}
           />
         );
       })()}

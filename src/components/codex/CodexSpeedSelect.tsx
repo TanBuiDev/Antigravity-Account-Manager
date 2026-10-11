@@ -113,20 +113,20 @@ export function CodexSpeedSelect({
     () => [
       {
         value: "standard" as CodexAppSpeed,
-        label: t("codex.speed.standard", "标准"),
-        desc: t("codex.speed.standardDesc", "默认速度，常规用量"),
+        label: t("codex.speed.standard", "Chuẩn"),
+        desc: t("codex.speed.standardDesc", "Tốc độ mặc định, mức dùng thường"),
       },
       {
         value: "fast" as CodexAppSpeed,
-        label: t("codex.speed.fast", "快速"),
-        desc: t("codex.speed.fastDesc", "加速，用量／费用更高"),
+        label: t("codex.speed.fast", "Nhanh"),
+        desc: t("codex.speed.fastDesc", "Nhanh hơn, tốn thêm hạn mức/phí"),
       },
     ],
     [t],
   );
 
   const selected = options.find((item) => item.value === speed) ?? options[0];
-  const selectedTitle = `${t("codex.speed.title", "速度")}：${selected.label} - ${
+  const selectedTitle = `${t("codex.speed.title", "Tốc độ")}：${selected.label} - ${
     selected.desc
   }`;
 
@@ -193,7 +193,7 @@ export function CodexSpeedSelect({
         }}
         disabled={disabled || busy}
         title={selectedTitle}
-        aria-label={ariaLabel || t("codex.speed.title", "速度")}
+        aria-label={ariaLabel || t("codex.speed.title", "Tốc độ")}
       >
         {speed === "fast" && <Zap size={12} />}
         <span>{selected.label}</span>
@@ -216,7 +216,7 @@ export function CodexSpeedSelect({
             >
               {!compact && (
                 <div className="codex-speed-menu-title">
-                  {t("codex.speed.title", "速度")}
+                  {t("codex.speed.title", "Tốc độ")}
                 </div>
               )}
               <div className="codex-speed-menu-options">

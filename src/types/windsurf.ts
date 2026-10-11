@@ -1248,7 +1248,7 @@ export function formatWindsurfResetTime(
   if (!resetTime) return '';
   const now = Math.floor(Date.now() / 1000);
   const diff = resetTime - now;
-  if (diff <= 0) return t('common.shared.quota.resetDone', { defaultValue: '已重置' });
+  if (diff <= 0) return t('common.shared.quota.resetDone', { defaultValue: "Đã đặt lại" });
 
   const totalMinutes = Math.floor(diff / 60);
   const days = Math.floor(totalMinutes / (60 * 24));

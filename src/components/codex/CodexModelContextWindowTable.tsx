@@ -46,11 +46,11 @@ export function CodexModelContextWindowTable({
   if (models.length === 0) return null;
   const showContext = showContextWindow;
   const showVision = typeof onVisionChange === "function";
-  const visionLabel = t("codex.modelProviders.vision.allModels", "图片输入");
+  const visionLabel = t("codex.modelProviders.vision.allModels", "Ảnh");
   const presetOptions = [
     {
       value: "official",
-      label: t("codex.contextOverride.followOfficial", "跟随官方"),
+      label: t("codex.contextOverride.followOfficial", "Theo chính thức"),
     },
     { value: "preset_516k", label: "516K" },
     { value: "preset_1m", label: "1M" },

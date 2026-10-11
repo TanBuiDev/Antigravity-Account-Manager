@@ -280,7 +280,7 @@ export function ApiKeyFunPage() {
           setUsage(null);
           setUsageError(
             t('apiKeyFun.error.queryFailed', {
-              defaultValue: '额度查询失败：{{error}}',
+              defaultValue: "Kiểm tra hạn mức thất bại: {{error}}",
               error: providerErrorMessage(error),
             }),
           );
@@ -307,7 +307,7 @@ export function ApiKeyFunPage() {
           setApiKeyModels(result.models);
           setModelsError(
             result.models.length === 0
-              ? t('apiKeyFun.models.emptyFromKey', '当前 API Key 未返回模型列表。')
+              ? t('apiKeyFun.models.emptyFromKey', "API Key hiện tại không trả về mô hình.")
               : null,
           );
         })
@@ -316,7 +316,7 @@ export function ApiKeyFunPage() {
           setApiKeyModels([]);
           setModelsError(
             t('apiKeyFun.models.queryFailed', {
-              defaultValue: '模型列表读取失败：{{error}}',
+              defaultValue: "Đọc danh sách mô hình thất bại: {{error}}",
               error: providerErrorMessage(error),
             }),
           );
@@ -336,7 +336,7 @@ export function ApiKeyFunPage() {
   const handleSaveCurrentKey = useCallback(() => {
     const key = apiKey.trim();
     if (!key) {
-      setUsageError(t('apiKeyFun.error.missingApiKey', '请输入 API Key。'));
+      setUsageError(t('apiKeyFun.error.missingApiKey', "Nhập API Key."));
       return;
     }
     const now = Date.now();
@@ -390,7 +390,7 @@ export function ApiKeyFunPage() {
       setManagedKeyAction(item.id, {
         target,
         status: 'error',
-        message: t('apiKeyFun.error.missingApiKey', '请输入 API Key。'),
+        message: t('apiKeyFun.error.missingApiKey', "Nhập API Key."),
       });
       return;
     }
@@ -508,13 +508,13 @@ export function ApiKeyFunPage() {
           <img src={apiKeyFunIcon} alt="" className="apikey-fun-brand-logo" />
           <div className="apikey-fun-brand-text">
             <div className="apikey-fun-eyebrow-container">
-              <span className="apikey-fun-eyebrow">{t('apiKeyFun.eyebrow', '中转站')}</span>
+              <span className="apikey-fun-eyebrow">{t('apiKeyFun.eyebrow', "Trung chuyển")}</span>
             </div>
-            <h1>{t('apiKeyFun.title', 'APIKEY.FUN 中转站')}</h1>
+            <h1>{t('apiKeyFun.title', "Relay APIKEY.FUN")}</h1>
             <p>
               {t(
                 'apiKeyFun.description',
-                'Cockpit 官方合作中转站，为用户提供稳定、开放、高性价比的大模型 API 接入服务。支持 Claude、ChatGPT、Grok、Gemini、智谱 GLM、Kimi、DeepSeek 等主流模型，适合在 Codex、Gemini CLI、Claude Code 及其他开发工具中统一配置使用。通过 Cockpit 专属链接注册，可享受最高充值永久 95 折优惠。',
+                "Relay đối tác chính thức của Cockpit cung cấp quyền truy cập API mô hình lớn ổn định, mở và có hiệu quả chi phí cao. Nền tảng hỗ trợ các mô hình phổ biến như Claude, ChatGPT, Grok, Gemini, Zhipu GLM, Kimi và DeepSeek, phù hợp để cấu hình thống nhất trong Codex, Gemini CLI, Claude Code và các công cụ phát triển khác. Đăng ký qua liên kết độc quyền của Cockpit để nhận ưu đãi nạp tiền vĩnh viễn lên tới 5%.",
               )}
             </p>
           </div>
@@ -525,7 +525,7 @@ export function ApiKeyFunPage() {
             onClick={() => openExternal(APIKEY_FUN_REGISTER_URL)}
           >
             <ExternalLink size={15} />
-            <span>{t('apiKeyFun.viewNow', '立即查看')}</span>
+            <span>{t('apiKeyFun.viewNow', "Xem ngay")}</span>
           </button>
         </div>
       </header>
@@ -535,11 +535,11 @@ export function ApiKeyFunPage() {
           <section className="apikey-fun-dashboard-panel apikey-fun-config-panel">
             <div className="apikey-fun-panel-head">
               <div>
-                <h2>{t('apiKeyFun.queryTitle', '密钥额度查询')}</h2>
+                <h2>{t('apiKeyFun.queryTitle', "Hạn mức khóa")}</h2>
               </div>
               <div className="apikey-fun-key-preview">
                 <KeyRound size={14} />
-                <span>{maskedApiKey || t('apiKeyFun.keyNotSet', '未输入秘钥')}</span>
+                <span>{maskedApiKey || t('apiKeyFun.keyNotSet', "Chưa nhập khóa")}</span>
               </div>
             </div>
 
@@ -550,7 +550,7 @@ export function ApiKeyFunPage() {
                   <input
                     value={apiKey}
                     type={showApiKey ? 'text' : 'password'}
-                    placeholder={t('apiKeyFun.apiKeyPlaceholder', '粘贴 APIKEY.FUN 控制台创建的 API Key')}
+                    placeholder={t('apiKeyFun.apiKeyPlaceholder', "Dán API Key được tạo trong console APIKEY.FUN")}
                     onChange={(event) => {
                       setApiKey(event.target.value);
                       setUsageError(null);
@@ -561,7 +561,7 @@ export function ApiKeyFunPage() {
                       type="button"
                       className="apikey-fun-icon-button copy-btn"
                       onClick={(e) => handleCopyToClipboard(apiKey, 'input', e)}
-                      title={t('apiKeyFun.copyKey', '复制密钥')}
+                      title={t('apiKeyFun.copyKey', "Copy Key​")}
                     >
                       {copiedId === 'input' ? <CheckCircle2 size={16} className="success-icon" /> : <Copy size={16} />}
                     </button>
@@ -578,7 +578,7 @@ export function ApiKeyFunPage() {
                       setModelsError(null);
                       setQueryingModels(false);
                     }}
-                    title={t('apiKeyFun.clearKey', '清空输入')}
+                    title={t('apiKeyFun.clearKey', "Clear input​")}
                   >
                       <X size={16} />
                     </button>
@@ -587,7 +587,7 @@ export function ApiKeyFunPage() {
                     type="button"
                     className="apikey-fun-icon-button"
                     onClick={() => setShowApiKey((value) => !value)}
-                    title={showApiKey ? t('apiKeyFun.hideKey', '隐藏') : t('apiKeyFun.showKey', '显示')}
+                    title={showApiKey ? t('apiKeyFun.hideKey', "Ẩn") : t('apiKeyFun.showKey', "Hiện")}
                   >
                     {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -601,13 +601,13 @@ export function ApiKeyFunPage() {
                   {currentSavedKey ? <CheckCircle2 size={16} /> : <BookmarkPlus size={16} />}
                   <span>
                     {currentSavedKey
-                      ? t('apiKeyFun.keyManager.savedButton', '已保存')
-                      : t('apiKeyFun.keyManager.saveButton', '保存密钥')}
+                      ? t('apiKeyFun.keyManager.savedButton', "Đã lưu")
+                      : t('apiKeyFun.keyManager.saveButton', "Lưu khóa")}
                   </span>
                 </button>
                 {saveFlash && (
                   <span className="apikey-fun-save-flash">
-                    {t('apiKeyFun.keyManager.saveFlash', '刚刚保存')}
+                    {t('apiKeyFun.keyManager.saveFlash', "Vừa lưu")}
                   </span>
                 )}
               </div>
@@ -622,7 +622,7 @@ export function ApiKeyFunPage() {
                         if (currentSavedKey) handlePrefillTarget('codex', currentSavedKey);
                       }}
                     >
-                      <span>{t('apiKeyFun.keyManager.addToCodex', '添加到 Codex')}</span>
+                      <span>{t('apiKeyFun.keyManager.addToCodex', "Thêm vào Codex")}</span>
                     </button>
                   )}
                   {canAddCurrentKeyToClaude && (
@@ -634,7 +634,7 @@ export function ApiKeyFunPage() {
                         if (currentSavedKey) handlePrefillTarget('claude_desktop', currentSavedKey);
                       }}
                     >
-                      <span>{t('apiKeyFun.keyManager.addToClaudeDesktop', '添加到 Claude')}</span>
+                      <span>{t('apiKeyFun.keyManager.addToClaudeDesktop', "Thêm vào Claude")}</span>
                     </button>
                   )}
                   {canAddCurrentKeyToClaude && (
@@ -646,7 +646,7 @@ export function ApiKeyFunPage() {
                         if (currentSavedKey) handlePrefillTarget('claude_cli', currentSavedKey);
                       }}
                     >
-                      <span>{t('apiKeyFun.keyManager.addToClaudeCli', '添加到 Claude CLI')}</span>
+                      <span>{t('apiKeyFun.keyManager.addToClaudeCli', "Thêm vào Claude CLI")}</span>
                     </button>
                   )}
                 </div>
@@ -663,7 +663,7 @@ export function ApiKeyFunPage() {
           {/* 数值卡片展示 */}
           <div className="apikey-fun-usage-grid">
             <div className={`apikey-fun-usage-card primary ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.remaining', '剩余额度')}</span>
+              <span>{t('apiKeyFun.usage.remaining', "Còn lại")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -671,7 +671,7 @@ export function ApiKeyFunPage() {
               )}
             </div>
             <div className={`apikey-fun-usage-card ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.used', '已用额度')}</span>
+              <span>{t('apiKeyFun.usage.used', "Đã dùng")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -679,7 +679,7 @@ export function ApiKeyFunPage() {
               )}
             </div>
             <div className={`apikey-fun-usage-card ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.todayRequests', '今日请求')}</span>
+              <span>{t('apiKeyFun.usage.todayRequests', "Hôm nay")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -687,7 +687,7 @@ export function ApiKeyFunPage() {
               )}
             </div>
             <div className={`apikey-fun-usage-card ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.todayTokens', '今日 Token')}</span>
+              <span>{t('apiKeyFun.usage.todayTokens', "Token hôm nay")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -695,7 +695,7 @@ export function ApiKeyFunPage() {
               )}
             </div>
             <div className={`apikey-fun-usage-card ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.totalRequests', '总请求')}</span>
+              <span>{t('apiKeyFun.usage.totalRequests', "Tổng yêu cầu")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -703,7 +703,7 @@ export function ApiKeyFunPage() {
               )}
             </div>
             <div className={`apikey-fun-usage-card ${queryingUsage ? 'loading' : ''}`}>
-              <span>{t('apiKeyFun.usage.totalTokens', '总 Token')}</span>
+              <span>{t('apiKeyFun.usage.totalTokens', "Tổng Token")}</span>
               {queryingUsage ? (
                 <div className="apikey-fun-skeleton-text" />
               ) : (
@@ -715,20 +715,20 @@ export function ApiKeyFunPage() {
           <section className="apikey-fun-dashboard-panel apikey-fun-models-panel">
             <div className="apikey-fun-panel-head">
               <div>
-                <h2>{t('apiKeyFun.models.title', '可用模型')}</h2>
+                <h2>{t('apiKeyFun.models.title', "Mô hình khả dụng")}</h2>
               </div>
               <div className="apikey-fun-model-count">
                 {queryingModels
-                  ? t('apiKeyFun.models.loading', '读取中')
+                  ? t('apiKeyFun.models.loading', "Đang tải")
                   : t('apiKeyFun.models.count', {
-                      defaultValue: '{{count}} 个模型',
+                      defaultValue: "{{count}} mô hình",
                       count: apiKeyFunModelCatalog.length,
                     })}
               </div>
             </div>
             {queryingModels ? (
               <div className="apikey-fun-model-empty">
-                {t('apiKeyFun.models.loadingDesc', '正在从当前 API Key 读取模型列表...')}
+                {t('apiKeyFun.models.loadingDesc', "Đang đọc danh sách mô hình từ API Key hiện tại...")}
               </div>
             ) : modelsError ? (
               <div className="apikey-fun-model-empty">
@@ -737,8 +737,8 @@ export function ApiKeyFunPage() {
             ) : apiKeyFunModelCatalog.length === 0 ? (
               <div className="apikey-fun-model-empty">
                 {currentKey
-                  ? t('apiKeyFun.models.emptyFromKey', '当前 API Key 未返回模型列表。')
-                  : t('apiKeyFun.models.empty', '输入 API Key 后读取可用模型。')}
+                  ? t('apiKeyFun.models.emptyFromKey', "API Key hiện tại không trả về mô hình.")
+                  : t('apiKeyFun.models.empty', "Nhập API Key để đọc các mô hình khả dụng.")}
               </div>
             ) : (
               <div className="apikey-fun-model-list">
@@ -754,14 +754,14 @@ export function ApiKeyFunPage() {
           <section className="apikey-fun-dashboard-panel apikey-fun-manager-panel">
             <div className="apikey-fun-panel-head">
               <div>
-                <h2>{t('apiKeyFun.keyManager.title', '密钥管理')}</h2>
-                <p>{t('apiKeyFun.keyManager.desc', '保存常用 API Key，点击即可切换并自动查询额度。')}</p>
+                <h2>{t('apiKeyFun.keyManager.title', "Quản lý khóa")}</h2>
+                <p>{t('apiKeyFun.keyManager.desc', "Lưu API Keys để chuyển nhanh và tự động kiểm tra hạn mức.")}</p>
               </div>
             </div>
             {managedKeys.length === 0 ? (
               <div className="apikey-fun-empty-keys">
                 <KeyRound size={16} />
-                <span>{t('apiKeyFun.keyManager.empty', '暂无保存的密钥。')}</span>
+                <span>{t('apiKeyFun.keyManager.empty', "Chưa có khóa đã lưu.")}</span>
               </div>
             ) : (
               <div className="apikey-fun-key-list">
@@ -776,7 +776,7 @@ export function ApiKeyFunPage() {
                             ref={(el) => el?.focus()}
                             className="apikey-fun-rename-input"
                             value={editNameValue}
-                            placeholder={t('apiKeyFun.keyManager.renamePlaceholder', '输入新别名...')}
+                            placeholder={t('apiKeyFun.keyManager.renamePlaceholder', "Enter alias...​")}
                             onChange={(e) => setEditNameValue(e.target.value)}
                             onBlur={() => handleSaveRename(item.id)}
                             onKeyDown={(e) => {
@@ -790,7 +790,7 @@ export function ApiKeyFunPage() {
                             <span className="name-text">{item.name}</span>
                             <span
                               className="edit-icon-btn"
-                              title={t('apiKeyFun.keyManager.editAlias', '修改别名')}
+                              title={t('apiKeyFun.keyManager.editAlias', "Edit alias​")}
                               onClick={(e) => handleStartRename(item, e)}
                             >
                               <Pencil size={12} />
@@ -800,14 +800,14 @@ export function ApiKeyFunPage() {
                             <small>
                               {item.lastRemaining
                                 ? t('apiKeyFun.keyManager.lastRemaining', {
-                                    defaultValue: '上次余额 {{value}}',
+                                    defaultValue: "Số dư trước {{value}}",
                                     value: item.lastRemaining,
                                   })
-                                : t('apiKeyFun.keyManager.notQueried', '未查询')}
+                                : t('apiKeyFun.keyManager.notQueried', "Chưa kiểm tra")}
                             </small>
                             <small>
                               {t('apiKeyFun.keyManager.createdAt', {
-                                defaultValue: '添加于 {{time}}',
+                                defaultValue: "Đã thêm {{time}}",
                                 time: formatManagedKeyTime(item.createdAt),
                               })}
                             </small>
@@ -824,7 +824,7 @@ export function ApiKeyFunPage() {
                         <button
                           type="button"
                           className="apikey-fun-key-copy"
-                          title={t('apiKeyFun.keyManager.useKey', '使用密钥')}
+                          title={t('apiKeyFun.keyManager.useKey', "Dùng khóa")}
                           onClick={(e) => {
                             e.stopPropagation();
                             void handleOpenKeyConfig(item);
@@ -836,7 +836,7 @@ export function ApiKeyFunPage() {
                           type="button"
                           className="apikey-fun-key-copy"
                           onClick={(e) => handleCopyToClipboard(item.key, item.id, e)}
-                          title={t('apiKeyFun.copyKey', '复制密钥')}
+                          title={t('apiKeyFun.copyKey', "Copy Key​")}
                         >
                           {copiedId === item.id ? (
                             <CheckCircle2 size={14} className="success-icon" />
@@ -852,7 +852,7 @@ export function ApiKeyFunPage() {
                             e.stopPropagation();
                             handleDeleteManagedKey(item.id);
                           }}
-                          title={t('apiKeyFun.keyManager.deleteButton', '删除')}
+                          title={t('apiKeyFun.keyManager.deleteButton', "Xóa")}
                         >
                           <Trash2 size={14} />
                         </button>

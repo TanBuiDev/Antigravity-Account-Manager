@@ -139,26 +139,26 @@ export function CodexApiKeyLaunchSection({
   }[] = [
     {
       id: DEEPSEEK_ACCESS_MODE_GATEWAY,
-      title: t("codex.deepSeek.start.gatewayMode", "网关列出"),
+      title: t("codex.deepSeek.start.gatewayMode", "Danh sách cổng"),
       description: t(
         "codex.deepSeek.start.gatewayDesc",
-        "需要本地网关。支持绑定 OAuth 的 GPT 账号并使用 OAuth 的全部能力（浏览器操作等），支持在 Codex 内切换模型，可把生图交给 GPT 账号。",
+        "Cần cổng cục bộ. Cho phép liên kết tài khoản GPT OAuth và dùng mọi khả năng OAuth (thao tác trình duyệt, v.v.), đổi mô hình trong Codex và giao việc tạo ảnh cho tài khoản GPT.",
       ),
     },
     {
       id: DEEPSEEK_ACCESS_MODE_DIRECT,
-      title: t("codex.deepSeek.start.directMode", "直连官方"),
+      title: t("codex.deepSeek.start.directMode", "API chính thức"),
       description: t(
         "codex.deepSeek.start.directDesc",
-        "不走网关，速度更快。不能在 Codex 内切换模型，也没有 OAuth 能力与生图转发。",
+        "Không dùng cổng, nhanh hơn. Không đổi được mô hình trong Codex, không có khả năng OAuth hay chuyển tiếp tạo ảnh.",
       ),
     },
     {
       id: DEEPSEEK_ACCESS_MODE_CDP,
-      title: t("codex.deepSeek.start.cdpMode", "CDP 注入"),
+      title: t("codex.deepSeek.start.cdpMode", "Tiêm CDP"),
       description: t(
         "codex.deepSeek.start.cdpDesc",
-        "通过注入接管 Codex 官方模型列表，速度与直连一致。需要注入官方客户端，不支持绑定 OAuth。",
+        "Tiếp quản danh sách mô hình chính thức của Codex bằng injection, tốc độ như chế độ trực tiếp. Cần injection vào ứng dụng chính thức; không hỗ trợ liên kết OAuth.",
       ),
     },
   ];
@@ -171,7 +171,7 @@ export function CodexApiKeyLaunchSection({
     <div className="codex-api-key-launch">
       {hasContextData && (
         <div className="form-group">
-          <label>{t("codex.deepSeek.start.context", "支持上下文")}</label>
+          <label>{t("codex.deepSeek.start.context", "Ngữ cảnh hỗ trợ")}</label>
           <div className="codex-api-key-launch-context-list">
             {contextFacts
               .filter((fact) => fact.context.length > 0)
@@ -187,7 +187,7 @@ export function CodexApiKeyLaunchSection({
 
       {canChooseAccessMode ? (
         <div className="form-group">
-          <label>{t("codex.deepSeek.start.accessMode", "接入方式")}</label>
+          <label>{t("codex.deepSeek.start.accessMode", "Kết nối")}</label>
           <div className="codex-api-key-launch-mode-list">
             {modes.map((mode) => (
               <button
@@ -207,22 +207,22 @@ export function CodexApiKeyLaunchSection({
         </div>
       ) : (
         <div className="form-group">
-          <label>{t("codex.deepSeek.start.accessMode", "接入方式")}</label>
+          <label>{t("codex.deepSeek.start.accessMode", "Kết nối")}</label>
           <div className="codex-api-key-launch-context-list">
             <span className="codex-api-key-launch-context-item">
               <span className="codex-api-key-launch-context-model">
-                {t("codex.deepSeek.start.protocol", "协议")}
+                {t("codex.deepSeek.start.protocol", "Giao thức")}
               </span>
               <span className="codex-api-key-launch-context-value">{wireApiLabel}</span>
             </span>
             <span className="codex-api-key-launch-context-item">
               <span className="codex-api-key-launch-context-model">
-                {t("codex.deepSeek.start.accessRoute", "接入")}
+                {t("codex.deepSeek.start.accessRoute", "Kết nối")}
               </span>
               <span className="codex-api-key-launch-context-value">
                 {usesLocalGateway
-                  ? t("codex.deepSeek.start.gatewayRequired", "走实例本地网关")
-                  : t("codex.deepSeek.start.directUpstream", "直连上游，不经网关")}
+                  ? t("codex.deepSeek.start.gatewayRequired", "Cổng cục bộ của instance")
+                  : t("codex.deepSeek.start.directUpstream", "Kết nối thẳng upstream")}
               </span>
             </span>
           </div>
@@ -230,11 +230,11 @@ export function CodexApiKeyLaunchSection({
             {usesLocalGateway
               ? t(
                   "codex.deepSeek.start.gatewayHint",
-                  "该协议需要本地网关转换，可在 Codex 内切换模型；网关还能承接生图转发。",
+                  "Giao thức này cần cổng cục bộ để chuyển đổi; cổng này cũng cho phép đổi mô hình trong Codex và chuyển tiếp ảnh.",
                 )
               : t(
                   "codex.deepSeek.start.directUpstreamHint",
-                  "该账号直接访问上游，不经过本地网关，因此不支持生图转发。",
+                  "Tài khoản này truy cập upstream trực tiếp nên không hỗ trợ chuyển tiếp ảnh.",
                 )}
           </p>
         </div>
@@ -242,7 +242,7 @@ export function CodexApiKeyLaunchSection({
 
       {isDeepSeek && (
         <div className="form-group">
-          <label>{t("codex.deepSeek.start.model", "启动模型")}</label>
+          <label>{t("codex.deepSeek.start.model", "Mô hình")}</label>
           <div className="api-provider-chip-list">
             {models.map((model) => (
               <button
@@ -279,13 +279,13 @@ export function CodexApiKeyLaunchSection({
             />
             <span>
               <ImagePlus size={15} />
-              {t("codex.deepSeek.start.imageGen", "支持 GPT 生图")}
+              {t("codex.deepSeek.start.imageGen", "Tạo ảnh GPT")}
             </span>
           </label>
           <p className="form-hint">
             {t(
               "codex.deepSeek.start.imageGenHint",
-              "对话仍由 DeepSeek 处理；生图走 gpt-image 原链路，由所选 GPT 账号执行并消耗其额度。",
+              "Chỉ hỗ trợ ở chế độ cổng. Hội thoại vẫn do model của nhà cung cấp này xử lý; tạo ảnh đi theo luồng gpt-image gốc, do các tài khoản GPT đã chọn thực hiện và tiêu tốn hạn mức của chúng.",
             )}
           </p>
           <div className="codex-api-key-launch-imagegen-row">
@@ -295,17 +295,17 @@ export function CodexApiKeyLaunchSection({
               disabled={disabled || !options.imageGenEnabled}
               onClick={() => setPickerOpen(true)}
             >
-              {t("codex.deepSeek.start.imageGenPick", "选择 GPT 账号")}
+              {t("codex.deepSeek.start.imageGenPick", "Chọn tài khoản GPT")}
             </button>
             <span className="codex-api-key-launch-imagegen-status">
               {!options.imageGenEnabled
-                ? t("codex.deepSeek.start.imageGenLocked", "勾选后可选择账号")
+                ? t("codex.deepSeek.start.imageGenLocked", "Tích để chọn tài khoản")
                 : selectedImageAccounts.length > 0
                   ? t("codex.deepSeek.start.imageGenSelected", {
                       count: selectedImageAccounts.length,
-                      defaultValue: "已选 {{count}} 个账号",
+                      defaultValue: "Đã chọn {{count}} tài khoản",
                     })
-                  : t("codex.deepSeek.start.imageGenEmpty", "尚未选择账号")}
+                  : t("codex.deepSeek.start.imageGenEmpty", "Chưa chọn tài khoản")}
             </span>
           </div>
           {options.imageGenEnabled && selectedImageAccounts.length > 0 && (
@@ -378,7 +378,7 @@ export function CodexApiKeyLaunchDialog({
     account.api_provider_name?.trim() ||
     account.account_name?.trim() ||
     account.api_base_url?.trim() ||
-    t("codex.api.provider.custom", "自定义");
+    t("codex.api.provider.custom", "Tùy chỉnh");
   const badgeLabel =
     subjectBadge?.trim() || account.plan_type?.trim() || "API_KEY";
   const modelCount = isDeepSeekAccount(account)
@@ -405,7 +405,7 @@ export function CodexApiKeyLaunchDialog({
           </div>
           <div className="codex-launch-preview-heading">
             <h2 id="codex-api-key-launch-dialog-title">
-              {title || t("codex.launchPreview.title", "Codex 启动预览")}
+              {title || t("codex.launchPreview.title", "Xem trước khi khởi động Codex")}
             </h2>
             {description && <p>{description}</p>}
           </div>
@@ -414,7 +414,7 @@ export function CodexApiKeyLaunchDialog({
             className="modal-close"
             onClick={onCancel}
             disabled={submitting}
-            aria-label={t("common.close", "关闭")}
+            aria-label={t("common.close", "Đóng")}
           >
             <X />
           </button>
@@ -443,7 +443,7 @@ export function CodexApiKeyLaunchDialog({
                     <span>
                       {t(
                         "codex.sessionManager.repairModal.targetInstance",
-                        "目标实例",
+                        "Phiên bản đích",
                       )}
                     </span>
                     <strong title={targetInstance}>{targetInstance}</strong>
@@ -454,20 +454,20 @@ export function CodexApiKeyLaunchDialog({
             </div>
             <div className="codex-launch-preview-facts">
               <div>
-                <span>{t("codex.api.provider.label", "供应商")}</span>
+                <span>{t("codex.api.provider.label", "Nhà cung cấp")}</span>
                 <strong title={providerLabel}>{providerLabel}</strong>
               </div>
               <div>
-                <span>{t("codex.api.modelCatalog.label", "模型列表")}</span>
+                <span>{t("codex.api.modelCatalog.label", "Danh sách mô hình")}</span>
                 <strong>
                   {t("codex.api.modelCatalog.count", {
                     count: modelCount,
-                    defaultValue: "{{count}} 个模型",
+                    defaultValue: "{{count}} mô hình",
                   })}
                 </strong>
               </div>
               <div>
-                <span>{t("codex.api.baseUrl", "基础地址")}</span>
+                <span>{t("codex.api.baseUrl", "URL cơ sở")}</span>
                 <strong className="is-monospace" title={baseUrl}>
                   {baseUrl}
                 </strong>
@@ -492,7 +492,7 @@ export function CodexApiKeyLaunchDialog({
             onClick={onCancel}
             disabled={submitting}
           >
-            {t("common.cancel", "取消")}
+            {t("common.cancel", "Hủy")}
           </button>
           <button
             type="button"
@@ -502,8 +502,8 @@ export function CodexApiKeyLaunchDialog({
           >
             {!submitting && <Play size={15} />}
             {submitting
-              ? t("common.saving", "保存中...")
-              : confirmLabel || t("codex.deepSeek.start.confirm", "确认启动")}
+              ? t("common.saving", "Đang lưu...")
+              : confirmLabel || t("codex.deepSeek.start.confirm", "Khởi động")}
           </button>
         </div>
       </div>

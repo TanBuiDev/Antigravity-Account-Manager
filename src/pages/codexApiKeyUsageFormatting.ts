@@ -37,7 +37,7 @@ export function useCodexApiKeyUsageFormatting(
       value?: number | null,
     ): string => {
       if (summary?.quotaUnlimited === true) {
-        return t("codex.modelProviders.usage.unlimitedQuota", "无限额度");
+        return t("codex.modelProviders.usage.unlimitedQuota", "Không giới hạn");
       }
       return formatApiKeyUsageMoney(value, summary?.unit);
     },
@@ -141,64 +141,64 @@ export function useCodexApiKeyUsageFormatting(
           "codex.modelProviders.usage.fields.weeklyExpiresAt",
           "Weekly Reset",
         ),
-        status: t("codex.modelProviders.usage.fields.status", "状态"),
-        planName: t("codex.modelProviders.usage.fields.planName", "订阅"),
-        remaining: t("codex.modelProviders.usage.fields.remaining", "剩余额度"),
-        balance: t("codex.modelProviders.usage.fields.balance", "余额"),
+        status: t("codex.modelProviders.usage.fields.status", "Trạng thái"),
+        planName: t("codex.modelProviders.usage.fields.planName", "Gói"),
+        remaining: t("codex.modelProviders.usage.fields.remaining", "Còn lại"),
+        balance: t("codex.modelProviders.usage.fields.balance", "Số dư"),
         quotaUnlimited: t(
           "codex.modelProviders.usage.fields.quotaUnlimited",
-          "无限额度",
+          "Không giới hạn",
         ),
         todayRequests: t(
           "codex.modelProviders.usage.fields.todayRequests",
-          "今日请求",
+          "Yêu cầu hôm nay",
         ),
         todayTokens: t(
           "codex.modelProviders.usage.fields.todayTokens",
-          "今日 Token",
+          "Token hôm nay",
         ),
-        todayCost: t("codex.modelProviders.usage.fields.todayCost", "今日消耗"),
+        todayCost: t("codex.modelProviders.usage.fields.todayCost", "Chi phí hôm nay"),
         totalRequests: t(
           "codex.modelProviders.usage.fields.totalRequests",
-          "累计请求",
+          "Tổng yêu cầu",
         ),
         totalTokens: t(
           "codex.modelProviders.usage.fields.totalTokens",
-          "累计 Token",
+          "Tổng Token",
         ),
-        totalCost: t("codex.modelProviders.usage.fields.totalCost", "累计消耗"),
+        totalCost: t("codex.modelProviders.usage.fields.totalCost", "Tổng chi phí"),
         hardLimitUsd: t(
           "codex.modelProviders.usage.fields.hardLimitUsd",
-          "硬额度",
+          "Giới hạn cứng",
         ),
         softLimitUsd: t(
           "codex.modelProviders.usage.fields.softLimitUsd",
-          "软额度",
+          "Giới hạn mềm",
         ),
         systemHardLimitUsd: t(
           "codex.modelProviders.usage.fields.systemHardLimitUsd",
-          "系统额度",
+          "Giới hạn hệ thống",
         ),
         accessUntil: t(
           "codex.modelProviders.usage.fields.accessUntil",
-          "可用至",
+          "Truy cập đến",
         ),
-        expiresAt: t("codex.modelProviders.usage.fields.expiresAt", "过期时间"),
+        expiresAt: t("codex.modelProviders.usage.fields.expiresAt", "Hết hạn"),
         totalGranted: t(
           "codex.modelProviders.usage.fields.totalGranted",
-          "授予额度",
+          "Đã cấp",
         ),
         totalAvailable: t(
           "codex.modelProviders.usage.fields.totalAvailable",
-          "可用额度",
+          "Khả dụng",
         ),
         modelLimitsEnabled: t(
           "codex.modelProviders.usage.fields.modelLimitsEnabled",
-          "模型限制",
+          "Giới hạn mô hình",
         ),
         totalUsage: t(
           "codex.modelProviders.usage.fields.totalUsage",
-          "累计消耗",
+          "Tổng sử dụng",
         ),
         isAvailable: t(
           "codex.modelProviders.usage.fields.isAvailable",
@@ -207,15 +207,15 @@ export function useCodexApiKeyUsageFormatting(
         currency: t("codex.modelProviders.usage.fields.currency", "币种"),
         totalBalance: t(
           "codex.modelProviders.usage.fields.totalBalance",
-          "总余额",
+          "Tổng số dư",
         ),
         grantedBalance: t(
           "codex.modelProviders.usage.fields.grantedBalance",
-          "赠金余额",
+          "Số dư tặng",
         ),
         toppedUpBalance: t(
           "codex.modelProviders.usage.fields.toppedUpBalance",
-          "充值余额",
+          "Số dư nạp",
         ),
       };
       return labels[key] ?? fallback;
@@ -253,9 +253,9 @@ export function useCodexApiKeyUsageFormatting(
         item.key === "isAvailable"
       ) {
         if (raw === "true")
-          return t("codex.modelProviders.usage.booleanTrue", "是");
+          return t("codex.modelProviders.usage.booleanTrue", "Có");
         if (raw === "false")
-          return t("codex.modelProviders.usage.booleanFalse", "否");
+          return t("codex.modelProviders.usage.booleanFalse", "Không");
       }
       if (
         Number.isFinite(numeric) &&

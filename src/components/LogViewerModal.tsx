@@ -29,11 +29,11 @@ function clampLineLimit(value: number): number {
 export function LogViewerModal({ open, onClose }: LogViewerModalProps) {
   const { t } = useTranslation();
   useEscClose(open, onClose);
-  const logsLabel = t('manual.dataPrivacy.keywords.5', '日志');
-  const logDirLabel = t('manual.dataPrivacy.keywords.6', '日志目录');
+  const logsLabel = t('manual.dataPrivacy.keywords.5', "khắc phục lỗi");
+  const logDirLabel = t('manual.dataPrivacy.keywords.6', "nhật ký");
   const levelOptions: Array<{ value: LogLevelFilter; label: string }> = useMemo(
     () => [
-      { value: 'ALL', label: t('logViewer.levels.all', '全部') },
+      { value: 'ALL', label: t('logViewer.levels.all', "Tất cả") },
       { value: 'INFO', label: t('logViewer.levels.info', 'INFO') },
       { value: 'WARN', label: t('logViewer.levels.warn', 'WARN') },
       { value: 'ERROR', label: t('logViewer.levels.error', 'ERROR') },
@@ -226,7 +226,7 @@ export function LogViewerModal({ open, onClose }: LogViewerModalProps) {
       <div className="modal log-viewer-modal" onClick={(event) => event.stopPropagation()}>
         <div className="modal-header">
           <h2>{logsLabel}</h2>
-          <button className="modal-close" onClick={onClose} aria-label={t('common.close', '关闭')}>
+          <button className="modal-close" onClick={onClose} aria-label={t('common.close', "Đóng")}>
             <X size={16} />
           </button>
         </div>
@@ -255,7 +255,7 @@ export function LogViewerModal({ open, onClose }: LogViewerModalProps) {
             <div className="log-viewer-toolbar">
               <div className="log-viewer-filter-wrap">
                 <span className="log-viewer-line-limit-label">
-                  {t('logViewer.levelLabel', '级别')}
+                  {t('logViewer.levelLabel', "Mức")}
                 </span>
                 <SingleSelectDropdown className="log-viewer-dropdown" value={levelFilter} options={levelOptions}
                   onChange={(value) => setLevelFilter(value as LogLevelFilter)}
@@ -307,14 +307,14 @@ export function LogViewerModal({ open, onClose }: LogViewerModalProps) {
             }}
           >
             {loading && !displayedContent ? (
-              <div className="log-viewer-placeholder">{t('common.loading', '加载中...')}</div>
+              <div className="log-viewer-placeholder">{t('common.loading', "Đang tải...")}</div>
             ) : displayedContent ? (
               <pre>{displayedContent}</pre>
             ) : (
               <div className="log-viewer-placeholder">
                 {hasFilteredOutContent
-                  ? t('logViewer.noMatches', '当前筛选下无匹配日志')
-                  : t('common.none', '暂无')}
+                  ? t('logViewer.noMatches', "Không có nhật ký nào khớp với bộ lọc hiện tại")
+                  : t('common.none', "None​")}
               </div>
             )}
           </div>
@@ -324,25 +324,25 @@ export function LogViewerModal({ open, onClose }: LogViewerModalProps) {
 
         <div className="modal-footer log-viewer-footer">
           <button className="btn btn-ghost" onClick={onClose}>
-            {t('common.close', '关闭')}
+            {t('common.close', "Đóng")}
           </button>
           <button className="btn btn-secondary" onClick={() => void loadSnapshot(true)}>
-            {t('common.refresh', '刷新')}
+            {t('common.refresh', "Làm mới")}
           </button>
           <button className="btn btn-secondary" onClick={handleClearOutput}>
-            {t('breakout.historyClear', '清空')}
+            {t('breakout.historyClear', "Xóa")}
           </button>
           <button className="btn btn-secondary" onClick={handleOpenDir}>
-            {t('common.open', '打开')} {logDirLabel}
+            {t('common.open', "Open​")} {logDirLabel}
           </button>
           <button className="btn btn-secondary" onClick={() => void handleCopyPath()}>
             {pathCopied
-              ? t('common.success', '成功')
-              : `${t('common.copy', '复制')} ${t('error.fileCorrupted.filePath', '文件位置')}`}
+              ? t('common.success', "Thành công")
+              : `${t('common.copy', "Copy​")} ${t('error.fileCorrupted.filePath', "Vị trí tệp")}`}
           </button>
           <button className="btn btn-primary" disabled={filtered.loading || Boolean(filterError)} onClick={() => void handleCopyLogs()}>
             <Copy size={14} />
-            {copied ? t('common.success', '成功') : `${t('common.copy', '复制')} ${logsLabel}`}
+            {copied ? t('common.success', "Thành công") : `${t('common.copy', "Copy​")} ${logsLabel}`}
           </button>
         </div>
       </div>

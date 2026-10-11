@@ -347,13 +347,13 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
           <button
             className="btn btn-secondary icon-only"
             onClick={onClose}
-            title={t('common.back', '返回')}
-            aria-label={t('common.back', '返回')}
+            title={t('common.back', "Quay lại")}
+            aria-label={t('common.back', "Quay lại")}
           >
             <ChevronLeft size={14} />
           </button>
           <h2>
-            <CalendarCheck size={20} /> {t('workbuddy.checkin.modalTitle', '每日签到')} -{' '}
+            <CalendarCheck size={20} /> {t('workbuddy.checkin.modalTitle', "Điểm danh hằng ngày")} -{' '}
             {platformLabel}
           </h2>
           <button className="modal-close" onClick={onClose}>
@@ -365,16 +365,16 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
           <div className="checkin-summary">
             <span className="checkin-stat checked">
               <CheckCircle size={14} /> {claimedCount}{' '}
-              {t('workbuddy.checkin.checkedIn', '已签到')}
+              {t('workbuddy.checkin.checkedIn', "Đã điểm danh")}
             </span>
             <span className="checkin-stat unchecked">
               <XCircle size={14} /> {availableCount}{' '}
-              {t('workbuddy.checkin.notCheckedIn', '未签到')}
+              {t('workbuddy.checkin.notCheckedIn', "Chưa điểm danh")}
             </span>
             {inactiveCount > 0 && (
               <span className="checkin-stat inactive">
                 <Ban size={14} /> {inactiveCount}{' '}
-                {t('workbuddy.checkin.inactive', '不可用')}
+                {t('workbuddy.checkin.inactive', "Không khả dụng")}
               </span>
             )}
             <span
@@ -394,21 +394,21 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                 autoCheckinConfig.enabled
                   ? t(
                       'workbuddy.checkin.autoCheckinEnabledHint',
-                      '自动签到已开启：将在 {{start}} 至 {{end}} 随机签到（点击设置）',
+                      "Điểm danh tự động bật: Điểm danh ngẫu nhiên từ {{start}} đến {{end}}",
                       {
                         start: autoCheckinConfig.startTime,
                         end: autoCheckinConfig.endTime,
                       },
                     )
-                  : t('workbuddy.checkin.autoCheckinDisabledHint', '自动签到未开启（点击设置）')
+                  : t('workbuddy.checkin.autoCheckinDisabledHint', "Điểm danh tự động tắt")
               }
             >
               <Clock size={14} />
               {autoCheckinConfig.enabled
-                ? `${t('workbuddy.checkin.autoCheckinLabel', '自动签到')} (${
+                ? `${t('workbuddy.checkin.autoCheckinLabel', "Điểm danh tự động")} (${
                     autoCheckinConfig.startTime
                   }-${autoCheckinConfig.endTime})`
-                : t('workbuddy.checkin.autoCheckinOff', '自动签到未开启')}
+                : t('workbuddy.checkin.autoCheckinOff', "Điểm danh tự động tắt")}
             </span>
           </div>
           <div className="checkin-actions">
@@ -422,7 +422,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
               ) : (
                 <RefreshCw size={14} />
               )}
-              {t('workbuddy.checkin.refreshStatus', '刷新状态')}
+              {t('workbuddy.checkin.refreshStatus', "Làm mới")}
             </button>
             <button
               className="btn btn-primary btn-sm"
@@ -434,7 +434,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
               ) : (
                 <Gift size={14} />
               )}
-              {t('workbuddy.checkin.checkAll', '一键签到')}
+              {t('workbuddy.checkin.checkAll', "Điểm danh tất cả")}
             </button>
           </div>
         </div>
@@ -442,7 +442,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
         <div className="modal-body checkin-modal-body">
           {accounts.length === 0 ? (
             <div className="checkin-empty">
-              {t('workbuddy.checkin.noAccounts', '暂无账号')}
+              {t('workbuddy.checkin.noAccounts', "Không có tài khoản")}
             </div>
           ) : (
             <div className="checkin-account-list">
@@ -483,34 +483,34 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                     <div className="checkin-account-status">
                       {isLoading ? (
                         <span className="checkin-status-unknown">
-                          {t('workbuddy.checkin.querying', '查询中...')}
+                          {t('workbuddy.checkin.querying', "Đang tải...")}
                         </span>
                       ) : isError ? (
                         <span className="checkin-status-no">
                           <XCircle size={16} />
-                          {t('workbuddy.checkin.queryFailed', '状态查询失败')}
+                          {t('workbuddy.checkin.queryFailed', "Truy vấn thất bại")}
                         </span>
                       ) : isClaimed ? (
                         <span className="checkin-status-yes">
                           <CheckCircle size={16} />
-                          {t('workbuddy.checkin.checkedIn', '已签到')}
+                          {t('workbuddy.checkin.checkedIn', "Đã điểm danh")}
                         </span>
                       ) : isAvailable ? (
                         <span className="checkin-status-no">
                           <XCircle size={16} />
-                          {t('workbuddy.checkin.notCheckedIn', '未签到')}
+                          {t('workbuddy.checkin.notCheckedIn', "Chưa điểm danh")}
                         </span>
                       ) : (
                         <span className="checkin-status-unknown">
                           <Ban size={16} />
-                          {t('workbuddy.checkin.inactive', '不可用')}
+                          {t('workbuddy.checkin.inactive', "Không khả dụng")}
                         </span>
                       )}
 
                       {showMeta && streakDays > 0 && (
                         <span className="checkin-streak-badge">
                           <Flame size={12} />
-                          {t('workbuddy.checkin.streakDays', '{{days}} 天', {
+                          {t('workbuddy.checkin.streakDays', "{{days}} ngày", {
                             days: streakDays,
                           })}
                         </span>
@@ -532,11 +532,11 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                           {isStreakDay
                             ? t(
                                 'workbuddy.checkin.streakRewardToday',
-                                '今日可获得大礼包!',
+                                "Hôm nay có thể nhận thưởng bonus!",
                               )
                             : t(
                                 'workbuddy.checkin.streakRewardCountdown',
-                                '再签 {{days}} 天获大礼包',
+                                "Còn {{days}} ngày nữa để nhận thưởng bonus",
                                 { days: nextStreakDay },
                               )}
                         </span>
@@ -552,7 +552,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                       ) : isClaimed ? (
                         <button className="btn btn-ghost btn-sm" disabled>
                           <CheckCircle size={14} />
-                          {t('workbuddy.checkin.claimed', '已领取')}
+                          {t('workbuddy.checkin.claimed', "Đã nhận")}
                         </button>
                       ) : isAvailable ? (
                         <button
@@ -560,7 +560,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                           onClick={() => void handleSingleCheckin(account.id)}
                         >
                           <Gift size={14} />
-                          {t('workbuddy.checkin.button', '签到')}
+                          {t('workbuddy.checkin.button', "Điểm danh")}
                         </button>
                       ) : isError ? (
                         <button
@@ -568,12 +568,12 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                           onClick={() => void refreshOneStatus(account.id)}
                         >
                           <RefreshCw size={14} />
-                          {t('workbuddy.checkin.retry', '重试')}
+                          {t('workbuddy.checkin.retry', "Thử lại")}
                         </button>
                       ) : (
                         <button className="btn btn-ghost btn-sm" disabled>
                           <Ban size={14} />
-                          {t('workbuddy.checkin.inactive', '不可用')}
+                          {t('workbuddy.checkin.inactive', "Không khả dụng")}
                         </button>
                       )}
                     </div>
@@ -582,7 +582,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                       <div className="checkin-account-info-msg">
                         {t(
                           'workbuddy.checkin.inactiveHint',
-                          '签到活动未开启或不适用当前账号',
+                          "Check-in không hoạt động với tài khoản này",
                         )}
                       </div>
                     )}
@@ -590,7 +590,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
                     {state?.checkinResult && state.checkinResult.success && (
                       <div className="checkin-account-success">
                         <CheckCircle size={14} />
-                        {t('workbuddy.checkin.success', '签到成功！连续签到 {{days}} 天', {
+                        {t('workbuddy.checkin.success', "Điểm danh thành công! Chuỗi {{days}} ngày", {
                           days: state.status?.streak_days ?? 0,
                         })}
                       </div>
@@ -620,7 +620,7 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
 
                     {showMeta && checkinDates && checkinDates.length > 0 && (
                       <div className="checkin-dates">
-                        {t('workbuddy.checkin.recentDates', '近期签到：')}
+                        {t('workbuddy.checkin.recentDates', "Gần đây: ")}
                         {checkinDates.slice(0, 5).map((d) => (
                           <span key={d} className="checkin-date-tag">
                             {d}
@@ -653,13 +653,13 @@ export function CodebuddySuiteCheckinModal<TAccount extends CodebuddySuiteAccoun
           <button
             className="btn btn-secondary icon-only"
             onClick={() => setShowConfigModal(true)}
-            title={t('workbuddy.checkin.autoCheckinSettings', '自动签到设置')}
-            aria-label={t('workbuddy.checkin.autoCheckinSettings', '自动签到设置')}
+            title={t('workbuddy.checkin.autoCheckinSettings', "Cài đặt điểm danh tự động")}
+            aria-label={t('workbuddy.checkin.autoCheckinSettings', "Cài đặt điểm danh tự động")}
           >
             <Settings size={14} />
           </button>
           <button className="btn btn-secondary" onClick={onClose}>
-            {t('common.close', '关闭')}
+            {t('common.close', "Đóng")}
           </button>
         </div>
 

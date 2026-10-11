@@ -1440,10 +1440,10 @@ export function getCodexSubscriptionPresentationForAccount(
   if (!isCodexAccessTokenOnlySubscriptionLimited(account)) return base;
 
   const valueText = t("codex.subscription.accessTokenOnlyUsable", {
-    defaultValue: "Token 可用",
+    defaultValue: "Token dùng được",
   });
   const detailText = t("codex.subscription.accessTokenOnlyUsableDetail", {
-    defaultValue: "订阅信息接口受限，但配额与 Codex 使用正常",
+    defaultValue: "Điểm cuối thuê bao bị giới hạn, nhưng hạn ngạch và việc dùng Codex vẫn bình thường",
   });
   return {
     bucket: "access_token_only",

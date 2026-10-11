@@ -261,39 +261,39 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
             >
               <div className="modal-header">
                 <div>
-                  <h2>{t("codex.batchImport.title", "Codex 批量导入")}</h2>
+                  <h2>{t("codex.batchImport.title", "Nhập hàng loạt Codex")}</h2>
                   <p className="codex-batch-import-subtitle">
                     {batchImportResult
-                      ? t("codex.batchImport.resultSubtitle", "导入结果")
+                      ? t("codex.batchImport.resultSubtitle", "Kết quả nhập")
                       : batchImportProgress?.phase === "importing" ||
                           batchImportProgress?.phase === "finalizing"
                         ? t(
                             "codex.batchImport.importSubtitle",
-                            "正在写入选中的账号",
+                            "Đang lưu các tài khoản đã chọn",
                           )
                         : batchImportBusy
                           ? activeBatchImportCheckQuota
                             ? t(
                                 "codex.batchImport.scanSubtitle",
-                                "正在逐条解析并检查账号",
+                                "Đang phân tích và kiểm tra từng tài khoản",
                               )
                             : t(
                                 "codex.batchImport.parseSubtitle",
-                                "正在解析账号文件",
+                                "Đang phân tích tệp tài khoản",
                               )
                           : batchImportPreview
                             ? t(
                                 "codex.batchImport.previewSubtitle",
-                                "选择要写入的账号",
+                                "Chọn tài khoản để lưu",
                               )
                             : activeBatchImportCheckQuota
                               ? t(
                                   "codex.batchImport.scanSubtitle",
-                                  "正在逐条解析并检查账号",
+                                  "Đang phân tích và kiểm tra từng tài khoản",
                                 )
                               : t(
                                   "codex.batchImport.parseSubtitle",
-                                  "正在解析账号文件",
+                                  "Đang phân tích tệp tài khoản",
                                 )}
                   </p>
                 </div>
@@ -305,7 +305,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                       onClick={() => setBatchImportOpen(false)}
                     >
                       <Minimize2 size={14} />
-                      {t("codex.batchImport.runInBackground", "后台执行")}
+                      {t("codex.batchImport.runInBackground", "Lý lịch")}
                     </button>
                   )}
                   <button
@@ -330,23 +330,23 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                     <div className="codex-batch-import-progress-head">
                       <span>
                         {batchImportProgress?.phase === "cancelling"
-                          ? t("codex.batchImport.cancelling", "正在取消...")
+                          ? t("codex.batchImport.cancelling", "Đang hủy...")
                           : batchImportBusy
                             ? batchImportProgress?.phase === "importing" ||
                               batchImportProgress?.phase === "finalizing"
-                              ? t("codex.batchImport.importing", "导入中")
+                              ? t("codex.batchImport.importing", "Nhập khẩu")
                               : activeBatchImportCheckQuota
-                                ? t("codex.batchImport.scanning", "扫描中")
-                                : t("codex.batchImport.parsing", "解析中")
+                                ? t("codex.batchImport.scanning", "Đang quét")
+                                : t("codex.batchImport.parsing", "Đang phân tích")
                             : batchImportPreview?.status === "cancelled"
-                              ? t("codex.batchImport.cancelled", "已取消")
+                              ? t("codex.batchImport.cancelled", "Đã hủy")
                               : batchImportPreview
                                 ? activeBatchImportCheckQuota
-                                  ? t("codex.batchImport.scanDone", "扫描完成")
-                                  : t("codex.batchImport.parseDone", "解析完成")
+                                  ? t("codex.batchImport.scanDone", "Quét xong")
+                                  : t("codex.batchImport.parseDone", "Phân tích xong")
                                 : activeBatchImportCheckQuota
-                                  ? t("codex.batchImport.scanning", "扫描中")
-                                  : t("codex.batchImport.parsing", "解析中")}
+                                  ? t("codex.batchImport.scanning", "Đang quét")
+                                  : t("codex.batchImport.parsing", "Đang phân tích")}
                       </span>
                       <strong>
                         {batchImportProgressCurrent}/{batchImportProgressTotal}
@@ -362,7 +362,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                     </div>
                     {batchImportProgress?.currentLabel && (
                       <div className="codex-batch-import-current">
-                        {t("codex.batchImport.current", "当前")}：
+                        {t("codex.batchImport.current", "Hiện tại")}：
                         {maskAccountText(batchImportProgress.currentLabel)}
                       </div>
                     )}
@@ -375,7 +375,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                       <div className="codex-batch-import-cancelled-note">
                         {t(
                           "codex.batchImport.importCancelledSummary",
-                          "导入已取消，已处理 {{processed}}/{{total}} 个账号。",
+                          "Đã hủy nhập sau khi xử lý {{processed}}/{{total}} tài khoản.",
                         )
                           .replace(
                             "{{processed}}",
@@ -389,11 +389,11 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                     )}
                     <div className="codex-batch-import-stat-grid">
                       <div>
-                        <span>{t("codex.batchImport.imported", "已导入")}</span>
+                        <span>{t("codex.batchImport.imported", "Đã nhập")}</span>
                         <strong>{batchImportResult.imported.length}</strong>
                       </div>
                       <div>
-                        <span>{t("codex.batchImport.failed", "失败")}</span>
+                        <span>{t("codex.batchImport.failed", "Thất bại")}</span>
                         <strong>{batchImportResult.failed.length}</strong>
                       </div>
                     </div>
@@ -418,25 +418,25 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                     <div className="codex-batch-import-stat-grid">
                       <div>
                         <span>
-                          {t("codex.batchImport.groups.ready", "可导入")}
+                          {t("codex.batchImport.groups.ready", "Có thể nhập")}
                         </span>
                         <strong>{batchImportCounts.ready}</strong>
                       </div>
                       <div>
                         <span>
-                          {t("codex.batchImport.groups.quotaFailed", "异常")}
+                          {t("codex.batchImport.groups.quotaFailed", "Lỗi")}
                         </span>
                         <strong>{batchImportCounts.quotaFailed}</strong>
                       </div>
                       <div>
                         <span>
-                          {t("codex.batchImport.groups.existing", "已存在")}
+                          {t("codex.batchImport.groups.existing", "Đã có")}
                         </span>
                         <strong>{batchImportCounts.existing}</strong>
                       </div>
                       <div>
                         <span>
-                          {t("codex.batchImport.groups.invalid", "无效账号")}
+                          {t("codex.batchImport.groups.invalid", "Không hợp lệ")}
                         </span>
                         <strong>{batchImportCounts.invalid}</strong>
                       </div>
@@ -460,7 +460,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.batchImport.checkQuotaToggle",
-                              "导入前检测账号",
+                              "Kiểm tra trước khi nhập",
                             )}
                           </span>
                         </label>
@@ -479,7 +479,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.importApiService.toggle",
-                              "同步加入 API 服务",
+                              "Thêm vào dịch vụ API",
                             )}
                           </span>
                         </label>
@@ -496,7 +496,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         >
                           {t(
                             "codex.batchImport.selectAllAccounts",
-                            "选择全部账号",
+                            "Chọn tất cả",
                           )}
                         </button>
                         <button
@@ -510,7 +510,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                           }
                           onClick={selectReadyBatchImportAccounts}
                         >
-                          {t("codex.batchImport.selectReady", "选择正常账号")}
+                          {t("codex.batchImport.selectReady", "Chọn tài khoản OK")}
                         </button>
                         <button
                           type="button"
@@ -521,7 +521,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                           }
                           onClick={clearBatchImportSelection}
                         >
-                          {t("codex.batchImport.clearSelection", "取消选择")}
+                          {t("codex.batchImport.clearSelection", "Bỏ chọn")}
                         </button>
                       </div>
                     </div>
@@ -531,7 +531,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         className="codex-batch-import-tags-label"
                         htmlFor="codex-batch-import-tags"
                       >
-                        {t("codex.batchImport.bulkTagsLabel", "导入后批量打标")}
+                        {t("codex.batchImport.bulkTagsLabel", "Gắn thẻ sau nhập")}
                       </label>
                       <input
                         id="codex-batch-import-tags"
@@ -544,7 +544,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         }
                         placeholder={t(
                           "codex.batchImport.bulkTagsPlaceholder",
-                          "可选，多个标签用逗号或空格分隔",
+                          "Tuỳ chọn; cách nhau bằng dấu phẩy/khoảng trắng",
                         )}
                       />
                     </div>
@@ -583,24 +583,24 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                                     {activeBatchImportCheckQuota
                                       ? t(
                                           "codex.batchImport.quotaOk",
-                                          "账号正常",
+                                          "Tài khoản OK",
                                         )
                                       : t(
                                           "codex.batchImport.groups.ready",
-                                          "可导入",
+                                          "Có thể nhập",
                                         )}
                                   </span>
                                 )}
                                 {item.status === "quota_failed" && (
                                   <span>
-                                    {t("codex.batchImport.quotaFailed", "异常")}
+                                    {t("codex.batchImport.quotaFailed", "Lỗi")}
                                   </span>
                                 )}
                                 {item.status === "existing" && (
                                   <span>
                                     {t(
                                       "codex.batchImport.groups.existing",
-                                      "已存在",
+                                      "Đã có",
                                     )}
                                   </span>
                                 )}
@@ -608,7 +608,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                                   <span>
                                     {t(
                                       "codex.batchImport.groups.invalid",
-                                      "无效账号",
+                                      "Không hợp lệ",
                                     )}
                                   </span>
                                 )}
@@ -627,7 +627,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                 ) : (
                   <div className="codex-batch-import-empty">
                     <RefreshCw size={18} className="loading-spinner" />
-                    {t("codex.batchImport.preparing", "正在准备导入任务...")}
+                    {t("codex.batchImport.preparing", "Đang chuẩn bị nhập...")}
                   </div>
                 )}
               </div>
@@ -654,10 +654,10 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                       {batchImportBusy
                         ? batchImportProgress?.phase === "importing" ||
                           batchImportProgress?.phase === "finalizing"
-                          ? t("codex.batchImport.cancelImport", "取消导入")
+                          ? t("codex.batchImport.cancelImport", "Hủy nhập")
                           : activeBatchImportCheckQuota
-                            ? t("codex.batchImport.cancelScan", "取消扫描")
-                            : t("codex.batchImport.cancelParse", "取消解析")
+                            ? t("codex.batchImport.cancelScan", "Hủy quét")
+                            : t("codex.batchImport.cancelParse", "Hủy phân tích")
                         : t("common.shared.close", "关闭")}
                     </button>
                     {!batchImportBusy &&
@@ -668,8 +668,8 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         >
                           <RefreshCw size={16} />
                           {activeBatchImportCheckQuota
-                            ? t("codex.batchImport.resumeScan", "继续扫描")
-                            : t("codex.batchImport.resumeParse", "继续解析")}
+                            ? t("codex.batchImport.resumeScan", "Tiếp tục quét")
+                            : t("codex.batchImport.resumeParse", "Tiếp tục phân tích")}
                         </button>
                       )}
                     {!batchImportBusy && (
@@ -685,11 +685,11 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         {activeBatchImportCheckQuota
                           ? t(
                               "codex.batchImport.importChecked",
-                              "导入已检测账号",
+                              "Nhập các tài khoản đã kiểm tra",
                             )
                           : t(
                               "codex.batchImport.directImport",
-                              "不检测，直接导入",
+                              "Nhập trực tiếp không kiểm tra",
                             )}
                         {batchImportSelectedSelectableCount > 0
                           ? ` (${batchImportSelectedSelectableCount})`
@@ -718,11 +718,11 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                         {activeBatchImportCheckQuota
                           ? t(
                               "codex.batchImport.importCheckedAndAddToApiService",
-                              "导入已检测账号并添加到 API 服务",
+                              "Nhập tài khoản đã kiểm tra và thêm vào Dịch vụ API",
                             )
                           : t(
                               "codex.batchImport.directImportAndAddToApiService",
-                              "直接导入并添加到 API 服务",
+                              "Nhập trực tiếp và thêm vào Dịch vụ API",
                             )}
                         {batchImportSelectedSelectableCount > 0
                           ? ` (${batchImportSelectedSelectableCount})`
@@ -745,13 +745,13 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
           >
             <div className="modal-header">
               <h2>
-                {t("common.shared.externalImport.titleCodex", "Codex 批量导入")}
+                {t("common.shared.externalImport.titleCodex", "Nhập hàng loạt Codex")}
               </h2>
               {!externalImportRunning && (
                 <button
                   className="modal-close"
                   onClick={closeExternalImportProgressModal}
-                  aria-label={t("common.close", "关闭")}
+                  aria-label={t("common.close", "Đóng")}
                 >
                   <X />
                 </button>
@@ -796,19 +796,19 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                   <div className="codex-external-import-stats">
                     <div>
                       <span>
-                        {t("common.shared.externalImport.total", "总数")}
+                        {t("common.shared.externalImport.total", "Tổng")}
                       </span>
                       <strong>{externalImportProgress.total}</strong>
                     </div>
                     <div>
                       <span>
-                        {t("common.shared.externalImport.success", "成功")}
+                        {t("common.shared.externalImport.success", "Thành công")}
                       </span>
                       <strong>{externalImportProgress.success}</strong>
                     </div>
                     <div>
                       <span>
-                        {t("common.shared.externalImport.failed", "失败")}
+                        {t("common.shared.externalImport.failed", "Thất bại")}
                       </span>
                       <strong>{externalImportProgress.failed}</strong>
                     </div>
@@ -836,14 +836,14 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                 <div className="codex-external-import-errors">
                   <div className="codex-external-import-errors-head">
                     <strong>
-                      {t("common.shared.externalImport.errorsTitle", "失败项")}
+                      {t("common.shared.externalImport.errorsTitle", "Mục thất bại")}
                     </strong>
                     <button
                       className="btn btn-secondary btn-sm"
                       onClick={handleCopyExternalImportErrors}
                     >
                       <Copy size={13} />
-                      {t("common.shared.externalImport.copyErrors", "复制错误")}
+                      {t("common.shared.externalImport.copyErrors", "Sao chép lỗi")}
                     </button>
                   </div>
                   <div className="codex-external-import-error-list">
@@ -867,7 +867,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                   <span>
                     {t(
                       "codex.importApiService.syncFailed",
-                      "账号已导入，但加入 API 服务失败：{{error}}",
+                      "Tài khoản đã được nhập nhưng không thể thêm vào dịch vụ API: {{error}}",
                     ).replace("{{error}}", externalImportSyncError)}
                   </span>
                 </div>
@@ -879,7 +879,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                   className="btn btn-secondary"
                   onClick={closeExternalImportProgressModal}
                 >
-                  {t("common.close", "关闭")}
+                  {t("common.close", "Đóng")}
                 </button>
                 <button
                   className="btn btn-primary"
@@ -887,7 +887,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
                 >
                   {t(
                     "common.shared.externalImport.viewAccounts",
-                    "查看 Codex 账号",
+                    "Xem tài khoản Codex",
                   )}
                 </button>
               </div>
@@ -928,7 +928,7 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
           command={cliLaunchModal.terminalCommand}
           commandPlaceholder={
             cliLaunchModal.preparing
-              ? t("common.loading", "加载中...")
+              ? t("common.loading", "Đang tải...")
               : t("codex.cli.selectWorkingDir", "选择 Codex CLI 工作目录")
           }
           preparing={cliLaunchModal.preparing}
@@ -970,8 +970,8 @@ export function CodexAccountsView(props: CodexAccountsViewProps) {
       )}
       {localAccessLaunchPreviewOpen && (
         <CodexLaunchPreviewModal
-          accountLabel={t("codex.localAccess.title", "API 服务")}
-          accountMetaLabel={t("codex.apiSwitchNotice.type.apiKey", "API 密钥")}
+          accountLabel={t("codex.localAccess.title", "Dịch vụ API")}
+          accountMetaLabel={t("codex.apiSwitchNotice.type.apiKey", "Khóa API")}
           summary={buildLocalAccessLaunchPreviewSummary()}
           actions={buildLocalAccessLaunchPreviewActions()}
           instanceId={launchPreviewInstanceId}

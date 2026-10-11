@@ -405,7 +405,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 <Search size={16} className="search-icon" />
                 <input
                   type="text"
-                  placeholder={t("common.shared.search", "搜索账号...")}
+                  placeholder={t("common.shared.search", "Tìm kiếm tài khoản...")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -414,21 +414,21 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 <button
                   className={`view-btn ${overviewLayoutMode === "compact" ? "active" : ""}`}
                   onClick={() => handleChangeOverviewLayoutMode("compact")}
-                  title={t("accounts.view.compact", "紧凑视图")}
+                  title={t("accounts.view.compact", "Chế độ thu gọn")}
                 >
                   <Rows3 size={16} />
                 </button>
                 <button
                   className={`view-btn ${overviewLayoutMode === "list" ? "active" : ""}`}
                   onClick={() => handleChangeOverviewLayoutMode("list")}
-                  title={t("common.shared.view.list", "列表视图")}
+                  title={t("common.shared.view.list", "Dạng danh sách")}
                 >
                   <List size={16} />
                 </button>
                 <button
                   className={`view-btn ${overviewLayoutMode === "grid" ? "active" : ""}`}
                   onClick={() => handleChangeOverviewLayoutMode("grid")}
-                  title={t("common.shared.view.grid", "卡片视图")}
+                  title={t("common.shared.view.grid", "Dạng thẻ")}
                 >
                   <LayoutGrid size={16} />
                 </button>
@@ -438,12 +438,12 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 selectedValues={filterTypes}
                 allLabel={t("codex.filters.allPlans", {
                   count: tierCounts.all,
-                  defaultValue: "全部套餐 ({{count}})",
+                  defaultValue: "Mọi gói ({{count}})",
                 })}
-                filterLabel={t("common.shared.filterLabel", "筛选")}
-                clearLabel={t("accounts.clearFilter", "清空筛选")}
-                emptyLabel={t("common.none", "暂无")}
-                ariaLabel={t("common.shared.filterLabel", "筛选")}
+                filterLabel={t("common.shared.filterLabel", "Bộ lọc")}
+                clearLabel={t("accounts.clearFilter", "Xóa bộ lọc")}
+                emptyLabel={t("common.none", "None​")}
+                ariaLabel={t("common.shared.filterLabel", "Bộ lọc")}
                 onToggleValue={toggleFilterTypeValue}
                 onClear={clearFilterTypes}
               />
@@ -452,12 +452,12 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   type="button"
                   className={`tag-filter-btn ${tagFilter.length > 0 ? "active" : ""}`}
                   onClick={() => setShowTagFilter((prev) => !prev)}
-                  aria-label={t("accounts.filterTags", "标签筛选")}
+                  aria-label={t("accounts.filterTags", "Lọc thẻ")}
                 >
                   <Tag size={14} />
                   {tagFilter.length > 0
-                    ? `${t("accounts.filterTagsCount", "标签")}(${tagFilter.length})`
-                    : t("accounts.filterTags", "标签筛选")}
+                    ? `${t("accounts.filterTagsCount", "Thẻ")}(${tagFilter.length})`
+                    : t("accounts.filterTags", "Lọc thẻ")}
                 </button>
                 {showTagFilter && (
                   <div
@@ -466,7 +466,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   >
                     {availableTags.length === 0 ? (
                       <div className="tag-filter-empty">
-                        {t("accounts.noAvailableTags", "暂无可用标签")}
+                        {t("accounts.noAvailableTags", "Không có thẻ nào")}
                       </div>
                     ) : (
                       <div
@@ -494,7 +494,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               }}
                               aria-label={t("accounts.deleteTagAria", {
                                 tag,
-                                defaultValue: "删除标签 {{tag}}",
+                                defaultValue: "Xóa thẻ {{tag}}",
                               })}
                             >
                               <X size={12} />
@@ -510,7 +510,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         checked={groupByTag}
                         onChange={(e) => setGroupByTag(e.target.checked)}
                       />
-                      <span>{t("accounts.groupByTag", "按标签分组展示")}</span>
+                      <span>{t("accounts.groupByTag", "Nhóm theo thẻ")}</span>
                     </label>
                     {tagFilter.length > 0 && (
                       <button
@@ -518,7 +518,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         className="tag-filter-clear"
                         onClick={clearTagFilter}
                       >
-                        {t("accounts.clearFilter", "清空筛选")}
+                        {t("accounts.clearFilter", "Xóa bộ lọc")}
                       </button>
                     )}
                   </div>
@@ -528,7 +528,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
               <SingleSelectFilterDropdown
                 value={sortBy}
                 options={codexAccountSortOptions}
-                ariaLabel={t("common.shared.sortLabel", "排序")}
+                ariaLabel={t("common.shared.sortLabel", "Sắp xếp")}
                 icon={<ArrowDownWideNarrow size={14} />}
                 onChange={handleSortByChange}
               />
@@ -544,16 +544,16 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     sortDirection === "desc"
                       ? t(
                           "common.shared.sort.descTooltip",
-                          "当前：降序，点击切换为升序",
+                          "Giảm dần (nhấn để chuyển Tăng dần)",
                         )
                       : t(
                           "common.shared.sort.ascTooltip",
-                          "当前：升序，点击切换为降序",
+                          "Tăng dần (nhấn để chuyển Giảm dần)",
                         )
                   }
                   aria-label={t(
                     "common.shared.sort.toggleDirection",
-                    "切换排序方向",
+                    "Đổi hướng sắp xếp",
                   )}
                 >
                   {sortDirection === "desc" ? "⬇" : "⬆"}
@@ -564,7 +564,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
               <button
                 className="btn btn-primary icon-only"
                 onClick={() => openCodexAddModal("tempLogin")}
-                title={t("common.shared.addAccount", "添加账号")}
+                title={t("common.shared.addAccount", "Thêm tài khoản")}
               >
                 <Plus size={14} />
               </button>
@@ -572,7 +572,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 className="btn btn-secondary icon-only"
                 onClick={handleRefreshAll}
                 disabled={refreshingAll || accounts.length === 0}
-                title={t("common.shared.refreshAll", "刷新全部")}
+                title={t("common.shared.refreshAll", "Làm mới tất cả")}
               >
                 <RefreshCw
                   size={14}
@@ -584,8 +584,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 onClick={togglePrivacyMode}
                 title={
                   privacyModeEnabled
-                    ? t("privacy.showSensitive", "显示邮箱")
-                    : t("privacy.hideSensitive", "隐藏邮箱")
+                    ? t("privacy.showSensitive", "Hiện email")
+                    : t("privacy.hideSensitive", "Ẩn email")
                 }
               >
                 {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -596,8 +596,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 disabled={exporting || filteredIds.length === 0}
                 title={
                   exportSelectionCount > 0
-                    ? `${t("common.shared.export.title", "导出")} (${exportSelectionCount})`
-                    : t("common.shared.export.title", "导出")
+                    ? `${t("common.shared.export.title", "Xuất")} (${exportSelectionCount})`
+                    : t("common.shared.export.title", "Xuất")
                 }
               >
                 <Upload size={14} />
@@ -608,8 +608,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   onClick={() => setShowCodexGroupModal(true)}
                   title={
                     groupFilter.length > 0
-                      ? `${t("accounts.groups.manageTitle", "分组管理")} (${groupFilter.length})`
-                      : t("accounts.groups.manageTitle", "分组管理")
+                      ? `${t("accounts.groups.manageTitle", "Quản lý nhóm")} (${groupFilter.length})`
+                      : t("accounts.groups.manageTitle", "Quản lý nhóm")
                   }
                 >
                   <FolderOpen size={14} />
@@ -629,7 +629,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     onChange={handleToggleSelectAllPaginated}
                     disabled={paginatedAccounts.length === 0}
                   />
-                  <span>{t("common.selectAll", "全选")}</span>
+                  <span>{t("common.selectAll", "Chọn tất cả")}</span>
                 </label>
                 {selected.size > 0 && !isAllFilteredSelectionActive && (
                   <>
@@ -644,7 +644,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       className="codex-overview-clear-selection-btn"
                       onClick={handleClearOverviewSelection}
                     >
-                      {t("messages.clearSelection", "取消选择")}
+                      {t("messages.clearSelection", "Bỏ chọn")}
                     </button>
                   </>
                 )}
@@ -656,7 +656,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   >
                     {t("messages.selectAllFilteredAccounts", {
                       count: filteredIds.length,
-                      defaultValue: "选择全部符合条件 {{count}} 条",
+                      defaultValue: "Chọn mọi kết quả {{count}}",
                     })}
                   </button>
                 )}
@@ -665,7 +665,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <span className="codex-overview-selected-count">
                       {t("messages.selectedAllFilteredAccounts", {
                         count: filteredIds.length,
-                        defaultValue: "已选择全部符合条件 {{count}} 条",
+                        defaultValue: "Đã chọn mọi kết quả {{count}}",
                       })}
                     </span>
                     <button
@@ -673,7 +673,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       className="codex-overview-clear-selection-btn"
                       onClick={handleClearOverviewSelection}
                     >
-                      {t("messages.clearSelection", "取消选择")}
+                      {t("messages.clearSelection", "Bỏ chọn")}
                     </button>
                   </>
                 )}
@@ -707,12 +707,12 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     onClick={openFullQuotaWakeupTestModal}
                     title={t(
                       "codex.wakeup.fullQuotaActionTitle",
-                      "打开账号唤醒测试，账号默认按 5h 额度从高到低排序。",
+                      "Mở kiểm thử đánh thức tài khoản. Mặc định sắp xếp theo hạn mức 5h từ cao xuống thấp.",
                     )}
                   >
                     <Power size={14} />
                     <span>
-                      {t("codex.wakeup.fullQuotaAction", "唤醒账号")}
+                      {t("codex.wakeup.fullQuotaAction", "Đánh thức tài khoản")}
                     </span>
                   </button>
                 )}
@@ -720,7 +720,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <button
                     className="btn btn-danger icon-only codex-overview-clear-error-btn"
                     onClick={handleClearErrorAccounts}
-                    title={`${t("messages.cleanErrorAccountsAction", "清理 ERROR 账号")} (${errorAccountIds.length})`}
+                    title={`${t("messages.cleanErrorAccountsAction", "Dọn tài khoản ERROR")} (${errorAccountIds.length})`}
                   >
                     <CircleAlert size={14} />
                   </button>
@@ -733,7 +733,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       title={
                         activeGroupId
                           ? `${t("accounts.groups.moveToGroup")} (${selected.size})`
-                          : `${t("codex.groups.addToGroup", "添加至分组")} (${selected.size})`
+                          : `${t("codex.groups.addToGroup", "Thêm vào nhóm")} (${selected.size})`
                       }
                     >
                       <FolderPlus size={14} />
@@ -751,7 +751,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <button
                       className="btn btn-danger icon-only"
                       onClick={handleCodexBatchDelete}
-                      title={`${t("common.delete", "删除")} (${selected.size})`}
+                      title={`${t("common.delete", "Xóa")} (${selected.size})`}
                     >
                       <Trash2 size={14} />
                     </button>
@@ -764,16 +764,16 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
           {loading && accounts.length === 0 ? (
             <div className="loading-container">
               <RefreshCw size={24} className="loading-spinner" />
-              <p>{t("common.loading", "加载中...")}</p>
+              <p>{t("common.loading", "Đang tải...")}</p>
             </div>
           ) : accounts.length === 0 && !hasGroupEntryCards ? (
             <div className="empty-state">
               <Globe size={48} />
-              <h3>{t("common.shared.empty.title", "暂无账号")}</h3>
+              <h3>{t("common.shared.empty.title", "Chưa có tài khoản")}</h3>
               <p>
                 {t(
                   "codex.empty.description",
-                  '点击"添加账号"开始管理您的 Codex 账号',
+                  "Nhấn \"Thêm tài khoản\" để bắt đầu",
                 )}
               </p>
               <div
@@ -789,7 +789,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   onClick={() => openCodexAddModal("tempLogin")}
                 >
                   <Plus size={16} />
-                  {t("common.shared.addAccount", "添加账号")}
+                  {t("common.shared.addAccount", "Thêm tài khoản")}
                 </button>
                 {recycleBinButton}
                 <button
@@ -803,16 +803,16 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   }
                 >
                   <BookOpen size={16} />
-                  {t("manual.navTitle", "功能使用手册")}
+                  {t("manual.navTitle", "Sổ tay sử dụng")}
                 </button>
               </div>
             </div>
           ) : filteredAccounts.length === 0 && !hasGroupEntryCards ? (
             <div className="empty-state">
-              <h3>{t("common.shared.noMatch.title", "没有匹配的账号")}</h3>
+              <h3>{t("common.shared.noMatch.title", "Không có tài khoản phù hợp")}</h3>
               {recycleBinButton}
               <p>
-                {t("common.shared.noMatch.desc", "请尝试调整搜索或筛选条件")}
+                {t("common.shared.noMatch.desc", "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}
               </p>
               {hasActiveOverviewFilters && (
                 <button
@@ -820,7 +820,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   className="btn btn-secondary"
                   onClick={clearAllOverviewFilters}
                 >
-                  {t("codex.filters.clearAll", "清除筛选")}
+                  {t("codex.filters.clearAll", "Xóa lọc")}
                 </button>
               )}
             </div>
@@ -921,14 +921,14 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <strong>
                         {t(
                           "codex.batchImport.hiddenTask",
-                          "Codex 批量导入进行中",
+                          "Tác vụ nhập hàng loạt Codex",
                         )}
                       </strong>
                       <span>
                         {batchImportBusy
                           ? t(
                               "codex.batchImport.taskRunning",
-                              "进度 {{current}}/{{total}}",
+                              "Đang xử lý {{current}} / {{total}}",
                             )
                               .replace(
                                 "{{current}}",
@@ -945,14 +945,14 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           : batchImportPreview
                             ? t(
                                 "codex.batchImport.taskPreview",
-                                "已解析 {{total}} 个账号，可继续导入",
+                                "Đã có {{total}} bản xem trước",
                               ).replace(
                                 "{{total}}",
                                 String(batchImportPreview.total),
                               )
                             : t(
                                 "codex.batchImport.preparing",
-                                "正在准备导入任务...",
+                                "Đang chuẩn bị nhập...",
                               )}
                       </span>
                     </div>
@@ -962,7 +962,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         onClick={() => setBatchImportOpen(true)}
                       >
                         <FileText size={14} />
-                        <span>{t("codex.batchImport.reopen", "查看任务")}</span>
+                        <span>{t("codex.batchImport.reopen", "Xem tác vụ")}</span>
                       </button>
                       <button
                         className="btn btn-secondary"
@@ -971,16 +971,16 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           batchImportBusy
                             ? t(
                                 "codex.batchImport.cancelAndDismiss",
-                                "取消并丢弃任务",
+                                "Hủy và bỏ",
                               )
-                            : t("codex.batchImport.dismissTask", "丢弃任务")
+                            : t("codex.batchImport.dismissTask", "Bỏ")
                         }
                       >
                         <X size={14} />
                         <span>
                           {batchImportBusy
-                            ? t("common.cancel", "取消")
-                            : t("codex.batchImport.dismissTask", "丢弃")}
+                            ? t("common.cancel", "Hủy")
+                            : t("codex.batchImport.dismissTask", "Bỏ")}
                         </span>
                       </button>
                     </div>
@@ -1042,7 +1042,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             checked={isAllPaginatedSelected}
                             onChange={handleToggleSelectAllPaginated}
                           />
-                          {t("common.selectAll", "全选")}
+                          {t("common.selectAll", "Chọn tất cả")}
                         </label>
                       </div>
                     )}
@@ -1101,17 +1101,17 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             )}
                           </th>
                           <th style={{ width: 260 }}>
-                            {t("common.shared.columns.email", "账号")}
+                            {t("common.shared.columns.email", "E-mail")}
                           </th>
                           <th style={{ width: 140 }}>
-                            {t("common.shared.columns.plan", "订阅")}
+                            {t("common.shared.columns.plan", "Gói")}
                           </th>
                           <th style={{ width: 150 }}>
-                            {t("codex.subscription.column", "订阅信息")}
+                            {t("codex.subscription.column", "Hết hạn")}
                           </th>
-                          <th>{t("accounts.columns.quota", "配额状态")}</th>
+                          <th>{t("accounts.columns.quota", "Trạng thái hạn mức")}</th>
                           <th className="sticky-action-header table-action-header">
-                            {t("common.shared.columns.actions", "操作")}
+                            {t("common.shared.columns.actions", "Hành động")}
                           </th>
                         </tr>
                       </thead>
@@ -1160,17 +1160,17 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             )}
                           </th>
                           <th style={{ width: 260 }}>
-                            {t("common.shared.columns.email", "账号")}
+                            {t("common.shared.columns.email", "E-mail")}
                           </th>
                           <th style={{ width: 140 }}>
-                            {t("common.shared.columns.plan", "订阅")}
+                            {t("common.shared.columns.plan", "Gói")}
                           </th>
                           <th style={{ width: 150 }}>
-                            {t("codex.subscription.column", "订阅信息")}
+                            {t("codex.subscription.column", "Hết hạn")}
                           </th>
-                          <th>{t("accounts.columns.quota", "配额状态")}</th>
+                          <th>{t("accounts.columns.quota", "Trạng thái hạn mức")}</th>
                           <th className="sticky-action-header table-action-header">
-                            {t("common.shared.columns.actions", "操作")}
+                            {t("common.shared.columns.actions", "Hành động")}
                           </th>
                         </tr>
                       </thead>
@@ -1209,11 +1209,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="modal-header">
-                  <h2>{t("codex.quickSwitch.title", "快速切换供应商")}</h2>
+                  <h2>{t("codex.quickSwitch.title", "Chuyển nhanh nhà cung cấp")}</h2>
                   <button
                     className="modal-close"
                     onClick={closeQuickSwitchModal}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                     disabled={quickSwitchSubmitting}
                   >
                     <X />
@@ -1224,13 +1224,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <p className="section-desc">
                       {t(
                         "codex.quickSwitch.desc",
-                        "为当前 API Key 账号快速切换到已保存的供应商与 API Key。",
+                        "Nhanh chóng chuyển tài khoản API Key này sang nhà cung cấp và API Key đã lưu.",
                       )}
                     </p>
                     {quickSwitchAccount && (
                       <div className="section-desc">
                         {t("codex.quickSwitch.currentAccount", {
-                          defaultValue: "当前账号：{{name}}",
+                          defaultValue: "Tài khoản hiện tại: {{name}}",
                           name: maskAccountText(
                             resolvePresentation(quickSwitchAccount).displayName,
                           ),
@@ -1241,12 +1241,12 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <label>
                         {t(
                           "codex.modelProviders.selectSavedProvider",
-                          "已保存供应商",
+                          "Nhà cung cấp đã lưu",
                         )}
                       </label>
                       {managedProvidersLoading ? (
                         <div className="section-desc">
-                          {t("common.loading", "加载中...")}
+                          {t("common.loading", "Đang tải...")}
                         </div>
                       ) : managedProviders.length === 0 ? (
                         <div className="add-status error">
@@ -1254,7 +1254,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.quickSwitch.noProviders",
-                              "暂无已保存供应商，请先在“模型供应商”中添加。",
+                              "Chưa có nhà cung cấp nào được lưu. Hãy thêm một mục trong Nhà cung cấp mô hình trước.",
                             )}
                           </span>
                         </div>
@@ -1283,7 +1283,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           <label>
                             {t(
                               "codex.modelProviders.selectSavedApiKey",
-                              "已保存 API Key",
+                              "API Key đã lưu",
                             )}
                           </label>
                           <SingleSelectDropdown
@@ -1296,7 +1296,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                   item,
                                   t(
                                     "codex.modelProviders.unnamedKey",
-                                    "未命名 Key",
+                                    "Key chưa có tên",
                                   ),
                                 ),
                               }),
@@ -1305,18 +1305,18 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             disabled={quickSwitchSubmitting}
                             placeholder={t(
                               "codex.modelProviders.selectSavedApiKeyPlaceholder",
-                              "选择 API Key",
+                              "Chọn khóa API",
                             )}
                             ariaLabel={t(
                               "codex.modelProviders.selectSavedApiKey",
-                              "已保存 API Key",
+                              "API Key đã lưu",
                             )}
                           />
                           {selectedQuickSwitchProvider.apiKeys.length > 1 && (
                             <p className="api-provider-hint">
                               {t(
                                 "codex.modelProviders.selectSavedApiKeyHint",
-                                "该供应商有多个 API Key，可在此切换选择。",
+                                "Nhà cung cấp này có nhiều khóa API. Chọn một khóa tại đây.",
                               )}
                             </p>
                           )}
@@ -1330,7 +1330,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           <span>
                             {t(
                               "codex.quickSwitch.providerHasNoKeys",
-                              "该供应商没有可用 API Key，请先在模型供应商中添加。",
+                              "Nhà cung cấp này chưa có API Key khả dụng. Hãy thêm một key trong Nhà cung cấp mô hình trước.",
                             )}
                           </span>
                         </div>
@@ -1354,7 +1354,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         }}
                         disabled={quickSwitchSubmitting}
                       >
-                        {t("codex.quickSwitch.gotoProviders", "管理供应商")}
+                        {t("codex.quickSwitch.gotoProviders", "Quản lý nhà cung cấp")}
                       </button>
                       <button
                         className="btn btn-primary"
@@ -1367,8 +1367,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         }
                       >
                         {quickSwitchSubmitting
-                          ? t("common.saving", "保存中...")
-                          : t("codex.quickSwitch.apply", "立即切换")}
+                          ? t("common.saving", "Đang lưu...")
+                          : t("codex.quickSwitch.apply", "Chuyển ngay")}
                       </button>
                     </div>
               </div>
@@ -1385,11 +1385,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="modal-header">
-                  <h2>{`${t("instances.actions.edit", "编辑")} ${t("codex.addModal.token", "API Key")}`}</h2>
+                  <h2>{`${t("instances.actions.edit", "Chỉnh sửa")} ${t("codex.addModal.token", "API Key")}`}</h2>
                   <button
                     className="modal-close"
                     onClick={closeApiKeyCredentialsModal}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                     disabled={savingApiKeyCredentials}
                   >
                     <X />
@@ -1401,18 +1401,18 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <label>
                         {t(
                           "codex.modelProviders.selectSavedProvider",
-                          "已保存供应商",
+                          "Nhà cung cấp đã lưu",
                         )}
                       </label>
                       {managedProvidersLoading ? (
                         <div className="section-desc">
-                          {t("common.loading", "加载中...")}
+                          {t("common.loading", "Đang tải...")}
                         </div>
                       ) : managedProviders.length === 0 ? (
                         <div className="section-desc">
                           {t(
                             "codex.modelProviders.noSavedProviders",
-                            "暂无已保存供应商，可直接填写后自动保存。",
+                            "Chưa có nhà cung cấp nào được lưu. Bạn có thể điền trực tiếp các trường và hệ thống sẽ tự động lưu.",
                           )}
                         </div>
                       ) : (
@@ -1439,7 +1439,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           <label>
                             {t(
                               "codex.modelProviders.selectSavedApiKey",
-                              "已保存 API Key",
+                              "API Key đã lưu",
                             )}
                           </label>
                           <SingleSelectDropdown
@@ -1450,7 +1450,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 value: "",
                                 label: t(
                                   "codex.modelProviders.manualApiKeyOption",
-                                  "手动输入新 Key",
+                                  "Nhập khóa mới theo cách thủ công",
                                 ),
                               },
                               ...selectedEditingManagedProvider.apiKeys.map(
@@ -1460,7 +1460,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                     item,
                                     t(
                                       "codex.modelProviders.unnamedKey",
-                                      "未命名 Key",
+                                      "Key chưa có tên",
                                     ),
                                   ),
                                 }),
@@ -1470,11 +1470,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             disabled={savingApiKeyCredentials}
                             placeholder={t(
                               "codex.modelProviders.selectSavedApiKeyPlaceholder",
-                              "选择 API Key",
+                              "Chọn khóa API",
                             )}
                             ariaLabel={t(
                               "codex.modelProviders.selectSavedApiKey",
-                              "已保存 API Key",
+                              "API Key đã lưu",
                             )}
                           />
                           {selectedEditingManagedProvider.apiKeys.length >
@@ -1482,14 +1482,14 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             <p className="api-provider-hint">
                               {t(
                                 "codex.modelProviders.selectSavedApiKeyHint",
-                                "该供应商有多个 API Key，可在此切换选择。",
+                                "Nhà cung cấp này có nhiều khóa API. Chọn một khóa tại đây.",
                               )}
                             </p>
                           )}
                         </div>
                       )}
                     <div className="oauth-link">
-                      <label>{t("codex.api.provider.label", "供应商")}</label>
+                      <label>{t("codex.api.provider.label", "Nhà cung cấp")}</label>
                       <div className="api-provider-chip-list">
                         <button
                           className={`api-provider-chip ${editingApiProviderPresetId === CODEX_API_PROVIDER_CUSTOM_ID ? "active" : ""}`}
@@ -1502,7 +1502,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           disabled={savingApiKeyCredentials}
                         >
                           <span>
-                            {t("codex.api.provider.custom", "自定义")}
+                            {t("codex.api.provider.custom", "Tùy chỉnh")}
                           </span>
                         </button>
                         {CODEX_API_PROVIDER_PRESETS.map((preset) => (
@@ -1535,7 +1535,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       selectedEditingApiProviderPreset.baseUrls.length > 1 && (
                         <div className="oauth-link">
                           <label>
-                            {t("codex.api.provider.endpoint", "供应商端点")}
+                            {t("codex.api.provider.endpoint", "Điểm cuối nhà cung cấp")}
                           </label>
                           <div className="api-provider-endpoint-list">
                             {selectedEditingApiProviderPreset.baseUrls.map(
@@ -1563,7 +1563,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <p className="api-provider-hint">
                           {t(
                             "codex.api.provider.hint",
-                            "已自动填写兼容 Base URL，可继续手动调整。",
+                            "Base URL tương thích đã được điền tự động. Bạn vẫn có thể chỉnh sửa thủ công.",
                           )}
                         </p>
                         <div className="api-provider-links">
@@ -1579,7 +1579,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               disabled={savingApiKeyCredentials}
                             >
                               <ExternalLink size={14} />
-                              {t("codex.api.provider.website", "官网")}
+                              {t("codex.api.provider.website", "Trang web")}
                             </button>
                           )}
                           {selectedEditingApiProviderPreset.apiKeyUrl && (
@@ -1596,10 +1596,10 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               <KeyRound size={14} />
                               {selectedEditingApiProviderPreset.id ===
                               COCKPIT_API_PROVIDER_ID
-                                ? t("codex.api.provider.getApiKey", "获取秘钥")
+                                ? t("codex.api.provider.getApiKey", "Lấy khóa")
                                 : t(
                                     "codex.api.provider.apiKeyPage",
-                                    "API Key 页面",
+                                    "Trang API Key",
                                   )}
                             </button>
                           )}
@@ -1634,13 +1634,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           disabled={savingApiKeyCredentials}
                           title={
                             editingApiKeyCredentialsVisible
-                              ? t("codex.api.hideApiKey", "隐藏 API Key")
-                              : t("codex.api.showApiKey", "显示 API Key")
+                              ? t("codex.api.hideApiKey", "Ẩn API Key")
+                              : t("codex.api.showApiKey", "Hiện API Key")
                           }
                           aria-label={
                             editingApiKeyCredentialsVisible
-                              ? t("codex.api.hideApiKey", "隐藏 API Key")
-                              : t("codex.api.showApiKey", "显示 API Key")
+                              ? t("codex.api.hideApiKey", "Ẩn API Key")
+                              : t("codex.api.showApiKey", "Hiện API Key")
                           }
                         >
                           {editingApiKeyCredentialsVisible ? (
@@ -1664,37 +1664,37 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }
                           placeholder={t(
                             "codex.api.baseUrlPlaceholder",
-                            "不填写则是官方默认",
+                            "Để trống để dùng giá trị mặc định chính thức",
                           )}
                           disabled={savingApiKeyCredentials}
                         />
                       </div>
                     </div>
                     <div className="oauth-link">
-                      <label>{t("codex.modelProviders.fields.wireApi", "协议")}</label>
+                      <label>{t("codex.modelProviders.fields.wireApi", "Giao thức")}</label>
                       <div className="api-provider-chip-list">
                         <button type="button" className={`api-provider-chip ${editingApiWireApi === "responses" ? "active" : ""}`}
                           disabled={savingApiKeyCredentials} aria-pressed={editingApiWireApi === "responses"}
                           onClick={() => { setEditingApiWireApi("responses"); setEditingApiCredentialsError(null); }}>
-                          {t("codex.modelProviders.wireApi.responses", "Responses 原生")}
+                          {t("codex.modelProviders.wireApi.responses", "Responses gốc")}
                         </button>
                         <button type="button" className={`api-provider-chip ${editingApiWireApi === "chat_completions" ? "active" : ""}`}
                           disabled={savingApiKeyCredentials} aria-pressed={editingApiWireApi === "chat_completions"}
                           onClick={() => { setEditingApiWireApi("chat_completions"); setEditingApiSupportsWebsockets(false); setEditingApiCredentialsError(null); }}>
-                          {t("codex.modelProviders.wireApi.chatCompletions", "Chat Completions 协议")}
+                          {t("codex.modelProviders.wireApi.chatCompletions", "Giao thức Chat Completions")}
                         </button>
                       </div>
                     </div>
                     {editingApiWireApi === "responses" && (
                       <div className="oauth-link">
-                        <label>{t("codex.modelProviders.fields.supportsWebsockets", "WebSocket 传输")}</label>
+                        <label>{t("codex.modelProviders.fields.supportsWebsockets", "Truyền tải WebSocket")}</label>
                         <label className="provider-vision-toggle">
                           <span className="provider-vision-toggle-copy">
                             <span className="provider-vision-toggle-title">
-                              {t("codex.modelProviders.websockets.title", "允许 Codex 使用 Responses WebSocket")}
+                              {t("codex.modelProviders.websockets.title", "Cho phép Codex dùng Responses qua WebSocket")}
                             </span>
                             <span className="provider-vision-toggle-desc">
-                              {t("codex.modelProviders.websockets.help", "仅在供应商明确支持 Responses WebSocket 时开启；连接方式可通过 Codex 或代理服务日志确认。")}
+                              {t("codex.modelProviders.websockets.help", "Chỉ bật khi nhà cung cấp hỗ trợ rõ ràng Responses qua WebSocket; hãy xác nhận phương thức truyền trong nhật ký Codex hoặc dịch vụ proxy.")}
                             </span>
                           </span>
                           <span className="provider-vision-switch">
@@ -1710,7 +1710,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <label>
                           {t(
                             "codex.modelProviders.newProviderName",
-                            "供应商名称（自动保存时使用，可选）",
+                            "Tên nhà cung cấp (tùy chọn, dùng cho tự động lưu)",
                           )}
                         </label>
                         <div className="oauth-url-box oauth-manual-input">
@@ -1724,7 +1724,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             }
                             placeholder={t(
                               "codex.modelProviders.newProviderNamePlaceholder",
-                              "不填则按域名自动生成",
+                              "Nếu để trống, tên máy chủ sẽ được dùng tự động",
                             )}
                             disabled={savingApiKeyCredentials}
                           />
@@ -1737,11 +1737,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <div className="api-model-catalog-panel">
                           <div className="api-model-catalog-header">
                             <label htmlFor="codex-api-model-catalog-edit">
-                              {t("codex.api.modelCatalog.label", "模型列表")}
+                              {t("codex.api.modelCatalog.label", "Danh sách mô hình")}
                             </label>
                             <span className="api-model-catalog-count">
                               {t("codex.api.modelCatalog.count", {
-                                defaultValue: "{{count}} 个模型",
+                                defaultValue: "{{count}} mô hình",
                                 count: editingApiModelCatalogDraft.length,
                               })}
                             </span>
@@ -1759,7 +1759,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             }}
                             placeholder={t(
                               "codex.api.modelCatalog.placeholder",
-                              "每行填写一个模型 ID，也可以使用逗号分隔。",
+                              "Nhập một ID mô hình trên mỗi dòng hoặc phân tách các ID bằng dấu phẩy.",
                             )}
                             disabled={savingApiKeyCredentials}
                             aria-describedby="codex-api-model-catalog-edit-hint"
@@ -1771,7 +1771,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             >
                               {t(
                                 "codex.api.modelCatalog.editHint",
-                                "上游结果仅填入当前草稿，可在保存前删除、补充或调整模型。",
+                                "Các mô hình đã lấy chỉ được thêm vào bản nháp này. Hãy xem lại và chỉnh sửa trước khi lưu.",
                               )}
                             </p>
                             <button
@@ -1797,11 +1797,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               {editingApiModelCatalogFetching
                                 ? t(
                                     "codex.api.modelCatalog.fetching",
-                                    "获取中...",
+                                    "Đang lấy...",
                                   )
                                 : t(
                                     "codex.api.modelCatalog.fetch",
-                                    "从上游获取",
+                                    "Lấy từ nhà cung cấp",
                                   )}
                             </button>
                           </div>
@@ -1818,13 +1818,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               <strong>
                                 {t(
                                   "codex.api.modelCatalog.syncToggle",
-                                  "同步供应商模型到 Codex",
+                                  "Đồng bộ mô hình nhà cung cấp với Codex",
                                 )}
                               </strong>
                               <small>
                                 {t(
                                   "codex.api.modelCatalog.syncDescription",
-                                  "保存后使用当前模型列表生成 Cockpit 受管的 Codex 模型目录，不覆盖用户自定义目录。",
+                                  "Sau khi lưu, danh sách này được dùng để tạo danh mục mô hình Codex do Cockpit quản lý. Danh mục tùy chỉnh không bị ghi đè.",
                                 )}
                               </small>
                             </span>
@@ -1865,7 +1865,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         }
                       >
                         {savingApiKeyCredentials
-                          ? t("common.saving", "保存中...")
+                          ? t("common.saving", "Đang lưu...")
                           : t("common.save")}
                       </button>
                     </div>
@@ -1883,19 +1883,19 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 <div className="modal-header">
                   <div>
                     <h2>
-                      {t("codex.sort.customModalTitle", "自定义账号排序")}
+                      {t("codex.sort.customModalTitle", "Thứ tự tài khoản")}
                     </h2>
                     <p className="codex-custom-sort-modal-desc">
                       {t(
                         "codex.sort.customModalDesc",
-                        "拖动账号或使用上下按钮调整展示顺序。",
+                        "Kéo tài khoản hoặc dùng nút lên/xuống để chỉnh thứ tự hiển thị.",
                       )}
                     </p>
                   </div>
                   <button
                     className="modal-close"
                     onClick={() => setShowCustomSortModal(false)}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -1956,11 +1956,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               }
                               title={t(
                                 "codex.sort.customDragHandle",
-                                "拖拽排序",
+                                "Kéo để sắp xếp",
                               )}
                               aria-label={t(
                                 "codex.sort.customDragHandle",
-                                "拖拽排序",
+                                "Kéo để sắp xếp",
                               )}
                             >
                               <GripVertical size={16} />
@@ -1979,7 +1979,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 </span>
                                 {isCurrent && (
                                   <span className="mini-tag current">
-                                    {t("codex.current", "当前")}
+                                    {t("codex.current", "Hiện tại")}
                                   </span>
                                 )}
                                 <span
@@ -2006,7 +2006,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                   <span className="codex-custom-sort-quota-empty">
                                     {t(
                                       "common.shared.quota.noData",
-                                      "暂无配额数据",
+                                      "Không có dữ liệu hạn mức",
                                     )}
                                   </span>
                                 )}
@@ -2021,8 +2021,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 moveCustomSortAccount(account.id, "up")
                               }
                               disabled={index === 0}
-                              title={t("codex.sort.customMoveUp", "上移")}
-                              aria-label={t("codex.sort.customMoveUp", "上移")}
+                              title={t("codex.sort.customMoveUp", "Lên")}
+                              aria-label={t("codex.sort.customMoveUp", "Lên")}
                             >
                               <ArrowUp size={14} />
                             </button>
@@ -2033,10 +2033,10 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 moveCustomSortAccount(account.id, "down")
                               }
                               disabled={index === customSortAccounts.length - 1}
-                              title={t("codex.sort.customMoveDown", "下移")}
+                              title={t("codex.sort.customMoveDown", "Xuống")}
                               aria-label={t(
                                 "codex.sort.customMoveDown",
-                                "下移",
+                                "Xuống",
                               )}
                             >
                               <ArrowDown size={14} />
@@ -2053,13 +2053,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     onClick={resetCustomSortOrder}
                   >
                     <RotateCw size={14} />
-                    {t("codex.sort.customReset", "重置自定义顺序")}
+                    {t("codex.sort.customReset", "Đặt lại thứ tự")}
                   </button>
                   <button
                     className="btn btn-primary"
                     onClick={() => setShowCustomSortModal(false)}
                   >
-                    {t("common.confirm", "确认")}
+                    {t("common.confirm", "Xác nhận")}
                   </button>
                 </div>
               </div>
@@ -2068,7 +2068,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
 
           <ExportJsonModal
             isOpen={showExportModal}
-            title={`${t("common.shared.export.title", "导出")} JSON`}
+            title={`${t("common.shared.export.title", "Xuất")} JSON`}
             jsonContent={formattedExportJsonContent}
             customContent={formattedExportModalCustomContent}
             errorMessage={exportModalError}
@@ -2082,19 +2082,19 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
             toolbarContent={
               <>
                 <span className="export-json-toolbar-label">
-                  {t("codex.exportFormat.label", "导出格式")}
+                  {t("codex.exportFormat.label", "Định dạng xuất")}
                 </span>
                 <div className="export-json-toolbar-dropdown">
                   <SingleSelectFilterDropdown
                     value={exportFormat}
                     options={exportFormatOptions}
-                    ariaLabel={t("codex.exportFormat.label", "导出格式")}
+                    ariaLabel={t("codex.exportFormat.label", "Định dạng xuất")}
                     onChange={(value) => {
                       if (value === "cpa" && exportHasAgentIdentity) {
                         reportExportModalError(
                           t(
                             "codex.exportFormat.agentIdentityCpaUnsupported",
-                            "Agent Identity 账号不支持 cpa 格式，请使用 Cockpit Tools 或 sub2api 格式导出。",
+                            "Không thể xuất tài khoản Agent Identity ở định dạng cpa. Hãy dùng Cockpit Tools hoặc sub2api.",
                           ),
                         );
                         return;
@@ -2109,7 +2109,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <span>
                       {t(
                         "codex.exportFormat.agentIdentityPrivateKeyNotice",
-                        "导出内容包含 Agent Identity 私钥，可用于在其他设备恢复账号。请像密码一样妥善保管。",
+                        "Bản xuất này chứa khóa riêng Agent Identity có thể khôi phục tài khoản trên thiết bị khác. Hãy bảo vệ khóa như mật khẩu.",
                       )}
                     </span>
                   </div>
@@ -2119,7 +2119,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     className="export-json-sensitive-toggle"
                     title={t(
                       "codex.accountNote.exportSensitiveToggleHint",
-                      "控制导出 JSON 是否包含 2FA 秘钥、密码和手机号。",
+                      "Kiểm soát JSON xuất ra có gồm mã 2FA, mật khẩu, số điện thoại và URL email hay không.",
                     )}
                   >
                     <input
@@ -2134,11 +2134,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       {includeExportSensitiveNotes
                         ? t(
                             "codex.accountNote.exportSensitiveIncluded",
-                            "包含敏感备注",
+                            "Gồm ghi chú nhạy cảm",
                           )
                         : t(
                             "codex.accountNote.exportSensitiveExcluded",
-                            "已排除敏感备注",
+                            "Loại ghi chú nhạy cảm",
                           )}
                     </span>
                     <Info size={14} />
@@ -2151,7 +2151,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <span>
                       {t(
                         "codex.accountNote.exportSensitiveNotice",
-                        "导出内容包含 2FA 秘钥、密码或手机号，请只保存到可信位置。",
+                        "Bản xuất chứa mã 2FA, mật khẩu, số điện thoại hoặc URL email. Chỉ lưu vào vị trí tin cậy.",
                       )}
                     </span>
                   </div>
@@ -2176,13 +2176,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <h2>
                     {t(
                       "codex.localAccess.quotaPool.modalTitle",
-                      "API 服务额度池",
+                      "Nhóm hạn mức dịch vụ API",
                     )}
                   </h2>
                   <button
                     className="modal-close"
                     onClick={() => setShowLocalAccessQuotaStatsModal(false)}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -2190,7 +2190,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                 <div className="modal-body">
                   {localAccessQuotaPoolSummary.visiblePlans.length === 0 ? (
                     <div className="codex-local-access-stats-empty">
-                      {t("codex.localAccess.quotaPool.empty", "暂无额度统计")}
+                      {t("codex.localAccess.quotaPool.empty", "Chưa có thống kê hạn mức")}
                     </div>
                   ) : (
                     <div className="codex-local-access-stats-list">
@@ -2231,7 +2231,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     className="btn btn-primary"
                     onClick={() => setShowLocalAccessQuotaStatsModal(false)}
                   >
-                    {t("common.confirm", "确认")}
+                    {t("common.confirm", "Xác nhận")}
                   </button>
                 </div>
               </div>
@@ -2248,7 +2248,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <h2>
                     {t(
                       "codex.localAccess.hideEntryAction",
-                      "关闭 API 服务入口",
+                      "Ẩn mục Dịch vụ API",
                     )}
                   </h2>
                   <button
@@ -2257,7 +2257,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       if (localAccessHideSubmitting) return;
                       setShowLocalAccessHideConfirm(false);
                     }}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                     disabled={localAccessHideSubmitting}
                   >
                     <X />
@@ -2267,7 +2267,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <p className="codex-local-access-hide-confirm-desc">
                     {t(
                       "codex.localAccess.hideEntryConfirm",
-                      "关闭后会同时隐藏总览中的 API 服务入口，并停用当前 API 服务。你仍可在 Codex 设置或快捷设置中重新打开。",
+                      "Thao tác này sẽ ẩn mục Dịch vụ API khỏi phần tổng quan và đồng thời tắt dịch vụ API hiện tại. Bạn có thể bật lại sau trong Cài đặt Codex hoặc Cài đặt nhanh.",
                     )}
                   </p>
                   <div className="codex-local-access-hide-confirm-points">
@@ -2276,7 +2276,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.localAccess.hideEntryEffectHide",
-                          "隐藏总览中的 API 服务入口",
+                          "Ẩn mục Dịch vụ API khỏi phần tổng quan",
                         )}
                       </span>
                     </div>
@@ -2285,7 +2285,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.localAccess.hideEntryEffectDisable",
-                          "停用当前 API 服务",
+                          "Tắt dịch vụ API hiện tại",
                         )}
                       </span>
                     </div>
@@ -2294,7 +2294,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.localAccess.hideEntryEffectRestore",
-                          "可在 Codex 设置或快捷设置中重新开启",
+                          "Bạn có thể bật lại trong Cài đặt Codex hoặc Cài đặt nhanh",
                         )}
                       </span>
                     </div>
@@ -2306,7 +2306,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     onClick={() => setShowLocalAccessHideConfirm(false)}
                     disabled={localAccessHideSubmitting}
                   >
-                    {t("common.cancel", "取消")}
+                    {t("common.cancel", "Hủy")}
                   </button>
                   <button
                     className="btn btn-danger"
@@ -2314,8 +2314,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     disabled={localAccessHideSubmitting}
                   >
                     {localAccessHideSubmitting
-                      ? t("common.processing", "处理中...")
-                      : t("common.confirm", "确认")}
+                      ? t("common.processing", "Đang xử lý...")
+                      : t("common.confirm", "Xác nhận")}
                   </button>
                 </div>
               </div>
@@ -2333,13 +2333,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     <CircleAlert size={18} />
                     {t(
                       "codex.webSessionImport.noticeTitle",
-                      "Web Session 导入须知",
+                      "Lưu ý Web Session",
                     )}
                   </h2>
                   <button
                     className="modal-close"
                     onClick={() => setPendingWebSessionImport(null)}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -2348,7 +2348,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <p className="codex-local-access-hide-confirm-desc">
                     {t(
                       "codex.webSessionImport.noticeMessage",
-                      "检测到 {{count}} 个 Web Session 账号。此格式不支持实际使用，仅支持查看额度。",
+                      "{{count}} Web Session. Không dùng thật; chỉ xem hạn mức.",
                       { count: pendingWebSessionImport.accountLabels.length },
                     )}
                   </p>
@@ -2371,7 +2371,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.webSessionImport.noticeQuotaOnly",
-                          "仅支持查看额度，不能启动官方客户端或 CLI，也不能切号。",
+                          "Chỉ hạn mức. Không client/CLI/đổi tài khoản.",
                         )}
                       </span>
                     </div>
@@ -2380,7 +2380,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.webSessionImport.noticeNoApi",
-                          "不能加入 Codex API 服务账号池，也不能作为 OAuth 绑定账号。",
+                          "Không vào API hay OAuth.",
                         )}
                       </span>
                     </div>
@@ -2391,7 +2391,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     className="btn btn-secondary"
                     onClick={() => setPendingWebSessionImport(null)}
                   >
-                    {t("common.cancel", "取消")}
+                    {t("common.cancel", "Hủy")}
                   </button>
                   <button
                     className="btn btn-primary"
@@ -2403,7 +2403,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   >
                     {t(
                       "codex.webSessionImport.noticeConfirm",
-                      "已知晓，继续导入",
+                      "Đã hiểu, tiếp tục",
                     )}
                   </button>
                 </div>
@@ -2428,7 +2428,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     type="button"
                     className="modal-close codex-reset-credit-confirm-close"
                     onClick={closeResetCreditConfirmModal}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                     disabled={isResetCreditConfirmSubmitting}
                   >
                     <X />
@@ -2445,18 +2445,18 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <h2>
                     {t(
                       "codex.quota.resetCreditDialogTitle",
-                      "要重置你的使用量吗？",
+                      "Đặt lại mức dùng?",
                     )}
                   </h2>
                   <p>
                     {t("codex.quota.resetCreditDialogDesc", {
                       count: resetCreditConfirmAvailableCount ?? 0,
                       defaultValue:
-                        "重置速率限制后，继续不间断地工作。你还有 {{count}} 次重置可用。",
+                        "Đặt lại giới hạn tốc độ để tiếp tục làm việc không gián đoạn. Lượt đặt lại còn lại: {{count}}.",
                     })}
                   </p>
                   <div className="codex-reset-credit-confirm-account">
-                    <span>{t("common.shared.columns.email", "账号")}</span>
+                    <span>{t("common.shared.columns.email", "E-mail")}</span>
                     <strong>
                       {maskAccountText(
                         resolvePresentation(resetCreditConfirmAccount)
@@ -2472,19 +2472,19 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           time: formatResetCreditTime(
                             resetCreditConfirmNextExpiresAt,
                           ),
-                          defaultValue: "最近到期：{{time}}",
+                          defaultValue: "Hết hạn gần nhất: {{time}}",
                         })}
                       </span>
                     </div>
                   )}
                   <div className="codex-reset-credit-confirm-details">
                     <div className="codex-reset-credit-confirm-details-title">
-                      {t("codex.quota.resetCreditDetailsTitle", "重置次数明细")}
+                      {t("codex.quota.resetCreditDetailsTitle", "Chi tiết lượt đặt lại")}
                     </div>
                     {resetCreditConfirmLoading ? (
                       <div className="codex-reset-credit-confirm-empty">
                         <RefreshCw size={14} className="loading-spinner" />
-                        <span>{t("common.loading", "加载中...")}</span>
+                        <span>{t("common.loading", "Đang tải...")}</span>
                       </div>
                     ) : resetCreditConfirmCredits.length > 0 ? (
                       resetCreditConfirmCredits.map((credit, index) => (
@@ -2500,13 +2500,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             {getResetCreditStatusLabel(credit)}
                           </span>
                           <span>
-                            {t("codex.quota.resetCreditGrantedAt", "发放")}：
+                            {t("codex.quota.resetCreditGrantedAt", "Được cấp")}：
                             <strong>
                               {formatResetCreditAbsoluteTime(credit.granted_at)}
                             </strong>
                           </span>
                           <span>
-                            {t("codex.quota.resetCreditExpiresAt", "到期")}：
+                            {t("codex.quota.resetCreditExpiresAt", "Hết hạn")}：
                             <strong>
                               {formatResetCreditTime(credit.expires_at)}
                             </strong>
@@ -2515,7 +2515,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       ))
                     ) : (
                       <div className="codex-reset-credit-confirm-empty">
-                        {t("codex.quota.resetCreditNoRecords", "暂无重置记录")}
+                        {t("codex.quota.resetCreditNoRecords", "Chưa có bản ghi đặt lại")}
                       </div>
                     )}
                   </div>
@@ -2541,10 +2541,10 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     {isResetCreditConfirmSubmitting ? (
                       <>
                         <RefreshCw size={14} className="loading-spinner" />
-                        {t("common.processing", "处理中...")}
+                        {t("common.processing", "Đang xử lý...")}
                       </>
                     ) : (
-                      t("codex.quota.resetCreditDialogAction", "重置使用次数")
+                      t("codex.quota.resetCreditDialogAction", "Đặt lại mức dùng")
                     )}
                   </button>
                 </div>
@@ -2560,7 +2560,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <button
                     className="modal-close"
                     onClick={() => !batchDeleteBusy && setDeleteConfirm(null)}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -2586,7 +2586,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     disabled={batchDeleteBusy}
                   >
                     {batchDeleteBusy
-                      ? t("common.processing", "处理中...")
+                      ? t("common.processing", "Đang xử lý...")
                       : t("common.recycleBin.move")}
                   </button>
                 </div>
@@ -2602,7 +2602,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   <button
                     className="modal-close"
                     onClick={() => !deletingTag && setTagDeleteConfirm(null)}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -2637,7 +2637,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     disabled={deletingTag}
                   >
                     {deletingTag
-                      ? t("common.processing", "处理中...")
+                      ? t("common.processing", "Đang xử lý...")
                       : t("common.confirm")}
                   </button>
                 </div>
@@ -2660,7 +2660,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       setGroupDeleteConfirm(null);
                       setGroupDeleteError(null);
                     }}
-                    aria-label={t("common.close", "关闭")}
+                    aria-label={t("common.close", "Đóng")}
                   >
                     <X />
                   </button>
@@ -2718,11 +2718,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                   onClick={(event) => event.stopPropagation()}
                 >
                   <div className="modal-header">
-                    <h2>{t("codex.accountNote.title", "账号备注")}</h2>
+                    <h2>{t("codex.accountNote.title", "Ghi chú tài khoản")}</h2>
                     <button
                       className="modal-close"
                       onClick={closeAccountNoteModal}
-                      aria-label={t("common.close", "关闭")}
+                      aria-label={t("common.close", "Đóng")}
                       disabled={activeAccountNoteSaving}
                     >
                       <X />
@@ -2737,11 +2737,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       {t("codex.accountNote.desc", {
                         account: maskAccountText(activeAccountNoteDisplayName),
                         defaultValue:
-                          "给 {{account}} 填写密码、2FA、邮件地址、手机号和其他备注。",
+                          "Thêm mật khẩu, 2FA, URL email, điện thoại và ghi chú khác cho {{account}}.",
                       })}
                     </p>
                     <div className="codex-account-note-field">
-                      <span>{t("common.shared.columns.email", "邮箱")}</span>
+                      <span>{t("common.shared.columns.email", "E-mail")}</span>
                       {activeAccountNoteMode === "pendingOAuth" ? (
                         <>
                           <div className="codex-account-note-input-row">
@@ -2758,7 +2758,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               }}
                               placeholder={t(
                                 "codex.pendingAuth.emailPlaceholder",
-                                "输入 OpenAI 账号邮箱",
+                                "Nhập email tài khoản OpenAI",
                               )}
                               disabled={activeAccountNoteSaving}
                               autoFocus
@@ -2776,8 +2776,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 activeAccountNoteSaving ||
                                 !activeAccountNoteEmail
                               }
-                              aria-label={t("common.copy", "复制")}
-                              title={t("common.copy", "复制")}
+                              aria-label={t("common.copy", "Copy​")}
+                              title={t("common.copy", "Copy​")}
                             >
                               {accountNoteCopiedKey === "modal:email" ? (
                                 <Check size={14} />
@@ -2814,8 +2814,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             disabled={
                               activeAccountNoteSaving || !activeAccountNoteEmail
                             }
-                            aria-label={t("common.copy", "复制")}
-                            title={t("common.copy", "复制")}
+                            aria-label={t("common.copy", "Copy​")}
+                            title={t("common.copy", "Copy​")}
                           >
                             {accountNoteCopiedKey === "modal:email" ? (
                               <Check size={14} />
@@ -2846,7 +2846,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             }}
                             placeholder={t(
                               "codex.accountNote.workspaceIdPlaceholder",
-                              "输入 Team / Workspace UUID",
+                              "Nhập UUID của nhóm / không gian làm việc",
                             )}
                             autoComplete="off"
                             spellCheck={false}
@@ -2865,8 +2865,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               activeAccountNoteSaving ||
                               !activeAccountNoteForm.chatgptAccountId.trim()
                             }
-                            aria-label={t("common.copy", "复制")}
-                            title={t("common.copy", "复制")}
+                            aria-label={t("common.copy", "Copy​")}
+                            title={t("common.copy", "Copy​")}
                           >
                             {accountNoteCopiedKey ===
                             "modal:chatgptAccountId" ? (
@@ -2879,14 +2879,14 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <small className="codex-account-note-field-hint">
                           {t(
                             "codex.accountNote.workspaceIdHint",
-                            "仅用于 at-* 个人访问令牌；API 服务会将其作为 ChatGPT-Account-Id 发送。",
+                            "Chỉ dành cho mã truy cập cá nhân at-*; Dịch vụ API gửi giá trị này dưới dạng ChatGPT-Account-Id.",
                           )}
                         </small>
                       </label>
                     ) : null}
                     <label className="codex-account-note-field">
                       <span>
-                        {t("codex.accountNote.passwordLabel", "账号密码")}
+                        {t("codex.accountNote.passwordLabel", "Mật khẩu")}
                       </span>
                       <div className="codex-account-note-input-row">
                         <input
@@ -2902,7 +2902,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }}
                           placeholder={t(
                             "codex.accountNote.passwordPlaceholder",
-                            "登录密码或临时密码",
+                            "Mật khẩu đăng nhập hoặc tạm thời",
                           )}
                           disabled={activeAccountNoteSaving}
                           autoFocus={activeAccountNoteMode !== "pendingOAuth"}
@@ -2916,13 +2916,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           disabled={activeAccountNoteSaving}
                           aria-label={
                             accountNotePasswordVisible
-                              ? t("codex.accountNote.hide", "隐藏")
-                              : t("codex.accountNote.show", "显示")
+                              ? t("codex.accountNote.hide", "Ẩn")
+                              : t("codex.accountNote.show", "Hiện")
                           }
                           title={
                             accountNotePasswordVisible
-                              ? t("codex.accountNote.hide", "隐藏")
-                              : t("codex.accountNote.show", "显示")
+                              ? t("codex.accountNote.hide", "Ẩn")
+                              : t("codex.accountNote.show", "Hiện")
                           }
                         >
                           {accountNotePasswordVisible ? (
@@ -2944,8 +2944,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             activeAccountNoteSaving ||
                             !activeAccountNoteForm.accountPassword.trim()
                           }
-                          aria-label={t("common.copy", "复制")}
-                          title={t("common.copy", "复制")}
+                          aria-label={t("common.copy", "Copy​")}
+                          title={t("common.copy", "Copy​")}
                         >
                           {accountNoteCopiedKey === "modal:password" ? (
                             <Check size={14} />
@@ -2959,7 +2959,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       <span>
                         {t(
                           "codex.accountNote.twoFactorSecretLabel",
-                          "2FA 秘钥",
+                          "Mã bí mật 2FA",
                         )}
                       </span>
                       <div className="codex-account-note-input-row">
@@ -2979,7 +2979,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }}
                           placeholder={t(
                             "codex.accountNote.twoFactorSecretPlaceholder",
-                            "Base32 secret 或 otpauth:// 链接",
+                            "Mã Base32 hoặc URI otpauth://",
                           )}
                           disabled={activeAccountNoteSaving}
                         />
@@ -2996,9 +2996,9 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }
                           aria-label={t(
                             "mfaQuick.selectLabel",
-                            "选择 2FA 秘钥",
+                            "Chọn khóa 2FA",
                           )}
-                          title={t("mfaQuick.selectLabel", "选择 2FA 秘钥")}
+                          title={t("mfaQuick.selectLabel", "Chọn khóa 2FA")}
                         >
                           <ChevronDown size={14} />
                         </button>
@@ -3011,13 +3011,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           disabled={activeAccountNoteSaving}
                           aria-label={
                             accountNoteSecretVisible
-                              ? t("codex.accountNote.hide", "隐藏")
-                              : t("codex.accountNote.show", "显示")
+                              ? t("codex.accountNote.hide", "Ẩn")
+                              : t("codex.accountNote.show", "Hiện")
                           }
                           title={
                             accountNoteSecretVisible
-                              ? t("codex.accountNote.hide", "隐藏")
-                              : t("codex.accountNote.show", "显示")
+                              ? t("codex.accountNote.hide", "Ẩn")
+                              : t("codex.accountNote.show", "Hiện")
                           }
                         >
                           {accountNoteSecretVisible ? (
@@ -3039,8 +3039,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             activeAccountNoteSaving ||
                             !activeAccountNoteForm.twoFactorSecret.trim()
                           }
-                          aria-label={t("common.copy", "复制")}
-                          title={t("common.copy", "复制")}
+                          aria-label={t("common.copy", "Copy​")}
+                          title={t("common.copy", "Copy​")}
                         >
                           {accountNoteCopiedKey === "modal:twoFactorSecret" ? (
                             <Check size={14} />
@@ -3056,13 +3056,13 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           role="listbox"
                           aria-label={t(
                             "mfaQuick.selectLabel",
-                            "选择 2FA 秘钥",
+                            "Chọn khóa 2FA",
                           )}
                         >
                           {savedMfaRecords.map((record) => {
                             const title = formatMfaRecordOption(
                               record,
-                              t("mfaQuick.unnamedSecret", "未命名秘钥"),
+                              t("mfaQuick.unnamedSecret", "Khóa chưa đặt tên"),
                             );
                             const remark = record.remark?.trim();
                             const isSelected =
@@ -3105,7 +3105,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         activeAccountNoteOtpToken ? (
                         <div className="codex-account-note-otp-preview">
                           <span>
-                            {t("codex.accountNote.currentOtp", "当前验证码")}
+                            {t("codex.accountNote.currentOtp", "Mã hiện tại")}
                           </span>
                           <strong>{activeAccountNoteOtpToken}</strong>
                           <button
@@ -3118,8 +3118,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               )
                             }
                             disabled={activeAccountNoteSaving}
-                            aria-label={t("common.copy", "复制")}
-                            title={t("common.copy", "复制")}
+                            aria-label={t("common.copy", "Copy​")}
+                            title={t("common.copy", "Copy​")}
                           >
                             {accountNoteCopiedKey === "modal:otp" ? (
                               <Check size={14} />
@@ -3129,7 +3129,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           </button>
                           <em>
                             {t("codex.accountNote.otpRemaining", {
-                              defaultValue: "{{seconds}}秒",
+                              defaultValue: "{{seconds}} giây",
                               seconds: mfaTimeRemaining,
                             })}
                           </em>
@@ -3138,14 +3138,14 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <span className="codex-account-note-field-error">
                           {t(
                             "codex.accountNote.twoFactorSecretInvalid",
-                            "2FA 秘钥格式无效，请输入 Base32 secret 或 otpauth:// 链接",
+                            "Mã bí mật 2FA không hợp lệ. Nhập mã Base32 hoặc URI otpauth://.",
                           )}
                         </span>
                       ) : null}
                     </label>
                     <label className="codex-account-note-field">
                       <span>
-                        {t("codex.accountNote.mailUrlLabel", "邮件地址")}
+                        {t("codex.accountNote.mailUrlLabel", "URL email")}
                       </span>
                       <div className="codex-account-note-input-row">
                         <input
@@ -3159,7 +3159,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }}
                           placeholder={t(
                             "codex.accountNote.mailUrlPlaceholder",
-                            "填写可打开的邮件查询网页地址",
+                            "Nhập URL trang tra cứu email mở được",
                           )}
                           disabled={activeAccountNoteSaving}
                         />
@@ -3174,11 +3174,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }
                           aria-label={t(
                             "codex.accountNote.mailPreviewRefresh",
-                            "刷新邮件",
+                            "Làm mới email",
                           )}
                           title={t(
                             "codex.accountNote.mailPreviewRefresh",
-                            "刷新邮件",
+                            "Làm mới email",
                           )}
                         >
                           <RefreshCw
@@ -3200,11 +3200,11 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }
                           aria-label={t(
                             "codex.accountNote.mailPreviewOpen",
-                            "浏览器查看",
+                            "Mở trong trình duyệt",
                           )}
                           title={t(
                             "codex.accountNote.mailPreviewOpen",
-                            "浏览器查看",
+                            "Mở trong trình duyệt",
                           )}
                         >
                           <ExternalLink size={14} />
@@ -3222,8 +3222,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             activeAccountNoteSaving ||
                             !activeAccountNoteForm.mailUrl.trim()
                           }
-                          aria-label={t("common.copy", "复制")}
-                          title={t("common.copy", "复制")}
+                          aria-label={t("common.copy", "Copy​")}
+                          title={t("common.copy", "Copy​")}
                         >
                           {accountNoteCopiedKey === "modal:mailUrl" ? (
                             <Check size={14} />
@@ -3236,7 +3236,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         <div className="codex-account-note-mail-preview is-loading">
                           {t(
                             "codex.accountNote.mailPreviewLoading",
-                            "读取邮件中...",
+                            "Đang đọc email...",
                           )}
                         </div>
                       ) : accountNoteMailPreviewError ? (
@@ -3256,7 +3256,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             <span>
                               {t(
                                 "codex.accountNote.mailPreviewCode",
-                                "最近一条邮箱验证码",
+                                "Mã email mới nhất",
                               )}
                             </span>
                             <strong>{accountNoteMailPreview.code}</strong>
@@ -3270,8 +3270,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 )
                               }
                               disabled={activeAccountNoteSaving}
-                              aria-label={t("common.copy", "复制")}
-                              title={t("common.copy", "复制")}
+                              aria-label={t("common.copy", "Copy​")}
+                              title={t("common.copy", "Copy​")}
                             >
                               {accountNoteCopiedKey === "modal:mailCode" ? (
                                 <Check size={14} />
@@ -3290,7 +3290,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                               ? t(
                                   "codex.accountNote.mailPreviewStatusChanged",
                                   {
-                                    defaultValue: "新验证码 · {{time}}",
+                                    defaultValue: "Mã mới · {{time}}",
                                     time: formatCodexAccountNoteMailPreviewTime(
                                       accountNoteMailPreview.fetchedAt,
                                     ),
@@ -3300,7 +3300,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 ? t(
                                     "codex.accountNote.mailPreviewStatusUnchanged",
                                     {
-                                      defaultValue: "未变化 · {{time}}",
+                                      defaultValue: "Không đổi · {{time}}",
                                       time: formatCodexAccountNoteMailPreviewTime(
                                         accountNoteMailPreview.fetchedAt,
                                       ),
@@ -3309,7 +3309,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                                 : t(
                                     "codex.accountNote.mailPreviewStatusInitial",
                                     {
-                                      defaultValue: "获取于 {{time}}",
+                                      defaultValue: "Đã lấy lúc {{time}}",
                                       time: formatCodexAccountNoteMailPreviewTime(
                                         accountNoteMailPreview.fetchedAt,
                                       ),
@@ -3320,7 +3320,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             <em>
                               {t(
                                 "codex.accountNote.mailPreviewTruncated",
-                                "内容已截断",
+                                "Nội dung đã bị cắt",
                               )}
                             </em>
                           ) : null}
@@ -3329,7 +3329,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     </label>
                     <label className="codex-account-note-field">
                       <span>
-                        {t("codex.accountNote.phoneNumberLabel", "手机号")}
+                        {t("codex.accountNote.phoneNumberLabel", "Điện thoại")}
                       </span>
                       <div className="codex-account-note-input-row">
                         <input
@@ -3343,7 +3343,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                           }}
                           placeholder={t(
                             "codex.accountNote.phoneNumberPlaceholder",
-                            "绑定手机号",
+                            "Số điện thoại đã liên kết",
                           )}
                           disabled={activeAccountNoteSaving}
                         />
@@ -3360,8 +3360,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                             activeAccountNoteSaving ||
                             !activeAccountNoteForm.phoneNumber.trim()
                           }
-                          aria-label={t("common.copy", "复制")}
-                          title={t("common.copy", "复制")}
+                          aria-label={t("common.copy", "Copy​")}
+                          title={t("common.copy", "Copy​")}
                         >
                           {accountNoteCopiedKey === "modal:phoneNumber" ? (
                             <Check size={14} />
@@ -3373,7 +3373,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                     </label>
                     <label className="codex-account-note-field">
                       <span>
-                        {t("codex.accountNote.otherNoteLabel", "其他备注")}
+                        {t("codex.accountNote.otherNoteLabel", "Ghi chú khác")}
                       </span>
                       <textarea
                         className="codex-account-note-textarea"
@@ -3385,7 +3385,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                         }}
                         placeholder={t(
                           "codex.accountNote.placeholder",
-                          "其他交付备注、辅助邮箱或账号说明",
+                          "Ghi chú bàn giao, email khôi phục hoặc chi tiết tài khoản",
                         )}
                         disabled={activeAccountNoteSaving}
                         rows={4}
@@ -3398,7 +3398,7 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       onClick={closeAccountNoteModal}
                       disabled={activeAccountNoteSaving}
                     >
-                      {t("common.cancel", "取消")}
+                      {t("common.cancel", "Hủy")}
                     </button>
                     <button
                       className="btn btn-primary"
@@ -3406,8 +3406,8 @@ export function CodexAccountsOverviewPanel(props: CodexAccountsViewProps) {
                       disabled={activeAccountNoteSaving}
                     >
                       {activeAccountNoteSaving
-                        ? t("common.saving", "保存中...")
-                        : t("common.save", "保存")}
+                        ? t("common.saving", "Đang lưu...")
+                        : t("common.save", "Lưu")}
                     </button>
                   </div>
                 </div>

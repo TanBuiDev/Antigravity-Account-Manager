@@ -34,7 +34,7 @@ export function ClaudeDesktopRuntimeManager({
   }, [disabled]);
 
   const formatStorageSize = (bytes: number | null) => {
-    if (bytes === null) return t('claude.desktopOAuth.storageCalculating', '计算中…');
+    if (bytes === null) return t('claude.desktopOAuth.storageCalculating', "Đang tính…");
     if (bytes < 1024) return `${bytes} B`;
     const units = ['KB', 'MB', 'GB', 'TB'];
     let value = bytes / 1024;
@@ -54,9 +54,9 @@ export function ClaudeDesktopRuntimeManager({
       await claudeService.uninstallClaudeDesktopLoginComponent();
       setSizeBytes(0);
       setConfirming(false);
-      onSuccess(t('claude.desktopOAuth.uninstallSuccess', 'Claude 登录组件已卸载，已清理本地缓存空间。'));
+      onSuccess(t('claude.desktopOAuth.uninstallSuccess', "Đã gỡ thành phần đăng nhập Claude và xóa bộ nhớ đệm cục bộ."));
     } catch (error) {
-      onError(t('claude.desktopOAuth.uninstallFailed', '卸载 Claude 登录组件失败：{{error}}', {
+      onError(t('claude.desktopOAuth.uninstallFailed', "Không thể gỡ thành phần đăng nhập Claude: {{error}}", {
         error: String(error).replace(/^Error:\s*/, ''),
       }));
     } finally {
@@ -71,11 +71,11 @@ export function ClaudeDesktopRuntimeManager({
         role="group"
       >
         <div className="claude-desktop-runtime-manager__copy">
-          <strong>{t('claude.desktopOAuth.uninstallTitle', '卸载登录组件')}</strong>
+          <strong>{t('claude.desktopOAuth.uninstallTitle', "Gỡ cài đặt thành phần đăng nhập")}</strong>
           <p>
             {t(
               'claude.desktopOAuth.uninstallConfirm',
-              '确定卸载本地 Electron 登录组件吗？下次使用 Claude 登录时需要重新下载。',
+              "Gỡ thành phần đăng nhập Electron cục bộ? Thành phần sẽ được tải lại vào lần đăng nhập Claude tiếp theo.",
             )}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function ClaudeDesktopRuntimeManager({
             onClick={() => setConfirming(false)}
             disabled={uninstalling}
           >
-            {t('common.cancel', '取消')}
+            {t('common.cancel', "Hủy")}
           </button>
           <button
             type="button"
@@ -96,8 +96,8 @@ export function ClaudeDesktopRuntimeManager({
           >
             {uninstalling && <RefreshCw size={14} className="loading-spinner" />}
             {uninstalling
-              ? t('claude.desktopOAuth.uninstalling', '正在卸载...')
-              : t('claude.desktopOAuth.uninstall', '卸载并释放空间')}
+              ? t('claude.desktopOAuth.uninstalling', "Đang gỡ cài đặt...")
+              : t('claude.desktopOAuth.uninstall', "Gỡ cài đặt và giải phóng dung lượng")}
           </button>
         </div>
       </div>
@@ -112,9 +112,9 @@ export function ClaudeDesktopRuntimeManager({
         </div>
         <div className="claude-desktop-runtime-manager__copy">
           <div className="claude-desktop-runtime-manager__title-row">
-            <strong>{t('claude.desktopOAuth.storageTitle', '登录组件缓存')}</strong>
+            <strong>{t('claude.desktopOAuth.storageTitle', "Bộ nhớ đệm thành phần đăng nhập")}</strong>
             <span className="claude-desktop-runtime-manager__size">
-              {t('claude.desktopOAuth.storageUsage', '占用 {{size}}', {
+              {t('claude.desktopOAuth.storageUsage', "Đã dùng {{size}}", {
                 size: formatStorageSize(sizeBytes),
               })}
             </span>
@@ -122,7 +122,7 @@ export function ClaudeDesktopRuntimeManager({
           <p>
             {t(
               'claude.desktopOAuth.uninstallDesc',
-              '卸载会删除本地 Electron 登录组件、下载缓存和未完成登录的临时文件；不会删除已保存的 Claude 账号。',
+              "Xóa thành phần đăng nhập Electron cục bộ, bộ nhớ đệm tải xuống và các tệp đăng nhập chưa hoàn tất; không xóa tài khoản Claude đã lưu.",
             )}
           </p>
         </div>
@@ -137,7 +137,7 @@ export function ClaudeDesktopRuntimeManager({
         disabled={disabled || uninstalling}
       >
         <Trash2 size={14} />
-        {t('claude.desktopOAuth.uninstall', '卸载并释放空间')}
+        {t('claude.desktopOAuth.uninstall', "Gỡ cài đặt và giải phóng dung lượng")}
       </button>
     </div>
   );

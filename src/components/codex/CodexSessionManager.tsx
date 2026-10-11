@@ -403,13 +403,13 @@ export function CodexSessionManager() {
     () => [
       {
         value: '',
-        label: t('codex.sessionManager.targetModal.pickTarget', '请选择目标实例'),
+        label: t('codex.sessionManager.targetModal.pickTarget', "Chọn phiên bản đích"),
       },
       ...orderedInstances.map((instance) => ({
         value: instance.id,
         label: instance.isDefault
-          ? t('instances.defaultName', '默认实例')
-          : instance.name || t('instances.defaultName', '默认实例'),
+          ? t('instances.defaultName', "Phiên bản mặc định")
+          : instance.name || t('instances.defaultName', "Phiên bản mặc định"),
       })),
     ],
     [orderedInstances, t],
@@ -419,8 +419,8 @@ export function CodexSessionManager() {
       orderedInstances.map((instance) => ({
         value: instance.id,
         label: instance.isDefault
-          ? t('instances.defaultName', '默认实例')
-          : instance.name || t('instances.defaultName', '默认实例'),
+          ? t('instances.defaultName', "Phiên bản mặc định")
+          : instance.name || t('instances.defaultName', "Phiên bản mặc định"),
       })),
     [orderedInstances, t],
   );
@@ -428,19 +428,19 @@ export function CodexSessionManager() {
     () => [
       {
         value: 'conversation',
-        label: t('codex.sessionManager.kind.conversation', '对话'),
+        label: t('codex.sessionManager.kind.conversation', "Chat"),
       },
       {
         value: 'external',
-        label: t('codex.sessionManager.kind.external', '外部'),
+        label: t('codex.sessionManager.kind.external', "Ngoài"),
       },
       {
         value: 'subagent',
-        label: t('codex.sessionManager.kind.subagent', '子代理'),
+        label: t('codex.sessionManager.kind.subagent', "Tác nhân con"),
       },
       {
         value: 'all',
-        label: t('codex.sessionManager.kind.all', '全部类型'),
+        label: t('codex.sessionManager.kind.all', "Mọi loại"),
       },
     ],
     [t],
@@ -496,7 +496,7 @@ export function CodexSessionManager() {
     return [
       {
         value: 'all',
-        label: t('codex.sessionManager.exportModal.allSources', '全部来源'),
+        label: t('codex.sessionManager.exportModal.allSources', "Tất cả nguồn"),
       },
       ...Array.from(sourceMap.entries()).map(([value, option]) => ({
         value,
@@ -506,9 +506,9 @@ export function CodexSessionManager() {
   }, [exportAvailableItems, t]);
   const exportSelectionFilterOptions = useMemo<SingleSelectOption[]>(
     () => [
-      { value: 'all', label: t('codex.sessionManager.exportModal.filterAll', '全部') },
-      { value: 'selected', label: t('codex.sessionManager.exportModal.filterSelected', '已选') },
-      { value: 'unselected', label: t('codex.sessionManager.exportModal.filterUnselected', '未选') },
+      { value: 'all', label: t('codex.sessionManager.exportModal.filterAll', "Tất cả") },
+      { value: 'selected', label: t('codex.sessionManager.exportModal.filterSelected', "Đã chọn") },
+      { value: 'unselected', label: t('codex.sessionManager.exportModal.filterUnselected', "Chưa chọn") },
     ],
     [t],
   );
@@ -555,8 +555,8 @@ export function CodexSessionManager() {
   const getTransferTitle = useCallback(
     (operation: CodexSessionTransferOperation) =>
       operation === 'export'
-        ? t('codex.sessionManager.transferModal.exportTitle', '导出会话')
-        : t('codex.sessionManager.transferModal.importTitle', '导入会话'),
+        ? t('codex.sessionManager.transferModal.exportTitle', "Xuất phiên")
+        : t('codex.sessionManager.transferModal.importTitle', "Nhập phiên"),
     [t],
   );
 
@@ -565,17 +565,17 @@ export function CodexSessionManager() {
       const operation = progress?.operation ?? transferTask?.operation ?? 'export';
       const phase = progress?.phase ?? 'prepare';
       if (operation === 'export') {
-        if (phase === 'collect') return t('codex.sessionManager.transferModal.phase.exportCollect', '正在收集会话...');
-        if (phase === 'hash') return t('codex.sessionManager.transferModal.phase.exportHash', '正在校验会话文件...');
-        if (phase === 'write') return t('codex.sessionManager.transferModal.phase.exportWrite', '正在写入会话包...');
-        if (phase === 'done') return t('codex.sessionManager.transferModal.phase.done', '任务已完成');
-        return t('codex.sessionManager.transferModal.phase.exportPrepare', '正在准备导出...');
+        if (phase === 'collect') return t('codex.sessionManager.transferModal.phase.exportCollect', "Đang thu thập phiên...");
+        if (phase === 'hash') return t('codex.sessionManager.transferModal.phase.exportHash', "Đang kiểm tra tệp phiên...");
+        if (phase === 'write') return t('codex.sessionManager.transferModal.phase.exportWrite', "Đang ghi gói phiên...");
+        if (phase === 'done') return t('codex.sessionManager.transferModal.phase.done', "Tác vụ đã hoàn tất");
+        return t('codex.sessionManager.transferModal.phase.exportPrepare', "Đang chuẩn bị xuất...");
       }
-      if (phase === 'read') return t('codex.sessionManager.transferModal.phase.importRead', '正在读取会话包...');
-      if (phase === 'write') return t('codex.sessionManager.transferModal.phase.importWrite', '正在写入目标实例...');
-      if (phase === 'rebuild') return t('codex.sessionManager.transferModal.phase.importRebuild', '正在刷新官方会话索引...');
-      if (phase === 'done') return t('codex.sessionManager.transferModal.phase.done', '任务已完成');
-      return t('codex.sessionManager.transferModal.phase.importPrepare', '正在准备导入...');
+      if (phase === 'read') return t('codex.sessionManager.transferModal.phase.importRead', "Đang đọc gói phiên...");
+      if (phase === 'write') return t('codex.sessionManager.transferModal.phase.importWrite', "Đang ghi vào phiên bản đích...");
+      if (phase === 'rebuild') return t('codex.sessionManager.transferModal.phase.importRebuild', "Đang làm mới chỉ mục phiên chính thức...");
+      if (phase === 'done') return t('codex.sessionManager.transferModal.phase.done', "Tác vụ đã hoàn tất");
+      return t('codex.sessionManager.transferModal.phase.importPrepare', "Đang chuẩn bị nhập...");
     },
     [t, transferTask?.operation],
   );
@@ -818,7 +818,7 @@ export function CodexSessionManager() {
 
   const handleOpenSyncTargetModal = async () => {
     if (selectedIds.length === 0) {
-      setMessage({ text: t('codex.sessionManager.messages.pickOne', '请至少选择一条会话'), tone: 'error' });
+      setMessage({ text: t('codex.sessionManager.messages.pickOne', "Vui lòng chọn ít nhất một phiên"), tone: 'error' });
       return;
     }
 
@@ -878,7 +878,7 @@ export function CodexSessionManager() {
       const latestInstances = await refreshInstances();
       if (latestInstances.length < 2) {
         setMessage({
-          text: t('codex.sessionManager.messages.syncNeedTwo', '至少需要两个实例才能同步会话'),
+          text: t('codex.sessionManager.messages.syncNeedTwo', "Cần ít nhất hai phiên bản để đồng bộ phiên"),
           tone: 'error',
         });
         return;
@@ -887,9 +887,9 @@ export function CodexSessionManager() {
       const confirmed = await confirmDialog(
         t('codex.sessionManager.confirm.syncMessage'),
         {
-          title: t('codex.sessionManager.actions.syncSessions', '同步会话'),
-          okLabel: t('common.confirm', '确认'),
-          cancelLabel: t('common.cancel', '取消'),
+          title: t('codex.sessionManager.actions.syncSessions', "Đồng bộ phiên"),
+          okLabel: t('common.confirm', "Xác nhận"),
+          cancelLabel: t('common.cancel', "Hủy"),
         },
       );
       if (!confirmed) return;
@@ -907,11 +907,11 @@ export function CodexSessionManager() {
 
   const handleSyncSelectedToInstance = async () => {
     if (selectedIds.length === 0) {
-      setSyncTargetModalError(t('codex.sessionManager.messages.pickOne', '请至少选择一条会话'));
+      setSyncTargetModalError(t('codex.sessionManager.messages.pickOne', "Vui lòng chọn ít nhất một phiên"));
       return;
     }
     if (!syncTargetInstanceId) {
-      setSyncTargetModalError(t('codex.sessionManager.targetModal.pickTarget', '请选择目标实例'));
+      setSyncTargetModalError(t('codex.sessionManager.targetModal.pickTarget', "Chọn phiên bản đích"));
       return;
     }
 
@@ -970,7 +970,7 @@ export function CodexSessionManager() {
       return summary.message;
     }
     if (summary.trashedSessionCount === 0) {
-      return t('codex.sessionManager.messages.trashSummaryEmpty', '所选会话在当前实例集合中不存在，无需处理');
+      return t('codex.sessionManager.messages.trashSummaryEmpty', "Các cuộc trò chuyện đã chọn không tồn tại trong tập hợp phiên bản hiện tại, không cần xử lý");
     }
 
     const separator = isZh ? '；' : '; ';
@@ -981,32 +981,32 @@ export function CodexSessionManager() {
       fallbackInstanceCount > 0
         ? t(
           'codex.sessionManager.messages.trashSummaryFallback',
-          '已将 {{count}} 条会话移到废纸篓，并已触发官方 Codex 重建会话索引',
+          "Đã chuyển {{count}} cuộc trò chuyện vào thùng rác và kích hoạt dựng lại chỉ mục phiên của Codex chính thức",
           { count: summary.trashedSessionCount },
         )
         : t(
           'codex.sessionManager.messages.trashSummary',
-          '已将 {{count}} 条会话移到废纸篓，并已在官方 Codex 中删除',
+          "Đã chuyển {{count}} cuộc trò chuyện vào thùng rác và xóa trong Codex chính thức",
           { count: summary.trashedSessionCount },
         ),
     ];
     if (runningInstanceCount > 0) {
       parts.push(t(
         'codex.sessionManager.messages.trashSummaryRunningHint',
-        '运行中的实例可能需要刷新或重启后显示',
+        "Các phiên bản đang chạy có thể cần làm mới hoặc khởi động lại để hiển thị thay đổi",
       ));
     }
     if (fallbackInstanceCount > 0) {
       parts.push(t(
         'codex.sessionManager.messages.trashSummaryFallbackHint',
-        '{{count}} 个实例的官方删除未完成，已按文件方式移除，Codex 重启后会同步',
+        "Việc xóa chính thức chưa hoàn tất ở {{count}} phiên bản; tệp đã được xóa trực tiếp và Codex sẽ đồng bộ sau khi khởi động lại",
         { count: fallbackInstanceCount },
       ));
     }
     if (rebuildFailedInstanceCount > 0) {
       parts.push(t(
         'codex.sessionManager.messages.trashSummaryRebuildFailedHint',
-        '{{count}} 个实例的官方侧边栏索引重建未完成，重启 Codex 后会重新加载',
+        "Việc dựng lại chỉ mục thanh bên chính thức chưa hoàn tất ở {{count}} phiên bản; Codex sẽ tải lại sau khi khởi động lại",
         { count: rebuildFailedInstanceCount },
       ));
     }
@@ -1015,19 +1015,19 @@ export function CodexSessionManager() {
 
   const handleMoveToTrash = async () => {
     if (selectedIds.length === 0) {
-      setMessage({ text: t('codex.sessionManager.messages.pickOne', '请至少选择一条会话'), tone: 'error' });
+      setMessage({ text: t('codex.sessionManager.messages.pickOne', "Vui lòng chọn ít nhất một phiên"), tone: 'error' });
       return;
     }
 
     const confirmed = await confirmDialog(
       t(
         'codex.sessionManager.confirm.message',
-        '会将所选会话从对应实例中移到废纸篓，便于后续恢复；运行中的实例可能需要重启后才会反映。确认继续？',
+        "Các phiên đã chọn sẽ được chuyển vào thùng rác từ các phiên bản tương ứng để có thể khôi phục sau này. Các phiên bản đang chạy có thể cần khởi động lại trước khi thay đổi xuất hiện. Tiếp tục chứ?",
       ),
       {
-        title: t('codex.sessionManager.confirm.title', '移到废纸篓'),
-        okLabel: t('common.confirm', '确认'),
-        cancelLabel: t('common.cancel', '取消'),
+        title: t('codex.sessionManager.confirm.title', "Chuyển vào thùng rác"),
+        okLabel: t('common.confirm', "Xác nhận"),
+        cancelLabel: t('common.cancel', "Hủy"),
         kind: 'warning',
       },
     );
@@ -1052,7 +1052,7 @@ export function CodexSessionManager() {
 
   const handleRestoreFromTrash = async () => {
     if (selectedTrashIds.length === 0) {
-      setRestoreModalError(t('codex.sessionManager.messages.pickRestoreOne', '请至少选择一条待恢复会话'));
+      setRestoreModalError(t('codex.sessionManager.messages.pickRestoreOne', "Hãy chọn ít nhất một phiên để khôi phục"));
       return;
     }
 
@@ -1076,7 +1076,7 @@ export function CodexSessionManager() {
   const handleDeleteTrashedSessions = async (sessionIds: string[]) => {
     const normalizedSessionIds = Array.from(new Set(sessionIds.filter(Boolean)));
     if (normalizedSessionIds.length === 0) {
-      setRestoreModalError(t('codex.sessionManager.restoreModal.pickDeleteOne', '请至少选择一条要永久删除的会话'));
+      setRestoreModalError(t('codex.sessionManager.restoreModal.pickDeleteOne', "Chọn ít nhất một phiên để xóa vĩnh viễn"));
       return;
     }
 
@@ -1092,18 +1092,18 @@ export function CodexSessionManager() {
       isSingle
         ? t(
             'codex.sessionManager.restoreModal.deleteOneConfirm',
-            '确定要永久删除这个会话吗？删除后无法恢复，预计释放 {{size}}。',
+            "Xóa vĩnh viễn phiên này? Không thể hoàn tác. Dung lượng dự kiến giải phóng: {{size}}.",
             { size: formatBytes(deletingSizeBytes) },
           )
         : t(
             'codex.sessionManager.restoreModal.deleteSelectedConfirm',
-            '确定要永久删除选中的 {{count}} 条会话吗？删除后无法恢复，预计释放 {{size}}。',
+            "Xóa vĩnh viễn {{count}} phiên đã chọn? Không thể hoàn tác. Dung lượng dự kiến giải phóng: {{size}}.",
             { count: normalizedSessionIds.length, size: formatBytes(deletingSizeBytes) },
           ),
       {
-        title: t('codex.sessionManager.restoreModal.permanentDeleteTitle', '永久删除'),
-        okLabel: t('codex.sessionManager.restoreModal.permanentDeleteAction', '永久删除'),
-        cancelLabel: t('common.cancel', '取消'),
+        title: t('codex.sessionManager.restoreModal.permanentDeleteTitle', "Xóa vĩnh viễn"),
+        okLabel: t('codex.sessionManager.restoreModal.permanentDeleteAction', "Xóa vĩnh viễn"),
+        cancelLabel: t('common.cancel', "Hủy"),
         kind: 'warning',
       },
     );
@@ -1134,13 +1134,13 @@ export function CodexSessionManager() {
     const confirmed = await confirmDialog(
       t(
         'codex.sessionManager.restoreModal.emptyTrashConfirm',
-        '确定要清空废纸篓吗？其中 {{count}} 条会话将被永久删除且无法恢复，预计释放 {{size}}。',
+        "Dọn thùng rác? {{count}} phiên sẽ bị xóa vĩnh viễn và không thể khôi phục. Dung lượng dự kiến giải phóng: {{size}}.",
         { count: trashedSessions.length, size: formatBytes(trashTotalSizeBytes) },
       ),
       {
-        title: t('codex.sessionManager.restoreModal.emptyTrash', '清空废纸篓'),
-        okLabel: t('codex.sessionManager.restoreModal.emptyTrash', '清空废纸篓'),
-        cancelLabel: t('common.cancel', '取消'),
+        title: t('codex.sessionManager.restoreModal.emptyTrash', "Dọn thùng rác"),
+        okLabel: t('codex.sessionManager.restoreModal.emptyTrash', "Dọn thùng rác"),
+        cancelLabel: t('common.cancel', "Hủy"),
         kind: 'warning',
       },
     );
@@ -1240,7 +1240,7 @@ export function CodexSessionManager() {
 
   const handleExportSessions = async () => {
     if (selectedIds.length === 0) {
-      setMessage({ text: t('codex.sessionManager.messages.pickOne', '请至少选择一条会话'), tone: 'error' });
+      setMessage({ text: t('codex.sessionManager.messages.pickOne', "Vui lòng chọn ít nhất một phiên"), tone: 'error' });
       return;
     }
 
@@ -1286,15 +1286,15 @@ export function CodexSessionManager() {
 
   const handleConfirmExportSessions = async () => {
     if (!exportPreview) {
-      setExportModalError(t('codex.sessionManager.exportModal.noPreview', '请先完成导出预览'));
+      setExportModalError(t('codex.sessionManager.exportModal.noPreview', "Hãy hoàn tất xem trước trước"));
       return;
     }
     if (exportableSessionIds.length === 0) {
-      setExportModalError(t('codex.sessionManager.exportModal.noExportable', '没有可导出的会话'));
+      setExportModalError(t('codex.sessionManager.exportModal.noExportable', "Không có phiên có thể xuất"));
       return;
     }
     if (!exportPath) {
-      setExportModalError(t('codex.sessionManager.exportModal.pickPath', '请选择导出位置'));
+      setExportModalError(t('codex.sessionManager.exportModal.pickPath', "Chọn vị trí xuất"));
       return;
     }
 
@@ -1378,7 +1378,7 @@ export function CodexSessionManager() {
       const defaultTarget = targetCandidates.find((instance) => instance.isDefault) ?? targetCandidates[0];
       const targetInstanceId = importTargetInstanceId || defaultTarget?.id || '';
       if (!targetInstanceId) {
-        setImportModalError(t('codex.sessionManager.importModal.noTarget', '未发现可导入的 Codex 实例'));
+        setImportModalError(t('codex.sessionManager.importModal.noTarget', "Không có instance Codex nào khả dụng để nhập"));
         return;
       }
       await previewImportPackage(filePath, targetInstanceId);
@@ -1436,15 +1436,15 @@ export function CodexSessionManager() {
 
   const handleImportSelectedSessions = async () => {
     if (!importPreview) {
-      setImportModalError(t('codex.sessionManager.importModal.noPackage', '请先选择会话包'));
+      setImportModalError(t('codex.sessionManager.importModal.noPackage', "Trước tiên hãy chọn gói phiên"));
       return;
     }
     if (!importTargetInstanceId) {
-      setImportModalError(t('codex.sessionManager.targetModal.pickTarget', '请选择目标实例'));
+      setImportModalError(t('codex.sessionManager.targetModal.pickTarget', "Chọn phiên bản đích"));
       return;
     }
     if (selectedImportIds.length === 0) {
-      setImportModalError(t('codex.sessionManager.importModal.pickOne', '请至少选择一条可导入会话'));
+      setImportModalError(t('codex.sessionManager.importModal.pickOne', "Chọn ít nhất một phiên có thể nhập"));
       return;
     }
 
@@ -1617,15 +1617,15 @@ export function CodexSessionManager() {
 
   const getImportStatusLabel = (item: CodexSessionImportPreviewItem): string => {
     if (item.status === 'ready') {
-      return t('codex.sessionManager.importModal.statusReady', '可导入');
+      return t('codex.sessionManager.importModal.statusReady', "Sẵn sàng");
     }
     if (item.status === 'duplicate') {
-      return t('codex.sessionManager.importModal.statusDuplicate', '已存在');
+      return t('codex.sessionManager.importModal.statusDuplicate', "Đã có");
     }
     if (item.status === 'conflict') {
-      return t('codex.sessionManager.importModal.statusConflict', '冲突');
+      return t('codex.sessionManager.importModal.statusConflict', "Xung đột");
     }
-    return t('codex.sessionManager.importModal.statusInvalid', '无效');
+    return t('codex.sessionManager.importModal.statusInvalid', "Không hợp lệ");
   };
 
   const handleCopySessionId = async (event: MouseEvent<HTMLButtonElement>, sessionId: string) => {
@@ -1645,7 +1645,7 @@ export function CodexSessionManager() {
     } catch (error) {
       console.error('Failed to copy session id:', error);
       setMessage({
-        text: t('common.shared.export.copyFailed', '复制失败，请手动复制'),
+        text: t('common.shared.export.copyFailed', "Sao chép thất bại, vui lòng sao chép thủ công"),
         tone: 'error',
       });
     }
@@ -1668,7 +1668,7 @@ export function CodexSessionManager() {
                 type="text"
                 value={titleSearchInput}
                 onChange={(event) => setTitleSearchInput(event.target.value)}
-                placeholder={t('codex.sessionManager.search.titlePlaceholder', '按标题搜索')}
+                placeholder={t('codex.sessionManager.search.titlePlaceholder', "Tìm theo tiêu đề")}
                 disabled={loading}
               />
             </div>
@@ -1680,7 +1680,7 @@ export function CodexSessionManager() {
             disabled={loading || (!hasSearchInput && !hasAppliedSearch)}
           >
             <X size={14} />
-            {t('codex.sessionManager.search.clear', '清空')}
+            {t('codex.sessionManager.search.clear', "Xóa")}
           </button>
           <SingleSelectDropdown
             className="codex-session-manager__kind-filter"
@@ -1688,7 +1688,7 @@ export function CodexSessionManager() {
             disabled={loading}
             options={sessionKindOptions}
             onChange={(value) => setSessionKindFilter(value as CodexSessionKindFilter)}
-            ariaLabel={t('codex.sessionManager.kindFilter', '会话类型')}
+            ariaLabel={t('codex.sessionManager.kindFilter', "Loại phiên")}
             menuWidth={160}
             menuMaxHeight={220}
           />
@@ -1702,12 +1702,12 @@ export function CodexSessionManager() {
               disabled={syncing || syncingToInstance || repairingVisibility || deleting || loading || instanceCount < 2}
               title={
                 instanceCount < 2
-                  ? t('codex.sessionManager.messages.syncNeedTwo', '至少需要两个实例才能同步会话')
-                  : t('codex.sessionManager.actions.syncSessions', '同步会话')
+                  ? t('codex.sessionManager.messages.syncNeedTwo', "Cần ít nhất hai phiên bản để đồng bộ phiên")
+                  : t('codex.sessionManager.actions.syncSessions', "Đồng bộ phiên")
               }
             >
               <RefreshCw size={14} className={syncing ? 'icon-spin' : undefined} />
-              {t('codex.sessionManager.actions.syncSessions', '同步会话')}
+              {t('codex.sessionManager.actions.syncSessions', "Đồng bộ phiên")}
             </button>
             <button
               className="btn btn-secondary codex-session-manager__action-button"
@@ -1716,7 +1716,7 @@ export function CodexSessionManager() {
               disabled={loading || syncing || syncingToInstance || repairingVisibility || deleting || exporting || importing || loadingImportPreview}
             >
               <Upload size={14} className={loadingImportPreview ? 'icon-spin' : undefined} />
-              {t('codex.sessionManager.actions.importSessions', '导入会话')}
+              {t('codex.sessionManager.actions.importSessions', "Nhập phiên")}
             </button>
             <button
               className="btn btn-secondary codex-session-manager__action-button"
@@ -1725,7 +1725,7 @@ export function CodexSessionManager() {
               disabled={repairingVisibility || loading || deleting || syncing || syncingToInstance || exporting}
             >
               <Eye size={14} />
-              {t('codex.sessionManager.actions.repairVisibility', '修复可见性')}
+              {t('codex.sessionManager.actions.repairVisibility', "Sửa hiển thị")}
             </button>
             <button
               className="btn btn-secondary codex-session-manager__action-button"
@@ -1734,7 +1734,7 @@ export function CodexSessionManager() {
               disabled={loading || syncing || syncingToInstance || repairingVisibility || deleting || restoring || purgingTrash}
             >
               <Trash2 size={14} />
-              {t('codex.sessionManager.actions.trash', '废纸篓')}
+              {t('codex.sessionManager.actions.trash', "Thùng rác")}
             </button>
             <button
               className="btn btn-secondary codex-session-manager__action-button"
@@ -1743,7 +1743,7 @@ export function CodexSessionManager() {
               disabled={loading || deleting || syncing || syncingToInstance || repairingVisibility}
             >
               <RefreshCw size={14} className={loading ? 'icon-spin' : undefined} />
-              {t('common.refresh', '刷新')}
+              {t('common.refresh', "Làm mới")}
             </button>
           </div>
           {allSessionIds.length > 0 && (
@@ -1755,19 +1755,19 @@ export function CodexSessionManager() {
                 disabled={loading || allSessionIds.length === 0}
                 title={
                   allSessionsSelected
-                    ? t('codex.sessionManager.actions.clearSelectedSessions', '取消全选')
-                    : t('codex.sessionManager.actions.selectAllSessions', '全选全部会话')
+                    ? t('codex.sessionManager.actions.clearSelectedSessions', "Bỏ chọn")
+                    : t('codex.sessionManager.actions.selectAllSessions', "Chọn mọi phiên")
                 }
                 aria-label={
                   allSessionsSelected
-                    ? t('codex.sessionManager.actions.clearSelectedSessions', '取消全选')
-                    : t('codex.sessionManager.actions.selectAllSessions', '全选全部会话')
+                    ? t('codex.sessionManager.actions.clearSelectedSessions', "Bỏ chọn")
+                    : t('codex.sessionManager.actions.selectAllSessions', "Chọn mọi phiên")
                 }
               >
                 {allSessionsSelected ? <X size={14} /> : <Check size={14} />}
                 {allSessionsSelected
-                  ? t('codex.sessionManager.actions.clearSelectedSessions', '取消全选')
-                  : t('codex.sessionManager.actions.selectAllSessions', '全选全部会话')}
+                  ? t('codex.sessionManager.actions.clearSelectedSessions', "Bỏ chọn")
+                  : t('codex.sessionManager.actions.selectAllSessions', "Chọn mọi phiên")}
               </button>
               <button
                 className="btn btn-secondary codex-session-manager__action-button"
@@ -1776,7 +1776,7 @@ export function CodexSessionManager() {
                 disabled={syncing || syncingToInstance || repairingVisibility || deleting || loading || exporting || selectedIds.length === 0}
               >
                 <Copy size={14} className={syncingToInstance ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.actions.copyToInstance', '复制到实例')} ({selectedIds.length})
+                {t('codex.sessionManager.actions.copyToInstance', "Sao chép sang phiên bản")} ({selectedIds.length})
               </button>
               <button
                 className="btn btn-secondary codex-session-manager__action-button"
@@ -1785,7 +1785,7 @@ export function CodexSessionManager() {
                 disabled={syncing || syncingToInstance || repairingVisibility || deleting || loading || loadingExportPreview || exporting || selectedIds.length === 0}
               >
                 <Download size={14} className={loadingExportPreview || exporting ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.actions.exportSessions', '导出会话')} ({selectedIds.length})
+                {t('codex.sessionManager.actions.exportSessions', "Xuất phiên")} ({selectedIds.length})
               </button>
               <button
                 className="btn btn-danger codex-session-manager__action-button"
@@ -1794,7 +1794,7 @@ export function CodexSessionManager() {
                 disabled={deleting || loading || syncing || syncingToInstance || repairingVisibility || selectedIds.length === 0}
               >
                 <Trash2 size={14} />
-                {t('codex.sessionManager.actions.moveToTrash', '移到废纸篓')} ({selectedIds.length})
+                {t('codex.sessionManager.actions.moveToTrash', "Chuyển vào thùng rác")} ({selectedIds.length})
               </button>
             </div>
           )}
@@ -1812,13 +1812,13 @@ export function CodexSessionManager() {
             <span>
               {transferTask.status === 'running'
                 ? t('codex.sessionManager.transferModal.runningSummary', {
-                    defaultValue: '正在处理 {{current}}/{{total}}',
+                    defaultValue: "Đang xử lý {{current}}/{{total}}",
                     current: transferProgress?.current ?? 0,
                     total: transferProgress?.total ?? 0,
                   })
                 : transferTask.status === 'success'
-                  ? t('codex.sessionManager.transferModal.completedSummary', '任务已完成')
-                  : t('codex.sessionManager.transferModal.failedSummary', '任务失败')}
+                  ? t('codex.sessionManager.transferModal.completedSummary', "Tác vụ đã hoàn tất")
+                  : t('codex.sessionManager.transferModal.failedSummary', "Tác vụ thất bại")}
             </span>
             <div className="codex-session-transfer-task__progress" aria-hidden="true">
               <span style={{ width: `${transferPercent}%` }} />
@@ -1827,12 +1827,12 @@ export function CodexSessionManager() {
           <div className="codex-session-transfer-task__actions">
             <button className="btn btn-secondary" type="button" onClick={() => setShowTransferModal(true)}>
               <Eye size={14} />
-              {t('codex.sessionManager.transferModal.reopen', '查看进度')}
+              {t('codex.sessionManager.transferModal.reopen', "Xem tiến độ")}
             </button>
             {transferTask.status !== 'running' ? (
               <button className="btn btn-secondary" type="button" onClick={handleClearTransferTask}>
                 <X size={14} />
-                {t('codex.sessionManager.transferModal.clear', '清除')}
+                {t('codex.sessionManager.transferModal.clear', "Xóa")}
               </button>
             ) : null}
           </div>
@@ -1841,7 +1841,7 @@ export function CodexSessionManager() {
 
       {loading && sessions.length === 0 ? (
         <div className="empty-state">
-          <h3>{t('common.loading', '加载中...')}</h3>
+          <h3>{t('common.loading', "Đang tải...")}</h3>
         </div>
       ) : null}
 
@@ -1850,13 +1850,13 @@ export function CodexSessionManager() {
           <Folder size={42} className="empty-icon" />
           <h3>
             {hasAppliedSearch
-              ? t('codex.sessionManager.empty.searchTitle', '未找到匹配会话')
-              : t('codex.sessionManager.empty.title', '还没有可管理的会话')}
+              ? t('codex.sessionManager.empty.searchTitle', "Không tìm thấy phiên phù hợp")
+              : t('codex.sessionManager.empty.title', "Chưa có phiên nào để quản lý")}
           </h3>
           <p>
             {hasAppliedSearch
-              ? t('codex.sessionManager.empty.searchDesc', '请调整标题关键词后再试。')
-              : t('codex.sessionManager.empty.desc', '当前实例集合中还没有发现会话记录。')}
+              ? t('codex.sessionManager.empty.searchDesc', "Hãy điều chỉnh từ khóa tiêu đề.")
+              : t('codex.sessionManager.empty.desc', "Không tìm thấy bản ghi phiên nào trong tập hợp phiên bản hiện tại.")}
           </p>
         </div>
       ) : null}
@@ -1878,8 +1878,8 @@ export function CodexSessionManager() {
                       onClick={() => toggleGroupExpanded(group.cwd)}
                       aria-label={
                         isExpanded
-                          ? t('codex.sessionManager.actions.collapse', '收起')
-                          : t('codex.sessionManager.actions.expand', '展开')
+                          ? t('codex.sessionManager.actions.collapse', "Thu gọn")
+                          : t('codex.sessionManager.actions.expand', "Mở rộng")
                       }
                     >
                       {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
@@ -1920,16 +1920,16 @@ export function CodexSessionManager() {
                             />
                             <div className="codex-session-row__content">
                               <span className="codex-session-row__title" title={session.title}>
-                                {session.title || t('codex.sessionManager.untitled', '未命名会话')}
+                                {session.title || t('codex.sessionManager.untitled', "Phiên chưa đặt tên")}
                               </span>
                               <span className="codex-session-row__meta">
                                 {session.locations.map((location) => location.instanceName).join(' / ')}
                                 {hasRunningLocation
-                                  ? t('codex.sessionManager.locationRunning', '（运行中）')
+                                  ? t('codex.sessionManager.locationRunning', " (đang chạy)")
                                   : ''}
                               </span>
                               <span className="codex-session-row__meta codex-session-row__session-id" title={session.sessionId}>
-                                {t('codex.sessionManager.labels.sessionId', '会话 ID')}: {formatSessionId(session.sessionId)}
+                                {t('codex.sessionManager.labels.sessionId', "ID phiên")}: {formatSessionId(session.sessionId)}
                               </span>
                             </div>
                           </label>
@@ -1938,8 +1938,8 @@ export function CodexSessionManager() {
                               className={`codex-session-row__copy-button${copiedSessionId === session.sessionId ? ' is-copied' : ''}`}
                               type="button"
                               onClick={(event) => void handleCopySessionId(event, session.sessionId)}
-                              title={t('codex.sessionManager.actions.copySessionId', '复制会话 ID')}
-                              aria-label={t('codex.sessionManager.actions.copySessionId', '复制会话 ID')}
+                              title={t('codex.sessionManager.actions.copySessionId', "Sao chép ID phiên")}
+                              aria-label={t('codex.sessionManager.actions.copySessionId', "Sao chép ID phiên")}
                             >
                               {copiedSessionId === session.sessionId ? <Check size={14} /> : <Copy size={14} />}
                             </button>
@@ -1947,8 +1947,8 @@ export function CodexSessionManager() {
                               className="codex-session-row__copy-button"
                               type="button"
                               onClick={(event) => void handleOpenSessionLocation(event, session)}
-                              title={t('codex.sessionManager.actions.openLocation', '打开位置')}
-                              aria-label={t('codex.sessionManager.actions.openLocation', '打开位置')}
+                              title={t('codex.sessionManager.actions.openLocation', "Mở vị trí")}
+                              aria-label={t('codex.sessionManager.actions.openLocation', "Mở vị trí")}
                             >
                               <FolderOpen size={14} />
                             </button>
@@ -1956,18 +1956,18 @@ export function CodexSessionManager() {
                               className="codex-session-row__copy-button"
                               type="button"
                               onClick={(event) => void handleOpenSessionRollout(event, session)}
-                              title={t('codex.sessionManager.actions.openRollout', '打开会话文件')}
-                              aria-label={t('codex.sessionManager.actions.openRollout', '打开会话文件')}
+                              title={t('codex.sessionManager.actions.openRollout', "Mở tệp phiên")}
+                              aria-label={t('codex.sessionManager.actions.openRollout', "Mở tệp phiên")}
                             >
                               <FileText size={14} />
                             </button>
                             {tokenText ? (
-                              <span className="codex-session-row__tokens" title={t('codex.sessionManager.labels.tokenUsage', 'Token使用')}>
+                              <span className="codex-session-row__tokens" title={t('codex.sessionManager.labels.tokenUsage', "Mức dùng token")}>
                                 {tokenText}
                               </span>
                             ) : null}
                             {!tokenText && isTokenStatsLoading ? (
-                              <span className="codex-session-row__tokens" title={t('common.loading', '加载中...')}>
+                              <span className="codex-session-row__tokens" title={t('common.loading', "Đang tải...")}>
                                 <RefreshCw size={12} className="icon-spin" />
                               </span>
                             ) : null}
@@ -1992,13 +1992,13 @@ export function CodexSessionManager() {
         <div className="modal-overlay">
           <div className="modal codex-session-target-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('codex.sessionManager.targetModal.title', '复制到实例')}</h2>
+              <h2>{t('codex.sessionManager.targetModal.title', "Sao chép sang phiên bản")}</h2>
               <button
                 className="modal-close"
                 type="button"
                 onClick={handleCloseSyncTargetModal}
                 disabled={syncingToInstance}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2008,11 +2008,11 @@ export function CodexSessionManager() {
               <p className="codex-session-target-modal__hint">
                 {t(
                   'codex.sessionManager.targetModal.hint',
-                  '会把所选会话的 rollout、session_index 条目和会话文件时间补到目标实例，并触发官方 Codex 重建会话索引；已有同 ID 会话会自动跳过。',
+                  "Sao chép các phiên đã chọn sang phiên bản đích. Phiên có cùng ID đã tồn tại ở đó sẽ được bỏ qua. Phiên bản đích đang chạy có thể cần khởi động lại trước khi hiển thị.",
                 )}
               </p>
               <label className="codex-session-target-modal__field">
-                <span>{t('codex.sessionManager.targetModal.targetInstance', '目标实例')}</span>
+                <span>{t('codex.sessionManager.targetModal.targetInstance', "Phiên bản đích")}</span>
                 <SingleSelectDropdown
                   className="codex-session-target-modal__select"
                   value={syncTargetInstanceId}
@@ -2022,21 +2022,21 @@ export function CodexSessionManager() {
                     setSyncTargetModalError(null);
                   }}
                   disabled={syncingToInstance}
-                  ariaLabel={t('codex.sessionManager.targetModal.targetInstance', '目标实例')}
+                  ariaLabel={t('codex.sessionManager.targetModal.targetInstance', "Phiên bản đích")}
                   menuMaxHeight={240}
                 />
               </label>
               <div className="codex-session-target-modal__summary">
                 <span>
                   {t('codex.sessionManager.targetModal.selectedCount', {
-                    defaultValue: '已选择 {{count}} 条会话',
+                    defaultValue: "Đã chọn {{count}} phiên",
                     count: selectedIds.length,
                   })}
                 </span>
                 {syncTargetInstance ? (
                   <span>
                     {t('codex.sessionManager.targetModal.existingCount', {
-                      defaultValue: '目标已存在 {{count}} 条',
+                      defaultValue: "{{count}} đã có ở đích",
                       count: syncTargetExistingCount,
                     })}
                   </span>
@@ -2050,7 +2050,7 @@ export function CodexSessionManager() {
                 onClick={handleCloseSyncTargetModal}
                 disabled={syncingToInstance}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -2059,7 +2059,7 @@ export function CodexSessionManager() {
                 disabled={syncingToInstance || !syncTargetInstanceId || selectedIds.length === 0}
               >
                 <Copy size={14} className={syncingToInstance ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.targetModal.confirm', '复制会话')}
+                {t('codex.sessionManager.targetModal.confirm', "Sao chép phiên")}
               </button>
             </div>
           </div>
@@ -2070,13 +2070,13 @@ export function CodexSessionManager() {
         <div className="modal-overlay">
           <div className="modal codex-session-export-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('codex.sessionManager.exportModal.title', '导出会话')}</h2>
+              <h2>{t('codex.sessionManager.exportModal.title', "Xuất phiên")}</h2>
               <button
                 className="modal-close"
                 type="button"
                 onClick={handleCloseExportModal}
                 disabled={loadingExportPreview || exporting}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2086,13 +2086,13 @@ export function CodexSessionManager() {
               <p className="codex-session-export-modal__hint">
                 {t(
                   'codex.sessionManager.exportModal.hint',
-                  '导出前可先确认会话列表、来源实例和文件大小；会话包只包含 rollout 文件和 session_index 条目，不包含账号、Token、API Key 或应用配置。',
+                  "Xem lại danh sách phiên, phiên bản nguồn và dung lượng trước khi xuất. Gói chỉ chứa tệp rollout và mục session_index, không chứa tài khoản, token, API Key hoặc cấu hình ứng dụng.",
                 )}
               </p>
               {loadingExportPreview ? (
                 <div className="codex-session-restore-modal__empty">
                   <RefreshCw size={28} className="icon-spin empty-icon" />
-                  <h3>{t('codex.sessionManager.exportModal.previewing', '正在预览会话...')}</h3>
+                  <h3>{t('codex.sessionManager.exportModal.previewing', "Đang xem trước phiên...")}</h3>
                 </div>
               ) : null}
               {!loadingExportPreview && exportPreview ? (
@@ -2100,21 +2100,21 @@ export function CodexSessionManager() {
                   <div className="codex-session-export-modal__summary">
                     <span>
                       {t('codex.sessionManager.exportModal.selectedExportCount', {
-                        defaultValue: '已选 {{selected}} / 可导出 {{total}}',
+                        defaultValue: "Đã chọn {{selected}} / có thể xuất {{total}}",
                         selected: exportableSessionIds.length,
                         total: exportAvailableItems.length,
                       })}
                     </span>
                     <span>
                       {t('codex.sessionManager.exportModal.selectedSize', {
-                        defaultValue: '已选大小 {{selected}} / 总计 {{total}}',
+                        defaultValue: "Dung lượng đã chọn {{selected}} / tổng {{total}}",
                         selected: formatBytes(exportSelectedSizeBytes),
                         total: formatBytes(exportAvailableSizeBytes),
                       })}
                     </span>
                     <span>
                       {t('codex.sessionManager.exportModal.missingCount', {
-                        defaultValue: '缺失 {{count}} 条',
+                        defaultValue: "Thiếu {{count}}",
                         count: exportPreview.missingSessionCount,
                       })}
                     </span>
@@ -2123,7 +2123,7 @@ export function CodexSessionManager() {
                     <div className="codex-session-export-modal__notice is-neutral">
                       <span>
                         {t('codex.sessionManager.exportModal.removedNotice', {
-                          defaultValue: '已从本次导出列表移出 {{count}} 条',
+                          defaultValue: "Đã bỏ {{count}} khỏi danh sách xuất này",
                           count: removedExportIds.length,
                         })}
                       </span>
@@ -2134,15 +2134,15 @@ export function CodexSessionManager() {
                         disabled={exporting}
                       >
                         <RotateCcw size={13} />
-                        {t('codex.sessionManager.exportModal.restoreRemoved', '恢复列表')}
+                        {t('codex.sessionManager.exportModal.restoreRemoved', "Khôi phục danh sách")}
                       </button>
                     </div>
                   ) : null}
                   <div className="codex-session-export-modal__path">
                     <div className="codex-session-export-modal__path-copy">
-                      <strong>{t('codex.sessionManager.exportModal.exportPath', '导出位置')}</strong>
+                      <strong>{t('codex.sessionManager.exportModal.exportPath', "Vị trí xuất")}</strong>
                       <span title={exportPath}>
-                        {exportPath || t('codex.sessionManager.exportModal.pathUnset', '尚未选择导出位置')}
+                        {exportPath || t('codex.sessionManager.exportModal.pathUnset', "Chưa chọn vị trí xuất")}
                       </span>
                     </div>
                     <button
@@ -2152,13 +2152,13 @@ export function CodexSessionManager() {
                       disabled={exporting}
                     >
                       <FolderOpen size={14} />
-                      {t('codex.sessionManager.exportModal.choosePath', '选择位置')}
+                      {t('codex.sessionManager.exportModal.choosePath', "Chọn vị trí")}
                     </button>
                   </div>
                   {exportPreview.missingSessionCount > 0 ? (
                     <div className="codex-session-export-modal__notice">
                       {t('codex.sessionManager.exportModal.missingNotice', {
-                        defaultValue: '{{count}} 条会话已不在当前实例集合中，导出时会跳过。',
+                        defaultValue: "{{count}} phiên không còn trong tập phiên bản hiện tại và sẽ bị bỏ qua.",
                         count: exportPreview.missingSessionCount,
                       })}
                     </div>
@@ -2167,26 +2167,26 @@ export function CodexSessionManager() {
                     <>
                       <div className="codex-session-export-filter">
                         <label className="codex-session-export-filter__field">
-                          <span>{t('codex.sessionManager.exportModal.sourceLabel', '来源')}</span>
+                          <span>{t('codex.sessionManager.exportModal.sourceLabel', "Nguồn")}</span>
                           <SingleSelectDropdown
                             className="codex-session-export-filter__select"
                             value={exportSourceFilter}
                             options={exportSourceOptions}
                             onChange={setExportSourceFilter}
                             disabled={exporting}
-                            ariaLabel={t('codex.sessionManager.exportModal.sourceLabel', '来源')}
+                            ariaLabel={t('codex.sessionManager.exportModal.sourceLabel', "Nguồn")}
                             menuMaxHeight={240}
                           />
                         </label>
                         <label className="codex-session-export-filter__field">
-                          <span>{t('codex.sessionManager.exportModal.selectionLabel', '选择')}</span>
+                          <span>{t('codex.sessionManager.exportModal.selectionLabel', "Chọn")}</span>
                           <SingleSelectDropdown
                             className="codex-session-export-filter__select"
                             value={exportSelectionFilter}
                             options={exportSelectionFilterOptions}
                             onChange={(value) => setExportSelectionFilter(value as ExportSelectionFilter)}
                             disabled={exporting}
-                            ariaLabel={t('codex.sessionManager.exportModal.selectionLabel', '选择')}
+                            ariaLabel={t('codex.sessionManager.exportModal.selectionLabel', "Chọn")}
                             menuMaxHeight={220}
                           />
                         </label>
@@ -2194,7 +2194,7 @@ export function CodexSessionManager() {
                       <div className="codex-session-export-actions">
                         <span>
                           {t('codex.sessionManager.exportModal.visibleCount', {
-                            defaultValue: '当前显示 {{visible}} / {{total}}',
+                            defaultValue: "Đang hiện {{visible}} / {{total}}",
                             visible: exportFilteredItems.length,
                             total: exportAvailableItems.length,
                           })}
@@ -2206,7 +2206,7 @@ export function CodexSessionManager() {
                           disabled={exporting || exportFilteredItems.length === 0}
                         >
                           <Check size={13} />
-                          {t('codex.sessionManager.exportModal.selectVisible', '选中筛选')}
+                          {t('codex.sessionManager.exportModal.selectVisible', "Chọn bộ lọc")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2215,7 +2215,7 @@ export function CodexSessionManager() {
                           disabled={exporting || exportFilteredItems.length === 0}
                         >
                           <X size={13} />
-                          {t('codex.sessionManager.exportModal.clearVisible', '取消筛选')}
+                          {t('codex.sessionManager.exportModal.clearVisible', "Bỏ bộ lọc")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2223,7 +2223,7 @@ export function CodexSessionManager() {
                           onClick={keepFilteredExportItems}
                           disabled={exporting || exportFilteredItems.length === 0}
                         >
-                          {t('codex.sessionManager.exportModal.keepVisibleOnly', '仅保留筛选')}
+                          {t('codex.sessionManager.exportModal.keepVisibleOnly', "Giữ bộ lọc")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2232,7 +2232,7 @@ export function CodexSessionManager() {
                           disabled={exporting || exportFilteredItems.length === 0}
                         >
                           <Trash2 size={13} />
-                          {t('codex.sessionManager.exportModal.removeVisible', '移出筛选')}
+                          {t('codex.sessionManager.exportModal.removeVisible', "Bỏ khỏi lọc")}
                         </button>
                         <button
                           className="btn btn-secondary"
@@ -2240,7 +2240,7 @@ export function CodexSessionManager() {
                           onClick={removeUncheckedExportItems}
                           disabled={exporting || exportAvailableItems.length === exportableSessionIds.length}
                         >
-                          {t('codex.sessionManager.exportModal.removeUnchecked', '移出未选')}
+                          {t('codex.sessionManager.exportModal.removeUnchecked', "Bỏ chưa chọn")}
                         </button>
                       </div>
                       {exportFilteredItems.length > 0 ? (
@@ -2261,19 +2261,19 @@ export function CodexSessionManager() {
                                     onChange={() => toggleExportSession(item.sessionId)}
                                   />
                                   <span className="sr-only">
-                                    {t('codex.sessionManager.exportModal.selectItem', '选择导出会话')}
+                                    {t('codex.sessionManager.exportModal.selectItem', "Chọn phiên để xuất")}
                                   </span>
                                 </label>
                                 <div className="codex-session-export-row__content">
                                   <span className="codex-session-export-row__title" title={item.title}>
-                                    {item.title || t('codex.sessionManager.untitled', '未命名会话')}
+                                    {item.title || t('codex.sessionManager.untitled', "Phiên chưa đặt tên")}
                                   </span>
                                   <span className="codex-session-export-row__meta" title={item.cwd}>
                                     {item.cwd}
                                   </span>
                                   <span className="codex-session-export-row__meta">
                                     {t('codex.sessionManager.exportModal.sourceInstance', {
-                                      defaultValue: '来源：{{name}}',
+                                      defaultValue: "Nguồn: {{name}}",
                                       name: item.sourceInstanceName,
                                     })}
                                   </span>
@@ -2290,7 +2290,7 @@ export function CodexSessionManager() {
                                     disabled={exporting}
                                   >
                                     <Trash2 size={13} />
-                                    {t('codex.sessionManager.exportModal.removeItem', '移出')}
+                                    {t('codex.sessionManager.exportModal.removeItem', "Bỏ")}
                                   </button>
                                 </div>
                               </div>
@@ -2300,15 +2300,15 @@ export function CodexSessionManager() {
                       ) : (
                         <div className="codex-session-restore-modal__empty">
                           <Search size={32} className="empty-icon" />
-                          <h3>{t('codex.sessionManager.exportModal.emptyFilteredTitle', '当前筛选无会话')}</h3>
-                          <p>{t('codex.sessionManager.exportModal.emptyFilteredDesc', '调整搜索、来源或选择状态后再试。')}</p>
+                          <h3>{t('codex.sessionManager.exportModal.emptyFilteredTitle', "Không có phiên phù hợp")}</h3>
+                          <p>{t('codex.sessionManager.exportModal.emptyFilteredDesc', "Điều chỉnh tìm kiếm, nguồn hoặc trạng thái chọn rồi thử lại.")}</p>
                         </div>
                       )}
                     </>
                   ) : (
                     <div className="codex-session-restore-modal__empty">
                       <Folder size={32} className="empty-icon" />
-                      <h3>{t('codex.sessionManager.exportModal.emptyTitle', '没有可导出的会话')}</h3>
+                      <h3>{t('codex.sessionManager.exportModal.emptyTitle', "Không có phiên để xuất")}</h3>
                     </div>
                   )}
                 </>
@@ -2321,7 +2321,7 @@ export function CodexSessionManager() {
                 onClick={handleCloseExportModal}
                 disabled={loadingExportPreview || exporting}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -2330,7 +2330,7 @@ export function CodexSessionManager() {
                 disabled={loadingExportPreview || exporting || !exportPath || exportableSessionIds.length === 0}
               >
                 <Download size={14} className={exporting ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.exportModal.confirm', '确认导出')} ({exportableSessionIds.length})
+                {t('codex.sessionManager.exportModal.confirm', "Xuất")} ({exportableSessionIds.length})
               </button>
             </div>
           </div>
@@ -2341,13 +2341,13 @@ export function CodexSessionManager() {
         <div className="modal-overlay">
           <div className="modal codex-session-import-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('codex.sessionManager.importModal.title', '导入会话')}</h2>
+              <h2>{t('codex.sessionManager.importModal.title', "Nhập phiên")}</h2>
               <button
                 className="modal-close"
                 type="button"
                 onClick={handleCloseImportModal}
                 disabled={importing || loadingImportPreview}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2357,18 +2357,18 @@ export function CodexSessionManager() {
               <p className="codex-session-import-modal__hint">
                 {t(
                   'codex.sessionManager.importModal.hint',
-                  '会话包只导入 rollout 文件和 session_index 条目，不包含账号、Token、API Key 或应用配置；目标实例已有同 ID 会话时会跳过。',
+                  "Gói phiên chỉ nhập các tệp rollout và mục session_index. Không bao gồm tài khoản, token, API key hoặc cài đặt ứng dụng; phiên có cùng ID trong instance đích sẽ bị bỏ qua.",
                 )}
               </p>
               <label className="codex-session-target-modal__field">
-                <span>{t('codex.sessionManager.targetModal.targetInstance', '目标实例')}</span>
+                <span>{t('codex.sessionManager.targetModal.targetInstance', "Phiên bản đích")}</span>
                 <SingleSelectDropdown
                   className="codex-session-target-modal__select"
                   value={importTargetInstanceId}
                   options={importTargetOptions}
                   onChange={(value) => void handleChangeImportTarget(value)}
                   disabled={importing || loadingImportPreview}
-                  ariaLabel={t('codex.sessionManager.targetModal.targetInstance', '目标实例')}
+                  ariaLabel={t('codex.sessionManager.targetModal.targetInstance', "Phiên bản đích")}
                   menuMaxHeight={240}
                 />
               </label>
@@ -2376,13 +2376,13 @@ export function CodexSessionManager() {
                 <div className="codex-session-import-modal__summary">
                   <span>
                     {t('codex.sessionManager.importModal.totalCount', {
-                      defaultValue: '会话包 {{count}} 条',
+                      defaultValue: "{{count}} phiên trong gói",
                       count: importPreview.totalSessionCount,
                     })}
                   </span>
                   <span>
                     {t('codex.sessionManager.importModal.readyCount', {
-                      defaultValue: '可导入 {{count}} 条',
+                      defaultValue: "{{count}} có thể nhập",
                       count: importPreview.importableSessionCount,
                     })}
                   </span>
@@ -2393,8 +2393,8 @@ export function CodexSessionManager() {
                     disabled={importing || loadingImportPreview || importReadyItems.length === 0}
                   >
                     {allImportReadySelected
-                      ? t('codex.sessionManager.actions.clearSelectedSessions', '取消全选')
-                      : t('codex.sessionManager.importModal.selectReady', '选择可导入')}
+                      ? t('codex.sessionManager.actions.clearSelectedSessions', "Bỏ chọn")
+                      : t('codex.sessionManager.importModal.selectReady', "Chọn mục có thể nhập")}
                   </button>
                 </div>
               ) : null}
@@ -2402,12 +2402,12 @@ export function CodexSessionManager() {
                 <section className="codex-session-import-mappings">
                   <div className="codex-session-import-mappings__intro">
                     <strong>
-                      {t('codex.sessionManager.importModal.cwdMappingTitle', '项目路径映射（可选）')}
+                      {t('codex.sessionManager.importModal.cwdMappingTitle', "Ánh xạ đường dẫn dự án (tùy chọn)")}
                     </strong>
                     <p>
                       {t(
                         'codex.sessionManager.importModal.cwdMappingHint',
-                        '将源工作目录映射到此电脑上已添加到 Codex 的项目路径；留空则保留源路径。',
+                        "Ánh xạ thư mục làm việc nguồn sang đường dẫn dự án đã được thêm vào Codex trên máy tính này. Để trống để giữ nguyên đường dẫn nguồn.",
                       )}
                     </p>
                   </div>
@@ -2425,9 +2425,9 @@ export function CodexSessionManager() {
                           value={importCwdMappings[sourceCwd] ?? ''}
                           placeholder={t(
                             'codex.sessionManager.importModal.cwdTargetPlaceholder',
-                            '输入此电脑上的项目绝对路径',
+                            "Nhập đường dẫn tuyệt đối đến dự án trên máy tính này",
                           )}
-                          aria-label={`${t('codex.sessionManager.importModal.cwdMappingTitle', '项目路径映射')}: ${sourceCwd}`}
+                          aria-label={`${t('codex.sessionManager.importModal.cwdMappingTitle', "Ánh xạ đường dẫn dự án (tùy chọn)")}: ${sourceCwd}`}
                           disabled={importing}
                           onChange={(event) => {
                             setImportPathErrors({});
@@ -2451,7 +2451,7 @@ export function CodexSessionManager() {
               {loadingImportPreview ? (
                 <div className="codex-session-restore-modal__empty">
                   <RefreshCw size={28} className="icon-spin empty-icon" />
-                  <h3>{t('codex.sessionManager.importModal.previewing', '正在预览会话包...')}</h3>
+                  <h3>{t('codex.sessionManager.importModal.previewing', "Đang xem trước gói phiên...")}</h3>
                 </div>
               ) : null}
               {!loadingImportPreview && importPreview ? (
@@ -2471,7 +2471,7 @@ export function CodexSessionManager() {
                         />
                         <div className="codex-session-import-row__content">
                           <span className="codex-session-import-row__title" title={item.title}>
-                            {item.title || t('codex.sessionManager.untitled', '未命名会话')}
+                            {item.title || t('codex.sessionManager.untitled', "Phiên chưa đặt tên")}
                           </span>
                           <span className="codex-session-import-row__meta" title={item.cwd}>
                             {item.cwd}
@@ -2479,7 +2479,7 @@ export function CodexSessionManager() {
                           {item.existingInstanceNames.length > 0 ? (
                             <span className="codex-session-import-row__meta">
                               {t('codex.sessionManager.importModal.existsIn', {
-                                defaultValue: '已存在于：{{names}}',
+                                defaultValue: "Đã có trong: {{names}}",
                                 names: item.existingInstanceNames.join(' / '),
                               })}
                             </span>
@@ -2507,7 +2507,7 @@ export function CodexSessionManager() {
                 onClick={handleCloseImportModal}
                 disabled={importing || loadingImportPreview}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-primary"
@@ -2516,7 +2516,7 @@ export function CodexSessionManager() {
                 disabled={importing || loadingImportPreview || selectedImportIds.length === 0}
               >
                 <Upload size={14} className={importing ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.importModal.confirm', '导入选中会话')} ({selectedImportIds.length})
+                {t('codex.sessionManager.importModal.confirm', "Nhập phiên đã chọn")} ({selectedImportIds.length})
               </button>
             </div>
           </div>
@@ -2537,8 +2537,8 @@ export function CodexSessionManager() {
                 onClick={transferRunning ? handleMinimizeTransferModal : handleClearTransferTask}
                 aria-label={
                   transferRunning
-                    ? t('codex.sessionManager.transferModal.minimize', '最小化')
-                    : t('common.close', '关闭')
+                    ? t('codex.sessionManager.transferModal.minimize', "Thu nhỏ")
+                    : t('common.close', "Đóng")
                 }
               >
                 {transferRunning ? <Minimize2 size={18} /> : <X size={18} />}
@@ -2575,12 +2575,12 @@ export function CodexSessionManager() {
               {transferRunning ? (
                 <button className="btn btn-secondary" type="button" onClick={handleMinimizeTransferModal}>
                   <Minimize2 size={14} />
-                  {t('codex.sessionManager.transferModal.minimize', '最小化')}
+                  {t('codex.sessionManager.transferModal.minimize', "Thu nhỏ")}
                 </button>
               ) : (
                 <button className="btn btn-primary" type="button" onClick={handleClearTransferTask}>
                   <X size={14} />
-                  {t('common.close', '关闭')}
+                  {t('common.close', "Đóng")}
                 </button>
               )}
             </div>
@@ -2601,13 +2601,13 @@ export function CodexSessionManager() {
         <div className="modal-overlay">
           <div className="modal codex-session-restore-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('codex.sessionManager.restoreModal.title', '废纸篓')}</h2>
+              <h2>{t('codex.sessionManager.restoreModal.title', "Thùng rác")}</h2>
               <button
                 className="modal-close"
                 type="button"
                 onClick={handleCloseRestoreModal}
                 disabled={restoring || purgingTrash}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2616,27 +2616,27 @@ export function CodexSessionManager() {
               <ModalErrorMessage message={restoreModalError} scrollKey={restoreModalErrorScrollKey} />
               {loadingTrash ? (
                 <div className="codex-session-restore-modal__empty">
-                  <h3>{t('common.loading', '加载中...')}</h3>
+                  <h3>{t('common.loading', "Đang tải...")}</h3>
                 </div>
               ) : null}
               {!loadingTrash && trashedSessions.length === 0 ? (
                 <div className="codex-session-restore-modal__empty">
                   <Folder size={36} className="empty-icon" />
-                  <h3>{t('codex.sessionManager.restoreModal.emptyTitle', '废纸篓里还没有会话')}</h3>
-                  <p>{t('codex.sessionManager.restoreModal.emptyDesc', '已移到废纸篓的会话会显示在这里。')}</p>
+                  <h3>{t('codex.sessionManager.restoreModal.emptyTitle', "Thùng rác trống")}</h3>
+                  <p>{t('codex.sessionManager.restoreModal.emptyDesc', "Các phiên đã chuyển vào thùng rác sẽ xuất hiện ở đây.")}</p>
                 </div>
               ) : null}
               {!loadingTrash && trashedSessions.length > 0 ? (
                 <>
                   <div className="codex-session-restore-modal__summary">
                     <span>
-                      {t('codex.sessionManager.restoreModal.summary', '共 {{count}} 条，{{size}}', {
+                      {t('codex.sessionManager.restoreModal.summary', "{{count}} mục, {{size}}", {
                         count: trashedSessions.length,
                         size: formatBytes(trashTotalSizeBytes),
                       })}
                     </span>
                     <span>
-                      {t('codex.sessionManager.restoreModal.selectedSummary', '已选 {{count}} 条，{{size}}', {
+                      {t('codex.sessionManager.restoreModal.selectedSummary', "Đã chọn {{count}}, {{size}}", {
                         count: selectedTrashIds.length,
                         size: formatBytes(selectedTrashSizeBytes),
                       })}
@@ -2650,8 +2650,8 @@ export function CodexSessionManager() {
                       disabled={trashBusy}
                     >
                       {allTrashSelected
-                        ? t('codex.sessionManager.restoreModal.clearSelected', '取消选择')
-                        : t('codex.sessionManager.restoreModal.selectAll', '全选')}
+                        ? t('codex.sessionManager.restoreModal.clearSelected', "Bỏ chọn")
+                        : t('codex.sessionManager.restoreModal.selectAll', "Chọn tất cả")}
                     </button>
                     <button
                       className="btn btn-danger"
@@ -2660,13 +2660,13 @@ export function CodexSessionManager() {
                       disabled={trashBusy || trashedSessions.length === 0}
                     >
                       <Trash2 size={14} className={purgingTrash && selectedTrashIds.length === 0 ? 'icon-spin' : undefined} />
-                      {t('codex.sessionManager.restoreModal.emptyTrash', '清空废纸篓')}
+                      {t('codex.sessionManager.restoreModal.emptyTrash', "Dọn thùng rác")}
                     </button>
                   </div>
                   <p className="codex-session-restore-modal__hint">
                     {t(
                       'codex.sessionManager.restoreModal.hint',
-                      '废纸篓中的会话可以恢复到原实例，也可以永久删除以释放磁盘空间。',
+                      "Phiên trong Thùng rác có thể khôi phục về instance gốc hoặc xóa vĩnh viễn để giải phóng dung lượng đĩa.",
                     )}
                   </p>
                   <div className="codex-session-restore-list">
@@ -2682,13 +2682,13 @@ export function CodexSessionManager() {
                           />
                           <div className="codex-session-restore-row__content">
                             <span className="codex-session-restore-row__title" title={session.title}>
-                              {session.title || t('codex.sessionManager.untitled', '未命名会话')}
+                              {session.title || t('codex.sessionManager.untitled', "Phiên chưa đặt tên")}
                             </span>
                             <span className="codex-session-restore-row__meta">
                               {session.locations.map((location) => location.instanceName).join(' / ')}
                             </span>
                             <span className="codex-session-restore-row__meta">
-                              {t('codex.sessionManager.restoreModal.itemSize', '大小 {{size}}', {
+                              {t('codex.sessionManager.restoreModal.itemSize', "Dung lượng {{size}}", {
                                 size: formatBytes(session.sizeBytes ?? 0),
                               })}
                             </span>
@@ -2708,7 +2708,7 @@ export function CodexSessionManager() {
                             disabled={trashBusy}
                           >
                             <Trash2 size={13} />
-                            {t('codex.sessionManager.restoreModal.deleteOne', '永久删除')}
+                            {t('codex.sessionManager.restoreModal.deleteOne', "Xóa vĩnh viễn")}
                           </button>
                         </div>
                       </div>
@@ -2724,7 +2724,7 @@ export function CodexSessionManager() {
                 onClick={handleCloseRestoreModal}
                 disabled={restoring || purgingTrash}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
               <button
                 className="btn btn-danger"
@@ -2733,7 +2733,7 @@ export function CodexSessionManager() {
                 disabled={trashBusy || selectedTrashIds.length === 0}
               >
                 <Trash2 size={14} className={purgingTrash && selectedTrashIds.length > 0 ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.restoreModal.deleteSelected', '永久删除选中')} ({selectedTrashIds.length})
+                {t('codex.sessionManager.restoreModal.deleteSelected', "Xóa đã chọn")} ({selectedTrashIds.length})
               </button>
               <button
                 className="btn btn-primary"
@@ -2742,7 +2742,7 @@ export function CodexSessionManager() {
                 disabled={trashBusy || selectedTrashIds.length === 0}
               >
                 <RotateCcw size={14} className={restoring ? 'icon-spin' : undefined} />
-                {t('codex.sessionManager.restoreModal.restoreAction', '恢复选中会话')} ({selectedTrashIds.length})
+                {t('codex.sessionManager.restoreModal.restoreAction', "Khôi phục các phiên đã chọn")} ({selectedTrashIds.length})
               </button>
             </div>
           </div>
@@ -2755,13 +2755,13 @@ export function CodexSessionManager() {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{t('codex.sessionManager.locationPicker.title', '选择实例')}</h2>
+              <h2>{t('codex.sessionManager.locationPicker.title', "Chọn instance")}</h2>
               <button
                 className="modal-close"
                 type="button"
                 onClick={handleCloseSessionLocationPicker}
                 disabled={openingSessionLocation}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X size={18} />
               </button>
@@ -2775,11 +2775,11 @@ export function CodexSessionManager() {
                 {sessionLocationTarget.action === 'rollout'
                   ? t(
                       'codex.sessionManager.locationPicker.rolloutHint',
-                      '该会话存在于多个实例，请选择要打开会话文件的实例：',
+                      "Phiên này tồn tại trên nhiều instance. Chọn instance để mở tệp phiên:",
                     )
                   : t(
                       'codex.sessionManager.locationPicker.hint',
-                      '该会话存在于多个实例，请选择要打开文件所在位置的实例：',
+                      "Phiên này tồn tại trên nhiều instance. Chọn instance để mở vị trí tệp:",
                     )}
               </p>
               <div className="codex-session-location-modal__list">
@@ -2803,7 +2803,7 @@ export function CodexSessionManager() {
                     </span>
                     {location.running ? (
                       <span className="codex-session-location-modal__option-badge">
-                        {t('codex.sessionManager.locationPicker.running', '运行中')}
+                        {t('codex.sessionManager.locationPicker.running', "Đang chạy")}
                       </span>
                     ) : null}
                   </button>
@@ -2817,7 +2817,7 @@ export function CodexSessionManager() {
                 onClick={handleCloseSessionLocationPicker}
                 disabled={openingSessionLocation}
               >
-                {t('common.cancel', '取消')}
+                {t('common.cancel', "Hủy")}
               </button>
             </div>
           </div>

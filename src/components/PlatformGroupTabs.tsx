@@ -33,7 +33,7 @@ export function PlatformGroupTabs({
           className={`account-group-tab ${activeGroupId === null ? 'active' : ''}`}
           onClick={() => onSelectGroup(null)}
         >
-          <span className="account-group-tab-name">{t('accounts.filters.all', '全部')}</span>
+          <span className="account-group-tab-name">{t('accounts.filters.all', "Tất cả")}</span>
           <span className="account-group-tab-badge">{allCount}</span>
         </button>
 
@@ -62,8 +62,8 @@ export function PlatformGroupTabs({
           type="button"
           className="account-group-tab-manage-btn"
           onClick={onOpenManage}
-          title={t('accounts.groups.manageTitle', '分组管理')}
-          aria-label={t('accounts.groups.manageTitle', '分组管理')}
+          title={t('accounts.groups.manageTitle', "Quản lý nhóm")}
+          aria-label={t('accounts.groups.manageTitle', "Quản lý nhóm")}
         >
           <Plus size={14} />
         </button>

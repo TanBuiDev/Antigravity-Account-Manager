@@ -319,7 +319,7 @@ export function CodebuddyAccountsPage() {
   );
 
   const resolveGroupLabel = (groupKey: string) =>
-    groupKey === untaggedKey ? t('accounts.defaultGroup', '默认分组') : groupKey;
+    groupKey === untaggedKey ? t('accounts.defaultGroup', "Nhóm mặc định") : groupKey;
 
   const formatQuotaDateTime = useCallback((timeMs: number | null) => {
     if (timeMs == null || !Number.isFinite(timeMs)) return null;
@@ -350,46 +350,46 @@ export function CodebuddyAccountsPage() {
     const primaryTimeText = formatQuotaDateTime(isBase ? resource.refreshAt : resource.expireAt);
     if (primaryTimeText) {
       return isBase
-        ? t('codebuddy.quotaQuery.updatedAt', '下次刷新时间：{{time}}', { time: primaryTimeText })
-        : t('codebuddy.quotaQuery.expireAt', '到期时间：{{time}}', { time: primaryTimeText });
+        ? t('codebuddy.quotaQuery.updatedAt', "Lần truy vấn gần nhất: {{time}}", { time: primaryTimeText })
+        : t('codebuddy.quotaQuery.expireAt', "Hết hạn lúc: {{time}}", { time: primaryTimeText });
     }
     const fallbackTimeText = formatQuotaDateTime(isBase ? resource.expireAt : resource.refreshAt);
     if (fallbackTimeText) {
       return isBase
-        ? t('codebuddy.quotaQuery.expireAt', '到期时间：{{time}}', { time: fallbackTimeText })
-        : t('codebuddy.quotaQuery.updatedAt', '下次刷新时间：{{time}}', { time: fallbackTimeText });
+        ? t('codebuddy.quotaQuery.expireAt', "Hết hạn lúc: {{time}}", { time: fallbackTimeText })
+        : t('codebuddy.quotaQuery.updatedAt', "Lần truy vấn gần nhất: {{time}}", { time: fallbackTimeText });
     }
     return null;
   }, [formatQuotaDateTime, t]);
 
   const resolveResourcePackageTitle = useCallback((resource: CodebuddyOfficialQuotaResource, isExtra: boolean) => {
     if (isExtra || resource.packageCode === CB_PACKAGE_CODE.extra) {
-      return t('codebuddy.extraCredit.title', '加量包');
+      return t('codebuddy.extraCredit.title', "Gói cộng thêm");
     }
     if (resource.packageCode === CB_PACKAGE_CODE.activity) {
-      return t('codebuddy.quotaQuery.packageTitle.activity', '活动赠送包');
+      return t('codebuddy.quotaQuery.packageTitle.activity', "Gói quà tặng sự kiện");
     }
     if (
       resource.packageCode === CB_PACKAGE_CODE.free ||
       resource.packageCode === CB_PACKAGE_CODE.gift ||
       resource.packageCode === CB_PACKAGE_CODE.freeMon
     ) {
-      return t('codebuddy.quotaQuery.packageTitle.base', '基础体验包');
+      return t('codebuddy.quotaQuery.packageTitle.base', "Gói trải nghiệm cơ bản");
     }
     if (
       resource.packageCode === CB_PACKAGE_CODE.proMon ||
       resource.packageCode === CB_PACKAGE_CODE.proYear
     ) {
-      return t('codebuddy.quotaQuery.packageTitle.pro', '专业版订阅');
+      return t('codebuddy.quotaQuery.packageTitle.pro', "Đăng ký Pro");
     }
-    return resource.packageName || t('codebuddy.quotaQuery.packageUnknown', '套餐信息未知');
+    return resource.packageName || t('codebuddy.quotaQuery.packageUnknown', "Không rõ gói");
   }, [t]);
 
   const renderResourceQuotaItems = useCallback((account: CodebuddyAccount, variant: 'card' | 'table') => {
     const model = getCodebuddyOfficialQuotaModel(account);
     const extraResource: CodebuddyOfficialQuotaResource = {
       ...model.extra,
-      packageName: t('codebuddy.extraCredit.title', '加量包'),
+      packageName: t('codebuddy.extraCredit.title', "Gói cộng thêm"),
     };
     const allResources = [...model.resources, extraResource];
 
@@ -400,7 +400,7 @@ export function CodebuddyAccountsPage() {
           const quotaClass = getQuotaClassByRemainPercent(resource.remainPercent);
           const usedPercent = clampPercent(resource.usedPercent);
           const quotaValueText = resource.unlimited
-            ? t('common.shared.quota.unlimited', '无限额度')
+            ? t('common.shared.quota.unlimited', "Hạn mức không giới hạn")
             : `${formatQuotaNumber(resource.used)} / ${formatQuotaNumber(resource.total)}`;
           const timeText = resolveResourceTimeText(resource, isExtra);
           const packageName = resolveResourcePackageTitle(resource, isExtra);
@@ -439,13 +439,13 @@ export function CodebuddyAccountsPage() {
         usage={usage}
         locale={locale}
         accountLabel={maskAccountText(getCodebuddyAccountDisplayEmail(account))}
-        normalText={t('codebuddy.usageNormal', '正常')}
-        abnormalText={t('codebuddy.usageAbnormal', '异常')}
-        viewDetailText={t('codebuddy.usageViewDetail', '查看详情')}
-        detailTitle={t('codebuddy.usageDetailTitle', '用量状态详情')}
-        accountText={t('common.shared.columns.account', '账号')}
-        confirmText={t('common.confirm', '确认')}
-        closeText={t('common.close', '关闭')}
+        normalText={t('codebuddy.usageNormal', "Bình thường")}
+        abnormalText={t('codebuddy.usageAbnormal', "Bất thường")}
+        viewDetailText={t('codebuddy.usageViewDetail', "Xem chi tiết")}
+        detailTitle={t('codebuddy.usageDetailTitle', "Chi tiết trạng thái sử dụng")}
+        accountText={t('common.shared.columns.account', "Tài khoản")}
+        confirmText={t('common.confirm', "Xác nhận")}
+        closeText={t('common.close', "Đóng")}
         classPrefix="codebuddy"
       />
     );
@@ -458,11 +458,11 @@ export function CodebuddyAccountsPage() {
     const refreshFailed = !!account.quota_query_last_error?.trim();
     const shouldShowQuota = hasQuotaData;
     const statusText = refreshFailed
-      ? t('codebuddy.quotaQuery.failedRefreshCompact', '配额查询失败')
-      : t('codebuddy.quotaQuery.empty', '暂无可用配额数据');
+      ? t('codebuddy.quotaQuery.failedRefreshCompact', "Làm mới hạn ngạch thất bại")
+      : t('codebuddy.quotaQuery.empty', "Chưa có thông tin truy vấn hạn ngạch được liên kết");
     const cachedWarningText = t(
       'common.shared.quota.cachedRefreshFailed',
-      '刷新失败，以下为上次成功数据',
+      "Làm mới thất bại; đang hiển thị dữ liệu thành công gần nhất",
     );
     const updatedAtText = model.updatedAt != null
       ? formatQuotaDateTime(model.updatedAt)
@@ -471,13 +471,13 @@ export function CodebuddyAccountsPage() {
       <>
         <div className="quota-item">
           <div className="quota-header">
-            <span className="quota-name">{t('codebuddy.usage', '用量状态')}</span>
+            <span className="quota-name">{t('codebuddy.usage', "Trạng thái sử dụng")}</span>
             {renderUsageInfo(account)}
           </div>
         </div>
         <div className="quota-item codebuddy-quota-item">
           <div className="quota-header codebuddy-quota-header">
-            <span className="quota-name">{t('codebuddy.quotaQuery.sectionTitle', '配额查询')}</span>
+            <span className="quota-name">{t('codebuddy.quotaQuery.sectionTitle', "Truy vấn hạn ngạch")}</span>
           </div>
           {refreshFailed && hasQuotaData && (
             <div className={`quota-cache-warning ${variant === 'table' ? 'table' : ''}`} role="status">
@@ -486,7 +486,7 @@ export function CodebuddyAccountsPage() {
                 <span className="quota-cache-warning-title">{cachedWarningText}</span>
                 {updatedAtText && (
                   <span className="quota-cache-warning-time">
-                    {t('common.shared.quota.lastSuccessfulQuery', '上次成功：{{time}}', {
+                    {t('common.shared.quota.lastSuccessfulQuery', "Lần thành công gần nhất: {{time}}", {
                       time: updatedAtText,
                     })}
                   </span>
@@ -524,7 +524,7 @@ export function CodebuddyAccountsPage() {
               <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(account.id)} />
             </div>
             <span className="account-email" title={maskAccountText(displayEmail)}>{maskAccountText(displayEmail)}</span>
-            {isCurrent && <span className="current-tag">{t('accounts.status.current', '当前')}</span>}
+            {isCurrent && <span className="current-tag">{t('accounts.status.current', "Hiện tại")}</span>}
             <span className={`tier-badge ${tierBadgeClass}`}>{planBadge}</span>
           </div>
           {accountTags.length > 0 && (
@@ -540,15 +540,15 @@ export function CodebuddyAccountsPage() {
             <span className="card-date">{formatDate(account.created_at)}</span>
             <div className="card-actions">
               <button className="card-action-btn success" onClick={() => handleInjectToVSCode?.(account.id)} disabled={!!injecting}
-                title={t('common.shared.switchAccount', '切换账号')}>
+                title={t('common.shared.switchAccount', "Chuyển tài khoản")}>
                 {injecting === account.id ? <RefreshCw size={14} className="loading-spinner" /> : <Play size={14} />}
               </button>
-              <button className="card-action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', '编辑标签')}><Tag size={14} /></button>
-              <button className="card-action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', '刷新')}>
+              <button className="card-action-btn" onClick={() => openTagModal(account.id)} title={t('accounts.editTags', "Chỉnh sửa thẻ")}><Tag size={14} /></button>
+              <button className="card-action-btn" onClick={() => handleRefresh(account.id)} disabled={refreshing === account.id} title={t('common.shared.refreshQuota', "Làm mới hạn mức")}>
                 <RotateCw size={14} className={refreshing === account.id ? 'loading-spinner' : ''} />
               </button>
-              <button className="card-action-btn export-btn" onClick={() => handleExportByIds([account.id])} title={t('common.shared.export.title', '导出')}><Upload size={14} /></button>
-              <button className="card-action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', '删除')}><Trash2 size={14} /></button>
+              <button className="card-action-btn export-btn" onClick={() => handleExportByIds([account.id])} title={t('common.shared.export.title', "Xuất")}><Upload size={14} /></button>
+              <button className="card-action-btn danger" onClick={() => handleDelete(account.id)} title={t('common.delete', "Xóa")}><Trash2 size={14} /></button>
             </div>
           </div>
         </div>
@@ -567,7 +567,7 @@ export function CodebuddyAccountsPage() {
           <td><input type="checkbox" checked={isSelected} onChange={() => toggleSelect(account.id)} /></td>
           <td>
             <span className="table-email" title={maskAccountText(displayEmail)}>{maskAccountText(displayEmail)}</span>
-            {isCurrent && <span className="current-tag">{t('accounts.status.current', '当前')}</span>}
+            {isCurrent && <span className="current-tag">{t('accounts.status.current', "Hiện tại")}</span>}
           </td>
           <td><span className={`tier-badge ${tierBadgeClass}`}>{planBadge}</span></td>
           <td>
@@ -606,18 +606,18 @@ export function CodebuddyAccountsPage() {
         <button type="button" className="ghcp-flow-notice-toggle" onClick={() => setIsFlowNoticeCollapsed((prev) => !prev)}>
           <div className="ghcp-flow-notice-title">
             <CircleAlert size={16} />
-            <span>{t('codebuddy.flowNotice.title', 'CodeBuddy 账号管理说明（点击展开/收起）')}</span>
+            <span>{t('codebuddy.flowNotice.title', "Hướng dẫn quản lý tài khoản CodeBuddy (bấm để mở rộng/thu gọn)")}</span>
           </div>
           <ChevronDown size={16} className={`ghcp-flow-notice-arrow ${isFlowNoticeCollapsed ? 'collapsed' : ''}`} />
         </button>
         {!isFlowNoticeCollapsed && (
           <div className="ghcp-flow-notice-body">
             <div className="ghcp-flow-notice-desc">
-              {t('codebuddy.flowNotice.desc', '切换账号需读取 CodeBuddy 本地认证存储并调用系统凭据服务进行加解密，数据仅在本地处理。')}
+              {t('codebuddy.flowNotice.desc', "Khi chuyển tài khoản, ứng dụng cần đọc vùng lưu xác thực cục bộ của CodeBuddy và gọi dịch vụ chứng thực hệ thống để giải mã/mã hóa lại. Dữ liệu chỉ được xử lý cục bộ.")}
             </div>
             <ul className="ghcp-flow-notice-list">
-              <li>{t('codebuddy.flowNotice.permission', '权限范围：读取 CodeBuddy 认证数据库 (state.vscdb)，调用系统凭据能力（macOS Keychain / Windows DPAPI / Linux Secret Service）进行解密/回写。')}</li>
-              <li>{t('codebuddy.flowNotice.network', '网络范围：OAuth 授权登录与 Token 刷新需联网请求 codebuddy.ai；配额查询需调用计费 API。不上传本地密钥或凭证。')}</li>
+              <li>{t('codebuddy.flowNotice.permission', "Phạm vi quyền: đọc cơ sở dữ liệu xác thực CodeBuddy (state.vscdb), gọi khả năng chứng thực hệ thống (macOS Keychain / Windows DPAPI / Linux Secret Service) để giải mã và ghi lại.")}</li>
+              <li>{t('codebuddy.flowNotice.network', "Phạm vi mạng: đăng nhập OAuth và làm mới Token cần gửi yêu cầu đến codebuddy.ai; truy vấn hạn ngạch sẽ gọi API tính phí. Không tải lên khóa hoặc thông tin xác thực cục bộ.")}</li>
             </ul>
           </div>
         )}
@@ -634,27 +634,27 @@ export function CodebuddyAccountsPage() {
         <div className="toolbar-left">
           <div className="search-box">
             <Search size={16} className="search-icon" />
-            <input type="text" placeholder={t('codebuddy.search', '搜索 CodeBuddy 账号...')} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+            <input type="text" placeholder={t('codebuddy.search', "Tìm kiếm tài khoản CodeBuddy...")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
           <div className="view-switcher">
-            <button className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title={t('common.shared.view.list', '列表视图')}><List size={16} /></button>
-            <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title={t('common.shared.view.grid', '卡片视图')}><LayoutGrid size={16} /></button>
+            <button className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title={t('common.shared.view.list', "Dạng danh sách")}><List size={16} /></button>
+            <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title={t('common.shared.view.grid', "Dạng thẻ")}><LayoutGrid size={16} /></button>
           </div>
           <MultiSelectFilterDropdown
             options={tierFilterOptions}
             selectedValues={filterTypes}
-            allLabel={t('common.shared.filter.all', '全部 ({{count}})', { count: tierSummary.all })}
-            filterLabel={t('common.shared.filterLabel', '筛选')}
-            clearLabel={t('accounts.clearFilter', '清空筛选')}
-            emptyLabel={t('common.none', '暂无')}
-            ariaLabel={t('common.shared.filterLabel', '筛选')}
+            allLabel={t('common.shared.filter.all', "Tất cả ({{count}})", { count: tierSummary.all })}
+            filterLabel={t('common.shared.filterLabel', "Bộ lọc")}
+            clearLabel={t('accounts.clearFilter', "Xóa bộ lọc")}
+            emptyLabel={t('common.none', "None​")}
+            ariaLabel={t('common.shared.filterLabel', "Bộ lọc")}
             onToggleValue={toggleFilterTypeValue}
             onClear={clearFilterTypes}
           />
           <div className="tag-filter" ref={tagFilterRef}>
             <button type="button" className={`tag-filter-btn ${tagFilter.length > 0 ? 'active' : ''}`} onClick={() => setShowTagFilter((prev) => !prev)}>
               <Tag size={14} />
-              {tagFilter.length > 0 ? `${t('accounts.filterTagsCount', '标签')}(${tagFilter.length})` : t('accounts.filterTags', '标签筛选')}
+              {tagFilter.length > 0 ? `${t('accounts.filterTagsCount', "Thẻ")}(${tagFilter.length})` : t('accounts.filterTags', "Lọc thẻ")}
             </button>
             {showTagFilter && (
               <div
@@ -662,12 +662,12 @@ export function CodebuddyAccountsPage() {
                 className={`tag-filter-panel ${page.tagFilterPanelPlacement === 'top' ? 'open-top' : ''}`}
               >
                 {availableTags.length === 0 ? (
-                  <div className="tag-filter-empty">{t('accounts.noAvailableTags', '暂无可用标签')}</div>
+                  <div className="tag-filter-empty">{t('accounts.noAvailableTags', "Không có thẻ nào")}</div>
                 ) : (
                   <>
                     <div className="tag-filter-header">
-                      <label className="group-toggle"><input type="checkbox" checked={groupByTag} onChange={() => setGroupByTag(!groupByTag)} /> {t('accounts.groupByTag', '按标签分组')}</label>
-                      {tagFilter.length > 0 && <button className="tag-filter-clear" onClick={clearTagFilter}>{t('common.shared.clear', '清除')}</button>}
+                      <label className="group-toggle"><input type="checkbox" checked={groupByTag} onChange={() => setGroupByTag(!groupByTag)} /> {t('accounts.groupByTag', "Nhóm theo thẻ")}</label>
+                      {tagFilter.length > 0 && <button className="tag-filter-clear" onClick={clearTagFilter}>{t('common.shared.clear', "Xóa")}</button>}
                     </div>
                     <div className="tag-filter-list" style={page.tagFilterScrollContainerStyle}>
                       {availableTags.map((tag) => (
@@ -684,17 +684,17 @@ export function CodebuddyAccountsPage() {
           </div>
         </div>
         <div className="toolbar-right">
-          <button className="btn btn-primary icon-only" onClick={() => openAddModal('oauth')} title={t('common.shared.addAccount', '添加账号')}><Plus size={14} /></button>
-          <button className="btn btn-secondary icon-only" onClick={handleRefreshAll} disabled={refreshingAll || accounts.length === 0} title={t('common.shared.refreshAll', '刷新全部')}>
+          <button className="btn btn-primary icon-only" onClick={() => openAddModal('oauth')} title={t('common.shared.addAccount', "Thêm tài khoản")}><Plus size={14} /></button>
+          <button className="btn btn-secondary icon-only" onClick={handleRefreshAll} disabled={refreshingAll || accounts.length === 0} title={t('common.shared.refreshAll', "Làm mới tất cả")}>
             <RefreshCw size={14} className={refreshingAll ? 'loading-spinner' : ''} />
           </button>
           <button className="btn btn-secondary icon-only" onClick={togglePrivacyMode}
-            title={privacyModeEnabled ? t('privacy.showSensitive', '显示邮箱') : t('privacy.hideSensitive', '隐藏邮箱')}>
+            title={privacyModeEnabled ? t('privacy.showSensitive', "Hiện email") : t('privacy.hideSensitive', "Ẩn email")}>
             {privacyModeEnabled ? <EyeOff size={14} /> : <Eye size={14} />}
           </button>
-          <button className="btn btn-secondary icon-only" onClick={() => openAddModal('token')} disabled={importing} title={t('common.shared.import.label', '导入')}><Download size={14} /></button>
+          <button className="btn btn-secondary icon-only" onClick={() => openAddModal('token')} disabled={importing} title={t('common.shared.import.label', "Nhập")}><Download size={14} /></button>
           <button className="btn btn-secondary export-btn icon-only" onClick={() => void handleExport(filteredIds)} disabled={exporting || filteredIds.length === 0}
-            title={exportSelectionCount > 0 ? `${t('common.shared.export.title', '导出')} (${exportSelectionCount})` : t('common.shared.export.title', '导出')}>
+            title={exportSelectionCount > 0 ? `${t('common.shared.export.title', "Xuất")} (${exportSelectionCount})` : t('common.shared.export.title', "Xuất")}>
             <Upload size={14} />
           </button>
           <QuickSettingsPopover type="codebuddy" />
@@ -715,8 +715,8 @@ export function CodebuddyAccountsPage() {
             <button
               className="btn btn-danger icon-only"
               onClick={handleBatchDelete}
-              title={`${t('common.delete', '删除')} (${selected.size})`}
-              aria-label={`${t('common.delete', '删除')} (${selected.size})`}
+              title={`${t('common.delete', "Xóa")} (${selected.size})`}
+              aria-label={`${t('common.delete', "Xóa")} (${selected.size})`}
             >
               <Trash2 size={14} />
             </button>
@@ -725,22 +725,22 @@ export function CodebuddyAccountsPage() {
       )}
 
       {loading && accounts.length === 0 ? (
-        <div className="loading-container"><RefreshCw size={24} className="loading-spinner" /><p>{t('common.loading', '加载中...')}</p></div>
+        <div className="loading-container"><RefreshCw size={24} className="loading-spinner" /><p>{t('common.loading', "Đang tải...")}</p></div>
       ) : accounts.length === 0 ? (
         <div className="empty-state">
           <Globe size={48} />
-          <h3>{t('common.shared.empty.title', '暂无账号')}</h3>
-          <p>{t('codebuddy.noAccounts', '暂无 CodeBuddy 账号')}</p>
+          <h3>{t('common.shared.empty.title', "Chưa có tài khoản")}</h3>
+          <p>{t('codebuddy.noAccounts', "Chưa có tài khoản CodeBuddy")}</p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '16px' }}>
             <button className="btn btn-primary" onClick={() => openAddModal('oauth')}>
-              <Plus size={16} /> {t('common.shared.addAccount', '添加账号')}
+              <Plus size={16} /> {t('common.shared.addAccount', "Thêm tài khoản")}
             </button>
           </div>
         </div>
       ) : filteredAccounts.length === 0 ? (
         <div className="empty-state">
-          <h3>{t('common.shared.noMatch.title', '没有匹配的账号')}</h3>
-          <p>{t('common.shared.noMatch.desc', '请尝试调整搜索或筛选条件')}</p>
+          <h3>{t('common.shared.noMatch.title', "Không có tài khoản phù hợp")}</h3>
+          <p>{t('common.shared.noMatch.desc', "Thử điều chỉnh tìm kiếm hoặc bộ lọc")}</p>
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid-view-container">
@@ -766,10 +766,10 @@ export function CodebuddyAccountsPage() {
             <thead>
               <tr>
                 <th style={{ width: 40 }}><input type="checkbox" checked={isAllPaginatedSelected} onChange={() => toggleSelectAll(paginatedIds)} /></th>
-                <th style={{ width: 240 }}>{t('common.shared.columns.email', '邮箱')}</th>
-                <th style={{ width: 120 }}>{t('common.shared.columns.plan', '套餐')}</th>
-                <th>{t('codebuddy.quotaQuery.sectionTitle', '配额查询')}</th>
-                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', '操作')}</th>
+                <th style={{ width: 240 }}>{t('common.shared.columns.email', "E-mail")}</th>
+                <th style={{ width: 120 }}>{t('common.shared.columns.plan', "Gói")}</th>
+                <th>{t('codebuddy.quotaQuery.sectionTitle', "Truy vấn hạn ngạch")}</th>
+                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', "Hành động")}</th>
               </tr>
             </thead>
             <tbody>
@@ -788,10 +788,10 @@ export function CodebuddyAccountsPage() {
             <thead>
               <tr>
                 <th style={{ width: 40 }}><input type="checkbox" checked={isAllPaginatedSelected} onChange={() => toggleSelectAll(paginatedIds)} /></th>
-                <th style={{ width: 240 }}>{t('common.shared.columns.email', '邮箱')}</th>
-                <th style={{ width: 120 }}>{t('common.shared.columns.plan', '套餐')}</th>
-                <th>{t('codebuddy.quotaQuery.sectionTitle', '配额查询')}</th>
-                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', '操作')}</th>
+                <th style={{ width: 240 }}>{t('common.shared.columns.email', "E-mail")}</th>
+                <th style={{ width: 120 }}>{t('common.shared.columns.plan', "Gói")}</th>
+                <th>{t('codebuddy.quotaQuery.sectionTitle', "Truy vấn hạn ngạch")}</th>
+                <th className="sticky-action-header table-action-header">{t('common.shared.columns.actions', "Hành động")}</th>
               </tr>
             </thead>
             <tbody>{renderTableRows(paginatedAccounts)}</tbody>
@@ -818,29 +818,29 @@ export function CodebuddyAccountsPage() {
         <div className="modal-overlay">
             <div className="modal-content ghcp-add-modal platform-account-add-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('codebuddy.addAccount', '添加 CodeBuddy 账号')}</h2>
+              <h2>{t('codebuddy.addAccount', "Thêm tài khoản CodeBuddy")}</h2>
               <button className="modal-close" onClick={closeAddModal}><X size={18} /></button>
             </div>
             <div className="modal-tabs">
-              <button className={`modal-tab ${addTab === 'oauth' ? 'active' : ''}`} onClick={() => openAddModal('oauth')}><Globe size={14} /> {t('common.shared.addModal.oauth', '授权登录')}</button>
+              <button className={`modal-tab ${addTab === 'oauth' ? 'active' : ''}`} onClick={() => openAddModal('oauth')}><Globe size={14} /> {t('common.shared.addModal.oauth', "Ủy quyền OAuth")}</button>
               <button className={`modal-tab ${addTab === 'token' ? 'active' : ''}`} onClick={() => openAddModal('token')}><KeyRound size={14} />{t('common.shared.addModal.token', 'Token / JSON')}</button>
-              <button className={`modal-tab ${addTab === 'json' ? 'active' : ''}`} onClick={() => openAddModal('json')}><Database size={14} />{t('common.shared.addModal.import', '本地导入')}</button>
+              <button className={`modal-tab ${addTab === 'json' ? 'active' : ''}`} onClick={() => openAddModal('json')}><Database size={14} />{t('common.shared.addModal.import', "Nhập từ máy")}</button>
             </div>
             <div className="modal-body">
               <MfaQuickCodeSelect />
               {addTab === 'oauth' && (
                 <div className="add-section oauth-section">
                   <p className="section-desc">
-                    {t('codebuddy.oauthDesc', '点击下方按钮将在浏览器中打开 CodeBuddy 授权页面。')}
+                    {t('codebuddy.oauthDesc', "Bấm nút bên dưới để mở trang ủy quyền CodeBuddy trong trình duyệt.")}
                   </p>
                   <div className="codebuddy-oauth-feature-card oauth">
                     <p className="feature-title">
-                      {t('codebuddy.oauthFeature.oauth.title', '仅授权 IDE 登录信息')}
+                      {t('codebuddy.oauthFeature.oauth.title', "Chỉ ủy quyền thông tin đăng nhập IDE")}
                     </p>
                     <ul className="feature-list">
-                      <li>{t('codebuddy.oauthFeature.oauth.item1', '在浏览器完成 OAuth 后即可添加账号并用于 IDE 切换。')}</li>
-                      <li>{t('codebuddy.oauthFeature.oauth.item2', '授权完成后会自动刷新资源包配额数据。')}</li>
-                      <li>{t('codebuddy.oauthFeature.oauth.item3', '账号卡片将按资源包展示额度、进度和刷新/到期时间。')}</li>
+                      <li>{t('codebuddy.oauthFeature.oauth.item1', "Sau khi hoàn tất OAuth trong trình duyệt, bạn có thể thêm tài khoản và dùng để chuyển IDE.")}</li>
+                      <li>{t('codebuddy.oauthFeature.oauth.item2', "Tham số truy vấn hạn ngạch sẽ không được liên kết tự động.")}</li>
+                      <li>{t('codebuddy.oauthFeature.oauth.item3', "Nếu cần hiển thị hạn ngạch, hãy chạy thủ công \"Truy vấn hạn ngạch\" trên thẻ tài khoản.")}</li>
                     </ul>
                   </div>
                   {oauthPrepareError ? (
@@ -848,7 +848,7 @@ export function CodebuddyAccountsPage() {
                       <CircleAlert size={16} />
                       <span>{oauthPrepareError}</span>
                       <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>
-                        {t('common.shared.oauth.retry', '重新生成授权信息')}
+                        {t('common.shared.oauth.retry', "Tạo lại thông tin ủy quyền")}
                       </button>
                     </div>
                   ) : oauthUrl ? (
@@ -858,7 +858,7 @@ export function CodebuddyAccountsPage() {
                           type="text"
                           value={oauthUrl}
                           readOnly
-                          placeholder={t('codebuddy.oauthUrlInputPlaceholder', '可手动输入授权地址')}
+                          placeholder={t('codebuddy.oauthUrlInputPlaceholder', "Có thể nhập URL ủy quyền thủ công")}
                         />
                         <button onClick={handleCopyOauthUrl}>
                           {oauthUrlCopied ? <Check size={16} /> : <Copy size={16} />}
@@ -874,7 +874,7 @@ export function CodebuddyAccountsPage() {
                       )}
                       {oauthMeta && (
                         <p className="oauth-hint">
-                          {t('common.shared.oauth.meta', '授权有效期：{{expires}}s；轮询间隔：{{interval}}s', {
+                          {t('common.shared.oauth.meta', "Hết hạn sau: {{expires}}s; chu kỳ thăm dò: {{interval}}s", {
                             expires: oauthMeta.expiresIn,
                             interval: oauthMeta.intervalSeconds,
                           })}
@@ -885,12 +885,12 @@ export function CodebuddyAccountsPage() {
                         onClick={handleOpenOauthUrl}
                       >
                         <Globe size={16} />
-                        {t('common.shared.oauth.openBrowser', '在浏览器中打开')}
+                        {t('common.shared.oauth.openBrowser', "Mở trong trình duyệt")}
                       </button>
                       {oauthPolling && (
                         <div className="add-status loading">
                           <RefreshCw size={16} className="loading-spinner" />
-                          <span>{t('codebuddy.oauthWaiting', '等待授权完成...')}</span>
+                          <span>{t('codebuddy.oauthWaiting', "Đang chờ hoàn tất ủy quyền...")}</span>
                         </div>
                       )}
                       {oauthCompleteError && (
@@ -899,7 +899,7 @@ export function CodebuddyAccountsPage() {
                           <span>{oauthCompleteError}</span>
                           {oauthTimedOut && (
                             <button className="btn btn-sm btn-outline" onClick={handleRetryOauth}>
-                              {t('common.shared.oauth.timeoutRetry', '刷新授权链接')}
+                              {t('common.shared.oauth.timeoutRetry', "Làm mới liên kết ủy quyền")}
                             </button>
                           )}
                         </div>
@@ -911,15 +911,15 @@ export function CodebuddyAccountsPage() {
                   ) : (
                     <div className="oauth-loading">
                       <RefreshCw size={24} className="loading-spinner" />
-                      <span>{t('common.shared.oauth.preparing', '正在准备授权信息...')}</span>
+                      <span>{t('common.shared.oauth.preparing', "Đang chuẩn bị liên kết ủy quyền...")}</span>
                     </div>
                   )}
                 </div>
               )}
               {addTab === 'token' && (
                 <div className="add-section token-section">
-                  <p className="section-desc">{t('codebuddy.tokenDesc', '粘贴 CodeBuddy 的 access token：')}</p>
-                  <textarea className="token-input" value={tokenInput} onChange={(e) => setTokenInput(e.target.value)} placeholder={t('common.shared.token.placeholder', '粘贴 Token 或 JSON...')} />
+                  <p className="section-desc">{t('codebuddy.tokenDesc', "Dán access token của CodeBuddy:")}</p>
+                  <textarea className="token-input" value={tokenInput} onChange={(e) => setTokenInput(e.target.value)} placeholder={t('common.shared.token.placeholder', "Ví dụ: ghu_xxx / sk-ws-xxx / {\"access_token\":\"eyJ...\",\"refresh_token\":\"rt_...\"} / [{...}]")} />
                   <button className="btn btn-primary btn-full" onClick={handleTokenImport} disabled={importing || !tokenInput.trim()}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Download size={16} />}
                     {t('common.shared.token.import', 'Import')}
@@ -928,17 +928,17 @@ export function CodebuddyAccountsPage() {
               )}
               {addTab === 'json' && (
                 <div className="add-section json-section">
-                  <p className="section-desc">{t('codebuddy.import.localDesc', '支持从本机 CodeBuddy 客户端或 JSON 文件导入账号数据。')}</p>
+                  <p className="section-desc">{t('codebuddy.import.localDesc', "Hỗ trợ nhập dữ liệu tài khoản từ ứng dụng CodeBuddy cục bộ hoặc từ tệp JSON.")}</p>
                   <button className="btn btn-secondary btn-full" onClick={() => handleImportFromLocal?.()} disabled={importing}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Database size={16} />}
-                    {t('codebuddy.import.localClient', '从本机 CodeBuddy 导入')}
+                    {t('codebuddy.import.localClient', "Nhập từ CodeBuddy cục bộ")}
                   </button>
-                  <div className="oauth-hint" style={{ margin: '8px 0 4px' }}>{t('common.shared.import.orJson', '或从 JSON 文件导入')}</div>
+                  <div className="oauth-hint" style={{ margin: '8px 0 4px' }}>{t('common.shared.import.orJson', "Hoặc nhập từ tệp JSON")}</div>
                   <input ref={importFileInputRef} type="file" accept="application/json" style={{ display: 'none' }}
                     onChange={(e) => { const file = e.target.files?.[0]; e.target.value = ''; if (!file) return; void handleImportJsonFile(file); }} />
                   <button className="btn btn-primary btn-full" onClick={handlePickImportFile} disabled={importing}>
                     {importing ? <RefreshCw size={16} className="loading-spinner" /> : <Database size={16} />}
-                    {t('common.shared.import.pickFile', '选择 JSON 文件导入')}
+                    {t('common.shared.import.pickFile', "Chọn tệp JSON để nhập")}
                   </button>
                 </div>
               )}
@@ -946,7 +946,7 @@ export function CodebuddyAccountsPage() {
               {addStatus !== 'idle' && addStatus !== 'loading' && (
                 <div className={`add-status ${addStatus}`}>
                   {addStatus === 'success' ? <Check size={16} /> : <CircleAlert size={16} />}
-                  <span>{addMessage || t('common.shared.loginSuccess', '登录成功')}</span>
+                  <span>{addMessage || t('common.shared.loginSuccess', "Đăng nhập thành công")}</span>
                 </div>
               )}
             </div>
@@ -958,11 +958,11 @@ export function CodebuddyAccountsPage() {
         <div className="modal-overlay">
           <div className="modal confirm-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('common.confirmDelete', '确认删除')}</h2>
+              <h2>{t('common.confirmDelete', "Xác nhận xóa")}</h2>
               <button
                 className="modal-close"
                 onClick={() => !deleting && setDeleteConfirm(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -972,8 +972,8 @@ export function CodebuddyAccountsPage() {
               <p>{deleteConfirm.message}</p>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={() => setDeleteConfirm(null)} disabled={deleting}>{t('common.cancel', '取消')}</button>
-              <button className="btn btn-danger" onClick={confirmDelete} disabled={deleting}>{deleting ? t('common.processing', '处理中...') : t('common.confirm', '确认')}</button>
+              <button className="btn btn-secondary" onClick={() => setDeleteConfirm(null)} disabled={deleting}>{t('common.cancel', "Hủy")}</button>
+              <button className="btn btn-danger" onClick={confirmDelete} disabled={deleting}>{deleting ? t('common.processing', "Đang xử lý...") : t('common.confirm', "Xác nhận")}</button>
             </div>
           </div>
         </div>
@@ -983,11 +983,11 @@ export function CodebuddyAccountsPage() {
         <div className="modal-overlay">
           <div className="modal confirm-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{t('common.confirmDeleteTag', '确认删除标签')}</h2>
+              <h2>{t('common.confirmDeleteTag', "Xác nhận xóa thẻ")}</h2>
               <button
                 className="modal-close"
                 onClick={() => !deletingTag && setTagDeleteConfirm(null)}
-                aria-label={t('common.close', '关闭')}
+                aria-label={t('common.close', "Đóng")}
               >
                 <X />
               </button>
@@ -997,8 +997,8 @@ export function CodebuddyAccountsPage() {
               <p>{t('common.deleteTagWarning', { tag: tagDeleteConfirm, defaultValue: '确定要从所有账号中移除标签 "{{tag}}" 吗？' })}</p>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={() => setTagDeleteConfirm(null)} disabled={deletingTag}>{t('common.cancel', '取消')}</button>
-              <button className="btn btn-danger" onClick={confirmDeleteTag} disabled={deletingTag}>{deletingTag ? t('common.processing', '处理中...') : t('common.confirm', '确认')}</button>
+              <button className="btn btn-secondary" onClick={() => setTagDeleteConfirm(null)} disabled={deletingTag}>{t('common.cancel', "Hủy")}</button>
+              <button className="btn btn-danger" onClick={confirmDeleteTag} disabled={deletingTag}>{deletingTag ? t('common.processing', "Đang xử lý...") : t('common.confirm', "Xác nhận")}</button>
             </div>
           </div>
         </div>
@@ -1006,7 +1006,7 @@ export function CodebuddyAccountsPage() {
 
       <ExportJsonModal
         isOpen={showExportModal}
-        title={`${t('common.shared.export.title', '导出')} JSON`}
+        title={`${t('common.shared.export.title', "Xuất")} JSON`}
         jsonContent={exportJsonContent}
         hidden={exportJsonHidden}
         copied={exportJsonCopied}
