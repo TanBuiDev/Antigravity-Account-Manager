@@ -57,41 +57,41 @@ const LEGACY_TOKEN_VERSION: u32 = 1;
 fn legacy_token_cipher() -> Result<Aes256Gcm, String> {
     let path = get_data_dir()?.join(LEGACY_TOKEN_KEY_FILE);
     let key = if path.exists() {
-        let raw = fs::read_to_string(&path).map_err(|e| format!("读取历史账号密钥失败: {}", e))?;
+        let raw = fs::read_to_string(&path).map_err(|e| format!("Không thể đọc khóa tài khoản cũ: {}", e))?;
         let bytes = general_purpose::STANDARD
             .decode(raw.trim())
-            .map_err(|e| format!("解析历史账号密钥失败: {}", e))?;
+            .map_err(|e| format!("Không thể phân tích khóa tài khoản cũ: {}", e))?;
         if bytes.len() != 32 {
-            return Err("历史账号密钥长度无效".to_string());
+            return Err("Khóa tài khoản cũ có độ dài không hợp lệ".to_string());
         }
         let mut key = [0u8; 32];
         key.copy_from_slice(&bytes);
         key
     } else {
-        return Err("历史账号密钥不存在".to_string());
+        return Err("Không tìm thấy khóa tài khoản cũ".to_string());
     };
-    Aes256Gcm::new_from_slice(&key).map_err(|e| format!("初始化历史账号加密失败: {}", e))
+    Aes256Gcm::new_from_slice(&key).map_err(|e| format!("Không thể khởi tạo mã hóa tài khoản cũ: {}", e))
 }
 
 fn decrypt_legacy_token_envelope(envelope: &EncryptedTokenEnvelope) -> Result<TokenData, String> {
     if envelope.version != LEGACY_TOKEN_VERSION {
-        return Err("历史账号 token 加密版本不受支持".to_string());
+        return Err("Không hỗ trợ phiên bản mã hóa token của tài khoản cũ".to_string());
     }
     let cipher = legacy_token_cipher()?;
     let nonce = general_purpose::STANDARD
         .decode(envelope.nonce.trim())
-        .map_err(|e| format!("解析历史账号 nonce 失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích nonce tài khoản cũ: {}", e))?;
     if nonce.len() != 12 {
-        return Err("历史账号 nonce 长度无效".to_string());
+        return Err("Nonce của tài khoản cũ có độ dài không hợp lệ".to_string());
     }
     let ciphertext = general_purpose::STANDARD
         .decode(envelope.ciphertext.trim())
-        .map_err(|e| format!("解析历史账号密文失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích dữ liệu mã hóa tài khoản cũ: {}", e))?;
     let plaintext = cipher
         .decrypt(Nonce::from_slice(&nonce), ciphertext.as_ref())
-        .map_err(|e| format!("解密历史账号 token 失败: {:?}", e))?;
+        .map_err(|e| format!("Không thể giải mã token tài khoản cũ: {:?}", e))?;
     serde_json::from_slice::<TokenData>(&plaintext)
-        .map_err(|e| format!("解析历史账号 token 明文失败: {}", e))
+        .map_err(|e| format!("Không thể phân tích token đã giải mã của tài khoản cũ: {}", e))
 }
 
 #[derive(Clone)]
@@ -158,22 +158,22 @@ fn deserialize_account_from_storage(
         return Ok(account);
     }
 
-    // 兼容历史明文详情与仅 token 加密的详情；读取成功后后台迁移为整文件密文。
+    // 兼容历史明文详情与仅 token 加密的详情；读取thành công后后台迁移为整文件密文。
     let mut value = serde_json::from_str::<serde_json::Value>(content)
-        .map_err(|e| format!("解析账号数据失败: {}", e))?;
+        .map_err(|e| format!("Không thể phân tích dữ liệu tài khoản: {}", e))?;
 
     if value.get("token").is_none() {
         let encrypted = value
             .get("token_encrypted")
             .cloned()
-            .ok_or_else(|| "账号数据缺少 token".to_string())?;
+            .ok_or_else(|| "Dữ liệu tài khoản thiếu token".to_string())?;
         let envelope = serde_json::from_value::<EncryptedTokenEnvelope>(encrypted)
-            .map_err(|e| format!("解析账号 token 密文失败: {}", e))?;
+            .map_err(|e| format!("Không thể phân tích token mã hóa của tài khoản: {}", e))?;
         let token = decrypt_legacy_token_envelope(&envelope)?;
         if let Some(object) = value.as_object_mut() {
             object.insert(
                 "token".to_string(),
-                serde_json::to_value(token).map_err(|e| format!("还原账号 token 失败: {}", e))?,
+                serde_json::to_value(token).map_err(|e| format!("Không thể khôi phục token tài khoản: {}", e))?,
             );
         }
     }
@@ -183,7 +183,7 @@ fn deserialize_account_from_storage(
     }
 
     let account =
-        serde_json::from_value::<Account>(value).map_err(|e| format!("解析账号数据失败: {}", e))?;
+        serde_json::from_value::<Account>(value).map_err(|e| format!("Không thể phân tích dữ liệu tài khoản: {}", e))?;
 
     let account_for_rewrite = account.clone();
     modules::deferred_account_rewrite::schedule_account_rewrite_if_unchanged(
@@ -220,7 +220,7 @@ pub fn get_data_dir() -> Result<PathBuf, String> {
                 let data_dir = PathBuf::from(override_dir);
                 if !data_dir.exists() {
                     fs::create_dir_all(&data_dir)
-                        .map_err(|e| format!("创建测试数据目录失败: {}", e))?;
+                        .map_err(|e| format!("Không thể tạo thư mục dữ liệu thử nghiệm: {}", e))?;
                 }
                 return Ok(data_dir);
             }
@@ -233,7 +233,7 @@ pub fn get_data_dir() -> Result<PathBuf, String> {
     let data_dir = resolve_data_dir()?;
 
     if !data_dir.exists() {
-        fs::create_dir_all(&data_dir).map_err(|e| format!("创建数据目录失败: {}", e))?;
+        fs::create_dir_all(&data_dir).map_err(|e| format!("Không thể tạo thư mục dữ liệu: {}", e))?;
     }
 
     Ok(data_dir)
@@ -245,7 +245,7 @@ pub fn get_accounts_dir() -> Result<PathBuf, String> {
     let accounts_dir = data_dir.join(ACCOUNTS_DIR);
 
     if !accounts_dir.exists() {
-        fs::create_dir_all(&accounts_dir).map_err(|e| format!("创建账号目录失败: {}", e))?;
+        fs::create_dir_all(&accounts_dir).map_err(|e| format!("Không thể tạo thư mục tài khoản: {}", e))?;
     }
 
     Ok(accounts_dir)
@@ -286,7 +286,7 @@ fn repair_account_index_from_details(reason: &str) -> Result<Option<AccountIndex
     let backup_path = crate::modules::account_index_repair::backup_existing_index(&index_path)
         .unwrap_or_else(|err| {
             modules::logger::log_warn(&format!(
-                "自动修复账号索引前备份失败，继续尝试重建: path={}, error={}",
+                "Không thể sao lưu trước khi sửa chỉ mục tài khoản; tiếp tục thử xây dựng lại: path={}, error={}",
                 index_path.display(),
                 err
             ));
@@ -295,7 +295,7 @@ fn repair_account_index_from_details(reason: &str) -> Result<Option<AccountIndex
 
     if let Err(err) = save_account_index(&index) {
         modules::logger::log_warn(&format!(
-            "自动修复账号索引保存失败，将以内存结果继续运行: reason={}, recovered_accounts={}, error={}",
+            "Không thể lưu chỉ mục tài khoản đã sửa; tiếp tục sử dụng kết quả trong bộ nhớ: reason={}, recovered_accounts={}, error={}",
             reason,
             index.accounts.len(),
             err
@@ -303,7 +303,7 @@ fn repair_account_index_from_details(reason: &str) -> Result<Option<AccountIndex
     }
 
     modules::logger::log_warn(&format!(
-        "检测到账号索引异常，已根据详情文件自动重建: reason={}, recovered_accounts={}, backup_path={}",
+        "Phát hiện chỉ mục tài khoản bất thường; đã xây dựng lại từ các tệp chi tiết: reason={}, recovered_accounts={}, backup_path={}",
         reason,
         index.accounts.len(),
         backup_path
@@ -321,17 +321,17 @@ pub fn load_account_index() -> Result<AccountIndex, String> {
     let index_path = data_dir.join(ACCOUNTS_INDEX);
 
     if !index_path.exists() {
-        if let Some(index) = repair_account_index_from_details("索引文件不存在")? {
+        if let Some(index) = repair_account_index_from_details("Không tìm thấy tệp chỉ mục")? {
             return Ok(index);
         }
         return Ok(AccountIndex::new());
     }
 
     let content =
-        fs::read_to_string(&index_path).map_err(|e| format!("读取账号索引失败: {}", e))?;
+        fs::read_to_string(&index_path).map_err(|e| format!("Không thể đọc chỉ mục tài khoản: {}", e))?;
 
     if content.trim().is_empty() {
-        if let Some(index) = repair_account_index_from_details("索引文件为空")? {
+        if let Some(index) = repair_account_index_from_details("Tệp chỉ mục đang trống")? {
             return Ok(index);
         }
         return Ok(AccountIndex::new());
@@ -343,7 +343,7 @@ pub fn load_account_index() -> Result<AccountIndex, String> {
     ) {
         Ok(index) => {
             if index.accounts.is_empty() {
-                if let Some(repaired) = repair_account_index_from_details("索引账号列表为空")?
+                if let Some(repaired) = repair_account_index_from_details("Danh sách tài khoản trong chỉ mục đang trống")?
                 {
                     return Ok(repaired);
                 }
@@ -351,7 +351,7 @@ pub fn load_account_index() -> Result<AccountIndex, String> {
             Ok(index)
         }
         Err(e) => {
-            if let Some(index) = repair_account_index_from_details("索引文件损坏")? {
+            if let Some(index) = repair_account_index_from_details("Tệp chỉ mục bị hỏng")? {
                 return Ok(index);
             }
             Err(crate::error::file_corrupted_error(
@@ -369,10 +369,10 @@ pub fn save_account_index(index: &AccountIndex) -> Result<(), String> {
     let index_path = data_dir.join(ACCOUNTS_INDEX);
 
     let content =
-        serde_json::to_string_pretty(index).map_err(|e| format!("序列化账号索引失败: {}", e))?;
+        serde_json::to_string_pretty(index).map_err(|e| format!("Không thể tuần tự hóa chỉ mục tài khoản: {}", e))?;
 
     crate::modules::atomic_write::write_string_atomic(&index_path, &content)
-        .map_err(|e| format!("写入账号索引失败: {}", e))?;
+        .map_err(|e| format!("Không thể ghi chỉ mục tài khoản: {}", e))?;
     invalidate_list_accounts_cache();
     Ok(())
 }
@@ -383,11 +383,11 @@ pub fn load_account(account_id: &str) -> Result<Account, String> {
     let account_path = accounts_dir.join(format!("{}.json", account_id));
 
     if !account_path.exists() {
-        return Err(format!("账号不存在: {}", account_id));
+        return Err(format!("Không tìm thấy tài khoản: {}", account_id));
     }
 
     let content =
-        fs::read_to_string(&account_path).map_err(|e| format!("读取账号数据失败: {}", e))?;
+        fs::read_to_string(&account_path).map_err(|e| format!("Không thể đọc dữ liệu tài khoản: {}", e))?;
 
     let mut account = deserialize_account_from_storage(&account_path, &content)?;
     if account.token.project_id.as_deref() == Some("aicode-consumers") {
@@ -452,7 +452,7 @@ pub fn save_account(account: &Account) -> Result<(), String> {
     let content = serialize_account_for_storage(account)?;
 
     crate::modules::atomic_write::write_string_atomic(&account_path, &content)
-        .map_err(|e| format!("保存账号数据失败: {}", e))?;
+        .map_err(|e| format!("Không thể lưu dữ liệu tài khoản: {}", e))?;
     invalidate_list_accounts_cache();
     Ok(())
 }
@@ -464,10 +464,10 @@ fn normalize_tags(tags: Vec<String>) -> Result<Vec<String>, String> {
     for raw in tags {
         let trimmed = raw.trim();
         if trimmed.is_empty() {
-            return Err("标签不能为空".to_string());
+            return Err("Nhãn không được để trống".to_string());
         }
         if trimmed.chars().count() > 20 {
-            return Err("标签长度不能超过 20 个字符".to_string());
+            return Err("Nhãn không được vượt quá 20 ký tự".to_string());
         }
         let normalized = trimmed.to_lowercase();
         if seen.insert(normalized.clone()) {
@@ -476,7 +476,7 @@ fn normalize_tags(tags: Vec<String>) -> Result<Vec<String>, String> {
     }
 
     if result.len() > 10 {
-        return Err("标签数量不能超过 10 个".to_string());
+        return Err("Không được tạo quá 10 nhãn".to_string());
     }
 
     Ok(result)
@@ -567,13 +567,13 @@ pub fn list_accounts() -> Result<Vec<Account>, String> {
 
     let _load_guard = LIST_ACCOUNTS_LOAD_LOCK
         .lock()
-        .map_err(|e| format!("获取账号列表锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể khóa danh sách tài khoản: {}", e))?;
 
     if let Some(accounts) = read_list_accounts_cache() {
         return Ok(accounts);
     }
 
-    modules::logger::log_info("开始列出账号...");
+    modules::logger::log_info("Bắt đầu liệt kê tài khoản...");
     let index = load_account_index()?;
     let mut accounts = Vec::new();
 
@@ -584,14 +584,14 @@ pub fn list_accounts() -> Result<Vec<Account>, String> {
                 accounts.push(account);
             }
             Err(e) => {
-                modules::logger::log_error(&format!("加载账号失败: {}", e));
+                modules::logger::log_error(&format!("Không thể tải tài khoản: {}", e));
             }
         }
     }
 
     if !index.accounts.is_empty() && accounts.is_empty() {
         return Err(format!(
-            "账号索引中有 {} 个账号，但详情文件均无法读取；已保留前端缓存，请从账号备份或本地账号文件恢复。",
+            "Chỉ mục có {} tài khoản nhưng không đọc được tệp chi tiết nào; đã giữ dữ liệu nhớ đệm trên giao diện. Hãy khôi phục từ bản sao lưu hoặc tệp tài khoản cục bộ.",
             index.accounts.len()
         ));
     }
@@ -652,7 +652,7 @@ fn find_matching_account_id(
             Ok(account) => account,
             Err(err) => {
                 modules::logger::log_warn(&format!(
-                    "账号匹配时跳过损坏账号文件: id={}, error={}",
+                    "Bỏ qua tệp tài khoản bị hỏng khi đối chiếu: id={}, error={}",
                     summary.id, err
                 ));
                 continue;
@@ -670,7 +670,7 @@ fn find_matching_account_id(
 
     if email_matches.len() == 1 {
         modules::logger::log_info(&format!(
-            "账号匹配走单邮箱覆盖路径: email={}, id={}",
+            "Đối chiếu tài khoản theo email duy nhất: email={}, id={}",
             normalized_email, email_matches[0].id
         ));
         return Ok(Some(email_matches.remove(0).id));
@@ -718,11 +718,11 @@ pub fn create_pending_oauth_account(
 ) -> Result<Account, String> {
     let email = email.trim().to_string();
     if email.is_empty() || !email.contains('@') {
-        return Err("账号邮箱不能为空或格式无效".to_string());
+        return Err("Email tài khoản không được để trống hoặc sai định dạng".to_string());
     }
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
     let target_id = build_account_storage_id(&email);
     let existing_id = index
@@ -777,7 +777,7 @@ pub fn upsert_account(
     let email = email.trim().to_string();
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
     let existing_account_id = index
         .accounts
@@ -849,14 +849,14 @@ pub fn upsert_account(
 pub fn delete_account(account_id: &str) -> Result<(), String> {
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
 
     let original_len = index.accounts.len();
     index.accounts.retain(|s| s.id != account_id);
 
     if index.accounts.len() == original_len {
-        return Err(format!("找不到账号 ID: {}", account_id));
+        return Err(format!("Không tìm thấy ID tài khoản: {}", account_id));
     }
 
     if index.current_account_id.as_deref() == Some(account_id) {
@@ -870,7 +870,7 @@ pub fn delete_account(account_id: &str) -> Result<(), String> {
 
     if account_path.exists() {
         crate::modules::atomic_write::remove_file_locked(&account_path)
-            .map_err(|e| format!("删除账号文件失败: {}", e))?;
+            .map_err(|e| format!("Không thể xóa tệp tài khoản: {}", e))?;
     }
 
     Ok(())
@@ -880,7 +880,7 @@ pub fn delete_account(account_id: &str) -> Result<(), String> {
 pub fn delete_accounts(account_ids: &[String]) -> Result<(), String> {
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
 
     let accounts_dir = get_accounts_dir()?;
@@ -905,7 +905,7 @@ pub fn delete_accounts(account_ids: &[String]) -> Result<(), String> {
 pub fn reorder_accounts(account_ids: &[String]) -> Result<(), String> {
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
 
     let id_to_summary: std::collections::HashMap<_, _> = index
@@ -953,7 +953,7 @@ pub fn get_current_account() -> Result<Option<Account>, String> {
 pub fn set_current_account_id(account_id: &str) -> Result<(), String> {
     let _lock = ACCOUNT_INDEX_LOCK
         .lock()
-        .map_err(|e| format!("获取锁失败: {}", e))?;
+        .map_err(|e| format!("Không thể lấy khóa truy cập: {}", e))?;
     let mut index = load_account_index()?;
     index.current_account_id = Some(account_id.to_string());
     save_account_index(&index)?;
@@ -979,13 +979,13 @@ fn save_current_account_file(email: &str) -> Result<(), String> {
         "updated_at": chrono::Utc::now().timestamp()
     });
 
-    let json = serde_json::to_string_pretty(&content).map_err(|e| format!("序列化失败: {}", e))?;
+    let json = serde_json::to_string_pretty(&content).map_err(|e| format!("Không thể tuần tự hóa: {}", e))?;
 
-    let mut file = fs::File::create(&file_path).map_err(|e| format!("创建文件失败: {}", e))?;
+    let mut file = fs::File::create(&file_path).map_err(|e| format!("Không thể tạo tệp: {}", e))?;
     file.write_all(json.as_bytes())
-        .map_err(|e| format!("写入文件失败: {}", e))?;
+        .map_err(|e| format!("Không thể ghi tệp: {}", e))?;
 
-    modules::logger::log_info("已保存当前账号");
+    modules::logger::log_info("Đã lưu tài khoản hiện tại");
     Ok(())
 }
 
@@ -1003,7 +1003,7 @@ pub fn update_account_quota(account_id: &str, mut quota: QuotaData) -> Result<()
                 && existing_quota.subscription_tier == quota.subscription_tier
             {
                 modules::logger::log_warn(&format!(
-                    "⚠️ 新配额 models 为空，保留原有 {} 个模型数据",
+                    "⚠️ Danh sách models của hạn mức mới đang trống; giữ dữ liệu của {} model cũ",
                     existing_quota.models.len()
                 ));
                 // 只更新非 models 字段（subscription_tier, is_forbidden 等）
@@ -1711,7 +1711,7 @@ pub fn send_quota_alert_native_notification(payload: &QuotaAlertPayload) {
         .body(body)
         .show()
     {
-        modules::logger::log_warn(&format!("[QuotaAlert] 原生通知发送失败: {}", e));
+        modules::logger::log_warn(&format!("[QuotaAlert] Không thể gửi thông báo hệ thống: {}", e));
     }
 }
 
@@ -1734,18 +1734,18 @@ pub fn send_quota_alert_native_notification(payload: &QuotaAlertPayload) {
             .asynchronous(true);
 
         if let Err(e) = mac_notification_sys::set_application(&bundle_identifier) {
-            modules::logger::log_warn(&format!("[QuotaAlert] 设置通知应用标识失败: {}", e));
+            modules::logger::log_warn(&format!("[QuotaAlert] Không thể đặt định danh ứng dụng thông báo: {}", e));
         }
 
         if let Err(e) = notification.send() {
-            modules::logger::log_warn(&format!("[QuotaAlert] 原生通知发送失败: {}", e));
+            modules::logger::log_warn(&format!("[QuotaAlert] Không thể gửi thông báo hệ thống: {}", e));
         }
     });
 }
 
 pub fn dispatch_quota_alert(payload: &QuotaAlertPayload) {
     modules::logger::log_warn(&format!(
-        "[QuotaAlert] 触发配额预警: platform={}, current_id={}, threshold={}%, lowest={}%",
+        "[QuotaAlert] Kích hoạt cảnh báo hạn mức: platform={}, current_id={}, threshold={}%, lowest={}%",
         payload.platform, payload.current_account_id, payload.threshold, payload.lowest_percentage
     ));
 
@@ -1850,7 +1850,7 @@ where
         &all_groups,
     );
     if monitored_groups.is_empty() {
-        modules::logger::log_warn("[AutoSwitch] 可监控模型分组为空，跳过自动切号");
+        modules::logger::log_warn("[AutoSwitch] Không có nhóm model để theo dõi; bỏ qua chuyển tài khoản tự động");
         return Ok(None);
     }
     let current_id = match current_account_id {
@@ -1866,14 +1866,14 @@ where
     );
     if monitored_account_ids.is_empty() {
         modules::logger::log_warn(&format!(
-            "[AutoSwitch] 可监控账号范围为空(scope={})，跳过自动切号",
+            "[AutoSwitch] Phạm vi theo dõi tài khoản trống(scope={}); bỏ qua chuyển tài khoản tự động",
             account_scope_mode
         ));
         return Ok(None);
     }
     if !monitored_account_ids.contains(&current_id) {
         modules::logger::log_info(&format!(
-            "[AutoSwitch] 当前账号不在监控范围内(current_id={}, scope={})，跳过自动切号",
+            "[AutoSwitch] Tài khoản hiện tại không nằm trong phạm vi theo dõi(current_id={}, scope={}); bỏ qua chuyển tài khoản tự động",
             current_id, account_scope_mode
         ));
         return Ok(None);
@@ -1912,7 +1912,7 @@ where
 
     if candidates.is_empty() {
         modules::logger::log_warn(&format!(
-            "[AutoSwitch] 命中自动切号条件(rule={}, threshold={}%, credits_enabled={}, credits_threshold={}, scope={})，但没有可切换候选账号",
+            "[AutoSwitch] Đã đạt điều kiện chuyển tài khoản tự động(rule={}, threshold={}%, credits_enabled={}, credits_threshold={}, scope={})，nhưng không có tài khoản thay thế khả dụng",
             trigger_context.rule,
             threshold,
             credits_enabled,
@@ -1928,7 +1928,7 @@ where
 
     let target = &candidates[0];
     modules::logger::log_info(&format!(
-        "[AutoSwitch] 触发自动切号: current_id={}, target_id={}, threshold={}%, credits_enabled={}, credits_threshold={}, current_credits={:?}, scope={}, rule={}",
+        "[AutoSwitch] Kích hoạt chuyển tài khoản tự động: current_id={}, target_id={}, threshold={}%, credits_enabled={}, credits_threshold={}, current_credits={:?}, scope={}, rule={}",
         current_id,
         target.id,
         threshold,
@@ -1976,7 +1976,7 @@ where
     Fut: std::future::Future<Output = Result<Account, String>>,
 {
     let Some(_guard) = AutoSwitchGuard::acquire(&AUTO_SWITCH_IN_PROGRESS) else {
-        modules::logger::log_info("[AutoSwitch] 自动切号进行中，跳过本次检查");
+        modules::logger::log_info("[AutoSwitch] Đang chuyển tài khoản tự động; bỏ qua lượt kiểm tra");
         return Ok(None);
     };
 
@@ -2024,7 +2024,7 @@ pub async fn refresh_all_quotas_logic(
         QuotaRefreshTrigger::Auto => AUTO_MAX_CONCURRENT,
     };
     modules::logger::log_info(&format!(
-        "开始批量刷新所有账号配额 (trigger={}, 并发模式, 最大并发: {})",
+        "Bắt đầu làm mới hạn mức tất cả tài khoản (trigger={}, chế độ song song, tối đa: {})",
         trigger_label, max_concurrent
     ));
     let accounts = list_accounts()?;
@@ -2091,7 +2091,7 @@ pub async fn refresh_all_quotas_logic(
 
     let elapsed = start.elapsed();
     modules::logger::log_info(&format!(
-        "批量刷新完成: {} 成功, {} 失败, 耗时: {}ms",
+        "Đã làm mới hàng loạt: {} thành công, {} thất bại, thời gian: {}ms",
         success,
         failed,
         elapsed.as_millis()
@@ -2148,11 +2148,11 @@ pub async fn fetch_quota_with_fresh_token(
         modules::quota::fetch_quota_for_token(&account.token, &account.email, skip_cache).await;
     match result {
         Ok(payload) => {
-            // 配额获取成功，Token 有效
+            // 配额获取thành công，Token 有效
             // 只解除 invalid_grant 类禁用，其他（verification_required / tos_violation / unknown）不解除
             if account.is_invalid_grant_disabled() {
                 modules::logger::log_info(&format!(
-                    "账号配额获取成功，自动解除禁用状态: {}",
+                    "Lấy hạn mức thành công; tự động bỏ trạng thái vô hiệu hóa: {}",
                     account.email
                 ));
                 account.clear_disabled();
@@ -2197,25 +2197,25 @@ pub async fn fetch_quota_with_fresh_token(
                     || err.message.contains("Verify your account")
                 {
                     modules::logger::log_warn(&format!(
-                        "账号需要重新授权/验证 (VALIDATION_REQUIRED): {}",
+                        "Tài khoản cần xác thực hoặc cấp quyền lại (VALIDATION_REQUIRED): {}",
                         account.email
                     ));
                     account.disabled_reason = Some("verification_required".to_string());
                 } else if err.reason.as_deref() == Some("SUBSCRIPTION_REQUIRED") {
                     modules::logger::log_warn(&format!(
-                        "账号需要有效订阅 (SUBSCRIPTION_REQUIRED): {}",
+                        "Tài khoản cần gói thuê bao hợp lệ (SUBSCRIPTION_REQUIRED): {}",
                         account.email
                     ));
                     account.disabled_reason = Some("subscription_required".to_string());
                 }
             } else if !is_stale {
                 account.quota_error = None;
-                // 配额获取成功且无部分错误，且非历史缓存兜底，如果之前是 verification_required / subscription_required，自动解除
+                // 配额获取thành công且无部分错误，且非历史缓存兜底，如果之前是 verification_required / subscription_required，自动解除
                 if account.disabled_reason.as_deref() == Some("verification_required")
                     || account.disabled_reason.as_deref() == Some("subscription_required")
                 {
                     modules::logger::log_info(&format!(
-                        "账号配额获取成功，自动解除状态: email={}, reason={:?}",
+                        "Lấy hạn mức thành công; tự động bỏ trạng thái: email={}, reason={:?}",
                         account.email, account.disabled_reason
                     ));
                     account.disabled_reason = None;
@@ -2254,11 +2254,11 @@ pub async fn fetch_quota_with_fresh_token(
 /// 内部切换账号函数（供 WebSocket 调用）
 /// 完整流程：Token刷新 + 关闭程序 + 注入 + 重启
 pub async fn switch_account_internal(account_id: &str) -> Result<Account, String> {
-    modules::logger::log_info("[Switch] 开始切换账号");
+    modules::logger::log_info("[Switch] Bắt đầu chuyển tài khoản");
 
     if !modules::config::get_user_config().antigravity_launch_on_switch {
         modules::logger::log_info(
-            "[Switch] 切号启动 Antigravity IDE 已关闭，改为仅写入默认账号数据",
+            "[Switch] Đã tắt khởi động IDE lúc chuyển tài khoản; chỉ ghi dữ liệu tài khoản mặc định",
         );
         return switch_account_local_no_restart(account_id).await;
     }
@@ -2268,7 +2268,7 @@ pub async fn switch_account_internal(account_id: &str) -> Result<Account, String
 
     // 1. 加载并验证账号存在
     let mut account = prepare_account_for_injection(account_id).await?;
-    modules::logger::log_info("[Switch] 正在切换到账号");
+    modules::logger::log_info("[Switch] Đang chuyển sang tài khoản");
 
     // 3. 更新工具内部状态
     set_current_account_id(account_id)?;
@@ -2281,11 +2281,11 @@ pub async fn switch_account_internal(account_id: &str) -> Result<Account, String
         None,
         Some(false),
     ) {
-        modules::logger::log_warn(&format!("[Switch] 更新默认实例绑定账号失败: {}", e));
+        modules::logger::log_warn(&format!("[Switch] Không thể cập nhật tài khoản liên kết phiên mặc định: {}", e));
     }
 
     // 6. 对齐默认实例启动逻辑：按默认实例目录关闭受管进程，再同步注入已有客户端目录。
-    // 默认目录必须成功，额外目录失败只记录日志。
+    // 默认目录必须thành công，额外目录失败只记录日志。
     let default_dir = modules::instance::get_default_user_data_dir()?;
     let default_dir_str = default_dir.to_string_lossy().to_string();
     modules::process::close_antigravity_instances(&[default_dir_str], 20)?;
@@ -2296,14 +2296,14 @@ pub async fn switch_account_internal(account_id: &str) -> Result<Account, String
             continue;
         }
         if let Err(e) = modules::instance::inject_account_to_profile_with_account(&target_dir, &account) {
-            modules::logger::log_warn(&format!("[Switch] 注入目录 {} 失败: {}", target_dir.display(), e));
+            modules::logger::log_warn(&format!("[Switch] Không thể ghi vào thư mục {}: {}", target_dir.display(), e));
         } else {
-            modules::logger::log_info(&format!("[Switch] 成功注入目录: {}", target_dir.display()));
+            modules::logger::log_info(&format!("[Switch] Đã ghi vào thư mục: {}", target_dir.display()));
         }
     }
 
     // 7. 启动 Antigravity IDE（带默认实例自定义启动参数；启动失败不阻断切号，保持原行为）
-    modules::logger::log_info("[Switch] 正在启动 Antigravity IDE 默认实例...");
+    modules::logger::log_info("[Switch] Đang khởi động phiên Antigravity IDE mặc định...");
     let default_settings = modules::instance::load_default_settings()?;
     let extra_args = modules::process::parse_extra_args(&default_settings.extra_args);
     let launch_result = if extra_args.is_empty() {
@@ -2316,18 +2316,18 @@ pub async fn switch_account_internal(account_id: &str) -> Result<Account, String
             let _ = modules::instance::update_default_pid(Some(pid));
         }
         Err(e) => {
-            modules::logger::log_warn(&format!("[Switch] Antigravity IDE 启动失败: {}", e));
+            modules::logger::log_warn(&format!("[Switch] Không thể khởi động Antigravity IDE: {}", e));
             // 不中断流程，允许用户手动启动
         }
     }
 
-    modules::logger::log_info("[Switch] 账号切换完成");
+    modules::logger::log_info("[Switch] Đã chuyển tài khoản");
     Ok(account)
 }
 
 fn persist_switch_history(item: modules::antigravity_switch_history::AntigravitySwitchHistoryItem) {
     if let Err(err) = modules::antigravity_switch_history::add_history_item(item) {
-        modules::logger::log_warn(&format!("写入 Antigravity IDE 切号记录失败: {}", err));
+        modules::logger::log_warn(&format!("Không thể ghi lịch sử chuyển tài khoản Antigravity IDE: {}", err));
     }
 }
 
@@ -2339,13 +2339,13 @@ fn ensure_antigravity_running_for_no_restart_switch() -> Result<bool, String> {
             let _ = modules::instance::update_default_pid(Some(pid));
         }
         modules::logger::log_info(&format!(
-            "[Switch][NoRestart] 检测到 Antigravity IDE 已运行: pid={}",
+            "[Switch][NoRestart] Phát hiện Antigravity IDE đang chạy: pid={}",
             pid
         ));
         return Ok(false);
     }
 
-    modules::logger::log_info("[Switch][NoRestart] Antigravity IDE 未运行，尝试自动启动");
+    modules::logger::log_info("[Switch][NoRestart] Antigravity IDE chưa chạy; thử tự khởi động");
     let extra_args = modules::process::parse_extra_args(&default_settings.extra_args);
     let launch_result = if extra_args.is_empty() {
         modules::process::start_antigravity()
@@ -2356,12 +2356,12 @@ fn ensure_antigravity_running_for_no_restart_switch() -> Result<bool, String> {
         Ok(pid) => {
             if let Err(err) = modules::instance::update_default_pid(Some(pid)) {
                 modules::logger::log_warn(&format!(
-                    "[Switch][NoRestart] 更新默认实例 PID 失败: {}",
+                    "[Switch][NoRestart] Không thể cập nhật PID phiên mặc định: {}",
                     err
                 ));
             }
             modules::logger::log_info(&format!(
-                "[Switch][NoRestart] Antigravity IDE 自动启动成功: pid={}",
+                "[Switch][NoRestart] Đã tự khởi động Antigravity IDE: pid={}",
                 pid
             ));
             Ok(true)
@@ -2462,14 +2462,14 @@ pub async fn switch_account_dual_no_restart(
             if error.starts_with("APP_PATH_NOT_FOUND:") {
                 return Err(error);
             }
-            return Err(format!("本地切换已完成，但客户端启动失败: {}", error));
+            return Err(format!("Đã chuyển tài khoản cục bộ nhưng không thể khởi động ứng dụng: {}", error));
         }
     };
 
     let wait_timeout_ms = if was_started { 12_000 } else { 1_500 };
     if let Err(wait_error) = modules::websocket::wait_for_connected_clients(wait_timeout_ms).await {
         modules::logger::log_warn(&format!(
-            "[Switch][NoRestart] 扩展连接等待结束: {}",
+            "[Switch][NoRestart] Đã kết thúc chờ kết nối extension: {}",
             wait_error
         ));
     }
@@ -2544,10 +2544,10 @@ pub async fn switch_account_dual_no_restart(
                 },
             );
             Err(format!(
-                "本地切换已完成，但扩展无感切号失败: {}",
+                "Đã chuyển tài khoản cục bộ nhưng extension không thể chuyển phiên liền mạch: {}",
                 response
                     .error_message
-                    .unwrap_or_else(|| "扩展未返回具体原因".to_string())
+                    .unwrap_or_else(|| "Extension không cung cấp lý do cụ thể".to_string())
             ))
         }
         Err(error) => {
@@ -2577,7 +2577,7 @@ pub async fn switch_account_dual_no_restart(
                     auto_switch_reason,
                 },
             );
-            Err(format!("本地切换已完成，但扩展无感切号失败: {}", error))
+            Err(format!("Đã chuyển tài khoản cục bộ nhưng extension không thể chuyển phiên liền mạch: {}", error))
         }
     }
 }
@@ -2586,7 +2586,7 @@ pub async fn switch_account_dual_no_restart(
 /// 流程：Token刷新 + 本地状态更新 + 默认实例注入
 pub async fn switch_account_local_no_restart(account_id: &str) -> Result<Account, String> {
     modules::logger::log_info(&format!(
-        "[Switch][NoRestart] 开始本地切号: account_id={}",
+        "[Switch][NoRestart] Bắt đầu chuyển tài khoản cục bộ: account_id={}",
         account_id
     ));
 
@@ -2602,7 +2602,7 @@ pub async fn switch_account_local_no_restart(account_id: &str) -> Result<Account
         Some(false),
     ) {
         modules::logger::log_warn(&format!(
-            "[Switch][NoRestart] 更新默认实例绑定账号失败: {}",
+            "[Switch][NoRestart] Không thể cập nhật tài khoản liên kết phiên mặc định: {}",
             e
         ));
     }
@@ -2615,20 +2615,20 @@ pub async fn switch_account_local_no_restart(account_id: &str) -> Result<Account
         }
         if let Err(e) = modules::instance::inject_account_to_profile_with_account(&target_dir, &account) {
             modules::logger::log_warn(&format!(
-                "[Switch][NoRestart] 注入目录 {} 失败: {}",
+                "[Switch][NoRestart] Không thể ghi vào thư mục {}: {}",
                 target_dir.display(),
                 e
             ));
         } else {
             modules::logger::log_info(&format!(
-                "[Switch][NoRestart] 成功注入目录: {}",
+                "[Switch][NoRestart] Đã ghi vào thư mục: {}",
                 target_dir.display()
             ));
         }
     }
 
     modules::logger::log_info(&format!(
-        "[Switch][NoRestart] 本地切号完成: {}",
+        "[Switch][NoRestart] Đã chuyển tài khoản cục bộ: {}",
         account.email
     ));
     Ok(account)
@@ -2639,10 +2639,10 @@ pub async fn prepare_account_for_injection(account_id: &str) -> Result<Account, 
     let mut account = load_account(account_id)?;
     let fresh_token = modules::oauth::ensure_fresh_token(&account.token)
         .await
-        .map_err(|e| format!("Token 刷新失败: {}", e))?;
+        .map_err(|e| format!("Không thể làm mới token: {}", e))?;
     let mut token_changed = false;
     if fresh_token.access_token != account.token.access_token {
-        modules::logger::log_info("[Account] Token 已刷新");
+        modules::logger::log_info("[Account] Đã làm mới token");
         account.token = fresh_token.clone();
         token_changed = true;
     }
@@ -2652,7 +2652,7 @@ pub async fn prepare_account_for_injection(account_id: &str) -> Result<Account, 
         || (account.token.is_gcp_tos == Some(true) && account.token.project_id.is_none());
     if needs_probe {
         modules::logger::log_info(&format!(
-            "[Account] 准备注入时发现缺少 GCP ToS 或 ProjectId 元数据，执行自动探测: {}",
+            "[Account] Thiếu metadata GCP ToS hoặc ProjectId trước khi ghi dữ liệu; đang tự động phát hiện: {}",
             account.email
         ));
         let meta =
