@@ -1284,7 +1284,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       const selected = await openFileDialog({
         directory: true,
         multiple: false,
-        title: t("codex.cli.selectWorkingDir", "选择 Codex CLI 工作目录"),
+        title: t("codex.cli.selectWorkingDir", "Chọn thư mục làm việc của Codex CLI"),
       });
       if (!selected || typeof selected !== "string") return;
       const next = { ...cliLaunchModal, workingDir: selected };
@@ -1442,7 +1442,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 ...prev,
                 executing: false,
                 executeMessage:
-                  result || t("codex.cli.launchSuccess", "已启动 Codex CLI"),
+                  result || t("codex.cli.launchSuccess", "Đã khởi chạy Codex CLI"),
               }
             : prev,
         );
@@ -2292,7 +2292,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
       setAddMessage(
         t(
           "apiKeyFun.prefill.codexReady",
-          "已带入 APIKEY.FUN 配置，请确认后添加到 Codex。",
+          "Đã điền cấu hình APIKEY.FUN, hãy xác nhận trước khi thêm vào Codex.",
         ),
       );
     }, [
@@ -2644,7 +2644,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setApiModelCatalogError(
           t(
             "codex.api.modelCatalog.contextWindowInvalid",
-            "上下文窗口必须是大于 0 的整数",
+            "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
           ),
         );
         return;
@@ -2779,7 +2779,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             apiSyncModelCatalogToCodex
               ? ` ${t(
                   "codex.api.modelCatalog.restartHint",
-                  "模型目录已更新。若 Codex 正在运行，请重启后生效。",
+                  "Đã cập nhật danh mục mô hình. Nếu Codex đang chạy, hãy khởi động lại để áp dụng.",
                 )}`
               : ""
           }`,
@@ -2849,7 +2849,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
           }
         }
         if (imported.length === 0) {
-          throw new Error(failures.join("; ") || "无法解析导入内容");
+          throw new Error(failures.join("; ") || "Không thể phân tích dữ liệu nhập");
         }
         // 待授权账号若带 2FA 秘钥，同步写入本地 MFA 速查
         for (const account of imported) {
@@ -2889,7 +2889,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
                 failed: failures.length,
                 errors: failures.slice(0, 3).join("; "),
                 defaultValue:
-                  "导入完成：成功 {{success}} 个，失败 {{failed}} 个。{{errors}}",
+                  "Đã nhập: {{success}} thành công, {{failed}} thất bại. {{errors}}",
               }),
             );
             return;
@@ -3582,7 +3582,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
         setEditingApiModelCatalogError(
           t(
             "codex.api.modelCatalog.contextWindowInvalid",
-            "上下文窗口必须是大于 0 的整数",
+            "Cửa sổ ngữ cảnh phải là số nguyên lớn hơn 0",
           ),
         );
         return;
@@ -3737,7 +3737,7 @@ export function useCodexAccountsAccessController(context: CodexAccountsAccessCon
             editingApiSyncModelCatalogToCodex
               ? `${t("instances.messages.updated", "Đã cập nhật phiên bản")} ${t(
                   "codex.api.modelCatalog.restartHint",
-                  "模型目录已更新。若 Codex 正在运行，请重启后生效。",
+                  "Đã cập nhật danh mục mô hình. Nếu Codex đang chạy, hãy khởi động lại để áp dụng.",
                 )}`
               : t("instances.messages.updated", "Đã cập nhật phiên bản"),
         });

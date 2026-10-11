@@ -202,9 +202,9 @@ export function useCodexApiKeyUsageFormatting(
         ),
         isAvailable: t(
           "codex.modelProviders.usage.fields.isAvailable",
-          "余额可用",
+          "Số dư khả dụng",
         ),
-        currency: t("codex.modelProviders.usage.fields.currency", "币种"),
+        currency: t("codex.modelProviders.usage.fields.currency", "Loại tiền"),
         totalBalance: t(
           "codex.modelProviders.usage.fields.totalBalance",
           "Tổng số dư",

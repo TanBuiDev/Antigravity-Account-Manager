@@ -1332,7 +1332,7 @@ export function useCodexAccountsOAuthController(context: Pick<ReturnType<typeof 
             } else {
               throw new Error(
                 t("codex.api.oauthBinding.saveFailed", {
-                  defaultValue: "OAuth 绑定失败：绑定目标账号缺失",
+                  defaultValue: "Liên kết OAuth thất bại: không tìm thấy tài khoản đích",
                   error: t(
                     "codex.api.oauthBinding.validationRequired",
                     "Vui lòng chọn tài khoản OAuth",

@@ -219,7 +219,7 @@ export function GrokInstancesContent({
         switchMessage: boundAccount
           ? t(
               'grok.instances.accountHomeReady',
-              '已准备独立目录：{{email}}',
+              'Đã chuẩn bị thư mục riêng: {{email}}',
               {
                 email: getGrokAccountDisplayEmail(boundAccount),
               },
@@ -753,9 +753,9 @@ export function GrokInstancesContent({
         appType="grok"
         isSupported={isSupported}
         unsupportedTitleKey="common.shared.instances.unsupported.title"
-        unsupportedTitleDefault="暂不支持当前系统"
+        unsupportedTitleDefault="Hệ điều hành hiện chưa được hỗ trợ"
         unsupportedDescKey="grok.instances.unsupported"
-        unsupportedDescDefault="Grok CLI 多开仅支持 macOS、Windows 和 Linux。"
+        unsupportedDescDefault="Chạy nhiều phiên Grok CLI chỉ được hỗ trợ trên macOS, Windows và Linux."
         onInstanceStarted={handleInstanceStarted}
         onInstanceStartError={handleInstanceStartError}
         resolveStartSuccessMessage={() =>
@@ -917,7 +917,7 @@ export function GrokInstancesContent({
                   launchModal.executing,
                   t(
                     'grok.instances.installLaunchHint',
-                    '可在终端运行以下官方命令，安装完成后重新点击终端执行。',
+                    'Bạn có thể chạy lệnh chính thức dưới đây trong terminal, sau khi cài đặt hãy nhấp chạy trong terminal lần nữa.',
                   ),
                 )}
               <div className="form-group">

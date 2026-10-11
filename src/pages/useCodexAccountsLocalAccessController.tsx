@@ -287,7 +287,7 @@ export function useCodexAccountsLocalAccessController(context: Pick<ReturnType<t
         if (!text) return;
         const normalizedSummary = summary?.trim();
         setQuotaErrorDetail({
-          accountName: accountName.trim() || t("common.unknown", "未知"),
+          accountName: accountName.trim() || t("common.unknown", "Không xác định"),
           title: title?.trim() || undefined,
           summary:
             normalizedSummary && normalizedSummary !== text

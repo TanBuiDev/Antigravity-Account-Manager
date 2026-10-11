@@ -334,7 +334,7 @@ function buildUsageStatusSubline(
   abnormalKey: string,
 ): Pick<UnifiedAccountPresentation, "sublineText" | "sublineClass"> {
   return {
-    sublineText: isNormal ? t(normalKey, "正常") : t(abnormalKey, "异常"),
+    sublineText: isNormal ? t(normalKey, "Bình thường") : t(abnormalKey, "Bất thường"),
     sublineClass: isNormal ? "high" : "critical",
   };
 }
@@ -417,11 +417,11 @@ function resolveResourceTimeText(
     return resource.isBasePackage
       ? t(updatedAtKey, {
           time: primaryText,
-          defaultValue: "下次刷新时间：{{time}}",
+          defaultValue: "Lần làm mới tiếp theo: {{time}}",
         })
       : t(expireAtKey, {
           time: primaryText,
-          defaultValue: "到期时间：{{time}}",
+          defaultValue: "Thời điểm hết hạn: {{time}}",
         });
   }
   const fallbackText = formatMetricResetText(fallbackTime, t);
@@ -429,11 +429,11 @@ function resolveResourceTimeText(
     return resource.isBasePackage
       ? t(expireAtKey, {
           time: fallbackText,
-          defaultValue: "到期时间：{{time}}",
+          defaultValue: "Thời điểm hết hạn: {{time}}",
         })
       : t(updatedAtKey, {
           time: fallbackText,
-          defaultValue: "下次刷新时间：{{time}}",
+          defaultValue: "Lần làm mới tiếp theo: {{time}}",
         });
   }
   return "";
@@ -1470,7 +1470,7 @@ export function buildQoderAccountPresentation(
           ? "--"
           : t("common.shared.remaining", {
               value: `${userRemainingPercent}%`,
-              defaultValue: "剩余 {{value}}",
+              defaultValue: "Còn lại {{value}}",
             }),
       resetText:
         subscription.userQuota.used != null ||
@@ -1580,7 +1580,7 @@ export function buildTraeAccountPresentation(
           ? "--"
           : t("common.shared.remaining", {
               value: `${remainingPercent}%`,
-              defaultValue: "剩余 {{value}}",
+              defaultValue: "Còn lại {{value}}",
             }),
       resetText:
         usage.spentUsd != null && usage.totalUsd != null

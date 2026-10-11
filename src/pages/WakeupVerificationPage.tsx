@@ -543,7 +543,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
         setAvailableModels([]);
       }
     } catch (error) {
-      console.error('获取模型列表失败:', error);
+      console.error('Không thể tải danh sách mô hình:', error);
       setNotice({ text: t('wakeup.notice.modelsFetchFailed'), tone: 'warning' });
       setAvailableModels([]);
     }
@@ -554,7 +554,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
       const groups = await getAccountGroups();
       setAccountGroups(groups || []);
     } catch (error) {
-      console.error('加载账号分组失败:', error);
+      console.error('Không thể tải nhóm tài khoản:', error);
       setAccountGroups([]);
     }
   }, []);
@@ -607,7 +607,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
 
   useEffect(() => {
     invoke('wakeup_set_official_ls_version_mode', { mode: officialLsVersionMode }).catch((error) => {
-      console.error('同步官方 LS 版本模式失败:', error);
+      console.error('Không thể đồng bộ chế độ phiên bản LS chính thức:', error);
     });
   }, [officialLsVersionMode]);
 
@@ -867,7 +867,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
         setNotice({ text: t('messages.actionSuccess', { action: t('common.delete') }), tone: 'success' });
       }
     } catch (error) {
-      console.error('删除验证记录失败:', error);
+      console.error('Không thể xóa bản ghi xác minh:', error);
       setNotice({
         text: t('messages.actionFailed', { action: t('common.delete'), error: String(error) }),
         tone: 'error',
@@ -926,7 +926,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
       await navigator.clipboard.writeText(text);
       setNotice({ text: t('wakeup.errorUi.copySuccess'), tone: 'success' });
     } catch (error) {
-      console.error('复制失败:', error);
+      console.error('Sao chép thất bại:', error);
       setNotice({ text: t('wakeup.errorUi.copyFailed'), tone: 'error' });
     }
   };
@@ -935,7 +935,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
     try {
       await openUrl(url);
     } catch (error) {
-      console.error('打开验证地址失败:', error);
+      console.error('Không thể mở địa chỉ xác minh:', error);
       setNotice({ text: t('wakeup.errorUi.openFailed'), tone: 'error' });
       window.open(url, '_blank', 'noopener,noreferrer');
     }
@@ -1074,7 +1074,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
 
       await fetchHistory();
     } catch (error) {
-      console.error('批量验证失败:', error);
+      console.error('Xác minh hàng loạt thất bại:', error);
       activeBatchIdRef.current = null;
       setRunning(false);
       setProgress(null);
@@ -1414,7 +1414,7 @@ export function WakeupVerificationPage({ onNavigate }: WakeupVerificationPagePro
                     <input
                       type="text"
                       className="verification-account-search"
-                      placeholder={t('accounts.search.placeholder', '搜索账号...')}
+                      placeholder={t('accounts.search.placeholder', 'Tìm tài khoản...')}
                       value={accountSearchQuery}
                       onChange={(e) => setAccountSearchQuery(e.target.value)}
                     />
