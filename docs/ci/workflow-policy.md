@@ -1,23 +1,30 @@
-# Chính sách CI: kiểm thử PR nhanh và build thủ công
+# Windows 10/11 x64: chính sách CI và phát hành
 
-## Trên pull request
+## Mục tiêu
 
-- `🚀 Build Matrix` chỉ chạy 4 bước Preflight: kiểm tra i18n và Rust guard, TypeScript typecheck, regression (bao gồm Go/release), TypeScript trên Windows.
-- Sáu job Tauri Build Matrix cố ý **skipped** khi chạy trên PR; đây không phải bằng chứng đã build thành công.
-- `CodeQL` vẫn chạy trên PR với JavaScript/TypeScript, Rust và Go, nhưng hủy lượt phân tích cũ khi có commit mới.
-- Không nên đẩy nhiều commit nhỏ liên tiếp chỉ để kích hoạt CI; gom lại và kiểm thử tại máy trước.
+- Ứng dụng được **hỗ trợ và kiểm thử phát hành cho Windows x64**. Không có cam kết build hoặc phát hành macOS/Linux.
+- Giữ kiểm thử TypeScript, Go, Rust và bảo mật CodeQL. Các runner Linux phục vụ *kiểm tra mã nguồn*, **không** đóng gói ứng dụng Linux.
+- Trên mỗi PR chỉ có **một** job build Tauri: `🏗️ Build: Windows x64`, chạy sau khi bốn Preflight thành công. Workflow có `concurrency.cancel-in-progress` để hủy lượt kiểm tra cũ.
+- Build PR dùng cấu hình unsigned `src-tauri/tauri.ci.conf.json`; không đưa signing private key vào PR hoặc third-party action.
+- Tác vụ `CodeQL` phân tích JavaScript/TypeScript, Rust, Go và hủy lượt PR cũ để tránh chạy lặp.
 
-## Trước khi merge PR quan trọng
+## Điều kiện merge PR #1
 
-1. Kiểm tra tất cả Preflight và CodeQL của **HEAD hiện tại** đều thành công; kiểm tra nội dung chuỗi Trung chưa được phân loại.
-2. Vào **Actions → 🚀 Build Matrix → Run workflow**, chọn **nhánh của PR** và kích hoạt một lần. `workflow_dispatch` sẽ chạy đầy đủ sáu bản build Tauri sau Preflight.
-3. Đợi **tất cả sáu nền tảng** thành công và xác nhận workflow thủ công dùng đúng HEAD của PR, không phải commit cũ.
-4. Chỉ đánh dấu PR Ready và merge sau khi các kiểm tra cần thiết, review OAuth/token và bảo mật đạt yêu cầu.
+1. Bốn Preflight (`check locales`, typecheck, regression gồm Go/release, TypeScript trên Windows) **xanh trên HEAD mới nhất**.
+2. **Windows x64 Tauri build** (và Rust tests chạy trong job) thành công, không được thay bằng job skipped.
+3. CodeQL kiểm tra JavaScript/TypeScript, Rust, Go thành công; xem xét các vấn đề bảo mật nếu có.
+4. Rà soát tiếng Trung còn lại: hiển thị phải Việt hóa, riêng khóa/chuỗi đầu vào kỹ thuật phải có lý do tương thích.
+5. Không thay đổi cấu trúc lưu token, dữ liệu tài khoản, OAuth hay refresh_token một cách nguy hiểm. Chỉ khi đó mới đánh dấu Ready/merge.
 
-## Phát hành
+## Phát hành Windows
 
-`📦 Release` vẫn chỉ chạy khi đẩy tag `v*` hoặc gọi thủ công theo tag; không cần kích hoạt để kiểm thử thường nhật.
+- Workflow `📦 Release` chạy qua tag `v*` hoặc thủ công theo tag, chỉ xây dựng Windows x64.
+- Phát hành Windows tạo MSI, NSIS, portable archive, hai target updater manifest Windows và `latest.json` chỉ có 3 mục Windows (`windows-x86_64`, `windows-x86_64-msi`, `windows-x86_64-nsis`).
+- Không yêu cầu DMG, AppImage, DEB, RPM; không cập nhật Homebrew Cask.
+- Trình tạo `build_merged_latest_json.cjs` có `--windows-only`; chế độ full-platform mặc định vẫn giữ vì tương thích với các tiện ích/kiểm thử cũ. Chạy `npm run test:release` để kiểm tra thêm chế độ này.
 
-## Chi phí
+## Hạn chế tài nguyên
 
-Repo Public dùng GitHub-hosted **standard runners** đủ điều kiện miễn phí theo chính sách GitHub. Không dùng larger runners khi chưa có ngân sách được phê duyệt. Ngân sách Actions $0 là hàng rào chi phí, nhưng không thay thế việc giám sát số lần build.
+- Repository Public dùng standard GitHub-hosted runners miễn phí theo chính sách GitHub; không dùng larger runners.
+- Gom các thay đổi trước khi push để không kích hoạt liên tục các bước tốn thời gian.
+- Ngân sách GitHub Actions $0 ngăn mức sử dụng tính phí nhưng không thay thế việc kiểm tra Usage.

@@ -103,6 +103,29 @@ function main() {
     (name) => !name.endsWith('.sig') && name !== 'latest.json' && name !== 'SHA256SUMS.txt'
   );
 
+  // Windows-only release does not require artifacts from other operating systems.
+  // Keep the original full-platform mode for backwards compatibility.
+  if (args['windows-only'] === 'true') {
+    const msi = findAsset(assets, /_x64_en-US\.msi$/, 'windows-x86_64-msi');
+    const nsis = findAsset(assets, /_x64-setup\.exe$/, 'windows-x86_64-nsis');
+    const msiEntry = buildPlatformEntry(msi, signatures, repo, version);
+    const nsisEntry = buildPlatformEntry(nsis, signatures, repo, version);
+    const latest = {
+      version,
+      notes: readText(notesFile),
+      pub_date: publishedAt,
+      platforms: {
+        'windows-x86_64': msiEntry,
+        'windows-x86_64-msi': cloneEntry(msiEntry),
+        'windows-x86_64-nsis': nsisEntry,
+      },
+    };
+    fs.writeFileSync(output, `${JSON.stringify(latest, null, 2)}\n`);
+    console.log(`Windows-only latest.json generated at ${output}`);
+    console.log(`platform count=${Object.keys(latest.platforms).length}`);
+    return;
+  }
+
   const darwinAarch64Tar = findAsset(assets, /_aarch64\.app\.tar\.gz$/, 'darwin-aarch64');
   const darwinX64Tar = findAsset(assets, /_x64\.app\.tar\.gz$/, 'darwin-x86_64');
   const windowsMsi = findAsset(assets, /_x64_en-US\.msi$/, 'windows-x86_64-msi');
