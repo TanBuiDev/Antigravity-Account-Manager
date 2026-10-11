@@ -416,7 +416,7 @@ export function useSettingsPageController() {
   useEffect(() => {
     invoke<string[]>('get_available_terminals')
       .then(setAvailableTerminals)
-      .catch(err => console.error('获取可用终端失败:', err));
+      .catch(err => console.error('Không thể tải danh sách terminal khả dụng:', err));
   }, []);
 
   const terminalOptions = useMemo(() => {
@@ -813,7 +813,7 @@ export function useSettingsPageController() {
         setCodexAccounts(nextCodexAccounts || []);
         setCodexGroups(nextCodexGroups || []);
       } catch (error) {
-        console.error('加载自动切号账号范围数据失败:', error);
+        console.error('Không thể tải danh sách tài khoản chuyển tự động:', error);
         if (!mounted) return;
         setAntigravityAccounts([]);
         setAntigravityAccountGroups([]);
@@ -852,7 +852,7 @@ export function useSettingsPageController() {
       setAutoInstallLoaded(true);
       setUpdateRemindersLoaded(true);
     } catch (err) {
-      console.error('加载自动更新设置失败:', err);
+      console.error('Không thể tải cài đặt tự động cập nhật:', err);
       setUpdateSettingsLoadFailed(true);
     }
   };
@@ -951,7 +951,7 @@ export function useSettingsPageController() {
   const [globalProxyNoProxy, setGlobalProxyNoProxy] = useState('');
   const reportPreviewPort = reportActualPort ?? (parseInt(reportPort, 10) || reportDefaultPort);
   const reportPreviewToken = encodeURIComponent((reportToken || 'your-token').trim() || 'your-token');
-  const reportRawPreviewUrl = `http://<当前IP>:${reportPreviewPort}/report?token=${reportPreviewToken}`;
+  const reportRawPreviewUrl = `http://<IP-hien-tai>:${reportPreviewPort}/report?token=${reportPreviewToken}`;
   const reportRenderedPreviewUrl = `${reportRawPreviewUrl}&render=true`;
   const [needsRestart, setNeedsRestart] = useState(false);
   const [networkSaving, setNetworkSaving] = useState(false);
@@ -1279,7 +1279,7 @@ export function useSettingsPageController() {
           };
           dispatchSettingsConfigUpdated(configUpdateSource);
         } catch (err) {
-          console.error('保存通用配置失败:', err);
+          console.error('Không thể lưu cấu hình chung:', err);
           const message = String(err) === 'common.configSaveTimeout' ? t('common.configSaveTimeout') : String(err);
           alert(`${t('settings.network.saveFailed').replace('{error}', message)}`);
           if (generalSaveQueueRef.current === operation) {
@@ -1569,7 +1569,7 @@ export function useSettingsPageController() {
         );
         setHasActiveResetTasks(hasReset);
       } catch (error) {
-        console.error('检测配额重置任务失败:', error);
+        console.error('Không thể kiểm tra tác vụ đặt lại hạn mức:', error);
         setHasActiveResetTasks(false);
       }
     };
@@ -1611,7 +1611,7 @@ export function useSettingsPageController() {
     try {
       await getCurrentWebview().setZoom(normalized);
     } catch (error) {
-      console.error('应用界面缩放失败:', error);
+      console.error('Không thể áp dụng tỷ lệ giao diện:', error);
     }
   };
 
@@ -1860,7 +1860,7 @@ export function useSettingsPageController() {
       if (loadVersion !== generalConfigLoadVersionRef.current) {
         return;
       }
-      console.error('加载通用配置失败:', err);
+      console.error('Không thể tải cấu hình chung:', err);
       setGeneralLoadFailed(true);
       if (hasHydratedGeneralConfigRef.current) {
         setGeneralLoaded(true);
@@ -1898,7 +1898,7 @@ export function useSettingsPageController() {
       setGlobalProxyNoProxy(config.global_proxy_no_proxy || '');
       setNeedsRestart(false);
     } catch (err) {
-      console.error('加载网络配置失败:', err);
+      console.error('Không thể tải cấu hình mạng:', err);
     }
   };
 
@@ -1934,7 +1934,7 @@ export function useSettingsPageController() {
       const config = await invoke<DiagnosticsConfig>('get_diagnostics_config');
       setErrorReportingEnabled(config.errorReportingEnabled);
     } catch (err) {
-      console.warn('加载诊断配置失败:', err);
+      console.warn('Không thể tải cấu hình chẩn đoán:', err);
     }
   };
 
@@ -1949,7 +1949,7 @@ export function useSettingsPageController() {
       });
     } catch (err) {
       setErrorReportingEnabled(previous);
-      console.error('保存诊断配置失败:', err);
+      console.error('Không thể lưu cấu hình chẩn đoán:', err);
     } finally {
       setErrorReportingSaving(false);
     }
@@ -2188,7 +2188,7 @@ export function useSettingsPageController() {
 
       setAppPathForTarget(target, path);
     } catch (err) {
-      console.error('选择启动路径失败:', err);
+      console.error('Không thể chọn đường dẫn khởi chạy:', err);
     }
   };
 
@@ -2202,7 +2202,7 @@ export function useSettingsPageController() {
       if (!path) return;
       setCodexSpecifiedAppPath(path);
     } catch (err) {
-      console.error('选择指定应用路径失败:', err);
+      console.error('Không thể chọn đường dẫn ứng dụng:', err);
     }
   };
 
@@ -2235,7 +2235,7 @@ export function useSettingsPageController() {
         } else {
           const message = t(
             'appPath.missing.scanEmptyGeneric',
-            '未检测到正在运行的 {{app}}，请先启动应用后重试，或手动选择路径。',
+            'Không tìm thấy {{app}} đang chạy; hãy mở ứng dụng và thử lại hoặc chọn đường dẫn thủ công.',
             { app: getAppPathDisplayName(target) },
           );
           if (target === 'codex') {
@@ -2249,7 +2249,7 @@ export function useSettingsPageController() {
       const detected = await invoke<string | null>('detect_app_path', { app: target, force: true });
       setAppPathForTarget(target, detected || '');
     } catch (err) {
-      console.error('重置启动路径失败:', err);
+      console.error('Không thể đặt lại đường dẫn khởi chạy:', err);
       if (target === 'codex' && isWindows) {
         setCodexAppScanError(String(err));
       } else {
@@ -2628,12 +2628,12 @@ export function useSettingsPageController() {
       <div className="settings-row">
         <div className="row-label">
           <div className="row-title">
-            {t('settings.general.accountLevelRefreshTitle', '账号级刷新配置')}
+            {t('settings.general.accountLevelRefreshTitle', 'Cấu hình làm mới theo tài khoản')}
           </div>
           <div className="row-desc">
             {t(
               'settings.general.accountLevelRefreshDesc',
-              '为不同账号设置不同的自动刷新间隔，覆盖平台级默认值。',
+              'Đặt khoảng làm mới riêng cho từng tài khoản, ghi đè thiết lập mặc định của nền tảng.',
             )}
           </div>
         </div>
@@ -2641,10 +2641,10 @@ export function useSettingsPageController() {
           <details>
             <summary style={{ cursor: 'pointer', fontSize: '13px', color: 'var(--text-secondary)' }}>
               {hasAnyOverride
-                ? t('settings.general.accountLevelRefreshSummaryActive', '已配置 {{count}} 个账号', {
+                ? t('settings.general.accountLevelRefreshSummaryActive', 'Đã cấu hình {{count}} tài khoản', {
                     count: Object.keys(platformOverrides).length,
                   })
-                : t('settings.general.accountLevelRefreshSummary', '展开配置')}
+                : t('settings.general.accountLevelRefreshSummary', 'Mở rộng cấu hình')}
             </summary>
             <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {accounts.map((account) => {
@@ -2727,10 +2727,10 @@ export function useSettingsPageController() {
                         }
                       >
                         <option value="inherit">
-                          {t('settings.general.accountLevelRefreshInherit', '继承平台设置')}
+                          {t('settings.general.accountLevelRefreshInherit', 'Kế thừa thiết lập nền tảng')}
                         </option>
                         <option value="-1">
-                          {t('settings.general.accountLevelRefreshDisabled', '禁用')}
+                          {t('settings.general.accountLevelRefreshDisabled', 'Tắt')}
                         </option>
                         <option value="1">1 {t('settings.general.minutes')}</option>
                         <option value="2">2 {t('settings.general.minutes')}</option>
@@ -3123,7 +3123,7 @@ export function useSettingsPageController() {
           : [],
       );
     } catch (error) {
-      console.error('加载更新记录失败:', error);
+      console.error('Không thể tải lịch sử cập nhật:', error);
       setReleaseHistoryItems([]);
       setReleaseHistoryError(
         error instanceof Error ? error.message : String(error || ''),

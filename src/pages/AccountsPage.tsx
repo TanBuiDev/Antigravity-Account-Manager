@@ -1584,7 +1584,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         }
       })
       .catch((e) => {
-        console.error('准备 OAuth 链接失败:', e)
+        console.error('Không thể chuẩn bị liên kết OAuth:', e)
       })
   }, [showAddModal, addTab, oauthUrl])
 
@@ -1765,10 +1765,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
   const consumeExternalProviderImport = useCallback(() => {
     const request = consumeQueuedExternalProviderImportForPlatform('antigravity')
     if (!request) {
-      console.info('[ExternalImport][AccountsPage] 当前无 antigravity 待处理导入请求')
+      console.info('[ExternalImport][AccountsPage] Không có yêu cầu nhập antigravity đang chờ')
       return
     }
-    console.info('[ExternalImport][AccountsPage] 消费到导入请求，准备打开导入弹框', {
+    console.info('[ExternalImport][AccountsPage] Đã nhận yêu cầu nhập; chuẩn bị mở hộp thoại', {
       page: request.page,
       autoImport: request.autoImport,
       tokenLength: request.token.length,
@@ -1779,7 +1779,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
     setTokenInput(normalizedTokenInput)
     setAddStatus('idle')
     setAddMessage('')
-    console.info('[ExternalImport][AccountsPage] 已打开导入弹框并写入 tokenInput', {
+    console.info('[ExternalImport][AccountsPage] Đã mở hộp thoại nhập và điền tokenInput', {
       normalizedLength: normalizedTokenInput.length,
       normalizedLooksLikeJson: normalizedTokenInput.trim().startsWith('{'),
     })
@@ -1787,10 +1787,10 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
 
   useEffect(() => {
     const handleExternalImportEvent = () => {
-      console.info('[ExternalImport][AccountsPage] 收到前端外部导入事件')
+      console.info('[ExternalImport][AccountsPage] Đã nhận sự kiện nhập từ frontend')
       consumeExternalProviderImport()
     }
-    console.info('[ExternalImport][AccountsPage] 初始化时尝试消费外部导入队列')
+    console.info('[ExternalImport][AccountsPage] Kiểm tra hàng đợi nhập khi khởi tạo')
     consumeExternalProviderImport()
     window.addEventListener(EXTERNAL_PROVIDER_IMPORT_EVENT, handleExternalImportEvent)
     return () => {
@@ -2399,7 +2399,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
         importedAccounts.push(account)
         success += 1
       } catch (e) {
-        console.error('Token 导入失败:', e)
+        console.error('Không thể nhập token:', e)
         fail += 1
       }
       await new Promise((resolve) => setTimeout(resolve, 120))
@@ -2438,7 +2438,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
       setOauthUrlCopied(true)
       window.setTimeout(() => setOauthUrlCopied(false), 1200)
     } catch (e) {
-      console.error('复制失败:', e)
+      console.error('Sao chép thất bại:', e)
     }
   }
 
@@ -2902,7 +2902,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
 
       const hasModels = account.quota?.models && account.quota.models.length > 0
       if (!hasModels) {
-        console.log('[AccountsPage] 账号无配额数据:', {
+        console.log('[AccountsPage] Tài khoản chưa có dữ liệu hạn mức:', {
           email: account.email,
           isCurrent,
           hasQuota: !!account.quota,
@@ -2999,7 +2999,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                         setShowVerificationErrorModal(account.id)
                       }
                     }}
-                    title={validationUrl || t('modals.errors.viewVerificationDetail', '查看验证详情')}
+                    title={validationUrl || t('modals.errors.viewVerificationDetail', 'Xem chi tiết xác minh')}
                   >
                     <ExternalLink size={12} />
                     <span>{t('accounts.actions.openValidationUrl', "Xác minh web")}</span>
@@ -3604,7 +3604,7 @@ export function useAccountsPageController({ onNavigate }: AccountsPageProps) {
                             setShowVerificationErrorModal(account.id)
                           }
                         }}
-                        title={validationUrl || t('modals.errors.viewVerificationDetail', '查看验证详情')}
+                        title={validationUrl || t('modals.errors.viewVerificationDetail', 'Xem chi tiết xác minh')}
                       >
                         <ExternalLink size={12} />
                         <span>{t('accounts.actions.openValidationUrl', "Xác minh web")}</span>

@@ -304,7 +304,7 @@ function AnnouncementSurface({
           break;
         }
         default:
-          console.warn('[Announcement] 未支持的命令动作:', action.target);
+          console.warn('[Announcement] Hành động lệnh chưa được hỗ trợ:', action.target);
       }
       await closeDetail(false);
     }

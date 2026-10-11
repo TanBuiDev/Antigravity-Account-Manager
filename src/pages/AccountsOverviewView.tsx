@@ -226,7 +226,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           subtitle={t('overview.subtitle')}
         />
 
-        {/* 工具栏 */}
+        {/* Thanh công cụ */}
         <div className="toolbar">
           <div className="toolbar-left">
             <div className="search-box">
@@ -284,7 +284,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               groupByTag={groupByTag}
               onToggleGroupByTag={setGroupByTag}
             />
-            {/* 排序下拉菜单 */}
+            {/* Menu sắp xếp */}
             <SingleSelectFilterDropdown
               value={sortBy}
               options={[
@@ -300,19 +300,19 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   value: group.id,
                   label: t('accounts.sort.byGroup', {
                     group: group.name,
-                    defaultValue: `按 ${group.name} 配额`,
+                    defaultValue: `Theo hạn mức ${group.name}`,
                   }),
                 })),
                 ...displayGroups.map((group) => ({
                   value: `${ANTIGRAVITY_RESET_SORT_PREFIX}${group.id}`,
                   label: t('accounts.sort.byGroupReset', {
                     group: group.name,
-                    defaultValue: `按 ${group.name} 重置时间`,
+                    defaultValue: `Theo thời gian đặt lại ${group.name}`,
                   }),
                 })),
                 {
                   value: 'custom',
-                  label: t('accounts.sort.custom', '自定义顺序'),
+                  label: t('accounts.sort.custom', 'Thứ tự tùy chỉnh'),
                 },
               ]}
               ariaLabel={t('accounts.sortLabel', "Sắp xếp")}
@@ -320,7 +320,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               onChange={handleSortByChange}
             />
 
-            {/* 排序方向切换按钮 / 自定义排序配置按钮 */}
+            {/* Nút đổi chiều sắp xếp / cấu hình thứ tự tùy chỉnh */}
             {!isCustomSortActive ? (
               <button
                 className="sort-direction-btn"
@@ -340,8 +340,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
               <button
                 className="sort-direction-btn"
                 onClick={() => setShowCustomSortModal(true)}
-                title={t('accounts.sort.customSettingsTooltip', '配置自定义顺序')}
-                aria-label={t('accounts.sort.customSettingsTooltip', '配置自定义顺序')}
+                title={t('accounts.sort.customSettingsTooltip', 'Cấu hình thứ tự tùy chỉnh')}
+                aria-label={t('accounts.sort.customSettingsTooltip', 'Cấu hình thứ tự tùy chỉnh')}
               >
                 <Wrench size={14} />
               </button>
@@ -479,7 +479,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           </div>
         )}
 
-        {/* 内容区域 */}
+        {/* Khu vực nội dung */}
         {loading ? (
           <div className="empty-state">
             <div
@@ -560,7 +560,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                   <FolderPlus size={14} />
                   <span>
                     {t('accounts.addModal.targetGroup', {
-                      defaultValue: '将添加到分组：{{group}}',
+                      defaultValue: 'Sẽ thêm vào nhóm: {{group}}',
                       group: addTargetGroup.name,
                     })}
                   </span>
@@ -908,12 +908,12 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
             <div className="modal-header">
               <div>
                 <h2>
-                  {t('accounts.sort.customModalTitle', '自定义账号排序')}
+                  {t('accounts.sort.customModalTitle', 'Tùy chỉnh thứ tự tài khoản')}
                 </h2>
                 <p className="codex-custom-sort-modal-desc">
                   {t(
                     'accounts.sort.customModalDesc',
-                    '拖动账号或使用上下按钮调整展示顺序。'
+                    'Kéo tài khoản hoặc dùng nút lên/xuống để sắp xếp thứ tự hiển thị.'
                   )}
                 </p>
               </div>
@@ -972,11 +972,11 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                           }
                           title={t(
                             'accounts.sort.customDragHandle',
-                            '拖拽排序'
+                            'Kéo để sắp xếp'
                           )}
                           aria-label={t(
                             'accounts.sort.customDragHandle',
-                            '拖拽排序'
+                            'Kéo để sắp xếp'
                           )}
                         >
                           <GripVertical size={16} />
@@ -1032,8 +1032,8 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             moveCustomSortAccount(account.id, 'up')
                           }
                           disabled={index === 0}
-                          title={t('accounts.sort.customMoveUp', '上移')}
-                          aria-label={t('accounts.sort.customMoveUp', '上移')}
+                          title={t('accounts.sort.customMoveUp', 'Lên trên')}
+                          aria-label={t('accounts.sort.customMoveUp', 'Lên trên')}
                         >
                           <ArrowUp size={14} />
                         </button>
@@ -1044,10 +1044,10 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                             moveCustomSortAccount(account.id, 'down')
                           }
                           disabled={index === customSortAccounts.length - 1}
-                          title={t('accounts.sort.customMoveDown', '下移')}
+                          title={t('accounts.sort.customMoveDown', 'Xuống dưới')}
                           aria-label={t(
                             'accounts.sort.customMoveDown',
-                            '下移'
+                            'Xuống dưới'
                           )}
                         >
                           <ArrowDown size={14} />
@@ -1064,7 +1064,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={resetCustomSortOrder}
               >
                 <RotateCw size={14} />
-                {t('accounts.sort.customReset', '重置自定义顺序')}
+                {t('accounts.sort.customReset', 'Đặt lại thứ tự tùy chỉnh')}
               </button>
               <button
                 className="btn btn-primary"
@@ -1359,7 +1359,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
                 onClick={confirmDeleteTag}
                 disabled={deletingTag}
               >
-                {deletingTag ? '处理中...' : t('common.confirm')}
+                {deletingTag ? 'Đang xử lý...' : t('common.confirm')}
               </button>
             </div>
           </div>
@@ -1650,7 +1650,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
           )
         })()}
 
-      {/* 标签编辑弹窗 */}
+      {/* Hộp thoại sửa nhãn */}
       <TagEditModal
         isOpen={!!showTagModal}
         initialTags={accounts.find((acc) => acc.id === showTagModal)?.tags || []}
@@ -1962,7 +1962,7 @@ export function AccountsOverviewView(props: AccountsOverviewViewProps) {
         document.body
       )}
 
-      {/* 文件损坏弹窗 */}
+      {/* Hộp thoại tệp bị hỏng */}
       {fileCorruptedError && (
         <FileCorruptedModal
           error={fileCorruptedError}

@@ -1950,7 +1950,7 @@ export function DashboardPage({
       }
 
       return {
-        remaining: avgRemainPercent, // 剩余百分比越高越好
+        remaining: avgRemainPercent, // Phần trăm còn lại càng cao càng tốt
         freshness: account.last_used || account.created_at || 0,
       };
     };
@@ -2049,7 +2049,7 @@ export function DashboardPage({
       }
 
       return {
-        remaining: avgRemainPercent, // 剩余百分比越高越好
+        remaining: avgRemainPercent, // Phần trăm còn lại càng cao càng tốt
         freshness: account.last_used || account.created_at || 0,
       };
     };
